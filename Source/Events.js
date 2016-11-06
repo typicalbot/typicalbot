@@ -41,7 +41,7 @@ module.exports = class Events {
     intervalPost() {
         if (!this.client.config.main) return;
         this.client.modules.request.post({url: 'https://www.carbonitex.net/discord/data/botdata.php', form: {
-            "key": 'typical992abdkj32lawhb2',
+            "key": this.client.config.carbonkey,
             "shardid": this.client.ShardID.toString(),
             "shardcount": this.client.ShardCount.toString(),
             "servercount": this.client.bot.guilds.size.toString()
@@ -57,7 +57,7 @@ module.exports = class Events {
             "method": "POST",
             "url": "https://bots.discord.pw/api/bots/153613756348366849/stats",
             "headers": {
-                "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiIxMDU0MDgxMzYyODU4MTg4ODAiLCJyYW5kIjo3MTYsImlhdCI6MTQ2OTQ3MDcxOX0.wp7jHtpDXgLTKdggIx-vQsoHlTcO4yKSc2Gp2vD0wYw",
+                "Authorization": this.client.config.discordpwkey,
                 "Content-Type": "Application/JSON"
             },
             "body": JSON.stringify({
