@@ -4,10 +4,6 @@ const ShardCount = process.env.SHARD_COUNT;
 let Config = require("./Config");
 
 const Discord = require("discord.js");
-const Webcord = require("Webcord");
-const YouTubeAPI = require("simple-youtube-api");
-const YouTube = new YouTubeAPI(Config.youtubekey);
-const WebhookClient = new Webcord.WebhookClient();
 const DiscordBot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
 
 let CommandHandler = require("./CommandHandler");
@@ -15,8 +11,6 @@ let Functions = require("./Functions"), functions;
 let Events = require("./Events"), events;
 let MusicUtil = require("./MusicUtil"), musicutil;
 let Database = require("./Database"), database;
-
-let AnnWebhook = WebhookClient.connect("233411483902410762", "-y8LT2tm-l9BubQW8HHeZMSlFYNZ49YdlqMHf1QD2_qFiW4NSFCshdqlzyInWor_Ftlm").then(webhook => AnnWebhook = webhook);
 
 let MusicQueue = new Map();
 
