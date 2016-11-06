@@ -1,3 +1,5 @@
+const request = require("request");
+
 module.exports = class Events {
     constructor(client) {
         this.client = client;
@@ -40,7 +42,7 @@ module.exports = class Events {
 
     intervalPost() {
         if (!this.client.config.main) return;
-        this.client.modules.request.post({url: 'https://www.carbonitex.net/discord/data/botdata.php', form: {
+        request.post({url: 'https://www.carbonitex.net/discord/data/botdata.php', form: {
             "key": this.client.config.carbonkey,
             "shardid": this.client.ShardID.toString(),
             "shardcount": this.client.ShardCount.toString(),
@@ -53,7 +55,7 @@ module.exports = class Events {
             }
         });
 
-        this.client.modules.request({
+        request({
             "method": "POST",
             "url": "https://bots.discord.pw/api/bots/153613756348366849/stats",
             "headers": {
