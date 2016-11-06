@@ -1,0 +1,57 @@
+let GuildData = new Map();
+
+const DefaultData = {
+    "masterrole": null, "joinrole": null, "silent": "N", "blacklist": null, "djrole": null, "announcement": null, "joinann": null, "leaveann": null, "banann": null, "unbanann": null, "nickann": null, "inviteann": null,
+    "joinmessage": null, "joinnick": null, "customprefix": null, "originaldisabled": "N", "antiinvite": "N", "antilink": "N", "musicperms": "all", "or-play": "off", "or-skip": "off", "or-stop": "off",
+    "or-unqueue": "off", "or-volume": "off", "lengthlimit": null, "queuelimit": null, "apikey": null
+};
+
+module.exports = class Database {
+    constructor(client) {
+        this.client = client;
+    }
+
+    get Data() {
+        return GuildData;
+    }
+
+    get(guild) {
+        return new Promise((resolve, reject) => {
+            if (!guild) return resolve(DefaultData);
+            if (GuildData.has(guild.id)) {
+                return resolve(GuildData.get(guild.id));
+            } else {
+                this.client.mysql.query(`SELECT * FROM servers WHERE id = ${this.client.mysql.escape(guild.id)}`, (error, rows) => {
+                    if (error) return resolve(DefaultData);
+                    if (!rows[0]) {
+                        this.create(guild);
+                        return resolve(DefaultData);
+                    } else {
+                        GuildData.set(guild.id, rows[0]);
+                        return resolve(rows[0]);
+                    }
+                });
+            }
+        });
+    }
+
+    create(guild) {
+        return new Promise((resolve, reject) => {
+            this.client.mysql.query(`INSERT INTO servers SET ?`, {"id": guild.id}, (error, result) => {
+                if (error) return reject(error);
+                GuildData.set(guild.id, DefaultData);
+                resolve();
+            });
+        });
+    }
+
+    update(guild, setting, value) {
+        return new Promise((resolve, reject) => {
+            this.client.mysql.query(`UPDATE servers SET ${setting} = ${value ? this.client.mysql.escape(value) : `NULL`} WHERE id = ${guild.id}`, (error, result) => {
+                if (error) return reject(error);
+                GuildData.get(guild.id)[setting] = value;
+                return resolve();
+            });
+        });
+    }
+};
