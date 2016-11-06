@@ -54,37 +54,25 @@ class Client {
     }
 
     reload(mod) {
-        if (mod === "all") {
-            CommandHandler.reload();
-
+        let all = mod === "all";
+        if (all || mod === "config") {
             delete require.cache[`${__dirname}/Config.js`];
             Config = require("./Config");
-
-            delete require.cache[`${__dirname}/Functions.js`];
-            Functions = require("./Functions");
-            functions = new Functions(this);
-
-            delete require.cache[`${__dirname}/Events.js`];
-            Events = require("./Events");
-            events = new Events(this);
-
-            delete require.cache[`${__dirname}/MusicUtil.js`];
-            MusicUtil = require("./MusicUtil");
-            musicutil = new MusicUtil(this);
-        } else if (mod === "config") {
-            delete require.cache[`${__dirname}/Config.json`];
-            Config = require("./Config");
-        } else if (mod === "commands") {
+        }
+        if (all || mod === "commands") {
             CommandHandler.reload();
-        } else if (mod === "Functions") {
+        }
+        if (all || mod === "functions") {
             delete require.cache[`${__dirname}/Functions.js`];
             Functions = require("./Functions");
             functions = new Functions(this);
-        } else if (mod === "events") {
+        }
+        if (all || mod === "events") {
             delete require.cache[`${__dirname}/Events.js`];
             Events = require("./Events");
             events = new Events(this);
-        } else if (mod === "mutil") {
+        }
+        if (all || mod === "music") {
             delete require.cache[`${__dirname}/MusicUtil.js`];
             MusicUtil = require("./MusicUtil");
             musicutil = new MusicUtil(this);
