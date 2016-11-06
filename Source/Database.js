@@ -1,3 +1,5 @@
+const mysql = require("mysql");
+
 let GuildData = new Map();
 
 const DefaultData = {
@@ -9,6 +11,9 @@ const DefaultData = {
 module.exports = class Database {
     constructor(client) {
         this.client = client;
+        this.connection = mysql.createConnection(this.client.config.mysql);
+
+        this.connection.connect();
     }
 
     get Data() {
@@ -21,7 +26,7 @@ module.exports = class Database {
             if (GuildData.has(guild.id)) {
                 return resolve(GuildData.get(guild.id));
             } else {
-                this.client.mysql.query(`SELECT * FROM servers WHERE id = ${this.client.mysql.escape(guild.id)}`, (error, rows) => {
+                this.connection.query(`SELECT * FROM servers WHERE id = ${mysql.escape(guild.id)}`, (error, rows) => {
                     if (error) return resolve(DefaultData);
                     if (!rows[0]) {
                         this.create(guild);
@@ -37,7 +42,7 @@ module.exports = class Database {
 
     create(guild) {
         return new Promise((resolve, reject) => {
-            this.client.mysql.query(`INSERT INTO servers SET ?`, {"id": guild.id}, (error, result) => {
+            this.connection.query(`INSERT INTO servers SET ?`, {"id": guild.id}, (error, result) => {
                 if (error) return reject(error);
                 GuildData.set(guild.id, DefaultData);
                 resolve();
@@ -47,7 +52,7 @@ module.exports = class Database {
 
     update(guild, setting, value) {
         return new Promise((resolve, reject) => {
-            this.client.mysql.query(`UPDATE servers SET ${setting} = ${value ? this.client.mysql.escape(value) : `NULL`} WHERE id = ${guild.id}`, (error, result) => {
+            this.connection.query(`UPDATE servers SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${guild.id}`, (error, result) => {
                 if (error) return reject(error);
                 GuildData.get(guild.id)[setting] = value;
                 return resolve();

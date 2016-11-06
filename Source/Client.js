@@ -4,7 +4,6 @@ const ShardCount = process.env.SHARD_COUNT;
 let Config = require("./Config");
 
 const Discord = require("discord.js");
-const MySQL = require("mysql");
 const request = require("request");
 const ytdl = require("ytdl-core");
 const Webcord = require("Webcord");
@@ -12,7 +11,6 @@ const YouTubeAPI = require("simple-youtube-api");
 const YouTube = new YouTubeAPI(Config.youtubekey);
 const WebhookClient = new Webcord.WebhookClient();
 const DiscordBot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
-const MySQLConnection = MySQL.createConnection(Config.mysql);
 
 let CommandHandler = require("./CommandHandler");
 let Functions = require("./Functions"), functions;
@@ -35,7 +33,6 @@ class Client {
 
     setup() {
         DiscordBot.login(Config.token).catch(err => this.events.error(err));
-        MySQLConnection.connect();
         CommandHandler = new CommandHandler(this);
         functions = new Functions(this);
         events = new Events(this);
@@ -114,10 +111,6 @@ class Client {
         return DiscordBot;
     }
 
-    get mysql() {
-        return MySQLConnection;
-    }
-
     get config() {
         return Config;
     }
@@ -125,7 +118,6 @@ class Client {
     get modules() {
         return {
             Discord: Discord,
-            mysql: MySQL,
             request: request,
             ytdl: ytdl,
             Webcord: Webcord,
