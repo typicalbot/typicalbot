@@ -102,10 +102,6 @@ class Client {
     get events() {
         return events;
     }
-
-    get announcementWebhook() {
-        return AnnWebhook;
-    }
 }
 
 module.exports = Client;
