@@ -4,8 +4,6 @@ const ShardCount = process.env.SHARD_COUNT;
 let Config = require("./Config");
 
 const Discord = require("discord.js");
-const request = require("request");
-const ytdl = require("ytdl-core");
 const Webcord = require("Webcord");
 const YouTubeAPI = require("simple-youtube-api");
 const YouTube = new YouTubeAPI(Config.youtubekey);
@@ -101,18 +99,6 @@ class Client {
 
     get config() {
         return Config;
-    }
-
-    get modules() {
-        return {
-            Discord: Discord,
-            request: request,
-            ytdl: ytdl,
-            Webcord: Webcord,
-            WebhookClient: WebhookClient,
-            YouTubeAPI: YouTubeAPI,
-            YouTube: YouTube
-        };
     }
 
     get functions() {

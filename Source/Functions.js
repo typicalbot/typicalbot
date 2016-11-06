@@ -1,3 +1,5 @@
+const request = require("request");
+
 module.exports = class Functions {
     constructor(client) {
         this.client = client;
@@ -157,9 +159,9 @@ module.exports = class Functions {
             .replace(/{user.discriminator}/gi, user.discriminator);
     }
 
-    getRequest(url) {
+    request(url) {
         return new Promise((resolve, reject) => {
-            this.client.modules.request(url, (error, response, body) =>{
+            request(url, (error, response, body) =>{
                 if (error || response.statusCode !== 200) return reject({error: error, response: response});
                 return resolve(body);
             });

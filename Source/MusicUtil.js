@@ -1,3 +1,5 @@
+const ytdl = require("ytdl-core");
+
 class MusicUtil {
     constructor(client) {
         this.client = client;
@@ -5,7 +7,7 @@ class MusicUtil {
 
     ProcessVideo(message, video) {
         try {
-            this.client.modules.ytdl.getInfo(video, (error, info) => {
+            ytdl.getInfo(video, (error, info) => {
                 if (error) return message.channel.sendMessage(`${message.author} | \`❌\` | An Error Occured:\n\n${error.stack}`);
                 this.client.MusicUtil.BeginAudio(message, video, info);
             });
@@ -56,7 +58,7 @@ class MusicUtil {
     PlayAudio(connection, message, video, info) {
         let stream = this.client.streams.get(message.guild.id);
         stream.current = { video, info, message };
-        let rawstream = this.client.modules.ytdl(video, {audioonly: true});
+        let rawstream = ytdl(video, {audioonly: true});
         let dispatcher = connection.playStream(rawstream, {volume: 0.75, passes: 3});
         dispatcher.on("start", () => {
             message.channel.sendMessage(`🎵 Now playing **${info.title}** requested by **${message.author.username}** for **${this.client.functions.length(info.length_seconds)}**.`);

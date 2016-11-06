@@ -1,3 +1,7 @@
+const apikey = require("../Config.js").youtubekey;
+const YouTubeAPI = require("simple-youtube-api");
+const YouTube = new YouTubeAPI(apikey);
+
 module.exports = {
     "youtube": {
         aliases: ["yts"],
@@ -205,7 +209,7 @@ function errorMessage(error) {
 
 function VideoSearch(client, settings, query) {
     return new Promise((resolve, reject) => {
-        let YT = settings.apikey ? new client.modules.YouTubeAPI(settings.apikey) : client.modules.YouTube;
+        let YT = settings.apikey ? new YouTubeAPI(settings.apikey) : YouTube;
         YT.search(query, 10).then(results => {
             let filtered = results.filter(a => a.type === "video");
             return resolve(filtered);
