@@ -106,8 +106,9 @@ module.exports = {
             let stream = client.streams.get(message.guild.id);
             let short = text => client.functions.shorten(text);
 
-            message.channel.sendMessage(`${message.author} | Skipped **${short(stream.current.info.title)}**.`);
-            connection.player.dispatcher.end();
+            message.channel.sendMessage(`${message.author} | Skipped **${short(stream.current.info.title)}**.`).then(msg => {
+                connection.player.dispatcher.end();
+            });
         }
     },
     "pause": {
@@ -120,11 +121,8 @@ module.exports = {
 
             if (!same(connection, message.member)) return message.channel.sendMessage(`${message.author} | \`❌\` | You're not in the same voice channel as I am.`);
 
-            let stream = client.streams.get(message.guild.id);
-            let short = text => client.functions.shorten(text);
-
-            connection.player.dispatcher.end();
-            message.channel.sendMessage(`${message.author} | Skipped **${short(stream.current.info.title)}**.`);
+            connection.player.dispatcher.pause();
+            message.channel.sendMessage(`${message.author} | Paused.`);
         }
     },
     "resume": {
@@ -137,11 +135,8 @@ module.exports = {
 
             if (!same(connection, message.member)) return message.channel.sendMessage(`${message.author} | \`❌\` | You're not in the same voice channel as I am.`);
 
-            let stream = client.streams.get(message.guild.id);
-            let short = text => client.functions.shorten(text);
-
-            connection.player.dispatcher.end();
-            message.channel.sendMessage(`${message.author} | Skipped **${short(stream.current.info.title)}**.`);
+            connection.player.dispatcher.resume();
+            message.channel.sendMessage(`${message.author} | Resumed.`);
         }
     },
     "stop": {
