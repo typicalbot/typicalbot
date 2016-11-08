@@ -1,4 +1,4 @@
-let Categories = [ "Utility" , "Creator" , "TypicalBot" , "Moderation" , "Fun" ];
+let Categories = [ "Utility" , "Creator" , "TypicalBot" , "Moderation" , "Fun" , "Music" ];
 
 class CommandHandler {
     constructor(client) {

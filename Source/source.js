@@ -1,4 +1,4 @@
-if (process.env.SHARD_ID < 7) require('@risingstack/trace');
+//if (process.env.SHARD_ID < 7) require('@risingstack/trace');
 
 const Client = require("./Client");
 const client = new Client();

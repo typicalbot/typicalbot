@@ -48,7 +48,7 @@ class Client {
     reload(mod) {
         let all = mod === "all";
         if (all || mod === "config") {
-            delete require.cache[`${__dirname}/Config.js`];
+            delete require.cache[`${__dirname}/Config.json`];
             Config = require("./Config");
         }
         if (all || mod === "commands") {

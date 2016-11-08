@@ -1,4 +1,4 @@
-const apikey = require("../Config.js").youtubekey;
+const apikey = require("../Config").youtubekey;
 const YouTubeAPI = require("simple-youtube-api");
 const YouTube = new YouTubeAPI(apikey);
 
