@@ -50,13 +50,14 @@ module.exports = {
 
             let songs = queue.length > 10 ? queue.slice(0, 10) : queue;
             let content = songs.map(s => `● **${short(s.info.title)}** (${time(s.info.length_seconds)}) | Requested by **${s.message.author.username}**`).join("\n");
-            let length = 0; songs.map(s => length += Number(s.length_seconds));
+            let length = 0; songs.forEach(s => length += Number(s.info.length_seconds));
 
             message.channel.sendMessage(`**__Queue:__** There are ${queue.length} songs in the queue. The queue will last for **${time(length)}.**\n\n${content}${queue.length > 10 ? `\n*...and ${queue.length - 10} more.*` : ""}\n\n**Currently Playing:** ${short(stream.current.info.title)} (${time(stream.current.info.length_seconds)})`);
         }
     },
     "current": {
         permission: 0,
+        aliases: ["np","playing"],
         usage: {"command": "current", "description": "Displays the currently playing song."},
         execute: (message, client, level) => {
             let connection = message.guild.voiceConnection;
@@ -89,7 +90,7 @@ module.exports = {
 
             if (!item) return message.channel.sendMessage(`${message.author} | There is no video under that queue id.`);
 
-            queue.splice(queue.indexOf(item));
+            queue.splice(queue.indexOf(item), 1);
             message.channel.sendMessage(`${message.author} | Removed **${short(item.info.title)}** from the queue.`);
         }
     },
