@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const mysql_login = require("./Config").mysql;
-const connection = mysql.createConnection(mysql_login).connect();
+const connection = mysql.createConnection(mysql_login);
+connection.connect();
 
 let GuildData = new Map();
 
