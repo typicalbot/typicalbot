@@ -32,6 +32,14 @@ module.exports = {
             }).then(re => message.reply(":thumbsup::skin-tone-2:")).catch(err => message.reply(":x:"));
         }
     },
+    "usage": {
+        permission: 5,
+        execute: (message, client) => {
+            let mb = client.data.heap;
+            let gb = mb / 1024;
+            message.channel.sendMessage(`__\`TypicalBot Total Heap Usage:\`__\`\`\`\nMegabytes: ${mb}\nGigabytes: ${gb}\n\`\`\``);
+        }
+    },
     "eval": {
         dm: true,
         permission: 5,

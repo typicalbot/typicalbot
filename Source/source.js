@@ -8,6 +8,9 @@ client.bot
         setInterval(() => client.events.intervalStatus(), 60000);
         setInterval(() => client.events.intervalPost(), 1200000);
         setInterval(() => client.sendStat("voiceConnections"), 10000);
+        setInterval(() => {
+            process.send({"type": "stat", "data": {"heap": process.memoryUsage().heapUsed/1024/1024}});
+        }, 5000);
     })
     .on("warn", warning => client.events.warn(warning))
     .on("error", error => client.events.error(error))

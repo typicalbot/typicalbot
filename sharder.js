@@ -33,7 +33,7 @@ function send(data) {
 }
 
 function sendData() {
-    const globalData = {"guilds": 0, "voiceConnections": 0, "shards": data};
+    const globalData = {"guilds": 0, "voiceConnections": 0, "heap": 0, "shards": data};
     for (let shard in data) {
         Object.keys(data[shard]).map(key => globalData[key] += Number(data[shard][key]));
     }
