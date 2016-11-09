@@ -6,11 +6,11 @@ let Config = require("./Config");
 const Discord = require("discord.js");
 const DiscordBot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
 
-let CommandHandler = require("./CommandHandler");
-let Functions = require("./Functions"), functions;
-let Events = require("./Events"), events;
-let MusicUtil = require("./MusicUtil"), musicutil;
-let Database = require("./Database"), database;
+let cmdh = require("./CommandHandler");
+let fn = require("./Functions");
+let ev = require("./Events");
+let music = require("./MusicUtil");
+let db = require("./Database");
 
 let MusicQueue = new Map();
 
@@ -25,11 +25,12 @@ class Client {
 
     setup() {
         DiscordBot.login(Config.token).catch(err => this.events.error(err));
-        CommandHandler = new CommandHandler(this);
-        functions = new Functions(this);
-        events = new Events(this);
-        musicutil = new MusicUtil(this);
-        database = new Database(this);
+
+        this.commands = new cmdh();
+        this.functions = new fn(this);
+        this.events = new ev(this);
+        this.music = new music(this);
+        this.settings = new db();
     }
 
     log(data) {
@@ -52,39 +53,27 @@ class Client {
             Config = require("./Config");
         }
         if (all || mod === "commands") {
-            CommandHandler.reload();
+            this.commands.reload();
         }
         if (all || mod === "functions") {
             delete require.cache[`${__dirname}/Functions.js`];
-            Functions = require("./Functions");
-            functions = new Functions(this);
+            fn = require("./Functions");
+            this.functions = new fn(this);
         }
         if (all || mod === "events") {
             delete require.cache[`${__dirname}/Events.js`];
-            Events = require("./Events");
-            events = new Events(this);
+            ev = require("./Events");
+            this.events = new ev(this);
         }
         if (all || mod === "music") {
             delete require.cache[`${__dirname}/MusicUtil.js`];
-            MusicUtil = require("./MusicUtil");
-            musicutil = new MusicUtil(this);
+            music = require("./MusicUtil");
+            this.music = new music(this);
         }
-    }
-
-    get CommandHandler() {
-        return CommandHandler;
-    }
-
-    get MusicUtil() {
-        return musicutil;
     }
 
     get streams() {
         return MusicQueue;
-    }
-
-    get settings() {
-        return database;
     }
 
     get bot() {
@@ -93,14 +82,6 @@ class Client {
 
     get config() {
         return Config;
-    }
-
-    get functions() {
-        return functions;
-    }
-
-    get events() {
-        return events;
     }
 }
 

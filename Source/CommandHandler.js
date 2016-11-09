@@ -1,8 +1,7 @@
 let Categories = [ "Utility" , "Creator" , "TypicalBot" , "Moderation" , "Fun" , "Music" ];
 
 class CommandHandler {
-    constructor(client) {
-        this.client = client;
+    constructor() {
         this.commands = {};
 
         this.setup();
