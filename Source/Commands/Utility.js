@@ -1,3 +1,5 @@
+const request = require("request");
+
 module.exports = {
     "ping": {
         dm: true,
@@ -123,7 +125,7 @@ module.exports = {
             let choices = match[2];
             choices = choices.split(";");
             if (!choices.length > 1) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage. There must be between 2 and 30 choices.`);
-            client.modules.request({
+            request({
                 "method": "POST",
                 "url": "https://www.strawpoll.me/api/v2/polls",
                 "headers": {

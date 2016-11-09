@@ -35,7 +35,7 @@ module.exports = {
             let cmd = message.content.split(" ")[1];
             if (!cmd) return message.channel.sendMessage(`**Hello!** I'm TypicalBot, created by HyperCoder. You can get a list of my commands with \`$commands\`. Documentation can be found at <https://typicalbot.com/documentation/>. If you need help, join us in the TypicalBot Lounge at <${client.config.urls.server}>.`);
 
-            let command = client.CommandHandler.getCommand(cmd);
+            let command = client.commands.getCommand(cmd);
             if (!command) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command to get help with.`);
             message.channel.sendMessage(
                 `${message.author} | **__Usage For:__** ${cmd}\n`
@@ -63,7 +63,7 @@ module.exports = {
         execute: (message, client) => {
             if (message.channel.type === "text") message.channel.sendMessage(`${message.author} | Check your Direct Messages for my commands!`);
 
-            let commands = client.CommandHandler.commands;
+            let commands = client.commands.commands;
             let list = Object.keys(commands);
             let level0 = list.filter(c => !commands[c].permission || commands[c].permission === 0 ? true : false).map(c => `${client.config.prefix}${c}`);
             let level1 = list.filter(c => commands[c].permission && commands[c].permission === 1 ? true : false).map(c => `${client.config.prefix}${c}`);

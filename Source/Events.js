@@ -100,7 +100,7 @@ module.exports = class Events {
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
-            let command = this.client.CommandHandler.getCommand(message);
+            let command = this.client.commands.getCommand(message);
             if (!command || !command.dm) return;
             command.execute(message, this.client);
         } else {
@@ -118,7 +118,7 @@ module.exports = class Events {
                 let prefix = this.client.functions.getPrefix(settings, split);
                 if (!prefix || !message.content.startsWith(prefix)) return;
 
-                let command = this.client.CommandHandler.getCommand(split.slice(prefix.length));
+                let command = this.client.commands.getCommand(split.slice(prefix.length));
                 if (!command) return;
 
                 if (command.permission && UserLevel < command.permission) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);

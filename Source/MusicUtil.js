@@ -9,7 +9,7 @@ class MusicUtil {
         try {
             ytdl.getInfo(video, (error, info) => {
                 if (error) return message.channel.sendMessage(`${message.author} | \`❌\` | An Error Occured:\n\n${error.stack}`);
-                this.client.MusicUtil.BeginAudio(message, video, info);
+                this.client.music.BeginAudio(message, video, info);
             });
         } catch(error) {
             message.channel.sendMessage(`${message.author} | \`❌\` | An Error Occured:\n\n${error.stack}`);
@@ -28,7 +28,7 @@ class MusicUtil {
             if (!authorchannel.speakable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot speak in your channel.`);
             authorchannel.join().then(connection => {
                 this.client.streams.set(message.guild.id, {"current": { video, info, message }, "queue": []});
-                this.client.MusicUtil.PlayAudio(connection, message, video, info);
+                this.client.music.PlayAudio(connection, message, video, info);
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured joining your voice channel.`));
         } else {
             let authorchannel = message.member.voiceChannel;
@@ -47,7 +47,7 @@ class MusicUtil {
     PlayNext(connection, stream, message, video, info) {
         let next = stream.queue[0];
         if (next) {
-            this.client.MusicUtil.PlayAudio(connection, next.message, next.video, next.info);
+            this.client.music.PlayAudio(connection, next.message, next.video, next.info);
             stream.queue.shift();
         } else {
             message.channel.sendMessage(`Finished playing audio. Departing from voice channel.`);
@@ -68,7 +68,7 @@ class MusicUtil {
             dispatcher.end();
         });
         dispatcher.on("end", () => {
-            this.client.MusicUtil.PlayNext(connection, stream, message, video, info);
+            this.client.music.PlayNext(connection, stream, message, video, info);
         });
     }
 }

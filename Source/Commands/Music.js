@@ -24,12 +24,12 @@ module.exports = {
             let url = /(?:https?\:\/\/)?(?:(?:www|m)\.)?(?:youtube\.com|youtu\.be)\/.+/i.exec(message.content);
             let searchParam = /play\s+(.+)/i.exec(message.content);
             if (url) {
-                return client.MusicUtil.ProcessVideo(message, url[0]);
+                return client.music.ProcessVideo(message, url[0]);
             } else if (searchParam) {
                 VideoSearch(client, message.guild.settings, searchParam[1]).then(results => {
                     if (!results.length) return message.channel.sendMessage(`${message.author} | \`❌\` | No results were found for the query **${searchParam[1]}**.`);
                     let video = results[0];
-                    return client.MusicUtil.ProcessVideo(message, video.url);
+                    return client.music.ProcessVideo(message, video.url);
                 }).catch(error => message.channel.sendMessage(`${message.author} | \`❌\` | ${errorMessage(error)}`));
             } else {
                 message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
