@@ -50,7 +50,7 @@ module.exports = {
 
             let songs = queue.length > 10 ? queue.slice(0, 10) : queue;
             let content = songs.map(s => `● **${short(s.info.title)}** (${time(s.info.length_seconds)}) | Requested by **${s.message.author.username}**`).join("\n");
-            let length = 0; songs.forEach(s => length += Number(s.info.length_seconds));
+            let length = 0; queue.forEach(s => length += Number(s.info.length_seconds));
 
             message.channel.sendMessage(`**__Queue:__** There are ${queue.length} songs in the queue. The queue will last for **${time(length)}.**\n\n${content}${queue.length > 10 ? `\n*...and ${queue.length - 10} more.*` : ""}\n\n**Currently Playing:** ${short(stream.current.info.title)} (${time(stream.current.info.length_seconds)})`);
         }

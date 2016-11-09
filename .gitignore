@@ -2,4 +2,5 @@ trello.js
 Source/Config.json
 Source/OldFunctions.js
 Source/Commands/MusicBase.js
+Source/Commands/MusicDown.js
 !Source/Commands/Music.js

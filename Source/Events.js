@@ -12,22 +12,6 @@ module.exports = class Events {
         this.intervalPost();
     }
 
-    warn(warning) {
-        console.error(warning);
-    }
-
-    error(error) {
-        console.error(error);
-    }
-
-    reconnecting() {
-        console.error("Reconnecting");
-    }
-
-    disconnect() {
-        console.error("Disconnected");
-    }
-
     processMessage(message) {
         if (message.type === "stats") {
             this.client.data = message.data;
@@ -209,11 +193,7 @@ module.exports = class Events {
         });
     }
 
-    guildCreate() {
-        this.client.sendStat("guilds", this.client.bot.guilds.size);
-    }
-
-    guildDelete() {
+    guild() {
         this.client.sendStat("guilds", this.client.bot.guilds.size);
     }
 };

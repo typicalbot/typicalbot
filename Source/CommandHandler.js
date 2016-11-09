@@ -1,4 +1,4 @@
-let Categories = [ "Utility" , "Creator" , "TypicalBot" , "Moderation" , "Fun" , "Music" ];
+const Categories = [ "Utility" , "Creator" , "TypicalBot" , "Moderation" , "Fun" , "Music" ];
 
 class CommandHandler {
     constructor() {
@@ -33,19 +33,6 @@ class CommandHandler {
         if (this.commands[text]) return this.commands[text];
         for (let command in this.commands) if (this.commands[command].aliases && this.commands[command].aliases.includes(text)) return this.commands[command];
         return null;
-    }
-
-    add(category) {
-        Categories.push(category);
-        this.reload();
-    }
-
-    remove(category) {
-        let NewList = [];
-        Categories.map(c => {
-            if (c !== category) NewList.push(c);
-        });
-        Categories = NewList;
     }
 }
 
