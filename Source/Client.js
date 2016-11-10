@@ -12,11 +12,17 @@ let db = require("./Database");
 
 let MusicQueue = new Map();
 
-class Client {
+const client = new class Client {
     constructor() {
         this.ShardID = ShardID;
         this.ShardCount = ShardCount;
         this.data = {};
+
+        this.commands = new cmdh();
+        this.functions = new fn(this);
+        this.events = new ev(this);
+        this.music = new music(this);
+        this.settings = new db();
 
         let bot = this.bot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
         bot.login(config.token).catch(err => this.events.error(err));
@@ -43,12 +49,6 @@ class Client {
             .on("guildMemberUpdate", (oldMember, newMember) => this.events.guildMemberUpdate(oldMember, newMember))
             .on("guildCreate", guild => this.events.guild(guild))
             .on("guildDelete", guild => this.events.guild(guild));
-
-        this.commands = new cmdh();
-        this.functions = new fn(this);
-        this.events = new ev(this);
-        this.music = new music(this);
-        this.settings = new db();
     }
 
     log(data) {
@@ -97,6 +97,8 @@ class Client {
     get config() {
         return config;
     }
-}
+};
 
-module.exports = this;
+process
+    .on("message", message => client.events.processMessage(message))
+    .on("unhandledRejection", (reason, p) => console.error('Unhandled Rejection at: Promise', p, 'reason:', reason));

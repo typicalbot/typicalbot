@@ -1,6 +1,6 @@
 const child_process = require("child_process");
 
-const file          = `${__dirname}/Source/source.js`;
+const file          = `${__dirname}/Source/Client.js`;
 const shards        = [];
 const data          = {};
 const shardCount    = 12;
