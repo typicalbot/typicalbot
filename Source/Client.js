@@ -1,10 +1,9 @@
 const ShardID = process.env.SHARD_ID;
 const ShardCount = process.env.SHARD_COUNT;
 
-let Config = require("./Config");
-
 const Discord = require("discord.js");
 
+let config = require("./Config");
 let cmdh = require("./CommandHandler");
 let fn = require("./Functions");
 let ev = require("./Events");
@@ -20,7 +19,7 @@ class Client {
         this.data = {};
 
         let bot = this.bot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
-        bot.login(Config.token).catch(err => this.events.error(err));
+        bot.login(config.token).catch(err => this.events.error(err));
 
         bot
             .on("ready", () => {
@@ -52,10 +51,6 @@ class Client {
         this.settings = new db();
     }
 
-    setup() {
-
-    }
-
     log(data) {
         console.log(`SHARD ${ShardID} | ${data}`);
     }
@@ -73,7 +68,7 @@ class Client {
         let all = mod === "all";
         if (all || mod === "config") {
             delete require.cache[`${__dirname}/Config.json`];
-            Config = require("./Config");
+            config = require("./Config");
         }
         if (all || mod === "commands") {
             this.commands.reload();
@@ -100,7 +95,7 @@ class Client {
     }
 
     get config() {
-        return Config;
+        return config;
     }
 }
 
