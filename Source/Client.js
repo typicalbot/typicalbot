@@ -3,7 +3,6 @@ const ShardCount = process.env.SHARD_COUNT;
 
 const Discord = require("discord.js");
 
-let config = require("./Config");
 let cmdh = require("./CommandHandler");
 let fn = require("./Functions");
 let ev = require("./Events");
@@ -18,6 +17,7 @@ const client = new class Client {
         this.ShardCount = ShardCount;
         this.data = {};
 
+        let config = this.config = require("./Config");
         this.commands = new cmdh();
         this.functions = new fn(this);
         this.events = new ev(this);
@@ -68,7 +68,7 @@ const client = new class Client {
         let all = mod === "all";
         if (all || mod === "config") {
             delete require.cache[`${__dirname}/Config.json`];
-            config = require("./Config");
+            this.config = require("./Config");
         }
         if (all || mod === "commands") {
             this.commands.reload();
@@ -88,14 +88,6 @@ const client = new class Client {
             music = require("./MusicUtil");
             this.music = new music(this);
         }
-    }
-
-    get streams() {
-        return MusicQueue;
-    }
-
-    get config() {
-        return config;
     }
 };
 
