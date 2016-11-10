@@ -4,7 +4,6 @@ const ShardCount = process.env.SHARD_COUNT;
 let Config = require("./Config");
 
 const Discord = require("discord.js");
-const DiscordBot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
 
 let cmdh = require("./CommandHandler");
 let fn = require("./Functions");
@@ -24,7 +23,31 @@ class Client {
     }
 
     setup() {
-        DiscordBot.login(Config.token).catch(err => this.events.error(err));
+        let bot = this.bot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
+        bot.login(Config.token).catch(err => this.events.error(err));
+
+        bot
+            .on("ready", () => {
+                this.events.ready();
+                setInterval(() => this.events.intervalStatus(), 60000);
+                setInterval(() => this.events.intervalPost(), 1200000);
+                setInterval(() => this.sendStat("voiceConnections"), 10000);
+                setInterval(() => {
+                    process.send({"type": "stat", "data": {"heap": process.memoryUsage().heapUsed/1024/1024}});
+                }, 5000);
+            })
+            .on("warn", console.error)
+            .on("error", console.error)
+            .on("reconnecting", () => console.error("Reconnecting"))
+            .on("disconnect", () => console.error("Disconnected"))
+            .on("message", this.events.message)
+            .on("guildMemberAdd", this.events.guildMemberAdd)
+            .on("guildMemberRemove", this.events.guildMemberRemove)
+            .on("guildBanAdd", this.events.guildBanAdd)
+            .on("guildBanRemove", this.events.guildBanRemove)
+            .on("guildMemberUpdate", this.events.guildMemberUpdate)
+            .on("guildCreate", this.events.guild)
+            .on("guildDelete", this.events.guild);
 
         this.commands = new cmdh();
         this.functions = new fn(this);
@@ -76,13 +99,9 @@ class Client {
         return MusicQueue;
     }
 
-    get bot() {
-        return DiscordBot;
-    }
-
     get config() {
         return Config;
     }
 }
 
-module.exports = Client;
+module.exports = this;
