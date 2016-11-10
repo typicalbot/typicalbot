@@ -33,9 +33,7 @@ const client = new class Client {
                 setInterval(() => this.events.intervalStatus(), 60000);
                 setInterval(() => this.events.intervalPost(), 1200000);
                 setInterval(() => this.sendStat("voiceConnections"), 10000);
-                setInterval(() => {
-                    process.send({"type": "stat", "data": {"heap": process.memoryUsage().heapUsed/1024/1024}});
-                }, 5000);
+                setInterval(() => process.send({"type": "stat", "data": {"heap": process.memoryUsage().heapUsed/1024/1024}}), 5000);
             })
             .on("warn", console.error)
             .on("error", console.error)

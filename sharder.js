@@ -14,7 +14,6 @@ function changeData(shard, sentData) {
 }
 
 function createShard(shardNumber) {
-    console.log(`CREATING SHARD: ${shardNumber}`);
     const TRACE_SERVICE_NAME = `TypicalBot-Shard${shardNumber}`;
     const shard = child_process.fork(file, [], {env: {"SHARD_ID": shardNumber, "SHARD_COUNT": shardCount, TRACE_API_KEY, TRACE_SERVICE_NAME}});
     shards.push(shard);
