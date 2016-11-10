@@ -36,14 +36,14 @@ class Client {
             .on("error", console.error)
             .on("reconnecting", () => console.error("Reconnecting"))
             .on("disconnect", () => console.error("Disconnected"))
-            .on("message", this.events.message.bind(this))
-            .on("guildMemberAdd", this.events.guildMemberAdd.bind(this))
-            .on("guildMemberRemove", this.events.guildMemberRemove.bind(this))
-            .on("guildBanAdd", this.events.guildBanAdd.bind(this))
-            .on("guildBanRemove", this.events.guildBanRemove.bind(this))
-            .on("guildMemberUpdate", this.events.guildMemberUpdate.bind(this))
-            .on("guildCreate", this.events.guild.bind(this))
-            .on("guildDelete", this.events.guild.bind(this));
+            .on("message", message => this.events.message(message))
+            .on("guildMemberAdd", (member) => this.events.guildMemberAdd(member))
+            .on("guildMemberRemove", (member) => this.events.guildMemberRemove(member))
+            .on("guildBanAdd", (guild, user) => this.events.guildBanAdd(guild, user))
+            .on("guildBanRemove", (guild, user) => this.events.guildBanRemove(guild, user))
+            .on("guildMemberUpdate", (oldMember, newMember) => this.events.guildMemberUpdate(oldMember, newMember))
+            .on("guildCreate", guild => this.events.guild(guild))
+            .on("guildDelete", guild => this.events.guild(guild));
 
         this.commands = new cmdh();
         this.functions = new fn(this);
