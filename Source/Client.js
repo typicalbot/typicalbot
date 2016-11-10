@@ -19,10 +19,6 @@ class Client {
         this.ShardCount = ShardCount;
         this.data = {};
 
-        this.setup();
-    }
-
-    setup() {
         let bot = this.bot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
         bot.login(Config.token).catch(err => this.events.error(err));
 
@@ -54,6 +50,10 @@ class Client {
         this.events = new ev(this);
         this.music = new music(this);
         this.settings = new db();
+    }
+
+    setup() {
+
     }
 
     log(data) {
