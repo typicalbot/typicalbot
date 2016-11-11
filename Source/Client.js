@@ -9,8 +9,6 @@ let ev = require("./Events");
 let music = require("./MusicUtil");
 let db = require("./Database");
 
-let MusicQueue = new Map();
-
 const client = new class Client {
     constructor() {
         this.ShardID = ShardID;
@@ -23,6 +21,8 @@ const client = new class Client {
         this.events = new ev(this);
         this.music = new music(this);
         this.settings = new db();
+
+        this.streams = new Map();
 
         let bot = this.bot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
         bot.login(config.token).catch(err => this.events.error(err));
