@@ -12,7 +12,7 @@ const DefaultData = {
 };
 
 module.exports = class Database {
-    get Data() {
+    get data() {
         return GuildData;
     }
 
