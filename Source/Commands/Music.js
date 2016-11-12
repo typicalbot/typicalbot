@@ -4,6 +4,7 @@ const YouTube = new YouTubeAPI(apikey);
 
 module.exports = {
     "youtube": {
+        mode: "lite",
         aliases: ["yts"],
         usage: {"command": "youtube <query>", "description": "Searches for a video on YouTube."},
         execute: (message, client) => {
@@ -17,7 +18,7 @@ module.exports = {
         }
     },
     "play": {
-        permission: 0,
+        mode: "lite",
         usage: {"command": "play <video_name/video_url>", "description": "Plays a video from YouTube."},
         execute: (message, client, level) => {
             if (!checkOverride(client, message.guild, message.author, "play", level)) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
@@ -37,7 +38,7 @@ module.exports = {
         }
     },
     "queue": {
-        permission: 0,
+        mode: "lite",
         usage: {"command": "queue", "description": "Displays the queue of songs to play."},
         execute: (message, client, level) => {
             let connection = message.guild.voiceConnection;
@@ -56,7 +57,7 @@ module.exports = {
         }
     },
     "current": {
-        permission: 0,
+        mode: "lite",
         aliases: ["np","playing"],
         usage: {"command": "current", "description": "Displays the currently playing song."},
         execute: (message, client, level) => {
@@ -66,11 +67,11 @@ module.exports = {
             let stream = client.streams.get(message.guild.id);
             let short = text => client.functions.shorten(text), time = len => client.functions.length(len);
             let remaining = stream.current.info.length_seconds - Math.floor(connection.player.dispatcher.time / 1000);
-            message.channel.sendMessage(`**__Currently Playing:__** ${short(stream.current.info.title)} | ${time(remaining)} left`);
+            message.channel.sendMessage(`**__Currently Playing:__** ${short(stream.current.info.title)} | ${time(remaining)} left | Requested by **${stream.current.message.author.username}**`);
         }
     },
     "unqueue": {
-        permission: 0,
+        mode: "lite",
         usage: {"command": "unqueue <queue_id>", "description": "Remove a song from the queue."},
         execute: (message, client, level) => {
             if (!checkOverride(client, message.guild, message.author, "unqueue", level)) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
@@ -95,7 +96,7 @@ module.exports = {
         }
     },
     "skip": {
-        permission: 0,
+        mode: "lite",
         usage: {"command": "skip", "description": "Skips the currently playing song."},
         execute: (message, client, level) => {
             if (!checkOverride(client, message.guild, message.author, "skip", level)) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
@@ -113,7 +114,7 @@ module.exports = {
         }
     },
     "pause": {
-        permission: 0,
+        mode: "lite",
         usage: {"command": "pause", "description": "Pauses the song currently playing."},
         execute: (message, client, level) => {
             if (!checkOverride(client, message.guild, message.author, "pause_resume", level)) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
@@ -127,7 +128,7 @@ module.exports = {
         }
     },
     "resume": {
-        permission: 0,
+        mode: "lite",
         usage: {"command": "resume", "description": "Resumes the song currently playing."},
         execute: (message, client, level) => {
             if (!checkOverride(client, message.guild, message.author, "pause_resume", level)) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
@@ -141,7 +142,7 @@ module.exports = {
         }
     },
     "stop": {
-        permission: 0,
+        mode: "lite",
         usage: {"command": "stop", "description": "Stops the currently playing song and clears the queue."},
         execute: (message, client, level) => {
             if (!checkOverride(client, message.guild, message.author, "stop", level)) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
@@ -157,7 +158,7 @@ module.exports = {
         }
     },
     "volume": {
-        permission: 0,
+        mode: "lite",
         usage: {"command": "volume <number>", "description": "Stops the currently playing song and clears the queue."},
         execute: (message, client, level) => {
             if (!checkOverride(client, message.guild, message.author, "stop", level)) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
@@ -188,7 +189,7 @@ function same(connection, member) {
 
 function checkOverride(client, guild, user, command, level) {
     let musicperms = guild.settings.musicperms;
-    let override = guild.settings[`or-${command}`];
+    let override = guild.settings[`or${command}`];
     if (override === "off") if (musicperms === "all" || musicperms === "dj" && level >= 1 || musicperms === "admin" && level >= 2) return true;
     if (override === "all" || override === "dj" && level >= 1 || override === "admin" && level >= 2) return true;
     return false;

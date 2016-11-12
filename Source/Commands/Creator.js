@@ -4,6 +4,7 @@ let webhook = WebhookClient.connect("233411483902410762", "-y8LT2tm-l9BubQW8HHeZ
 
 module.exports = {
     "reload": {
+        mode: "strict",
         permission: 5,
         execute: (message, client) => {
             let mod = message.content.slice(message.content.search(" ") + 1);
@@ -12,6 +13,7 @@ module.exports = {
         }
     },
     "announce": {
+        mode: "strict",
         permission: 4,
         execute: (message, client) => {
             let text = message.content.slice(message.content.search(" ") + 1);
@@ -33,6 +35,7 @@ module.exports = {
         }
     },
     "usage": {
+        mode: "strict",
         permission: 5,
         execute: (message, client) => {
             let mb = client.data.heap;
@@ -42,6 +45,7 @@ module.exports = {
     },
     "eval": {
         dm: true,
+        mode: "strict",
         permission: 5,
         execute: (message, client, level) => {
             let code = message.content.slice(message.content.search(" ") + 1);
@@ -51,6 +55,14 @@ module.exports = {
             } catch (err) {
                 message.channel.sendMessage(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`ERROR:\`\n\`\`\`${err}\n\`\`\``);
             }
+        }
+    },
+    "lite": {
+        dm: true,
+        mode: "lite",
+        permission: 5,
+        execute: (message, client, level) => {
+            message.reply("ayeeeeee!!!!!!");
         }
     }
 };

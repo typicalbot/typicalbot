@@ -1,12 +1,14 @@
 module.exports = {
     "donate": {
         dm: true,
+        mode: "strict",
         usage: {"command": "donate", "description": "Donate to the cause of TypicalBot."},
         execute: (message, client) => {
             message.channel.sendMessage(`${message.author} | **__You can donate here:__** ${client.config.urls.donate}\n\nDonations are GREATLY appreciated! They help cover extra costs for our server, domain, and other payments.`);
         }
     },
     "subscribe": {
+        mode: "strict",
         aliases: ["sub"],
         usage: {"command": "subscribe", "description": "Subscribe to TypicalBot's announcements."},
         execute: (message, client) => {
@@ -18,6 +20,7 @@ module.exports = {
         }
     },
     "unsubscribe": {
+        mode: "strict",
         aliases: ["unsub"],
         usage: {"command": "subscribe", "description": "Unsubscribe from TypicalBot's announcements."},
         execute: (message, client) => {
@@ -30,6 +33,7 @@ module.exports = {
     },
     "help": {
         dm: true,
+        mode: "strict",
         usage: {"command": "help [command]", "description": "Get help with TypicalBot, or a specific command."},
         execute: (message, client) => {
             let cmd = message.content.split(" ")[1];
@@ -51,6 +55,7 @@ module.exports = {
     },
     "info": {
         dm: true,
+        mode: "strict",
         usage: {"command": "info", "description": "Get information about TypicalBot."},
         execute: (message, client) => {
             message.channel.sendMessage(`**Hello!** I'm TypicalBot, created by HyperCoder. You can get a list of my commands with \`$commands\`. Documentation can be found at <https://typicalbot.com/documentation/>. If you need help, join us in the TypicalBot Lounge at <https://typicalbot.com/join-our-server/>.`);
@@ -58,6 +63,7 @@ module.exports = {
     },
     "commands": {
         dm: true,
+        mode: "strict",
         aliases: ["cmds"],
         usage: {"command": "commands", "description": "Gives you a list of commands."},
         execute: (message, client) => {
@@ -84,6 +90,7 @@ module.exports = {
     },
     "invite": {
         dm: true,
+        mode: "strict",
         usage: {"command": "invite", "description": "Get TypicalBot's invite link."},
         execute: (message, client) => {
             message.channel.sendMessage(`${message.author} | You can invite me here: <${client.config.urls.oauth}>`);
@@ -91,6 +98,7 @@ module.exports = {
     },
     "server": {
         dm: true,
+        mode: "strict",
         usage: {"command": "server", "description": "Get TypicalBot's server invite."},
         execute: (message, client) => {
             message.channel.sendMessage(`${message.author} | You can join my lounge here: <${client.config.urls.server}>`);
@@ -98,6 +106,7 @@ module.exports = {
     },
     "stats": {
         dm: true,
+        mode: "strict",
         usage: {"command": "stats", "description": "Get TypicalBot's current stats."},
         execute: (message, client) => {
             message.channel.sendMessage(
@@ -111,6 +120,7 @@ module.exports = {
         }
     },
     "shard": {
+        mode: "strict",
         usage: {"command": "shard", "description": "Get your current shard's stats."},
         execute: (message, client) => {
             message.channel.sendMessage(

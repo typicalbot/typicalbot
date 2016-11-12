@@ -3,12 +3,14 @@ const request = require("request");
 module.exports = {
     "ping": {
         dm: true,
+        mode: "strict",
         usage: {"command": "ping", "description": "A check to see if TypicalBot is responsive."},
         execute: (message, client) => {
             message.channel.sendMessage("Pinging...").then(msg => msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`));
         }
     },
     "mylevel": {
+        mode: "strict",
         usage: {"command": "mylevel", "description": "Gives you your permission level, specific to that server."},
         execute: (message, client) => {
             let level = client.functions.getPermissionLevel(message.guild, message.guild.settings, message.author);
@@ -21,6 +23,7 @@ module.exports = {
         }
     },
     "serverinfo": {
+        mode: "strict",
         usage: {"command": "serverinfo ['roles'/'channels'/'bots']", "description": "Lists the server's information."},
         execute: (message, client) => {
             let after = message.content.split(" ")[1];
@@ -61,6 +64,7 @@ module.exports = {
         }
     },
     "userinfo": {
+        mode: "lite",
         usage: {"command": "userinfo [@user]", "description": "Lists a user's information."},
         execute: (message, client) => {
             let user = message.mentions.users.array()[0];

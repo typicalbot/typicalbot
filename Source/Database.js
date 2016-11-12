@@ -7,8 +7,8 @@ let GuildData = new Map();
 
 const DefaultData = {
     "masterrole": null, "joinrole": null, "silent": "N", "blacklist": null, "djrole": null, "announcement": null, "joinann": null, "leaveann": null, "banann": null, "unbanann": null, "nickann": null, "inviteann": null,
-    "joinmessage": null, "joinnick": null, "customprefix": null, "originaldisabled": "N", "antiinvite": "N", "antilink": "N", "musicperms": "all", "or-play": "off", "or-skip": "off", "or-stop": "off",
-    "or-unqueue": "off", "or-volume": "off", "lengthlimit": null, "queuelimit": null, "apikey": null
+    "joinmessage": null, "joinnick": null, "mode": "free", "customprefix": null, "originaldisabled": "N", "antiinvite": "N", "antilink": "N", "musicperms": "all", "orplay": "off", "orskip": "off", "orstop": "off",
+    "orunqueue": "off", "orvolume": "off", "lengthlimit": null, "queuelimit": null, "apikey": null
 };
 
 module.exports = class Database {

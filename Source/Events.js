@@ -105,6 +105,9 @@ module.exports = class Events {
                 let command = this.client.commands.getCommand(split.slice(prefix.length));
                 if (!command) return;
 
+                let mode = command.mode || "free";
+                if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return message.channel.sendMessage(`${message.author} | \`❌\` | That command is not enabled on this server.`);
+
                 if (command.permission && UserLevel < command.permission) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
 
                 command.execute(message, this.client, UserLevel);

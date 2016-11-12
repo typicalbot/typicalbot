@@ -1,5 +1,6 @@
 module.exports = {
     "say": {
+        mode: "strict",
         permission: 2,
         aliases: ["speak"],
         usage: {"command": "say <#channel> <message>", "description": "Have TypicalBot send a message in the same channel or the channel specified."},
@@ -17,6 +18,7 @@ module.exports = {
         }
     },
     "settings": {
+        mode: "strict",
         permission: 2,
         aliases: ["set"],
         usage: {"command": "settings <'view'|'edit'> <setting> [{options}] <value>", "description": "Edit or view your server's settings."},
@@ -93,7 +95,7 @@ module.exports = {
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
                 } else if (setting === "announcements") {
-                    if (value === "off") {
+                    if (value === "disable") {
                         client.settings.update(message.guild, "announcement", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -217,6 +219,22 @@ module.exports = {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
+                } else if (setting === "mode") {
+                    if (value === "free") {
+                        client.settings.update(message.guild, "mode", "free").then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "lite") {
+                        client.settings.update(message.guild, "mode", "lite").then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "strict") {
+                        client.settings.update(message.guild, "mode", "strict").then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else {
+                        message.channel.sendMessage(`${message.author} | \`❌\` | Invalid option.`);
+                    }
                 } else if (setting === "customprefix" || setting === "prefix") {
                     if (value === "remove") {
                         client.settings.update(message.guild, "customprefix", null).then(() => {
@@ -240,6 +258,18 @@ module.exports = {
                     } else {
                         message.channel.sendMessage(`${message.author} | \`❌\` | Invalid option.`);
                     }
+                } else if (setting === "antiinvite") {
+                    if (value === "enable") {
+                        client.settings.update(message.guild, "antiinvite", "Y").then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "disable") {
+                        client.settings.update(message.guild, "antiinvite", "N").then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else {
+                        message.channel.sendMessage(`${message.author} | \`❌\` | Invalid option.`);
+                    }
                 } else {
                     message.channel.sendMessage(`${message.author} | \`❌\` | Invalid setting.`);
                 }
@@ -247,6 +277,7 @@ module.exports = {
         }
     },
     "role": {
+        mode: "strict",
         permission: 2,
         usage: {"command": "role <'give'/'take'> <@user> <role_name>", "description": "Give or take a role from a user."},
         execute: (message, client) => {
@@ -276,6 +307,7 @@ module.exports = {
         }
     },
     "prune": {
+        mode: "strict",
         permission: 2,
         aliases: ["purge"],
         usage: {"command": "prune <number>", "description": "Prune messages in a channel."},
@@ -301,6 +333,7 @@ module.exports = {
         }
     },
     "kick": {
+        mode: "strict",
         permission: 2,
         usage: {"command": "kick <@user>", "description": "Kick a user from the server."},
         execute: (message, client) => {
@@ -315,6 +348,7 @@ module.exports = {
         }
     },
     "ban": {
+        mode: "strict",
         permission: 2,
         usage: {"command": "ban <@user>", "description": "Ban a user from the server."},
         execute: (message, client) => {
@@ -329,6 +363,7 @@ module.exports = {
         }
     },
     "softban": {
+        mode: "strict",
         permission: 2,
         usage: {"command": "softban <@user>", "description": "Softban a user from the server."},
         execute: (message, client) => {

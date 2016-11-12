@@ -1,4 +1,5 @@
 const request = require("request");
+const moment = require("moment");
 
 module.exports = class Functions {
     constructor(client) {
@@ -117,42 +118,34 @@ module.exports = class Functions {
     }
 
     getFilteredMessage(type, guild, user, text, options = {}) {
+        let member = guild.member(user);
         text = text
             .replace(/@everyone/gi, `@\u200Beveryone`)
             .replace(/@here/g, `@\u200Bhere`);
 //            .replace(/`/g, `\`\u200B`);
         if (type === "ann") return text
-            .replace(/{user}/gi, user.toString())
-            .replace(/{user.mention}/gi, user.toString())
+            .replace(/{user}|{user.mention}/gi, user.toString())
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.id}/gi, user.id)
-            .replace(/{user.discrim}/gi, user.discriminator)
-            .replace(/{user.discriminator}/gi, user.discriminator)
+            .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator)
             .replace(/{user.created}/, user.createdAt)
-            .replace(/{guild.name}/gi, guild.name)
-            .replace(/{guild.id}/gi, guild.id)
-            .replace(/{server.name}/gi, guild.name)
-            .replace(/{server.id}/gi, guild.id);
+            .replace(/{user.shortcreated}/, moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"))
+            .replace(/{guild.name}|{server.name}/gi, guild.name)
+            .replace(/{guild.id}|{server.id}/gi, guild.id);
         if (type === "ann-nick") return this.getFilteredMessage("ann", guild, user, text)
-            .replace(/{user.nick}/gi, guild.member(user).nickname ? guild.member(user).nickname : user.username)
-            .replace(/{user.nickname}/gi, guild.member(user).nickname ? guild.member(user).nickname : user.username)
-            .replace(/{user.oldnick}/gi, options.oldmember.nickname ? options.oldmember.nickname : user.username)
-            .replace(/{user.oldnickname}/gi, options.oldmember.nickname ? options.oldmember.nickname : user.username);
+            .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
+            .replace(/{user.oldnick}|{user.oldnickname}/gi, options.oldmember.nickname || user.username);
         if (type === "ann-invite") return this.getFilteredMessage("ann", guild, user, text)
-            .replace(/{user.nick}/gi, guild.member(user).nickname ? guild.member(user).nickname : user.username)
-            .replace(/{user.nickname}/gi, guild.member(user).nickname ? guild.member(user).nickname : user.username)
+            .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{channel}/gi, options.channel.toString())
             .replace(/{channel.name}/gi, options.channel.name)
             .replace(/{channel.id}/gi, options.channel.id);
         if (type === "jm") return text
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.id}/gi, user.id)
-            .replace(/{user.discrim}/gi, user.discriminator)
-            .replace(/{user.discriminator}/gi, user.discriminator)
-            .replace(/{guild.name}/gi, guild.name)
-            .replace(/{guild.id}/gi, guild.id)
-            .replace(/{server.name}/gi, guild.name)
-            .replace(/{server.id}/gi, guild.id);
+            .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator)
+            .replace(/{guild.name}|{server.name}/gi, guild.name)
+            .replace(/{guild.id}|{server.id}/gi, guild.id);
         if (type === "jn") return text
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.discrim}/gi, user.discriminator)
