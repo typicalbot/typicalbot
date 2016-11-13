@@ -23,14 +23,50 @@ module.exports = {
         aliases: ["set"],
         usage: {"command": "settings <'view'|'edit'> <setting> [{options}] <value>", "description": "Edit or view your server's settings."},
         execute: (message, client) => {
-            let match = /(?:settings|set)\s+(view|edit)\s+([\w-]+)\s*(?:{(.+)})?\s*((?:.|[\r\n])+)?/i.exec(message.content);
+            let match = /(?:settings|set)\s+(view|edit)\s+([\w-]+)\s*((?:.|[\r\n])+)?/i.exec(message.content);
             if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
-            let action = match[1], setting = match[2], options = match[3] ? match[3].split(";") : [], value = match[4];
+            let action = match[1], setting = match[2], value = match[3];
             if (action === "view") {
                 if (setting === "masterrole") {
-
+                    let role = client.functions.fetchRole(message.guild, message.guild.settings, "masterrole");
+                    message.channel.sendMessage(`**Master Role:** ${role ? role.name : "None"}`);
                 } else if (setting === "joinrole") {
-
+                    let role = this.client.functions.fetchRole(message.guild, message.guild.settings, "joinrole");
+                    message.channel.sendMessage(`**Join Role:** ${role ? role.name : "None"}`);
+                } else if (setting === "blacklistrole") {
+                    let role = this.client.functions.fetchRole(message.guild, message.guild.settings, "blacklist");
+                    message.channel.sendMessage(`**Blacklist Role:** ${role ? role.name : "None"}`);
+                } else if (setting === "djrole") {
+                    let role = client.functions.fetchRole(message.guild, message.guild.settings, "djrole");
+                    message.channel.sendMessage(`**DJ Role:** ${role ? role.name : "None"}`);
+                } else if (setting === "announcements") {
+                    let channelid = message.guild.settings.announcement;
+                    let channel = channelid ? message.guild.channels.get(channelid) || null : null;
+                    message.channel.sendMessage(`**Announcements Channel:** ${channel ? `<#${channel.id}>` : "None"}`);
+                } else if (setting === "ann-join") {
+                    let msg = message.guild.settings.joinann;
+                    msg = !msg ? "Default Message:\n```\n**{user.name}** has joined the server.\n```" : msg === "--disabled" ? "Disabled" : msg.startsWith("--embed") ? `Embedded Object:\n\`\`\`\n${msg.slice(8)}\n\`\`\`` : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
+                    message.channel.sendMessage(`**Join Announcement:** ${msg}`);
+                } else if (setting === "ann-leave") {
+                    let msg = message.guild.settings.leaveann;
+                    msg = !msg ? "Default Message:\n```\n**{user.name}** has left the server.\n```" : msg === "--disabled" ? "Disabled" : msg.startsWith("--embed") ? `Embedded Object:\n\`\`\`\n${msg.slice(8)}\n\`\`\`` : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
+                    message.channel.sendMessage(`**Leave Announcement:** ${msg}`);
+                } else if (setting === "ann-ban") {
+                    let msg = message.guild.settings.banann;
+                    msg = !msg ? "Default Message:\n```\n**{user.name}** has been banned from the server.\n```" : msg === "--disabled" ? "Disabled" : msg.startsWith("--embed") ? `Embedded Object:\n\`\`\`\n${msg.slice(8)}\n\`\`\`` : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
+                    message.channel.sendMessage(`**Ban Announcement:** ${msg}`);
+                } else if (setting === "ann-unban") {
+                    let msg = message.guild.settings.unbanann;
+                    msg = !msg ? "Disabled" : msg === "--enabled" ? "Default Message:\n```\n**{user.name}** has been unbanned from the server.\n```" : msg.startsWith("--embed") ? `Embedded Object:\n\`\`\`\n${msg.slice(8)}\n\`\`\`` : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
+                    message.channel.sendMessage(`**Unban Announcement:** ${msg}`);
+                } else if (setting === "ann-nick") {
+                    let msg = message.guild.settings.nickann;
+                    msg = !msg ? "Disabled" : msg === "--enabled" ? "Default Message:\n```\n**{user.name}** changed their nickname to **{user.nickname}**.\n```" : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
+                    message.channel.sendMessage(`**Nickname Announcement:** ${msg}`);
+                } else if (setting === "ann-invite") {
+                    let msg = message.guild.settings.inviteann;
+                    msg = !msg ? "Disabled" : msg === "--enabled" ? "Default Message:\n```\n**{user.name}** has posted an invite in {channel}.\n```" : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
+                    message.channel.sendMessage(`**Invite Announcement:** ${msg}`);
                 } else {
                     message.channel.sendMessage(`${message.author} | \`❌\` | Invalid setting.`);
                 }
@@ -61,7 +97,8 @@ module.exports = {
                         let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
                         if (!role) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid role.`);
                         client.settings.update(message.guild, "joinrole", role.id).then(() => {
-                            let announce = options.includes("showann");
+                            let announce = value.startsWith("--showann");
+                            if (announce) value = value.slice(10);
                             client.settings.update(message.guild, "silent", announce ? "N" : "Y");
                             message.channel.sendMessage(`${message.author} | Success. ${announce ? "(This will send an announcement in your announcement channel.)" : ""}`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.\n\n${err}`));
@@ -122,7 +159,17 @@ module.exports = {
                         client.settings.update(message.guild, "joinann", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "embed") {
+                        let msg = `--embed {"color": 65280, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User joined" }, "timestamp": "{now}"}`;
+                        client.settings.update(message.guild, "joinann", msg).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
+                        let embed = value.startsWith("--embed");
+                        if (embed) {
+                            let object = value.slice(8);
+                            try { object = JSON.parse(object); } catch(err) { return message.channel.sendMessage(`${message.author} | \`❌\` | Unable to convert into object.`); }
+                        }
                         client.settings.update(message.guild, "joinann", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -136,7 +183,17 @@ module.exports = {
                         client.settings.update(message.guild, "leaveann", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "embed") {
+                        let msg = `--embed {"color": 16737792, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User left" }, "timestamp": "{now}"}`;
+                        client.settings.update(message.guild, "leaveann", msg).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
+                        let embed = value.startsWith("--embed");
+                        if (embed) {
+                            let object = value.slice(8);
+                            try { object = JSON.parse(object); } catch(err) { return message.channel.sendMessage(`${message.author} | \`❌\` | Unable to convert into object.`); }
+                        }
                         client.settings.update(message.guild, "leaveann", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -150,7 +207,17 @@ module.exports = {
                         client.settings.update(message.guild, "banann", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "embed") {
+                        let msg = `--embed {"color": 16711680, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User banned" }, "timestamp": "{now}"}`;
+                        client.settings.update(message.guild, "banann", msg).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
+                        let embed = value.startsWith("--embed");
+                        if (embed) {
+                            let object = value.slice(8);
+                            try { object = JSON.parse(object); } catch(err) { return message.channel.sendMessage(`${message.author} | \`❌\` | Unable to convert into object.`); }
+                        }
                         client.settings.update(message.guild, "banann", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -164,7 +231,17 @@ module.exports = {
                         client.settings.update(message.guild, "unbanann", "--enabled").then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "embed") {
+                        let msg = `--embed {"color": 17663, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User unbanned" }, "timestamp": "{now}"}`;
+                        client.settings.update(message.guild, "banann", msg).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
+                        let embed = value.startsWith("--embed");
+                        if (embed) {
+                            let object = value.slice(8);
+                            try { object = JSON.parse(object); } catch(err) { return message.channel.sendMessage(`${message.author} | \`❌\` | Unable to convert into object.`); }
+                        }
                         client.settings.update(message.guild, "unbanann", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -343,6 +420,24 @@ module.exports = {
             if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
             if (!user.kickable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot kick that user.`);
             message.guild.member(user).kick().then(() => {
+                message.channel.sendMessage(`${message.author} | Success.`);
+            }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
+        }
+    },
+    "vkick": {
+        mode: "strict",
+        permission: 2,
+        usage: {"command": "vkick <@user>", "description": "Kick a user from the voice channel they are in."},
+        execute: (message, client) => {
+            let match = /ban\s+<@!?(.+)>/i.exec(message.content);
+            if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
+            let user = message.guild.members.get(match[1]);
+            if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
+
+
+
+            if (!user.bannable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot kick that user from a voice channel.`);
+            message.guild.member(user).ban().then(() => {
                 message.channel.sendMessage(`${message.author} | Success.`);
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
         }

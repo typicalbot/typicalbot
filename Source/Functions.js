@@ -127,11 +127,14 @@ module.exports = class Functions {
             .replace(/{user}|{user.mention}/gi, user.toString())
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.id}/gi, user.id)
+            .replace(/{user.avatar}/, user.avatarURL)
             .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator)
             .replace(/{user.created}/, user.createdAt)
+            .replace(/{user.createdembed}/, JSON.stringify(user.createdAt).replace(/"/g, ""))
             .replace(/{user.shortcreated}/, moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"))
             .replace(/{guild.name}|{server.name}/gi, guild.name)
-            .replace(/{guild.id}|{server.id}/gi, guild.id);
+            .replace(/{guild.id}|{server.id}/gi, guild.id)
+            .replace(/{now}/gi, JSON.stringify(new Date()).replace(/"/g, ""));
         if (type === "ann-nick") return this.getFilteredMessage("ann", guild, user, text)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{user.oldnick}|{user.oldnickname}/gi, options.oldmember.nickname || user.username);
@@ -150,6 +153,10 @@ module.exports = class Functions {
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.discrim}/gi, user.discriminator)
             .replace(/{user.discriminator}/gi, user.discriminator);
+    }
+
+    parseEmbed(type, guild, user, text) {
+
     }
 
     request(url) {

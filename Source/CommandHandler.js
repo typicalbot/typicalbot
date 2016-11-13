@@ -4,10 +4,6 @@ class CommandHandler {
     constructor() {
         this.commands = {};
 
-        this.setup();
-    }
-
-    setup() {
         for (let category of Categories) {
             category = require(`./Commands/${category}`);
             Object.keys(category).map(c => {

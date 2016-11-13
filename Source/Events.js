@@ -106,7 +106,7 @@ module.exports = class Events {
                 if (!command) return;
 
                 let mode = command.mode || "free";
-                if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return message.channel.sendMessage(`${message.author} | \`❌\` | That command is not enabled on this server.`);
+                if (message.author.id !== this.client.config.owner) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return message.channel.sendMessage(`${message.author} | \`❌\` | That command is not enabled on this server.`);
 
                 if (command.permission && UserLevel < command.permission) return message.channel.sendMessage(`${message.author} | \`❌\` | Your permission level is too low to execute that command.`);
 
@@ -121,7 +121,20 @@ module.exports = class Events {
             if (settings.announcement && settings.joinann !== "--disabled") {
                 let channel = guild.channels.get(settings.announcement);
                 if (channel && this.client.functions.messageable(channel)) {
-                    channel.sendMessage(settings.joinann ? this.client.functions.getFilteredMessage("ann", guild, member.user, settings.joinann) : `**${member.user.username}** has joined the server.`);
+                    try {
+                        let useembed = settings.joinann && settings.joinann.startsWith("--embed");
+                        if (useembed) {
+                            let object = settings.joinann.slice(8);
+                            let embed = this.client.functions.getFilteredMessage("ann", guild, member.user, object);
+                            embed = JSON.parse(embed);
+                            if (embed.author && embed.author.icon_url && !embed.author.icon_url.startsWith("https://")) embed.author.icon_url = null;
+                            channel.sendMessage("", { embed });
+                        } else {
+                            channel.sendMessage(settings.joinann ? this.client.functions.getFilteredMessage("ann", guild, member.user, settings.joinann) : `**${member.user.username}** has joined the server.`);
+                        }
+                    } catch(err) {
+                        console.error(err);
+                    }
                 }
             }
             if (settings.joinmessage) member.user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.getFilteredMessage("jm", guild, member.user, settings.joinmessage)}`);
@@ -144,7 +157,20 @@ module.exports = class Events {
                 if (settings.announcement && settings.leaveann !== "--disabled") {
                     let channel = guild.channels.get(settings.announcement);
                     if (!channel || !this.client.functions.messageable(channel)) return;
-                    channel.sendMessage(settings.leaveann ? this.client.functions.getFilteredMessage("ann", guild, member.user, settings.leaveann) : `**${member.user.username}** has left the server.`);
+                    try {
+                        let useembed = settings.leaveann && settings.leaveann.startsWith("--embed");
+                        if (useembed) {
+                            let object = settings.leaveann.slice(8);
+                            let embed = this.client.functions.getFilteredMessage("ann", guild, member.user, object);
+                            embed = JSON.parse(embed);
+                            if (embed.author && embed.author.icon_url && !embed.author.icon_url.startsWith("https://")) embed.author.icon_url = null;
+                            channel.sendMessage("", { embed });
+                        } else {
+                            channel.sendMessage(settings.leaveann ? this.client.functions.getFilteredMessage("ann", guild, member.user, settings.leaveann) : `**${member.user.username}** has left the server.`);
+                        }
+                    } catch(err) {
+                        console.error(err);
+                    }
                 }
             });
         });
@@ -155,7 +181,20 @@ module.exports = class Events {
             if (settings.announcement && settings.banann !== "--disabled") {
                 let channel = guild.channels.get(settings.announcement);
                 if (!channel || !this.client.functions.messageable(channel)) return;
-                channel.sendMessage(settings.banann ? this.client.functions.getFilteredMessage("ann", guild, user, settings.banann) : `**${user.username}** has been banned from the server.`);
+                try {
+                    let useembed = settings.banann && settings.banann.startsWith("--embed");
+                    if (useembed) {
+                        let object = settings.banann.slice(8);
+                        let embed = this.client.functions.getFilteredMessage("ann", guild, user, object);
+                        embed = JSON.parse(embed);
+                        if (embed.author && embed.author.icon_url && !embed.author.icon_url.startsWith("https://")) embed.author.icon_url = null;
+                        channel.sendMessage("", { embed });
+                    } else {
+                        channel.sendMessage(settings.banann ? this.client.functions.getFilteredMessage("ann", guild, user, settings.banann) : `**${user.username}** has been banned from the server.`);
+                    }
+                } catch(err) {
+                    console.error(err);
+                }
             }
         });
     }
@@ -165,7 +204,20 @@ module.exports = class Events {
             if (settings.announcement && settings.unbanann) {
                 let channel = guild.channels.get(settings.announcement);
                 if (!channel || !this.client.functions.messageable(channel)) return;
-                channel.sendMessage(settings.unbanann !== "--enabled" ? this.client.functions.getFilteredMessage("ann", guild, user, settings.unbanann) : `**${user.username}** has been unbanned from the server.`);
+                try {
+                    let useembed = settings.unbanann && settings.unbanann.startsWith("--embed");
+                    if (useembed) {
+                        let object = settings.unbanann.slice(8);
+                        let embed = this.client.functions.getFilteredMessage("ann", guild, user, object);
+                        embed = JSON.parse(embed);
+                        if (embed.author && embed.author.icon_url && !embed.author.icon_url.startsWith("https://")) embed.author.icon_url = null;
+                        channel.sendMessage("", { embed });
+                    } else {
+                        channel.sendMessage(settings.unbanann !== "--enabled" ? this.client.functions.getFilteredMessage("ann", guild, user, settings.unbanann) : `**${user.username}** has been unbanned from the server.`);
+                    }
+                } catch(err) {
+                    console.error(err);
+                }
             }
         });
     }
@@ -180,7 +232,7 @@ module.exports = class Events {
                 if (settings.announcement && settings.nickann) {
                     let channel = guild.channels.get(settings.announcement);
                     if (!channel || !this.client.functions.messageable(channel)) return;
-                    channel.sendMessage(settings.nickann !== "--enabled" ? this.client.functions.getFilteredMessage("ann-nick", guild, newMember.user, settings.nickann, {oldmember: oldMember}) : `**${newMember.user.username}** changed their nickname to **${newMember.nickname || newMember.user.username}**.`);
+                    channel.sendMessage(settings.nickann !== "--enabled" ? this.client.functions.getFilteredMessage("ann-nick", guild, newMember.user, settings.nickann, { oldMember }) : `**${newMember.user.username}** changed their nickname to **${newMember.nickname || newMember.user.username}**.`);
                 }
             });
         }

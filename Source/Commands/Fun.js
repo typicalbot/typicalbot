@@ -68,7 +68,7 @@ module.exports = {
     "tiger": {
         usage: {"command": "tiger", "description": "Gives you a random tiger picture."},
         execute: (message, client) => {
-            client.functions.request("https://api.typicalbot.com/tiger/").then(data => {
+            client.functions.request("https://typicalbot.com/api/tiger/").then(data => {
                 message.channel.sendMessage(JSON.parse(data).response);
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured making that request.`));
         }
@@ -84,7 +84,7 @@ module.exports = {
     "yomomma": {
         usage: {"command": "yomomma", "description": "Gives you a random yomomma joke."},
         execute: (message, client) => {
-            client.functions.request("https://api.typicalbot.com/yomomma/").then(data => {
+            client.functions.request("https://typicalbot.com/api/yomomma/").then(data => {
                 message.channel.sendMessage(JSON.parse(data).response);
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured making that request.`));
         }
@@ -92,7 +92,7 @@ module.exports = {
     "quote": {
         usage: {"command": "quote", "description": "Gives you a random quote."},
         execute: (message, client) => {
-            client.functions.request("https://api.typicalbot.com/quotes/").then(data => {
+            client.functions.request("https://typicalbot.com/api/quotes/").then(data => {
                 message.channel.sendMessage(JSON.parse(data).response);
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured making that request.`));
         }
