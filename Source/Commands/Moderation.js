@@ -31,10 +31,10 @@ module.exports = {
                     let role = client.functions.fetchRole(message.guild, message.guild.settings, "masterrole");
                     message.channel.sendMessage(`**Master Role:** ${role ? role.name : "None"}`);
                 } else if (setting === "joinrole") {
-                    let role = this.client.functions.fetchRole(message.guild, message.guild.settings, "joinrole");
+                    let role = client.functions.fetchRole(message.guild, message.guild.settings, "joinrole");
                     message.channel.sendMessage(`**Join Role:** ${role ? role.name : "None"}`);
                 } else if (setting === "blacklistrole") {
-                    let role = this.client.functions.fetchRole(message.guild, message.guild.settings, "blacklist");
+                    let role = client.functions.fetchRole(message.guild, message.guild.settings, "blacklist");
                     message.channel.sendMessage(`**Blacklist Role:** ${role ? role.name : "None"}`);
                 } else if (setting === "djrole") {
                     let role = client.functions.fetchRole(message.guild, message.guild.settings, "djrole");
@@ -73,7 +73,7 @@ module.exports = {
             } else if (action === "edit") {
                 if (!value) return message.channel.sendMessage(`${message.author} | \`❌\` | No value given to change the setting to.`);
                 if (setting === "masterrole") {
-                    if (value === "remove") {
+                    if (value === "disable") {
                         client.settings.update(message.guild, "masterrole", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -87,7 +87,7 @@ module.exports = {
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
                 } else if (setting === "joinrole") {
-                    if (value === "remove") {
+                    if (value === "disable") {
                         client.settings.update(message.guild, "joinrole", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -104,7 +104,7 @@ module.exports = {
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.\n\n${err}`));
                     }
                 } else if (setting === "blacklistrole") {
-                    if (value === "remove") {
+                    if (value === "disable") {
                         client.settings.update(message.guild, "blacklist", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -118,7 +118,7 @@ module.exports = {
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
                 } else if (setting === "djrole") {
-                    if (value === "remove") {
+                    if (value === "disable") {
                         client.settings.update(message.guild, "djrole", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -232,8 +232,8 @@ module.exports = {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "embed") {
-                        let msg = `--embed {"color": 17663, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User unbanned" }, "timestamp": "{now}"}`;
-                        client.settings.update(message.guild, "banann", msg).then(() => {
+                        let msg = `--embed {"color": 3447003, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User unbanned" }, "timestamp": "{now}"}`;
+                        client.settings.update(message.guild, "unbanann", msg).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
@@ -275,7 +275,7 @@ module.exports = {
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
                 } else if (setting === "joinmessage") {
-                    if (value === "remove") {
+                    if (value === "disable") {
                         client.settings.update(message.guild, "joinmessage", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -285,7 +285,7 @@ module.exports = {
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
                 } else if (setting === "joinnick") {
-                    if (value === "remove") {
+                    if (value === "disable") {
                         client.settings.update(message.guild, "joinnick", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -313,8 +313,9 @@ module.exports = {
                         message.channel.sendMessage(`${message.author} | \`❌\` | Invalid option.`);
                     }
                 } else if (setting === "customprefix" || setting === "prefix") {
-                    if (value === "remove") {
+                    if (value === "disable") {
                         client.settings.update(message.guild, "customprefix", null).then(() => {
+                            if (message.guild.settings.originaldisabled === "Y") client.settings.update(message.guild, "originaldisabled", "N");
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
@@ -329,6 +330,7 @@ module.exports = {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "disable") {
+                        if (!message.guild.settings.customprefix) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot do that. A custom prefix must be set to turn the default prefix off.`);
                         client.settings.update(message.guild, "originaldisabled", "Y").then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
@@ -346,6 +348,25 @@ module.exports = {
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
                         message.channel.sendMessage(`${message.author} | \`❌\` | Invalid option.`);
+                    }
+                } else if (setting === "modlogs") {
+                    if (value === "disable") {
+                        client.settings.update(message.guild, "modlogs", null).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "here") {
+                        client.settings.update(message.guild, "modlogs", message.channel.id).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else {
+                        let match = /<#([0-9]+)>/i.exec(value);
+                        let id = match ? match[1] : null;
+                        let channel = id ? message.guild.channels.get(id) : message.guild.channels.find("name", value);
+                        if (!channel) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid channel.`);
+                        if (channel.type !== "text") return message.channel.sendMessage(`${message.author} | \`❌\` | The channel must be a text channel.`);
+                        client.settings.update(message.guild, "modlogs", channel.id).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
                 } else {
                     message.channel.sendMessage(`${message.author} | \`❌\` | Invalid setting.`);
@@ -421,12 +442,13 @@ module.exports = {
             if (!user.kickable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot kick that user.`);
             message.guild.member(user).kick().then(() => {
                 message.channel.sendMessage(`${message.author} | Success.`);
+                if (message.guild.settings.modlogs) client.modlog.log(message.guild, { action: "Kick", user: user.user });
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
         }
     },
     "vkick": {
         mode: "strict",
-        permission: 2,
+        permission: 5,
         usage: {"command": "vkick <@user>", "description": "Kick a user from the voice channel they are in."},
         execute: (message, client) => {
             let match = /ban\s+<@!?(.+)>/i.exec(message.content);
@@ -457,6 +479,20 @@ module.exports = {
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
         }
     },
+    "unban": {
+        mode: "strict",
+        permission: 2,
+        usage: {"command": "unban <user_id", "description": "Unban a user from the server."},
+        execute: (message, client) => {
+            let match = /unban\s+(\d+)/i.exec(message.content);
+            if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
+            let user = match[1];
+            if (!message.guild.member(client.bot.user).permissions.hasPermission("BAN_MEMBERS")) return message.channel.sendMessage(`${message.author} | \`❌\` | I do not have permissions to unban users.`);
+            message.guild.unban(user).then(() => {
+                message.channel.sendMessage(`${message.author} | Success.`);
+            }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
+        }
+    },
     "softban": {
         mode: "strict",
         permission: 2,
@@ -473,5 +509,29 @@ module.exports = {
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`))
             ).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
         }
-    }
+    }/*,
+    "announceN": {
+        mode: "strict",
+        permission: 5,
+        usage: {"command": "announce <message>", "description": "Sends an announcement."},
+        execute: (message, client) => {
+            let has = message.content.split(" ")[1];
+            if (!has) return message.channel.sendMessage(`${message.author} | \`❌\` | No message supplied.`);
+            let text = message.content.slice(message.content.search(" ") + 1);
+
+            let embed = {
+                "color": 0x00ADFF,
+                "title": "Announcement",
+                "url": client.config.urls.website,
+                "description": text,
+                "timestamp": new Date(),
+                "footer": {
+                    "text": `${message.author.username}#${message.author.discriminator}`,
+                    "icon_url": message.author.avatarURL || null
+                }
+            };
+
+            message.guild.channels.get("163039371535187968").sendMessage("", { embed });
+        }
+    }*/
 };

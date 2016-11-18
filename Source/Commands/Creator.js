@@ -12,7 +12,7 @@ module.exports = {
             message.channel.sendMessage(`Reloading module __\`${mod}\`__`);
         }
     },
-    "announce": {
+    "sudoannounce": {
         mode: "strict",
         permission: 4,
         execute: (message, client) => {
@@ -63,26 +63,6 @@ module.exports = {
         usage: {"command": "supportinfo", "description": "Lists information our support team may need to know inorder to help you."},
         execute: (message, client) => {
 
-        }
-    },
-    "case": {
-        mode: "strict",
-        permission: 5,
-        usage: {"command": "supportinfo", "description": "Lists information our support team may need to know inorder to help you."},
-        execute: (message, client) => {
-            let embed = {
-                "color": 16711680,
-                "description": `**Action:** Ban\n**User:** Name#Discrim (ID)\n**Reason:** Because poop.`,
-                "author": {
-                    "name": message.author.username,
-                    "icon_url": message.author.avatarURL
-                },
-                "timestamp": new Date(),
-                "footer": {
-                    "text": "Case #1"
-                }
-            };
-            message.channel.sendMessage("", { embed }).catch(err => message.reply(err));
         }
     }
 };

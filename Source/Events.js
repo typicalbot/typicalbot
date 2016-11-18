@@ -92,6 +92,8 @@ module.exports = class Events {
             if (!BotMember || !message.channel.permissionsFor(BotMember).hasPermission("SEND_MESSAGES")) return;
 
             this.client.settings.get(message.guild).then(settings => {
+                if (message.content === this.client.bot.user.toString()) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
+
                 message.guild.settings = settings;
 
                 let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
@@ -178,6 +180,7 @@ module.exports = class Events {
 
     guildBanAdd(guild, user) {
         this.client.settings.get(guild).then(settings => {
+            if (settings.modlogs) this.client.modlog.log(guild, { action: "Ban", user });
             if (settings.announcement && settings.banann !== "--disabled") {
                 let channel = guild.channels.get(settings.announcement);
                 if (!channel || !this.client.functions.messageable(channel)) return;
@@ -201,6 +204,7 @@ module.exports = class Events {
 
     guildBanRemove(guild, user) {
         this.client.settings.get(guild).then(settings => {
+            if (settings.modlogs) this.client.modlog.log(guild, { action: "Unban", user });
             if (settings.announcement && settings.unbanann) {
                 let channel = guild.channels.get(settings.announcement);
                 if (!channel || !this.client.functions.messageable(channel)) return;

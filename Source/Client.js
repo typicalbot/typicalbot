@@ -6,7 +6,7 @@ const Discord = require("discord.js");
 let cmdh = require("./CommandHandler");
 let fn = require("./Functions");
 let ev = require("./Events");
-let music = require("./MusicUtil");
+//let music = require("./Extras/MusicUtil");
 let db = require("./Database");
 
 const client = new class Client {
@@ -19,8 +19,14 @@ const client = new class Client {
         this.commands = new cmdh();
         this.functions = new fn(this);
         this.events = new ev(this);
-        this.music = new music(this);
+        //this.music = new music(this);
+
+        this.music = require("./Extras/MusicUtil");
+        this.music.setup(this);
+
         this.settings = new db();
+        this.modlog = require("./Extras/LogUtil");
+        this.modlog.setup(this);
 
         this.streams = new Map();
 
@@ -82,9 +88,14 @@ const client = new class Client {
             this.events = new ev(this);
         }
         if (all || mod === "music") {
-            delete require.cache[`${__dirname}/MusicUtil.js`];
-            music = require("./MusicUtil");
-            this.music = new music(this);
+            delete require.cache[`${__dirname}/Extras/MusicUtil.js`];
+            this.music = require("./Extras/MusicUtil");
+            this.music.setup(this);
+        }
+        if (all || mod === "modlog") {
+            delete require.cache[`${__dirname}/Extras/LogUtil.js`];
+            this.modlog = require("./Extras/LogUtil");
+            this.modlog.setup(this);
         }
     }
 };

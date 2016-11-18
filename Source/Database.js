@@ -6,9 +6,37 @@ connection.connect();
 let GuildData = new Map();
 
 const DefaultData = {
-    "masterrole": null, "joinrole": null, "silent": "N", "blacklist": null, "djrole": null, "announcement": null, "joinann": null, "leaveann": null, "banann": null, "unbanann": null, "nickann": null, "inviteann": null,
-    "joinmessage": null, "joinnick": null, "mode": "free", "customprefix": null, "originaldisabled": "N", "antiinvite": "N", "antilink": "N", "musicperms": "all", "orplay": "off", "orskip": "off", "orstop": "off",
-    "orunqueue": "off", "orvolume": "off", "lengthlimit": null, "queuelimit": null, "apikey": null
+    "masterrole": null,
+    "joinrole": null,
+    "silent": "N",
+    "blacklist": null,
+    "djrole": null,
+    "announcement": null,
+    "joinann": null,
+    "leaveann": null,
+    "banann": null,
+    "unbanann": null,
+    "nickann": null,
+    "inviteann": null,
+    "joinmessage": null,
+    "joinnick": null,
+    "mode": "free",
+    "customprefix": null,
+    "originaldisabled": "N",
+    "antiinvite": "N",
+    "invitekick": "N",
+    "modlogs": null,
+    "antilink": "N",
+    "musicperms": "all",
+    "orplay": "off",
+    "orskip": "off",
+    "orstop": "off",
+    "orunqueue": "off",
+    "orvolume": "off",
+    "orpause_resume": "off",
+    "lengthlimit": null,
+    "queuelimit": null,
+    "apikey": null,
 };
 
 module.exports = class Database {
