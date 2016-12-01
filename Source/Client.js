@@ -6,8 +6,6 @@ const Discord = require("discord.js");
 let cmdh = require("./CommandHandler");
 let fn = require("./Functions");
 let ev = require("./Events");
-//let music = require("./Extras/MusicUtil");
-let db = require("./Database");
 
 const client = new class Client {
     constructor() {
@@ -15,26 +13,21 @@ const client = new class Client {
         this.ShardCount = ShardCount;
         this.data = {};
 
-        let config = this.config = require("./Config");
+        this.config = require("./Config");
         this.commands = new cmdh();
         this.functions = new fn(this);
         this.events = new ev(this);
-        //this.music = new music(this);
-
-        this.music = require("./Extras/MusicUtil");
-        this.music.setup(this);
-
-        this.settings = new db();
+        this.settings = require("./Database");
         this.modlog = require("./Extras/LogUtil");
         this.modlog.setup(this);
 
         this.streams = new Map();
 
-        let bot = this.bot = new Discord.Client({"shardId": parseInt(ShardID), "shardCount": parseInt(ShardCount)});
-        bot.login(config.token).catch(err => this.events.error(err));
+        let bot = this.bot = new Discord.Client();
+        bot.login(this.config.token).catch(err => this.events.error(err));
 
         bot
-            .on("ready", () => {
+            .once("ready", () => {
                 this.events.ready();
                 setInterval(() => this.events.intervalStatus(), 60000);
                 setInterval(() => this.events.intervalPost(), 1200000);
@@ -70,10 +63,6 @@ const client = new class Client {
 
     reload(mod) {
         let all = mod === "all";
-        if (all || mod === "config") {
-            delete require.cache[`${__dirname}/Config.json`];
-            this.config = require("./Config");
-        }
         if (all || mod === "commands") {
             this.commands.reload();
         }
@@ -86,11 +75,6 @@ const client = new class Client {
             delete require.cache[`${__dirname}/Events.js`];
             ev = require("./Events");
             this.events = new ev(this);
-        }
-        if (all || mod === "music") {
-            delete require.cache[`${__dirname}/Extras/MusicUtil.js`];
-            this.music = require("./Extras/MusicUtil");
-            this.music.setup(this);
         }
         if (all || mod === "modlog") {
             delete require.cache[`${__dirname}/Extras/LogUtil.js`];

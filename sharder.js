@@ -3,7 +3,7 @@ const child_process = require("child_process");
 const file          = `${__dirname}/Source/Client.js`;
 const shards        = [];
 const data          = {};
-const shardCount    = 2;
+const shardCount    = 1;
 
 function changeData(shard, sentData) {
     if (!data[shard]) data[shard] = {};

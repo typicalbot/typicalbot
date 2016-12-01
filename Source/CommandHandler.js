@@ -1,4 +1,4 @@
-const Categories = [ "Utility" , "Creator" , "TypicalBot" , "Moderation" , "Fun", "ModLog", "MusicDown" ];
+const Categories = [ "Utility" , "Creator" , "TypicalBot" , "Moderation" , "Fun", "MusicD" ];
 
 class CommandHandler {
     constructor() {

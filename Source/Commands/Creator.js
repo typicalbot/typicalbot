@@ -12,7 +12,7 @@ module.exports = {
             message.channel.sendMessage(`Reloading module __\`${mod}\`__`);
         }
     },
-    "sudoannounce": {
+    "announce": {
         mode: "strict",
         permission: 4,
         execute: (message, client) => {
@@ -55,14 +55,6 @@ module.exports = {
             } catch (err) {
                 message.channel.sendMessage(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`ERROR:\`\n\`\`\`${err}\n\`\`\``);
             }
-        }
-    },
-    "getinfo": {
-        mode: "strict",
-        permission: 4,
-        usage: {"command": "supportinfo", "description": "Lists information our support team may need to know inorder to help you."},
-        execute: (message, client) => {
-
         }
     }
 };

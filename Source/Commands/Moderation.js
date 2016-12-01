@@ -24,7 +24,7 @@ module.exports = {
         usage: {"command": "settings <'view'|'edit'> <setting> [{options}] <value>", "description": "Edit or view your server's settings."},
         execute: (message, client) => {
             let match = /(?:settings|set)\s+(view|edit)\s+([\w-]+)\s*((?:.|[\r\n])+)?/i.exec(message.content);
-            if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
+            if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage. You're most likely using the old syntax, which has changed. View the new syntax by using **$help set**.`);
             let action = match[1], setting = match[2], value = match[3];
             if (action === "view") {
                 if (setting === "masterrole") {
@@ -435,32 +435,17 @@ module.exports = {
         permission: 2,
         usage: {"command": "kick <@user>", "description": "Kick a user from the server."},
         execute: (message, client) => {
-            let match = /kick\s+<@!?(.+)>/i.exec(message.content);
+            let match = /kick\s+<@!?(.+)>(?:\s+(.+))?/i.exec(message.content);
             if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
             let user = message.guild.members.get(match[1]);
             if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
+            if (message.member.highestRole.position <= user.highestRole.position) return message.channel.sendMessage(`${message.author} | \`❌\` | You cannot kick a user with either the same or higher highest role.`);
             if (!user.kickable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot kick that user.`);
             message.guild.member(user).kick().then(() => {
                 message.channel.sendMessage(`${message.author} | Success.`);
-                if (message.guild.settings.modlogs) client.modlog.log(message.guild, { action: "Kick", user: user.user });
-            }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
-        }
-    },
-    "vkick": {
-        mode: "strict",
-        permission: 5,
-        usage: {"command": "vkick <@user>", "description": "Kick a user from the voice channel they are in."},
-        execute: (message, client) => {
-            let match = /ban\s+<@!?(.+)>/i.exec(message.content);
-            if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
-            let user = message.guild.members.get(match[1]);
-            if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
-
-
-
-            if (!user.bannable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot kick that user from a voice channel.`);
-            message.guild.member(user).ban().then(() => {
-                message.channel.sendMessage(`${message.author} | Success.`);
+                if (message.guild.settings.modlogs) client.modlog.log(message.guild,
+                    match[2] ? { action: "Kick", user: user.user, reason: match[2], moderator: message.author } : { action: "Kick", user: user.user }
+                );
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
         }
     },
@@ -473,6 +458,7 @@ module.exports = {
             if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
             let user = message.guild.members.get(match[1]);
             if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
+            if (message.member.highestRole.position <= user.highestRole.position) return message.channel.sendMessage(`${message.author} | \`❌\` | You cannot ban a user with either the same or higher highest role.`);
             if (!user.bannable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot ban that user.`);
             message.guild.member(user).ban().then(() => {
                 message.channel.sendMessage(`${message.author} | Success.`);
@@ -503,13 +489,49 @@ module.exports = {
             let user = message.guild.members.get(match[1]);
             let amount = match[2] || 2;
             if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
+            if (message.member.highestRole.position <= user.highestRole.position) return message.channel.sendMessage(`${message.author} | \`❌\` | You cannot softban a user with either the same or higher highest role.`);
             if (!user.bannable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot softban that user.`);
             message.guild.member(user).ban(parseInt(amount)).then(member => message.guild.unban(member).then(() => {
                 message.channel.sendMessage(`${message.author} | Success. Purged ${amount} day${amount === 1 ? "" : "s"} worth of messages.`);
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`))
             ).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
         }
-    }/*,
+    },
+    "warn": {
+        mode: "strict",
+        permission: 2,
+        usage: {"command": "warn <@user>", "description": "Warn a user in the server. (Only works with mod logs enabled)"},
+        execute: (message, client) => {
+            let match = /warn\s+<@!?(.+)>(?:\s+(.+))?/i.exec(message.content);
+            if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
+            let user = message.guild.members.get(match[1]);
+            if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
+            if (message.member.highestRole.position <= user.highestRole.position) return message.channel.sendMessage(`${message.author} | \`❌\` | You cannot warn a user with either the same or higher highest role.`);
+            if (message.guild.settings.modlogs) client.modlog.log(message.guild,
+                match[2] ? { action: "Warn", user: user.user, reason: match[2], moderator: message.author } : { action: "Warn", user: user.user }
+            );
+        }
+    },
+    "reason": {
+        mode: "strict",
+        permission: 2,
+        execute: (message, client) => {
+            let match = /reason\s+(\w+)\s+(.+)/i.exec(message.content);
+            if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
+            let id = match[1], reason = match[2];
+            if (!id) return message.channel.sendMessage(`${message.author} | \`❌\` | No ID given.`);
+            if (!reason) return message.channel.sendMessage(`${message.author} | \`❌\` | No reason given.`);
+
+            client.modlog.get(message.guild, id).then(log =>{
+                if (!log) return message.channel.sendMessage(`${message.author} | \`❌\` | No log under the given ID.`);
+                client.modlog.reason(log, message.author, reason).then(() => {
+                    message.channel.sendMessage(`${message.author} | :thumbsup::skin-tone-2:`).then(msg => msg.delete(5000));
+                }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured: ${err.stack}`));
+            }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured: ${err.stack}`));
+        }
+    }
+
+    /*,
     "announceN": {
         mode: "strict",
         permission: 5,
@@ -532,6 +554,24 @@ module.exports = {
             };
 
             message.guild.channels.get("163039371535187968").sendMessage("", { embed });
+        },
+        "vkick": {
+            mode: "strict",
+            permission: 5,
+            usage: {"command": "vkick <@user>", "description": "Kick a user from the voice channel they are in."},
+            execute: (message, client) => {
+                let match = /ban\s+<@!?(.+)>/i.exec(message.content);
+                if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
+                let user = message.guild.members.get(match[1]);
+                if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
+
+
+
+                if (!user.bannable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot kick that user from a voice channel.`);
+                message.guild.member(user).ban().then(() => {
+                    message.channel.sendMessage(`${message.author} | Success.`);
+                }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
+            }
         }
     }*/
 };

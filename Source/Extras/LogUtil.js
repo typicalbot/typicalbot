@@ -11,7 +11,7 @@ _.case = message => {
     let action = _case.description.match(regex.action)[0];
     let user = _case.description.match(regex.user)[0];
     let id = _case.footer.text;
-    let ts = _case.timestamp;
+    let ts = _case.createdAT;
 
     return { action, user, id, ts };
 };

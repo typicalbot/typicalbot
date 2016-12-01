@@ -3,8 +3,6 @@ const mysql_login = require("./Config").mysql;
 const connection = mysql.createConnection(mysql_login);
 connection.connect();
 
-let GuildData = new Map();
-
 const DefaultData = {
     "masterrole": null,
     "joinrole": null,
@@ -39,48 +37,48 @@ const DefaultData = {
     "apikey": null,
 };
 
-module.exports = class Database {
-    get data() {
-        return GuildData;
-    }
+const _ = {};
 
-    get(guild) {
-        return new Promise((resolve, reject) => {
-            if (!guild) return resolve(DefaultData);
-            if (GuildData.has(guild.id)) {
-                return resolve(GuildData.get(guild.id));
-            } else {
-                connection.query(`SELECT * FROM servers WHERE id = ${mysql.escape(guild.id)}`, (error, rows) => {
-                    if (error) return resolve(DefaultData);
-                    if (!rows[0]) {
-                        this.create(guild);
-                        return resolve(DefaultData);
-                    } else {
-                        GuildData.set(guild.id, rows[0]);
-                        return resolve(rows[0]);
-                    }
-                });
-            }
-        });
-    }
+_.data = new Map();
 
-    create(guild) {
-        return new Promise((resolve, reject) => {
-            connection.query(`INSERT INTO servers SET ?`, {"id": guild.id}, (error, result) => {
-                if (error) return reject(error);
-                GuildData.set(guild.id, DefaultData);
-                resolve();
+_.get = guild => {
+    return new Promise((resolve, reject) => {
+        if (!guild) return resolve(DefaultData);
+        if (_.data.has(guild.id)) {
+            return resolve(_.data.get(guild.id));
+        } else {
+            connection.query(`SELECT * FROM servers WHERE id = ${mysql.escape(guild.id)}`, (error, rows) => {
+                if (error) return resolve(DefaultData);
+                if (!rows[0]) {
+                    _.create(guild);
+                    return resolve(DefaultData);
+                } else {
+                    _.data.set(guild.id, rows[0]);
+                    return resolve(rows[0]);
+                }
             });
-        });
-    }
-
-    update(guild, setting, value) {
-        return new Promise((resolve, reject) => {
-            connection.query(`UPDATE servers SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${guild.id}`, (error, result) => {
-                if (error) return reject(error);
-                GuildData.get(guild.id)[setting] = value;
-                return resolve();
-            });
-        });
-    }
+        }
+    });
 };
+
+_.create = guild => {
+    return new Promise((resolve, reject) => {
+        connection.query(`INSERT INTO servers SET ?`, {"id": guild.id}, (error, result) => {
+            if (error) return reject(error);
+            _.data.set(guild.id, DefaultData);
+            resolve();
+        });
+    });
+};
+
+_.update = (guild, setting, value) => {
+    return new Promise((resolve, reject) => {
+        connection.query(`UPDATE servers SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${guild.id}`, (error, result) => {
+            if (error) return reject(error);
+            _.data.get(guild.id)[setting] = value;
+            return resolve();
+        });
+    });
+};
+
+module.exports = _;
