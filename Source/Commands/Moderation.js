@@ -39,34 +39,34 @@ module.exports = {
                 } else if (setting === "djrole") {
                     let role = client.functions.fetchRole(message.guild, message.guild.settings, "djrole");
                     message.channel.sendMessage(`**DJ Role:** ${role ? role.name : "None"}`);
-                } else if (setting === "announcements") {
-                    let channelid = message.guild.settings.announcement;
+                } else if (setting === "logs") {
+                    let channelid = message.guild.settings.logs;
                     let channel = channelid ? message.guild.channels.get(channelid) || null : null;
-                    message.channel.sendMessage(`**Announcements Channel:** ${channel ? `<#${channel.id}>` : "None"}`);
-                } else if (setting === "ann-join") {
-                    let msg = message.guild.settings.joinann;
+                    message.channel.sendMessage(`**Server Logs Channel:** ${channel ? `<#${channel.id}>` : "None"}`);
+                } else if (setting === "logs-join") {
+                    let msg = message.guild.settings.joinlog;
                     msg = !msg ? "Default Message:\n```\n**{user.name}** has joined the server.\n```" : msg === "--disabled" ? "Disabled" : msg.startsWith("--embed") ? `Embedded Object:\n\`\`\`\n${msg.slice(8)}\n\`\`\`` : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
-                    message.channel.sendMessage(`**Join Announcement:** ${msg}`);
-                } else if (setting === "ann-leave") {
-                    let msg = message.guild.settings.leaveann;
+                    message.channel.sendMessage(`**Join Log:** ${msg}`);
+                } else if (setting === "logs-leave") {
+                    let msg = message.guild.settings.leavelog;
                     msg = !msg ? "Default Message:\n```\n**{user.name}** has left the server.\n```" : msg === "--disabled" ? "Disabled" : msg.startsWith("--embed") ? `Embedded Object:\n\`\`\`\n${msg.slice(8)}\n\`\`\`` : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
-                    message.channel.sendMessage(`**Leave Announcement:** ${msg}`);
-                } else if (setting === "ann-ban") {
-                    let msg = message.guild.settings.banann;
+                    message.channel.sendMessage(`**Leave Log:** ${msg}`);
+                } else if (setting === "logs-ban") {
+                    let msg = message.guild.settings.banlog;
                     msg = !msg ? "Default Message:\n```\n**{user.name}** has been banned from the server.\n```" : msg === "--disabled" ? "Disabled" : msg.startsWith("--embed") ? `Embedded Object:\n\`\`\`\n${msg.slice(8)}\n\`\`\`` : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
-                    message.channel.sendMessage(`**Ban Announcement:** ${msg}`);
-                } else if (setting === "ann-unban") {
-                    let msg = message.guild.settings.unbanann;
+                    message.channel.sendMessage(`**Ban Log:** ${msg}`);
+                } else if (setting === "logs-unban") {
+                    let msg = message.guild.settings.unbanlog;
                     msg = !msg ? "Disabled" : msg === "--enabled" ? "Default Message:\n```\n**{user.name}** has been unbanned from the server.\n```" : msg.startsWith("--embed") ? `Embedded Object:\n\`\`\`\n${msg.slice(8)}\n\`\`\`` : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
-                    message.channel.sendMessage(`**Unban Announcement:** ${msg}`);
-                } else if (setting === "ann-nick") {
-                    let msg = message.guild.settings.nickann;
+                    message.channel.sendMessage(`**Unban Log:** ${msg}`);
+                } else if (setting === "logs-nick") {
+                    let msg = message.guild.settings.nicklog;
                     msg = !msg ? "Disabled" : msg === "--enabled" ? "Default Message:\n```\n**{user.name}** changed their nickname to **{user.nickname}**.\n```" : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
-                    message.channel.sendMessage(`**Nickname Announcement:** ${msg}`);
-                } else if (setting === "ann-invite") {
-                    let msg = message.guild.settings.inviteann;
+                    message.channel.sendMessage(`**Nickname Log:** ${msg}`);
+                } else if (setting === "logs-invite") {
+                    let msg = message.guild.settings.invitelog;
                     msg = !msg ? "Disabled" : msg === "--enabled" ? "Default Message:\n```\n**{user.name}** has posted an invite in {channel}.\n```" : `Custom Message:\n\`\`\`\n${msg}\n\`\`\``;
-                    message.channel.sendMessage(`**Invite Announcement:** ${msg}`);
+                    message.channel.sendMessage(`**Invite Log:** ${msg}`);
                 } else {
                     message.channel.sendMessage(`${message.author} | \`❌\` | Invalid setting.`);
                 }
@@ -117,27 +117,13 @@ module.exports = {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
-                } else if (setting === "djrole") {
+                } else if (setting === "logs") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "djrole", null).then(() => {
-                            message.channel.sendMessage(`${message.author} | Success.`);
-                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
-                    } else {
-                        let match = /<@&([0-9]+)>/i.exec(value);
-                        let id = match ? match[1] : null;
-                        let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
-                        if (!role) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid role.`);
-                        client.settings.update(message.guild, "djrole", role.id).then(() => {
-                            message.channel.sendMessage(`${message.author} | Success.`);
-                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
-                    }
-                } else if (setting === "announcements") {
-                    if (value === "disable") {
-                        client.settings.update(message.guild, "announcement", null).then(() => {
+                        client.settings.update(message.guild, "logs", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "here") {
-                        client.settings.update(message.guild, "announcement", message.channel.id).then(() => {
+                        client.settings.update(message.guild, "logs", message.channel.id).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
@@ -146,22 +132,22 @@ module.exports = {
                         let channel = id ? message.guild.channels.get(id) : message.guild.channels.find("name", value);
                         if (!channel) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid channel.`);
                         if (channel.type !== "text") return message.channel.sendMessage(`${message.author} | \`❌\` | The channel must be a text channel.`);
-                        client.settings.update(message.guild, "announcement", channel.id).then(() => {
+                        client.settings.update(message.guild, "logs", channel.id).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
-                } else if (setting === "ann-join") {
+                } else if (setting === "logs-join") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "joinann", "--disabled").then(() => {
+                        client.settings.update(message.guild, "joinlog", "--disabled").then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "default") {
-                        client.settings.update(message.guild, "joinann", null).then(() => {
+                        client.settings.update(message.guild, "joinlog", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "embed") {
                         let msg = `--embed {"color": 65280, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User joined" }, "timestamp": "{now}"}`;
-                        client.settings.update(message.guild, "joinann", msg).then(() => {
+                        client.settings.update(message.guild, "joinlog", msg).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
@@ -170,22 +156,22 @@ module.exports = {
                             let object = value.slice(8);
                             try { object = JSON.parse(object); } catch(err) { return message.channel.sendMessage(`${message.author} | \`❌\` | Unable to convert into object.`); }
                         }
-                        client.settings.update(message.guild, "joinann", value).then(() => {
+                        client.settings.update(message.guild, "joinlog", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
-                } else if (setting === "ann-leave") {
+                } else if (setting === "logs-leave") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "leaveann", "--disabled").then(() => {
+                        client.settings.update(message.guild, "leavelog", "--disabled").then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "default") {
-                        client.settings.update(message.guild, "leaveann", null).then(() => {
+                        client.settings.update(message.guild, "leavelog", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "embed") {
                         let msg = `--embed {"color": 16737792, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User left" }, "timestamp": "{now}"}`;
-                        client.settings.update(message.guild, "leaveann", msg).then(() => {
+                        client.settings.update(message.guild, "leavelog", msg).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
@@ -194,22 +180,22 @@ module.exports = {
                             let object = value.slice(8);
                             try { object = JSON.parse(object); } catch(err) { return message.channel.sendMessage(`${message.author} | \`❌\` | Unable to convert into object.`); }
                         }
-                        client.settings.update(message.guild, "leaveann", value).then(() => {
+                        client.settings.update(message.guild, "leavelog", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
-                } else if (setting === "ann-ban") {
+                } else if (setting === "logs-ban") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "banann", "--disabled").then(() => {
+                        client.settings.update(message.guild, "banlog", "--disabled").then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "default") {
-                        client.settings.update(message.guild, "banann", null).then(() => {
+                        client.settings.update(message.guild, "banlog", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "embed") {
                         let msg = `--embed {"color": 16711680, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User banned" }, "timestamp": "{now}"}`;
-                        client.settings.update(message.guild, "banann", msg).then(() => {
+                        client.settings.update(message.guild, "banlog", msg).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
@@ -218,22 +204,22 @@ module.exports = {
                             let object = value.slice(8);
                             try { object = JSON.parse(object); } catch(err) { return message.channel.sendMessage(`${message.author} | \`❌\` | Unable to convert into object.`); }
                         }
-                        client.settings.update(message.guild, "banann", value).then(() => {
+                        client.settings.update(message.guild, "banlog", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
-                } else if (setting === "ann-unban") {
+                } else if (setting === "logs-unban") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "unbanann", null).then(() => {
+                        client.settings.update(message.guild, "unbanlog", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
-                    } else if (value === "enable") {
-                        client.settings.update(message.guild, "unbanann", "--enabled").then(() => {
+                    } else if (value === "enable" || value === "default") {
+                        client.settings.update(message.guild, "unbanlog", "--enabled").then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "embed") {
                         let msg = `--embed {"color": 3447003, "author": { "name": "{user.name}#{user.discrim} ({user.id})", "icon_url": "{user.avatar}" }, "footer": { "text": "User unbanned" }, "timestamp": "{now}"}`;
-                        client.settings.update(message.guild, "unbanann", msg).then(() => {
+                        client.settings.update(message.guild, "unbanlog", msg).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
@@ -242,35 +228,35 @@ module.exports = {
                             let object = value.slice(8);
                             try { object = JSON.parse(object); } catch(err) { return message.channel.sendMessage(`${message.author} | \`❌\` | Unable to convert into object.`); }
                         }
-                        client.settings.update(message.guild, "unbanann", value).then(() => {
+                        client.settings.update(message.guild, "unbanlog", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
-                } else if (setting === "ann-nick") {
+                } else if (setting === "logs-nick") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "nickann", null).then(() => {
+                        client.settings.update(message.guild, "nicklog", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else if (value === "enable" || value === "default") {
-                        client.settings.update(message.guild, "nickann", "--enabled").then(() => {
+                        client.settings.update(message.guild, "nicklog", "--enabled").then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "nickann", value).then(() => {
+                        client.settings.update(message.guild, "nicklog", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
-                } else if (setting === "ann-invite") {
+                } else if (setting === "logs-invite") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "inviteann", null).then(() => {
+                        client.settings.update(message.guild, "invitelog", null).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
-                    } else if (value === "enable") {
-                        client.settings.update(message.guild, "inviteann", "--enabled").then(() => {
+                    } else if (value === "enable" || value === "default") {
+                        client.settings.update(message.guild, "invitelog", "--enabled").then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "inviteann", value).then(() => {
+                        client.settings.update(message.guild, "invitelog", value).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
@@ -507,9 +493,10 @@ module.exports = {
             let user = message.guild.members.get(match[1]);
             if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
             if (message.member.highestRole.position <= user.highestRole.position) return message.channel.sendMessage(`${message.author} | \`❌\` | You cannot warn a user with either the same or higher highest role.`);
-            if (message.guild.settings.modlogs) client.modlog.log(message.guild,
+            if (message.guild.settings.modlogs) return client.modlog.log(message.guild,
                 match[2] ? { action: "Warn", user: user.user, reason: match[2], moderator: message.author } : { action: "Warn", user: user.user }
-            );
+            ).then(() => message.channel.sendMessage(`${message.author} | Success.`)).catch(err => message.reply(err));
+            message.channel.sendMessage(`${message.author} | \`❌\` | Inorder to use the warning feature, you must have modlogs enabled.`);
         }
     },
     "reason": {

@@ -120,19 +120,19 @@ module.exports = class Events {
     guildMemberAdd(member) {
         let guild = member.guild;
         this.client.settings.get(guild).then(settings => {
-            if (settings.announcement && settings.joinann !== "--disabled") {
-                let channel = guild.channels.get(settings.announcement);
+            if (settings.logs && settings.joinlog !== "--disabled") {
+                let channel = guild.channels.get(settings.logs);
                 if (channel && this.client.functions.messageable(channel)) {
                     try {
-                        let useembed = settings.joinann && settings.joinann.startsWith("--embed");
+                        let useembed = settings.joinlog && settings.joinlog.startsWith("--embed");
                         if (useembed) {
-                            let object = settings.joinann.slice(8);
+                            let object = settings.joinlog.slice(8);
                             let embed = this.client.functions.getFilteredMessage("ann", guild, member.user, object);
                             embed = JSON.parse(embed);
                             if (embed.author && embed.author.icon_url && !embed.author.icon_url.startsWith("https://")) embed.author.icon_url = null;
                             channel.sendMessage("", { embed });
                         } else {
-                            channel.sendMessage(settings.joinann ? this.client.functions.getFilteredMessage("ann", guild, member.user, settings.joinann) : `**${member.user.username}** has joined the server.`);
+                            channel.sendMessage(settings.joinlog ? this.client.functions.getFilteredMessage("ann", guild, member.user, settings.joinlog) : `**${member.user.username}** has joined the server.`);
                         }
                     } catch(err) {
                         console.error(err);
@@ -156,19 +156,19 @@ module.exports = class Events {
         this.client.functions.checkGuildBan(guild, member.user).then(banned => {
             if (banned) return;
             this.client.settings.get(guild).then(settings => {
-                if (settings.announcement && settings.leaveann !== "--disabled") {
-                    let channel = guild.channels.get(settings.announcement);
+                if (settings.logs && settings.leavelog !== "--disabled") {
+                    let channel = guild.channels.get(settings.logs);
                     if (!channel || !this.client.functions.messageable(channel)) return;
                     try {
-                        let useembed = settings.leaveann && settings.leaveann.startsWith("--embed");
+                        let useembed = settings.leavelog && settings.leavelog.startsWith("--embed");
                         if (useembed) {
-                            let object = settings.leaveann.slice(8);
+                            let object = settings.leavelog.slice(8);
                             let embed = this.client.functions.getFilteredMessage("ann", guild, member.user, object);
                             embed = JSON.parse(embed);
                             if (embed.author && embed.author.icon_url && !embed.author.icon_url.startsWith("https://")) embed.author.icon_url = null;
                             channel.sendMessage("", { embed });
                         } else {
-                            channel.sendMessage(settings.leaveann ? this.client.functions.getFilteredMessage("ann", guild, member.user, settings.leaveann) : `**${member.user.username}** has left the server.`);
+                            channel.sendMessage(settings.leavelog ? this.client.functions.getFilteredMessage("ann", guild, member.user, settings.leavelog) : `**${member.user.username}** has left the server.`);
                         }
                     } catch(err) {
                         console.error(err);
@@ -181,19 +181,19 @@ module.exports = class Events {
     guildBanAdd(guild, user) {
         this.client.settings.get(guild).then(settings => {
             if (settings.modlogs) this.client.modlog.log(guild, { action: "Ban", user });
-            if (settings.announcement && settings.banann !== "--disabled") {
-                let channel = guild.channels.get(settings.announcement);
+            if (settings.logs && settings.banlog !== "--disabled") {
+                let channel = guild.channels.get(settings.logs);
                 if (!channel || !this.client.functions.messageable(channel)) return;
                 try {
-                    let useembed = settings.banann && settings.banann.startsWith("--embed");
+                    let useembed = settings.banlog && settings.banlog.startsWith("--embed");
                     if (useembed) {
-                        let object = settings.banann.slice(8);
+                        let object = settings.banlog.slice(8);
                         let embed = this.client.functions.getFilteredMessage("ann", guild, user, object);
                         embed = JSON.parse(embed);
                         if (embed.author && embed.author.icon_url && !embed.author.icon_url.startsWith("https://")) embed.author.icon_url = null;
                         channel.sendMessage("", { embed });
                     } else {
-                        channel.sendMessage(settings.banann ? this.client.functions.getFilteredMessage("ann", guild, user, settings.banann) : `**${user.username}** has been banned from the server.`);
+                        channel.sendMessage(settings.banlog ? this.client.functions.getFilteredMessage("ann", guild, user, settings.banlog) : `**${user.username}** has been banned from the server.`);
                     }
                 } catch(err) {
                     console.error(err);
@@ -205,19 +205,19 @@ module.exports = class Events {
     guildBanRemove(guild, user) {
         this.client.settings.get(guild).then(settings => {
             if (settings.modlogs) this.client.modlog.log(guild, { action: "Unban", user });
-            if (settings.announcement && settings.unbanann) {
-                let channel = guild.channels.get(settings.announcement);
+            if (settings.logs && settings.unbanlog) {
+                let channel = guild.channels.get(settings.logs);
                 if (!channel || !this.client.functions.messageable(channel)) return;
                 try {
-                    let useembed = settings.unbanann && settings.unbanann.startsWith("--embed");
+                    let useembed = settings.unbanlog && settings.unbanlog.startsWith("--embed");
                     if (useembed) {
-                        let object = settings.unbanann.slice(8);
+                        let object = settings.unbanlog.slice(8);
                         let embed = this.client.functions.getFilteredMessage("ann", guild, user, object);
                         embed = JSON.parse(embed);
                         if (embed.author && embed.author.icon_url && !embed.author.icon_url.startsWith("https://")) embed.author.icon_url = null;
                         channel.sendMessage("", { embed });
                     } else {
-                        channel.sendMessage(settings.unbanann !== "--enabled" ? this.client.functions.getFilteredMessage("ann", guild, user, settings.unbanann) : `**${user.username}** has been unbanned from the server.`);
+                        channel.sendMessage(settings.unbanlog !== "--enabled" ? this.client.functions.getFilteredMessage("ann", guild, user, settings.unbanlog) : `**${user.username}** has been unbanned from the server.`);
                     }
                 } catch(err) {
                     console.error(err);
@@ -233,10 +233,10 @@ module.exports = class Events {
         if (!oldNick && newNick || oldNick && !newNick || oldNick && newNick && oldNick !== newNick) {
             this.client.settings.get(guild).then(settings => {
                 if (settings.joinnick && newNick === this.client.functions.getFilteredMessage("jn", guild, newMember.user, settings.joinnick)) return;
-                if (settings.announcement && settings.nickann) {
-                    let channel = guild.channels.get(settings.announcement);
+                if (settings.logs && settings.nicklog) {
+                    let channel = guild.channels.get(settings.logs);
                     if (!channel || !this.client.functions.messageable(channel)) return;
-                    channel.sendMessage(settings.nickann !== "--enabled" ? this.client.functions.getFilteredMessage("ann-nick", guild, newMember.user, settings.nickann, { oldMember }) : `**${newMember.user.username}** changed their nickname to **${newMember.nickname || newMember.user.username}**.`);
+                    channel.sendMessage(settings.nicklog !== "--enabled" ? this.client.functions.getFilteredMessage("ann-nick", guild, newMember.user, settings.nicklog, { oldMember }) : `**${newMember.user.username}** changed their nickname to **${newMember.nickname || newMember.user.username}**.`);
                 }
             });
         }
@@ -244,10 +244,10 @@ module.exports = class Events {
 
     guildInvitePosted(guild, mchannel, user) {
         this.client.settings.get(guild).then(settings => {
-            if (settings.announcement && settings.inviteann) {
-                let channel = guild.channels.get(settings.announcement);
+            if (settings.logs && settings.invitelog) {
+                let channel = guild.channels.get(settings.logs);
                 if (!channel || !this.client.functions.messageable(channel)) return;
-                channel.sendMessage(settings.inviteann !== "--enabled" ? this.client.functions.getFilteredMessage("ann-invite", guild, user, settings.inviteann, {channel: mchannel}) : `**${user.username}** has posted an invite in <#${mchannel.id}>.`);
+                channel.sendMessage(settings.invitelog !== "--enabled" ? this.client.functions.getFilteredMessage("ann-invite", guild, user, settings.invitelog, {channel: mchannel}) : `**${user.username}** has posted an invite in <#${mchannel.id}>.`);
             }
         });
     }
