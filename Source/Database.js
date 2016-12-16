@@ -9,6 +9,7 @@ const DefaultData = {
     "silent": "N",
     "blacklist": null,
     "djrole": null,
+    "announcements": null,
     "logs": null,
     "joinlog": null,
     "leavelog": null,

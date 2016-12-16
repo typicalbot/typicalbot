@@ -39,6 +39,10 @@ module.exports = {
                 } else if (setting === "djrole") {
                     let role = client.functions.fetchRole(message.guild, message.guild.settings, "djrole");
                     message.channel.sendMessage(`**DJ Role:** ${role ? role.name : "None"}`);
+                } else if (setting === "announcements") {
+                    let channelid = message.guild.settings.announcements;
+                    let channel = channelid ? message.guild.channels.get(channelid) || null : null;
+                    message.channel.sendMessage(`**Server Announcements Channel:** ${channel ? `<#${channel.id}>` : "None"}`);
                 } else if (setting === "logs") {
                     let channelid = message.guild.settings.logs;
                     let channel = channelid ? message.guild.channels.get(channelid) || null : null;
@@ -114,6 +118,25 @@ module.exports = {
                         let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
                         if (!role) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid role.`);
                         client.settings.update(message.guild, "blacklist", role.id).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    }
+                } else if (setting === "announcements") {
+                    if (value === "disable") {
+                        client.settings.update(message.guild, "announcements", null).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else if (value === "here") {
+                        client.settings.update(message.guild, "announcements", message.channel.id).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else {
+                        let match = /<#([0-9]+)>/i.exec(value);
+                        let id = match ? match[1] : null;
+                        let channel = id ? message.guild.channels.get(id) : message.guild.channels.find("name", value);
+                        if (!channel) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid channel.`);
+                        if (channel.type !== "text") return message.channel.sendMessage(`${message.author} | \`❌\` | The channel must be a text channel.`);
+                        client.settings.update(message.guild, "announcements", channel.id).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
@@ -402,7 +425,7 @@ module.exports = {
             ) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot manage messages here.`);
             let amount = message.content.split(" ")[1];
             if (!amount) return message.channel.sendMessage(`${message.author} | \`❌\` | No number was given.`);
-            if (amount < 1) return message.channel.sendMessage(`${message.author} | \`❌\` | Please give a number above 0 and no greater than 100.`);
+            if (amount <= 1) return message.channel.sendMessage(`${message.author} | \`❌\` | Please give a number above 1 and no greater than 100.`);
             if (amount > 100) amount = 100;
             message.channel.fetchMessages({limit: amount, before: message.id}).then(messages => {
                 message.channel.bulkDelete(messages).then(() => {
@@ -516,10 +539,8 @@ module.exports = {
                 }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured: ${err.stack}`));
             }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured: ${err.stack}`));
         }
-    }
-
-    /*,
-    "announceN": {
+    },
+    "announce": {
         mode: "strict",
         permission: 5,
         usage: {"command": "announce <message>", "description": "Sends an announcement."},
@@ -528,37 +549,21 @@ module.exports = {
             if (!has) return message.channel.sendMessage(`${message.author} | \`❌\` | No message supplied.`);
             let text = message.content.slice(message.content.search(" ") + 1);
 
-            let embed = {
+            let channel = message.guild.channels.get(message.guild.settings.announcements);
+            if (!channel) return message.channel.sendMessage(`${message.author} | \`❌\` | No announcements channel set up.`);
+
+            let useembed = text.startsWith("--embed");
+            if (!useembed) return channel.sendMessage(`**__Announcement from ${message.author.username}#${message.author.discriminator}:__**\n\n${text}`);
+
+            channel.sendMessage("", { embed: {
                 "color": 0x00ADFF,
-                "title": "Announcement",
-                "url": client.config.urls.website,
-                "description": text,
+                "description": `**__Announcement:__**\n\n${text.slice(8)}`,
                 "timestamp": new Date(),
                 "footer": {
                     "text": `${message.author.username}#${message.author.discriminator}`,
                     "icon_url": message.author.avatarURL || null
                 }
-            };
-
-            message.guild.channels.get("163039371535187968").sendMessage("", { embed });
-        },
-        "vkick": {
-            mode: "strict",
-            permission: 5,
-            usage: {"command": "vkick <@user>", "description": "Kick a user from the voice channel they are in."},
-            execute: (message, client) => {
-                let match = /ban\s+<@!?(.+)>/i.exec(message.content);
-                if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
-                let user = message.guild.members.get(match[1]);
-                if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
-
-
-
-                if (!user.bannable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot kick that user from a voice channel.`);
-                message.guild.member(user).ban().then(() => {
-                    message.channel.sendMessage(`${message.author} | Success.`);
-                }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
-            }
+            }});
         }
-    }*/
+    }
 };

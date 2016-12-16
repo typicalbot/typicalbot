@@ -12,7 +12,7 @@ module.exports = {
             message.channel.sendMessage(`Reloading module __\`${mod}\`__`);
         }
     },
-    "announce": {
+    "sannounce": {
         mode: "strict",
         permission: 4,
         execute: (message, client) => {
