@@ -1,39 +1,37 @@
-const child_process = require("child_process");
+const cp            = require("child_process");
+const config        = require("./config");
 
-const file          = `${__dirname}/Source/Client.js`;
+const SHARD_COUNT   = config.shards[config.bot];
+const CLIENT_TOKEN  = config.tokens[config.bot];
+
+const path          = `${__dirname}/Source/Client.js`;
+
 const shards        = [];
-const data          = {};
-const shardCount    = 14;
+const stats         = {};
 
-function changeData(shard, sentData) {
-    if (!data[shard]) data[shard] = {};
-    Object.keys(sentData).map(key => data[shard][key] = sentData[key]);
-    sendData();
-}
+const update = (shard, data) => {
+    if (!stats[shard]) stats[shard] = {};
+    Object.keys(data).map(key => stats[shard][key] = data[key]);
+    transmit();
+};
 
-function createShard(shardNumber) {
-    const shard = child_process.fork(file, [], {env: {"SHARD_ID": shardNumber, "SHARD_COUNT": shardCount}});
+const send = data => shards.forEach(shard => shard.send(data));
+
+const transmit = () => {
+    const newdata = { "guilds": 0, "voiceConnections": 0, "heap": 0, "shards": stats };
+    for (let shard in stats) Object.keys(stats[shard]).forEach(key => newdata[key] += Number(stats[shard][key]));
+    send( { "type": "stats", "data": newdata } );
+};
+
+const create = SHARD_ID => {
+    const shard = cp.fork( path, [], { env: { SHARD_ID, SHARD_COUNT, CLIENT_TOKEN } } );
+
     shards.push(shard);
 
     shard.on("message", message => {
-        if (message.type === "stat") {
-            changeData(shardNumber, message.data);
-        } else if (message.type === "reload") {
-            send({"type": "reload", "module": message.module});
-        }
+        if (message.type === "stat") return update(SHARD_ID, message.data);
+        return send(message);
     });
-}
+};
 
-function send(data) {
-    shards.map(shard => shard.send(data));
-}
-
-function sendData() {
-    const globalData = {"guilds": 0, "voiceConnections": 0, "heap": 0, "shards": data};
-    for (let shard in data) {
-        Object.keys(data[shard]).map(key => globalData[key] += Number(data[shard][key]));
-    }
-    send({"type": "stats", "data": globalData});
-}
-
-for (let s = 0; s < shardCount; s++) setTimeout(createShard, (6000 * s), s);
+for (let s = 0; s < SHARD_COUNT; s++) setTimeout(create, (6000 * s), s);

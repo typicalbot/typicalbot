@@ -1,64 +1,91 @@
-const ShardID = process.env.SHARD_ID;
-const ShardCount = process.env.SHARD_COUNT;
-
 const Discord = require("discord.js");
 
-let cmdh = require("./CommandHandler");
-let fn = require("./Functions");
-let ev = require("./Events");
+let CommandsManager = require("./Managers/Commands");
+let SettingsManager = require("./Managers/Settings");
 
-const client = new class Client {
+let Functions = require("./Util/Functions");
+let Events = require("./Util/Events");
+
+const client = new class Client extends Discord.Client {
     constructor() {
-        this.ShardID = ShardID;
-        this.ShardCount = ShardCount;
+        super({
+            messageCacheMaxSize: 1,
+            disabledEvents: [ "CHANNEL_PINS_UPDATE", "MESSAGE_REACTION_ADD", "MESSAGE_REACTION_REMOVE", "MESSAGE_REACTION_REMOVE_ALL", "USER_NOTE_UPDATE", "TYPING_START", "RELATIONSHIP_ADD", "RELATIONSHIP_REMOVE" ]
+        });
+
+        this.commands = new CommandsManager(this);
+        this.functions = new Functions(this);
+        this.events = new Events(this);
+        this.settings = new SettingsManager();
+        this.modlog = require("./Managers/ModerationLog").setup(this);
+
+        this.config = require("../config");
+
+        this.shardID = process.env.SHARD_ID;
+        this.shardCount = process.env.SHARD_COUNT;
+
         this.data = {};
 
-        this.config = require("./Config");
-        this.commands = new cmdh();
-        this.functions = new fn(this);
-        this.events = new ev(this);
-        this.settings = require("./Database");
-        this.modlog = require("./Extras/LogUtil");
-        this.modlog.setup(this);
+        this.donors = [];
 
-        this.streams = new Map();
+        this.once("ready", () => {
+            this.log("Client Connected");
+            this.transmitStat("guilds");
+            this.user.setGame("Powering up.");
+            setInterval(() => this.user.setGame(`${this.config.prefix}help | ${this.data.guilds} Servers`), 300000);
+            if (this.config.bot === "main") { this.events.statsPost(); setInterval(() => this.events.statsPost(), 1200000); }
+            if (this.guilds.has("163038706117115906")) { this.events.sendDonors(); setInterval(() => this.events.sendDonors(), 300000); }
+        })
+        .on("warn", err => {
+            client.channels.get("259802223251292160").sendMessage("", { embed: {
+                "title": "Client Warning",
+                "color": 0xFFD700,
+                "description": err.stack.substring(0, 2000),
+                "timestamp": new Date(),
+                "footer": {
+                    "text": "TypicalBot Alpha Error Tracker",
+                    "icon_url": "https://typicalbot.com/images/icon.png"
+                }
+            }});
+        })
+        .on("error", err => {
+            client.channels.get("259802223251292160").sendMessage("", { embed: {
+                "title": "Client Error",
+                "color": 0xFF4500,
+                "description": err.stack.substring(0, 2000),
+                "timestamp": new Date(),
+                "footer": {
+                    "text": "TypicalBot Alpha Error Tracker",
+                    "icon_url": "https://typicalbot.com/images/icon.png"
+                }
+            }});
+        })
+        .on("reconnecting", () => this.log("Reconnecting", true))
+        .on("disconnect", () => this.log("Disconnected", true))
+        .on("message", message => this.events.message(message))
+        .on("guildMemberAdd", (member) => this.events.guildMemberAdd(member))
+        .on("guildMemberRemove", (member) => this.events.guildMemberRemove(member))
+        .on("guildBanAdd", (guild, user) => this.events.guildBanAdd(guild, user))
+        .on("guildBanRemove", (guild, user) => this.events.guildBanRemove(guild, user))
+        .on("guildMemberUpdate", (oldMember, newMember) => this.events.guildMemberUpdate(oldMember, newMember))
+        .on("guildCreate", guild => this.events.guildCreate(guild))
+        .on("guildDelete", guild => this.events.guildDelete(guild));
 
-        let bot = this.bot = new Discord.Client();
-        bot.login(this.config.token).catch(err => this.events.error(err));
-
-        bot
-            .once("ready", () => {
-                this.events.ready();
-                setInterval(() => this.events.intervalStatus(), 60000);
-                setInterval(() => this.events.intervalPost(), 1200000);
-                setInterval(() => this.sendStat("voiceConnections"), 10000);
-                setInterval(() => process.send({"type": "stat", "data": {"heap": process.memoryUsage().heapUsed/1024/1024}}), 5000);
-            })
-            .on("warn", console.error)
-            .on("error", console.error)
-            .on("reconnecting", () => console.error("Reconnecting"))
-            .on("disconnect", () => console.error("Disconnected"))
-            .on("message", message => this.events.message(message))
-            .on("guildMemberAdd", (member) => this.events.guildMemberAdd(member))
-            .on("guildMemberRemove", (member) => this.events.guildMemberRemove(member))
-            .on("guildBanAdd", (guild, user) => this.events.guildBanAdd(guild, user))
-            .on("guildBanRemove", (guild, user) => this.events.guildBanRemove(guild, user))
-            .on("guildMemberUpdate", (oldMember, newMember) => this.events.guildMemberUpdate(oldMember, newMember))
-            .on("guildCreate", guild => this.events.guild(guild))
-            .on("guildDelete", guild => this.events.guild(guild));
+        this.login();
     }
 
-    log(data) {
-        console.log(`SHARD ${ShardID} | ${data}`);
+    log(content, error = false) {
+        error ?
+            console.error(`SHARD ${this.shardID} | ${content}`) :
+            console.log(`SHARD ${this.shardID} | ${content}`);
     }
 
-    send(type, key, data) {
-        process.send({"type": type, [key]: data});
+    transmit(type, data) {
+        process.send({ type, data });
     }
 
-    sendStat(stat) {
-        let value = this.bot[stat].size;
-        process.send({"type": "stat", "data": {[stat]: value}});
+    transmitStat(stat) {
+        this.transmit("stat", { [stat]: this[stat].size });
     }
 
     reload(mod) {
@@ -67,23 +94,49 @@ const client = new class Client {
             this.commands.reload();
         }
         if (all || mod === "functions") {
-            delete require.cache[`${__dirname}/Functions.js`];
-            fn = require("./Functions");
-            this.functions = new fn(this);
+            delete require.cache[`${__dirname}/Util/Functions.js`];
+            Functions = require("./Util/Functions");
+            this.functions = new Functions(this);
         }
         if (all || mod === "events") {
-            delete require.cache[`${__dirname}/Events.js`];
-            ev = require("./Events");
-            this.events = new ev(this);
+            delete require.cache[`${__dirname}/Util/Events.js`];
+            Events = require("./Util/Events");
+            this.events = new Events(this);
         }
         if (all || mod === "modlog") {
-            delete require.cache[`${__dirname}/Extras/LogUtil.js`];
-            this.modlog = require("./Extras/LogUtil");
-            this.modlog.setup(this);
+            delete require.cache[`${__dirname}/Managers/ModerationLog.js`];
+            this.modlog = require("./Managers/ModerationLog").setup(this);
+        }
+        if (mod === "database") {
+            delete require.cache[`${__dirname}/Managers/Settings.js`];
+            SettingsManager = require("./Managers/Settings");
+            this.settings = new SettingsManager();
         }
     }
 };
 
-process
-    .on("message", message => client.events.processMessage(message))
-    .on("unhandledRejection", (reason, p) => console.error('Unhandled Rejection at: Promise', p, 'reason:', reason));
+process.on("message", message => client.events.processMessage(message))
+.on("unhandledRejection", (reason, p) => console.error('Unhandled Rejection at: Promise', p, 'reason:', reason))
+.on("uncaughtException", err => {
+    client.channels.get("259802223251292160").sendMessage("", { embed: {
+        "title": "Process Error",
+        "color": 0xFF0000,
+        "description": err.stack.substring(0, 2000),
+        "timestamp": new Date(),
+        "footer": {
+            "text": "TypicalBot Alpha Error Tracker",
+            "icon_url": "https://typicalbot.com/images/icon.png"
+        }
+    }}).then(() => process.exit());
+}).on("unhandledRejection", err => {
+    client.channels.get("259802223251292160").sendMessage("", { embed: {
+        "title": "Process Rejection",
+        "color": 0xFF6600,
+        "description": err.stack.substring(0, 2000),
+        "timestamp": new Date(),
+        "footer": {
+            "text": "TypicalBot Alpha Error Tracker",
+            "icon_url": "https://typicalbot.com/images/icon.png"
+        }
+    }}).then(() => process.exit());
+});
