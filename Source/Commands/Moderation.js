@@ -30,6 +30,9 @@ module.exports = {
                 if (setting === "masterrole") {
                     let role = client.functions.fetchRole(message.guild, message.guild.settings, "masterrole");
                     message.channel.sendMessage(`**Master Role:** ${role ? role.name : "None"}`);
+                } else if (setting === "modrole") {
+                    let role = client.functions.fetchRole(message.guild, message.guild.settings, "modrole");
+                    message.channel.sendMessage(`**Moderator Role:** ${role ? role.name : "None"}`);
                 } else if (setting === "joinrole") {
                     let role = client.functions.fetchRole(message.guild, message.guild.settings, "joinrole");
                     message.channel.sendMessage(`**Join Role:** ${role ? role.name : "None"}`);
@@ -90,6 +93,20 @@ module.exports = {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
+                } else if (setting === "modrole") {
+                    if (value === "disable") {
+                        client.settings.update(message.guild, "modrole", null).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else {
+                        let match = /<@&([0-9]+)>/i.exec(value);
+                        let id = match ? match[1] : null;
+                        let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
+                        if (!role) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid role.`);
+                        client.settings.update(message.guild, "modrole", role.id).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    }
                 } else if (setting === "joinrole") {
                     if (value === "disable") {
                         client.settings.update(message.guild, "joinrole", null).then(() => {
@@ -137,6 +154,20 @@ module.exports = {
                         if (!channel) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid channel.`);
                         if (channel.type !== "text") return message.channel.sendMessage(`${message.author} | \`❌\` | The channel must be a text channel.`);
                         client.settings.update(message.guild, "announcements", channel.id).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    }
+                } else if (setting === "ann-mention") {
+                    if (value === "disable") {
+                        client.settings.update(message.guild, "annmention", null).then(() => {
+                            message.channel.sendMessage(`${message.author} | Success.`);
+                        }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
+                    } else {
+                        let match = /<@&([0-9]+)>/i.exec(value);
+                        let id = match ? match[1] : null;
+                        let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
+                        if (!role) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid role.`);
+                        client.settings.update(message.guild, "annmention", role.id).then(() => {
                             message.channel.sendMessage(`${message.author} | Success.`);
                         }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured.`));
                     }
@@ -500,9 +531,9 @@ module.exports = {
             if (!user) return message.channel.sendMessage(`${message.author} | \`❌\` | User not found.`);
             if (message.member.highestRole.position <= user.highestRole.position) return message.channel.sendMessage(`${message.author} | \`❌\` | You cannot softban a user with either the same or higher highest role.`);
             if (!user.bannable) return message.channel.sendMessage(`${message.author} | \`❌\` | I cannot softban that user.`);
-            message.guild.member(user).ban(parseInt(amount)).then(member => message.guild.unban(member).then(() => {
+            message.guild.member(user).ban(parseInt(amount)).then(member => setTimeout(() => message.guild.unban(member).then(() => {
                 message.channel.sendMessage(`${message.author} | Success. Purged ${amount} day${amount === 1 ? "" : "s"} worth of messages.`);
-            }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`))
+            }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`)), 5000)
             ).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured:\n\n${err}`));
         }
     },
@@ -542,7 +573,7 @@ module.exports = {
     },
     "announce": {
         mode: "strict",
-        permission: 5,
+        permission: 2,
         usage: {"command": "announce <message>", "description": "Sends an announcement."},
         execute: (message, client) => {
             let has = message.content.split(" ")[1];
@@ -554,10 +585,18 @@ module.exports = {
 
             let useembed = text.startsWith("--embed");
             if (!useembed) return channel.sendMessage(`**__Announcement from ${message.author.username}#${message.author.discriminator}:__**\n\n${text}`);
+            text = text.slice(8);
 
-            channel.sendMessage("", { embed: {
+            let mention = text.startsWith("--mention");
+            if (mention) text = text.slice(10);
+            let annmention = message.guild.settings.annmention;
+            let mentionrole = message.guild.roles.get(annmention);
+
+            if (mention && !mentionrole) return message.channel.sendMessage(`${message.author} | \`❌\` | Announcing with a mention requires the \`ann-mention\` setting to be set.`);
+
+            channel.sendMessage(mention && mentionrole ? `${mentionrole}` : "", { embed: {
                 "color": 0x00ADFF,
-                "description": `**__Announcement:__**\n\n${text.slice(8)}`,
+                "description": `**__Announcement:__**\n\n${text}`,
                 "timestamp": new Date(),
                 "footer": {
                     "text": `${message.author.username}#${message.author.discriminator}`,

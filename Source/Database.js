@@ -5,10 +5,10 @@ connection.connect();
 
 const DefaultData = {
     "masterrole": null,
+    "modrole": null,
     "joinrole": null,
     "silent": "N",
     "blacklist": null,
-    "djrole": null,
     "announcements": null,
     "logs": null,
     "joinlog": null,
@@ -26,16 +26,6 @@ const DefaultData = {
     "invitekick": "N",
     "modlogs": null,
     "antilink": "N",
-    "musicperms": "all",
-    "orplay": "off",
-    "orskip": "off",
-    "orstop": "off",
-    "orunqueue": "off",
-    "orvolume": "off",
-    "orpause_resume": "off",
-    "lengthlimit": null,
-    "queuelimit": null,
-    "apikey": null,
 };
 
 const _ = {};

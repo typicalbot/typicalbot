@@ -17,6 +17,7 @@ module.exports = class Events {
             this.client.data = message.data;
         } else if (message.type === "reload") {
             this.client.reload(message.module);
+            this.client.log(`Reloading ${message.module}`);
         }
     }
 

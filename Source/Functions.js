@@ -60,8 +60,8 @@ module.exports = class Functions {
         if (role === "masterrole") {
             let orole = guild.roles.find("name", "TypicalBot Admin");
             if (orole) return orole;
-        } else if (role === "djrole") {
-            let orole = guild.roles.find("name", "TypicalBot DJ");
+        } else if (role === "modrole") {
+            let orole = guild.roles.find("name", "TypicalBot Mod");
             if (orole) return orole;
         } else if (role === "blacklist") {
             let orole = guild.roles.find("name", "TypicalBot Blacklist");
@@ -78,8 +78,8 @@ module.exports = class Functions {
         if (user.id === guild.ownerID) return 3;
         let masterrole = this.fetchRole(guild, settings, "masterrole");
         if (masterrole && member.roles.has(masterrole.id)) return 2;
-        let djrole = this.fetchRole(guild, settings, "djrole");
-        if (djrole && member.roles.has(djrole.id)) return 1;
+        let modrole = this.fetchRole(guild, settings, "modrole");
+        if (modrole && member.roles.has(modrole.id)) return 1;
         let blacklist = this.fetchRole(guild, settings, "blacklist");
         if (blacklist && member.roles.has(blacklist.id)) return -1;
         return 0;

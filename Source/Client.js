@@ -29,10 +29,9 @@ const client = new class Client {
         bot
             .once("ready", () => {
                 this.events.ready();
-                setInterval(() => this.events.intervalStatus(), 60000);
+                setInterval(() => this.events.intervalStatus(), 300000);
                 setInterval(() => this.events.intervalPost(), 1200000);
-                setInterval(() => this.sendStat("voiceConnections"), 10000);
-                setInterval(() => process.send({"type": "stat", "data": {"heap": process.memoryUsage().heapUsed/1024/1024}}), 5000);
+                setInterval(() => process.send({"type": "stat", "data": {"heap": process.memoryUsage().heapUsed/1024/1024}}), 60000);
             })
             .on("warn", console.error)
             .on("error", console.error)
@@ -80,6 +79,10 @@ const client = new class Client {
             delete require.cache[`${__dirname}/Extras/LogUtil.js`];
             this.modlog = require("./Extras/LogUtil");
             this.modlog.setup(this);
+        }
+        if (mod === "database") {
+            delete require.cache[`${__dirname}/Database.js`];
+            this.settings = require("./Database");
         }
     }
 };

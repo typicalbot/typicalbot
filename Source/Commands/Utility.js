@@ -15,7 +15,7 @@ module.exports = {
         execute: (message, client) => {
             let level = client.functions.getPermissionLevel(message.guild, message.guild.settings, message.author);
             if (level === 0) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 0 | Server Member`);
-            if (level === 1) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 1 | Server DJ`);
+            if (level === 1) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 1 | Server Moderator`);
             if (level === 2) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 2 | Server Admin`);
             if (level === 3) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 3 | Server Owner`);
             if (level === 4) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 4 | TypicalBot Staff`);
