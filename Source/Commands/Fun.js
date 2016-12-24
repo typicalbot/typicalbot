@@ -15,6 +15,14 @@ module.exports = {
             response.send(`${message.author} just stabbed ${user}! :knife::scream: ${Math.floor(Math.random() * 4) === 3 ? `Someone call the police!` : ""}`);
         }
     },
+    "salt": {
+        usage: {"command": "salt [@user]", "description": "'Salt' another user in the server."},
+        execute: (message, client, response) => {
+            let user = message.mentions.users.array()[0];
+            if (!user || user.id === message.author.id) return response.send(`${message.author} just salted themself. Wha?`);
+            response.send(`${message.author} just salted ${user}! ${Math.floor(Math.random() * 4) === 3 ? `Someone get the snails away!` : ""}`);
+        }
+    },
     "8ball": {
         usage: {"command": "stab [@user]", "description": "'Stab' another user in the server."},
         execute: (message, client, response) => {

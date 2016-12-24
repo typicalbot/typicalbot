@@ -30,6 +30,7 @@ const create = SHARD_ID => {
 
     shard.on("message", message => {
         if (message.type === "stat") return update(SHARD_ID, message.data);
+        if (message.type === "restartshard") return create(+message.data.shard);
         return send(message);
     });
 };

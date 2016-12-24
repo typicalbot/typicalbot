@@ -37,28 +37,36 @@ const client = new class Client extends Discord.Client {
             if (this.guilds.has("163038706117115906")) { this.events.sendDonors(); setInterval(() => this.events.sendDonors(), 300000); }
         })
         .on("warn", err => {
-            client.channels.get("259802223251292160").sendMessage("", { embed: {
-                "title": "Client Warning",
-                "color": 0xFFD700,
-                "description": err.stack.substring(0, 2000),
-                "timestamp": new Date(),
-                "footer": {
-                    "text": "TypicalBot Alpha Error Tracker",
-                    "icon_url": "https://typicalbot.com/images/icon.png"
+            this.transmit("channelmessage", {
+                "embed": true,
+                "channel": "259802223251292160",
+                "content": {
+                    "title": "Client Warning",
+                    "color": 0xFFD700,
+                    "description": err.substring(0, 2000),
+                    "timestamp": new Date(),
+                    "footer": {
+                        "text": "TypicalBot Alpha Error Tracker",
+                        "icon_url": "https://typicalbot.com/images/icon.png"
+                    }
                 }
-            }});
+            });
         })
         .on("error", err => {
-            client.channels.get("259802223251292160").sendMessage("", { embed: {
-                "title": "Client Error",
-                "color": 0xFF4500,
-                "description": err.stack.substring(0, 2000),
-                "timestamp": new Date(),
-                "footer": {
-                    "text": "TypicalBot Alpha Error Tracker",
-                    "icon_url": "https://typicalbot.com/images/icon.png"
+            this.transmit("channelmessage", {
+                "embed": true,
+                "channel": "259802223251292160",
+                "content": {
+                    "title": "Client Error",
+                    "color": 0xFF4500,
+                    "description": err.substring(0, 2000),
+                    "timestamp": new Date(),
+                    "footer": {
+                        "text": "TypicalBot Alpha Error Tracker",
+                        "icon_url": "https://typicalbot.com/images/icon.png"
+                    }
                 }
-            }});
+            });
         })
         .on("reconnecting", () => this.log("Reconnecting", true))
         .on("disconnect", () => this.log("Disconnected", true))
@@ -116,27 +124,36 @@ const client = new class Client extends Discord.Client {
 };
 
 process.on("message", message => client.events.processMessage(message))
-.on("unhandledRejection", (reason, p) => console.error('Unhandled Rejection at: Promise', p, 'reason:', reason))
 .on("uncaughtException", err => {
-    client.channels.get("259802223251292160").sendMessage("", { embed: {
-        "title": "Process Error",
-        "color": 0xFF0000,
-        "description": err.stack.substring(0, 2000),
-        "timestamp": new Date(),
-        "footer": {
-            "text": "TypicalBot Alpha Error Tracker",
-            "icon_url": "https://typicalbot.com/images/icon.png"
+    client.transmit("channelmessage", {
+        "embed": true,
+        "channel": "259802223251292160",
+        "content": {
+            "title": "Process Error",
+            "color": 0xFF0000,
+            "description": err.stack.substring(0, 2000),
+            "timestamp": new Date(),
+            "footer": {
+                "text": "TypicalBot Alpha Error Tracker",
+                "icon_url": "https://typicalbot.com/images/icon.png"
+            }
         }
-    }}).then(() => process.exit());
+    });
+    setTimeout(process.exit, 5000);
 }).on("unhandledRejection", err => {
-    client.channels.get("259802223251292160").sendMessage("", { embed: {
-        "title": "Process Rejection",
-        "color": 0xFF6600,
-        "description": err.stack.substring(0, 2000),
-        "timestamp": new Date(),
-        "footer": {
-            "text": "TypicalBot Alpha Error Tracker",
-            "icon_url": "https://typicalbot.com/images/icon.png"
+    client.transmit("channelmessage", {
+        "embed": true,
+        "channel": "259802223251292160",
+        "content": {
+            "title": "Process Rejection",
+            "color": 0xFF6600,
+            "description": err.stack.substring(0, 2000),
+            "timestamp": new Date(),
+            "footer": {
+                "text": "TypicalBot Alpha Error Tracker",
+                "icon_url": "https://typicalbot.com/images/icon.png"
+            }
         }
-    }}).then(() => process.exit());
+    });
 });
+//.on("unhandledRejection", (reason, p) => console.error('Unhandled Rejection at: Promise', p, 'reason:', reason))

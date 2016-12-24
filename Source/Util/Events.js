@@ -47,13 +47,25 @@ module.exports = class Events {
                         "color": 0x00adff,
                         "description": `**__Guild:__**\n${guild.name} | ${guild.id}\n\n**__Owner:__**\n${owner.username}#${owner.discriminator} | ${owner.id}\n\n`
                         + `**__Stats:__**\n**Members:** ${guild.memberCount}\n**Shard:** ${this.client.shardID}\n\n`
-                        + `**__Roles:__**\n${guild.roles.map(r => `\`${r.name}\``).join(", ")}\n\n`
+                        + `**__Roles:__**\n${guild.roles.map(r => `\`${r.name} (${r.position})\``).join(", ")}\n\n`
                         + `**__Channels:__**\n**Text:** ${guild.channels.filter(c => c.type === "text").map(c => `\`${c.name}\``).join(", ")}\n**Voice:** ${guild.channels.filter(c => c.type === "voice").map(c => `\`${c.name}\``).join(", ")}\n\n`
                         + `**__Settings:__**\n${settingslist.join(", ")}`,
                         "footer": { "text": "TypicalBot Support", "icon_url": "https://typicalbot.com/images/icon.png" },
                         "timestamp": new Date()
                     }
                 });
+            });
+        } else if (message.type === "shardping") {
+            if (message.data.shard != this.client.shardID) return;
+            this.client.transmit("channelmessage", {
+                "embed": true,
+                "channel": message.data.channel,
+                "content": {
+                    "color": 0x00FF00,
+                    "description": `Shard ${+this.client.shardID + 1} / ${this.client.shardCount} is online.`,
+                    "footer": { "text": "TypicalBot Monitor", "icon_url": "https://typicalbot.com/images/icon.png" },
+                    "timestamp": new Date()
+                }
             });
         }
     }
@@ -162,7 +174,9 @@ module.exports = class Events {
             if (settings.joinnick) member.setNickname(this.client.functions.getFilteredMessage("jn", guild, user, settings.joinnick)).catch();
 
             let joinrole = this.client.functions.fetchRole(guild, settings, "joinrole");
-            if (joinrole && joinrole.editable) member.addRole(joinrole);
+            if (joinrole && joinrole.editable) setTimeout(() =>
+                member.addRole(joinrole).then(() => console.log("Success!")).catch(err => console.error(err)), 2000
+            );
         });
     }
 

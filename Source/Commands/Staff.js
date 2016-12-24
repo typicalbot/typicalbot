@@ -22,13 +22,35 @@ module.exports = {
     },
     "shard": {
         mode: "strict",
-        permission: 4,
+        permission: 5,
         execute: (message, client, response) => {
-            let guild = message.content.split(" ")[1];
+            let match = /shard\s+(ping|restart|\d+)\s*(\d+)?/i.exec(message.content);
+            if (!match) return response.error("Invalid command usage.");
 
-            client.functions.request(`https://typicalbot.com/shard-num/?guild_id=${guild}&shard_count=${client.shardCount}`).then(data => {
-                response.reply(`Guild ${guild} is on Shard ${+data + 1} / ${client.shardCount}.`);
-            });
+            let action = match[1];
+            let shard = match[2];
+
+            if (action === "ping") {
+                if (!shard) return response.error("No shard specified.");
+
+                shard < 100 ?
+                    client.transmit("shardping", { "channel": message.channel.id, shard }) :
+                    client.functions.request(`https://typicalbot.com/shard-num/?guild_id=${shard}&shard_count=${client.shardCount}`).then(data => {
+                        client.transmit("shardping", { "channel": message.channel.id, "shard": +data });
+                    });
+            } else if (action === "restart") {
+                if (!shard) return response.error("No shard specified.");
+
+                shard < 100 ?
+                    client.transmit("restartshard", { shard }) :
+                    client.functions.request(`https://typicalbot.com/shard-num/?guild_id=${shard}&shard_count=${client.shardCount}`).then(data => {
+                        client.transmit("restartshard", { "shard": +data });
+                    });
+            } else {
+                client.functions.request(`https://typicalbot.com/shard-num/?guild_id=${action}&shard_count=${client.shardCount}`).then(data => {
+                    response.reply(`Guild ${action} is on Shard ${+data + 1} / ${client.shardCount}.`);
+                });
+            }
         }
     },
     "eval": {
