@@ -3,7 +3,10 @@ const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*User:\*\*\s.+/gi };
 const _ = {};
 let client;
 
-_.setup = _client => client = _client;
+_.setup = _client => {
+    client = _client;
+    return _;
+};
 
 _.case = message => {
     let _case = message.embeds[0];
@@ -33,7 +36,7 @@ _.latest = guild => {
         _.channel(guild).then(channel => {
             channel.fetchMessages({ limit: 100 }).then(messages => {
                 let logs = messages.filter(m => {
-                    if (m.author.id !== client.bot.user.id) return false;
+                    if (m.author.id !== client.user.id) return false;
                     if (!m.embeds[0]) return false;
                     if (m.embeds[0].type !== "rich") return false;
                     if (!m.embeds[0].footer || !m.embeds[0].footer.text) return false;
@@ -53,7 +56,7 @@ _.get = (guild, id) => {
             if (id === "latest") return resolve(_.latest(guild));
             channel.fetchMessages({ limit: 100 }).then(messages => {
                 let logs = messages.filter(m => {
-                    if (m.author.id !== client.bot.user.id) return false;
+                    if (m.author.id !== client.user.id) return false;
                     if (!m.embeds[0]) return false;
                     if (m.embeds[0].type !== "rich") return false;
                     if (!m.embeds[0].footer || !m.embeds[0].footer.text) return false;

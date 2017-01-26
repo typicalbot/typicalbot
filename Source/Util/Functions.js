@@ -39,18 +39,26 @@ module.exports = class Functions {
 
     lengthen(text, length, place = "after") {
         text = text.toString();
-        if (text.length > 20) return `${text.substring(0, 17)}...`;
-        if (place === "before") {
-            for (let i = text.length; i < length; i++) text = ` ${text}`;
-            return text;
-        } else if (place === "after") {
-            for (let i = text.length; i < length; i++) text = `${text} `;
-            return text;
+        if (text.length > length) return `${text.substring(0, length - 3)}...`;
+        return place === "before" ?
+            ' '.repeat(length - text.length) + text :
+            text + ' '.repeat(length - text.length);
+    }
+
+    inviteCheck(message) {
+        if (message.guild.settings.antiinvite === "Y") {
+            let match = /(discord\.gg\/.+|discordapp\.com\/invite\/.+)/gi.test(message.content);
+            if (match && message.deletable) {
+                this.client.events.guildInvitePosted(message.guild, message.channel, message.author);
+                message.delete().then(() => {
+                    message.channel.sendMessage(`${message.author} | \`❗\` | Your message contained a server invite link, which this server prohibits.`);
+                });
+            }
         }
     }
 
     get uptime() {
-        return this.time(this.timestamp(this.client.bot.uptime));
+        return this.time(this.timestamp(this.client.uptime));
     }
 
     fetchRole(guild, settings, role) {
@@ -70,11 +78,12 @@ module.exports = class Functions {
         return null;
     }
 
-    getPermissionLevel(guild, settings, user) {
+    getPermissionLevel(guild, settings, user, ignorestaff = false) {
         let member = guild.member(user);
         if (!member) return 0;
-        if (user.id === this.client.config.owner) return 5;
-        if (this.client.config.staff[user.id]) return 4;
+        if (user.id === this.client.config.owner) return 6;
+        if (!ignorestaff && this.client.config.staff[user.id]) return 5;
+        if (!ignorestaff && this.client.config.support[user.id]) return 4;
         if (user.id === guild.ownerID) return 3;
         let masterrole = this.fetchRole(guild, settings, "masterrole");
         if (masterrole && member.roles.has(masterrole.id)) return 2;
@@ -85,36 +94,20 @@ module.exports = class Functions {
         return 0;
     }
 
+    numberToLevel(number) {
+        if (number == 6) return "TypicalBot Creator";
+        if (number == 5) return "TypicalBot Staff";
+        if (number == 4) return "TypicalBot Support";
+        if (number == 3) return "Server Owner";
+        if (number == 2) return "Server Administrator";
+        if (number == 1) return "Server Moderator";
+        return "Server Member";
+    }
+
     getPrefix(settings, command) {
         if (settings.customprefix && command.startsWith(settings.customprefix)) return settings.customprefix;
         if (settings.originaldisabled === "N" && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
         return null;
-    }
-
-    checkGuildBan(guild, user) {
-        return new Promise((resolve, reject) => {
-            if (!guild) return reject();
-            let BotMember = guild.member(this.client.bot.user);
-            if (!BotMember || !BotMember.hasPermission("BAN_MEMBERS")) return resolve(false);
-            guild.fetchBans().then(bans => {
-                if (bans.has(user.id)) return resolve(true);
-                return resolve(false);
-            });
-        });
-    }
-
-    messageable(channel) {
-        let ClientMember = channel.guild.member(this.client.bot.user);
-        let Permissions = channel.permissionsFor(ClientMember);
-        if (!Permissions.hasPermission("SEND_MESSAGES")) return false;
-        return true;
-    }
-
-    nicknameable(member) {
-        let ClientMember = member.guild.member(this.client.bot.user);
-        let Permissions = ClientMember.permissions;
-        if (!Permissions.hasPermission("MANAGE_NICKNAMES")) return false;
-        return ClientMember.highestRole.comparePositionTo(member.highestRole) > 0;
     }
 
     getFilteredMessage(type, guild, user, text, options = {}) {
@@ -137,7 +130,7 @@ module.exports = class Functions {
             .replace(/{now}/gi, JSON.stringify(new Date()).replace(/"/g, ""));
         if (type === "ann-nick") return this.getFilteredMessage("ann", guild, user, text)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
-            .replace(/{user.oldnick}|{user.oldnickname}/gi, options.oldmember.nickname || user.username);
+            .replace(/{user.oldnick}|{user.oldnickname}/gi, options.oldMember.nickname || user.username);
         if (type === "ann-invite") return this.getFilteredMessage("ann", guild, user, text)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{channel}/gi, options.channel.toString())
@@ -155,10 +148,6 @@ module.exports = class Functions {
             .replace(/{user.discriminator}/gi, user.discriminator);
     }
 
-    parseEmbed(type, guild, user, text) {
-
-    }
-
     request(url) {
         return new Promise((resolve, reject) => {
             request(url, (error, response, body) =>{
@@ -166,5 +155,26 @@ module.exports = class Functions {
                 return resolve(body);
             });
         });
+    }
+
+    pagify(content, page) {
+        let pages = [];
+        let currentPage = [];
+
+        content.forEach((v, index) => {
+            currentPage.push(v);
+            if (currentPage.length >= 10 || content.length === index + 1 || content.size === index + 1) {
+                pages.push(currentPage);
+                currentPage = [];
+            }
+        });
+
+        page = page && page > 0 && page <= pages.length ? page - 1 : 0;
+
+        let thisPage = pages[page].map((item, index) =>
+              `• ${this.lengthen((index+1)+10*page, String(10+(10*page)).length, "before")}: ${item}`
+        ).join("\n");
+
+        return `Page ${page + 1} / ${pages.length} | ${content.length} Items\n\n${thisPage}`;
     }
 };

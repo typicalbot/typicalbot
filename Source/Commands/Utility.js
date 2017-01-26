@@ -5,72 +5,101 @@ module.exports = {
         dm: true,
         mode: "strict",
         usage: {"command": "ping", "description": "A check to see if TypicalBot is responsive."},
-        execute: (message, client) => {
-            message.channel.sendMessage("Pinging...").then(msg => msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`));
+        execute: (message, client, response) => {
+            response.send("Pinging...").then(msg => {
+                msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`);
+            });
         }
     },
     "mylevel": {
         mode: "strict",
-        usage: {"command": "mylevel", "description": "Gives you your permission level, specific to that server."},
-        execute: (message, client) => {
-            let level = client.functions.getPermissionLevel(message.guild, message.guild.settings, message.author);
-            if (level === 0) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 0 | Server Member`);
-            if (level === 1) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 1 | Server Moderator`);
-            if (level === 2) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 2 | Server Admin`);
-            if (level === 3) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 3 | Server Owner`);
-            if (level === 4) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 4 | TypicalBot Staff`);
-            if (level === 5) return message.channel.sendMessage(`${message.author} | **__Your Permission Level:__** 5 | TypicalBot Creator`);
+        usage: {"command": "mylevel ['--here']", "description": "Gives you your permission level, specific to that server."},
+        execute: (message, client, response) => {
+            let split = message.content.split(" ")[1];
+
+            let level = split && split === "--here" ?
+                client.functions.getPermissionLevel(message.guild, message.guild.settings, message.author, true) :
+                client.functions.getPermissionLevel(message.guild, message.guild.settings, message.author);
+
+            if (level === 0) return response.reply(`**__Your Permission Level:__** 0 | Server Member`);
+            if (level === 1) return response.reply(`**__Your Permission Level:__** 1 | Server Moderator`);
+            if (level === 2) return response.reply(`**__Your Permission Level:__** 2 | Server Admin`);
+            if (level === 3) return response.reply(`**__Your Permission Level:__** 3 | Server Owner`);
+            if (level === 4) return response.reply(`**__Your Permission Level:__** 4 | TypicalBot Support`);
+            if (level === 5) return response.reply(`**__Your Permission Level:__** 5 | TypicalBot Staff`);
+            if (level === 6) return response.reply(`**__Your Permission Level:__** 6 | TypicalBot Creator`);
         }
     },
     "serverinfo": {
         mode: "strict",
         usage: {"command": "serverinfo ['roles'/'channels'/'bots']", "description": "Lists the server's information."},
-        execute: (message, client) => {
+        execute: (message, client, response, userlevel) => {
             let after = message.content.split(" ")[1];
-            if (!after) return message.channel.sendMessage(
+            let owner = message.guild.owner ? message.guild.owner : message.guild.member(message.guild.ownerID);
+            if (!after) return response.reply(
                 `**__Server Information For:__** ${message.guild.name}\n`
                 + `\`\`\`\n`
                 + `Name                : ${message.guild.name} (${message.guild.id})\n`
-                + `Owner               : ${message.guild.owner.user.username}#${message.guild.owner.user.discriminator} (${message.guild.owner.user.id})\n`
+                + `Owner               : ${owner.user.username}#${owner.user.discriminator} (${owner.user.id})\n`
                 + `Created             : ${message.guild.createdAt}\n`
                 + `Region              : ${message.guild.region}\n`
                 + `Verification Level  : ${message.guild.verificationLevel}\n`
                 + `Icon                : ${message.guild.iconURL ? message.guild.iconURL : "None"}\n`
                 + `Channels            : ${message.guild.channels.size}\n`
-                + `Members             : ${message.guild.members.size} (${message.guild.members.filter(m => !m.user.bot).size} Users | ${message.guild.members.filter(m => m.user.bot).size} Bots)\n`
+                + `Members             : ${message.guild.memberCount}\n`
                 + `Roles               : ${message.guild.roles.size}\n`
                 + `Emojis              : ${message.guild.emojis.size}\n`
                 + `\`\`\``
             );
             let lengthen = client.functions.lengthen;
-            if (after === "roles") return message.channel.sendMessage(
-                `**__Roles for server:__** ${message.guild.name}\n`
-                + `\`\`\`autohotkey\n`
-                + message.guild.roles.filter(r => r.position !== 0).array().sort((a,b) => b.position - a.position).map(r => `=> ${lengthen(r.position, 2, "before")}: ${lengthen(r.name, 20)} (${r.id})`).join("\n")
-                + `\`\`\``
-            );
-            if (after === "channels") return message.channel.sendMessage(
-                `**__Text Channels for server:__** ${message.guild.name}\n`
-                + `\`\`\`autohotkey\n`
-                + message.guild.channels.filter(c => c.type === "text").array().sort((a,b) => a.position - b.position).map(c => `=> ${lengthen(c.position, 2, "before")}: ${lengthen(c.name, 20)} (${c.id})`).join("\n")
-                + `\`\`\``
-            );
-            if (after === "bots") return message.channel.sendMessage(
-                `**__Bots in server:__** ${message.guild.name}\n`
-                + `\`\`\`autohotkey\n`
-                + message.guild.members.filter(m => m.user.bot).map((b, i) => `=> ${lengthen(i + 1, 2, "before")}: ${lengthen(b.user.username, 20)} (${b.user.id})`).join("\n")
-                + `\`\`\``
-            );
+            if (after === "roles") {
+                let page = message.content.split(" ")[2];
+                let paged = client.functions.pagify(
+                    message.guild.roles.filter(r => r.position !== 0).array().sort((a,b) => b.position - a.position).map(r => `${lengthen(r.name, 20)} : ${r.id}`),
+                    page
+                );
+                return response.reply(
+                    `**__Roles for server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
+                );
+            }
+            if (after === "channels") {
+                let page = message.content.split(" ")[2];
+                let paged = client.functions.pagify(
+                    message.guild.channels.filter(c => c.type === "text").array().sort((a,b) => a.position - b.position).map(c => `${lengthen(c.name, 20)} : ${c.id}`),
+                    page
+                );
+                return response.reply(
+                    `**__Text Channels for server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
+                );
+            }
+            if (after === "bots") {
+                let page = message.content.split(" ")[2];
+                let paged = client.functions.pagify(
+                    message.guild.members.filter(m => m.user.bot).map(b => `${client.functions.lengthen(b.user.username, 20)} : ${b.user.id}`),
+                    page
+                );
+                return response.reply(
+                    `**__Bots in server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
+                );
+            }
+            if (userlevel < 4) return;
+            let settingslist = after === "s";
+
+            let transmit = settingslist ?
+                { channel: message.channel.id, guild: message.content.split(" ")[2], settings: true } :
+                { channel: message.channel.id, guild: after };
+
+            client.transmit("serverinfo", transmit);
         }
     },
     "userinfo": {
         mode: "lite",
         usage: {"command": "userinfo [@user]", "description": "Lists a user's information."},
-        execute: (message, client) => {
+        execute: (message, client, response) => {
             let user = message.mentions.users.array()[0];
             if (!user) user = message.author;
             let member = message.guild.member(user);
-            message.channel.sendMessage(
+            response.reply(
                 `**__User Information For:__** ${user.username}\n`
                 + `\`\`\`\n`
                 + `Name                : ${user.username}#${user.discriminator} (${user.id})\n`
@@ -85,9 +114,40 @@ module.exports = {
             );
         }
     },
+    "search": {
+        mode: "lite",
+        usage: {"command": "search <query> [page]", "description": "Searches in the user list for a username or nickname."},
+        execute: (message, client, response) => {
+            let match = /search\s+(\S+)(?:\s+(\d+))?/i.exec(message.content);
+            if (!match) return response.usage("search");
+
+            let context = match[1];
+            let page = match[2] || 1;
+
+            let members = message.guild.members.filter(m => {
+                if (m.user.username.toLowerCase().includes(context.toLowerCase())) return true;
+                if (m.nickname && m.nickname.toLowerCase().includes(context.toLowerCase())) return true;
+                return false;
+            });
+
+            //message.guild.members.filter(m => m.user.bot).map(b => `${client.functions.lengthen(b.user.username, 20)} : ${b.user.id}`),
+
+            if (members.size < 1) return response.reply("There are no matches.");
+
+            let lengthen = client.functions.lengthen;
+
+            let list = members.map(m => `${lengthen(m.user.username, 25)}${m.nickname ? `(${m.nickname})` : ""}`);
+
+            let paged = client.functions.pagify(list, page);
+
+            return response.reply(
+                `**__Results for query \`${context}\`:__**\n\`\`\`autohotkey\n${paged}\`\`\``
+            );
+        }
+    },
     "bots": {
         usage: {"command": "bots [page]", "description": "Gives a list of bots from Carbonitex ranked by server count."},
-        execute: (message, client) => {
+        execute: (message, client, response) => {
             client.functions.request("https://www.carbonitex.net/discord/api/listedbots").then(data => {
                 let list = JSON.parse(data)
                     .filter(bot => bot.botid > 10 && bot.servercount > 0)
@@ -116,19 +176,19 @@ module.exports = {
                     + `${lengthen(Number(bot.servercount).toLocaleString(), Number(pages[page][0].servercount).toLocaleString().length, "before")} Servers`
                     + `${bot.compliant == "1" ? ` | Carbon Compliant` : ""}`;
                 }).join("\n");
-                message.channel.sendMessage(`__\`Ranked Bot List - Provided by Carbonitex\`__\`\`\`autohotkey\nPage ${page + 1} / ${pages.length}\n\n${thisPage}\n\`\`\``);
-            }).catch(err => message.channel.sendMessage(`${message.author} | \`❌\` | An error occured making that request.`));
+                response.send(`__\`Ranked Bot List - Provided by Carbonitex\`__\`\`\`autohotkey\nPage ${page + 1} / ${pages.length}\n\n${thisPage}\n\`\`\``);
+            }).catch(err => response.error(`An error occured making that request.`));
         }
     },
     "strawpoll": {
         usage: {"command": "strawpoll <question> <{choice1;choice2;etc}>", "description": "Create a strawpoll vote."},
-        execute: (message, client) => {
+        execute: (message, client, response) => {
             let match = /strawpoll\s+(.+)\s+{(.+)}/i.exec(message.content);
-            if (!match) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage.`);
+            if (!match) return response.usage("strawpoll");
             let question = match[1];
             let choices = match[2];
             choices = choices.split(";");
-            if (!choices.length > 1) return message.channel.sendMessage(`${message.author} | \`❌\` | Invalid command usage. There must be between 2 and 30 choices.`);
+            if (!choices.length > 1) return response.error(`Invalid command usage. There must be between 2 and 30 choices.`);
             request({
                 "method": "POST",
                 "url": "https://www.strawpoll.me/api/v2/polls",
@@ -140,9 +200,79 @@ module.exports = {
                     "options": choices,
                     "multi": false
                 })
-            }, function(error, response, body) {
-                if (error || response.statusCode !== 200) return message.channel.sendMessage(`${message.author} | \`❌\` | An error occured making that request.`);
-                message.channel.sendMessage(`${message.author} | Your Strawpoll: <https://strawpoll.me/${JSON.parse(body).id}>`);
+            }, function(error, resp, body) {
+                if (error || resp.statusCode !== 200) return response.error(`An error occured making that request.`);
+                response.reply(`Your Strawpoll: <https://strawpoll.me/${JSON.parse(body).id}>`);
+            });
+        }
+    },
+    "discriminator": {
+        mode: "lite",
+        aliases: ["discrim"],
+        usage: {"command": "discriminator [discrim|@user]", "description": "Provides a list of all uers with a given discriminator."},
+        execute: (message, client, response) => {
+            let match = /discrim(?:inator)?(?:\s+(?:(\d{4})|<(@!?\d+)>))?(?:\s+(\d+))?/i.exec(message.content);
+            if (!match) return response.usage("discriminator");
+
+            let discrim = match[1];
+            let user = match[2] ? client.users.get(match[2]) : null;
+            let page = match[3];
+
+            let discriminator = discrim ? discrim : user ? user.discriminator : message.author.discriminator;
+
+            let lengthen = client.functions.lengthen;
+
+            let users = client.users.findAll("discriminator", discriminator);
+
+            if (users.length < 1) return response.reply("There are no matches.");
+
+            let list = users.map(u => u.username);
+
+            let paged = client.functions.pagify(list, page);
+
+            return response.reply(
+                `**__Results for query \`${discriminator}\`:__**\n\`\`\`autohotkey\n${paged}\`\`\``
+            );
+        }
+    },
+    "randomuser": {
+        mode: "lite",
+        usage: {"command": "randomuser", "description": "Gives you a random user."},
+        execute: (message, client, response) => {
+            let user = message.guild.members.random().user;
+
+            response.reply(`Your random pick is: **${user.username}#${user.discriminator}** (${user.id}).`);
+        }
+    },
+    "nickname": {
+        mode: "lite",
+        aliases: ["nick"],
+        usage: {"command": "nickname [nickname]", "description": "Changes your nickname."},
+        execute: (message, client, response, level) => {
+            let match = /nick(?:name)?(?:\s+<@!?(\d+)>)?(?:\s+([\S\s]+))?/i.exec(message.content);
+
+            let member = message.guild.members.get(match[1]);
+            let nick = match[2];
+            let reset = !nick || nick === "reset";
+
+            if (member) {
+                if (level < 1) return response.error(`Your permission level is too low to execute that command. The command requires permission level 1 (${client.functions.numberToLevel(1)}) and you are level ${level} (${client.functions.numberToLevel(level)}).`);
+
+                if (reset) return member.setNickname("").then(() => response.reply(`Successfully reset member's nickname.`)).catch(err => {
+                    response.error(`An error occured. This most likely means I cannot manage member's nickname.`);
+                });
+
+                return member.setNickname(nick).then(() => response.reply(`Successfully changed member's nickname.`)).catch(err => {
+                    response.error(`An error occured. This most likely means I cannot manage member's nickname.`);
+                });
+            }
+
+            if (reset) return message.member.setNickname("").then(() => response.reply(`Successfully reset your nickname.`)).catch(err => {
+                response.error(`An error occured. This most likely means I cannot manage your nickname.`);
+            });
+
+            message.member.setNickname(match[1]).then(() => response.reply(`Successfully changed your nickname.`)).catch(err => {
+                response.error(`An error occured. This most likely means I cannot manage your nickname.`);
             });
         }
     }
