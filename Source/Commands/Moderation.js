@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 module.exports = {
     "say": {
         mode: "strict",
@@ -508,12 +510,14 @@ module.exports = {
 
             if (channel) {
                 return message.channel.fetchMessages({ limit: amount, before: message.id }).then(msgs => {
+                    if (msgs.filter(m => Date.now() - Discord.Snowflake.deconstruct(m.id).date.getTime() < 1209600000).size === 0) return response.error("No messages found to delete. If there are messages older than two weeks, I cannot delete them.");
+
                     channel.bulkDelete(msgs, true).then(msgs => {
                         response.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`).then(msg => {
                             setTimeout(() => msg.delete(), 2500);
                         });
                         message.delete();
-                    }).catch(err => response.error("An error occured. This most likely means I do not have permissions to manage messages."));
+                    }).catch(err => response.error(`An error occured. This most likely means I do not have permissions to manage messages.\n\n${err}`));
                 }).catch(err => {
                     response.error(`An error occured. This most likely means I cannot read message history.`);
                 });

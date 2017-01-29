@@ -97,6 +97,17 @@ class Settings {
         });
     }
 
+    delete(id) {
+        return new Promise((resolve, reject) => {
+            id = id ? typeof id === "object" ? id.id : id : null;
+            connection.query(`DELETE FROM servers WHERE id = ${id}`, (error, result) => {
+                if (error) return reject(error);
+                this.data.delete(id);
+                return resolve();
+            });
+        });
+    }
+
     logError(err) {
         connection.query(`INSERT INTO errors SET ?`, { error: err, timestamp: new Date() });
     }

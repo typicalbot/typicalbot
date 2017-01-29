@@ -271,7 +271,7 @@ module.exports = {
                 response.error(`An error occured. This most likely means I cannot manage your nickname.`);
             });
 
-            message.member.setNickname(match[1]).then(() => response.reply(`Successfully changed your nickname.`)).catch(err => {
+            message.member.setNickname(nick).then(() => response.reply(`Successfully changed your nickname.`)).catch(err => {
                 response.error(`An error occured. This most likely means I cannot manage your nickname.`);
             });
         }

@@ -153,7 +153,7 @@ module.exports = class Events {
                 if (UserLevel === -1) return;
 
                 let split = message.content.split(" ")[0];
-                let prefix = this.client.functions.getPrefix(settings, split);
+                let prefix = this.client.functions.getPrefix(message.author, settings, split);
                 if (!prefix || !message.content.startsWith(prefix)) return;
 
                 let command = this.client.commands.get(split.slice(prefix.length).toLowerCase());
@@ -164,7 +164,7 @@ module.exports = class Events {
                 //if (message.author.id === this.client.config.owner && message.content === "$ping") response.reply(`CREATED TO NOW1: ${created - now1} | NOW1 TO NOW2: ${now2 - now1}`);
 
                 let mode = command.mode || "free";
-                if (message.author.id !== this.client.config.owner) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
+                if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
 
                 let userperm = this.client.functions.numberToLevel(UserLevel),
                     requiredperm = command.permission ?
@@ -337,7 +337,8 @@ module.exports = class Events {
         this.client.transmitStat("guilds");
     }
 
-    guildDelete() {
+    guildDelete(guild) {
         this.client.transmitStat("guilds");
+        this.client.settings.delete(guild.id);
     }
 };

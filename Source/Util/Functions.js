@@ -104,7 +104,8 @@ module.exports = class Functions {
         return "Server Member";
     }
 
-    getPrefix(settings, command) {
+    getPrefix(user, settings, command) {
+        if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
         if (settings.customprefix && command.startsWith(settings.customprefix)) return settings.customprefix;
         if (settings.originaldisabled === "N" && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
         return null;
