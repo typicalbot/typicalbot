@@ -1,5 +1,6 @@
 const request = require("request");
 const util = require("util");
+const hd = require("heapdump");
 
 function authorize(client, guildid, clientid) {
     return new Promise((resolve, reject) => {
@@ -30,7 +31,7 @@ function authorize(client, guildid, clientid) {
 module.exports = {
     "reload": {
         mode: "strict",
-        permission: 5,
+        permission: 9,
         execute: (message, client, response) => {
             let mod = message.content.slice(message.content.search(" ") + 1);
             client.transmit("reload", mod);
@@ -42,7 +43,7 @@ module.exports = {
     },
     "sannounce": {
         mode: "strict",
-        permission: 5,
+        permission: 9,
         execute: (message, client, response) => {
             let text = message.content.slice(message.content.search(" ") + 1);
             client.transmit("announcement", text);
@@ -51,15 +52,22 @@ module.exports = {
     },
     "oauth": {
         mode: "strict",
-        permission: 6,
+        permission: 10,
         execute: (message, client, response) => {
             let clientid = message.content.slice(message.content.search(" ") + 1);
             authorize(client, message.guild.id, clientid).then(a => response.reply(a)).catch(e => response.error(e));
         }
     },
+    "hdump": {
+        mode: "strict",
+        permission: 10,
+        execute: (message, client, response) => {
+            hd.writeSnapshot(`${__dirname}/${Date.now()}.heapsnapshot`);
+        }
+    },
     "shard": {
         mode: "strict",
-        permission: 5,
+        permission: 9,
         execute: (message, client, response) => {
             let match = /shard\s+(ping|restart|\d+)\s*(\d+)?/i.exec(message.content);
             if (!match) return response.error("Invalid command usage.");
@@ -93,7 +101,7 @@ module.exports = {
     "eval": {
         dm: true,
         mode: "strict",
-        permission: 6,
+        permission: 10,
         execute: (message, client, response, level) => {
             let code = message.content.slice(message.content.search(" ") + 1);
             try {
@@ -161,59 +169,3 @@ module.exports = {
         }
     }
 };
-
-/*
-const util = require('util');
-exports.run = function(client, message, args) {
-  let suffix = args.join(' ');
-  try {
-    let evaled = eval(suffix);
-    let type = typeof evaled;
-    let insp = util.inspect(evaled, {
-      depth: 0
-    });
-    let tosend = [];
-
-    if (evaled === null) evaled = 'null';
-
-    tosend.push('**EVAL:**');
-    tosend.push('\`\`\`js');
-    tosend.push(clean(suffix));
-    tosend.push('\`\`\`');
-    tosend.push('**Evaluates to:**');
-    tosend.push('\`\`\`LDIF');
-    tosend.push(clean(evaled.toString().replace(client.token, 'Redacted').replace(client.user.email, 'Redacted')));
-    tosend.push('\`\`\`');
-    if (evaled instanceof Object) {
-      tosend.push('**Inspect:**');
-      tosend.push('\`\`\`js');
-      tosend.push(insp.toString().replace(client.token, 'Redacted').replace(client.user.email, 'Redacted'));
-      tosend.push('\`\`\`');
-    } else {
-      tosend.push('**Type:**');
-      tosend.push('\`\`\`js');
-      tosend.push(type);
-      tosend.push('\`\`\`');
-    }
-    message.edit(tosend);
-  } catch (err) {
-    let tosend = [];
-    tosend.push('**EVAL:** \`\`\`js');
-    tosend.push(clean(suffix));
-    tosend.push('\`\`\`');
-    tosend.push('**Error:** \`\`\`LDIF');
-    tosend.push(clean(err.message));
-    tosend.push('\`\`\`');
-    message.edit(tosend)
-      .catch(error => console.log(error.stack));
-  }
-};
-
-function clean(text) {
-  if (typeof(text) === 'string') {
-    return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
-  } else {
-    return text;
-  }
-}
-*/

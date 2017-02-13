@@ -5,7 +5,7 @@ module.exports = {
         aliases: ["docs"],
         usage: {"command": "donate", "description": "Donate to the cause of TypicalBot."},
         execute: (message, client, response) => {
-            response.reply(`**Documentation coun be found here:** <https://typicalbot.com/documentation/>`);
+            response.reply(`**Documentation can be found here:** <https://typicalbot.com/documentation/>`);
         }
     },
     "donate": {
@@ -84,12 +84,14 @@ module.exports = {
             let level1 = list.filter(c => commands[c].permission && commands[c].permission === 1 ? true : false).map(c => `${client.config.prefix}${c}`);
             let level2 = list.filter(c => commands[c].permission && commands[c].permission === 2 ? true : false).map(c => `${client.config.prefix}${c}`);
             let level3 = list.filter(c => commands[c].permission && commands[c].permission === 3 ? true : false).map(c => `${client.config.prefix}${c}`);
+            let level4 = list.filter(c => commands[c].permission && commands[c].permission === 3 ? true : false).map(c => `${client.config.prefix}${c}`);
 
             response.dm(
                 `**__TypicalBot's Commands:__**\nView Usage Here: ${client.config.urls.docs}\n\n`
-                + `__**Permission Level 3:** Server Owner__\n${level3.join(", ")}\n\n`
-                + `__**Permission Level 2:** Server Administrator__\n${level2.join(", ")}\n\n`
-                + `__**Permission Level 1:** Server Moderator__\n${level1.join(", ")}\n\n`
+                + `__**Permission Level 4:** Server Owner__\n${level4.join(", ")}\n\n`
+                + `__**Permission Level 3:** Server Administrator__\n${level3.join(", ")}\n\n`
+                + `__**Permission Level 2:** Server Moderator__\n${level2.join(", ")}\n\n`
+                + `__**Permission Level 1:** Server DJ__\n${level1.join(", ")}\n\n`
                 + `__**Permission Level 0:** Server Member__\n${level0.join(", ")}\n\n`
                 + `__**Permission Level -1:** Server Blacklisted__\nNothing. You can't use any commands.`
             );
@@ -136,6 +138,7 @@ module.exports = {
                 + `\`\`\`autohotkey\n`
                 + `=> Uptime            : ${client.functions.uptime}\n`
                 + `=> Servers           : ${client.data.guilds.toLocaleString()} (${client.shardCount} Shards)\n`
+                + `=> Voice Connections : ${client.data.voiceConnections.toLocaleString()}\n`
                 + `=> Library           : discord.js\n`
                 + `=> Created By        : HyperCoder#2975\n`
                 + `    This Shard:\n`

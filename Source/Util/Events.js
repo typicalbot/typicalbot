@@ -126,9 +126,6 @@ module.exports = class Events {
     }
 
     message(message) {
-        let created = message.createdTimestamp;
-        let now1 = Date.now();
-
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
@@ -142,15 +139,16 @@ module.exports = class Events {
             if (!BotMember || !message.channel.permissionsFor(BotMember).hasPermission("SEND_MESSAGES")) return;
 
             this.client.settings.get(message.guild).then(settings => {
-                let now2 = Date.now();
-
-                if (message.content.match(/^<@!?153613756348366849>$/)) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
+                if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
 
                 message.guild.settings = settings;
 
                 let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
-                if (UserLevel < 2) this.client.functions.inviteCheck(message);
                 if (UserLevel === -1) return;
+
+                let response = new Response(this.client, message);
+                if (UserLevel < 2) this.client.functions.inviteCheck(response);
+                //this.client.nms.execute(response);
 
                 let split = message.content.split(" ")[0];
                 let prefix = this.client.functions.getPrefix(message.author, settings, split);
@@ -159,23 +157,33 @@ module.exports = class Events {
                 let command = this.client.commands.get(split.slice(prefix.length).toLowerCase());
                 if (!command) return;
 
-                let response = new Response(this.client, message);
-
-                //if (message.author.id === this.client.config.owner && message.content === "$ping") response.reply(`CREATED TO NOW1: ${created - now1} | NOW1 TO NOW2: ${now2 - now1}`);
-
                 let mode = command.mode || "free";
                 if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
 
-                let userperm = this.client.functions.numberToLevel(UserLevel),
-                    requiredperm = command.permission ?
-                        this.client.functions.numberToLevel(command.permission) :
-                        this.client.functions.numberToLevel(0);
-                if (command.permission && UserLevel < command.permission) return response.error(`Your permission level is too low to execute that command. The command requires permission level ${command.permission} (${requiredperm}) and you are level ${UserLevel} (${userperm}).`);
-                if (command.permission && command.permission < 4 && (UserLevel === 4 || UserLevel === 5) && this.client.functions.getPermissionLevel(message.guild, settings, message.author, true) < command.permission) return response.error(`Your permission level is too low to execute that command.`);
+                if (command.permission && UserLevel < command.permission) return response.perms(command.permission, UserLevel);
+                if (command.permission && command.permission < 7 && (UserLevel === 7 || UserLevel === 8) && this.client.functions.getPermissionLevel(message.guild, settings, message.author, true) < command.permission) return response.error(response.perms(command.permission, UserLevel));
 
                 command.execute(message, this.client, response, UserLevel);
             });
         }
+    }
+
+    messageUpdate(oldMessage, message) {
+        if (message.channel.type !== "text") return;
+
+        this.client.settings.get(message.guild).then(settings => {
+            let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
+            if (UserLevel >= 2) return;
+
+            message.guild.settings = settings;
+
+            let response = new Response(this.client, message);
+            this.client.functions.inviteCheck(response);
+        });
+    }
+
+    voiceConnectionChange() {
+        this.client.transmitStat("voiceConnections");
     }
 
     guildMemberAdd(member) {
@@ -246,7 +254,13 @@ module.exports = class Events {
 
     guildBanAdd(guild, user) {
         this.client.settings.get(guild.id).then(settings => {
-            if (settings.modlogs) this.client.modlog.log(guild, { action: "Ban", user });
+            if (settings.modlogs && !this.client.softbans.has(user.id)) {
+                let hasmod = this.client.banLogs.get(user.id);
+
+                let log = Object.assign({ action: "ban", user }, hasmod);
+                this.client.modlog.createLog(guild, log);
+                this.client.banLogs.delete(user.id);
+            }
 
             if (!settings.logs || settings.banlog === "--disabled") return;
 
@@ -271,7 +285,13 @@ module.exports = class Events {
 
     guildBanRemove(guild, user) {
         this.client.settings.get(guild.id).then(settings => {
-            if (settings.modlogs) this.client.modlog.log(guild, { action: "Unban", user });
+            if (settings.modlogs && !this.client.softbans.has(user.id)) {
+                let hasmod = this.client.unbanLogs.get(user.id);
+
+                let log = Object.assign({ action: "unban", user }, hasmod);
+                this.client.modlog.createLog(guild, log);
+                this.client.unbanLogs.delete(user.id);
+            }
 
             if (!settings.logs || !settings.unbanlog) return;
 

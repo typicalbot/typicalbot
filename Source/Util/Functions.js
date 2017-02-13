@@ -1,5 +1,6 @@
 const request = require("request");
 const moment = require("moment");
+const util = require("util");
 
 module.exports = class Functions {
     constructor(client) {
@@ -45,13 +46,19 @@ module.exports = class Functions {
             text + ' '.repeat(length - text.length);
     }
 
-    inviteCheck(message) {
-        if (message.guild.settings.antiinvite === "Y") {
-            let match = /(discord\.gg\/.+|discordapp\.com\/invite\/.+)/gi.test(message.content);
-            if (match && message.deletable) {
-                this.client.events.guildInvitePosted(message.guild, message.channel, message.author);
-                message.delete().then(() => {
-                    message.channel.sendMessage(`${message.author} | \`❗\` | Your message contained a server invite link, which this server prohibits.`);
+    inviteCheck(response) {
+        if (response.message.guild.settings.antiinvite === "Y") {
+            let expr = /(discord\.gg\/.+|discordapp\.com\/invite\/.+)/gi;
+
+            let contentMatch = expr.test(response.message.content);
+
+            let embedMatch = expr.test(util.inspect(response.message.embeds, { depth: 2 }));
+
+            if (contentMatch || embedMatch) {
+                if (!response.message.deletable) return;
+                this.client.events.guildInvitePosted(response.message.guild, response.message.channel, response.message.author);
+                response.message.delete().then(() => {
+                    response.error(`Your message contained a server invite link, which this server prohibits.`);
                 });
             }
         }
@@ -71,6 +78,9 @@ module.exports = class Functions {
         } else if (role === "modrole") {
             let orole = guild.roles.find("name", "TypicalBot Mod");
             if (orole) return orole;
+        } else if (role === "djrole") {
+            let orole = guild.roles.find("name", "TypicalBot DJ");
+            if (orole) return orole;
         } else if (role === "blacklist") {
             let orole = guild.roles.find("name", "TypicalBot Blacklist");
             if (orole) return orole;
@@ -81,26 +91,38 @@ module.exports = class Functions {
     getPermissionLevel(guild, settings, user, ignorestaff = false) {
         let member = guild.member(user);
         if (!member) return 0;
-        if (user.id === this.client.config.owner) return 6;
-        if (!ignorestaff && this.client.config.staff[user.id]) return 5;
-        if (!ignorestaff && this.client.config.support[user.id]) return 4;
-        if (user.id === guild.ownerID) return 3;
+
+        if (user.id === this.client.config.owner) return 10;
+        if (this.client.config.management[user.id]) return 9;
+        if (!ignorestaff && this.client.config.staff[user.id]) return 8;
+        if (!ignorestaff && this.client.config.support[user.id]) return 7;
+
+        if (user.id === guild.ownerID) return 4;
+
         let masterrole = this.fetchRole(guild, settings, "masterrole");
-        if (masterrole && member.roles.has(masterrole.id)) return 2;
+        if (masterrole && member.roles.has(masterrole.id)) return 3;
+
         let modrole = this.fetchRole(guild, settings, "modrole");
-        if (modrole && member.roles.has(modrole.id)) return 1;
+        if (modrole && member.roles.has(modrole.id)) return 2;
+
+        let djrole = this.fetchRole(guild, settings, "djrole");
+        if (djrole && member.roles.has(djrole.id)) return 1;
+
         let blacklist = this.fetchRole(guild, settings, "blacklist");
         if (blacklist && member.roles.has(blacklist.id)) return -1;
+
         return 0;
     }
 
     numberToLevel(number) {
-        if (number == 6) return "TypicalBot Creator";
-        if (number == 5) return "TypicalBot Staff";
-        if (number == 4) return "TypicalBot Support";
-        if (number == 3) return "Server Owner";
-        if (number == 2) return "Server Administrator";
-        if (number == 1) return "Server Moderator";
+        if (number == 10) return "TypicalBot Creator";
+        if (number == 9) return "TypicalBot Management";
+        if (number == 8) return "TypicalBot Staff";
+        if (number == 7) return "TypicalBot Support";
+        if (number == 4) return "Server Owner";
+        if (number == 3) return "Server Administrator";
+        if (number == 2) return "Server Moderator";
+        if (number == 1) return "Server DJ";
         return "Server Member";
     }
 
@@ -128,6 +150,7 @@ module.exports = class Functions {
             .replace(/{user.shortcreated}/, moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"))
             .replace(/{guild.name}|{server.name}/gi, guild.name)
             .replace(/{guild.id}|{server.id}/gi, guild.id)
+            .replace(/{guild.members}|{server.members}/gi, guild.memberCount)
             .replace(/{now}/gi, JSON.stringify(new Date()).replace(/"/g, ""));
         if (type === "ann-nick") return this.getFilteredMessage("ann", guild, user, text)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)

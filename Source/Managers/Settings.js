@@ -11,11 +11,13 @@ connection.on("error", err => {
 });
 
 const DefaultData = {
+    "embed": "N",
     "masterrole": null,
     "modrole": null,
     "joinrole": null,
     "silent": "N",
     "blacklist": null,
+    "publicroles": null,
     "announcements": null,
     "logs": null,
     "joinlog": null,
@@ -33,6 +35,17 @@ const DefaultData = {
     "invitekick": "N",
     "modlogs": null,
     "antilink": "N",
+    "musicperms": "all",
+    "orplay": "off",
+    "orskip": "off",
+    "orstop": "off",
+    "orunqueue": "off",
+    "orvolume": "off",
+    "orpause_resume": "off",
+    "lengthlimit": null,
+    "queuelimit": null,
+    "apikey": null,
+    "mentionlimit": null
 };
 
 class Settings {

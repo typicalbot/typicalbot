@@ -35,4 +35,4 @@ const create = SHARD_ID => {
     });
 };
 
-for (let s = 0; s < SHARD_COUNT; s++) setTimeout(create, (6000 * s), s);
+for (let s = 0; s < SHARD_COUNT; s++) setTimeout(create, (9000 * s), s);

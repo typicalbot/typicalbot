@@ -22,6 +22,13 @@ module.exports = class Response {
         return this.error(`Invalid command usage. Check \`${this.client.config.prefix}help ${command}\` for more information.`);
     }
 
+    perms(rLevel, uLevel) {
+        let rLevelText = this.client.functions.numberToLevel(rLevel);
+        let uLevelText = this.client.functions.numberToLevel(uLevel);
+
+        return this.error(`Your permission level is too low to execute that command. The command requires permission level ${rLevel} (${rLevelText}) and you are level ${uLevel} (${uLevelText}).`);
+    }
+
     dm(content, embed) {
         return embed ?
             this.message.author.sendMessage(content, { embed }) :

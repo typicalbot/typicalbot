@@ -6,51 +6,105 @@ module.exports = {
         mode: "strict",
         usage: {"command": "ping", "description": "A check to see if TypicalBot is responsive."},
         execute: (message, client, response) => {
-            response.send("Pinging...").then(msg => {
-                msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`);
-            });
+            let embed = message.guild.settings.embed === "Y";
+
+            if (embed) {
+                response.send("Pinging...").then(msg => {
+                    msg.edit("", { embed: {
+                        color: 0x00FF00,
+                        description: `Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`
+                    }});
+                });
+            } else {
+                response.send("Pinging...").then(msg => {
+                    msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`);
+                });
+            }
         }
     },
     "mylevel": {
         mode: "strict",
         usage: {"command": "mylevel ['--here']", "description": "Gives you your permission level, specific to that server."},
         execute: (message, client, response) => {
+            let embed = message.guild.settings.embed === "Y";
             let split = message.content.split(" ")[1];
 
             let level = split && split === "--here" ?
                 client.functions.getPermissionLevel(message.guild, message.guild.settings, message.author, true) :
                 client.functions.getPermissionLevel(message.guild, message.guild.settings, message.author);
 
-            if (level === 0) return response.reply(`**__Your Permission Level:__** 0 | Server Member`);
-            if (level === 1) return response.reply(`**__Your Permission Level:__** 1 | Server Moderator`);
-            if (level === 2) return response.reply(`**__Your Permission Level:__** 2 | Server Admin`);
-            if (level === 3) return response.reply(`**__Your Permission Level:__** 3 | Server Owner`);
-            if (level === 4) return response.reply(`**__Your Permission Level:__** 4 | TypicalBot Support`);
-            if (level === 5) return response.reply(`**__Your Permission Level:__** 5 | TypicalBot Staff`);
-            if (level === 6) return response.reply(`**__Your Permission Level:__** 6 | TypicalBot Creator`);
+            if (embed) {
+                if (level === 0) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 0 | Server Member`} );
+                if (level === 1) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 1 | Server DJ`} );
+                if (level === 2) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 2 | Server Moderator`} );
+                if (level === 3) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 3 | Server Administrator`} );
+                if (level === 4) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 4 | Server Owner`} );
+                if (level === 7) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 7 | TypicalBot Support`} );
+                if (level === 8) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 8 | TypicalBot Staff`} );
+                if (level === 9) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 9 | TypicalBot Management`} );
+                if (level === 10) return response.send("", { color: 0x00ADFF, description: `**__Your Permission Level:__** 10 | TypicalBot Creator`} );
+            } else {
+                if (level === 0) return response.reply(`**__Your Permission Level:__** 0 | Server Member`);
+                if (level === 1) return response.reply(`**__Your Permission Level:__** 1 | Server DJ`);
+                if (level === 2) return response.reply(`**__Your Permission Level:__** 2 | Server Moderator`);
+                if (level === 3) return response.reply(`**__Your Permission Level:__** 3 | Server Admin`);
+                if (level === 4) return response.reply(`**__Your Permission Level:__** 4 | Server Owner`);
+                if (level === 7) return response.reply(`**__Your Permission Level:__** 7 | TypicalBot Support`);
+                if (level === 8) return response.reply(`**__Your Permission Level:__** 8 | TypicalBot Staff`);
+                if (level === 9) return response.reply(`**__Your Permission Level:__** 9 | TypicalBot Management`);
+                if (level === 10) return response.reply(`**__Your Permission Level:__** 10 | TypicalBot Creator`);
+            }
         }
     },
     "serverinfo": {
         mode: "strict",
         usage: {"command": "serverinfo ['roles'/'channels'/'bots']", "description": "Lists the server's information."},
         execute: (message, client, response, userlevel) => {
+            let embed = message.guild.settings.embed === "Y";
             let after = message.content.split(" ")[1];
+
             let owner = message.guild.owner ? message.guild.owner : message.guild.member(message.guild.ownerID);
-            if (!after) return response.reply(
-                `**__Server Information For:__** ${message.guild.name}\n`
-                + `\`\`\`\n`
-                + `Name                : ${message.guild.name} (${message.guild.id})\n`
-                + `Owner               : ${owner.user.username}#${owner.user.discriminator} (${owner.user.id})\n`
-                + `Created             : ${message.guild.createdAt}\n`
-                + `Region              : ${message.guild.region}\n`
-                + `Verification Level  : ${message.guild.verificationLevel}\n`
-                + `Icon                : ${message.guild.iconURL ? message.guild.iconURL : "None"}\n`
-                + `Channels            : ${message.guild.channels.size}\n`
-                + `Members             : ${message.guild.memberCount}\n`
-                + `Roles               : ${message.guild.roles.size}\n`
-                + `Emojis              : ${message.guild.emojis.size}\n`
-                + `\`\`\``
-            );
+
+            if (!after) {
+                if (embed) {
+                    return response.send("", {
+                        "color": 0x00ADFF,
+                        "description": `**__Server Information For:__** ${message.guild.name}`,
+                        "fields": [
+                            { "inline": true, "name": "Name", "value": `${message.guild.name}`},
+                            { "inline": true, "name": "ID", "value": `${message.guild.id}`},
+                            { "inline": true, "name": "Owner", "value": `${owner.user.username}#${owner.user.discriminator} (${owner.user.id})`},
+                            { "inline": true, "name": "Created", "value": `${message.guild.createdAt}`},
+                            { "inline": true, "name": "Region", "value": `${message.guild.region}`},
+                            { "inline": true, "name": "Verification Level", "value": `${message.guild.verificationLevel}`},
+                            { "inline": true, "name": "Channels", "value": `${message.guild.channels.size}`},
+                            { "inline": true, "name": "Members", "value": `${message.guild.memberCount}`},
+                            { "inline": true, "name": "Roles", "value": `${message.guild.roles.size}`},
+                            { "inline": true, "name": "Emojis", "value": `${message.guild.emojis.size}`},
+                        ],
+                        "thumbnail": {
+                            "url": message.guild.iconURL || null,
+                        }
+                    });
+                } else {
+                    return response.reply(
+                        `**__Server Information For:__** ${message.guild.name}\n`
+                        + `\`\`\`\n`
+                        + `Name                : ${message.guild.name} (${message.guild.id})\n`
+                        + `Owner               : ${owner.user.username}#${owner.user.discriminator} (${owner.user.id})\n`
+                        + `Created             : ${message.guild.createdAt}\n`
+                        + `Region              : ${message.guild.region}\n`
+                        + `Verification Level  : ${message.guild.verificationLevel}\n`
+                        + `Icon                : ${message.guild.iconURL ? message.guild.iconURL : "None"}\n`
+                        + `Channels            : ${message.guild.channels.size}\n`
+                        + `Members             : ${message.guild.memberCount}\n`
+                        + `Roles               : ${message.guild.roles.size}\n`
+                        + `Emojis              : ${message.guild.emojis.size}\n`
+                        + `\`\`\``
+                    );
+                }
+            }
+
             let lengthen = client.functions.lengthen;
             if (after === "roles") {
                 let page = message.content.split(" ")[2];
@@ -82,7 +136,7 @@ module.exports = {
                     `**__Bots in server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
                 );
             }
-            if (userlevel < 4) return;
+            if (userlevel < 8) return;
             let settingslist = after === "s";
 
             let transmit = settingslist ?
@@ -256,7 +310,7 @@ module.exports = {
             let reset = !nick || nick === "reset";
 
             if (member) {
-                if (level < 1) return response.error(`Your permission level is too low to execute that command. The command requires permission level 1 (${client.functions.numberToLevel(1)}) and you are level ${level} (${client.functions.numberToLevel(level)}).`);
+                if (level < 2) return response.error(`Your permission level is too low to execute that command. The command requires permission level 1 (${client.functions.numberToLevel(1)}) and you are level ${level} (${client.functions.numberToLevel(level)}).`);
 
                 if (reset) return member.setNickname("").then(() => response.reply(`Successfully reset member's nickname.`)).catch(err => {
                     response.error(`An error occured. This most likely means I cannot manage member's nickname.`);

@@ -2,26 +2,26 @@ module.exports = {
     "shoot": {
         usage: {"command": "shoot [@user]", "description": "'Shoot' another user in the server."},
         execute: (message, client, response) => {
-            let user = message.mentions.users.array()[0];
+            let user = message.mentions.users.first();
             let level = client.functions.getPermissionLevel(message.guild, message.guild.settings, user);
 
             let r_addition = Math.floor(Math.random() * 9);
             let addition = r_addition === 1 ? `Someone call the police!` : r_addition === 3 ? "Wait! They missed!" : r_addition === 5 ? "Bam! Headshot!" : null;
 
-            if (level === 5 || level === 6) addition = "Wait! They missed!";
-            if (level === 4) addition = "Bam! Headshot!";
+            if (level === 6 || level === 7) addition = "Wait! They missed!";
+            if (level === 5) addition = "Bam! Headshot!";
 
-            if (!user || user.id === message.author.id) return response.send(`${message.author} just shot themselves! :scream:${addition ? ` ${addition}` : ""}`);
-            response.send(`${message.author} just shot ${user}! :scream:${addition ? ` ${addition}` : ""}`);
+            if (!user || user.id === message.author.id) return response.send(`${message.author} just shot at themselves! :scream:${addition ? ` ${addition}` : ""}`);
+            response.send(`${message.author} just shot at ${user}! :scream:${addition ? ` ${addition}` : ""}`);
         }
     },
     "stab": {
         usage: {"command": "stab [@user]", "description": "'Stab' another user in the server."},
         execute: (message, client, response) => {
-            let user = message.mentions.users.array()[0];
+            let user = message.mentions.users.first();
 
-            let r_addition = Math.floor(Math.random() * 5);
-            let addition = r_addition === 1 ? `Someone call the police!` : r_addition === 3 ? "Wait! They missed!" : null;
+            let r_addition = Math.floor(Math.random() * 4);
+            let addition = r_addition === 1 ? `Someone call the police!` : null;
 
             if (!user || user.id === message.author.id) return response.send(`${message.author} just stabbed themselves! :dagger::scream:${addition ? ` ${addition}` : ""}`);
             response.send(`${message.author} just stabbed ${user}! :dagger::scream:${addition ? ` ${addition}` : ""}`);
@@ -30,7 +30,7 @@ module.exports = {
     "slap": {
         usage: {"command": "slap [@user]", "description": "'Slap' another user in the server."},
         execute: (message, client, response) => {
-            let user = message.mentions.users.array()[0];
+            let user = message.mentions.users.first();
 
             let r_addition = Math.floor(Math.random() * 4);
             let addition = r_addition === 1 ? `Oh, dang! That must've hurt!` : null;
@@ -42,7 +42,7 @@ module.exports = {
     "punch": {
         usage: {"command": "punch [@user]", "description": "'Punch' another user in the server."},
         execute: (message, client, response) => {
-            let user = message.mentions.users.array()[0];
+            let user = message.mentions.users.first();
 
             let r_addition = Math.floor(Math.random() * 4);
             let addition = r_addition === 1 ? `Oh, dang! Right to the jaw! That must've hurt!` : null;
@@ -54,7 +54,7 @@ module.exports = {
     "salt": {
         usage: {"command": "salt [@user]", "description": "'Salt' another user in the server."},
         execute: (message, client, response) => {
-            let user = message.mentions.users.array()[0];
+            let user = message.mentions.users.first();
 
             let r_addition = Math.floor(Math.random() * 4);
             let addition = r_addition === 1 ? `Someone get the snails away!` : null;
@@ -66,7 +66,7 @@ module.exports = {
     "hug": {
         usage: {"command": "hug [@user]", "description": "'Hug' another user in the server."},
         execute: (message, client, response) => {
-            let user = message.mentions.users.array()[0];
+            let user = message.mentions.users.first();
 
             let r_addition = Math.floor(Math.random() * 4);
             let addition = r_addition === 1 ? `Awwwww.` : null;
@@ -75,10 +75,36 @@ module.exports = {
             response.send(`${message.author} just gave ${user} a hug. :hugging:${addition ? ` ${addition}` : ""}`);
         }
     },
+    "cookie": {
+        usage: {"command": "cookie [@user]", "description": "Give another user a cookie."},
+        execute: (message, client, response) => {
+            let user = message.mentions.users.first();
+
+            if (!user || user.id === message.author.id) return response.send(`${message.author} decided to keep all of the cookies for himself! What a jerk! :angry:`);
+            response.send(`${message.author} just gave ${user} a cookie. :cookie:`);
+        }
+    },
+    "toast": {
+        usage: {"command": "toast [@user]", "description": "Give another user some toast."},
+        execute: (message, client, response) => {
+            let user = message.mentions.users.first();
+
+            if (!user || user.id === message.author.id) user = "themselves"; else user = `${user}`;
+
+            let responses = [
+                `${message.author} just gave ${user} burnt toast.`,
+                `${message.author} just gave ${user} unbuttered toast.`,
+                `${message.author} just gave ${user} toast.`,
+            ];
+
+            response.send(responses[Math.floor(Math.random() * responses.length)]);
+        }
+    },
     "8ball": {
-        usage: {"command": "stab [@user]", "description": "'Stab' another user in the server."},
+        usage: {"command": "8ball <question>", "description": "Ask the magic 8ball a question."},
         execute: (message, client, response) => {
             if (!message.content.split(" ")[1]) return response.error(`I can't respond to a non-existant question!`);
+
             let responses = ["It is certain.", "It is decidedly so.", "Without a doubt.", "Yes, definitely.", "You may rely on it.", "As I see it, yes.", "Most likely.", "Outlook is good.", "Yes.", "Signs point to yes.", "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.", "Don't count on it.", "My reply is no.", "My sources say no.", "Outlook not so good.", "Very doubtful."];
             response.reply(responses[Math.floor(Math.random() * responses.length)]);
         }
@@ -160,7 +186,7 @@ module.exports = {
         }
     },
     "dice": {
-        usage: {"command": "dice [sides]", "description": "Gives you a random pug picture."},
+        usage: {"command": "dice [sides]", "description": "Roles a random number for you."},
         aliases: ["roll"],
         execute: (message, client, response) => {
             let sides = message.content.split(" ")[1];
