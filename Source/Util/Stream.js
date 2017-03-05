@@ -19,31 +19,30 @@ class Stream {
         });
     }
 
-    play(response, video) {
+    play(video) {
         this.fetchStream(video).then(audioStream => {
             let dispatcher = this.connection.playStream(audioStream, { volume: 0.5 });
             this.dispatcher = dispatcher;
 
             this.current = video;
 
-            response.send(`🎵 Now playing **${video.title}** requested by **${response.message.author.username}** for **${this.client.functions.length(video.length_seconds)}**. **Music is enabled for testing purposes. It most likely will be disabled within a few hours.**`);
+            video.response.send(`🎵 Now playing **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.length(video.length_seconds)}**.`);
 
             dispatcher.on("error", err => {
-                response.error(err);
+                video.response.error(err);
             });
 
             dispatcher.on("end", () => {
                 if (!this.queue.length) {
-                    response.send(`The queue has concluded.`);
+                    video.response.send(`The queue has concluded.`);
                     return this.kill();
                 }
 
-                let next = this.queue[0];
-                this.queue.shift();
-                this.play(next.response, next);
+                dispatcher.stream.destroy();
+                this.play(this.queue.splice(0, 1));
             });
         }).catch(err => {
-            response.error(`An error occured:\n\n${err}`);
+            video.response.error(`An error occured:\n\n${err}`);
         });
     }
 
@@ -55,29 +54,21 @@ class Stream {
     }
 
     skip() {
-        return new Promise((resolve, reject) => {
-            let song = this.current;
-            this.dispatcher.end();
-            return resolve(song);
-        });
+        let song = this.current;
+        this.dispatcher.end();
+        return song;
     }
 
     pause() {
-        return new Promise((resolve, reject) => {
-            return resolve(this.dispatcher.pause());
-        });
+        return this.dispatcher.pause();
     }
 
     resume() {
-        return new Promise((resolve, reject) => {
-            return resolve(this.dispatcher.resume());
-        });
+        return this.dispatcher.resume();
     }
 
     setVolume(vol) {
-        return new Promise((resolve, reject) => {
-            return resolve(this.dispatcher.setVolume(vol));
-        });
+        return this.dispatcher.setVolume(vol);
     }
 
     unqueue(id) {

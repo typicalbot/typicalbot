@@ -303,6 +303,8 @@ module.exports = {
         aliases: ["nick"],
         usage: {"command": "nickname [nickname]", "description": "Changes your nickname."},
         execute: (message, client, response, level) => {
+            if (message.guild.settings.nonickname === "Y") return response.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
+            
             let match = /nick(?:name)?(?:\s+<@!?(\d+)>)?(?:\s+([\S\s]+))?/i.exec(message.content);
 
             let member = message.guild.members.get(match[1]);

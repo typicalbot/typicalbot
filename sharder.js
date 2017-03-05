@@ -1,8 +1,9 @@
 const cp            = require("child_process");
-const config        = require("./config");
+const vr            = require("./version").version;
+const config        = require(`./configs/${vr}`);
 
-const SHARD_COUNT   = config.shards[config.bot];
-const CLIENT_TOKEN  = config.tokens[config.bot];
+const SHARD_COUNT   = config.shards;
+const CLIENT_TOKEN  = config.token;
 
 const path          = `${__dirname}/Source/Client.js`;
 
@@ -24,7 +25,7 @@ const transmit = () => {
 };
 
 const create = SHARD_ID => {
-    const shard = cp.fork( path, [], { env: { SHARD_ID, SHARD_COUNT, CLIENT_TOKEN } } );
+    const shard = cp.fork( path, [], { env: { SHARD_ID, SHARD_COUNT, CLIENT_TOKEN, CLIENT_VR: vr } } );
 
     shards.push(shard);
 

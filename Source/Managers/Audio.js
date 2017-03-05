@@ -10,7 +10,7 @@ class AudioManager {
         return new Promise((resolve, reject) => {
             ytdl.getInfo(url, (err, info) => {
                 if (err) return reject(err);
-                return resolve(info);
+                return resolve({ title: info.title, length_seconds: info.length_seconds, url });
             });
         });
     }
@@ -60,7 +60,7 @@ class AudioManager {
         video.response = response;
 
         stream.queue.push(video);
-        return response.reply(`Enqueued **${video.title}**. **Music is enabled for testing purposes. It most likely will be disabled within a few hours.**`);
+        return response.reply(`Enqueued **${video.title}**.`);
     }
 }
 

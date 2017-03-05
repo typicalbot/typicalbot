@@ -48,7 +48,7 @@ module.exports = {
             let cmd = message.content.split(" ")[1];
             if (!cmd) return response.send(`**Hello!** I'm TypicalBot, created by HyperCoder. You can get a list of my commands with \`$commands\`. Documentation can be found at <https://typicalbot.com/documentation/>. If you need help, join us in the TypicalBot Lounge at <${client.config.urls.server}>.`);
 
-            let command = client.commands.get(cmd);
+            let command = client.commandsManager.get(cmd);
             if (!command) return response.error(`Invalid command to get help with.`);
             response.send(
                 `**__Usage For:__** ${cmd}\n`
@@ -78,7 +78,7 @@ module.exports = {
         execute: (message, client, response) => {
             if (message.channel.type === "text") response.send(`Check your Direct Messages for my commands!`);
 
-            let commands = client.commands.commands;
+            let commands = client.commandsManager.commands;
             let list = Object.keys(commands);
             let level0 = list.filter(c => !commands[c].permission || commands[c].permission === 0 ? true : false).map(c => `${client.config.prefix}${c}`);
             let level1 = list.filter(c => commands[c].permission && commands[c].permission === 1 ? true : false).map(c => `${client.config.prefix}${c}`);
@@ -142,7 +142,7 @@ module.exports = {
                 + `=> Library           : discord.js\n`
                 + `=> Created By        : HyperCoder#2975\n`
                 + `    This Shard:\n`
-                + `=> Shard             : ${+client.shardID + 1} / ${client.shardCount}\n`
+                + `=> Shard             : ${+client.shardNumber} / ${client.shardCount}\n`
                 + `=> Servers           : ${client.guilds.size.toLocaleString()}\n`
                 + `=> Channels          : ${client.channels.size.toLocaleString()}\n`
                 + `=> Users             : ${client.users.size.toLocaleString()}\n`

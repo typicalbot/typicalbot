@@ -50,18 +50,18 @@ module.exports = {
 
             let url = /(?:https?\:\/\/)?(?:(?:www|m)\.)?(?:youtube\.com|youtu\.be)\/(.+)/i.exec(match[1]);
             if (url) {
-                client.audio.fetchInfo(url[1]).then(videoInfo => {
+                client.audioManager.fetchInfo(url[1]).then(videoInfo => {
                     videoInfo.url = url[1];
-                    return client.audio.playVideo(response, videoInfo);
+                    return client.audioManager.playVideo(response, videoInfo);
                 }).catch(err => response.error(`Information cannot be fetched from that video. Please try another url or video name.`));
             } else {
                 search(message.guild.settings, match[1]).then(results => {
                     if (!results.length) return response.error(`No results were found for the query **${match[1]}**.`);
                     let video = results[0];
 
-                    client.audio.fetchInfo(video.url).then(videoInfo => {
+                    client.audioManager.fetchInfo(video.url).then(videoInfo => {
                         videoInfo.url = video.url;
-                        return client.audio.playVideo(response, videoInfo);
+                        return client.audioManager.playVideo(response, videoInfo);
                     }).catch(err => response.error(`Information cannot be fetched from that video. Please try another url or video name.`));
                 }).catch(() => {
                     response.error(`An error occured making that search.`);
@@ -152,11 +152,9 @@ module.exports = {
 
             let stream = client.streams.get(message.guild.id);
 
-            stream.setVolume(volume * 0.01).then(() => {
-                response.reply(`Changed the volume to **${volume}%**.`);
-            }).catch(err => {
-                response.error(`An error occured.`);
-            });
+            stream.setVolume(volume * 0.01);
+
+            response.reply(`Changed the volume to **${volume}%**.`);
         }
     },
     "skip": {
@@ -172,11 +170,9 @@ module.exports = {
 
             let short = text => client.functions.shorten(text);
 
-            stream.skip().then(song => {
-                response.reply(`Skipped **${short(song.title)}**.`);
-            }).catch(err => {
-                response.error(`An error occured making that request.`);
-            });
+            let song = stream.skip();
+
+            response.reply(`Skipped **${short(song.title)}**.`);
         }
     },
     "pause": {
@@ -190,11 +186,9 @@ module.exports = {
 
             let stream = client.streams.get(message.guild.id);
 
-            stream.pause().then(() => {
-                response.reply(`Paused the stream.`);
-            }).catch(err => {
-                response.error(`An error occured making that request.`);
-            });
+            stream.pause();
+
+            response.reply(`Paused the stream.`);
         }
     },
     "resume": {
@@ -208,11 +202,10 @@ module.exports = {
 
             let stream = client.streams.get(message.guild.id);
 
-            stream.resume().then(() => {
-                response.reply(`Resumed the stream.`);
-            }).catch(err => {
-                response.error(`An error occured making that request.`);
-            });
+            stream.resume();
+
+            response.reply(`Resumed the stream.`);
+
         }
     },
     "stop": {

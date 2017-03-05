@@ -86,7 +86,7 @@ module.exports = {
                 if (!value) return response.error(`No value given to change the setting to.`);
                 if (setting === "masterrole") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "masterrole", null).then(() => {
+                        client.settingsManager.update(message.guild, "masterrole", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -94,13 +94,13 @@ module.exports = {
                         let id = match ? match[1] : null;
                         let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
                         if (!role) return response.error(`Invalid role.`);
-                        client.settings.update(message.guild, "masterrole", role.id).then(() => {
+                        client.settingsManager.update(message.guild, "masterrole", role.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "modrole") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "modrole", null).then(() => {
+                        client.settingsManager.update(message.guild, "modrole", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -108,13 +108,13 @@ module.exports = {
                         let id = match ? match[1] : null;
                         let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
                         if (!role) return response.error(`Invalid role.`);
-                        client.settings.update(message.guild, "modrole", role.id).then(() => {
+                        client.settingsManager.update(message.guild, "modrole", role.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "joinrole") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "joinrole", null).then(() => {
+                        client.settingsManager.update(message.guild, "joinrole", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -124,14 +124,14 @@ module.exports = {
                         let id = match ? match[1] : null;
                         let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
                         if (!role) return response.error(`Invalid role.`);
-                        client.settings.update(message.guild, "joinrole", role.id).then(() => {
-                            client.settings.update(message.guild, "silent", announce ? "N" : "Y");
+                        client.settingsManager.update(message.guild, "joinrole", role.id).then(() => {
+                            client.settingsManager.update(message.guild, "silent", announce ? "N" : "Y");
                             response.reply(`Success. ${announce ? "(This will send an announcement in your announcement channel.)" : ""}`);
                         }).catch(err => response.error(`An error occured.\n\n${err}`));
                     }
                 } else if (setting === "blacklistrole") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "blacklist", null).then(() => {
+                        client.settingsManager.update(message.guild, "blacklist", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -139,17 +139,17 @@ module.exports = {
                         let id = match ? match[1] : null;
                         let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
                         if (!role) return response.error(`Invalid role.`);
-                        client.settings.update(message.guild, "blacklist", role.id).then(() => {
+                        client.settingsManager.update(message.guild, "blacklist", role.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "announcements") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "announcements", null).then(() => {
+                        client.settingsManager.update(message.guild, "announcements", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "here") {
-                        client.settings.update(message.guild, "announcements", message.channel.id).then(() => {
+                        client.settingsManager.update(message.guild, "announcements", message.channel.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -158,13 +158,13 @@ module.exports = {
                         let channel = id ? message.guild.channels.get(id) : message.guild.channels.find("name", value);
                         if (!channel) return response.error(`Invalid channel.`);
                         if (channel.type !== "text") return response.error(`The channel must be a text channel.`);
-                        client.settings.update(message.guild, "announcements", channel.id).then(() => {
+                        client.settingsManager.update(message.guild, "announcements", channel.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "ann-mention") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "annmention", null).then(() => {
+                        client.settingsManager.update(message.guild, "annmention", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -173,17 +173,17 @@ module.exports = {
                         let role = id ? message.guild.roles.get(id) : message.guild.roles.find("name", value);
                         let everyone = value === "everyone";
                         if (!role && !everyone) return response.error(`Invalid role.`);
-                        client.settings.update(message.guild, "annmention", role ? role.id : "@all").then(() => {
+                        client.settingsManager.update(message.guild, "annmention", role ? role.id : "@all").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "logs") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "logs", null).then(() => {
+                        client.settingsManager.update(message.guild, "logs", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "here") {
-                        client.settings.update(message.guild, "logs", message.channel.id).then(() => {
+                        client.settingsManager.update(message.guild, "logs", message.channel.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -192,31 +192,31 @@ module.exports = {
                         let channel = id ? message.guild.channels.get(id) : message.guild.channels.find("name", value);
                         if (!channel) return response.error(`Invalid channel.`);
                         if (channel.type !== "text") return response.error(`The channel must be a text channel.`);
-                        client.settings.update(message.guild, "logs", channel.id).then(() => {
+                        client.settingsManager.update(message.guild, "logs", channel.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "logs-join") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "joinlog", "--disabled").then(() => {
+                        client.settingsManager.update(message.guild, "joinlog", "--disabled").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "default") {
-                        client.settings.update(message.guild, "joinlog", null).then(() => {
+                        client.settingsManager.update(message.guild, "joinlog", null).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "embed") {
-                        client.settings.update(message.guild, "joinlog", "--embed").then(() => {
+                        client.settingsManager.update(message.guild, "joinlog", "--embed").then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "joinlog", value).then(() => {
+                        client.settingsManager.update(message.guild, "joinlog", value).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
@@ -225,25 +225,25 @@ module.exports = {
                     }
                 } else if (setting === "logs-leave") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "leavelog", "--disabled").then(() => {
+                        client.settingsManager.update(message.guild, "leavelog", "--disabled").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "default") {
-                        client.settings.update(message.guild, "leavelog", null).then(() => {
+                        client.settingsManager.update(message.guild, "leavelog", null).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "embed") {
-                        client.settings.update(message.guild, "leavelog", "--embed").then(() => {
+                        client.settingsManager.update(message.guild, "leavelog", "--embed").then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "leavelog", value).then(() => {
+                        client.settingsManager.update(message.guild, "leavelog", value).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
@@ -252,25 +252,25 @@ module.exports = {
                     }
                 } else if (setting === "logs-ban") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "banlog", "--disabled").then(() => {
+                        client.settingsManager.update(message.guild, "banlog", "--disabled").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "default") {
-                        client.settings.update(message.guild, "banlog", null).then(() => {
+                        client.settingsManager.update(message.guild, "banlog", null).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "embed") {
-                        client.settings.update(message.guild, "banlog", "--embed").then(() => {
+                        client.settingsManager.update(message.guild, "banlog", "--embed").then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "banlog", value).then(() => {
+                        client.settingsManager.update(message.guild, "banlog", value).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
@@ -279,28 +279,28 @@ module.exports = {
                     }
                 } else if (setting === "logs-unban") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "unbanlog", null).then(() => {
+                        client.settingsManager.update(message.guild, "unbanlog", null).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "enable" || value === "default") {
-                        client.settings.update(message.guild, "unbanlog", "--enabled").then(() => {
+                        client.settingsManager.update(message.guild, "unbanlog", "--enabled").then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "embed") {
-                        client.settings.update(message.guild, "unbanlog", "--embed").then(() => {
+                        client.settingsManager.update(message.guild, "unbanlog", "--embed").then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "unbanlog", value).then(() => {
+                        client.settingsManager.update(message.guild, "unbanlog", value).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
@@ -309,18 +309,18 @@ module.exports = {
                     }
                 } else if (setting === "logs-nick") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "nicklog", null).then(() => {
+                        client.settingsManager.update(message.guild, "nicklog", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "enable" || value === "default") {
-                        client.settings.update(message.guild, "nicklog", "--enabled").then(() => {
+                        client.settingsManager.update(message.guild, "nicklog", "--enabled").then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "nicklog", value).then(() => {
+                        client.settingsManager.update(message.guild, "nicklog", value).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
@@ -329,18 +329,18 @@ module.exports = {
                     }
                 } else if (setting === "logs-invite") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "invitelog", null).then(() => {
+                        client.settingsManager.update(message.guild, "invitelog", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "enable" || value === "default") {
-                        client.settings.update(message.guild, "invitelog", "--enabled").then(() => {
+                        client.settingsManager.update(message.guild, "invitelog", "--enabled").then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
                             });
                         }).catch(err => response.error(`An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "invitelog", value).then(() => {
+                        client.settingsManager.update(message.guild, "invitelog", value).then(() => {
                             response.reply(`Success.`).then(msg => {
                                 if (message.guild.settings.logs) return;
                                 response.error(`It seems that you don't have your logs channel set up! In order for this message to be used, you need to have the \`logs\` setting set up.`);
@@ -349,37 +349,37 @@ module.exports = {
                     }
                 } else if (setting === "joinmessage") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "joinmessage", null).then(() => {
+                        client.settingsManager.update(message.guild, "joinmessage", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
-                        client.settings.update(message.guild, "joinmessage", value).then(() => {
+                        client.settingsManager.update(message.guild, "joinmessage", value).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "joinnick") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "joinnick", null).then(() => {
+                        client.settingsManager.update(message.guild, "joinnick", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
                         if (value.length > 20) return response.error(`The join nickname must be no longer than 20 characters.`);
                         if (!value.includes("{user.name}")) return response.error(`The join nickname must include the replacer \`{user.name}\`.`);
-                        client.settings.update(message.guild, "joinnick", value).then(() => {
+                        client.settingsManager.update(message.guild, "joinnick", value).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "mode") {
                     if (value === "free") {
-                        client.settings.update(message.guild, "mode", "free").then(() => {
+                        client.settingsManager.update(message.guild, "mode", "free").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "lite") {
-                        client.settings.update(message.guild, "mode", "lite").then(() => {
+                        client.settingsManager.update(message.guild, "mode", "lite").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "strict") {
-                        client.settings.update(message.guild, "mode", "strict").then(() => {
+                        client.settingsManager.update(message.guild, "mode", "strict").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -387,24 +387,24 @@ module.exports = {
                     }
                 } else if (setting === "customprefix" || setting === "prefix") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "customprefix", null).then(() => {
-                            if (message.guild.settings.originaldisabled === "Y") client.settings.update(message.guild, "originaldisabled", "N");
+                        client.settingsManager.update(message.guild, "customprefix", null).then(() => {
+                            if (message.guild.settings.originaldisabled === "Y") client.settingsManager.update(message.guild, "originaldisabled", "N");
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
                         if (value.length > 30) return response.error(`The custom prefix must be no longer than 30 characters.`);
-                        client.settings.update(message.guild, "customprefix", value).then(() => {
+                        client.settingsManager.update(message.guild, "customprefix", value).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
                 } else if (setting === "defaultprefix") {
                     if (value === "enable") {
-                        client.settings.update(message.guild, "originaldisabled", "N").then(() => {
+                        client.settingsManager.update(message.guild, "originaldisabled", "N").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "disable") {
                         if (!message.guild.settings.customprefix) return response.error(`I cannot do that. A custom prefix must be set to turn the default prefix off.`);
-                        client.settings.update(message.guild, "originaldisabled", "Y").then(() => {
+                        client.settingsManager.update(message.guild, "originaldisabled", "Y").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -412,11 +412,23 @@ module.exports = {
                     }
                 } else if (setting === "antiinvite") {
                     if (value === "enable") {
-                        client.settings.update(message.guild, "antiinvite", "Y").then(() => {
+                        client.settingsManager.update(message.guild, "antiinvite", "Y").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "disable") {
-                        client.settings.update(message.guild, "antiinvite", "N").then(() => {
+                        client.settingsManager.update(message.guild, "antiinvite", "N").then(() => {
+                            response.reply(`Success.`);
+                        }).catch(err => response.error(`An error occured.`));
+                    } else {
+                        response.error(`Invalid option.`);
+                    }
+                } else if (setting === "nonick" || setting === "nonickname") {
+                    if (value === "enable") {
+                        client.settingsManager.update(message.guild, "nonickname", "Y").then(() => {
+                            response.reply(`Success.`);
+                        }).catch(err => response.error(`An error occured.`));
+                    } else if (value === "disable") {
+                        client.settingsManager.update(message.guild, "nonickname", "N").then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -424,11 +436,11 @@ module.exports = {
                     }
                 } else if (setting === "modlogs") {
                     if (value === "disable") {
-                        client.settings.update(message.guild, "modlogs", null).then(() => {
+                        client.settingsManager.update(message.guild, "modlogs", null).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (value === "here") {
-                        client.settings.update(message.guild, "modlogs", message.channel.id).then(() => {
+                        client.settingsManager.update(message.guild, "modlogs", message.channel.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else {
@@ -437,7 +449,7 @@ module.exports = {
                         let channel = id ? message.guild.channels.get(id) : message.guild.channels.find("name", value);
                         if (!channel) return response.error(`Invalid channel.`);
                         if (channel.type !== "text") return response.error(`The channel must be a text channel.`);
-                        client.settings.update(message.guild, "modlogs", channel.id).then(() => {
+                        client.settingsManager.update(message.guild, "modlogs", channel.id).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
@@ -452,7 +464,7 @@ module.exports = {
         aliases: ["role"],
         usage: {"command": `Check \`roles help\` for more information.`, "description": "Manage or view roles in a server."},
         execute: (message, client, response, level) => {
-            let match = /roles?\s+(help|list|give|take|public)(?:\s+(.+))?/i.exec(message.content);
+            let match = /roles?\s+(help|list|give|take|public|info)(?:\s+(.+))?/i.exec(message.content);
             if (!match) return response.usage("roles");
 
             let action = match[1];
@@ -478,6 +490,29 @@ module.exports = {
                 return response.reply(
                     `**__Roles for server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
                 );
+            } else if (action === "info" || action === "information") {
+                let input = /(?:(members)\s+)?(?:(.+)(?:\s+(\d))|(.+))/i.exec(extra);
+                if (!input) response.error(`Invalid command usage. Check \`${client.config.prefix}roles help\` for more information.`);
+
+                let aAction = input[1];
+                let iRole = input[2] || input[4];
+                let aPage = input[3];
+
+                let aRole = message.guild.roles.find("name", iRole);
+                if (!aRole) return response.error(`Invalid role. Please make sure your spelling and capitalization is correct.`);
+
+                if (aAction === "members") {
+                    let paged = client.functions.pagify(
+                        aRole.members.array().map(m => `${lengthen(m.user.username, 20)} : ${m.id}`),
+                        aPage
+                    );
+
+                    return response.reply(
+                        `**__Members with role:__** ${aRole.name}\n\`\`\`autohotkey\n${paged}\`\`\``
+                    );
+                } else {
+
+                }
             } else if (action === "give" || action === "take") {
                 let input = /<@!?([0-9]{17,20})>\s+(.+)/i.exec(extra);
                 if (!input) return response.error(`Invalid command usage. Check \`${client.config.prefix}roles help\` for more information.`);
@@ -530,7 +565,7 @@ module.exports = {
                 } else if (aAction === "clear") {
                     if (level < 3) return response.perms(3, level);
 
-                    client.settings.update(message.guild, "publicroles", null).then(() => {
+                    client.settingsManager.update(message.guild, "publicroles", null).then(() => {
                         response.reply(`Success.`);
                     }).catch(err => response.error(`An error occured.`));
                 } else {
@@ -547,7 +582,7 @@ module.exports = {
 
                         currentList.push(aRole.id);
 
-                        client.settings.update(message.guild, "publicroles", currentList.join(";")).then(() => {
+                        client.settingsManager.update(message.guild, "publicroles", currentList.join(";")).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     } else if (aAction === "remove") {
@@ -559,7 +594,7 @@ module.exports = {
 
                         currentList.splice(index, 1);
 
-                        client.settings.update(message.guild, "publicroles", currentList.join(";")).then(() => {
+                        client.settingsManager.update(message.guild, "publicroles", currentList.join(";")).then(() => {
                             response.reply(`Success.`);
                         }).catch(err => response.error(`An error occured.`));
                     }
@@ -671,7 +706,7 @@ module.exports = {
             let match = /kick\s+<@!?(.+)>(?:\s+(.+))?/i.exec(message.content);
             if (!match) return response.usage("kick");
 
-            let user = message.guild.members.get(match[1]);
+            let user = message.guild.member(match[1]);
             if (!user) return response.error(`User not found.`);
 
             if (message.member.highestRole.position <= user.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);
@@ -679,7 +714,7 @@ module.exports = {
 
             message.guild.member(user).kick().then(() => {
                 response.reply(`Success.`);
-                if (message.guild.settings.modlogs) client.modlog.createLog(message.guild,
+                if (message.guild.settings.modlogs) client.modlogManager.createLog(message.guild,
                     match[2] ? { action: "kick", user: user.user, reason: match[2], moderator: message.author } : { action: "kick", user: user.user, moderator: message.author }
                 );
             }).catch(err => response.error(`An error occured:\n\n${err}`));
@@ -746,7 +781,7 @@ module.exports = {
             if (!match) return response.usage("softban");
             let reason = match[3];
 
-            let user = message.guild.members.get(match[1]);
+            let user = message.guild.member(match[1]);
             let amount = match[2] || 2;
 
             if (!user) return response.error(`User not found.`);
@@ -759,7 +794,7 @@ module.exports = {
                 setTimeout(() => {
                     message.guild.unban(member).then(() => {
                         response.reply(`Success. Purged ${amount} day${amount === 1 ? "" : "s"} worth of messages.`);
-                        if (message.guild.settings.modlogs) client.modlog.createLog(message.guild,
+                        if (message.guild.settings.modlogs) client.modlogManager.createLog(message.guild,
                             reason ?
                                 { action: "softban", user: user.user, reason, moderator: message.author } :
                                 { action: "softban", user: user.user, moderator: message.author }
@@ -779,13 +814,13 @@ module.exports = {
             let match = /warn\s+<@!?(.+)>(?:\s+(.+))?/i.exec(message.content);
             if (!match) return response.usage("warn");
 
-            let user = message.guild.members.get(match[1]);
+            let user = message.guild.member(match[1]);
             if (!user) return response.error(`User not found.`);
             if (message.member.highestRole.position <= user.highestRole.position) return response.error(`You cannot warn a user with either the same or higher highest role.`);
 
             if (!message.guild.settings.modlogs) return response.error(`Inorder to use the warning feature, you must have modlogs enabled.`);
 
-            client.modlog.createLog(message.guild,
+            client.modlogManager.createLog(message.guild,
                 match[2] ? { action: "warn", user: user.user, reason: match[2], moderator: message.author } : { action: "warn", user: user.user }
             ).then(() => response.reply(`Success.`)).catch(err => response.error(err));
         }
@@ -802,10 +837,10 @@ module.exports = {
             if (!id) return response.error(`No ID given.`);
             if (!reason) return response.error(`No reason given.`);
 
-            client.modlog.fetchCase(message.guild, id).then(log =>{
+            client.modlogManager.fetchCase(message.guild, id).then(log =>{
                 if (!log) return response.error(`No log under the given ID.`);
 
-                client.modlog.editReason(log, message.author, reason).then(() => {
+                client.modlogManager.editReason(log, message.author, reason).then(() => {
                     response.reply(`:thumbsup::skin-tone-2:`).then(msg => msg.delete(5000));
                 }).catch(err => response.error(`An error occured.`));
             }).catch(err => response.error(`An error occured.`));

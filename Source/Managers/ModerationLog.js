@@ -29,7 +29,7 @@ class ModerationLog {
 
     fetchChannel(guild) {
         return new Promise((resolve, reject) => {
-            this.client.settings.get(guild.id).then(settings => {
+            this.client.settingsManager.get(guild.id).then(settings => {
                 let id = settings.modlogs;
 
                 if (!id) return reject("Setting of modlogs is null.");

@@ -7,6 +7,46 @@ module.exports = class Functions {
         this.client = client;
     }
 
+    sendStats() {
+        try {
+            request({
+                "method": "POST",
+                "url": "https://www.carbonitex.net/discord/data/botdata.php",
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": JSON.stringify({
+                    "key": this.client.config.carbonkey,
+                    "shardid": this.client.shardID.toString(),
+                    "shardcount": this.client.shardCount.toString(),
+                    "servercount": this.client.guilds.size.toString()
+                })
+            }, (err, res, body) => { if (err || res.statusCode != 200) this.client.log(`Carbon Post Failed\n\n${err || body}`, true); });
+
+            request({
+                "method": "POST",
+                "url": "https://bots.discord.pw/api/bots/153613756348366849/stats",
+                "headers": {
+                    "Authorization": this.client.config.discordpwkey,
+                    "Content-Type": "application/json"
+                },
+                "body": JSON.stringify({
+                    "shard_id": this.client.shardID.toString(),
+                    "shard_count": this.client.shardCount.toString(),
+                    "server_count": this.client.guilds.size.toString()
+                })
+            }, (err, res, body) => { if (err || res.statusCode != 200) this.client.log("DiscordPW Post Failed", true); });
+        } catch(err) {
+            this.client.log(err, true);
+        }
+    }
+
+    sendDonors() {
+        let donor = this.client.guilds.get("163038706117115906").roles.find("name", "Donor");
+        let list = []; donor.members.forEach(m => list.push(m.id));
+        this.client.transmit("donors", list);
+    }
+
     timestamp(ms) {
         let days = ms / 86400000;
         let d = Math.floor(days);

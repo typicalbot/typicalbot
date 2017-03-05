@@ -1,5 +1,6 @@
 const mysql = require("mysql");
-const mysql_login = require("../../config.json").mysql;
+const vr = require("../../version").version;
+const mysql_login = require(`../../configs/${vr}`).mysql;
 
 let connection = mysql.createConnection(mysql_login);
 connection.connect();
@@ -35,6 +36,7 @@ const DefaultData = {
     "invitekick": "N",
     "modlogs": null,
     "antilink": "N",
+    "nonickname": "Y",
     "musicperms": "all",
     "orplay": "off",
     "orskip": "off",

@@ -6,139 +6,22 @@ module.exports = class Events {
         this.client = client;
     }
 
-    processMessage(message) {
-        if (message.type === "stats") {
-            this.client.data = message.data;
-        } else if (message.type === "reload") {
-            this.client.reload(message.data);
-        } else if (message.type === "donors") {
-            this.client.donors = message.data;
-        } else if (message.type === "announcement") {
-            if (this.client.channels.has("163039371535187968")) {
-                this.client.channels.get("163039371535187968").sendMessage("<@&202467732975779850>", { embed: {
-                    "title": "Announcement",
-                    "description": message.data,
-                    "color": 0x00adff,
-                    "timestamp": new Date(),
-                    "footer": {
-                        "text": "TypicalBot Announcements",
-                        "icon_url": "https://typicalbot.com/images/icon.png"
-                    }
-                }});
-            }
-        } else if (message.type === "channelmessage") {
-            if (!this.client.channels.has(message.data.channel)) return;
-            let channel = this.client.channels.get(message.data.channel);
-            message.data.embed ?
-                channel.sendMessage("", { embed: message.data.content }).catch(err => channel.sendMessage("A message was too big to send here.")) :
-                channel.sendMessage(message.data.content);
-        } else if (message.type === "serverinfo") {
-            if (!this.client.guilds.has(message.data.guild)) return;
-            let guild = this.client.guilds.get(message.data.guild);
-            let owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
-
-            this.client.settings.get(guild.id).then(settings => {
-                let settingslist = [];
-                Object.keys(settings).map(s => settingslist.push(`${s}: \`${settings[s]}\``));
-
-                message.data.settings ?
-                    this.client.transmit("channelmessage", {
-                        "embed": true,
-                        "channel": message.data.channel,
-                        "content": {
-                            "color": 0x00adff,
-                            "description": `**__Guild:__**\n${guild.name} | ${guild.id}\n\n**__Owner:__**\n${owner.username}#${owner.discriminator} | ${owner.id}\n\n`
-                            + `**__Settings:__**\n${settingslist.join(", ")}`,
-                            "footer": { "text": "TypicalBot Support", "icon_url": "https://typicalbot.com/images/icon.png" },
-                            "timestamp": new Date()
-                        }
-                    }) :
-                    this.client.transmit("channelmessage", {
-                        "embed": true,
-                        "channel": message.data.channel,
-                        "content": {
-                            "color": 0x00adff,
-                            "description": `**__Guild:__**\n${guild.name} | ${guild.id}\n\n**__Owner:__**\n${owner.username}#${owner.discriminator} | ${owner.id}\n\n`
-                            + `**__Stats:__**\n**Members:** ${guild.memberCount}\n**Shard:** ${this.client.shardID}\n\n`
-                            + `**__Roles:__**\n${guild.roles.map(r => `\`${r.name} (${r.position})\``).join(", ")}\n\n`
-                            + `**__Channels:__**\n**Text:** ${guild.channels.filter(c => c.type === "text").map(c => `\`${c.name}\``).join(", ")}\n**Voice:** ${guild.channels.filter(c => c.type === "voice").map(c => `\`${c.name}\``).join(", ")}`,
-                            "footer": { "text": "TypicalBot Support", "icon_url": "https://typicalbot.com/images/icon.png" },
-                            "timestamp": new Date()
-                        }
-                    });
-            });
-        } else if (message.type === "shardping") {
-            if (message.data.shard != this.client.shardID) return;
-            this.client.transmit("channelmessage", {
-                "embed": true,
-                "channel": message.data.channel,
-                "content": {
-                    "color": 0x00FF00,
-                    "description": `Shard ${+this.client.shardID + 1} / ${this.client.shardCount} is online. ${Date.now() - message.data.timestamp}ms`,
-                    "footer": { "text": "TypicalBot Monitor", "icon_url": "https://typicalbot.com/images/icon.png" },
-                    "timestamp": new Date()
-                }
-            });
-        } else if (message.type === "eval") {
-            try { this.client.log(eval(message.data.code)); }
-            catch(err) { this.client.log(err, true); }
-        }
-    }
-
-    statsPost() {
-        try {
-            request({
-                "method": "POST",
-                "url": "https://www.carbonitex.net/discord/data/botdata.php",
-                "headers": {
-                    "Content-Type": "application/json"
-                },
-                "body": JSON.stringify({
-                    "key": this.client.config.carbonkey,
-                    "shardid": this.client.shardID.toString(),
-                    "shardcount": this.client.shardCount.toString(),
-                    "servercount": this.client.guilds.size.toString()
-                })
-            }, (err, res, body) => { if (err || res.statusCode != 200) this.client.log(`Carbon Post Failed\n\n${err || body}`, true); });
-
-            request({
-                "method": "POST",
-                "url": "https://bots.discord.pw/api/bots/153613756348366849/stats",
-                "headers": {
-                    "Authorization": this.client.config.discordpwkey,
-                    "Content-Type": "application/json"
-                },
-                "body": JSON.stringify({
-                    "shard_id": this.client.shardID.toString(),
-                    "shard_count": this.client.shardCount.toString(),
-                    "server_count": this.client.guilds.size.toString()
-                })
-            }, (err, res, body) => { if (err || res.statusCode != 200) this.client.log("DiscordPW Post Failed", true); });
-        } catch(err) {
-            this.client.log(err, true);
-        }
-    }
-
-    sendDonors() {
-        let donor = this.client.guilds.get("163038706117115906").roles.find("name", "Donor");
-        let list = []; donor.members.forEach(m => list.push(m.id));
-        this.client.transmit("donors", list);
-    }
-
     message(message) {
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
-            let command = this.client.commands.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
+            let command = this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
             if (!command || !command.dm) return;
 
             let response = new Response(this.client, message);
             command.execute(message, this.client, response);
         } else {
+            this.client.lastMessage = message.createdTimestamp;
+            
             let BotMember = message.guild.member(this.client.user);
             if (!BotMember || !message.channel.permissionsFor(BotMember).hasPermission("SEND_MESSAGES")) return;
 
-            this.client.settings.get(message.guild).then(settings => {
+            this.client.settingsManager.get(message.guild).then(settings => {
                 if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
 
                 message.guild.settings = settings;
@@ -148,13 +31,12 @@ module.exports = class Events {
 
                 let response = new Response(this.client, message);
                 if (UserLevel < 2) this.client.functions.inviteCheck(response);
-                //this.client.nms.execute(response);
 
                 let split = message.content.split(" ")[0];
                 let prefix = this.client.functions.getPrefix(message.author, settings, split);
                 if (!prefix || !message.content.startsWith(prefix)) return;
 
-                let command = this.client.commands.get(split.slice(prefix.length).toLowerCase());
+                let command = this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());
                 if (!command) return;
 
                 let mode = command.mode || "free";
@@ -171,7 +53,7 @@ module.exports = class Events {
     messageUpdate(oldMessage, message) {
         if (message.channel.type !== "text") return;
 
-        this.client.settings.get(message.guild).then(settings => {
+        this.client.settingsManager.get(message.guild).then(settings => {
             let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
             if (UserLevel >= 2) return;
 
@@ -188,7 +70,7 @@ module.exports = class Events {
 
     guildMemberAdd(member) {
         let guild = member.guild;
-        this.client.settings.get(guild.id).then(settings => {
+        this.client.settingsManager.get(guild.id).then(settings => {
             let user = member.user;
 
             if (settings.logs && settings.joinlog !== "--disabled") {
@@ -225,7 +107,7 @@ module.exports = class Events {
         let guild = member.guild;
 
         const continueleave = () => {
-            this.client.settings.get(guild.id).then(settings => {
+            this.client.settingsManager.get(guild.id).then(settings => {
                 let user = member.user;
 
                 if (!settings.logs || settings.leavelog === "--disabled") return;
@@ -253,12 +135,12 @@ module.exports = class Events {
     }
 
     guildBanAdd(guild, user) {
-        this.client.settings.get(guild.id).then(settings => {
+        this.client.settingsManager.get(guild.id).then(settings => {
             if (settings.modlogs && !this.client.softbans.has(user.id)) {
                 let hasmod = this.client.banLogs.get(user.id);
 
                 let log = Object.assign({ action: "ban", user }, hasmod);
-                this.client.modlog.createLog(guild, log);
+                this.client.modlogManager.createLog(guild, log);
                 this.client.banLogs.delete(user.id);
             }
 
@@ -284,12 +166,12 @@ module.exports = class Events {
     }
 
     guildBanRemove(guild, user) {
-        this.client.settings.get(guild.id).then(settings => {
+        this.client.settingsManager.get(guild.id).then(settings => {
             if (settings.modlogs && !this.client.softbans.has(user.id)) {
                 let hasmod = this.client.unbanLogs.get(user.id);
 
                 let log = Object.assign({ action: "unban", user }, hasmod);
-                this.client.modlog.createLog(guild, log);
+                this.client.modlogManager.createLog(guild, log);
                 this.client.unbanLogs.delete(user.id);
             }
 
@@ -319,7 +201,7 @@ module.exports = class Events {
         let oldNick = oldMember.nickname;
         let newNick = newMember.nickname;
         if (oldNick !== newNick) {
-            this.client.settings.get(guild).then(settings => {
+            this.client.settingsManager.get(guild).then(settings => {
                 if (!settings.logs || !settings.nicklog) return;
 
                 let user = newMember.user;
@@ -339,7 +221,7 @@ module.exports = class Events {
     }
 
     guildInvitePosted(guild, mchannel, user) {
-        this.client.settings.get(guild).then(settings => {
+        this.client.settingsManager.get(guild).then(settings => {
             if (!settings.logs || !settings.invitelog) return;
 
             let channel = guild.channels.get(settings.logs);
@@ -353,12 +235,12 @@ module.exports = class Events {
     }
 
     guildCreate(guild) {
-        if (this.client.config.bot === "alpha") if (!this.client.donors.includes(guild.ownerID)) return guild.leave();
+        if (this.client.vr === "alpha") if (!this.client.donors.includes(guild.ownerID)) return guild.leave();
         this.client.transmitStat("guilds");
     }
 
     guildDelete(guild) {
         this.client.transmitStat("guilds");
-        this.client.settings.delete(guild.id);
+        this.client.settingsManager.delete(guild.id);
     }
 };
