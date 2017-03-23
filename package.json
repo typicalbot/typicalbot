@@ -1,0 +1,11 @@
+{
+    "dependencies": {
+        "discord.js": "hydrabolt/discord.js#master",
+        "erlpack": "hammerandchisel/erlpack",
+        "mysql": "^2.13.0",
+        "fs-extra-promise": "^0.4.1",
+        "heapdump": "^0.3.7",
+        "moment": "^2.18.0",
+        "request": "^2.81.0"
+    }
+}

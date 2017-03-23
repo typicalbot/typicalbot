@@ -1,78 +1,56 @@
 const Discord = require("discord.js");
+const Collection = Discord.Collection;
 
+/*        Managers        */
+let ProcessManager = require("./Managers/Process");
+let EventsManager = require("./Managers/Events");
 let CommandsManager = require("./Managers/Commands");
 let SettingsManager = require("./Managers/Settings");
-let ModerationLogManager = require("./Managers/ModerationLog");
-let AudioManager = require("./Managers/Audio");
-let ProcessManager = require("./Managers/Process");
+let ModlogsManager = require("./Managers/ModerationLogs");
 
-let Functions = require("./Util/Functions");
-let Events = require("./Util/Events");
+let Functions = require("./Utility/Functions");
 
 const client = new class extends Discord.Client {
     constructor() {
-        super({
-            messageCacheMaxSize: 150,
-            disabledEvents: [ "CHANNEL_PINS_UPDATE", "MESSAGE_REACTION_ADD", "MESSAGE_REACTION_REMOVE", "MESSAGE_REACTION_REMOVE_ALL", "USER_NOTE_UPDATE", "TYPING_START", "RELATIONSHIP_ADD", "RELATIONSHIP_REMOVE" ]
-        });
-
-        this.killed = false;
-
-        this.commandsManager = new CommandsManager(this);
-        this.functions = new Functions(this);
-        this.events = new Events(this);
-        this.settingsManager = new SettingsManager();
-        this.modlogManager = new ModerationLogManager(this);
-        this.audioManager = new AudioManager(this);
-        this.processManager = new ProcessManager(this);
+        super({ messageCacheMaxSize: 150, disabledEvents: [ "CHANNEL_PINS_UPDATE", "MESSAGE_REACTION_ADD", "MESSAGE_REACTION_REMOVE", "MESSAGE_REACTION_REMOVE_ALL", "USER_NOTE_UPDATE", "TYPING_START", "RELATIONSHIP_ADD", "RELATIONSHIP_REMOVE" ]});
 
         this.vr = process.env.CLIENT_VR;
-        this.config = require(`../configs/${this.vr}`);
+        this.config = require(`../Configs/${this.vr}`);
 
-        this.shardID = process.env.SHARD_ID;
+        this.shardID = +process.env.SHARD_ID;
         this.shardNumber = +process.env.SHARD_ID + 1;
-        this.shardCount = process.env.SHARD_COUNT;
+        this.shardCount = +process.env.SHARD_COUNT;
 
-        this.data = {};
+        this.processManager = new ProcessManager(this);
+        this.eventsManager = new EventsManager(this);
+        this.commandsManager = new CommandsManager(this);
+        this.settingsManager = new SettingsManager(this);
+        this.modlogsManager = new ModlogsManager(this);
+
+        this.functions = new Functions(this);
+
+        this.shardData = {};
+        this.donorData = [];
 
         this.lastMessage = null;
-        this.streams = new Map();
-        this.banLogs = new Map();
-        this.unbanLogs = new Map();
-        this.softbans = new Map();
 
-        this.once("ready", () => {
-            this.transmitStat("guilds");
-            this.user.setGame(`Client Starting`);
+        this.streams = new Collection();
 
-            setInterval(() =>
-                this.user.setGame(`${this.config.prefix}help | ${this.data.guilds} Servers`),
-                300000
-            );
-        })
-        .on("ready", () => this.log(`Client Connected | Shard ${this.shardNumber} / ${this.shardCount}`))
+        this.banCache = new Collection();
+        this.unbanCache = new Collection();
+        this.softbanCache = new Collection();
+
+        this.once("ready", () => this.eventsManager.onceReady())
+        .on("ready", () => this.eventsManager.ready())
         .on("warn", err => this.log(err, true))
         .on("error", err => this.log(err, true))
-        .on("reconnecting", () => this.log("Reconnecting", true))
-        .on("disconnect", () => this.log("Disconnected", true))
-        .on("message", message => this.events.message(message))
-        .on("messageUpdate", (oldMessage, message) => this.events.messageUpdate(oldMessage, message))
-        .on("guildMemberAdd", (member) => this.events.guildMemberAdd(member))
-        .on("guildMemberRemove", (member) => this.events.guildMemberRemove(member))
-        .on("guildBanAdd", (guild, user) => this.events.guildBanAdd(guild, user))
-        .on("guildBanRemove", (guild, user) => this.events.guildBanRemove(guild, user))
-        .on("guildMemberUpdate", (oldMember, newMember) => this.events.guildMemberUpdate(oldMember, newMember))
-        .on("guildCreate", guild => this.events.guildCreate(guild))
-        .on("guildDelete", guild => this.events.guildDelete(guild));
+        .on("message", message => this.eventsManager.message(message));
 
-        if (this.vr === "stable") setInterval(() => this.functions.sendStats(), 1200000);
+        if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 
         setInterval(() => {
-            if (!this.lastMessage) return;
-            if (Date.now() - this.lastMessage > 120000) {
-                this.destroy();
-                this.login(process.env.CLIENT_TOKEN);
-            }
+            if (this.settingsManager.connection.state === "disconnected") this.settingsManager.connection.connect();
+            if (this.lastMessage && Date.now() - this.lastMessage > 120000) { this.destroy(); return this.login(process.env.CLIENT_TOKEN); }
         }, 60000);
 
         this.login();
@@ -91,36 +69,8 @@ const client = new class extends Discord.Client {
     transmitStat(stat) {
         this.transmit("stat", { [stat]: this[stat].size });
     }
-
-    reload(mod) {
-        let all = mod === "all";
-        if (all || mod === "commands") {
-            this.commandsManager.reload();
-        }
-        if (all || mod === "functions") {
-            delete require.cache[`${__dirname}/Util/Functions.js`];
-            Functions = require("./Util/Functions");
-            this.functions = new Functions(this);
-        }
-        if (all || mod === "events") {
-            delete require.cache[`${__dirname}/Util/Events.js`];
-            Events = require("./Util/Events");
-            this.events = new Events(this);
-        }
-        if (all || mod === "modlog") {
-            delete require.cache[`${__dirname}/Managers/ModerationLog.js`];
-            ModerationLogManager = require("./Managers/ModerationLog");
-            this.modlogManager = new ModerationLogManager(this);
-        }
-        if (mod === "database") {
-            delete require.cache[`${__dirname}/Managers/Settings.js`];
-            SettingsManager = require("./Managers/Settings");
-            this.settingsManager.connection.end();
-            this.settingsManager = new SettingsManager();
-        }
-    }
 };
 
 process.on("message", msg => client.processManager.register(msg))
 .on("uncaughtException", err => client.log(err.stack, true))
-.on("unhandledRejection", err => client.log(err.stack, true));
+.on("unhandledRejection", err => client.log(err, true));

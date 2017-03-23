@@ -8,11 +8,11 @@ class ProcessManager {
 
     message(message) {
         if (message.type === "stats") {
-            this.client.data = message.data;
+            this.client.shardData = message.data;
         } else if (message.type === "reload") {
             this.client.reload(message.data);
         } else if (message.type === "donors") {
-            this.client.donors = message.data;
+            this.client.donorData = message.data;
         } else if (message.type === "channelmessage") {
             if (!this.client.channels.has(message.data.channel)) return;
             let channel = this.client.channels.get(message.data.channel);

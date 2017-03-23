@@ -7,9 +7,9 @@ module.exports = class Functions {
         this.client = client;
     }
 
-    sendStats() {
+    sendStats(post = "a") {
         try {
-            request({
+            if (post === "a" || post === "c") request({
                 "method": "POST",
                 "url": "https://www.carbonitex.net/discord/data/botdata.php",
                 "headers": {
@@ -23,7 +23,7 @@ module.exports = class Functions {
                 })
             }, (err, res, body) => { if (err || res.statusCode != 200) this.client.log(`Carbon Post Failed\n\n${err || body}`, true); });
 
-            request({
+            if (post === "a" || post === "b") request({
                 "method": "POST",
                 "url": "https://bots.discord.pw/api/bots/153613756348366849/stats",
                 "headers": {
@@ -45,6 +45,17 @@ module.exports = class Functions {
         let donor = this.client.guilds.get("163038706117115906").roles.find("name", "Donor");
         let list = []; donor.members.forEach(m => list.push(m.id));
         this.client.transmit("donors", list);
+    }
+
+    alphaCheck(g) {
+        if (
+            !this.client.donors.includes(g.ownerID) &&
+            g.ownerID !== this.client.config.owner &&
+            !this.client.config.management[g.ownerID] &&
+            !this.client.config.staff[g.ownerID] &&
+            !this.client.config.support[g.ownerID]
+        ) return false;
+        return true;
     }
 
     timestamp(ms) {
@@ -87,6 +98,8 @@ module.exports = class Functions {
     }
 
     inviteCheck(response) {
+        if (response.message.author.id === "288828235628675072") return;
+
         if (response.message.guild.settings.antiinvite === "Y") {
             let expr = /(discord\.gg\/.+|discordapp\.com\/invite\/.+)/gi;
 

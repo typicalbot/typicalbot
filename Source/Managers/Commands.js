@@ -1,32 +1,43 @@
-const Categories = [ "Fun", "Moderation", "Staff", "TypicalBot", "Utility", "Disabled" ];
-const path = `${__dirname.replace(/\/\w+$/, ``)}/Commands`;
+const fs = require("fs-extra-promise");
+const path = require("path");
+const commandsPath = path.join(__dirname, "..", "Commands");
 
 class CommandsManager {
-    constructor() {
-        this.commands = {};
+    constructor(client) {
+        this.client = client;
 
-        for (let category of Categories) {
-            let list = require(`${path}/${category}`);
-            Object.keys(list).map(c => this.commands[c] = list[c]);
-        }
+        this.data = new Map();
+
+        this.init();
     }
 
-    reload() {
-        const newlist = {};
-        for (let category of Categories) {
-            delete require.cache[`${path}/${category}.js`];
-            let list = require(`${path}/${category}`);
-            Object.keys(list).forEach(c => newlist[c] = list[c]);
-        }
-        this.commands = newlist;
+    load(filePath) {
+        let command = new (require(filePath))(this.client);
+        this.data.set(command.name, command);
+    }
+
+    reload(filePath) {
+        delete require.cache(filePath);
+        let command = new (require(filePath))(this.client);
+        this.data.set(command.name, command);
+    }
+
+    init() {
+        fs.walk(commandsPath).on("data", item => {
+            let file = path.parse(item.path);
+            if (!file.ext || file.ext !== ".js") return;
+            this.load(`${file.dir}/${file.base}`);
+        });
     }
 
     get(text) {
-        if (this.commands[text]) return this.commands[text];
-        for (let command in this.commands) {
-            let c = this.commands[command];
+        if (this.data.has(text)) return this.data.get(text);
+
+        this.data.forEach(c => {
             if (c.aliases && c.aliases.includes(text)) return c;
-        }
+        });
+
+        return;
     }
 }
 

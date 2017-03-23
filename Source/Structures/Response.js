@@ -1,4 +1,4 @@
-module.exports = class Response {
+class Response {
     constructor(client, message) {
         this.client = client;
         this.message = message;
@@ -10,16 +10,20 @@ module.exports = class Response {
             this.message.channel.sendMessage(content);
     }
 
-    reply(content) {
-        return this.send(`${this.message.author} | ${content}`);
+    reply(content, embed) {
+        return this.send(`${this.message.author} | ${content}`, embed);
     }
 
     error(content, embed) {
         return this.send(`${this.message.author} | \`❌\` | ${content}`, embed);
     }
 
+    success(content, embed) {
+        return this.send(`${this.message.author} | \`✔\` | ${content}`, embed);
+    }
+
     usage(command) {
-        return this.error(`Invalid command usage. Check \`${this.client.config.prefix}help ${command}\` for more information.`);
+        return this.error(`Invalid command usage. Check \`${this.client.config.prefix}help ${command.name}\` for more information.`);
     }
 
     perms(rLevel, uLevel) {
@@ -34,4 +38,6 @@ module.exports = class Response {
             this.message.author.sendMessage(content, { embed }) :
             this.message.author.sendMessage(content);
     }
-};
+}
+
+module.exports = Response;

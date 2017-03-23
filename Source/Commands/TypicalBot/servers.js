@@ -1,0 +1,26 @@
+const Command = require("../../Structures/Command.js");
+
+module.exports = class extends Command {
+    constructor(client) {
+        super(client, {
+            name: "servers",
+            description: "Get a list of servers of the current shard.",
+            usage: "servers [page]",
+            mode: "strict"
+        });
+
+        this.client = client;
+    }
+
+    execute(message, response, permissionLevel) {
+        let page = message.content.split(" ")[1];
+
+        let lengthen = this.client.functions.lengthen;
+
+        let paged = this.client.functions.pagify(this.client.guilds.array().sort((a,b) => b.memberCount - a.memberCount).map(g => `${lengthen(`${g.name.replace(/[^a-z0-9 '"/\\\[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`), page);
+
+        return response.reply(
+            `**__Servers on shard ${this.client.shardNumber} / ${this.client.shardCount}:__**\n\`\`\`autohotkey\n${paged}\`\`\``
+        );
+    }
+};
