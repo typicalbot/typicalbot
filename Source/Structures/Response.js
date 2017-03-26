@@ -26,11 +26,10 @@ class Response {
         return this.error(`Invalid command usage. Check \`${this.client.config.prefix}help ${command.name}\` for more information.`);
     }
 
-    perms(rLevel, uLevel) {
-        let rLevelText = this.client.functions.numberToLevel(rLevel);
-        let uLevelText = this.client.functions.numberToLevel(uLevel);
+    perms(command, uLevel) {
+        let rLevel = this.client.permissionsManager.define(command.permission);
 
-        return this.error(`Your permission level is too low to execute that command. The command requires permission level ${rLevel} (${rLevelText}) and you are level ${uLevel} (${uLevelText}).`);
+        return this.error(`Your permission level is too low to execute that command. The command requires permission level ${rLevel.level} (${rLevel.title}) and you are level ${uLevel.level} (${uLevel.title}).`);
     }
 
     dm(content, embed) {

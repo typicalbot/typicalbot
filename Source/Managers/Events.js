@@ -31,7 +31,7 @@ class EventsManager {
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
             let command = this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
-            if (!command || !command.dm) return;
+            if (!command || !command.dm || command.permission > 0) return;
 
             let response = new Response(this.client, message);
             command.execute(message, response);
@@ -46,11 +46,11 @@ class EventsManager {
 
                 message.guild.settings = settings;
 
-                let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
-                if (UserLevel === -1) return;
+                let userPermissions = this.client.permissionsManager.get(message.guild, message.author);
+                if (userPermissions.level === -1) return;
 
                 let response = new Response(this.client, message);
-                if (UserLevel < 2) this.client.functions.inviteCheck(response);
+                if (userPermissions.level < 2) return this.client.functions.inviteCheck(response);
 
                 let split = message.content.split(" ")[0];
                 let prefix = this.client.functions.getPrefix(message.author, settings, split);
@@ -62,10 +62,10 @@ class EventsManager {
                 let mode = command.mode || "free";
                 if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
 
-                if (command.permission && UserLevel < command.permission) return response.perms(command.permission, UserLevel);
-                if (command.permission && command.permission < 7 && (UserLevel === 7 || UserLevel === 8) && this.client.functions.getPermissionLevel(message.guild, settings, message.author, true) < command.permission) return response.error(response.perms(command.permission, UserLevel));
+                if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
+                if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && this.client.permissionsManager.get(message.guild, message.author, true) < command.permission) return response.perms(command, userPermissions);
 
-                command.execute(message, response, UserLevel);
+                command.execute(message, response, userPermissions);
             });
         }
     }
