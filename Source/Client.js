@@ -6,6 +6,7 @@ let ProcessManager = require("./Managers/Process");
 let EventsManager = require("./Managers/Events");
 let CommandsManager = require("./Managers/Commands");
 let SettingsManager = require("./Managers/Settings");
+let PermissionsManager = require("./Managers/Permissions");
 let ModlogsManager = require("./Managers/ModerationLogs");
 
 let Functions = require("./Utility/Functions");
@@ -25,6 +26,7 @@ const client = new class extends Discord.Client {
         this.eventsManager = new EventsManager(this);
         this.commandsManager = new CommandsManager(this);
         this.settingsManager = new SettingsManager(this);
+        this.permissionsManager = new PermissionsManager(this);
         this.modlogsManager = new ModlogsManager(this);
 
         this.functions = new Functions(this);

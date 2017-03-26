@@ -121,6 +121,14 @@ module.exports = class Functions {
         return this.time(this.timestamp(this.client.uptime));
     }
 
+    fetchJoinRole(guild) {
+        let roleSetting = guild.settings.joinrole;
+        if (!roleSetting) return;
+
+        if (guild.roles.has(roleSetting)) return guild.roles.get(roleSetting);
+        return;
+    }
+
     fetchRole(guild, settings, role) {
         let setting = settings[role] || null;
         if (setting && guild.roles.has(setting)) return guild.roles.get(setting);
