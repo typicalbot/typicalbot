@@ -129,64 +129,6 @@ module.exports = class Functions {
         return;
     }
 
-    fetchRole(guild, settings, role) {
-        let setting = settings[role] || null;
-        if (setting && guild.roles.has(setting)) return guild.roles.get(setting);
-        if (role === "joinrole") return;
-        if (role === "masterrole") {
-            let orole = guild.roles.find("name", "TypicalBot Admin");
-            if (orole) return orole;
-        } else if (role === "modrole") {
-            let orole = guild.roles.find("name", "TypicalBot Mod");
-            if (orole) return orole;
-        } else if (role === "djrole") {
-            let orole = guild.roles.find("name", "TypicalBot DJ");
-            if (orole) return orole;
-        } else if (role === "blacklist") {
-            let orole = guild.roles.find("name", "TypicalBot Blacklist");
-            if (orole) return orole;
-        }
-        return null;
-    }
-
-    getPermissionLevel(guild, settings, user, ignorestaff = false) {
-        let member = guild.member(user);
-        if (!member) return 0;
-
-        if (user.id === this.client.config.owner) return 10;
-        if (this.client.config.management[user.id]) return 9;
-        if (!ignorestaff && this.client.config.staff[user.id]) return 8;
-        if (!ignorestaff && this.client.config.support[user.id]) return 7;
-
-        if (user.id === guild.ownerID) return 4;
-
-        let masterrole = this.fetchRole(guild, settings, "masterrole");
-        if (masterrole && member.roles.has(masterrole.id)) return 3;
-
-        let modrole = this.fetchRole(guild, settings, "modrole");
-        if (modrole && member.roles.has(modrole.id)) return 2;
-
-        let djrole = this.fetchRole(guild, settings, "djrole");
-        if (djrole && member.roles.has(djrole.id)) return 1;
-
-        let blacklist = this.fetchRole(guild, settings, "blacklist");
-        if (blacklist && member.roles.has(blacklist.id)) return -1;
-
-        return 0;
-    }
-
-    numberToLevel(number) {
-        if (number == 10) return "TypicalBot Creator";
-        if (number == 9) return "TypicalBot Management";
-        if (number == 8) return "TypicalBot Staff";
-        if (number == 7) return "TypicalBot Support";
-        if (number == 4) return "Server Owner";
-        if (number == 3) return "Server Administrator";
-        if (number == 2) return "Server Moderator";
-        if (number == 1) return "Server DJ";
-        return "Server Member";
-    }
-
     getPrefix(user, settings, command) {
         if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
         if (settings.customprefix && command.startsWith(settings.customprefix)) return settings.customprefix;

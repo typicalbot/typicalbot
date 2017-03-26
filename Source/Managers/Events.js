@@ -50,7 +50,7 @@ class EventsManager {
                 if (userPermissions.level === -1) return;
 
                 let response = new Response(this.client, message);
-                if (userPermissions.level < 2) return this.client.functions.inviteCheck(response);
+                if (userPermissions.level < 2) this.client.functions.inviteCheck(response);
 
                 let split = message.content.split(" ")[0];
                 let prefix = this.client.functions.getPrefix(message.author, settings, split);

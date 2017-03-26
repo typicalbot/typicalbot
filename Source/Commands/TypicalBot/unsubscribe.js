@@ -13,7 +13,7 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        if (message.guild.id !== "163038706117115906") return response.error(`You must be in TypicalBot's Lounge inorder to use this command.`);
+        if (message.guild.id !== "163038706117115906") return response.error(`You must be in TypicalBot's Lounge in order to use this command.`);
 
         let Role = message.guild.roles.find("name", "Subscriber");
 

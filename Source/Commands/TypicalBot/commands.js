@@ -18,13 +18,13 @@ module.exports = class extends Command {
         if (message.channel.type === "text") response.reply(`Check your Direct Messages for my commands!`);
 
         let commands = this.client.commandsManager.data;
-        let list = Object.keys(commands);
+        let list = Array.from(commands.keys());
 
-        let level0 = list.filter(c => commands[c].permission === 0).map(c => `${this.client.config.prefix}${c}`);
-        let level1 = list.filter(c => commands[c].permission === 1).map(c => `${this.client.config.prefix}${c}`);
-        let level2 = list.filter(c => commands[c].permission === 2).map(c => `${this.client.config.prefix}${c}`);
-        let level3 = list.filter(c => commands[c].permission === 3).map(c => `${this.client.config.prefix}${c}`);
-        let level4 = list.filter(c => commands[c].permission === 4).map(c => `${this.client.config.prefix}${c}`);
+        let level0 = list.filter(c => commands.get(c).permission === 0).map(c => `${this.client.config.prefix}${c}`);
+        let level1 = list.filter(c => commands.get(c).permission === 1).map(c => `${this.client.config.prefix}${c}`);
+        let level2 = list.filter(c => commands.get(c).permission === 2).map(c => `${this.client.config.prefix}${c}`);
+        let level3 = list.filter(c => commands.get(c).permission === 3).map(c => `${this.client.config.prefix}${c}`);
+        let level4 = list.filter(c => commands.get(c).permission === 4).map(c => `${this.client.config.prefix}${c}`);
 
         response.dm(
             `**__TypicalBot's Commands:__**\nView Usage Here: ${this.client.config.urls.docs}\n\n`
