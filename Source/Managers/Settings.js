@@ -51,14 +51,10 @@ class Settings {
     }
 
     connect() {
-        if (this.connection) this.connection = null;
+        if (this.connection) this.connection.end();
 
         this.connection = mysql.createConnection(mysql_login);
         this.connection.connect();
-    }
-
-    clear() {
-        this.data.delete();
     }
 
     get(id) {
