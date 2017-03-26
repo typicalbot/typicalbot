@@ -1,4 +1,4 @@
-const Categories = [ "Fun", "Moderation", "Staff", "TypicalBot", "Utility", "Disabled" ];
+const Categories = [ "Fun", "Moderation", "Utility", "TypicalBot", "Help", "Staff", "Disabled" ];
 const path = `${__dirname.replace(/\/\w+$/, ``)}/Commands`;
 
 class CommandsManager {

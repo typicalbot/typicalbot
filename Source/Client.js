@@ -16,8 +16,6 @@ const client = new class extends Discord.Client {
             disabledEvents: [ "CHANNEL_PINS_UPDATE", "MESSAGE_REACTION_ADD", "MESSAGE_REACTION_REMOVE", "MESSAGE_REACTION_REMOVE_ALL", "USER_NOTE_UPDATE", "TYPING_START", "RELATIONSHIP_ADD", "RELATIONSHIP_REMOVE" ]
         });
 
-        this.killed = false;
-
         this.commandsManager = new CommandsManager(this);
         this.functions = new Functions(this);
         this.events = new Events(this);
@@ -34,6 +32,7 @@ const client = new class extends Discord.Client {
         this.shardCount = process.env.SHARD_COUNT;
 
         this.data = {};
+        this.donors = [];
 
         this.lastMessage = null;
         this.streams = new Map();
@@ -44,11 +43,17 @@ const client = new class extends Discord.Client {
         this.once("ready", () => {
             this.transmitStat("guilds");
             this.user.setGame(`Client Starting`);
+            if (this.vr === "alpha" && this.guilds.has("163038706117115906")) this.functions.sendDonors();
 
-            setInterval(() =>
-                this.user.setGame(`${this.config.prefix}help | ${this.data.guilds} Servers`),
-                300000
-            );
+            if (this.vr === "alpha") setTimeout(() => this.guilds.forEach(g => {
+                if (!this.functions.alphaCheck(g)) g.leave();
+            }), 5000);
+
+            setInterval(() => {
+                this.user.setGame(`${this.config.prefix}help | ${this.data.guilds} Servers`);
+
+                if (this.vr === "alpha" && this.guilds.has("163038706117115906")) this.functions.sendDonors();
+            }, 300000);
         })
         .on("ready", () => this.log(`Client Connected | Shard ${this.shardNumber} / ${this.shardCount}`))
         .on("warn", err => this.log(err, true))
@@ -65,13 +70,14 @@ const client = new class extends Discord.Client {
         .on("guildCreate", guild => this.events.guildCreate(guild))
         .on("guildDelete", guild => this.events.guildDelete(guild));
 
-        if (this.vr === "stable") setInterval(() => this.functions.sendStats(), 1200000);
+        if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 
         setInterval(() => {
-            if (!this.lastMessage) return;
+            if (!this.lastMessage && this.settingsManager.connection.state !== "disconnected") return;
+            if (this.settingsManager.connection.state === "disconnected") this.settingsManager.connection.connect();
             if (Date.now() - this.lastMessage > 120000) {
                 this.destroy();
-                this.login(process.env.CLIENT_TOKEN);
+                return this.login(process.env.CLIENT_TOKEN);
             }
         }, 60000);
 

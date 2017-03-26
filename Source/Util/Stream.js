@@ -39,7 +39,7 @@ class Stream {
                 }
 
                 dispatcher.stream.destroy();
-                this.play(this.queue.splice(0, 1));
+                this.play(this.queue.splice(0, 1)[0]);
             });
         }).catch(err => {
             video.response.error(`An error occured:\n\n${err}`);

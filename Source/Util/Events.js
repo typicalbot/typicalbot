@@ -17,7 +17,7 @@ module.exports = class Events {
             command.execute(message, this.client, response);
         } else {
             this.client.lastMessage = message.createdTimestamp;
-            
+
             let BotMember = message.guild.member(this.client.user);
             if (!BotMember || !message.channel.permissionsFor(BotMember).hasPermission("SEND_MESSAGES")) return;
 
@@ -92,7 +92,7 @@ module.exports = class Events {
                 }
             }
 
-            if (settings.joinmessage) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.getFilteredMessage("jm", guild, user, settings.joinmessage)}'`).catch();
+            if (settings.joinmessage && !user.bot) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.getFilteredMessage("jm", guild, user, settings.joinmessage)}'`).catch();
 
             if (settings.joinnick) member.setNickname(this.client.functions.getFilteredMessage("jn", guild, user, settings.joinnick)).catch();
 
@@ -235,7 +235,10 @@ module.exports = class Events {
     }
 
     guildCreate(guild) {
-        if (this.client.vr === "alpha") if (!this.client.donors.includes(guild.ownerID)) return guild.leave();
+        if (this.client.vr === "alpha") if (!this.client.functions.alphaCheck(guild)) return guild.leave();
+
+        if (this.client.vr === "stable") this.client.functions.sendStats("b");
+
         this.client.transmitStat("guilds");
     }
 

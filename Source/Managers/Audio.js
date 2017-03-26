@@ -30,7 +30,7 @@ class AudioManager {
                 this.client.streams.set(response.message.guild.id, stream);
 
                 video.response = response;
-                stream.play(response, video);
+                stream.play(video);
             }).catch(err => {
                 return response.error(err);
             });
