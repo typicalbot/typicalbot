@@ -1,4 +1,5 @@
-const apikey = require("../../config.json").youtubekey;
+const vr = require("../../version").version;
+const apikey = require(`../../configs/${vr}`).youtubekey;
 const yta = require("simple-youtube-api");
 const yt = new yta(apikey);
 const ytdl = require("ytdl-core");

@@ -703,20 +703,22 @@ module.exports = {
         permission: 2,
         usage: {"command": "kick <@user>", "description": "Kick a user from the server."},
         execute: (message, client, response) => {
-            let match = /kick\s+<@!?(.+)>(?:\s+(.+))?/i.exec(message.content);
+            let match = /kick\s+(?:<@!?)?(\d+)>?(?:\s+(.+))?/i.exec(message.content);
             if (!match) return response.usage("kick");
 
-            let user = message.guild.member(match[1]);
-            if (!user) return response.error(`User not found.`);
+            client.fetchUser(match[1]).then(user => {
+                let member = message.guild.member(user);
+                if (!member) return response.error(`User not found.`);
 
-            if (message.member.highestRole.position <= user.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);
-            if (!user.kickable) return response.error(`I cannot kick that user.`);
+                if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);
+                if (!member.kickable) return response.error(`I cannot kick that user.`);
 
-            message.guild.member(user).kick().then(() => {
-                response.reply(`Success.`);
-                if (message.guild.settings.modlogs) client.modlogManager.createLog(message.guild,
-                    match[2] ? { action: "kick", user: user.user, reason: match[2], moderator: message.author } : { action: "kick", user: user.user, moderator: message.author }
-                );
+                member.kick().then(() => {
+                    response.reply(`Success.`);
+                    if (message.guild.settings.modlogs) client.modlogManager.createLog(message.guild,
+                        match[2] ? { action: "kick", user: member.user, reason: match[2], moderator: message.author } : { action: "kick", user: member.user, moderator: message.author }
+                    );
+                }).catch(err => response.error(`An error occured:\n\n${err}`));
             }).catch(err => response.error(`An error occured:\n\n${err}`));
         }
     },
@@ -777,32 +779,34 @@ module.exports = {
         permission: 2,
         usage: {"command": "softban <@user> [purge-days]", "description": "Softban a user from the server."},
         execute: (message, client, response) => {
-            let match = /softban\s+<@!?(.+)>(?:\s+(\d))?(?:\s+(.+))?/i.exec(message.content);
+            let match = /softban\s+(?:<@!?)?(\d+)>?(?:\s+(\d))?(?:\s+(.+))?/i.exec(message.content);
             if (!match) return response.usage("softban");
-            let reason = match[3];
 
-            let user = message.guild.member(match[1]);
-            let amount = match[2] || 2;
+            client.fetchUser(match[1]).then(user => {
+                let member = message.guild.member(user);
+                let reason = match[3];
+                let amount = match[2] || 2;
 
-            if (!user) return response.error(`User not found.`);
-            if (message.member.highestRole.position <= user.highestRole.position) return response.error(`You cannot softban a user with either the same or higher highest role.`);
-            if (!user.bannable) return response.error(`I cannot softban that user.`);
+                if (!member) return response.error(`User not found.`);
+                if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot softban a user with either the same or higher highest role.`);
+                if (!member.bannable) return response.error(`I cannot softban that user.`);
 
-            client.softbans.set(user.id, setTimeout(() => client.softbans.delete(user.id), 2500));
+                client.softbans.set(member.id, setTimeout(() => client.softbans.delete(user.id), 2500));
 
-            message.guild.member(user).ban(parseInt(amount)).then(member => {
-                setTimeout(() => {
-                    message.guild.unban(member).then(() => {
-                        response.reply(`Success. Purged ${amount} day${amount === 1 ? "" : "s"} worth of messages.`);
-                        if (message.guild.settings.modlogs) client.modlogManager.createLog(message.guild,
-                            reason ?
-                                { action: "softban", user: user.user, reason, moderator: message.author } :
-                                { action: "softban", user: user.user, moderator: message.author }
-                        );
-                    }).catch(err => response.error(`An error occured:\n\n${err}`));
-                },
-                    1000
-                );
+                member.ban(parseInt(amount)).then(member => {
+                    setTimeout(() => {
+                        message.guild.unban(member).then(() => {
+                            response.reply(`Success. Purged ${amount} day${amount === 1 ? "" : "s"} worth of messages.`);
+                            if (message.guild.settings.modlogs) client.modlogManager.createLog(message.guild,
+                                reason ?
+                                    { action: "softban", user: member.user, reason, moderator: message.author } :
+                                    { action: "softban", user: member.user, moderator: message.author }
+                            );
+                        }).catch(err => response.error(`An error occured:\n\n${err}`));
+                    },
+                        1000
+                    );
+                }).catch(err => response.error(`An error occured:\n\n${err}`));
             }).catch(err => response.error(`An error occured:\n\n${err}`));
         }
     },

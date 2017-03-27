@@ -11,7 +11,7 @@ module.exports = class Events {
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
             let command = this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
-            if (!command || !command.dm) return;
+            if (!command || !command.dm || command.permission > 0) return;
 
             let response = new Response(this.client, message);
             command.execute(message, this.client, response);
@@ -43,7 +43,7 @@ module.exports = class Events {
                 if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
 
                 if (command.permission && UserLevel < command.permission) return response.perms(command.permission, UserLevel);
-                if (command.permission && command.permission < 7 && (UserLevel === 7 || UserLevel === 8) && this.client.functions.getPermissionLevel(message.guild, settings, message.author, true) < command.permission) return response.error(response.perms(command.permission, UserLevel));
+                if (command.permission && command.permission < 7 && (UserLevel === 7 || UserLevel === 8) && this.client.functions.getPermissionLevel(message.guild, settings, message.author, true) < command.permission) return response.perms(command.permission, UserLevel);
 
                 command.execute(message, this.client, response, UserLevel);
             });
@@ -235,7 +235,11 @@ module.exports = class Events {
     }
 
     guildCreate(guild) {
-        if (this.client.vr === "alpha") if (!this.client.functions.alphaCheck(guild)) return guild.leave();
+        if (this.client.vr === "alpha") {
+            let check = this.client.functions.alphaCheck(guild);
+            console.log(`${guild.owner.user.username} | ${check}`);
+            if (!check) setTimeout(() => guild.leave(), 2000);
+        }
 
         if (this.client.vr === "stable") this.client.functions.sendStats("b");
 

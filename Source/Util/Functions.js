@@ -50,7 +50,7 @@ module.exports = class Functions {
     alphaCheck(g) {
         if (
             !this.client.donors.includes(g.ownerID) &&
-            !g.ownerID === this.client.config.owner &&
+            g.ownerID !== this.client.config.owner &&
             !this.client.config.management[g.ownerID] &&
             !this.client.config.staff[g.ownerID] &&
             !this.client.config.support[g.ownerID]

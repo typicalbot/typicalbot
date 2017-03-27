@@ -6,20 +6,9 @@ module.exports = {
         mode: "strict",
         usage: {"command": "ping", "description": "A check to see if TypicalBot is responsive."},
         execute: (message, client, response) => {
-            let embed = message.guild.settings.embed === "Y";
-
-            if (embed) {
-                response.send("Pinging...").then(msg => {
-                    msg.edit("", { embed: {
-                        color: 0x00FF00,
-                        description: `Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`
-                    }});
-                });
-            } else {
-                response.send("Pinging...").then(msg => {
-                    msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`);
-                });
-            }
+            response.send("Pinging...").then(msg => {
+                msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms.`);
+            });
         }
     },
     "mylevel": {
@@ -136,7 +125,7 @@ module.exports = {
                     `**__Bots in server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
                 );
             }
-            if (userlevel < 8) return;
+            if (userlevel < 7) return;
             let settingslist = after === "s";
 
             let transmit = settingslist ?
@@ -304,7 +293,7 @@ module.exports = {
         usage: {"command": "nickname [nickname]", "description": "Changes your nickname."},
         execute: (message, client, response, level) => {
             if (message.guild.settings.nonickname === "Y") return response.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
-            
+
             let match = /nick(?:name)?(?:\s+<@!?(\d+)>)?(?:\s+([\S\s]+))?/i.exec(message.content);
 
             let member = message.guild.members.get(match[1]);
