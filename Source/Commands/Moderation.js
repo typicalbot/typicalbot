@@ -463,12 +463,14 @@ module.exports = {
         mode: "strict",
         aliases: ["role"],
         usage: {"command": `Check \`roles help\` for more information.`, "description": "Manage or view roles in a server."},
-        execute: (message, client, response, level) => {
+        execute: (message, client, response) => {
             let match = /roles?\s+(help|list|give|take|public|info)(?:\s+(.+))?/i.exec(message.content);
             if (!match) return response.usage("roles");
 
             let action = match[1];
             let extra = match[2];
+
+            let level = client.functions.getPermissionLevel(message.guild, message.guild.settings, message.author, true);
 
             if ((action === "give" || action === "take") && level < 3) return response.perms(3, level);
             let lengthen = client.functions.lengthen;
