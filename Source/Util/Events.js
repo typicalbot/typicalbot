@@ -43,7 +43,8 @@ module.exports = class Events {
                 if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
 
                 if (command.permission && UserLevel < command.permission) return response.perms(command.permission, UserLevel);
-                if (command.permission && command.permission < 7 && (UserLevel === 7 || UserLevel === 8) && this.client.functions.getPermissionLevel(message.guild, settings, message.author, true) < command.permission) return response.perms(command.permission, UserLevel);
+                let actualLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author, true);
+                if (command.permission && command.permission < 7 && (UserLevel === 7 || UserLevel === 8) && actualLevel < command.permission) return response.perms(command.permission, actualLevel);
 
                 command.execute(message, this.client, response, UserLevel);
             });
