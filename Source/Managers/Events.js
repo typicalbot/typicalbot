@@ -63,7 +63,9 @@ class EventsManager {
                 if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
 
                 if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
-                if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && this.client.permissionsManager.get(message.guild, message.author, true) < command.permission) return response.perms(command, userPermissions);
+
+                let actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
+                if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
 
                 command.execute(message, response, userPermissions);
             });
