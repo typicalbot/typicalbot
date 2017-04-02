@@ -13,9 +13,8 @@ module.exports = class extends Command {
         this.client = client;
     }
 
-    execute(message, response, permissionLevel) {
-        response.send("Pinging...").then(msg => {
-            msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms`);
-        });
+    async execute(message, response, permissionLevel) {
+        let msg = await response.send("Pinging...");
+        msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms`);
     }
 };

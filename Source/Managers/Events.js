@@ -26,7 +26,7 @@ class EventsManager {
         this.client.ws.ws.on("close", code => this.client.log(code));
     }
 
-    message(message) {
+    async message(message) {
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
@@ -41,35 +41,49 @@ class EventsManager {
             let BotMember = message.guild.member(this.client.user);
             if (!BotMember || !message.channel.permissionsFor(BotMember).hasPermission("SEND_MESSAGES")) return;
 
-            this.client.settingsManager.get(message.guild).then(settings => {
-                if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
+            let settings = await this.client.settingsManager.get(message.guild).catch(err => { return err; });
 
-                message.guild.settings = settings;
+            if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
 
-                let userPermissions = this.client.permissionsManager.get(message.guild, message.author);
-                if (userPermissions.level === -1) return;
+            message.guild.settings = settings;
 
-                let response = new Response(this.client, message);
-                if (userPermissions.level < 2) this.client.functions.inviteCheck(response);
+            let userPermissions = this.client.permissionsManager.get(message.guild, message.author);
+            if (userPermissions.level === -1) return;
 
-                let split = message.content.split(" ")[0];
-                let prefix = this.client.functions.getPrefix(message.author, settings, split);
-                if (!prefix || !message.content.startsWith(prefix)) return;
+            let response = new Response(this.client, message);
+            if (userPermissions.level < 2) this.client.functions.inviteCheck(response);
 
-                let command = this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());
-                if (!command) return;
+            let split = message.content.split(" ")[0];
+            let prefix = this.client.functions.getPrefix(message.author, settings, split);
+            if (!prefix || !message.content.startsWith(prefix)) return;
 
-                let mode = command.mode || "free";
-                if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
+            let command = this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());
+            if (!command) return;
 
-                if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
+            let mode = command.mode || "free";
+            if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
 
-                let actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
-                if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
+            if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
 
-                command.execute(message, response, userPermissions);
-            });
+            let actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
+            if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
+
+            command.execute(message, response, userPermissions);
         }
+    }
+
+    messageUpdate(oldMessage, message) {
+        if (message.channel.type !== "text") return;
+
+        this.client.settingsManager.get(message.guild).then(settings => {
+            let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
+            if (UserLevel >= 2) return;
+
+            message.guild.settings = settings;
+
+            let response = new Response(this.client, message);
+            this.client.functions.inviteCheck(response);
+        });
     }
 }
 

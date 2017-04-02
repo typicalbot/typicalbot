@@ -21,7 +21,7 @@ module.exports = class extends Command {
                 output.then(a => {
                     response.send("", {
                         "color": 0x00FF00,
-                        "description": `Promise Resolved:\n\n\`\`\`js\n${util.inspect(a, { depth: 0 })}\n\`\`\``,
+                        "description": `\n\n\`\`\`js\n${util.inspect(a, { depth: 0 })}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
                             "icon_url": "https://typicalbot.com/images/icon.png"
@@ -39,7 +39,7 @@ module.exports = class extends Command {
                 }).catch(err => {
                     response.send("", {
                         "color": 0xFF0000,
-                        "description": `Promise Rejected:\n\n\`\`\`\n${err.stack}\n\`\`\``,
+                        "description": `\n\n\`\`\`\n${err.stack}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
                             "icon_url": "https://typicalbot.com/images/icon.png"
