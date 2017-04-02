@@ -22,7 +22,7 @@ module.exports = class extends Command {
             .addField("» Uptime", this.client.functions.uptime, true)
             .addField("» Servers", `${this.client.shardData.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})`, true)
             .addField("» Library", "discord.js", true)
-            .addField("» Created By", "HyperCoder2975", true)
+            .addField("» Created By", "HyperCoder#2975", true)
             .addField("» Shard", `${this.client.shardNumber} / ${this.client.shardCount}`, true)
             .addField("» Servers on Shard", `${this.client.guilds.size.toLocaleString()}`, true)
             .addField("» Channels on Shard", `${this.client.channels.size.toLocaleString()}`, true)

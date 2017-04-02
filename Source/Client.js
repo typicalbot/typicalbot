@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const Collection = Discord.Collection;
 
-/*        Managers        */
 let ProcessManager = require("./Managers/Process");
 let EventsManager = require("./Managers/Events");
 let CommandsManager = require("./Managers/Commands");
@@ -75,4 +74,4 @@ const client = new class extends Discord.Client {
 
 process.on("message", msg => client.processManager.register(msg))
 .on("uncaughtException", err => client.log(err.stack, true))
-.on("unhandledRejection", err => client.log(err, true));
+.on("unhandledRejection", err => client.log(err.stack, true));
