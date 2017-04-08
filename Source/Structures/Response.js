@@ -14,6 +14,10 @@ class Response {
         return this.send(`${this.message.author} | ${content}`, embed);
     }
 
+    embed(embed) {
+        return this.send("", embed);
+    }
+
     error(content, embed) {
         return this.send(`${this.message.author} | \`❌\` | ${content}`, embed);
     }

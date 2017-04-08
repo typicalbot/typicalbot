@@ -68,22 +68,50 @@ class EventsManager {
             let actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
             if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
 
-            command.execute(message, response, userPermissions);
+            settings.embed === "Y" && command.embed ?
+                command.embedExecute(message, response, userPermissions) :
+                command.execute(message, response, userPermissions);
         }
     }
 
-    messageUpdate(oldMessage, message) {
+    async messageUpdate(oldMessage, message) {
         if (message.channel.type !== "text") return;
 
-        this.client.settingsManager.get(message.guild).then(settings => {
-            let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
-            if (UserLevel >= 2) return;
+        let settings = await this.client.settingsManager.get(message.guild).catch(err => { return err; });
 
-            message.guild.settings = settings;
+        let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
+        if (UserLevel >= 2) return;
 
-            let response = new Response(this.client, message);
-            this.client.functions.inviteCheck(response);
-        });
+        message.guild.settings = settings;
+
+        let response = new Response(this.client, message);
+        this.client.functions.inviteCheck(response);
+    }
+
+    async messageDelete(message) {
+        if (message.channel.type !== "text") return;
+
+        let settings = await this.client.settingsManager.get(message.guild).catch(err => { return err; });
+
+        if (!settings.logs || !settings.deletelog) return;
+
+        let channel = message.guild.channels.get(settings.logs);
+        if (!channel) return;
+
+        let user = message.author;
+
+        settings.deletelogs === "--embed" ?
+        channel.sendEmbed({
+            "color": 0x3EA7ED,
+            "author": { "name": `${user.username}#${user.discriminator} (${user.id})`, "icon_url": user.avatarURL || null },
+            "footer": { "text": "User Unbanned" },
+            "timestamp": new Date()
+        }).catch() :
+        channel.sendMessage(
+            settings.unbanlog !== "--enabled" ?
+                this.client.functions.getFilteredMessage("ann", message.guild, user, settings.unbanlog) :
+                `**${user.username}#${user.discriminator}** has been unbanned from the server.`
+        ).catch();
     }
 }
 
