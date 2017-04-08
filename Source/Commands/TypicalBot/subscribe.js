@@ -13,7 +13,7 @@ module.exports = class extends Command {
         this.client = client;
     }
 
-    execute(message, response) {
+    execute(message, response, permissionLevel) {
         if (message.guild.id !== "163038706117115906") return response.error(`You must be in TypicalBot's Lounge in order to use this command.`);
 
         let Role = message.guild.roles.find("name", "Subscriber");
@@ -23,7 +23,7 @@ module.exports = class extends Command {
         });
     }
 
-    embedExecute(message, response) {
+    embedExecute(message, response, permissionLevel) {
         let fail = new RichEmbed()
         .setColor(0xFF0000)
         .setTitle("Error")
