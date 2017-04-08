@@ -1,4 +1,5 @@
 const Command = require("../../Structures/Command.js");
+const RichEmbed = require("discord.js").RichEmbed;
 
 module.exports = class extends Command {
     constructor(client) {
@@ -22,5 +23,20 @@ module.exports = class extends Command {
         return response.reply(
             `**__Servers on shard ${this.client.shardNumber} / ${this.client.shardCount}:__**\n\`\`\`autohotkey\n${paged}\`\`\``
         );
+    }
+
+    embedExecute(message, response){
+        let page = message.content.split(" ")[1];
+
+        let lengthen = this.client.functions.lengthen;
+
+        let paged = this.client.functions.pagify(this.client.guilds.array().sort((a,b) => b.memberCount - a.memberCount).map(g => `${lengthen(`${g.name.replace(/[^a-z0-9 '"/\\\[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`), page);
+
+        let embed = new RichEmbed()
+        .setColor(0x00adff)
+        .setTitle(`**__Servers on shard ${this.client.shardNumber} / ${this.client.shardCount}__**`)
+        .setDescription(`\`\`\`autohotkey\n${paged}\`\`\``);
+
+        return response.embed(embed);
     }
 };
