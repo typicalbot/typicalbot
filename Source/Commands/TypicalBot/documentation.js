@@ -17,4 +17,14 @@ module.exports = class extends Command {
     execute(message, response, permissionLevel) {
         response.send(`**Documentation can be found here:** <${this.client.config.urls.docs}>`);
     }
+
+    embedExecute(message, response){
+        let embed = new RichEmbed()
+        .setColor(0x00adff)
+        .setTitle("Documentation URL")
+        .setDescription(`**Documentation can be found here:** <${this.client.config.urls.docs}>`);
+
+        reponse.embed(embed);
+
+    }
 };

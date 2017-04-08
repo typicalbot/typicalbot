@@ -1,4 +1,5 @@
 const Command = require("../../Structures/Command.js");
+const RichEmbed = require("discord.js").RichEmbed;
 
 module.exports = class extends Command {
     constructor(client) {
@@ -16,5 +17,14 @@ module.exports = class extends Command {
 
     execute(message, response, permissionLevel) {
         response.send(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
+    }
+
+    embedExecute(message, response){
+        let embed = new RichEmbed()
+        .setColor(0x00adff)
+        .setTitle("Bot Invite Link")
+        .setDescription(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
+
+        response.embed(embed);
     }
 };
