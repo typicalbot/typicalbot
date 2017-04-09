@@ -7,7 +7,7 @@ class PermissionLevels {
         this.levels = {
 
             "-1": new PermissionLevel(-1, "Server Blacklisted", (guild, member) => {
-                let role = this.fetchRole(guild, "blacklist"); if (!role) return;
+                let role = this.fetchRole(guild, "blacklistrole"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole;
                 } else return member.roles.has(role.id);
             }),

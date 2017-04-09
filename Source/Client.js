@@ -72,6 +72,6 @@ const client = new class extends Discord.Client {
     }
 };
 
-process.on("message", msg => client.processManager.register(msg))
+process.on("message", msg => client.processManager.message(msg))
 .on("uncaughtException", err => client.log(err.stack, true))
 .on("unhandledRejection", err => client.log(err.stack, true));

@@ -70,7 +70,7 @@ class Settings {
 
                 //return resolve(data);
             } else {
-                this.connection.query(`SELECT * FROM servers WHERE id = ${id}`, (error, rows) => {
+                this.connection.query(`SELECT * FROM guilds WHERE id = ${id}`, (error, rows) => {
                     if (error) return resolve(DefaultData);
                     if (!rows[0]) {
                         this.create(id);
@@ -87,7 +87,7 @@ class Settings {
     create(id) {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
-            this.connection.query(`INSERT INTO servers SET ?`, { id }, (error, result) => {
+            this.connection.query(`INSERT INTO guilds SET ?`, { id }, (error, result) => {
                 if (error) return reject(error);
                 this.data.set(id, DefaultData);
                 resolve();
@@ -98,7 +98,7 @@ class Settings {
     update(id, setting, value) {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
-            this.connection.query(`UPDATE servers SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${id}`, (error, result) => {
+            this.connection.query(`UPDATE guilds SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${id}`, (error, result) => {
                 if (error) return reject(error);
                 this.data.get(id)[setting] = value;
                 return resolve();
@@ -109,7 +109,7 @@ class Settings {
     delete(id) {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
-            this.connection.query(`DELETE FROM servers WHERE id = ${id}`, (error, result) => {
+            this.connection.query(`DELETE FROM guilds WHERE id = ${id}`, (error, result) => {
                 if (error) return reject(error);
                 this.data.delete(id);
                 return resolve();

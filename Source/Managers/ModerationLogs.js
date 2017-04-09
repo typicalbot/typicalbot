@@ -28,17 +28,17 @@ class ModerationLog {
     }
 
     fetchChannel(guild) {
-        return new Promise((resolve, reject) => {
-            this.client.settingsManager.get(guild.id).then(settings => {
-                let id = settings.modlogs;
+        return new Promise(async (resolve, reject) => {
+            let settings = await this.client.settingsManager.get(guild.id);
 
-                if (!id) return reject("Setting of modlogs is null.");
+            let id = settings.modlogs;
 
-                let channel = guild.channels.get(id);
-                if (!channel) return reject("Invalid channel.");
+            if (!id) return reject("Setting of modlogs is null.");
 
-                return resolve(channel);
-            }).catch( reject );
+            let channel = guild.channels.get(id);
+            if (!channel) return reject("Invalid channel.");
+
+            return resolve(channel);
         });
     }
 

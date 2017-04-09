@@ -122,7 +122,7 @@ module.exports = class Functions {
     }
 
     fetchJoinRole(guild) {
-        let roleSetting = guild.settings.joinrole;
+        let roleSetting = guild.settings.autorole;
         if (!roleSetting) return;
 
         if (guild.roles.has(roleSetting)) return guild.roles.get(roleSetting);
@@ -141,7 +141,6 @@ module.exports = class Functions {
         text = text
             .replace(/@everyone/gi, `@\u200Beveryone`)
             .replace(/@here/g, `@\u200Bhere`);
-//            .replace(/`/g, `\`\u200B`);
         if (type === "ann") return text
             .replace(/{user}|{user.mention}/gi, user.toString())
             .replace(/{user.name}/gi, user.username)
@@ -149,12 +148,13 @@ module.exports = class Functions {
             .replace(/{user.avatar}/, user.avatarURL)
             .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator)
             .replace(/{user.created}/, user.createdAt)
-            .replace(/{user.createdembed}/, JSON.stringify(user.createdAt).replace(/"/g, ""))
             .replace(/{user.shortcreated}/, moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"))
             .replace(/{guild.name}|{server.name}/gi, guild.name)
             .replace(/{guild.id}|{server.id}/gi, guild.id)
             .replace(/{guild.members}|{server.members}/gi, guild.memberCount)
-            .replace(/{now}/gi, JSON.stringify(new Date()).replace(/"/g, ""));
+            .replace(/{now}/gi, moment().format("dddd MMMM Do, YYYY, hh:mm A"))
+            .replace(/{now.time}/gi, moment().format("hh:mm A"))
+            .replace(/{now.date}/gi, moment().format("MMM DD, YYYY"));
         if (type === "ann-nick") return this.getFilteredMessage("ann", guild, user, text)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{user.oldnick}|{user.oldnickname}/gi, options.oldMember.nickname || user.username);
@@ -171,8 +171,7 @@ module.exports = class Functions {
             .replace(/{guild.id}|{server.id}/gi, guild.id);
         if (type === "jn") return text
             .replace(/{user.name}/gi, user.username)
-            .replace(/{user.discrim}/gi, user.discriminator)
-            .replace(/{user.discriminator}/gi, user.discriminator);
+            .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator);
     }
 
     request(url) {

@@ -1,11 +1,6 @@
 class ProcessManager {
     constructor(client) { this.client = client; }
-
-    register(message) {
-        if (this.client.killed) return;
-        return this.message(message);
-    }
-
+    
     message(message) {
         if (message.type === "stats") {
             this.client.shardData = message.data;
