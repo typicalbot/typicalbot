@@ -34,8 +34,10 @@ module.exports = class extends Command {
 
         let embed = new RichEmbed()
         .setColor(0x00adff)
-        .setTitle(`**__Servers on shard ${this.client.shardNumber} / ${this.client.shardCount}__**`)
-        .setDescription(`\`\`\`autohotkey\n${paged}\`\`\``);
+        .setTitle(`Servers on Shard ${this.client.shardNumber} / ${this.client.shardCount}`)
+        .setDescription(`\`\`\`autohotkey\n${paged}\`\`\``)
+        .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+        .setTimestamp();
 
         return response.embed(embed);
     }

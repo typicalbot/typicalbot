@@ -15,14 +15,16 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        response.send(`**Documentation can be found here:** <${this.client.config.urls.donate}>\n\nDonations go to the creator of TypicalBot for any finances.`);
+        response.send(`**Donations can be sent here:** <${this.client.config.urls.donate}>\n\nDonations go to the creator of TypicalBot for any finances.`);
     }
 
     embedExecute(message, response){
         let embed = new RichEmbed()
-        .setColor(0x00adff)
-        .setTitle("Donation Information")
-        .setDescription(`**Donations can be sent here:** <${this.client.config.urls.donate}>\n\nDonations go to the creator of TypicalBot for any finances.`);
+            .setColor(0x00ADFF)
+            .setTitle("Donate to TypicalBot's Creator")
+            .setDescription(`You can donate to TypicalBot's creator [here](${this.client.config.urls.donate}>).\n\nDonations go to the creator of TypicalBot for any finances.`)
+            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png");
+
         response.embed(embed);
     }
 };

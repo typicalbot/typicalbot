@@ -27,12 +27,16 @@ module.exports = class extends Command {
         let fail = new RichEmbed()
         .setColor(0xFF0000)
         .setTitle("Error")
-        .setDescription(`You must be in TypicalBot's Lounge in order to use this command.`);
+        .setDescription(`You must be in TypicalBot's Lounge in order to use this command.`)
+        .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+        .setTimestamp();
 
         let success = new RichEmbed()
         .setColor(0x00adff)
         .setTitle("Success")
-        .setDescription("You are now subscribed to TypicalBot's announcements!");
+        .setDescription("You are now subscribed to TypicalBot's announcements!")
+        .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+        .setTimestamp();
 
         if (message.guild.id !== "163038706117115906") return response.embed(fail);
 

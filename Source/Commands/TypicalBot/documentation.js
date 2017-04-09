@@ -1,4 +1,5 @@
 const Command = require("../../Structures/Command.js");
+const RichEmbed = require("discord.js").RichEmbed;
 
 module.exports = class extends Command {
     constructor(client) {
@@ -20,11 +21,13 @@ module.exports = class extends Command {
 
     embedExecute(message, response){
         let embed = new RichEmbed()
-        .setColor(0x00adff)
-        .setTitle("Documentation URL")
-        .setDescription(`**Documentation can be found here:** <${this.client.config.urls.docs}>`);
+        .setColor(0x00ADFF)
+        .setTitle("TypicalBot Documentation")
+        .setDescription(`**Documentation can be found here:** <${this.client.config.urls.docs}>`)
+        .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+        .setTimestamp();
 
-        reponse.embed(embed);
+        response.embed(embed);
 
     }
 };

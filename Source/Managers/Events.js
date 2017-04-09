@@ -30,7 +30,7 @@ class EventsManager {
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
-            let command = this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
+            let command = await this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
             if (!command || !command.dm || command.permission > 0) return;
 
             let response = new Response(this.client, message);
@@ -57,7 +57,7 @@ class EventsManager {
             let prefix = this.client.functions.getPrefix(message.author, settings, split);
             if (!prefix || !message.content.startsWith(prefix)) return;
 
-            let command = this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());
+            let command = await this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());
             if (!command) return;
 
             let mode = command.mode || "free";

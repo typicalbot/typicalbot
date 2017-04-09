@@ -23,7 +23,7 @@ class PermissionLevels {
                 } else return member.roles.has(role.id);
             }),
             "3" : new PermissionLevel(3, "Server Administrator", (guild, member) => {
-                let role = this.fetchRole(guild, "masterrole"); if (!role) return;
+                let role = this.fetchRole(guild, "adminrole"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole;
                 } else return member.roles.has(role.id);
             }),
@@ -43,7 +43,7 @@ class PermissionLevels {
     fetchRole(guild, permission) {
         let roleSetting = guild.settings[permission];
         if (!roleSetting) {
-            if (permission === "masterrole") return guild.roles.find("name", "TypicalBot Administrator");
+            if (permission === "adminrole") return guild.roles.find("name", "TypicalBot Administrator");
             if (permission === "modrole") return guild.roles.find("name", "TypicalBot Moderator");
             if (permission === "djrole") return guild.roles.find("name", "TypicalBot DJ");
             if (permission === "blacklist") return guild.roles.find("name", "TypicalBot Blacklisted");

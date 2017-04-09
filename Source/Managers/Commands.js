@@ -31,13 +31,15 @@ class CommandsManager {
     }
 
     get(text) {
-        if (this.data.has(text)) return this.data.get(text);
+        return new Promise((resolve, reject) => {
+            if (this.data.has(text)) return resolve(this.data.get(text));
 
-        this.data.forEach(c => {
-            if (c.aliases && c.aliases.includes(text)) return c;
+            this.data.forEach(c => {
+                if (c.aliases && c.aliases.includes(text)) return resolve(c);
+            });
+
+            return resolve();
         });
-
-        return;
     }
 }
 
