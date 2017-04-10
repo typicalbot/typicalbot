@@ -29,7 +29,7 @@ class ModerationLog {
 
     fetchChannel(guild) {
         return new Promise(async (resolve, reject) => {
-            let settings = await this.client.settingsManager.get(guild.id);
+            let settings = await this.client.settingsManager.fetch(guild.id);
 
             let id = settings.modlogs;
 

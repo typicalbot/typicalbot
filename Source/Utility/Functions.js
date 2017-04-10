@@ -121,8 +121,8 @@ module.exports = class Functions {
         return this.time(this.timestamp(this.client.uptime));
     }
 
-    fetchJoinRole(guild) {
-        let roleSetting = guild.settings.autorole;
+    fetchAutoRole(guild, settings) {
+        let roleSetting = settings.autorole;
         if (!roleSetting) return;
 
         if (guild.roles.has(roleSetting)) return guild.roles.get(roleSetting);
@@ -141,24 +141,30 @@ module.exports = class Functions {
         text = text
             .replace(/@everyone/gi, `@\u200Beveryone`)
             .replace(/@here/g, `@\u200Bhere`);
-        if (type === "ann") return text
+        if (type === "logs") return text
             .replace(/{user}|{user.mention}/gi, user.toString())
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.id}/gi, user.id)
             .replace(/{user.avatar}/, user.avatarURL)
             .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator)
-            .replace(/{user.created}/, user.createdAt)
-            .replace(/{user.shortcreated}/, moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"))
+            .replace(/{user.created}/, moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"))
             .replace(/{guild.name}|{server.name}/gi, guild.name)
             .replace(/{guild.id}|{server.id}/gi, guild.id)
             .replace(/{guild.members}|{server.members}/gi, guild.memberCount)
             .replace(/{now}/gi, moment().format("dddd MMMM Do, YYYY, hh:mm A"))
             .replace(/{now.time}/gi, moment().format("hh:mm A"))
             .replace(/{now.date}/gi, moment().format("MMM DD, YYYY"));
-        if (type === "ann-nick") return this.getFilteredMessage("ann", guild, user, text)
+        if (type === "logs-nick") return this.getFilteredMessage("logs", guild, user, text)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{user.oldnick}|{user.oldnickname}/gi, options.oldMember.nickname || user.username);
-        if (type === "ann-invite") return this.getFilteredMessage("ann", guild, user, text)
+        if (type === "logs-invite") return this.getFilteredMessage("logs", guild, user, text)
+            .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
+            .replace(/{channel}/gi, options.channel.toString())
+            .replace(/{channel.name}/gi, options.channel.name)
+            .replace(/{channel.id}/gi, options.channel.id);
+        if (type === "logs-msgdel") return this.getFilteredMessage("logs", guild, user, text)
+            .replace(/{message.content}|{message.text}/gi, options.message.content)
+            .replace(/{message.content:short}|{message.text:short}/gi, this.shorten(options.message.content, 100))
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{channel}/gi, options.channel.toString())
             .replace(/{channel.name}/gi, options.channel.name)

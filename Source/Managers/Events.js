@@ -1,3 +1,4 @@
+const RichEmbed = require("discord.js").RichEmbed;
 const Response = require("../Structures/Response");
 
 class EventsManager {
@@ -41,7 +42,7 @@ class EventsManager {
             let BotMember = message.guild.member(this.client.user);
             if (!BotMember || !message.channel.permissionsFor(BotMember).hasPermission("SEND_MESSAGES")) return;
 
-            let settings = await this.client.settingsManager.get(message.guild).catch(err => { return err; });
+            let settings = await this.client.settingsManager.fetch(message.guild).catch(err => { return err; });
 
             if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
 
@@ -77,7 +78,7 @@ class EventsManager {
     async messageUpdate(oldMessage, message) {
         if (message.channel.type !== "text") return;
 
-        let settings = await this.client.settingsManager.get(message.guild).catch(err => { return err; });
+        let settings = await this.client.settingsManager.fetch(message.guild).catch(err => { return err; });
 
         let UserLevel = this.client.functions.getPermissionLevel(message.guild, settings, message.author);
         if (UserLevel >= 2) return;
@@ -91,7 +92,7 @@ class EventsManager {
     async messageDelete(message) {
         if (message.channel.type !== "text") return;
 
-        let settings = await this.client.settingsManager.get(message.guild).catch(err => { return err; });
+        let settings = await this.client.settingsManager.fetch(message.guild).catch(err => { return err; });
 
         if (!settings.logs || !settings.deletelog) return;
 
@@ -100,18 +101,59 @@ class EventsManager {
 
         let user = message.author;
 
-        settings.deletelogs === "--embed" ?
-        channel.sendEmbed({
-            "color": 0x3EA7ED,
-            "author": { "name": `${user.username}#${user.discriminator} (${user.id})`, "icon_url": user.avatarURL || null },
-            "footer": { "text": "User Unbanned" },
-            "timestamp": new Date()
-        }).catch() :
+        if (settings.deletelog === "--embed") return channel.sendEmbed(new RichEmbed()
+            .setColor(0x3EA7ED)
+            .setAuthor(`${user.tag} (${user.id})`, user.avatarURL || null)
+            .setDescription(this.client.functions.shorten(message.content, 100))
+            .setFooter("Message Deleted")
+            .setTimestamp()
+        ).catch(() => this.client.log("Missing Permissions"));
+
         channel.sendMessage(
-            settings.unbanlog !== "--enabled" ?
-                this.client.functions.getFilteredMessage("ann", message.guild, user, settings.unbanlog) :
-                `**${user.username}#${user.discriminator}** has been unbanned from the server.`
-        ).catch();
+            settings.deletelog === "--enabled" ?
+                `**${user.username}#${user.discriminator}**'s message was deleted.` :
+                this.client.functions.getFilteredMessage("logs-msgdel", message.guild, user, settings.deletelog, { message, channel: message.channel })
+        ).catch(() => this.client.log("Missing Permissions"));
+    }
+
+    async guildMemberAdd(member) {
+        let guild = member.guild;
+
+        let settings = await this.client.settingsManager.fetch(guild.id);
+
+        let user = member.user;
+
+        if (settings.joinlog !== "disabled") {
+            if (guild.channels.has(settings.logs)) {
+                let channel = guild.channels.get(settings.logs);
+
+                if (settings.joinlog === "--embed") {
+                    channel.sendEmbed(new RichEmbed()
+                        .setColor(0x00FF00)
+                        .setAuthor(`${user.tag} (${user.id})`, user.avatarURL || null)
+                        .setFooter("User Joined")
+                        .setTimestamp()
+                    ).catch(() => this.client.log("Missing Permissions"));
+                } else {
+                    channel.sendMessage(
+                        settings.joinlog ?
+                            this.client.functions.getFilteredMessage("logs", guild, user, settings.joinlog) :
+                            `**${user.username}#${user.discriminator}** has joined the server.`
+                    ).catch(() => this.client.log("Missing Permissions"));
+                }
+            }
+        }
+
+        if (settings.joinmessage && !user.bot) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.getFilteredMessage("jm", guild, user, settings.joinmessage)}`).catch(() => this.client.log("Missing Permissions"));
+
+        if (settings.joinnick) member.setNickname(this.client.functions.getFilteredMessage("jn", guild, user, settings.joinnick)).catch(() => this.client.log("Missing Permissions"));
+
+        let autorole = this.client.functions.fetchAutoRole(guild, settings);
+        if (autorole && autorole.editable) setTimeout(() =>
+            member.addRole(autorole).then(() => {
+                if (settings.autorolesilent === "N" && settings.logs && guild.channels.has(settings.logs)) guild.channels.get(settings.logs).sendMessage(`**${user.tag}** was given the autorole **${autorole.name}**.`);
+            }).catch(() => this.client.log("Missing Permissions")), settings.autoroledelay || 2000
+        );
     }
 }
 

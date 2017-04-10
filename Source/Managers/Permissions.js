@@ -46,7 +46,7 @@ class PermissionLevels {
             if (permission === "adminrole") return guild.roles.find("name", "TypicalBot Administrator");
             if (permission === "modrole") return guild.roles.find("name", "TypicalBot Moderator");
             if (permission === "djrole") return guild.roles.find("name", "TypicalBot DJ");
-            if (permission === "blacklist") return guild.roles.find("name", "TypicalBot Blacklisted");
+            if (permission === "blacklistrole") return guild.roles.find("name", "TypicalBot Blacklisted");
         }
 
         if (roleSetting.includes(";")) return roleSetting.split(";").filter(r => guild.roles.has(r)).map(r => guild.roles.get(r));

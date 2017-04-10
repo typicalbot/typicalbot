@@ -45,7 +45,9 @@ const client = new class extends Discord.Client {
         .on("ready", () => this.eventsManager.ready())
         .on("warn", err => this.log(err, true))
         .on("error", err => this.log(err, true))
-        .on("message", message => this.eventsManager.message(message));
+        .on("message", message => this.eventsManager.message(message))
+        .on("messageDelete", message => this.eventsManager.messageDelete(message))
+        .on("guildMemberAdd", member => this.eventsManager.guildMemberAdd(member));
 
         if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 

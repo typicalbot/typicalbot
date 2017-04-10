@@ -57,7 +57,7 @@ class Settings {
         this.connection.connect();
     }
 
-    get(id) {
+    fetch(id) {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
             if (!id) return resolve(DefaultData);
