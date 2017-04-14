@@ -45,7 +45,7 @@ module.exports = class extends Command {
             .addField("» Servers on Shard", `${this.client.guilds.size.toLocaleString()}`, true)
             .addField("» Channels on Shard", `${this.client.channels.size.toLocaleString()}`, true)
             .addField("» Users on Shard", `${this.client.users.size.toLocaleString()}`, true)
-            .setFooter("TypicalBot", `${this.client.config.urls.website}/images/icon.png`)
+            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
             .setTimestamp();
 
         response.embed(embed);

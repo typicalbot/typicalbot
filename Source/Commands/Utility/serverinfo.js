@@ -1,4 +1,6 @@
 const Command = require("../../Structures/Command.js");
+const RichEmbed = require("discord.js").RichEmbed;
+const moment = require("moment");
 
 module.exports = class extends Command {
     constructor(client) {
@@ -23,7 +25,7 @@ module.exports = class extends Command {
             + `\`\`\`\n`
             + `Name                : ${message.guild.name} (${message.guild.id})\n`
             + `Owner               : ${guildOwner.user.username}#${guildOwner.user.discriminator} (${guildOwner.user.id})\n`
-            + `Created             : ${message.guild.createdAt}\n`
+            + `Created             : ${moment(message.guild.createdAt).format("dddd MMMM Do, YYYY, hh:mm A")}\n`
             + `Region              : ${message.guild.region}\n`
             + `Verification Level  : ${message.guild.verificationLevel}\n`
             + `Icon                : ${message.guild.iconURL ? message.guild.iconURL : "None"}\n`
@@ -32,6 +34,31 @@ module.exports = class extends Command {
             + `Roles               : ${message.guild.roles.size}\n`
             + `Emojis              : ${message.guild.emojis.size}\n`
             + `\`\`\``
+        );
+    }
+
+    embedExecute(message, response, permissionLevel) {
+        let match = /serverinfo\s+(.+)/i.exec(message.content);
+        let option = match ? match[1] : null;
+
+        let guildOwner = message.guild.member(message.guild.ownerID).user;
+
+        if (!option) return response.embed(new RichEmbed()
+            .setColor(0x00ADFF)
+            .setTitle(`Server Information`)
+            .addField("» Name", message.guild.name, true)
+            .addField("» ID", message.guild.id, true)
+            .addField("» Owner", `${guildOwner.tag}\n${guildOwner.id}`, true)
+            .addField("» Created", `${moment(message.guild.createdAt).format("dddd MMMM Do, YYYY")}\n${moment(message.guild.createdAt).format("hh:mm A")}`, true)
+            .addField("» Region", message.guild.region.toUpperCase(), true)
+            .addField("» Verification Level", message.guild.verificationLevel, true)
+            .addField("» Channels", message.guild.channels.size, true)
+            .addField("» Members", message.guild.memberCount, true)
+            .addField("» Roles", message.guild.roles.size, true)
+            .addField("» Emojis", message.guild.emojis.size, true)
+            .setThumbnail(message.guild.iconURL || null)
+            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setTimestamp()
         );
     }
 };

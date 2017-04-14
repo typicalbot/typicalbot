@@ -1,40 +1,77 @@
 const cp            = require("child_process");
-const path          = require("path");
+const pathModule    = require("path");
 const vr            = require("./version").version;
 const config        = require(`./Configs/${vr}`);
+const Discord       = require("discord.js");
 
 const SHARD_COUNT   = config.shards;
 const CLIENT_TOKEN  = config.token;
 
-const spath         = path.join(__dirname, `Source`, `Client.js`);
+const Webserver     = require("./Express/app");
 
-const shards        = [];
-const stats         = {};
+const path          = pathModule.join(__dirname, `Source`, `client.js`);
 
-const update = (shard, data) => {
-    if (!stats[shard]) stats[shard] = {};
-    Object.keys(data).map(key => stats[shard][key] = data[key]);
-    transmit();
+class Shard extends cp.fork {
+    constructor(manager, id) {
+        super(path, [], { env: { SHARD_ID: id, SHARD_COUNT, CLIENT_TOKEN, CLIENT_VR: vr } });
+
+        this.id = id;
+
+        this.stats = {};
+
+        this.manager = manager;
+
+        this.on("message", message => {
+            if (message.type === "stat") return this.manager.changeStats(this.id, message.data);
+            return this.manager.transmit(message.type, message.data);
+        });
+    }
+}
+
+new class {
+    constructor() {
+        this.shards = new Discord.Collection();
+        this.stats = [];
+
+        this.lastRequest = 0;
+        this.pendingRequests = new Discord.Collection();
+
+        this.webserver = new Webserver(this, config);
+
+        this.init();
+    }
+
+    create(id) {
+        this.shards.set(id, new Shard(this, id));
+    }
+
+    changeStats(shard, data) {
+        Object.keys(data).map(key => this.shards.get(shard).stats[key] = data[key]);
+        this.relayStats();
+    }
+
+    relayStats() {
+        let data = {};
+        this.shards.forEach(shard => {
+            Object.keys(shard.stats).forEach(key => {
+                data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key];
+            });
+        });
+        this.transmit("stats", data);
+    }
+
+    transmit(type, data) {
+        this.shards.forEach(shard => {
+            shard.send({
+                type,
+                data
+            });
+        });
+    }
+
+    init() {
+        for (let s = 0; s < SHARD_COUNT; s++) {
+            setTimeout(this.create.bind(this), (9000 * s), s);
+        }
+    }
 };
-
-const send = data => shards.forEach(shard => shard.send(data));
-
-const transmit = () => {
-    const newdata = { "guilds": 0, "voiceConnections": 0, "heap": 0, "shards": stats };
-    for (let shard in stats) Object.keys(stats[shard]).forEach(key => newdata[key] += Number(stats[shard][key]));
-    send( { "type": "stats", "data": newdata } );
-};
-
-const create = SHARD_ID => {
-    const shard = cp.fork( spath, [], { env: { SHARD_ID, SHARD_COUNT, CLIENT_TOKEN, CLIENT_VR: vr } } );
-
-    shards.push(shard);
-
-    shard.on("message", message => {
-        if (message.type === "stat") return update(SHARD_ID, message.data);
-        if (message.type === "restartshard") return create(+message.data.shard);
-        return send(message);
-    });
-};
-
-for (let s = 0; s < SHARD_COUNT; s++) setTimeout(create, (9000 * s), s);

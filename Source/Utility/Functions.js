@@ -105,13 +105,13 @@ module.exports = class Functions {
 
             let contentMatch = expr.test(response.message.content);
 
-            let embedMatch = expr.test(util.inspect(response.message.embeds, { depth: 2 }));
+            let embedMatch = expr.test(util.inspect(response.message.embeds, { depth: 4 }));
 
             if (contentMatch || embedMatch) {
                 if (!response.message.deletable) return;
-                this.client.events.guildInvitePosted(response.message.guild, response.message.channel, response.message.author);
+                this.client.eventsManager.guildInvitePosted(response.message.guild, response.message, response.message.author);
                 response.message.delete().then(() => {
-                    response.error(`Your message contained a server invite link, which this server prohibits.`);
+                    response.error(`An invite was detected in your message. Your message has been deleted.`);
                 });
             }
         }

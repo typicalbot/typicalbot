@@ -32,7 +32,6 @@ class Response {
 
     perms(command, uLevel) {
         let rLevel = this.client.permissionsManager.define(command.permission);
-
         return this.error(`Your permission level is too low to execute that command. The command requires permission level ${rLevel.level} (${rLevel.title}) and you are level ${uLevel.level} (${uLevel.title}).`);
     }
 
