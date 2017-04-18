@@ -123,6 +123,21 @@ class Webserver extends express {
                                                            - - - - - - - - - -
         */
 
+        this.get("/api/bots/:bot/stats", isApp, (req, res) => {
+            let bot = req.params.bot;
+
+            if (bot !== "dev") return res.status(400).json({ message: "Unable to fetch requested stats" });
+
+            let data = {};
+            master.shards.forEach(shard => {
+                Object.keys(shard.stats).forEach(key => {
+                    data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key];
+                });
+            });
+
+            res.status(200).json({ "guilds": data.guilds });
+        });
+
         this.post("/api/channels/:channel/messages", isApp, (req, res) => {
             let channel = req.params.channel;
             let content = req.body.content;

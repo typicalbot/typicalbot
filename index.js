@@ -23,6 +23,18 @@ class Shard extends cp.fork {
 
         this.on("message", message => {
             if (message.type === "stat") return this.manager.changeStats(this.id, message.data);
+            if (message.type === "request") {
+                let toShard = manager.shards.get(message.data.to);
+                if (!toShard) return this.send({ "type": "request", "data": { "id": message.data.id, "error": "InvalidShard" } });
+
+                let listener = msg => {
+                    if (msg.type !== "request" || msg.data.id !== message.data.id) return;
+                    this.removeListener("message", listener);
+                };
+                this.on("message", listener);
+
+                toShard.send(message);
+            }
             return this.manager.transmit(message.type, message.data);
         });
     }
@@ -32,13 +44,17 @@ new class {
     constructor() {
         this.shards = new Discord.Collection();
         this.stats = [];
-
-        this.lastRequest = 0;
         this.pendingRequests = new Discord.Collection();
 
         this.webserver = new Webserver(this, config);
 
         this.init();
+    }
+
+    makeRequest(from, to, request) {
+        this.shards.get(to).send({
+            "type": "request"
+        });
     }
 
     create(id) {

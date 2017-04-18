@@ -12,7 +12,7 @@ let Functions = require("./Utility/Functions");
 
 const client = new class extends Discord.Client {
     constructor() {
-        super({ messageCacheMaxSize: 150, disabledEvents: [ "CHANNEL_PINS_UPDATE", "MESSAGE_REACTION_ADD", "MESSAGE_REACTION_REMOVE", "MESSAGE_REACTION_REMOVE_ALL", "USER_NOTE_UPDATE", "TYPING_START", "RELATIONSHIP_ADD", "RELATIONSHIP_REMOVE" ]});
+        super({ messageCacheMaxSize: 150 });
 
         this.vr = process.env.CLIENT_VR;
         this.config = require(`../Configs/${this.vr}`);
