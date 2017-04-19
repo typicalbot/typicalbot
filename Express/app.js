@@ -47,11 +47,13 @@ class Webserver extends express {
         this.use(passport.session());
         this.use(bodyParser.json());
         this.use(express.static(`${staticRoot}/static`));
-        this.use(session({ secret: "typicalbot", resave: false, saveUninitialized: false, }));
+        this.use(session({ secret: "typicalbotdashboard", resave: false, saveUninitialized: false, }));
 
         this.engine("html", require("ejs").renderFile);
 
         this.set("view engine", "html");
+
+        this.locals.domain = "testing.typicalbot.com";
 
         /*
                                                            - - - - - - - - - -
@@ -60,6 +62,10 @@ class Webserver extends express {
 
                                                            - - - - - - - - - -
         */
+
+        this.get("/auth", (req, res, next) => {
+            res.json({ "logged_in": req.isAuthenticated() });
+        });
 
         this.get("/auth/login", (req, res, next) => {
             if (req.session.backURL) {
@@ -70,13 +76,13 @@ class Webserver extends express {
                     req.session.backURL = parsed.path;
                 }
             } else {
-                req.session.backURL = "/";
+                req.session.backURL = '/';
             }
             next();
         }, passport.authenticate("discord"));
 
-        this.get("/auth/user", passport.authenticate("discord", {
-            failureRedirect: `/`
+        this.get("/auth/callback", passport.authenticate("discord", {
+            failureRedirect: `/failed`
         }), (req, res) => {
             if (req.session.backURL) {
                 res.redirect(req.session.backURL);
@@ -107,7 +113,7 @@ class Webserver extends express {
         });
 
         this.get("/dashboard", isAuth, (req, res) => {
-            res.render(path.resolve(`${staticRoot}${path.sep}pages${path.sep}index.ejs`), {
+            res.render(path.resolve(`${staticRoot}${path.sep}pages${path.sep}dashboard.ejs`), {
                 user: req.user,
                 auth: true
             });
