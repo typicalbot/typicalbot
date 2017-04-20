@@ -7,22 +7,25 @@
 		<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-		<title>Admin – TypicalBot</title>
+		<title>User – TypicalBot</title>
 	</head>
 	<body>
 		<div class="nav">
 			<img src="https://typicalbot.com/images/icon.png" />
 			<a href="/" class="title">TypicalBot Dashboard</a>
 			<ul class="links links-right">
+				<% if (master.userLevel(user.id) >= 6) { %>
+					<li><a href="/admin">Admin Panel</a></li>
+				<% } %>
 				<li><img class="profile-img" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" /></li>
 				<li><a href="/auth/user"><%= user.username %></a></li>
 				<li><a href="/auth/logout">Sign Out</a></li>
 			</ul>
 		</div>
 		<div class="page">
-			<h1 class="title">Your Profile</h1>
+			<h1 class="title">Content To Come</h1>
 			<p class="text">
-				Hello, <%= user.username %>. You're an administrator.
+				Hello, <%= user.username %>. There's nothing to display right now. Sorry!
 			</p>
 		</div>
 	</body>

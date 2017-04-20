@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="/styles/style.css" rel="stylesheet" type="text/css">
+		<link href="/images/icon.png" rel="icon" type="image/x-icon"/>
+		<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<title>Home – TypicalBot</title>
+	</head>
+	<body>
+		<div class="nav">
+			<img src="https://typicalbot.com/images/icon.png" />
+			<a href="/" class="title">TypicalBot Dashboard</a>
+			<ul class="links links-right">
+				<% if (auth) { %>
+					<% if (master.userLevel(user.id) >= 6) { %>
+						<li><a href="/admin">Admin Panel</a></li>
+					<% } %>
+					<li><img class="profile-img" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" /></li>
+					<li><a href="/auth/user"><%= user.username %></a></li>
+					<li><a href="/auth/logout">Sign Out</a></li>
+				<% } else { %>
+					<li><a href="/auth/login">Sign In</a></li>
+				<% } %>
+			</ul>
+		</div>
+		<div class="page">
+			<h1 class="title">About TypicalBot</h1>
+			<p class="text">
+				TypicalBot is a cool bot!
+			</p>
+
+			<h1 class="break"></h1>
+
+			<h1 class="title">Features</h1>
+			<ul class="lister">
+				<li><p>Moderation</p></li>
+				<li>
+					<ul class="list">
+						<li>Spamming your channels</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

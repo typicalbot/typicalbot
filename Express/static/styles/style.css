@@ -1,0 +1,121 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+    font-family: 'Open Sans', arial, sans-serif;
+    font-weight: normal;
+}
+
+.nav {
+	margin: 0px;
+	background-color: #00adff;
+	padding: 0 75px 0 75px;
+}
+.nav > img {
+	float: left;
+	height: 40px;
+	margin: 5px;
+}
+.nav .title {
+	display: inline-block;
+	padding: 5px 10px 5px 10px;
+	height: 40px;
+	line-height: 35px;
+	color: white;
+	font-size: 25px;
+	font-family: "Bree Serif", serif;
+	text-decoration: none;
+}
+.nav .links {
+	display: inline-block;
+	list-style: none;
+}
+.nav .links-right {
+	float: right !important;
+}
+.nav .links li {
+	display: inline-block;
+}
+.nav .links .profile-img {
+	display: inline-block;
+	margin: 5px;
+	height: 40px;
+	border-radius: 100%;
+}
+.nav .links li a {
+	display: inline-block;
+	float: right;
+	margin: 5px;
+	padding: 5px 8px 5px 8px;
+	height: 30px;
+	color: white;
+	text-decoration: none;
+	line-height: 30px;
+	transition: background 0.25s linear;
+	border-radius: 5px;
+	font-size: 15px;
+}
+.nav .links li a:hover {
+	background-color: #007FBB;
+}
+
+.card {
+	box-shadow: 1px 2px 8px #3B3B3B;
+	border-radius: 4px;
+	margin-bottom: 75px;
+}
+.card .header {
+	background-color: #00adff;
+	padding: 15px;
+	color: white;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	font-family: "Bree Serif", serif;
+}
+.card .body {
+	padding: 20px;
+	font-size: 20px;
+}
+
+.profile {
+	padding: 2px;
+	box-shadow: 1px 2px 8px #000000
+}
+.profile img {
+	height: 80px;
+}
+
+.break {
+	border-bottom: 1px solid #00adff;
+	margin: 35px 20px 35px 20px;
+}
+
+.page {
+	padding: 40px 8% 20px 8%;
+}
+.page .title {
+    font-size: 24px;
+    font-weight: lighter;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+.page .text {
+	font-size: 18px;
+	padding: 10px 30px 10px 30px;
+}
+.page .lister {
+	padding: 10px 30px 10px 30px;
+	list-style-type: none;
+}
+.page .lister li > p {
+	font-size: 18px;
+	font-weight: bold;
+}
+.page .list {
+	padding: 10px 30px 10px 30px;
+	list-style-type: square;
+	font-size: 18px;
+}

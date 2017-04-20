@@ -3,6 +3,7 @@ const pathModule    = require("path");
 const vr            = require("./version").version;
 const config        = require(`./Configs/${vr}`);
 const Discord       = require("discord.js");
+const request       = require("superagent");
 
 const SHARD_COUNT   = config.shards;
 const CLIENT_TOKEN  = config.token;
@@ -49,6 +50,25 @@ new class {
         this.webserver = new Webserver(this, config);
 
         this.init();
+    }
+
+    userLevel(userid) {
+        if (userid === config.owner) return 10;
+        if (config.management[userid]) return 9;
+        if (userid === config.devhelp) return 8;
+        if (config.staff[userid]) return 7;
+        if (config.support[userid]) return 6;
+    }
+
+    inGuild(guildid) {
+        return new Promise((resolve, reject) => {
+            request.get(`https://discordapp.com/api/v6/guilds/${guildid}`)
+            .set("Authorization", `Bot ${config.token}`)
+            .end((err, res) => {
+                if (res.statusCode === 200) return resolve();
+                return reject();
+            });
+        });
     }
 
     makeRequest(from, to, request) {

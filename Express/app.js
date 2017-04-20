@@ -18,14 +18,16 @@ function isAuth(req, res, next) {
 function isStaff(req, res, next) {
     if (req.isAuthenticated() && req.user.id === "105408136285818880") return next();
 
-    req.session.backURL = req.url;
-    res.redirect("/auth/login");
+    req.session.backURL = req.originalURL;
+    res.redirect("/");
 }
 
 function isApp(req, res, next) {
     if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next();
     res.status(401).json({ "message": "Unauthorized" });
 }
+
+let botOAuth = (guildid) => `https://discordapp.com/oauth2/authorize?client_id=166527505610702848&permissions=8&scope=bot&redirect_uri=https://typicalbot.com/thanks/&response_type=code&guild_id=${guildid}`;
 
 class Webserver extends express {
     constructor(master, config) {
@@ -43,11 +45,10 @@ class Webserver extends express {
             process.nextTick(() => done(null, profile));
         }));
 
+        this.use(session({ secret: "atypicalsession", resave: false, saveUninitialized: false, }));
         this.use(passport.initialize());
         this.use(passport.session());
         this.use(bodyParser.json());
-        this.use(express.static(`${staticRoot}/static`));
-        this.use(session({ secret: "typicalbotdashboard", resave: false, saveUninitialized: false, }));
 
         this.engine("html", require("ejs").renderFile);
 
@@ -88,13 +89,21 @@ class Webserver extends express {
                 res.redirect(req.session.backURL);
                 req.session.backURL = null;
             } else {
-                res.redirect("/");
+                res.redirect("/auth");
             }
         });
 
         this.get("/auth/logout", function(req, res) {
             req.logout();
             res.redirect("/");
+        });
+
+        this.get("/auth/user", isAuth, (req, res) => {
+            res.render(path.resolve(`${staticRoot}${path.sep}pages${path.sep}user.ejs`), {
+                master,
+                user: req.user,
+                auth: true
+            });
         });
 
         /*
@@ -105,21 +114,30 @@ class Webserver extends express {
                                                            - - - - - - - - - -
         */
 
-        this.get("/dashboard/admin", isStaff, (req, res) => {
+        this.get("/", (req, res) => {
+            res.render(path.resolve(`${staticRoot}${path.sep}pages${path.sep}index.ejs`), {
+                master,
+                user: req.user || null,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        this.get("/admin", isStaff, (req, res) => {
             res.render(path.resolve(`${staticRoot}${path.sep}pages${path.sep}admin.ejs`), {
+                master,
                 user: req.user,
                 auth: true
             });
         });
 
-        this.get("/dashboard", isAuth, (req, res) => {
-            res.render(path.resolve(`${staticRoot}${path.sep}pages${path.sep}dashboard.ejs`), {
-                user: req.user,
-                auth: true
+        this.get("/guild/:guildid", isAuth, async (req, res) => {
+            let guildid = req.params.guildid;
+            master.inGuild(guildid).then(() => {
+                res.send("OKAY");
+            }).catch(() => {
+                res.redirect(botOAuth(guildid));
             });
         });
-
-
 
         /*
                                                            - - - - - - - - - -
@@ -171,6 +189,7 @@ class Webserver extends express {
             });
         });
 
+        this.use(express.static(`${staticRoot}/static`));
         this.use((req, res) => { res.status(404).sendFile(path.join(__dirname, "404.html")); });
         this.listen(3000, () => console.log("Listening to port 3000."));
     }

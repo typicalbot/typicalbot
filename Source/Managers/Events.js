@@ -24,7 +24,7 @@ class EventsManager {
 
     ready() {
         this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
-        this.client.ws.ws.on("close", code => this.client.log(code));
+        this.client.ws.ws.on("close", code => console.dir(code));
     }
 
     async message(message) {
