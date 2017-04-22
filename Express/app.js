@@ -57,6 +57,47 @@ class Webserver extends express {
             res.status(401).json({ "message": "Unauthorized" });
         };
 
+        this.get("/api/bots/:bot/stats", isApplication, (req, res) => {
+            let bot = req.params.bot;
+
+            if (bot !== "dev") return res.status(400).json({ message: "Unable to fetch requested stats" });
+
+            let data = {};
+            master.shards.forEach(shard => {
+                Object.keys(shard.stats).forEach(key => {
+                    data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key];
+                });
+            });
+
+            res.status(200).json({ "guilds": data.guilds });
+        });
+
+        this.post("/api/channels/:channel/messages", isApplication, (req, res) => {
+            let channel = req.params.channel;
+            let content = req.body.content;
+
+            console.log(channel, content);
+
+            if (!content) return res.status(400).json({ "message": "Missing Message Content" });
+
+            master.transmit("channelmessage", { channel, content });
+            res.status(200).json({ "message": "OKAY" });
+        });
+
+        this.all("/api*", (req, res) => {
+            res.status(401).json({ "message": "Unknown Endpoint or Invalid Method" });
+        });
+
+        this.get("/message/:channel/:message", isStaff, (req, res) => {
+            let channel = req.params.channel;
+            let content = req.params.message;
+
+            res.render(page("admin.ejs"), {
+                user: req.user,
+                auth: true
+            });
+        });
+
         /*
                                                            - - - - - - - - - -
 
