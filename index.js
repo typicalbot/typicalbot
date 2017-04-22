@@ -28,8 +28,7 @@ class Shard extends cp.fork {
             } else if (message.type === "masterrequest") {
                 let r = this.master.pendingRequests.get(message.data.id);
                 if (!r) return;
-                clearTimeout(r.timeout);
-                r.r(message);
+                r.callback(message);
             } else if (message.type === "request") {
                 let toShard = this.master.shards.get(message.data.to);
                 if (!toShard) return this.send({ "type": "request", "data": { "id": message.data.id, "error": "InvalidShard" } });
@@ -67,76 +66,21 @@ new class {
         if (config.support[userid]) return 6;
     }
 
-    guildUserLevel(guildid, userid) {
+    globalRequest(request, data) {
         return new Promise((resolve, reject) => {
-            let r_id = Math.random();
+            let id = Math.random();
 
-            let timeout = setTimeout(() => {
-                this.pendingRequests.delete(r_id);
-                return reject("Timed out");
-            }, 5000);
+            let timeout = setTimeout(() => { this.pendingRequests.delete(id); return reject("Timed Out"); }, 5000);
 
-            let r = (response) => {
-                this.pendingRequests.delete(r_id);
+            let callback = (response) => {
+                clearTimeout(timeout);
+                this.pendingRequests.delete(id);
                 return resolve(response.data);
             };
 
-            this.pendingRequests.set(r_id, { r, timeout });
-            this.transmit("userlevel", {
-                id: r_id,
-                guildid,
-                userid
-            });
-        });
-    }
+            this.pendingRequests.set(id, { callback, timeout });
 
-    inGuild(guildid) {
-        return new Promise((resolve, reject) => {
-            let r_id = Math.random();
-
-            let timeout = setTimeout(() => {
-                this.pendingRequests.delete(r_id);
-                return reject("Timed out");
-            }, 5000);
-
-            let r = (response) => {
-                this.pendingRequests.delete(r_id);
-                return resolve(response.data);
-            };
-
-            this.pendingRequests.set(r_id, { r, timeout });
-            this.transmit("inguild", {
-                id: r_id,
-                guildid
-            });
-        });
-    }
-
-    guildInformation(guildid) {
-        return new Promise((resolve, reject) => {
-            let r_id = Math.random();
-
-            let timeout = setTimeout(() => {
-                this.pendingRequests.delete(r_id);
-                return reject();
-            }, 5000);
-
-            let r = (response) => {
-                this.pendingRequests.delete(r_id);
-                return resolve(response.data);
-            };
-
-            this.pendingRequests.set(r_id, { r, timeout });
-            this.transmit("guildinfo", {
-                id: r_id,
-                guildid
-            });
-        });
-    }
-
-    makeRequest(from, to, request) {
-        this.shards.get(to).send({
-            "type": "request"
+            this.transmit(request, Object.assign(data, { id }));
         });
     }
 

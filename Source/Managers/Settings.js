@@ -65,7 +65,7 @@ class Settings {
                 let data = this.data.get(id);
                 if (data.id !== id) {
                     this.data.delete(id);
-                    return this.get(id);
+                    return this.fetch(id);
                 } else return resolve(data);
 
                 //return resolve(data);

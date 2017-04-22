@@ -50,15 +50,15 @@ class ProcessManager {
                     });
             });
         } else if (message.type === "guildinfo") {
-            if (!this.client.guilds.has(message.data.guildid)) return;
+            if (!this.client.guilds.has(message.data.guild)) return;
 
-            let guild = this.client.guilds.get(message.data.guildid);
+            let guild = this.client.guilds.get(message.data.guild);
             let settings = await this.client.settingsManager.fetch(guild.id);
 
             let owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
             this.client.transmit("masterrequest", {
                 id: message.data.id,
-                info: {
+                guild: {
                     "name": guild.name,
                     "id": guild.id,
                     "roles": guild.roles.map(r => new Object({ "name": r.name, "id": r.id, "position": r.position, "hoist": r.hoist, "permissions": r.permissions, "mentionable": r.mentionable })),
@@ -69,17 +69,18 @@ class ProcessManager {
                 },
             });
         } else if (message.type === "inguild") {
+            if (!this.client.guilds.has(message.data.guild)) return;
+
             this.client.transmit("masterrequest", {
-                id: message.data.id,
-                in: this.client.guilds.has(message.data.guildid),
+                id: message.data.id
             });
         } else if (message.type === "userlevel") {
-            if (!this.client.guilds.has(message.data.guildid)) return;
+            if (!this.client.guilds.has(message.data.guild)) return;
 
-            let guild = this.client.guilds.get(message.data.guildid);
+            let guild = this.client.guilds.get(message.data.guild);
             guild.settings = await this.client.settingsManager.fetch(guild.id);
 
-            let userPerms = this.client.permissionsManager.get(guild, message.data.userid, true);
+            let userPerms = this.client.permissionsManager.get(guild, message.data.user, true);
 
             this.client.transmit("masterrequest", {
                 id: message.data.id,
