@@ -13,19 +13,25 @@ const Webserver     = require("./Express/app");
 const path          = pathModule.join(__dirname, `Source`, `client.js`);
 
 class Shard extends cp.fork {
-    constructor(manager, id) {
+    constructor(master, id) {
         super(path, [], { env: { SHARD_ID: id, SHARD_COUNT, CLIENT_TOKEN, CLIENT_VR: vr } });
 
         this.id = id;
 
         this.stats = {};
 
-        this.manager = manager;
+        this.master = master;
 
         this.on("message", message => {
-            if (message.type === "stat") return this.manager.changeStats(this.id, message.data);
-            if (message.type === "request") {
-                let toShard = manager.shards.get(message.data.to);
+            if (message.type === "stat") {
+                this.master.changeStats(this.id, message.data);
+            } else if (message.type === "masterrequest") {
+                let r = this.master.pendingRequests.get(message.data.id);
+                if (!r) return;
+                clearTimeout(r.timeout);
+                r.r(message);
+            } else if (message.type === "request") {
+                let toShard = this.master.shards.get(message.data.to);
                 if (!toShard) return this.send({ "type": "request", "data": { "id": message.data.id, "error": "InvalidShard" } });
 
                 let listener = msg => {
@@ -35,8 +41,9 @@ class Shard extends cp.fork {
                 this.on("message", listener);
 
                 toShard.send(message);
+            } else {
+                this.master.transmit(message.type, message.data);
             }
-            return this.manager.transmit(message.type, message.data);
         });
     }
 }
@@ -60,13 +67,69 @@ new class {
         if (config.support[userid]) return 6;
     }
 
+    guildUserLevel(guildid, userid) {
+        return new Promise((resolve, reject) => {
+            let r_id = Math.random();
+
+            let timeout = setTimeout(() => {
+                this.pendingRequests.delete(r_id);
+                return reject("Timed out");
+            }, 5000);
+
+            let r = (response) => {
+                this.pendingRequests.delete(r_id);
+                return resolve(response.data);
+            };
+
+            this.pendingRequests.set(r_id, { r, timeout });
+            this.transmit("userlevel", {
+                id: r_id,
+                guildid,
+                userid
+            });
+        });
+    }
+
     inGuild(guildid) {
         return new Promise((resolve, reject) => {
-            request.get(`https://discordapp.com/api/v6/guilds/${guildid}`)
-            .set("Authorization", `Bot ${config.token}`)
-            .end((err, res) => {
-                if (res.statusCode === 200) return resolve();
+            let r_id = Math.random();
+
+            let timeout = setTimeout(() => {
+                this.pendingRequests.delete(r_id);
+                return reject("Timed out");
+            }, 5000);
+
+            let r = (response) => {
+                this.pendingRequests.delete(r_id);
+                return resolve(response.data);
+            };
+
+            this.pendingRequests.set(r_id, { r, timeout });
+            this.transmit("inguild", {
+                id: r_id,
+                guildid
+            });
+        });
+    }
+
+    guildInformation(guildid) {
+        return new Promise((resolve, reject) => {
+            let r_id = Math.random();
+
+            let timeout = setTimeout(() => {
+                this.pendingRequests.delete(r_id);
                 return reject();
+            }, 5000);
+
+            let r = (response) => {
+                this.pendingRequests.delete(r_id);
+                return resolve(response.data);
+            };
+
+            this.pendingRequests.set(r_id, { r, timeout });
+            this.transmit("guildinfo", {
+                id: r_id,
+                guildid
             });
         });
     }

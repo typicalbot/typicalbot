@@ -15,7 +15,7 @@
 			<a href="/" class="title">TypicalBot Dashboard</a>
 			<ul class="links links-right">
 				<% if (master.userLevel(user.id) >= 6) { %>
-					<li><a href="/admin">Admin Panel</a></li>
+					<li><a href="/staff">Staff Panel</a></li>
 				<% } %>
 				<li><img class="profile-img" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" /></li>
 				<li><a href="/auth/user"><%= user.username %></a></li>
@@ -27,6 +27,11 @@
 			<p class="text">
 				Hello, <%= user.username %>. There's nothing to display right now. Sorry!
 			</p>
+
+			<div class="break"></div>
+
+			<h1 class="title"><%= user.username %> (<%= user.id %>)</h1>
+			<img style="padding: 30px; height: 100px; border-radius: 100%;" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" />
 		</div>
 	</body>
 </html>

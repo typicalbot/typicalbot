@@ -40,19 +40,19 @@ body {
 }
 .nav .links .profile-img {
 	display: inline-block;
-	margin: 5px;
-	height: 40px;
+	margin: 10px;
+	height: 30px;
 	border-radius: 100%;
 }
 .nav .links li a {
 	display: inline-block;
 	float: right;
-	margin: 5px;
+	margin: 8px 5px 8px 5px;
 	padding: 5px 8px 5px 8px;
-	height: 30px;
+	height: 24px;
 	color: white;
 	text-decoration: none;
-	line-height: 30px;
+	line-height: 24px;
 	transition: background 0.25s linear;
 	border-radius: 5px;
 	font-size: 15px;
@@ -104,7 +104,11 @@ body {
 }
 .page .text {
 	font-size: 18px;
-	padding: 10px 30px 10px 30px;
+	padding: 10px 30px;
+}
+.page .ind-text {
+	font-size: 16px;
+	padding: 10px 60px;
 }
 .page .lister {
 	padding: 10px 30px 10px 30px;
@@ -115,7 +119,99 @@ body {
 	font-weight: bold;
 }
 .page .list {
-	padding: 10px 30px 10px 30px;
+	padding: 10px 30px;
 	list-style-type: square;
 	font-size: 18px;
+}
+
+.ind-1 { padding-left: 30px; }
+.ind-2 { padding-left: 60px; }
+.ind-3 { padding-left: 90px; }
+
+.page .inline-list {
+	list-style-type: none;
+}
+.page .inline-list li {
+	display: inline-block;
+	background-color: #ececec;
+	padding: 4px 10px;
+	margin: 4px 2px;
+	border-radius: 4px;
+}
+
+.page .setting-list {
+	list-style-type: square;
+}
+.page .setting-list li{
+	margin-bottom: 10px;
+}
+.page .setting-list li .setting {
+	color: #00adff;
+	font-weight: bold;
+}
+.page .setting-list li .value {
+	padding: 4px 10px;
+	border-radius: 4px;
+	margin-left: 10px;
+	background-color: #ececec;
+}
+
+.guild-list {
+    list-style: none;
+	padding: 10px 45px;
+    font-size: 18px;
+}
+
+.guild-list li {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.guild-list li a {
+    background-color: #ececec;
+    text-decoration: none;
+    padding: 8px 15px;
+	height: 20px;
+	line-height: 20px;
+	display: inline-block;
+    color: black;
+    border-radius: 4px;
+    transition: all 0.25s linear;
+}
+.guild-list li a img {
+	float: left;
+	height: 20px;
+	border-radius: 100%;
+	margin-right: 10px;
+}
+
+.guild-list li a:hover {
+    background-color: #00aaff;
+    color: white;
+}
+
+input[type=text] {
+    width: 20%;
+    box-sizing: border-box;
+    border: 1px solid #00adff;
+    border-radius: 4px;
+    font-size: 18px;
+    background-color: white;
+    background-image: url('/images/search.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+	margin: 15px 10px 10px 30px;
+    padding: 12px 20px 12px 40px;
+}
+
+input[type=submit] {
+    background-color: #00adff;
+    border: none;
+    color: white;
+	padding: 10px 20px;
+    border-radius: 4px;
+	font-size: 18px;
+    text-decoration: none;
+    margin: 4px 2px 4px 20px;
+    cursor: pointer;
 }

@@ -54,15 +54,17 @@ class PermissionLevels {
         return guild.roles.get(roleSetting);
     }
 
-    get(guild, user, ignoreStaff = false) {
-        let member = guild.member(user);
-        if (!member) return this.define(0);
-
+    get(guild, member, ignoreStaff = false) {
         if (this.levels[10].check(guild, member)) return this.define(10);
         if (this.levels[9].check(guild, member)) return this.define(9);
         if (this.levels[8].check(guild, member)) return this.define(8);
         if (!ignoreStaff && this.levels[7].check(guild, member)) return this.define(7);
         if (!ignoreStaff && this.levels[6].check(guild, member)) return this.define(6);
+
+        if (!guild) return;
+        
+        member = guild.member(member);
+        if (!member) return this.define(0);
 
         if (this.levels[4].check(guild, member)) return this.define(4);
         if (this.levels[3].check(guild, member)) return this.define(3);

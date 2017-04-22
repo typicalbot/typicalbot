@@ -78,12 +78,10 @@ class EventsManager {
     async messageUpdate(oldMessage, message) {
         if (message.channel.type !== "text") return;
 
-        let settings = await this.client.settingsManager.fetch(message.guild);
+        message.guild.settings = await this.client.settingsManager.fetch(message.guild);
 
         let userPermissions = this.client.permissionsManager.get(message.guild, message.author);
         if (userPermissions.level >= 2) return;
-
-        message.guild.settings = settings;
 
         let response = new Response(this.client, message);
         this.client.functions.inviteCheck(response);

@@ -1,7 +1,7 @@
 class ProcessManager {
     constructor(client) { this.client = client; }
-    
-    message(message) {
+
+    async message(message) {
         if (message.type === "stats") {
             this.client.shardData = message.data;
         } else if (message.type === "reload") {
@@ -19,7 +19,7 @@ class ProcessManager {
             let guild = this.client.guilds.get(message.data.guild);
             let owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
 
-            this.client.settings.get(guild.id).then(settings => {
+            this.client.settingsManager.fetch(guild.id).then(settings => {
                 let settingslist = [];
                 Object.keys(settings).map(s => settingslist.push(`${s}: \`${settings[s]}\``));
 
@@ -48,6 +48,42 @@ class ProcessManager {
                             "timestamp": new Date()
                         }
                     });
+            });
+        } else if (message.type === "guildinfo") {
+            if (!this.client.guilds.has(message.data.guildid)) return;
+
+            let guild = this.client.guilds.get(message.data.guildid);
+            let settings = await this.client.settingsManager.fetch(guild.id);
+
+            let owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
+            this.client.transmit("masterrequest", {
+                id: message.data.id,
+                info: {
+                    "name": guild.name,
+                    "id": guild.id,
+                    "roles": guild.roles.map(r => new Object({ "name": r.name, "id": r.id, "position": r.position, "hoist": r.hoist, "permissions": r.permissions, "mentionable": r.mentionable })),
+                    "memberCount": guild.memberCount,
+                    "channels": guild.channels.map(c => new Object({ "name": c.name, "id": c.id, "position": c.position, "type": c.type })),
+                    owner: { "name": owner.username, "id": owner.id },
+                    settings
+                },
+            });
+        } else if (message.type === "inguild") {
+            this.client.transmit("masterrequest", {
+                id: message.data.id,
+                in: this.client.guilds.has(message.data.guildid),
+            });
+        } else if (message.type === "userlevel") {
+            if (!this.client.guilds.has(message.data.guildid)) return;
+
+            let guild = this.client.guilds.get(message.data.guildid);
+            guild.settings = await this.client.settingsManager.fetch(guild.id);
+
+            let userPerms = this.client.permissionsManager.get(guild, message.data.userid, true);
+
+            this.client.transmit("masterrequest", {
+                id: message.data.id,
+                permissions: userPerms
             });
         } else if (message.type === "shardping") {
             if (message.data.shard != this.client.shardID) return;

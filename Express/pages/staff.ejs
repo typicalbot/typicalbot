@@ -22,8 +22,16 @@
 		<div class="page">
 			<h1 class="title">Your Profile</h1>
 			<p class="text">
-				Hello, <%= user.username %>. You're an administrator.
+				Hello, <%= user.username %>. You're a staff member.
 			</p>
+
+			<div class="break"></div>
+
+			<h1 class="title">Get Server Information</h1>
+			<form>
+			 	<input action="/guild/search" type="text" name="guildid" placeholder="Guild ID">
+				<input type="submit" value="Get Guild Information">
+			</form>
 		</div>
 	</body>
 </html>
