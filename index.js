@@ -29,17 +29,6 @@ class Shard extends cp.fork {
                 let r = this.master.pendingRequests.get(message.data.id);
                 if (!r) return;
                 r.callback(message);
-            } else if (message.type === "request") {
-                let toShard = this.master.shards.get(message.data.to);
-                if (!toShard) return this.send({ "type": "request", "data": { "id": message.data.id, "error": "InvalidShard" } });
-
-                let listener = msg => {
-                    if (msg.type !== "request" || msg.data.id !== message.data.id) return;
-                    this.removeListener("message", listener);
-                };
-                this.on("message", listener);
-
-                toShard.send(message);
             } else {
                 this.master.transmit(message.type, message.data);
             }

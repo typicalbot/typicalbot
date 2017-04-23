@@ -44,6 +44,10 @@ class Webserver extends express {
         this.engine("html", require("ejs").renderFile);
         this.set("view engine", "html");
 
+        const isAuthenticated = (req, res, next) => { if (req.isAuthenticated()) return next(); req.session.backURL = req.url; res.redirect("/auth/login"); };
+        const isStaff = (req, res, next) => { if (req.isAuthenticated() && master.userLevel(req.user.id) >= 6) return next(); req.session.backURL = req.originalURL; res.redirect("/"); };
+        const isApplication = (req, res, next) => { if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next(); res.status(401).json({ "message": "Unauthorized" }); };
+
         /*
                                                            - - - - - - - - - -
 
@@ -51,11 +55,6 @@ class Webserver extends express {
 
                                                            - - - - - - - - - -
         */
-
-        const isApplication = (req, res, next) => {
-            if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next();
-            res.status(401).json({ "message": "Unauthorized" });
-        };
 
         this.get("/api/bots/:bot/stats", isApplication, (req, res) => {
             let bot = req.params.bot;
@@ -143,9 +142,6 @@ class Webserver extends express {
 
                                                            - - - - - - - - - -
         */
-
-        const isAuthenticated = (req, res, next) => { if (req.isAuthenticated()) return next(); req.session.backURL = req.url; res.redirect("/auth/login"); };
-        const isStaff = (req, res, next) => { if (req.isAuthenticated() && master.userLevel(req.user.id) >= 6) return next(); req.session.backURL = req.originalURL; res.redirect("/"); };
 
         let userGuilds = user => {
             return new Promise((resolve, reject) => {
@@ -242,7 +238,10 @@ class Webserver extends express {
         });
 
         this.use(express.static(`${__dirname}/static`));
-        this.use((req, res) => { res.status(404).sendFile(path.join(__dirname, "404.html")); });
+        this.use((req, res) => {
+            if (!req.isAuthenticated()) return res.status(404).render(page("404.ejs"), { master, auth: req.isAuthenticated() });
+            res.status(404).render(page("404.ejs"), { master, user: req.user, auth: req.isAuthenticated() });
+        });
         this.listen(3000, () => console.log("Listening to port 3000."));
     }
 }

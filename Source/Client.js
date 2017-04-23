@@ -56,10 +56,12 @@ const client = new class extends Discord.Client {
 
         if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 
+/*
         setInterval(() => {
             if (this.settingsManager.connection.state === "disconnected") this.settingsManager.connection.connect();
             if (this.lastMessage && Date.now() - this.lastMessage > 120000) { this.destroy(); return this.login(process.env.CLIENT_TOKEN); }
         }, 60000);
+*/
 
         this.login();
     }
