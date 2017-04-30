@@ -7,6 +7,7 @@ class EventsManager {
     }
 
     onceReady() {
+        this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
         this.client.transmitStat("guilds");
         this.client.user.setGame(`Client Starting`);
         if (this.client.vr === "alpha" && this.client.guilds.has("163038706117115906")) this.client.functions.sendDonors();
@@ -22,11 +23,6 @@ class EventsManager {
         }, 300000);
     }
 
-    ready() {
-        this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
-        this.client.ws.ws.on("close", code => console.dir(code));
-    }
-
     async message(message) {
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
@@ -40,7 +36,7 @@ class EventsManager {
             this.client.lastMessage = message.createdTimestamp;
 
             let BotMember = message.guild.member(this.client.user);
-            if (!BotMember || !message.channel.permissionsFor(BotMember).hasPermission("SEND_MESSAGES")) return;
+            if (!BotMember || !message.channel.permissionsFor(BotMember).has("SEND_MESSAGES")) return;
 
             let settings = await this.client.settingsManager.fetch(message.guild).catch(err => { return err; });
 
@@ -105,13 +101,13 @@ class EventsManager {
             .setDescription(this.client.functions.shorten(message.content, 100))
             .setFooter("Message Deleted")
             .setTimestamp()
-        ).catch(() => {throw new Error("Missing Permissions");});
+        ).catch(() => console.log("Missing Permissions"));
 
         channel.sendMessage(
             settings.deletelog === "--enabled" ?
                 `**${user.username}#${user.discriminator}**'s message was deleted.` :
                 this.client.functions.getFilteredMessage("logs-msgdel", message.guild, user, settings.deletelog, { message, channel: message.channel })
-        ).catch(() => {throw new Error("Missing Permissions");});
+        ).catch(() => console.log("Missing Permissions"));
     }
 
     async guildMemberAdd(member) {
@@ -131,33 +127,33 @@ class EventsManager {
                         .setAuthor(`${user.tag} (${user.id})`, user.avatarURL || null)
                         .setFooter("User Joined")
                         .setTimestamp()
-                    ).catch(() => {throw new Error("Missing Permissions");});
+                    ).catch(() => console.log("Missing Permissions"));
                 } else {
                     channel.sendMessage(
                         settings.joinlog ?
                             this.client.functions.getFilteredMessage("logs", guild, user, settings.joinlog) :
                             `**${user.username}#${user.discriminator}** has joined the server.`
-                    ).catch(() => {throw new Error("Missing Permissions");});
+                    ).catch(() => console.log("Missing Permissions"));
                 }
             }
         }
 
-        if (settings.joinmessage && !user.bot) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.getFilteredMessage("jm", guild, user, settings.joinmessage)}`).catch(() => {throw new Error("Missing Permissions");});
+        if (settings.automessage && !user.bot) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.getFilteredMessage("jm", guild, user, settings.automessage)}`).catch(() => console.log("Missing Permissions"));
 
-        if (settings.joinnick) member.setNickname(this.client.functions.getFilteredMessage("jn", guild, user, settings.joinnick)).catch(() => {throw new Error("Missing Permissions");});
+        if (settings.autonick) member.setNickname(this.client.functions.getFilteredMessage("jn", guild, user, settings.autonick)).catch(() => console.log("Missing Permissions"));
 
         let autorole = this.client.functions.fetchAutoRole(guild, settings);
         if (autorole && autorole.editable) setTimeout(() =>
             member.addRole(autorole).then(() => {
                 if (settings.autorolesilent === "N" && settings.logs && guild.channels.has(settings.logs)) guild.channels.get(settings.logs).sendMessage(`**${user.tag}** was given the autorole **${autorole.name}**.`);
-            }).catch(() => {throw new Error("Missing Permissions");}), settings.autoroledelay || 2000
+            }).catch(() => console.log("Missing Permissions")), settings.autoroledelay || 2000
         );
     }
 
     async guildMemberRemove(member) {
         let guild = member.guild;
 
-        let bans = await guild.fetchBans().catch(() => {throw new Error("Missing Permissions");});
+        let bans = await guild.fetchBans().catch(() => console.log("Missing Permissions"));
         if (bans instanceof require("discord.js").Collection && bans.has(member.id)) return;
 
         let settings = await this.client.settingsManager.fetch(guild.id);
@@ -174,13 +170,13 @@ class EventsManager {
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL || null)
                 .setFooter("User Left")
                 .setTimestamp()
-            ).catch(() => {throw new Error("Missing Permissions");});
+            ).catch(() => console.log("Missing Permissions"));
         } else {
             channel.sendMessage(
                 settings.leavelog ?
                     this.client.functions.getFilteredMessage("logs", guild, user, settings.leavelog) :
                     `**${user.tag}** has left the server.`
-            ).catch(() => {throw new Error("Missing Permissions");});
+            ).catch(() => console.log("Missing Permissions"));
         }
     }
 
@@ -205,7 +201,7 @@ class EventsManager {
             settings.nicklog !== "--enabled" ?
             this.client.functions.getFilteredMessage("ann-nick", guild, user, settings.nicklog, { oldMember }) :
             `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
-        ).catch(() => {throw new Error("Missing Permissions");});
+        ).catch(() => console.log("Missing Permissions"));
     }
 
     async guildBanAdd(guild, user) {
@@ -229,13 +225,13 @@ class EventsManager {
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL || null)
                 .setFooter("User Banned")
                 .setTimestamp()
-            ).catch(() => {throw new Error("Missing Permissions");});
+            ).catch(() => console.log("Missing Permissions"));
         } else {
             channel.sendMessage(
                 settings.banlog ?
                     this.client.functions.getFilteredMessage("logs", guild, user, settings.banlog) :
                     `**${user.tag}** has been banned from the server.`
-            ).catch(() => {throw new Error("Missing Permissions");});
+            ).catch(() => console.log("Missing Permissions"));
         }
     }
 
@@ -260,13 +256,13 @@ class EventsManager {
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL || null)
                 .setFooter("User Unbanned")
                 .setTimestamp()
-            ).catch(() => {throw new Error("Missing Permissions");});
+            ).catch(() => console.log("Missing Permissions"));
         } else {
             channel.sendMessage(
                 settings.unbanlog ?
                     this.client.functions.getFilteredMessage("logs", guild, user, settings.unbanlog) :
                     `**${user.tag}** has been unbanned from the server.`
-            ).catch(() => {throw new Error("Missing Permissions");});
+            ).catch(() => console.log("Missing Permissions"));
         }
     }
 

@@ -6,8 +6,8 @@ class Response {
 
     send(content, embed) {
         return embed ?
-            this.message.channel.sendMessage(content, { embed }) :
-            this.message.channel.sendMessage(content);
+            this.message.channel.send(content, { embed }) :
+            this.message.channel.send(content);
     }
 
     reply(content, embed) {
@@ -37,8 +37,8 @@ class Response {
 
     dm(content, embed) {
         return embed ?
-            this.message.author.sendMessage(content, { embed }) :
-            this.message.author.sendMessage(content);
+            this.message.author.send(content, { embed }) :
+            this.message.author.send(content);
     }
 }
 

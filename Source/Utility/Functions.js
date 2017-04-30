@@ -132,7 +132,7 @@ module.exports = class Functions {
     getPrefix(user, settings, command) {
         if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
         if (settings.customprefix && command.startsWith(settings.customprefix)) return settings.customprefix;
-        if (settings.originaldisabled === "N" && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
+        if (settings.defaultprefix === "N" && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
         return null;
     }
 
@@ -208,5 +208,9 @@ module.exports = class Functions {
         ).join("\n");
 
         return `Page ${page + 1} / ${pages.length} | ${content.length} Items\n\n${thisPage}`;
+    }
+
+    page(array, page) {
+        return array.splice((page -1) * 10, 10);
     }
 };

@@ -27,6 +27,8 @@ module.exports = class extends Command {
                     this.client.transmit("shardping", { "channel": message.channel.id, "shard": +data, timestamp: Date.now() });
                 });
         } else if (action === "restart") {
+            if (shard || !shard) return response.error("Subcommand disabled.");
+
             if (!shard) return response.error("No shard specified.");
 
             shard < 100 ?

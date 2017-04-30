@@ -33,6 +33,6 @@ module.exports = class extends Command {
             }
         };
 
-        response.send("", embed);
+        response.embed(embed);
     }
 };

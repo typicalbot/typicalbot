@@ -42,7 +42,7 @@ const client = new class extends Discord.Client {
         this.softbanCache = new Collection();
 
         this.once("ready", () => this.eventsManager.onceReady())
-        .on("ready", () => this.eventsManager.ready())
+        .on("debug", debug => console.log(debug.replace(this.token, "REDACTED")))
         .on("warn", err => this.log(err, true))
         .on("error", err => this.log(err, true))
         .on("message", message => this.eventsManager.message(message))

@@ -16,7 +16,7 @@ module.exports = class extends Command {
 
         this.client.transmit("reload", mod);
 
-        response.send("", {
+        response.embed({
             "color": 0x00FF00,
             "description": `**Reloading Module:** \`${mod}\``
         });
