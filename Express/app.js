@@ -122,6 +122,8 @@ class Webserver extends express {
         this.get("/auth/callback", passport.authenticate("discord", {
             failureRedirect: `/failed`
         }), (req, res) => {
+            console.log(`${req.user.username} signed in.`);
+
             if (req.session.backURL) {
                 res.redirect(req.session.backURL);
                 req.session.backURL = null;
@@ -194,6 +196,29 @@ class Webserver extends express {
             });
         });
 
+        this.get("/beta-apply", isAuthenticated, (req, res) => {
+            let inGuild = !!req.user.guilds.filter(g => g.id = "163038706117115906")[0];
+            if (!inGuild) return res.status(401).json({ "message": "You are not in TypicalBot Lounge." });
+
+            res.render(page("beta-apply.ejs"), {
+                master,
+                user: req.user,
+                auth: true
+            });
+        });
+
+        this.get("/beta-apply/form", isAuthenticated, (req, res) => {
+            let inGuild = !!req.user.guilds.filter(g => g.id = "163038706117115906")[0];
+            if (!inGuild) return res.status(401).json({ "message": "You are not in TypicalBot Lounge." });
+
+            let username = req.query.username;
+            let why = req.query.why;
+            if (!username || !why) return res.status(401).json({ "message": "Invalid query options." });
+
+            master.transmit("channelmessage", { "channel": "308348915420364810", "content": `${req.user.username}#${req.user.discriminator} | **Stated Username:** ${username} | **Reason:** ${why}\n\n\u200B` });
+            res.redirect("/");
+        });
+
         this.get("/staff", isStaff, (req, res) => {
             if (req.query.guildid) return res.redirect(`/guild/${req.query.guildid}`);
 
@@ -233,7 +258,7 @@ class Webserver extends express {
                 let userPerms = new Perms(userInGuild.permissions);
                 if (!userPerms.has("MANAGE_GUILD")) return res.status(401).json({ "message": "You do not have permissions to add the bot to that guild." });
 
-                res.redirect(botOAuth(config.client, guild));
+                res.redirect(botOAuth(config.clientID, guild));
             });
         });
 

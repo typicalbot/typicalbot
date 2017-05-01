@@ -197,11 +197,19 @@ input[type=text] {
     border-radius: 4px;
     font-size: 18px;
     background-color: white;
-    background-image: url('/images/search.png');
-    background-position: 10px 10px;
     background-repeat: no-repeat;
 	margin: 15px 10px 10px 30px;
-    padding: 12px 20px 12px 40px;
+    padding: 12px 20px 12px 20px;
+}
+
+.guild-search input[type=text] {
+	padding: 12px 20px 12px 40px;
+    background-image: url('/images/search.png');
+    background-position: 10px 10px;
+}
+
+input[type=text]:focus {
+    border: 1px solid #00adff;
 }
 
 input[type=submit] {
