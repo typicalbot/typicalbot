@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="/styles/style.css" rel="stylesheet" type="text/css">
+		<link href="/images/icon.png" rel="icon" type="image/x-icon"/>
+		<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<title><%= guild.name %> – TypicalBot</title>
+	</head>
+	<body>
+		<%- include("nav.ejs", { master, auth, user: auth ? user : null }) %>
+		<div class="page">
+			<h1 class="title"><%= guild.name %> (<%= guild.id %>)</h1>
+			<p class="text">Guild Information</p>
+			<p class="ind-text">Owner: <%= guild.owner.name %> (<%= guild.owner.id %>)</p>
+			<p class="ind-text">Members: <%= guild.memberCount %></p>
+			<p class="ind-text">Roles: <%= guild.roles.length %></p>
+			<ul class="inline-list ind-3">
+				<% guild.roles.forEach(r => { %>
+					<li><%= r.name %></li>
+				<% }) %>
+			</ul>
+			<p class="ind-text">Channels: <%= guild.channels.length %></p>
+			<ul class="inline-list ind-3">
+				<b>Text:</b><br>
+				<% guild.channels.filter(c => c.type === "text").forEach(c => { %>
+					<li>#<%= c.name %></li>
+				<% }) %>
+				<br><b>Voice:</b><br>
+				<% guild.channels.filter(c => c.type === "voice").forEach(c => { %>
+					<li><%= c.name %></li>
+				<% }) %>
+			</ul>
+			<p class="ind-text">Settings:</p>
+			<ul class="setting-list ind-3">
+				<li><span class="setting">Administrator Role:</span><span class="value"><% let value = guild.roles.filter(r => r.id === guild.settings.adminrole)[0] %><%= value ? value.name : "None"%></span></li>
+			</ul>
+		</div>
+	</body>
+</html>

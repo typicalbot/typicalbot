@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="/styles/style.css" rel="stylesheet" type="text/css">
+		<link href="/images/icon.png" rel="icon" type="image/x-icon"/>
+		<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<title>Home – TypicalBot</title>
+	</head>
+	<body>
+		<%- include("nav.ejs", { master, auth, user: auth ? user : null }) %>
+		<div class="page">
+			<% if (auth) { %>
+
+				<h1 class="title">TypicalBot Dashboard</h1>
+				<p class="text">
+					Hello, <%= user.username %>. This dashboard is still in development.
+				</p>
+
+				<div class="break"></div>
+
+				<h1 class="title">Manage Servers</h1>
+				<p class="text">Click a server to manage settings. <span style="font-size: 14px; font-style: italic;">Something missing? Make sure you have a permission level of 2 or higher.</span></p>
+				<ul class="guild-list">
+					<% if (!user.guilds || !user.guilds.length) { %>
+						<p class="text">No servers to display.</p>
+					<% } else {
+						if (!guilds.in.length) { %>
+								<p class="text">No servers to display.</p>
+						<% } else { guilds.in.sort((a,b) => { if (a.name.toLowerCase() < b.name.toLowerCase()) return -1; if (a.name.toLowerCase() > b.name.toLowerCase()) return 1; return 0}).forEach(g => { %>
+								<li><a href="/guild/<%= g.id %>"><img class="guild-icon" src="<%= g.icon ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.jpg` : `/images/missing.png` %>" /><%= g.name %></a></li>
+							<% }) %>
+						<% } %>
+					<% } %>
+				</ul>
+
+				<div class="break"></div>
+
+				<h1 class="title">Invite to Server</h1>
+				<p class="text">Click a server to add the bot to. <span style="font-size: 14px; font-style: italic;">Something missing? Make sure you have the Manage Server permission.</span></p>
+				<ul class="guild-list">
+					<% if (!user.guilds || !user.guilds.length) { %>
+						<p class="text">No servers to display.</p>
+					<% } else {
+						if (!guilds.not.length) { %>
+								<p class="text">No servers to display.</p>
+						<% } else { guilds.not.sort((a,b) => { if (a.name.toLowerCase() < b.name.toLowerCase()) return -1; if (a.name.toLowerCase() > b.name.toLowerCase()) return 1; return 0}).forEach(g => { %>
+								<li><a href="/guild/<%= g.id %>"><img class="guild-icon" src="<%= g.icon ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.jpg` : `/images/missing.png` %>" /><%= g.name %></a></li>
+							<% }) %>
+						<% } %>
+					<% } %>
+				</ul>
+
+			<% } else { %>
+				<h1 class="title">TypicalBot Dashboard</h1>
+				<p class="text">
+					Sign in to access the dashboard.
+				</p>
+			<% } %>
+		</div>
+	</body>
+</html>

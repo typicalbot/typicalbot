@@ -58,10 +58,10 @@ module.exports = class extends Command {
             .setColor(0x00ADFF)
             .setTitle(`Command Usage: ${commandInput}`)
             .setDescription(`• [[Parameter]]() - Optional Parameter\n• [<Parameter>]() - Required Parameter`)
-            .addField("Command", command.name, true)
-            .addField("Aliases", command.aliases.length ? command.aliases.join(", ") : "None", true)
-            .addField("Description", command.description)
-            .addField("Usage", command.usage)
+            .addField("» Command", command.name, true)
+            .addField("» Aliases", command.aliases.length ? command.aliases.join(", ") : "None")
+            .addField("» Description", command.description)
+            .addField("» Usage", command.usage)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
             .setTimestamp();
 

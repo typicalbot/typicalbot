@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const Collection = Discord.Collection;
 
+let Database = require("./Managers/Database");
 let ProcessManager = require("./Managers/Process");
 let EventsManager = require("./Managers/Events");
 let CommandsManager = require("./Managers/Commands");
@@ -20,6 +21,8 @@ const client = new class extends Discord.Client {
         this.shardID = +process.env.SHARD_ID;
         this.shardNumber = +process.env.SHARD_ID + 1;
         this.shardCount = +process.env.SHARD_COUNT;
+
+        this.database = Database(this);
 
         this.processManager = new ProcessManager(this);
         this.eventsManager = new EventsManager(this);

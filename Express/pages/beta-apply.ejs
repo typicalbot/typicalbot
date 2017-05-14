@@ -1,22 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link href="/styles/style.css" rel="stylesheet" type="text/css">
-		<link href="/images/icon.png" rel="icon" type="image/x-icon"/>
-		<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-		<title>Beta Tester Application – TypicalBot</title>
-	</head>
-	<body>
-		<%- include("nav.ejs", { master, auth, user: auth ? user : null }) %>
-		<div class="page">
-			<h1 class="title">Apply for Beta Testing</h1>
+    <head>
+        <meta charset="utf-8">
+        <%- include("parts/head.ejs") %>
+        <link href="/extra/style.css" rel="stylesheet" type="text/css">
+        <link href="/images/icon.png" rel="icon" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <title>Beta Tester Application – TypicalBot</title>
+    </head>
+    <body>
+        <%- include("parts/nav.ejs", { master, auth, user: auth ? user : null }) %>
+        <div class="page-container">
+            <span class="section section-large"><p>Apply for Beta Testing</p></span>
             <form action="/beta-apply/form">
                 <fieldset style="padding: 20px; border-radius: 4px;">
-					<legend style="padding: 0px 4px;">Beta Application</legend>
-
                     <label for="username">
                         Discord Username:
                         <br>
@@ -35,7 +35,9 @@
 
                     <input type="submit" value="Submit Application">
                 </fieldset>
-			</form>
-		</div>
-	</body>
+            </form>
+        </div>
+    </body>
 </html>
+
+<%- include("parts/footer.ejs") %>

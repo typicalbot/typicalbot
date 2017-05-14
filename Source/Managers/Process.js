@@ -53,18 +53,21 @@ class ProcessManager {
             if (!this.client.guilds.has(message.data.guild)) return;
 
             let guild = this.client.guilds.get(message.data.guild);
-            let settings = await this.client.settingsManager.fetch(guild.id);
+            //let settings = await this.client.settingsManager.valueSettings(guild);
+            let settings = await this.client.settingsManager.fetch(guild);
 
             let owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
+
             this.client.transmit("masterrequest", {
                 id: message.data.id,
                 guild: {
                     "name": guild.name,
                     "id": guild.id,
+                    "icon": guild.icon,
                     "roles": guild.roles.map(r => new Object({ "name": r.name, "id": r.id, "position": r.position, "hoist": r.hoist, "permissions": r.permissions, "mentionable": r.mentionable })),
                     "memberCount": guild.memberCount,
                     "channels": guild.channels.map(c => new Object({ "name": c.name, "id": c.id, "position": c.position, "type": c.type })),
-                    owner: { "name": owner.username, "id": owner.id },
+                    owner: { "name": owner.username, "id": owner.id, "discriminator": owner.discriminator },
                     settings
                 },
             });
@@ -74,6 +77,11 @@ class ProcessManager {
             this.client.transmit("masterrequest", {
                 id: message.data.id
             });
+        } else if (message.type === "leaveguild") {
+            if (!this.client.guilds.has(message.data.guild)) return;
+
+            let guild = this.client.guilds.get(message.data.guild);
+            guild.leave();
         } else if (message.type === "userlevel") {
             if (!this.client.guilds.has(message.data.guild)) return;
 
@@ -85,6 +93,27 @@ class ProcessManager {
             this.client.transmit("masterrequest", {
                 id: message.data.id,
                 permissions: userPerms
+            });
+        } else if (message.type === "userpos") {
+            if (!this.client.guilds.has("163038706117115906")) return;
+
+            let guild = this.client.guilds.get("163038706117115906");
+            let user = guild.member(message.data.user) || { roles: [] };
+
+            let roles = [];
+
+            user.roles.forEach(r => {
+                if (["163039088243507200",
+                    "278955494272663552",
+                    "193487705844350976",
+                    "193578559057559562",
+                    "193486573067567104",
+                    "301392622763638785"].includes(r.id)) roles.push({ name: r.name, id: r.id, hexColor: r.hexColor });
+            });
+
+            this.client.transmit("masterrequest", {
+                id: message.data.id,
+                roles
             });
         } else if (message.type === "shardping") {
             if (message.data.shard != this.client.shardID) return;

@@ -12,7 +12,7 @@ const Perms = Discord.Permissions;
 
 const page = file => path.resolve(`${__dirname}${path.sep}pages${path.sep}${file}`);
 
-const botOAuth = (client, guild) => `https://discordapp.com/oauth2/authorize?client_id=${client}&permissions=8&scope=bot&redirect_uri=http://dev.typicalbot.com/&response_type=code&guild_id=${guild}`;
+const botOAuth = (client, guild) => `https://discordapp.com/oauth2/authorize?client_id=${client}&permissions=8&scope=bot&redirect_uri=http://dev.typicalbot.com:3000/&response_type=code&guild_id=${guild}`;
 
 class Webserver extends express {
     constructor(master, config) {
@@ -48,6 +48,9 @@ class Webserver extends express {
         const isStaff = (req, res, next) => { if (req.isAuthenticated() && master.userLevel(req.user.id) >= 6) return next(); req.session.backURL = req.originalURL; res.redirect("/"); };
         const isApplication = (req, res, next) => { if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next(); res.status(401).json({ "message": "Unauthorized" }); };
 
+        const shade = (color, percent) => { let R = parseInt(color.substring(1,3),16); let G = parseInt(color.substring(3,5),16); let B = parseInt(color.substring(5,7),16); R = parseInt(R * (100 + percent) / 100); G = parseInt(G * (100 + percent) / 100); B = parseInt(B * (100 + percent) / 100); R = (R<255)?R:255; G = (G<255)?G:255; B = (B<255)?B:255; let RR = ((R.toString(16).length==1)?"0"+R.toString(16):R.toString(16)); let GG = ((G.toString(16).length==1)?"0"+G.toString(16):G.toString(16)); let BB = ((B.toString(16).length==1)?"0"+B.toString(16):B.toString(16)); return "#"+RR+GG+BB; };
+        const rgb = (color) => { let R = parseInt(color.substring(1,3),16); let G = parseInt(color.substring(3,5),16); let B = parseInt(color.substring(5,7),16); return { R, G, B }; };
+
         /*
                                                            - - - - - - - - - -
 
@@ -74,8 +77,6 @@ class Webserver extends express {
         this.post("/api/channels/:channel/messages", isApplication, (req, res) => {
             let channel = req.params.channel;
             let content = req.body.content;
-
-            console.log(channel, content);
 
             if (!content) return res.status(400).json({ "message": "Missing Message Content" });
 
@@ -222,10 +223,17 @@ class Webserver extends express {
         this.get("/staff", isStaff, (req, res) => {
             if (req.query.guildid) return res.redirect(`/guild/${req.query.guildid}`);
 
-            res.render(page("staff.ejs"), {
-                master,
-                user: req.user,
-                auth: true
+            master.globalRequest("userpos", { user: req.user.id }).then(data => {
+                res.render(page("staff.ejs"), {
+                    master,
+                    user: req.user,
+                    auth: true,
+                    roles: data.roles,
+                    shade,
+                    rgb
+                });
+            }).catch(() => {
+                return res.status(400).json({ "message": "An error occured." });
             });
         });
 
@@ -249,6 +257,31 @@ class Webserver extends express {
                     }).catch(() => {
                         res.status(500).json({ "message": "An error occured." });
                     });
+                }).catch(() => {
+                    res.status(500).json({ "message": "An error occured." });
+                });
+            }).catch(() => {
+                if (!userInGuild) return res.redirect("/");
+
+                let userPerms = new Perms(userInGuild.permissions);
+                if (!userPerms.has("MANAGE_GUILD")) return res.status(401).json({ "message": "You do not have permissions to add the bot to that guild." });
+
+                res.redirect(botOAuth(config.clientID, guild));
+            });
+        });
+
+        this.get("/guild/:guild/leave", isAuthenticated, async (req, res) => {
+            let guild = req.params.guild;
+
+            let userInGuild = req.user.guilds.filter(g => g.id === guild)[0];
+            if (!userInGuild && master.userLevel(req.user.id) < 6) return res.status(401).json({ "message": "You do not have access to that guild." });
+
+            master.globalRequest("inguild", { guild }).then(() => {
+                master.globalRequest("userlevel", { guild, user: req.user.id }).then(data => {
+                    if (data.permissions.level < 2) return res.status(401).json({ "message": "You do not have access to the requested guild." });
+
+                    master.globalRequest("leaveguild", { guild });
+                    res.redirect("/");
                 }).catch(() => {
                     res.status(500).json({ "message": "An error occured." });
                 });

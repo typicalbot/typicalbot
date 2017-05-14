@@ -1,6 +1,4 @@
 const mysql = require("mysql");
-const vr = require("../../version").version;
-const mysql_login = require(`../../Configs/${vr}`).mysql;
 
 const DefaultData = {
     "embed": "N",
@@ -42,43 +40,33 @@ const DefaultData = {
 };
 
 class Settings {
-    constructor() {
-        this.connect();
+    constructor(client) {
+        this.client = client;
 
         this.data = new Map();
 
         this.default = DefaultData;
     }
 
-    connect() {
-        if (this.connection) this.connection.end();
-
-        this.connection = mysql.createConnection(mysql_login);
-        this.connection.connect();
-    }
-
     fetch(id) {
         return new Promise((resolve, reject) => {
-            id = id ? typeof id === "object" ? id.id : id : null;
-            if (!id) return resolve(DefaultData);
             if (this.data.has(id)) {
                 let data = this.data.get(id);
                 if (data.id !== id) {
                     this.data.delete(id);
                     return this.fetch(id);
                 } else return resolve(data);
-
-                //return resolve(data);
             } else {
-                this.connection.query(`SELECT * FROM guilds WHERE id = ${id}`, (error, rows) => {
-                    if (error) return resolve(DefaultData);
-                    if (!rows[0]) {
+                this.client.database.query(`SELECT * FROM guilds WHERE id = ${id}`).then(rows => {
+                    if (!rows.length) {
                         this.create(id);
                         return resolve(DefaultData);
                     } else {
                         this.data.set(id, rows[0]);
                         return resolve(rows[0]);
                     }
+                }).catch(err => {
+                    return resolve(DefaultData);
                 });
             }
         });
@@ -86,19 +74,19 @@ class Settings {
 
     create(id) {
         return new Promise((resolve, reject) => {
-            id = id ? typeof id === "object" ? id.id : id : null;
-            this.connection.query(`INSERT INTO guilds SET ?`, { id }, (error, result) => {
-                if (error) return reject(error);
+            this.client.database.query(`INSERT INTO guilds (id) VALUES (${mysql.escape(id)})`).then(result => {
                 this.data.set(id, DefaultData);
-                resolve();
+                return resolve();
+            }).catch(err => {
+                return reject();
             });
         });
     }
 
-    update(id, setting, value) {
+    old_update(id, setting, value) {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
-            this.connection.query(`UPDATE guilds SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${id}`, (error, result) => {
+            this.client.database.query(`UPDATE guilds SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${id}`, (error, result) => {
                 if (error) return reject(error);
                 this.data.get(id)[setting] = value;
                 return resolve();
@@ -106,14 +94,22 @@ class Settings {
         });
     }
 
-    delete(id) {
+    old_delete(id) {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
-            this.connection.query(`DELETE FROM guilds WHERE id = ${id}`, (error, result) => {
+            this.client.database.query(`DELETE FROM guilds WHERE id = ${id}`, (error, result) => {
                 if (error) return reject(error);
                 this.data.delete(id);
                 return resolve();
             });
+        });
+    }
+
+    valueSettings(guild) {
+        return new Promise(async (resolve, reject) => {
+            let settings = await this.fetch(guild.id);
+
+
         });
     }
 }

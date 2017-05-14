@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="/styles/style.css" rel="stylesheet" type="text/css">
+		<link href="/images/icon.png" rel="icon" type="image/x-icon"/>
+		<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<title>User – TypicalBot</title>
+	</head>
+	<body>
+		<%- include("nav.ejs", { master, auth, user: auth ? user : null }) %>
+		<div class="page">
+			<h1 class="title">Content To Come</h1>
+			<p class="text">
+				Hello, <%= user.username %>. There's nothing to display right now. Sorry!
+			</p>
+
+			<div class="break"></div>
+
+			<h1 class="title"><%= user.username %> (<%= user.id %>)</h1>
+			<img style="padding: 30px; height: 100px; border-radius: 100%;" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" />
+		</div>
+	</body>
+</html>

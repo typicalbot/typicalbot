@@ -1,29 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link href="/styles/style.css" rel="stylesheet" type="text/css">
-		<link href="/images/icon.png" rel="icon" type="image/x-icon"/>
-		<link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-		<title>Admin – TypicalBot</title>
-	</head>
-	<body>
-		<%- include("nav.ejs", { master, auth, user: auth ? user : null }) %>
-		<div class="page">
-			<h1 class="title">Your Profile</h1>
-			<p class="text">
-				Hello, <%= user.username %>. You're a staff member.
-			</p>
+    <head>
+        <meta charset="utf-8">
+        <%- include("parts/head.ejs") %>
+        <link href="/extra/style.css" rel="stylesheet" type="text/css">
+        <link href="/images/icon.png" rel="icon" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <title>Staff Panel – TypicalBot</title>
+    </head>
+    <body>
+        <%- include("parts/nav.ejs", { master, auth, user: auth ? user : null }) %>
+        <div class="page-container container-fluid">
+            <span class="section section-large"><p>Staff Roles</p></span>
+            <% if (roles.length) { %>
+                <ul class="roles">
+                    <% roles.forEach(r => { %>
+                        <% let color = rgb(r.hexColor); %>
+                        <li style="background-color: rgba(<%= color.R %>, <%= color.B %>, <%= color.G %>, 0.0980392);
+                            border-color: rgb(<%= color.R %>, <%= color.B %>, <%= color.G %>);
+                            color: rgb(<%= color.R %>, <%= color.B %>, <%= color.G %>)"><%= r.name %></li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p class="text">No roles to display.</p>
+            <% } %>
 
-			<div class="break"></div>
-
-			<h1 class="title">Get Server Information</h1>
-			<form action="/guild/search" class="guild-search">
+            <span class="section section-large"><p>Guild Search</p></span>
+            <form class="guild-search">
 			 	<input type="text" name="guildid" placeholder="Guild ID">
 				<input type="submit" value="Get Guild Information">
 			</form>
-		</div>
-	</body>
+        </div>
+    </body>
 </html>
+
+<%- include("parts/footer.ejs") %>

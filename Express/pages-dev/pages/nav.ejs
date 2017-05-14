@@ -7,8 +7,10 @@
             <% if (master.userLevel(user.id) >= 6) { %>
                 <li><a href="/staff">Staff Panel</a></li>
             <% } %>
-            <li><img class="profile-img" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" /></li>
-            <li><a href="/user"><%= user.username %></a></li>
+            <li><a href="/user">
+                <img class="profile-img" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" />
+                <%= user.username %>
+            </a></li>
             <li><a href="/auth/logout">Sign Out</a></li>
         <% } else { %>
             <li><a href="/auth/login">Sign In</a></li>
