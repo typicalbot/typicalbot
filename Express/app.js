@@ -45,11 +45,41 @@ class Webserver extends express {
         this.set("view engine", "html");
 
         const isAuthenticated = (req, res, next) => { if (req.isAuthenticated()) return next(); req.session.backURL = req.url; res.redirect("/auth/login"); };
-        const isStaff = (req, res, next) => { if (req.isAuthenticated() && master.userLevel(req.user.id) >= 6) return next(); req.session.backURL = req.originalURL; res.redirect("/"); };
+        const isStaff = (req, res, next) => { if (req.isAuthenticated() && master.staff(req.user.id)) return next(); req.session.backURL = req.url/*originalURL*/; res.redirect("/"); };
         const isApplication = (req, res, next) => { if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next(); res.status(401).json({ "message": "Unauthorized" }); };
 
-        const shade = (color, percent) => { let R = parseInt(color.substring(1,3),16); let G = parseInt(color.substring(3,5),16); let B = parseInt(color.substring(5,7),16); R = parseInt(R * (100 + percent) / 100); G = parseInt(G * (100 + percent) / 100); B = parseInt(B * (100 + percent) / 100); R = (R<255)?R:255; G = (G<255)?G:255; B = (B<255)?B:255; let RR = ((R.toString(16).length==1)?"0"+R.toString(16):R.toString(16)); let GG = ((G.toString(16).length==1)?"0"+G.toString(16):G.toString(16)); let BB = ((B.toString(16).length==1)?"0"+B.toString(16):B.toString(16)); return "#"+RR+GG+BB; };
-        const rgb = (color) => { let R = parseInt(color.substring(1,3),16); let G = parseInt(color.substring(3,5),16); let B = parseInt(color.substring(5,7),16); return { R, G, B }; };
+        const rgb = (hex) => {
+            let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return {
+                R: parseInt(result[1], 16),
+                G: parseInt(result[2], 16),
+                B: parseInt(result[3], 16)
+            };
+        };
+
+        const timestamp = (ms) => {
+            let days = ms / 86400000;
+            let d = Math.floor(days);
+            let hours = (days - d) * 24;
+            let h = Math.floor(hours);
+            let minutes = (hours - h) * 60;
+            let m = Math.floor(minutes);
+            let seconds = (minutes - m) * 60;
+            let s = Math.floor(seconds);
+            return { d, h, m, s };
+        };
+
+        const time = (ms) => {
+            let ts = timestamp(ms);
+
+            let d = ts.d > 0 ? ts.d === 1 ? "1 day" : `${ts.d} days` : null;
+            let h = ts.h > 0 ? ts.h === 1 ? "1 hour" : `${ts.h} hours` : null;
+            let m = ts.m > 0 ? ts.m === 1 ? "1 minute" : `${ts.m} minutes` : null;
+            let s = ts.s > 0 ? ts.s === 1 ? "1 second" : `${ts.s} seconds` : null;
+            let l = [];
+            if (d) l.push(d); if (h) l.push(h); if (m) l.push(m); if (s) l.push(s);
+            return l.join(", ");
+        };
 
         /*
                                                            - - - - - - - - - -
@@ -136,6 +166,14 @@ class Webserver extends express {
         this.get("/auth/logout", function(req, res) {
             req.logout();
             res.redirect("/");
+        });
+
+        this.get("/access-denied", (req, res) => {
+            res.render(page("403.ejs"), {
+                master,
+                user: req.user || null,
+                auth: req.isAuthenticated()
+            });
         });
 
         /*
@@ -229,8 +267,8 @@ class Webserver extends express {
                     user: req.user,
                     auth: true,
                     roles: data.roles,
-                    shade,
-                    rgb
+                    rgb,
+                    time
                 });
             }).catch(() => {
                 return res.status(400).json({ "message": "An error occured." });
@@ -241,11 +279,11 @@ class Webserver extends express {
             let guild = req.params.guild;
 
             let userInGuild = req.user.guilds.filter(g => g.id === guild)[0];
-            if (!userInGuild && master.userLevel(req.user.id) < 6) return res.status(401).json({ "message": "You do not have access to that guild." });
+            if (!userInGuild && !master.staff(req.user.id)) return res.redirect("/access-denied");
 
             master.globalRequest("inguild", { guild }).then(() => {
                 master.globalRequest("userlevel", { guild, user: req.user.id }).then(data => {
-                    if (data.permissions.level < 2) return res.status(401).json({ "message": "You do not have access to the requested guild." });
+                    if (data.permissions.level < 2) return res.redirect("/access-denied");
 
                     master.globalRequest("guildinfo", { guild }).then(data => {
                         res.render(page("guild.ejs"), {
@@ -261,7 +299,7 @@ class Webserver extends express {
                     res.status(500).json({ "message": "An error occured." });
                 });
             }).catch(() => {
-                if (!userInGuild) return res.redirect("/");
+                if (!userInGuild) return res.redirect("/404");
 
                 let userPerms = new Perms(userInGuild.permissions);
                 if (!userPerms.has("MANAGE_GUILD")) return res.status(401).json({ "message": "You do not have permissions to add the bot to that guild." });

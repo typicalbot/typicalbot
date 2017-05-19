@@ -1,4 +1,5 @@
-const RichEmbed = require("discord.js").RichEmbed;
+const Discord = require("discord.js");
+const RichEmbed = Discord.RichEmbed;
 const Response = require("../Structures/Response");
 
 class EventsManager {
@@ -10,16 +11,27 @@ class EventsManager {
         this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
         this.client.transmitStat("guilds");
         this.client.user.setGame(`Client Starting`);
+        this.client.transmit("status", { "status": this.client.status === Discord.Constants.Status.READY ? 0 : 1, "uptime": this.client.uptime, "mysqlStatus": this.client.database.connection.state === "authenticated" ? 0 : 1 });
         if (this.client.vr === "alpha" && this.client.guilds.has("163038706117115906")) this.client.functions.sendDonors();
+        this.client.transmit("sendtesters", {});
 
         if (this.client.vr === "alpha") setTimeout(() => this.client.guilds.forEach(g => {
             if (!this.client.functions.alphaCheck(g)) g.leave();
-        }), 5000);
+        }), 10000);
+
+        if (this.client.vr === "dev") setTimeout(() => this.client.guilds.forEach(g => {
+            if (!this.client.functions.devCheck(g)) g.leave();
+        }), 10000);
+
+        setInterval(() => {
+            this.client.transmit("status", { "status": this.client.status === Discord.Constants.Status.READY ? 0 : 1, "uptime": this.client.uptime, "mysqlStatus": this.client.database.connection.state === "authenticated" ? 0 : 1 });
+        }, 20000);
 
         setInterval(() => {
             this.client.user.setGame(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
 
             if (this.client.vr === "alpha" && this.client.guilds.has("163038706117115906")) this.client.functions.sendDonors();
+            if (this.client.vr === "dev" && this.client.guilds.has("163038706117115906")) this.client.functions.sendTesters();
         }, 300000);
     }
 
@@ -38,7 +50,7 @@ class EventsManager {
             let BotMember = message.guild.member(this.client.user);
             if (!BotMember || !message.channel.permissionsFor(BotMember).has("SEND_MESSAGES")) return;
 
-            let settings = await this.client.settingsManager.fetch(message.guild).catch(err => { return err; });
+            let settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
 
             if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
 
@@ -74,7 +86,7 @@ class EventsManager {
     async messageUpdate(oldMessage, message) {
         if (message.channel.type !== "text") return;
 
-        message.guild.settings = await this.client.settingsManager.fetch(message.guild);
+        message.guild.settings = await this.client.settingsManager.fetch(message.guild.id);
 
         let userPermissions = this.client.permissionsManager.get(message.guild, message.author);
         if (userPermissions.level >= 2) return;
@@ -86,7 +98,7 @@ class EventsManager {
     async messageDelete(message) {
         if (message.channel.type !== "text") return;
 
-        let settings = await this.client.settingsManager.fetch(message.guild).catch(err => { return err; });
+        let settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
 
         if (!settings.logs || !settings.deletelog) return;
 
@@ -281,6 +293,11 @@ class EventsManager {
     }
 
     guildCreate(guild) {
+        if (this.client.vr === "dev") {
+            let check = this.client.functions.devCheck(guild);
+            console.log(`${guild.owner.user.username} | ${check}`);
+            if (!check) setTimeout(() => guild.leave(), 2000);
+        }
         if (this.client.vr === "alpha") {
             let check = this.client.functions.alphaCheck(guild);
             console.log(`${guild.owner.user.username} | ${check}`);

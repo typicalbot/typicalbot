@@ -6,6 +6,10 @@ class ProcessManager {
             this.client.shardData = message.data;
         } else if (message.type === "reload") {
             this.client.reload(message.data);
+        } else if (message.type === "sendtesters") {
+            if (this.client.guilds.has("163038706117115906")) this.client.functions.sendTesters();
+        } else if (message.type === "testers") {
+            this.client.testerData = message.data;
         } else if (message.type === "donors") {
             this.client.donorData = message.data;
         } else if (message.type === "channelmessage") {
@@ -63,6 +67,7 @@ class ProcessManager {
                 guild: {
                     "name": guild.name,
                     "id": guild.id,
+                    "shard": `${this.client.shardNumber}/${this.client.shardCount} (${this.client.shardID})`,
                     "icon": guild.icon,
                     "roles": guild.roles.map(r => new Object({ "name": r.name, "id": r.id, "position": r.position, "hoist": r.hoist, "permissions": r.permissions, "mentionable": r.mentionable })),
                     "memberCount": guild.memberCount,
@@ -88,7 +93,7 @@ class ProcessManager {
             let guild = this.client.guilds.get(message.data.guild);
             guild.settings = await this.client.settingsManager.fetch(guild.id);
 
-            let userPerms = this.client.permissionsManager.get(guild, message.data.user, true);
+            let userPerms = this.client.permissionsManager.get(guild, message.data.user);
 
             this.client.transmit("masterrequest", {
                 id: message.data.id,
@@ -102,7 +107,7 @@ class ProcessManager {
 
             let roles = [];
 
-            user.roles.forEach(r => {
+            user.roles.array().sort((a,b) => b.position - a.position).forEach(r => {
                 if (["163039088243507200",
                     "278955494272663552",
                     "193487705844350976",

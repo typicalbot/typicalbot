@@ -22,9 +22,17 @@ class Shard extends cp.fork {
 
         this.master = master;
 
+        this.status = null;
+        this.mysqlStatus = null;
+        this.uptime = null;
+
         this.on("message", message => {
             if (message.type === "stat") {
                 this.master.changeStats(this.id, message.data);
+            } else if (message.type === "status") {
+                this.status = message.data.status;
+                this.mysqlStatus = message.data.mysqlStatus;
+                this.uptime = message.data.uptime;
             } else if (message.type === "masterrequest") {
                 let r = this.master.pendingRequests.get(message.data.id);
                 if (!r) return;
@@ -47,12 +55,15 @@ new class {
         this.init();
     }
 
-    userLevel(userid) {
-        if (userid === config.owner) return 10;
-        if (config.management[userid]) return 9;
-        if (userid === config.devhelp) return 8;
-        if (config.staff[userid]) return 7;
-        if (config.support[userid]) return 6;
+    staff(userid) {
+        if (
+            userid === config.owner ||
+            config.management[userid] ||
+            userid === config.devhelp ||
+            config.staff[userid] ||
+            config.support[userid]
+        ) return true;
+        return false;
     }
 
     globalRequest(request, data) {

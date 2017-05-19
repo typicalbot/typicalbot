@@ -15,7 +15,8 @@
         <%- include("parts/nav.ejs", { master, auth, user: auth ? user : null }) %>
         <div class="page-container container-fluid">
             <span class="section section-large"><p>Emptiness!</p></span>
-            <p class="text">Hello, <%= user.username %>. There's nothing to display right now. Sorry!</p>
+            <p class="text">Hello, <%= user.username %>. There's nothing to display right now, so here's Wumpus.</p>
+            <img src="/images/wumpus.png">
         </div>
     </body>
 </html>

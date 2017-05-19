@@ -13,7 +13,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/user"><i class="fa fa-user" aria-hidden="true"></i> User Profile</a></li>
-                    <% if (master.userLevel(user.id) >= 6) { %>
+                    <% if (master.staff(user.id)) { %>
                         <li><a href="/staff"><i class="fa fa-flag" aria-hidden="true"></i> Staff Panel</a></li>
                     <% } %>
                     <li class="divider"></li>

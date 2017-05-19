@@ -62,6 +62,10 @@ body {
     padding-left: 50px !important;
     letter-spacing: .5px;
 }
+.page-container .section-large[data-center="true"] {
+    padding-left: 0 !important;
+    text-align: center;
+}
 .page-container .section > p {
     position: relative;
     display: inline-block;
@@ -92,6 +96,47 @@ body {
 .page-container .panel-heading {
     background-color: #333 !important;
     color: white !important;
+}
+
+.page-container .search a {
+    background-color: #333;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    padding: 4px 8px;
+    margin: 10px 0 10px 5px;
+    text-decoration: none;
+    transition: background 0.25s linear !important;
+}
+.page-container .search a:hover {
+    background-color: #00adff;
+}
+.page-container .search input[type=text] {
+    background-image: url(/images/search.png);
+    background-position: 8px 8px;
+    border: 1px solid #00adff;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+    margin: 10px 10px 10px 40px;
+    padding: 8px 18px 8px 40px;
+}
+
+.shards {
+    margin: 0 40px;
+}
+.shards tbody tr td:nth-child(5)[status="1"],
+.shards tbody tr td:nth-child(6)[status="1"] {
+    color: green;
+}
+.shards tbody tr td:nth-child(5)[status="2"],
+.shards tbody tr td:nth-child(6)[status="2"] {
+    color: orange;
+}
+.shards tbody tr td:nth-child(5)[status="3"],
+.shards tbody tr td:nth-child(6)[status="3"] {
+    color: red;
 }
 
 .page-container .roles {
@@ -204,26 +249,8 @@ input[type=text] {
     padding: 12px 20px 12px 20px;
 }
 
-.guild-search input[type=text] {
-	padding: 12px 20px 12px 40px;
-    background-image: url('/images/search.png');
-    background-position: 10px 10px;
-}
-
 input[type=text]:focus {
     border: 1px solid #00adff;
-}
-
-input[type=submit] {
-    background-color: #00adff;
-    border: none;
-    color: white;
-	padding: 10px 20px;
-    border-radius: 4px;
-	font-size: 18px;
-    text-decoration: none;
-    margin: 4px 2px 4px 20px;
-    cursor: pointer;
 }
 
 

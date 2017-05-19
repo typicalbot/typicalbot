@@ -66,6 +66,7 @@ class Settings {
                         return resolve(rows[0]);
                     }
                 }).catch(err => {
+                    console.error(err);
                     return resolve(DefaultData);
                 });
             }
@@ -83,24 +84,24 @@ class Settings {
         });
     }
 
-    old_update(id, setting, value) {
+    update(id, setting, value) {
         return new Promise((resolve, reject) => {
-            id = id ? typeof id === "object" ? id.id : id : null;
-            this.client.database.query(`UPDATE guilds SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${id}`, (error, result) => {
-                if (error) return reject(error);
+            this.client.database.query(`UPDATE guilds SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${id}`).then(result => {
                 this.data.get(id)[setting] = value;
                 return resolve();
+            }).catch(err => {
+                return reject();
             });
         });
     }
 
-    old_delete(id) {
+    delete(id) {
         return new Promise((resolve, reject) => {
-            id = id ? typeof id === "object" ? id.id : id : null;
-            this.client.database.query(`DELETE FROM guilds WHERE id = ${id}`, (error, result) => {
-                if (error) return reject(error);
+            this.client.database.query(`DELETE FROM guilds WHERE id = ${id}`).then(result => {
                 this.data.delete(id);
                 return resolve();
+            }).catch(err => {
+                return reject();
             });
         });
     }

@@ -8,6 +8,7 @@ let CommandsManager = require("./Managers/Commands");
 let SettingsManager = require("./Managers/Settings");
 let PermissionsManager = require("./Managers/Permissions");
 let ModlogsManager = require("./Managers/ModerationLogs");
+let AudioManager = require("./Managers/Audio");
 
 let Functions = require("./Utility/Functions");
 
@@ -22,7 +23,7 @@ const client = new class extends Discord.Client {
         this.shardNumber = +process.env.SHARD_ID + 1;
         this.shardCount = +process.env.SHARD_COUNT;
 
-        this.database = Database(this);
+        this.database = new Database(this);
 
         this.processManager = new ProcessManager(this);
         this.eventsManager = new EventsManager(this);
@@ -30,10 +31,12 @@ const client = new class extends Discord.Client {
         this.settingsManager = new SettingsManager(this);
         this.permissionsManager = new PermissionsManager(this);
         this.modlogsManager = new ModlogsManager(this);
+        this.audioManager = new AudioManager(this);
 
         this.functions = new Functions(this);
 
         this.shardData = {};
+        this.testerData = [];
         this.donorData = [];
 
         this.lastMessage = null;
@@ -55,7 +58,9 @@ const client = new class extends Discord.Client {
         .on("guildMemberRemove", member => this.eventsManager.guildMemberRemove(member))
         .on("guildMemberUpdate", (oldMember, member) => this.eventsManager.guildMemberUpdate(oldMember, member))
         .on("guildBanAdd", (guild, user) => this.eventsManager.guildBanAdd(guild, user))
-        .on("guildBanRemove", (guild, user) => this.eventsManager.guildBanRemove(guild, user));
+        .on("guildBanRemove", (guild, user) => this.eventsManager.guildBanRemove(guild, user))
+        .on("guildCreate", (guild) => this.eventsManager.guildCreate(guild))
+        .on("guildDelete", (guild) => this.eventsManager.guildDelete(guild));
 
         if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 

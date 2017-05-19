@@ -28,11 +28,11 @@ class PermissionLevels {
                 } else return member.roles.has(role.id);
             }),
             "4" : new PermissionLevel(4, "Server Owner", (guild, member) => member.id === guild.ownerID),
-            "6" : new PermissionLevel(6, "TypicalBot Support", (guild, member) => this.client.config.support[member.id]),
-            "7" : new PermissionLevel(7, "TypicalBot Staff", (guild, member) => this.client.config.staff[member.id]),
-            "8" : new PermissionLevel(8, "TypicalBot Development Helper", (guild, member) => member.id === client.config.devhelp),
-            "9" : new PermissionLevel(9, "TypicalBot Management", (guild, member) => this.client.config.management[member.id]),
-            "10" : new PermissionLevel(10, "TypicalBot Creator", (guild, member) => member.id === client.config.owner),
+            "6" : new PermissionLevel(6, "TypicalBot Support", (guild, id) => this.client.config.support[id]),
+            "7" : new PermissionLevel(7, "TypicalBot Staff", (guild, id) => this.client.config.staff[id]),
+            "8" : new PermissionLevel(8, "TypicalBot Development Helper", (guild, id) => id === client.config.devhelp),
+            "9" : new PermissionLevel(9, "TypicalBot Management", (guild, id) => this.client.config.management[id]),
+            "10" : new PermissionLevel(10, "TypicalBot Creator", (guild, id) => id === client.config.owner),
 
         };
     }
@@ -55,14 +55,16 @@ class PermissionLevels {
     }
 
     get(guild, member, ignoreStaff = false) {
+        let id = member.id ? member.id : member;
+
+        if (this.levels[10].check(guild, id)) return this.define(10);
+        if (this.levels[9].check(guild, id)) return this.define(9);
+        if (this.levels[8].check(guild, id)) return this.define(8);
+        if (!ignoreStaff && this.levels[7].check(guild, id)) return this.define(7);
+        if (!ignoreStaff && this.levels[6].check(guild, id)) return this.define(6);
+
         member = guild.member(member);
         if (!member) return this.define(0);
-
-        if (this.levels[10].check(guild, member)) return this.define(10);
-        if (this.levels[9].check(guild, member)) return this.define(9);
-        if (this.levels[8].check(guild, member)) return this.define(8);
-        if (!ignoreStaff && this.levels[7].check(guild, member)) return this.define(7);
-        if (!ignoreStaff && this.levels[6].check(guild, member)) return this.define(6);
 
         if (this.levels[4].check(guild, member)) return this.define(4);
         if (this.levels[3].check(guild, member)) return this.define(3);

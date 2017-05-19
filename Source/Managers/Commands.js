@@ -1,4 +1,4 @@
-const fs = require("fs-extra-promise");
+const klaw = require("klaw");
 const path = require("path");
 const commandsPath = path.join(__dirname, "..", "Commands");
 
@@ -23,7 +23,7 @@ class CommandsManager {
     }
 
     init() {
-        fs.walk(commandsPath).on("data", item => {
+        klaw(commandsPath).on("data", item => {
             let file = path.parse(item.path);
             if (!file.ext || file.ext !== ".js") return;
             this.load(`${file.dir}/${file.base}`);

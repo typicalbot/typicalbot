@@ -41,15 +41,32 @@ module.exports = class Functions {
         }
     }
 
+    sendTesters() {
+        let tester = this.client.guilds.get("163038706117115906").roles.find("name", "Beta Tester");
+        let list = []; tester.members.forEach(m => list.push(m.id));
+        this.client.transmit("testers", list);
+    }
+
     sendDonors() {
         let donor = this.client.guilds.get("163038706117115906").roles.find("name", "Donor");
         let list = []; donor.members.forEach(m => list.push(m.id));
         this.client.transmit("donors", list);
     }
 
+    devCheck(g) {
+        if (
+            !this.client.testerData.includes(g.ownerID) &&
+            g.ownerID !== this.client.config.owner &&
+            !this.client.config.management[g.ownerID] &&
+            !this.client.config.staff[g.ownerID] &&
+            !this.client.config.support[g.ownerID]
+        ) return false;
+        return true;
+    }
+
     alphaCheck(g) {
         if (
-            !this.client.donors.includes(g.ownerID) &&
+            !this.client.donorData.includes(g.ownerID) &&
             g.ownerID !== this.client.config.owner &&
             !this.client.config.management[g.ownerID] &&
             !this.client.config.staff[g.ownerID] &&
