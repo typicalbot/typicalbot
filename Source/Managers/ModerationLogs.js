@@ -108,7 +108,7 @@ class ModerationLog {
                         .setFooter(`Case ${_case}`, "https://discordapp.com/api/v6/users/153613756348366849/avatars/f23270abe4a489eef6c2c372704fbe72.jpg")
                         .setTimestamp();
 
-                    return resolve(channel.send({embed}));
+                    return resolve(channel.send(embed));
                 }).catch( reject );
             }).catch( reject );
         });
@@ -127,7 +127,7 @@ class ModerationLog {
                 .setFooter(id, "https://discordapp.com/api/v6/users/153613756348366849/avatars/f23270abe4a489eef6c2c372704fbe72.jpg")
                 .setTimestamp(ts);
 
-            return resolve(_case.edit({embed}));
+            return resolve(_case.edit("", {embed}));
         });
     }
 }
