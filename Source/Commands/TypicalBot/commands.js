@@ -1,8 +1,8 @@
 const Command = require("../../Structures/Command.js");
 
 module.exports = class extends Command {
-    constructor(client) {
-        super(client, {
+    constructor(client, filePath) {
+        super(client, filePath, {
             name: "commands",
             description: "Receive a list of TypicalBot's commands.",
             aliases: ["cmds"],

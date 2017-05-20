@@ -2,8 +2,8 @@ const Command = require("../../Structures/Command.js");
 const RichEmbed = require("discord.js").RichEmbed;
 
 module.exports = class extends Command {
-    constructor(client) {
-        super(client, {
+    constructor(client, filePath) {
+        super(client, filePath, {
             name: "donate",
             description: "Donate to the cause of TypicalBot.",
             usage: "donate",

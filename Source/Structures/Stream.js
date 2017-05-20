@@ -1,5 +1,3 @@
-const ytdl = require("ytdl-core");
-
 class Stream {
     constructor(client, connection) {
         this.client = client;
@@ -12,18 +10,11 @@ class Stream {
         this.queue = [];
     }
 
-    fetchStream(video) {
-        return new Promise((resolve, reject) => {
-            let audioStream = ytdl(video.url, { filter: "audioonly" });
-            return resolve(audioStream);
-        });
-    }
-
     play(video) {
-        this.fetchStream(video).then(audioStream => {
+        this.client.audioUtility.fetchStream(video).then(audioStream => {
             let dispatcher = this.connection.playStream(audioStream, { volume: 0.5 });
-            this.dispatcher = dispatcher;
 
+            this.dispatcher = dispatcher;
             this.current = video;
 
             video.response.send(`🎵 Now playing **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.length(video.length_seconds)}**.`);

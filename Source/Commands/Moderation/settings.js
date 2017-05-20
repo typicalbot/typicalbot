@@ -30,8 +30,8 @@ const settingsList = {
 };
 
 module.exports = class extends Command {
-    constructor(client) {
-        super(client, {
+    constructor(client, filePath) {
+        super(client, filePath, {
             name: "settings",
             description: "Customize your servers setting and enable/discord specific features.",
             usage: "settings <'view'|'edit'> <setting> <value>",
@@ -73,7 +73,7 @@ module.exports = class extends Command {
 
                 }
             } else {
-                
+
             }
         } else if (action === "edit") {
             response.reply("Settings Edit");

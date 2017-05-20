@@ -1,6 +1,8 @@
 class Command {
-    constructor(client, {name, description, usage, aliases, dm, permission, mode}) {
+    constructor(client, filePath, {name, description, usage, aliases, dm, permission, mode}) {
         this.client = client;
+
+        this.path = filePath;
 
         this.name = name || "NULL";
 

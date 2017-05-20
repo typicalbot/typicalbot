@@ -1,18 +1,8 @@
 const Stream = require("../Structures/Stream");
-const ytdl = require("ytdl-core");
 
 class Audio {
     constructor(client) {
         this.client = client;
-    }
-
-    fetchInfo(url) {
-        return new Promise((resolve, reject) => {
-            ytdl.getInfo(url, (err, info) => {
-                if (err) return reject(err);
-                return resolve({ title: info.title, length_seconds: info.length_seconds, url });
-            });
-        });
     }
 
     connect(response) {
@@ -31,7 +21,7 @@ class Audio {
         });
     }
 
-    createStream(response, video) {
+    stream(response, video) {
         return new Promise((resolve, reject) => {
             let currentConnection = response.message.guild.voiceConnection;
             if (currentConnection) return this.queueVideo(response, video);

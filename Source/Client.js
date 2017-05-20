@@ -11,6 +11,7 @@ let ModlogsManager = require("./Managers/ModerationLogs");
 let AudioManager = require("./Managers/Audio");
 
 let Functions = require("./Utility/Functions");
+let AudioUtility = require("./Utility/Audio");
 
 const client = new class extends Discord.Client {
     constructor() {
@@ -34,6 +35,7 @@ const client = new class extends Discord.Client {
         this.audioManager = new AudioManager(this);
 
         this.functions = new Functions(this);
+        this.audioUtility = new AudioUtility(this);
 
         this.shardData = {};
         this.testerData = [];
@@ -86,6 +88,62 @@ const client = new class extends Discord.Client {
 
     transmitStat(stat) {
         this.transmit("stat", { [stat]: this[stat].size });
+    }
+
+    reload(input) {
+        let match = /core~(\w+)(?::(\w+))?/i.exec(input);
+        if (!match && input !== "all") return;
+
+        let mod = match ? match[1] : null;
+        let all = input === "all";
+
+        if (mod === "database") {
+            this.database.connection.end();
+            delete require.cache[`${__dirname}/Managers/Database.js`];
+            Database = require("./Managers/Database");
+            this.database = new Database();
+        } else if (all || mod === "events") {
+            delete require.cache[`${__dirname}/Managers/Events.js`];
+            EventsManager = require("./Managers/Events");
+            this.eventsManager = new EventsManager(this);
+        } else if (all || mod === "commands") {
+            let command = match[2];
+
+            if (command) {
+                this.commandsManager.get(command).then(cmd => {
+                    if (!cmd) return; this.commandsManager.reload(cmd.filePath);
+                });
+            } else {
+                delete require.cache[`${__dirname}/Managers/Commands.js`];
+                CommandsManager = require("./Managers/Commands");
+                this.commandsManager = new CommandsManager(this);
+            }
+        } else if (all || mod === "settings") {
+            delete require.cache[`${__dirname}/Managers/Settings.js`];
+            SettingsManager = require("./Managers/Settings");
+            this.settingsManager = new SettingsManager(this);
+        } else if (all || mod === "permissions") {
+            delete require.cache[`${__dirname}/Managers/Permissions.js`];
+            PermissionsManager = require("./Managers/Permissions");
+            this.permissionsManager = new PermissionsManager(this);
+        } else if (all || mod === "modlogs") {
+            delete require.cache[`${__dirname}/Managers/ModerationLogs.js`];
+            ModlogsManager = require("./Managers/ModerationLogs");
+            this.modlogsManager = new ModlogsManager(this);
+        } else if (all || mod === "audio") {
+            delete require.cache[`${__dirname}/Managers/Audio.js`];
+            delete require.cache[`${__dirname}/Structures/Stream.js`];
+            AudioManager = require("./Managers/Audio");
+            this.audioManager = new AudioManager(this);
+        } else if (all || mod === "functions") {
+            delete require.cache[`${__dirname}/Utility/Functions.js`];
+            Functions = require("./Utility/Functions");
+            this.functions = new Functions(this);
+        } else if (all || mod === "audioutility") {
+            delete require.cache[`${__dirname}/Utility/Audio.js`];
+            AudioUtility = require("./Utility/Audio");
+            this.audioUtility = new AudioUtility(this);
+        }
     }
 };
 

@@ -3,8 +3,8 @@ const RichEmbed = require("discord.js").RichEmbed;
 const moment = require("moment");
 
 module.exports = class extends Command {
-    constructor(client) {
-        super(client, {
+    constructor(client, filePath) {
+        super(client, filePath, {
             name: "serverinfo",
             description: "Displays the server's information.",
             usage: "serverinfo ['bots'|'channels']",

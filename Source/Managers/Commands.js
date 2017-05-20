@@ -12,7 +12,7 @@ class CommandsManager {
     }
 
     load(filePath) {
-        let command = new (require(filePath))(this.client);
+        let command = new (require(filePath))(this.client, filePath);
         this.data.set(command.name, command);
     }
 

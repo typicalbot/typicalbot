@@ -1,8 +1,8 @@
 const Command = require("../../Structures/Command.js");
 
 module.exports = class extends Command {
-    constructor(client) {
-        super(client, {
+    constructor(client, filePath) {
+        super(client, filePath, {
             name: "say",
             description: "Customize your servers setting and enable/discord specific features.",
             usage: "settings <'view'|'edit'> <setting> <value>",
@@ -13,6 +13,6 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        
+
     }
 };
