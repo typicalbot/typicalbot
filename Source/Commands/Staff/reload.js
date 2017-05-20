@@ -1,4 +1,5 @@
 const Command = require("../../Structures/Command.js");
+const RichEmbed = require("discord.js").RichEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -15,10 +16,12 @@ module.exports = class extends Command {
         let mod = message.content.slice(message.content.search(" ") + 1);
 
         this.client.transmit("reload", mod);
+        let embed = new RichEmbed()
+            .setColor(0x00FF00)
+            .setDescription(`**Reloading Module:** \`${mod}\``)
+            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setTimestamp();
 
-        response.embed({
-            "color": 0x00FF00,
-            "description": `**Reloading Module:** \`${mod}\``
-        });
+        response.embed({embed});
     }
 };
