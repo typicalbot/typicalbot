@@ -22,6 +22,6 @@ module.exports = class extends Command {
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
             .setTimestamp();
 
-        response.embed({embed});
+        response.embed(embed);
     }
 };
