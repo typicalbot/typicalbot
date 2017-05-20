@@ -10,7 +10,7 @@ class Database {
     }
 
     reconnect() {
-        this.connection.close();
+        this.connection.end();
 
         this.connection = mysql.createConnection(credentials);
         this.connection.connect();
