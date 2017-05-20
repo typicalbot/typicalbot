@@ -1,3 +1,4 @@
+const RichEmbed = require("discord.js").RichEmbed;
 const types = {
     warn: { color: 0xFFFF00, action: "Warn" },
     vmute: { color: 0xFF9900, action: "Voice Mute" },
@@ -98,22 +99,16 @@ class ModerationLog {
                     let _case = Number(last) + 1;
                     let _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
 
-                    let embed = {
-                        "color": type.color || 0xC4C4C4,
-                        "description": `${_action}\n${_user}\n${_reason}`,
-                        "author": {
-                            "url": this.client.config.urls.website,
-                            "name": moderator ? `${moderator.username}#${moderator.discriminator} (${moderator.id})` : null,
-                            "icon_url": moderator ? moderator.avatarURL : null,
-                        },
-                        "timestamp": new Date(),
-                        "footer": {
-                            "text": `Case ${_case}`,
-                            "icon_url": "https://discordapp.com/api/v6/users/153613756348366849/avatars/f23270abe4a489eef6c2c372704fbe72.jpg"
-                        }
-                    };
 
-                    return resolve(channel.sendMessage("", { embed }));
+                    let embed = new RichEmbed()
+                        .setColor(type.color || 0xC4C4C4)
+                        .setAuthor(moderator ? `${moderator.username}#${moderator.discriminator} (${moderator.id})` : null, moderator ? moderator.avatarURL : null)
+                        .setURL(this.client.config.urls.website)
+                        .setDescription(`${_action}\n${_user}\n${_reason}`)
+                        .setFooter(`Case ${_case}`, "https://discordapp.com/api/v6/users/153613756348366849/avatars/f23270abe4a489eef6c2c372704fbe72.jpg")
+                        .setTimestamp();
+
+                    return resolve(channel.send("", { embed }));
                 }).catch( reject );
             }).catch( reject );
         });
@@ -124,20 +119,13 @@ class ModerationLog {
             let { action, user, id, ts } = this.caseMatch(_case);
             let _reason = `**Reason:** ${reason}`;
 
-            let embed = {
-                "color": _case.embeds[0].color || 0xC4C4C4,
-                "description": `${action}\n${user}\n${_reason}`,
-                "author": {
-                    "url": this.client.config.urls.website,
-                    "name": moderator ? `${moderator.username}#${moderator.discriminator} (${moderator.id})` : null,
-                    "icon_url": moderator ? moderator.avatarURL : null,
-                },
-                "timestamp": ts,
-                "footer": {
-                    "text": id,
-                    "icon_url": "https://discordapp.com/api/v6/users/153613756348366849/avatars/f23270abe4a489eef6c2c372704fbe72.jpg"
-                }
-            };
+            let embed = new RichEmbed()
+                .setColor(_case.embeds[0].color || 0xC4C4C4)
+                .setAuthor(moderator ? `${moderator.username}#${moderator.discriminator} (${moderator.id})` : null, moderator ? moderator.avatarURL : null)
+                .setURL(this.client.config.urls.website)
+                .setDescription(`${action}\n${user}\n${_reason}`)
+                .setFooter(id, "https://discordapp.com/api/v6/users/153613756348366849/avatars/f23270abe4a489eef6c2c372704fbe72.jpg")
+                .setTimestamp(ts);
 
             return resolve(_case.edit("", { embed }));
         });
