@@ -91,7 +91,7 @@ const client = new class extends Discord.Client {
     }
 
     reload(input) {
-        let match = /core~(\w+)(?::(\w+))?/i.exec(input);
+        let match = /(\w+)(?::(\w+))?/i.exec(input);
         if (!match && input !== "all") return;
 
         let mod = match ? match[1] : null;
@@ -106,19 +106,19 @@ const client = new class extends Discord.Client {
             delete require.cache[`${__dirname}/Managers/Events.js`];
             EventsManager = require("./Managers/Events");
             this.eventsManager = new EventsManager(this);
-        } else if (all || mod === "commands") {
+        } else if (mod === "commands") {
             let command = match[2];
 
             if (command) {
                 this.commandsManager.get(command).then(cmd => {
-                    if (!cmd) return; this.commandsManager.reload(cmd.filePath);
+                    if (!cmd) return; this.commandsManager.reload(cmd.path);
                 });
             } else {
                 delete require.cache[`${__dirname}/Managers/Commands.js`];
                 CommandsManager = require("./Managers/Commands");
                 this.commandsManager = new CommandsManager(this);
             }
-        } else if (all || mod === "settings") {
+        } else if (mod === "settings") {
             delete require.cache[`${__dirname}/Managers/Settings.js`];
             SettingsManager = require("./Managers/Settings");
             this.settingsManager = new SettingsManager(this);

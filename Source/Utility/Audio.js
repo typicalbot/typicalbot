@@ -23,12 +23,14 @@ class AudioUtil {
     }
 
     validate(url) {
+        let id = /[a-zA-Z0-9-_]{11}$/.exec(url);
+        if (id) url = id;
         return new Promise((resolve, reject) => {
             return sys.fetchInfo(url).then(resolve).catch(reject);
         });
     }
 
-    fethcStream(video) {
+    fetchStream(video) {
         return new Promise((resolve, reject) => {
             this.validate(video.url).then(() => {
                 let audioStream = ytdl(video.url, { filter: "audioonly" });

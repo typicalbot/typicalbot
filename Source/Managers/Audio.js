@@ -24,7 +24,7 @@ class Audio {
     stream(response, video) {
         return new Promise((resolve, reject) => {
             let currentConnection = response.message.guild.voiceConnection;
-            if (currentConnection) return this.queueVideo(response, video);
+            if (currentConnection) return this.queue(response, video);
 
             this.connect(response).then(connection => {
                 let guildStream = new Stream(this.client, connection);
@@ -36,6 +36,15 @@ class Audio {
                 return response.error(err);
             });
         });
+    }
+
+    queue(response, video) {
+        let stream = this.client.streams.get(response.message.guild.id);
+
+        video.response = response;
+        stream.queue.push(video);
+
+        return response.reply(`Enqueued **${video.title}**.`);
     }
 }
 

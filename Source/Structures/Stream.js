@@ -17,7 +17,7 @@ class Stream {
             this.dispatcher = dispatcher;
             this.current = video;
 
-            video.response.send(`🎵 Now playing **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.length(video.length_seconds)}**.`);
+            video.response.send(`🎵 Now streaming **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.length(video.length_seconds)}**.`);
 
             dispatcher.on("error", err => {
                 video.response.error(err);
@@ -35,7 +35,7 @@ class Stream {
                 );
             });
         }).catch(err => {
-            video.response.error(`An error occured:\n\n${err}`);
+            video.response.error(`An error occured fetching information for the request song.`);
         });
     }
 

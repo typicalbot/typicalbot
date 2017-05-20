@@ -17,7 +17,7 @@ class CommandsManager {
     }
 
     reload(filePath) {
-        delete require.cache(filePath);
+        delete require.cache[filePath];
         let command = new (require(filePath))(this.client);
         this.data.set(command.name, command);
     }
