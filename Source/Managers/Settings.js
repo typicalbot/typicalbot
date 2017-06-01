@@ -92,12 +92,7 @@ class Settings {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
             this.connection.query(`INSERT INTO servers SET ?`, { id }, (error, result) => {
-                if (error) {
-                    reject(error);
-                    setTimeout(function() {
-                        return this.connect();
-                    }, 500);
-                }
+                if (error) return reject(error);
                 this.data.set(id, DefaultData);
                 resolve();
             });
@@ -108,12 +103,7 @@ class Settings {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
             this.connection.query(`UPDATE servers SET ${setting} = ${value ? mysql.escape(value) : `NULL`} WHERE id = ${id}`, (error, result) => {
-                if (error) {
-                    reject(error);
-                    setTimeout(function() {
-                        return this.connect();
-                    }, 500);
-                }
+                if (error) return reject(error);
                 this.data.get(id)[setting] = value;
                 return resolve();
             });
@@ -124,12 +114,7 @@ class Settings {
         return new Promise((resolve, reject) => {
             id = id ? typeof id === "object" ? id.id : id : null;
             this.connection.query(`DELETE FROM servers WHERE id = ${id}`, (error, result) => {
-                if (error) {
-                    reject(error);
-                    setTimeout(function() {
-                        return this.connect();
-                    }, 500);
-                }
+                if (error) return reject(error);
                 this.data.delete(id);
                 return resolve();
             });
