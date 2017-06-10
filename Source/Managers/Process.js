@@ -17,8 +17,8 @@ class ProcessManager {
             if (!this.client.channels.has(message.data.channel)) return;
             let channel = this.client.channels.get(message.data.channel);
             message.data.embed ?
-                channel.sendMessage("", { embed: message.data.content }).catch(err => channel.sendMessage("A message was too big to send here.")) :
-                channel.sendMessage(message.data.content);
+                channel.send("", { embed: message.data.content }).catch(err => channel.send("A message was too big to send here.")) :
+                channel.send(message.data.content);
         } else if (message.type === "serverinfo") {
             if (!this.client.guilds.has(message.data.guild)) return;
             let guild = this.client.guilds.get(message.data.guild);

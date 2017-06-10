@@ -14,7 +14,7 @@ module.exports = {
             let content = match[2];
 
             channel ?
-                channel.sendMessage(content).catch(err => response.error("Messages cannot be delivered there.")) :
+                channel.send(content).catch(err => response.error("Messages cannot be delivered there.")) :
                 response.send(content);
 
             if (message.deletable) message.delete(500);
@@ -865,7 +865,7 @@ module.exports = {
             if (!channel) return response.error(`No announcements channel set up.`);
 
             let useembed = text.startsWith("--embed");
-            if (!useembed) return channel.sendMessage(`**__Announcement from ${message.author.username}#${message.author.discriminator}:__**\n\n${text}`);
+            if (!useembed) return channel.send(`**__Announcement from ${message.author.username}#${message.author.discriminator}:__**\n\n${text}`);
             text = text.slice(8);
 
             let mention = text.startsWith("--mention");
@@ -875,7 +875,7 @@ module.exports = {
 
             if (mention && !mentionrole) return response.error(`Announcing with a mention requires the \`ann-mention\` setting to be set.`);
 
-            channel.sendMessage(mention && mentionrole ? `${mentionrole}` : "", { embed: {
+            channel.send(mention && mentionrole ? `${mentionrole}` : "", { embed: {
                 "color": 0x00ADFF,
                 "description": `**__Announcement:__**\n\n${text}`,
                 "timestamp": new Date(),

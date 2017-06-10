@@ -122,7 +122,7 @@ module.exports = {
         aliases: ["puppy", "doggy"],
         usage: {"command": "dog", "description": "Gives you a random dog picture."},
         execute: (message, client, response) => {
-            message.channel.sendFile("http://randomdoggiegenerator.com/randomdoggie.php", "doggie.jpg").catch(err =>
+            message.channel.send("", { files: ["http://randomdoggiegenerator.com/randomdoggie.php"] }).catch(err =>
                 response.error(`An error occured making that request.`));
         }
     },
