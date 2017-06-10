@@ -55,7 +55,9 @@ const client = new class extends Discord.Client {
                 if (this.vr === "alpha" && this.guilds.has("163038706117115906")) this.functions.sendDonors();
             }, 300000);
         })
-        .on("ready", () => this.log(`Client Connected | Shard ${this.shardNumber} / ${this.shardCount}`))
+        .on("ready", () => {
+            this.log(`Client Connected | Shard ${this.shardNumber} / ${this.shardCount}`);
+        })
         .on("warn", err => this.log(err, true))
         .on("error", err => this.log(err, true))
         .on("reconnecting", () => this.log("Reconnecting", true))
@@ -73,15 +75,15 @@ const client = new class extends Discord.Client {
         if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 
         setInterval(() => {
-            if (!this.lastMessage && this.settingsManager.connection.state !== "disconnected") return;
-            if (this.settingsManager.connection.state === "disconnected") this.settingsManager.connection.connect();
+            if (!this.lastMessage && this.settingsManager.connection.state === "authenticated") return;
+            if (this.settingsManager.connection.state !== "authenticated") this.settingsManager.connection.connect();
             if (Date.now() - this.lastMessage > 120000) {
                 this.destroy();
                 return this.login(process.env.CLIENT_TOKEN);
             }
         }, 60000);
 
-        this.login();
+        this.login(process.env.CLIENT_TOKEN);
     }
 
     log(content, error = false) {
@@ -129,4 +131,4 @@ const client = new class extends Discord.Client {
 
 process.on("message", msg => client.processManager.register(msg))
 .on("uncaughtException", err => client.log(err.stack, true))
-.on("unhandledRejection", err => client.log(err.stack, true));
+.on("unhandledRejection", err => client.log(err, true));

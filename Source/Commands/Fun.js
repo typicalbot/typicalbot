@@ -8,8 +8,8 @@ module.exports = {
             let r_addition = Math.floor(Math.random() * 9);
             let addition = r_addition === 1 ? `Someone call the police!` : r_addition === 3 ? "Wait! They missed!" : r_addition === 5 ? "Bam! Headshot!" : null;
 
-            if (level === 6 || level === 7) addition = "Wait! They missed!";
-            if (level === 5) addition = "Bam! Headshot!";
+            if (level === 10 || level === 9) addition = "Wait! They missed!";
+            if (level === 8 || level == 7) addition = "Bam! Headshot!";
 
             if (!user || user.id === message.author.id) return response.send(`${message.author} just shot at themselves! :scream:${addition ? ` ${addition}` : ""}`);
             response.send(`${message.author} just shot at ${user}! :scream:${addition ? ` ${addition}` : ""}`);

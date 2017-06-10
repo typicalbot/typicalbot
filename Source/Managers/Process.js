@@ -24,7 +24,7 @@ class ProcessManager {
             let guild = this.client.guilds.get(message.data.guild);
             let owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
 
-            this.client.settings.get(guild.id).then(settings => {
+            this.client.settingsManager.get(guild.id).then(settings => {
                 let settingslist = [];
                 Object.keys(settings).map(s => settingslist.push(`${s}: \`${settings[s]}\``));
 

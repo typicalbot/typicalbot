@@ -744,7 +744,7 @@ module.exports = {
 
                 client.banLogs.set(toban.id || toban, reason ? { moderator: message.author, reason } : { moderator: message.author });
 
-                message.guild.ban(toban, purgeDays).then(() => {
+                message.guild.ban(toban, { days: purgeDays }).then(() => {
                     response.reply(`Success.`);
                 }).catch(err => {
                     if (err === "Error: Couldn't resolve the user ID to ban.") return response.error(`User cannot be resolved.`);
@@ -795,7 +795,7 @@ module.exports = {
 
                 client.softbans.set(member.id, setTimeout(() => client.softbans.delete(user.id), 2500));
 
-                member.ban(parseInt(amount)).then(member => {
+                member.ban({ days: parseInt(amount) }).then(member => {
                     setTimeout(() => {
                         message.guild.unban(member).then(() => {
                             response.reply(`Success. Purged ${amount} day${amount === 1 ? "" : "s"} worth of messages.`);
@@ -817,7 +817,7 @@ module.exports = {
         permission: 2,
         usage: {"command": "warn <@user>", "description": "Warn a user in the server. (Only works with mod logs enabled)"},
         execute: (message, client, response) => {
-            let match = /warn\s+<@!?(.+)>(?:\s+(.+))?/i.exec(message.content);
+            let match = /warn\s+(?:<@!?)?(\d+)>?(?:\s+(.+))?/i.exec(message.content);
             if (!match) return response.usage("warn");
 
             let user = message.guild.member(match[1]);

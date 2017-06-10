@@ -64,8 +64,8 @@ module.exports = {
                         videoInfo.url = video.url;
                         return client.audioManager.playVideo(response, videoInfo);
                     }).catch(err => response.error(`Information cannot be fetched from that video. Please try another url or video name.`));
-                }).catch(() => {
-                    response.error(`An error occured making that search.`);
+                }).catch(theErr => {
+                    response.error(`An error occured making that search.${message.author.id === "105408136285818880" ? ` ${theErr}` : ""}`);
                 });
             }
         }

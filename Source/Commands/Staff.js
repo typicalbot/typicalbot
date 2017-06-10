@@ -1,6 +1,5 @@
 const request = require("request");
 const util = require("util");
-const hd = require("heapdump");
 
 function authorize(client, guildid, clientid) {
     return new Promise((resolve, reject) => {
@@ -56,13 +55,6 @@ module.exports = {
         execute: (message, client, response) => {
             let clientid = message.content.slice(message.content.search(" ") + 1);
             authorize(client, message.guild.id, clientid).then(a => response.reply(a)).catch(e => response.error(e));
-        }
-    },
-    "hdump": {
-        mode: "strict",
-        permission: 10,
-        execute: (message, client, response) => {
-            hd.writeSnapshot(`${__dirname}/${Date.now()}.heapsnapshot`);
         }
     },
     "shard": {

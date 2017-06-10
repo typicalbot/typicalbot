@@ -22,7 +22,7 @@ module.exports = class Events {
             if (!BotMember || !message.channel.permissionsFor(BotMember).hasPermission("SEND_MESSAGES")) return;
 
             this.client.settingsManager.get(message.guild).then(settings => {
-                if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.sendMessage(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
+                if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.send(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
 
                 message.guild.settings = settings;
 
@@ -79,13 +79,13 @@ module.exports = class Events {
                 if (channel) {
                     let useembed = settings.joinlog === "--embed";
                     useembed ?
-                        channel.sendEmbed({
+                        channel.send("", { embed: {
                             "color": 0x00FF00,
                             "author": { "name": `${user.username}#${user.discriminator} (${user.id})`, "icon_url": user.avatarURL || null },
                             "footer": { "text": "User Joined" },
                             "timestamp": new Date()
-                        }).catch() :
-                        channel.sendMessage(
+                        }}).catch() :
+                        channel.send(
                             settings.joinlog ?
                                 this.client.functions.getFilteredMessage("ann", guild, user, settings.joinlog) :
                                 `**${user.username}#${user.discriminator}** has joined the server.`
@@ -93,7 +93,7 @@ module.exports = class Events {
                 }
             }
 
-            if (settings.joinmessage && !user.bot) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.getFilteredMessage("jm", guild, user, settings.joinmessage)}'`).catch();
+            if (settings.joinmessage && !user.bot) user.send(`**${guild.name}'s Join Message:**\n\n${this.client.functions.getFilteredMessage("jm", guild, user, settings.joinmessage)}'`).catch();
 
             if (settings.joinnick) member.setNickname(this.client.functions.getFilteredMessage("jn", guild, user, settings.joinnick)).catch();
 
@@ -118,13 +118,13 @@ module.exports = class Events {
 
                 let useembed = settings.leavelog === "--embed";
                 useembed ?
-                    channel.sendEmbed({
+                    channel.send("", { embed: {
                         "color": 0xFF6600,
                         "author": { "name": `${user.username}#${user.discriminator} (${user.id})`, "icon_url": user.avatarURL || null },
                         "footer": { "text": "User Left" },
                         "timestamp": new Date()
-                    }).catch() :
-                    channel.sendMessage(
+                    }}).catch() :
+                    channel.send(
                         settings.leavelog ?
                             this.client.functions.getFilteredMessage("ann", guild, user, settings.leavelog) :
                             `**${user.username}#${user.discriminator}** has left the server.`
@@ -152,13 +152,13 @@ module.exports = class Events {
 
             let useembed = settings.banlog === "--embed";
             useembed ?
-                channel.sendEmbed({
+                channel.send("", { embed: {
                     "color": 0xFF0000,
                     "author": { "name": `${user.username}#${user.discriminator} (${user.id})`, "icon_url": user.avatarURL || null },
                     "footer": { "text": "User Banned" },
                     "timestamp": new Date()
-                }).catch() :
-                channel.sendMessage(
+                }}).catch() :
+                channel.send(
                     settings.banlog ?
                         this.client.functions.getFilteredMessage("ann", guild, user, settings.banlog) :
                         `**${user.username}#${user.discriminator}** has been banned from the server.`
@@ -189,7 +189,7 @@ module.exports = class Events {
                     "footer": { "text": "User Unbanned" },
                     "timestamp": new Date()
                 }).catch() :
-                channel.sendMessage(
+                channel.send(
                     settings.unbanlog !== "--enabled" ?
                         this.client.functions.getFilteredMessage("ann", guild, user, settings.unbanlog) :
                         `**${user.username}#${user.discriminator}** has been unbanned from the server.`
@@ -212,7 +212,7 @@ module.exports = class Events {
 
                 if (settings.joinnick && newNick === this.client.functions.getFilteredMessage("jn", guild, user, settings.joinnick)) return;
 
-                channel.sendMessage(
+                channel.send(
                     settings.nicklog !== "--enabled" ?
                     this.client.functions.getFilteredMessage("ann-nick", guild, user, settings.nicklog, { oldMember }) :
                     `**${user.username}#${user.discriminator}** changed their nickname to **${newMember.nickname || user.username}**.`
@@ -228,7 +228,7 @@ module.exports = class Events {
             let channel = guild.channels.get(settings.logs);
             if (!channel) return;
 
-            channel.sendMessage(
+            channel.send(
                 settings.invitelog !== "--enabled" ?
                     this.client.functions.getFilteredMessage("ann-invite", guild, user, settings.invitelog, { channel: mchannel }) :
                     `**${user.username}#${user.discriminator}** posted an invite in <#${mchannel.id}>.`);
