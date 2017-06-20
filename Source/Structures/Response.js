@@ -35,6 +35,11 @@ class Response {
         return this.error(`Your permission level is too low to execute that command. The command requires permission level ${rLevel.level} (${rLevel.title}) and you are level ${uLevel.level} (${uLevel.title}).`);
     }
 
+    elevation(command, uLevel, rLevel) {
+        rLevel = this.client.permissionsManager.define(rLevel);
+        return this.error(`This server requires elevated permissions to use that command. The command requires permission level ${rLevel.level} (${rLevel.title}) and you are level ${uLevel.level} (${uLevel.title}).`);
+    }
+
     dm(content, embed) {
         return embed ?
             this.message.author.send(content, { embed }) :

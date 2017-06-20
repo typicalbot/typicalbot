@@ -35,7 +35,7 @@ class Stream {
                 );
             });
         }).catch(err => {
-            video.response.error(`An error occured fetching information for the request song.`);
+            video.response.error(`An error occured fetching information for the requested song.`);
         });
     }
 
@@ -44,6 +44,16 @@ class Stream {
         this.connection.disconnect();
         this.client.streams.delete(this.connection.channel.guild);
         this.client.emit("voiceConnectionChange");
+    }
+
+    skip() {
+        let song = this.current;
+        this.dispatcher.end();
+        return song;
+    }
+
+    setVolume(vol) {
+        return this.dispatcher.setVolume(vol);
     }
 }
 

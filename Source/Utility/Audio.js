@@ -13,6 +13,10 @@ class AudioUtil {
         this.client = client;
     }
 
+    withinLimit(video, response) {
+        return video.length_seconds <= (response.message.guild.settings.lengthLimit || 1800) ? true : false;
+    }
+
     fetchInfo(url) {
         return new Promise((resolve, reject) => {
             ytdl.getInfo(url, (err, info) => {
@@ -58,6 +62,26 @@ class AudioUtil {
         if (err === "keyInvalid") return "**__An unknown error occured while requesting that video:__**\n\nThis server entered an invalid YouTube API Key.";
         else if (err === "quotaExceeded") return "**__An error occured while requesting that video:__**\n\nOur Global YouTube API Quota limit exceeded, meaning no more searches can be made until it is reset at 3 AM EST.\n\n**__How to Resolve the Issue:__**\n```md\n# You can resolve the issue by creating your own YouTube Data API v3 Key.\n\n< Join TypicalBot\'s server and use the command '/tag apikeyhowto' for more information on how to do so.```\n**Link:** <https://typicalbot.com/join-our-server/>";
         else return `An unknown error occured while requesting that video:\n${err}`;
+    }
+
+    permissionCheck(message, command, permissions) {
+        let level = permissions.level;
+
+        let musicperms = message.guild.settings.musicperms;
+        let override = message.guild.settings[`or${command.name}`];
+        if (override === "off") if (musicperms === "all" || musicperms === "dj" && level >= 1 || musicperms === "moderator" && level >= 2 || musicperms === "administrator" && level >= 3) return { has: true };
+        if (override === "all" || override === "dj" && level >= 1 || override === "moderator" && level >= 2 || override === "administrator" && level >= 3) return { has: true };
+        return { has: false, req: override === "off" ? musicperms : override };
+    }
+
+    hasPermissions(response, command) {
+        let userTrueLevel = this.client.permissionsManager.get(response.message.guild, response.message.author, true);
+
+        let permissionCheck = this.permissionCheck(response.message, command, userTrueLevel);
+        if (permissionCheck.has) { return true; } else {
+            response.elevation(this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0 );
+            return false;
+        }
     }
 }
 

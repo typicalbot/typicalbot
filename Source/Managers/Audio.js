@@ -23,8 +23,13 @@ class Audio {
 
     stream(response, video) {
         return new Promise((resolve, reject) => {
+            if (!this.client.audioUtility.withinLimit(video, response)) return response.error(`The song requested is too long to play. The maximum song length is ${this.client.functions.length(response.message.guild.settings.lengthLimit || 1800)}.`);
+
             let currentConnection = response.message.guild.voiceConnection;
-            if (currentConnection) return this.queue(response, video);
+            if (currentConnection) {
+                if (!response.message.member.voiceChannel || response.message.member.voiceChannel.id !== currentConnection.channel.id) return response.error("You must be in the same voice channel to request a song to be played.");
+                return this.queue(response, video);
+            }
 
             this.connect(response).then(connection => {
                 let guildStream = new Stream(this.client, connection);
@@ -40,6 +45,8 @@ class Audio {
 
     queue(response, video) {
         let stream = this.client.streams.get(response.message.guild.id);
+
+        if (stream.queue.length >= (response.message.guild.settings.queuelimit || 10)) return response.error(`The queue limit of ${response.message.guild.settings.queuelimit || 10} has been reached.`);
 
         video.response = response;
         stream.queue.push(video);

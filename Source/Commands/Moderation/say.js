@@ -6,7 +6,8 @@ module.exports = class extends Command {
             name: "say",
             description: "Customize your servers setting and enable/discord specific features.",
             usage: "settings <'view'|'edit'> <setting> <value>",
-            mode: "strict"
+            mode: "strict",
+            permission: 2
         });
 
         this.client = client;

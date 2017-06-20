@@ -57,7 +57,6 @@ class ProcessManager {
             if (!this.client.guilds.has(message.data.guild)) return;
 
             let guild = this.client.guilds.get(message.data.guild);
-            //let settings = await this.client.settingsManager.valueSettings(guild);
             let settings = await this.client.settingsManager.fetch(guild.id);
 
             let owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
