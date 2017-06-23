@@ -37,8 +37,8 @@ module.exports = class {
     }
 
     transmitTesters() {
-        let tester = this.client.guilds.get("163038706117115906").roles.find("name", "Beta Tester");
-        let list = []; tester.members.forEach(m => list.push(m.id));
+        const tester = this.client.guilds.get("163038706117115906").roles.find("name", "Beta Tester");
+        const list = []; tester.members.forEach(m => list.push(m.id));
         this.client.transmit("testers", list);
     }
 
@@ -53,8 +53,8 @@ module.exports = class {
     }
 
     transmitDonors() {
-        let donor = this.client.guilds.get("163038706117115906").roles.find("name", "Donor");
-        let list = []; donor.members.forEach(m => list.push(m.id));
+        const donor = this.client.guilds.get("163038706117115906").roles.find("name", "Donor");
+        const list = []; donor.members.forEach(m => list.push(m.id));
         this.client.transmit("donors", list);
     }
 
@@ -76,21 +76,21 @@ module.exports = class {
     }
 
     convertTime(ms) {
-        let days = ms / 86400000;
-        let absoluteDays = Math.floor(days);
-        let hours = (days - absoluteDays) * 24;
-        let absoluteHours = Math.floor(hours);
-        let minutes = (hours - absoluteHours) * 60;
-        let absoluteMinutes = Math.floor(minutes);
-        let seconds = (minutes - absoluteMinutes) * 60;
-        let absoluteSeconds = Math.floor(seconds);
+        const days = ms / 86400000;
+        const absoluteDays = Math.floor(days);
+        const hours = (days - absoluteDays) * 24;
+        const absoluteHours = Math.floor(hours);
+        const minutes = (hours - absoluteHours) * 60;
+        const absoluteMinutes = Math.floor(minutes);
+        const seconds = (minutes - absoluteMinutes) * 60;
+        const absoluteSeconds = Math.floor(seconds);
 
-        let d = absoluteDays > 0 ? absoluteDays === 1 ? "1 day" : `${absoluteDays} days` : null;
-        let h = absoluteHours > 0 ? absoluteHours === 1 ? "1 hour" : `${absoluteHours} hours` : null;
-        let m = absoluteMinutes > 0 ? absoluteMinutes === 1 ? "1 minute" : `${absoluteMinutes} minutes` : null;
-        let s = absoluteSeconds > 0 ? absoluteSeconds === 1 ? "1 second" : `${absoluteSeconds} seconds` : null;
+        const d = absoluteDays > 0 ? absoluteDays === 1 ? "1 day" : `${absoluteDays} days` : null;
+        const h = absoluteHours > 0 ? absoluteHours === 1 ? "1 hour" : `${absoluteHours} hours` : null;
+        const m = absoluteMinutes > 0 ? absoluteMinutes === 1 ? "1 minute" : `${absoluteMinutes} minutes` : null;
+        const s = absoluteSeconds > 0 ? absoluteSeconds === 1 ? "1 second" : `${absoluteSeconds} seconds` : null;
 
-        let absoluteTime = [];
+        const absoluteTime = [];
         if (d) absoluteTime.push(d);
         if (h) absoluteTime.push(h);
         if (m) absoluteTime.push(m);
@@ -117,7 +117,7 @@ module.exports = class {
     }
 
     fetchAutoRole(guild, settings) {
-        let roleSetting = settings.autorole; if (!roleSetting) return;
+        const roleSetting = settings.autorole; if (!roleSetting) return;
 
         if (guild.roles.has(roleSetting)) return guild.roles.get(roleSetting);
         return;
@@ -131,7 +131,7 @@ module.exports = class {
     }
 
     formatMessage(type, guild, user, content, options = {}) {
-        let member = guild.member(user);
+        const member = guild.member(user);
 
         content = content.replace(/@everyone/gi, `@\u200Beveryone`).replace(/@here/g, `@\u200Bhere`);
 
@@ -174,14 +174,13 @@ module.exports = class {
             .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator);
     }
 
-    pagify(list, page) {
-        let pageCount = Math.ceil(list / 10);
-        let currentPage = list.splice((page - 1) * 10, 10);
+    pagify(list, page = 1) {
+        const listSize = list.length;
+        const pageCount = Math.ceil(listSize / 10);
+        page = page > pageCount ? 0 : page--;
+        const currentPage = list.splice((page) * 10, 10);
 
-        let pageContent = currentPage.map((item, index) =>
-              `• ${this.lengthen(1, (index + 1) + 10 * page, String(10 + ( 10 * page)).length, "before")}: ${item}`
-        ).join("\n");
-
-        return `Page ${page + 1} / ${pageCount} | ${list.length} Items\n\n${pageContent}`;
+        const pageContent = currentPage.map((item, index) => `• ${this.lengthen(1, (index + 1) + 10 * page, String(10 + (10 * page)).length, "before")}: ${item}`).join("\n");
+        return `Page ${page + 1} / ${pageCount} | ${listSize.toLocaleString()} Total\n\n${pageContent}`;
     }
 };
