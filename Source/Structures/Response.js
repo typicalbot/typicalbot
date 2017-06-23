@@ -19,11 +19,11 @@ class Response {
     }
 
     error(content, embed) {
-        return this.send(`${this.message.author} | \`❌\` | ${content}`, embed);
+        return this.send(`${this.message.author} | \\❌ | ${content}`, embed);
     }
 
     success(content, embed) {
-        return this.send(`${this.message.author} | \`✔\` | ${content}`, embed);
+        return this.send(`${this.message.author} | ✓ | ${content}`, embed);
     }
 
     usage(command) {

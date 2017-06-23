@@ -1,164 +1,141 @@
-const request = require("request");
+const request = require("superagent");
 const moment = require("moment");
 const util = require("util");
+const Discord = require("discord.js");
 
-module.exports = class Functions {
+module.exports = class {
     constructor(client) {
         this.client = client;
     }
 
-    sendStats(post = "a") {
-        try {
-            if (post === "a" || post === "c") request({
-                "method": "POST",
-                "url": "https://www.carbonitex.net/discord/data/botdata.php",
-                "headers": {
-                    "Content-Type": "application/json"
-                },
-                "body": JSON.stringify({
-                    "key": this.client.config.carbonkey,
-                    "shardid": this.client.shardID.toString(),
-                    "shardcount": this.client.shardCount.toString(),
-                    "servercount": this.client.guilds.size.toString()
-                })
-            }, (err, res, body) => { if (err || res.statusCode != 200) this.client.log(`Carbon Post Failed\n\n${err || body}`, true); });
-
-            if (post === "a" || post === "b") request({
-                "method": "POST",
-                "url": "https://bots.discord.pw/api/bots/153613756348366849/stats",
-                "headers": {
-                    "Authorization": this.client.config.discordpwkey,
-                    "Content-Type": "application/json"
-                },
-                "body": JSON.stringify({
-                    "shard_id": this.client.shardID.toString(),
-                    "shard_count": this.client.shardCount.toString(),
-                    "server_count": this.client.guilds.size.toString()
-                })
-            }, (err, res, body) => { if (err || res.statusCode != 200) this.client.log("DiscordPW Post Failed", true); });
-        } catch(err) {
-            this.client.log(err, true);
+    postStats(provider) {
+        if (provider === "a" || provider === "c") {
+            request.post("https://www.carbonitex.net/discord/data/botdata.php")
+            .set("Content-Type", "application/json")
+            .send({
+                "key": this.client.config.carbonkey,
+                "shardid": this.client.shardID.toString(),
+                "shardcount": this.client.shardCount.toString(),
+                "servercount": this.client.guilds.size.toString()
+            })
+            .end((err, res) => {
+                if (err || res.statusCode != 200) this.client.log("Carbinitex Stats Transfer Failed", true);
+            });
+        } else if (provider === "a" || provider === "b") {
+            request.post("https://bots.discord.pw/api/bots/153613756348366849/stats")
+            .set("Authorization", this.client.config.discordpwkey)
+            .set("Content-Type", "application/json")
+            .send({
+                "shard_id": this.client.shardID.toString(),
+                "shard_count": this.client.shardCount.toString(),
+                "server_count": this.client.guilds.size.toString()
+            })
+            .end((err, res) => {
+                if (err || res.statusCode != 200) this.client.log("bots.discord.pw Stats Transfer Failed", true);
+            });
         }
     }
 
-    sendTesters() {
+    transmitTesters() {
         let tester = this.client.guilds.get("163038706117115906").roles.find("name", "Beta Tester");
         let list = []; tester.members.forEach(m => list.push(m.id));
         this.client.transmit("testers", list);
     }
 
-    sendDonors() {
+    checkTester(guild) {
+        if (!this.client.testerData.includes(guild.ownerID) &&
+            guild.ownerID !== this.client.config.owner &&
+            !this.client.config.management[guild.ownerID] &&
+            !this.client.config.staff[guild.ownerID] &&
+            !this.client.config.support[guild.ownerID]
+        ) return false;
+        return true;
+    }
+
+    transmitDonors() {
         let donor = this.client.guilds.get("163038706117115906").roles.find("name", "Donor");
         let list = []; donor.members.forEach(m => list.push(m.id));
         this.client.transmit("donors", list);
     }
 
-    devCheck(g) {
-        if (
-            !this.client.testerData.includes(g.ownerID) &&
-            g.ownerID !== this.client.config.owner &&
-            !this.client.config.management[g.ownerID] &&
-            !this.client.config.staff[g.ownerID] &&
-            !this.client.config.support[g.ownerID]
+    checkDonor(guild) {
+        if (!this.client.donorData.includes(guild.ownerID) &&
+            guild.ownerID !== this.client.config.owner &&
+            !this.client.config.management[guild.ownerID] &&
+            !this.client.config.staff[guild.ownerID] &&
+            !this.client.config.support[guild.ownerID]
         ) return false;
         return true;
     }
 
-    alphaCheck(g) {
-        if (
-            !this.client.donorData.includes(g.ownerID) &&
-            g.ownerID !== this.client.config.owner &&
-            !this.client.config.management[g.ownerID] &&
-            !this.client.config.staff[g.ownerID] &&
-            !this.client.config.support[g.ownerID]
-        ) return false;
-        return true;
+    transmitStatus() {
+        this.client.transmit("status", {
+            "status": this.client.status === Discord.Constants.Status.READY ? 0 : 1,
+            "uptime": this.client.uptime,
+            "mysqlStatus": this.client.database.connection.state === "authenticated" ? 0 : 1 });
     }
 
-    timestamp(ms) {
+    convertTime(ms) {
         let days = ms / 86400000;
-        let d = Math.floor(days);
-        let hours = (days - d) * 24;
-        let h = Math.floor(hours);
-        let minutes = (hours - h) * 60;
-        let m = Math.floor(minutes);
-        let seconds = (minutes - m) * 60;
-        let s = Math.floor(seconds);
-        return { d, h, m, s };
+        let absoluteDays = Math.floor(days);
+        let hours = (days - absoluteDays) * 24;
+        let absoluteHours = Math.floor(hours);
+        let minutes = (hours - absoluteHours) * 60;
+        let absoluteMinutes = Math.floor(minutes);
+        let seconds = (minutes - absoluteMinutes) * 60;
+        let absoluteSeconds = Math.floor(seconds);
+
+        let d = absoluteDays > 0 ? absoluteDays === 1 ? "1 day" : `${absoluteDays} days` : null;
+        let h = absoluteHours > 0 ? absoluteHours === 1 ? "1 hour" : `${absoluteHours} hours` : null;
+        let m = absoluteMinutes > 0 ? absoluteMinutes === 1 ? "1 minute" : `${absoluteMinutes} minutes` : null;
+        let s = absoluteSeconds > 0 ? absoluteSeconds === 1 ? "1 second" : `${absoluteSeconds} seconds` : null;
+
+        let absoluteTime = [];
+        if (d) absoluteTime.push(d);
+        if (h) absoluteTime.push(h);
+        if (m) absoluteTime.push(m);
+        if (s) absoluteTime.push(s);
+
+        return absoluteTime.join(", ");
     }
 
-    time(ts) {
-        let d = ts.d > 0 ? ts.d === 1 ? "1 day" : `${ts.d} days` : null;
-        let h = ts.h > 0 ? ts.h === 1 ? "1 hour" : `${ts.h} hours` : null;
-        let m = ts.m > 0 ? ts.m === 1 ? "1 minute" : `${ts.m} minutes` : null;
-        let s = ts.s > 0 ? ts.s === 1 ? "1 second" : `${ts.s} seconds` : null;
-        let l = [];
-        if (d) l.push(d); if (h) l.push(h); if (m) l.push(m); if (s) l.push(s);
-        return l.join(", ");
-    }
-
-    length(s) {
-        return this.time(this.timestamp(s * 1000));
-    }
-
-    shorten(text, length = 45) {
-        if (text.length > length) return `${text.substring(0, length - 3)}...`;
-        return text;
-    }
-
-    lengthen(text, length, place = "after") {
-        text = text.toString();
-        if (text.length > length) return `${text.substring(0, length - 3)}...`;
-        return place === "before" ?
-            ' '.repeat(length - text.length) + text :
-            text + ' '.repeat(length - text.length);
-    }
-
-    inviteCheck(response) {
-        if (response.message.author.id === "288828235628675072") return;
-
-        if (response.message.guild.settings.antiinvite === "Y") {
-            let expr = /(discord\.gg\/.+|discordapp\.com\/invite\/.+)/gi;
-
-            let contentMatch = expr.test(response.message.content);
-
-            let embedMatch = expr.test(util.inspect(response.message.embeds, { depth: 4 }));
-
-            if (contentMatch || embedMatch) {
-                if (!response.message.deletable) return;
-                this.client.eventsManager.guildInvitePosted(response.message.guild, response.message, response.message.author);
-                response.message.delete().then(() => {
-                    response.error(`An invite was detected in your message. Your message has been deleted.`);
-                });
-            }
+    lengthen(type = -1, text, length, place = "after") {
+        if (type === -1) {
+            if (text.length > length) return `${text.substring(0, length - 3)}...`;
+            return text;
+        } else if (type === 1) {
+            text = text.toString();
+            if (text.length > length) return `${text.substring(0, length - 3)}...`;
+            return place === "before" ?
+                ' '.repeat(length - text.length) + text :
+                text + ' '.repeat(length - text.length);
         }
     }
 
-    get uptime() {
-        return this.time(this.timestamp(this.client.uptime));
+    inviteCheck(text) {
+        return /(discord\.gg\/.+|discordapp\.com\/invite\/.+|discord\.me\/.+)/gi.test(text);
     }
 
     fetchAutoRole(guild, settings) {
-        let roleSetting = settings.autorole;
-        if (!roleSetting) return;
+        let roleSetting = settings.autorole; if (!roleSetting) return;
 
         if (guild.roles.has(roleSetting)) return guild.roles.get(roleSetting);
         return;
     }
 
-    getPrefix(user, settings, command) {
+    matchPrefix(user, settings, command) {
         if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
         if (settings.customprefix && command.startsWith(settings.customprefix)) return settings.customprefix;
         if (settings.defaultprefix === "N" && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
         return null;
     }
 
-    getFilteredMessage(type, guild, user, text, options = {}) {
+    formatMessage(type, guild, user, content, options = {}) {
         let member = guild.member(user);
-        text = text
-            .replace(/@everyone/gi, `@\u200Beveryone`)
-            .replace(/@here/g, `@\u200Bhere`);
-        if (type === "logs") return text
+
+        content = content.replace(/@everyone/gi, `@\u200Beveryone`).replace(/@here/g, `@\u200Bhere`);
+
+        if (type === "logs") return content
             .replace(/{user}|{user.mention}/gi, user.toString())
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.id}/gi, user.id)
@@ -171,63 +148,40 @@ module.exports = class Functions {
             .replace(/{now}/gi, moment().format("dddd MMMM Do, YYYY, hh:mm A"))
             .replace(/{now.time}/gi, moment().format("hh:mm A"))
             .replace(/{now.date}/gi, moment().format("MMM DD, YYYY"));
-        if (type === "logs-nick") return this.getFilteredMessage("logs", guild, user, text)
+        if (type === "logs-nick") return this.getFilteredMessage("logs", guild, user, content)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{user.oldnick}|{user.oldnickname}/gi, options.oldMember.nickname || user.username);
-        if (type === "logs-invite") return this.getFilteredMessage("logs", guild, user, text)
+        if (type === "logs-invite") return this.getFilteredMessage("logs", guild, user, content)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{channel}/gi, options.channel.toString())
             .replace(/{channel.name}/gi, options.channel.name)
             .replace(/{channel.id}/gi, options.channel.id);
-        if (type === "logs-msgdel") return this.getFilteredMessage("logs", guild, user, text)
+        if (type === "logs-msgdel") return this.getFilteredMessage("logs", guild, user, content)
             .replace(/{message.content}|{message.text}/gi, options.message.content)
             .replace(/{message.content:short}|{message.text:short}/gi, this.shorten(options.message.content, 100))
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{channel}/gi, options.channel.toString())
             .replace(/{channel.name}/gi, options.channel.name)
             .replace(/{channel.id}/gi, options.channel.id);
-        if (type === "jm") return text
+        if (type === "automessage") return content
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.id}/gi, user.id)
             .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator)
             .replace(/{guild.name}|{server.name}/gi, guild.name)
             .replace(/{guild.id}|{server.id}/gi, guild.id);
-        if (type === "jn") return text
+        if (type === "autonick") return content
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator);
     }
 
-    request(url) {
-        return new Promise((resolve, reject) => {
-            request(url, (error, response, body) =>{
-                if (error || response.statusCode !== 200) return reject({error: error, response: response});
-                return resolve(body);
-            });
-        });
-    }
+    pagify(list, page) {
+        let pageCount = Math.ceil(list / 10);
+        let currentPage = list.splice((page - 1) * 10, 10);
 
-    pagify(content, page) {
-        let pages = [];
-        let currentPage = [];
-
-        content.forEach((v, index) => {
-            currentPage.push(v);
-            if (currentPage.length >= 10 || content.length === index + 1 || content.size === index + 1) {
-                pages.push(currentPage);
-                currentPage = [];
-            }
-        });
-
-        page = page && page > 0 && page <= pages.length ? page - 1 : 0;
-
-        let thisPage = pages[page].map((item, index) =>
-              `• ${this.lengthen((index+1)+10*page, String(10+(10*page)).length, "before")}: ${item}`
+        let pageContent = currentPage.map((item, index) =>
+              `• ${this.lengthen(1, (index + 1) + 10 * page, String(10 + ( 10 * page)).length, "before")}: ${item}`
         ).join("\n");
 
-        return `Page ${page + 1} / ${pages.length} | ${content.length} Items\n\n${thisPage}`;
-    }
-
-    page(array, page) {
-        return array.splice((page -1) * 10, 10);
+        return `Page ${page + 1} / ${pageCount} | ${list.length} Items\n\n${pageContent}`;
     }
 };

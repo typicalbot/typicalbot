@@ -73,7 +73,7 @@ const client = new class extends Discord.Client {
         }, 60000);
 */
 
-        this.login();
+        this.login(process.env.CLIENT_TOKEN);
     }
 
     log(content, error = false) {
@@ -82,7 +82,7 @@ const client = new class extends Discord.Client {
             console.log(`SHARD ${this.shardID} | ${content}`);
     }
 
-    transmit(type, data) {
+    transmit(type, data = {}) {
         process.send({ type, data });
     }
 

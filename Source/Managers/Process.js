@@ -6,8 +6,10 @@ class ProcessManager {
             this.client.shardData = message.data;
         } else if (message.type === "reload") {
             this.client.reload(message.data);
-        } else if (message.type === "sendtesters") {
-            if (this.client.guilds.has("163038706117115906")) this.client.functions.sendTesters();
+        } else if (message.type === "transmitTesters") {
+            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
+        } else if (message.type === "transmitDonors") {
+            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
         } else if (message.type === "testers") {
             this.client.testerData = message.data;
         } else if (message.type === "donors") {
@@ -16,7 +18,7 @@ class ProcessManager {
             if (!this.client.channels.has(message.data.channel)) return;
             let channel = this.client.channels.get(message.data.channel);
             message.data.embed ?
-                channel.send("", { embed: message.data.content }).catch(err => channel.sendMessage("A message was too big to send here.")) :
+                channel.send("", { embed: message.data.content }).catch(err => channel.send("A message was too big to send here.")) :
                 channel.send(message.data.content);
         } else if (message.type === "serverinfo") {
             if (!this.client.guilds.has(message.data.guild)) return;
