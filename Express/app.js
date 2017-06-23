@@ -261,7 +261,7 @@ class Webserver extends express {
         this.get("/staff", isStaff, (req, res) => {
             if (req.query.guildid) return res.redirect(`/guild/${req.query.guildid}`);
 
-            master.globalRequest("userpos", { user: req.user.id }).then(data => {
+            master.globalRequest("staffposition", { user: req.user.id }).then(data => {
                 res.render(page("staff.ejs"), {
                     master,
                     user: req.user,
