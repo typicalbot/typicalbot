@@ -23,6 +23,7 @@
         "semi": [
             "warn",
             "always"
-        ]
+        ],
+        "prefer-const": "warn"
     }
 }
