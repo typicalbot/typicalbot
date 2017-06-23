@@ -7,23 +7,23 @@ class PermissionLevels {
         this.levels = {
 
             "-1": new PermissionLevel(-1, "Server Blacklisted", (guild, member) => {
-                let role = this.fetchRole(guild, "blacklistrole"); if (!role) return;
+                const role = this.fetchRole(guild, "blacklistrole"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole;
                 } else return member.roles.has(role.id);
             }),
             "0" : new PermissionLevel(0, "Server Member"),
             "1" : new PermissionLevel(1, "Server DJ", (guild, member) => {
-                let role = this.fetchRole(guild, "djrole"); if (!role) return;
+                const role = this.fetchRole(guild, "djrole"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole;
                 } else return member.roles.has(role.id);
             }),
             "2" : new PermissionLevel(2, "Server Moderator", (guild, member) => {
-                let role = this.fetchRole(guild, "modrole"); if (!role) return;
+                const role = this.fetchRole(guild, "modrole"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole;
                 } else return member.roles.has(role.id);
             }),
             "3" : new PermissionLevel(3, "Server Administrator", (guild, member) => {
-                let role = this.fetchRole(guild, "adminrole"); if (!role) return;
+                const role = this.fetchRole(guild, "adminrole"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole;
                 } else return member.roles.has(role.id);
             }),
@@ -42,7 +42,7 @@ class PermissionLevels {
     }
 
     fetchRole(guild, permission) {
-        let roleSetting = guild.settings[permission];
+        const roleSetting = guild.settings[permission];
         if (!roleSetting) {
             if (permission === "adminrole") return guild.roles.find("name", "TypicalBot Administrator");
             if (permission === "modrole") return guild.roles.find("name", "TypicalBot Moderator");
@@ -55,7 +55,7 @@ class PermissionLevels {
     }
 
     get(guild, member, ignoreStaff = false) {
-        let id = member.id ? member.id : member;
+        const id = member.id ? member.id : member;
 
         if (this.levels[10].check(guild, id)) return this.define(10);
         if (this.levels[9].check(guild, id)) return this.define(9);

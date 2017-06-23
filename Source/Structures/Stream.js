@@ -12,7 +12,7 @@ class Stream {
 
     play(video) {
         this.client.audioUtility.fetchStream(video).then(audioStream => {
-            let dispatcher = this.connection.playStream(audioStream, { volume: 0.5 });
+            const dispatcher = this.connection.playStream(audioStream, { volume: 0.5 });
 
             this.dispatcher = dispatcher;
             this.current = video;
@@ -47,7 +47,7 @@ class Stream {
     }
 
     skip() {
-        let song = this.current;
+        const song = this.current;
         this.dispatcher.end();
         return song;
     }

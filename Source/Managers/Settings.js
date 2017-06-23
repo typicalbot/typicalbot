@@ -51,7 +51,7 @@ class Settings {
     fetch(id) {
         return new Promise((resolve, reject) => {
             if (this.data.has(id)) {
-                let data = this.data.get(id);
+                const data = this.data.get(id);
                 if (data.id !== id) {
                     this.data.delete(id);
                     return this.fetch(id);
@@ -108,7 +108,7 @@ class Settings {
 
     valueSettings(guild) {
         return new Promise(async (resolve, reject) => {
-            let settings = await this.fetch(guild.id);
+            const settings = await this.fetch(guild.id);
 
 
         });

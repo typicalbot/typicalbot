@@ -27,7 +27,7 @@ class AudioUtil {
     }
 
     validate(url) {
-        let id = /[a-zA-Z0-9-_]{11}$/.exec(url);
+        const id = /[a-zA-Z0-9-_]{11}$/.exec(url);
         if (id) url = id;
         return new Promise((resolve, reject) => {
             return sys.fetchInfo(url).then(resolve).catch(reject);
@@ -37,7 +37,7 @@ class AudioUtil {
     fetchStream(video) {
         return new Promise((resolve, reject) => {
             this.validate(video.url).then(() => {
-                let audioStream = ytdl(video.url, { filter: "audioonly" });
+                const audioStream = ytdl(video.url, { filter: "audioonly" });
                 return resolve(audioStream);
             }).catch(reject);
         });
@@ -45,9 +45,9 @@ class AudioUtil {
 
     search(settings, query) {
         return new Promise((resolve, reject) => {
-            let YT = settings.apikey ? new YAPI(settings.apikey) : TBYT;
+            const YT = settings.apikey ? new YAPI(settings.apikey) : TBYT;
             YT.search(query, 10).then(results => {
-                let filtered = results.filter(a => a.type === "video");
+                const filtered = results.filter(a => a.type === "video");
                 return resolve(filtered);
             }).catch(error => {
                 return reject(error);
@@ -65,19 +65,19 @@ class AudioUtil {
     }
 
     permissionCheck(message, command, permissions) {
-        let level = permissions.level;
+        const level = permissions.level;
 
-        let musicperms = message.guild.settings.musicperms;
-        let override = message.guild.settings[`or${command.name}`];
+        const musicperms = message.guild.settings.musicperms;
+        const override = message.guild.settings[`or${command.name}`];
         if (override === "off") if (musicperms === "all" || musicperms === "dj" && level >= 1 || musicperms === "moderator" && level >= 2 || musicperms === "administrator" && level >= 3) return { has: true };
         if (override === "all" || override === "dj" && level >= 1 || override === "moderator" && level >= 2 || override === "administrator" && level >= 3) return { has: true };
         return { has: false, req: override === "off" ? musicperms : override };
     }
 
     hasPermissions(response, command) {
-        let userTrueLevel = this.client.permissionsManager.get(response.message.guild, response.message.author, true);
+        const userTrueLevel = this.client.permissionsManager.get(response.message.guild, response.message.author, true);
 
-        let permissionCheck = this.permissionCheck(response.message, command, userTrueLevel);
+        const permissionCheck = this.permissionCheck(response.message, command, userTrueLevel);
         if (permissionCheck.has) { return true; } else {
             response.elevation(this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0 );
             return false;
