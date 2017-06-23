@@ -1,8 +1,9 @@
 const Discord = require("discord.js");
 const Collection = Discord.Collection;
 
+const ProcessManager = require("./Managers/Process");
+
 let Database = require("./Managers/Database");
-let ProcessManager = require("./Managers/Process");
 let EventsManager = require("./Managers/Events");
 let CommandsManager = require("./Managers/Commands");
 let SettingsManager = require("./Managers/Settings");
@@ -91,11 +92,11 @@ const client = new class extends Discord.Client {
     }
 
     reload(input) {
-        let match = /(\w+)(?::(\w+))?/i.exec(input);
+        const match = /(\w+)(?::(\w+))?/i.exec(input);
         if (!match && input !== "all") return;
 
-        let mod = match ? match[1] : null;
-        let all = input === "all";
+        const mod = match ? match[1] : null;
+        const all = input === "all";
 
         if (mod === "database") {
             this.database.connection.end();
@@ -107,7 +108,7 @@ const client = new class extends Discord.Client {
             EventsManager = require("./Managers/Events");
             this.eventsManager = new EventsManager(this);
         } else if (mod === "commands") {
-            let command = match[2];
+            const command = match[2];
 
             if (command) {
                 this.commandsManager.get(command).then(cmd => {
