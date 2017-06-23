@@ -25,7 +25,7 @@
                     <p class="text"><i class="fa fa-tags" aria-hidden="true"></i><span class="text-right"><b><%= guild.roles.length %></b> Roles</span></p>
                     <p class="text"><i class="fa fa-microphone" aria-hidden="true"></i><span class="text-right"><b><%= guild.channels.filter(c => c.type === "voice").length %></b> Voice Channels</span></p>
                     <p class="text"><i class="fa fa-hashtag" aria-hidden="true"></i><span class="text-right"><b><%= guild.channels.filter(c => c.type === "text").length %></b> Text Channels</span></p>
-                    <span class="section"><p class="text">Owned By <b><%= guild.owner.name %>#<%= guild.owner.discriminator %></b></p></span>
+                    <span class="section"><p class="text">Owned By <b><%= guild.owner.username %>#<%= guild.owner.discriminator %></b></p></span>
                 </div>
                 <a class="leave"
                     data-btn-ok-label="Continue"
