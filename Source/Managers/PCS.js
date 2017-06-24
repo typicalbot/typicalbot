@@ -24,9 +24,9 @@ class PCS {
 
     match(guild, text) {
         if (!list.has(guild)) return;
-        let list = this.data.get(guild);
+        const list = this.data.get(guild);
 
-        let key = list.filter(d => d.trigger === text)[0];
+        const key = list.filter(d => d.trigger === text)[0];
         return key;
     }
 }

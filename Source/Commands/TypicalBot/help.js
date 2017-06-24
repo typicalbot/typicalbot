@@ -15,10 +15,10 @@ module.exports = class extends Command {
     }
 
     async execute(message, response, permissionLevel) {
-        let commandInput = message.content.split(" ")[1];
+        const commandInput = message.content.split(" ")[1];
         if (!commandInput) return response.send(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
 
-        let command = await this.client.commandsManager.get(commandInput);
+        const command = await this.client.commandsManager.get(commandInput);
         if (!command) return response.error(`The command \`${commandInput}\` does not exist.`);
 
         response.send(
@@ -34,9 +34,9 @@ module.exports = class extends Command {
     }
 
     async embedExecute(message, response, permissionLevel) {
-        let commandInput = message.content.split(" ")[1];
-        let command = await this.client.commandsManager.get(commandInput);
-        let defaultEmbed = new RichEmbed()
+        const commandInput = message.content.split(" ")[1];
+        const command = await this.client.commandsManager.get(commandInput);
+        const defaultEmbed = new RichEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Info")
             .setDescription(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`)
@@ -45,7 +45,7 @@ module.exports = class extends Command {
 
         if (!commandInput) return response.embed(defaultEmbed);
 
-        let noCommandEmbed = new RichEmbed()
+        const noCommandEmbed = new RichEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Invalid Command Input`)
             .setDescription(`The command \`${commandInput}\` does not exist.`)
@@ -54,7 +54,7 @@ module.exports = class extends Command {
 
         if (!command) return response.embed(noCommandEmbed);
 
-        let reponseCommand = new RichEmbed()
+        const reponseCommand = new RichEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Command Usage: ${commandInput}`)
             .setDescription(`• [[Parameter]]() - Optional Parameter\n• [<Parameter>]() - Required Parameter`)

@@ -15,15 +15,15 @@ module.exports = class extends Command {
     execute(message, response, permissionLevel) {
         if (!this.client.audioUtility.hasPermissions(response, this)) return;
 
-        let currentConnection = message.guild.voiceConnection;
+        const currentConnection = message.guild.voiceConnection;
         if (!currentConnection) return response.send(`Nothing is currently streaming.`);
 
-        let stream = this.client.streams.get(message.guild.id);
+        const stream = this.client.streams.get(message.guild.id);
 
-        let match = /volume\s+(\d+)/i.exec(message.content);
+        const match = /volume\s+(\d+)/i.exec(message.content);
         if (!match) return response.reply(`The audio streaming is at ${stream.dispatcher.volume * 100}% volume.`);
 
-        let volume = match[1];
+        const volume = match[1];
         if (volume < 0 || volume > 200) return response.error(`Invalid command usage. Volume must be a percent from 0% to 200%.`);
 
         if (!message.member.voiceChannel || message.member.voiceChannel.id !== currentConnection.channel.id) return response.error("You must be in the same voice channel to preform that command.");

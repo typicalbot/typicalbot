@@ -15,9 +15,9 @@ class ProcessManager {
         } else if (type === "transmitDonors") {
             if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
         } else if (type === "testers") {
-            this.client.testersData = data;
+            this.client.testerData = data;
         } else if (type === "donors") {
-            this.client.donorsData = data;
+            this.client.donorData = data;
         } else if (type === "message") {
             if (!this.client.channels.has(data.channel)) return;
 
@@ -40,9 +40,9 @@ class ProcessManager {
                     "id": guild.id,
                     "shard": `${this.client.shardNumber}/${this.client.shardCount} (${this.client.shardID})`,
                     "icon": guild.icon,
-                    "roles": guild.roles.map(r => new Object({ "name": r.name, "id": r.id, "position": r.position, "hoist": r.hoist, "permissions": r.permissions, "mentionable": r.mentionable })),
+                    "roles": guild.roles.map(r => ({ "name": r.name, "id": r.id, "position": r.position, "hoist": r.hoist, "permissions": r.permissions, "mentionable": r.mentionable })),
                     "memberCount": guild.memberCount,
-                    "channels": guild.channels.map(c => new Object({ "name": c.name, "id": c.id, "position": c.position, "type": c.type })),
+                    "channels": guild.channels.map(c => ({ "name": c.name, "id": c.id, "position": c.position, "type": c.type })),
                     "owner": { "username": guildOwner.username, "id": guildOwner.id, "discriminator": guildOwner.discriminator },
                     settings
                 }
@@ -75,16 +75,16 @@ class ProcessManager {
             const guild = this.client.guilds.get("163038706117115906");
             const user = guild.member(data.user);
 
-            const rolesList = [];
+            const roles = [];
 
             user.roles.sort((a, b) => b.position - a.position).forEach(r => {
                 if (["163039088243507200", "278955494272663552", "193487705844350976", "193578559057559562", "193486573067567104", "301392622763638785"]
-                    .includes(r.id)) rolesList.push({ name: r.name, id: r.id, hexColor: r.hexColor });
+                    .includes(r.id)) roles.push({ name: r.name, id: r.id, hexColor: r.hexColor });
             });
 
             this.client.transmit("masterrequest", {
                 "id": data.id,
-                rolesList
+                roles
             });
         } else if (type === "globaleval") {
             try { this.client.log(eval(data.code)); }

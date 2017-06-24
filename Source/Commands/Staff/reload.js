@@ -13,10 +13,10 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let mod = message.content.slice(message.content.search(" ") + 1);
+        const mod = message.content.slice(message.content.search(" ") + 1);
 
         this.client.transmit("reload", mod);
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
             .setColor(0x00FF00)
             .setDescription(`**Reloading Module:** \`${mod}\``)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")

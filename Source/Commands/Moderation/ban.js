@@ -14,11 +14,11 @@ module.exports = class extends Command {
     }
 
     async execute(message, response, permissionLevel) {
-        let match = /kick\s+(?:<@!?)?(\d+)>?(?:\s+(.+))?/i.exec(message.content);
+        const match = /kick\s+(?:<@!?)?(\d+)>?(?:\s+(.+))?/i.exec(message.content);
         if (!match) return response.usage(this);
 
         this.client.fetchUser(match[1]).then(user => {
-            let member = message.guild.member(user);
+            const member = message.guild.member(user);
             if (!member) return response.error(`User not found.`);
 
             if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);
@@ -26,7 +26,7 @@ module.exports = class extends Command {
 
             member.kick().then(async () =>  {
                 if (message.guild.settings.modlogs) {
-                    let _case = await this.client.modlogsManager.createLog(message.guild,
+                    const _case = await this.client.modlogsManager.createLog(message.guild,
                         match[2] ? {
                             action: "kick",
                             user: member.user,

@@ -14,7 +14,7 @@ module.exports = class extends Command {
     }
 
     async execute(message, response, permissionLevel) {
-        let msg = await response.send("Pinging...");
+        const msg = await response.send("Pinging...");
         msg.edit(`Pong! | Took ${msg.createdTimestamp - message.createdTimestamp}ms`);
     }
 };

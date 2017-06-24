@@ -13,9 +13,9 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let code = message.content.slice(message.content.search(" ") + 1);
+        const code = message.content.slice(message.content.search(" ") + 1);
         try {
-            let output = eval(code);
+            const output = eval(code);
 
             output instanceof Promise ?
                 output.then(a => {

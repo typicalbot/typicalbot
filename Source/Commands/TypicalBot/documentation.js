@@ -20,12 +20,12 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response){
-        let embed = new RichEmbed()
-        .setColor(0x00ADFF)
-        .setTitle("TypicalBot Documentation")
-        .setDescription(`**Documentation can be found here:** <${this.client.config.urls.docs}>`)
-        .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-        .setTimestamp();
+        const embed = new RichEmbed()
+            .setColor(0x00ADFF)
+            .setTitle("TypicalBot Documentation")
+            .setDescription(`**Documentation can be found here:** <${this.client.config.urls.docs}>`)
+            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setTimestamp();
 
         response.embed(embed);
 

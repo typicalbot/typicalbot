@@ -12,11 +12,11 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let match = /shard\s+(ping|restart|\d+)\s*(\d+)?/i.exec(message.content);
+        const match = /shard\s+(ping|restart|\d+)\s*(\d+)?/i.exec(message.content);
         if (!match) return response.error("Invalid command usage.");
 
-        let action = match[1];
-        let shard = match[2];
+        const action = match[1];
+        const shard = match[2];
 
         if (action === "ping") {
             if (!shard) return response.error("No shard specified.");

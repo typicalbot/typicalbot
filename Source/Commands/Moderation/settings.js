@@ -43,22 +43,22 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*((?:.|[\r\n])+)?)?/i.exec(message.content);
+        const match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*((?:.|[\r\n])+)?)?/i.exec(message.content);
         if (!match) return response.usage(this);
 
-        let realPermissionLevel = this.client.permissionsManager.get(message.guild, message.author, true);
+        const realPermissionLevel = this.client.permissionsManager.get(message.guild, message.author, true);
 
-        let action = match[1], setting = match[2], value = match[3];
+        const action = match[1], setting = match[2], value = match[3];
 
         if (action === "edit" && realPermissionLevel.level < 2) return response.perms({ permission: 2 }, realPermissionLevel);
 
         if (action === "list") {
             let page = setting || 1;
-            let settings = Object.keys(settingsList);
-            let count = Math.ceil(settings.length / 10);
+            const settings = Object.keys(settingsList);
+            const count = Math.ceil(settings.length / 10);
             if (page < 1 || page > count) page = 1;
 
-            let list = settings.splice((page -1) * 10, 10).map(k => ` • **${k}:** ${settingsList[k]}`);
+            const list = settings.splice((page -1) * 10, 10).map(k => ` • **${k}:** ${settingsList[k]}`);
 
             response.send(`**__Available settings to use with TypicalBot:__**\n\n**Page ${page} / ${count}**\n${list.join("\n")}`);
         } else if (action === "view") {
@@ -81,24 +81,24 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response, permissionLevel) {
-        let match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*((?:.|[\r\n])+)?)?/i.exec(message.content);
+        const match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*((?:.|[\r\n])+)?)?/i.exec(message.content);
         if (!match) return response.usage(this);
 
-        let realPermissionLevel = this.client.permissionsManager.get(message.guild, message.author, true);
+        const realPermissionLevel = this.client.permissionsManager.get(message.guild, message.author, true);
 
-        let action = match[1], setting = match[2], value = match[3];
+        const action = match[1], setting = match[2], value = match[3];
 
         if (action === "edit" && realPermissionLevel.level < 2) return response.perms({ permission: 2 }, realPermissionLevel);
 
         if (action === "list") {
             let page = setting || 1;
-            let settings = Object.keys(settingsList);
-            let count = Math.ceil(settings.length / 10);
+            const settings = Object.keys(settingsList);
+            const count = Math.ceil(settings.length / 10);
             if (page < 1 || page > count) page = 1;
 
-            let list = settings.splice((page -1) * 10, 10);
+            const list = settings.splice((page -1) * 10, 10);
 
-            let embed = new RichEmbed()
+            const embed = new RichEmbed()
                 .setColor(0x00ADFF)
                 .setTitle(`TypicalBot Settings | Page ${page} / ${count}`)
                 .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")

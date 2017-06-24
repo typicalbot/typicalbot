@@ -19,12 +19,12 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response){
-        let embed = new RichEmbed()
-        .setColor(0x00adff)
-        .setTitle("TypicalBot Lounge Invite")
-        .setDescription(`You can join the TypicalBot Lounge [here](${this.client.config.urls.server}).`)
-        .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-        .setTimestamp();
+        const embed = new RichEmbed()
+            .setColor(0x00adff)
+            .setTitle("TypicalBot Lounge Invite")
+            .setDescription(`You can join the TypicalBot Lounge [here](${this.client.config.urls.server}).`)
+            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setTimestamp();
 
         response.embed(embed);
 

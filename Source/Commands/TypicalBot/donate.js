@@ -19,7 +19,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response){
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
             .setColor(0x00ADFF)
             .setTitle("Donate to TypicalBot's Creator")
             .setDescription(`You can donate to TypicalBot's creator [here](${this.client.config.urls.donate}>).\n\nDonations go to the creator of TypicalBot for any finances.`)

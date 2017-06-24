@@ -15,10 +15,10 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let match = /serverinfo\s+(.+)/i.exec(message.content);
-        let option = match ? match[1] : null;
+        const match = /serverinfo\s+(.+)/i.exec(message.content);
+        const option = match ? match[1] : null;
 
-        let guildOwner = message.guild.member(message.guild.ownerID);
+        const guildOwner = message.guild.member(message.guild.ownerID);
 
         if (!option) return response.reply(
             `**__Server Information For:__** ${message.guild.name}\n`
@@ -38,10 +38,10 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response, permissionLevel) {
-        let match = /serverinfo\s+(.+)/i.exec(message.content);
-        let option = match ? match[1] : null;
+        const match = /serverinfo\s+(.+)/i.exec(message.content);
+        const option = match ? match[1] : null;
 
-        let guildOwner = message.guild.member(message.guild.ownerID).user;
+        const guildOwner = message.guild.member(message.guild.ownerID).user;
 
         if (!option) return response.embed(new RichEmbed()
             .setColor(0x00ADFF)

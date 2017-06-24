@@ -12,19 +12,19 @@ class CommandsManager {
     }
 
     load(filePath) {
-        let command = new (require(filePath))(this.client, filePath);
+        const command = new (require(filePath))(this.client, filePath);
         this.data.set(command.name, command);
     }
 
     reload(filePath) {
         delete require.cache[filePath];
-        let command = new (require(filePath))(this.client);
+        const command = new (require(filePath))(this.client);
         this.data.set(command.name, command);
     }
 
     init() {
         klaw(commandsPath).on("data", item => {
-            let file = path.parse(item.path);
+            const file = path.parse(item.path);
             if (!file.ext || file.ext !== ".js") return;
             this.load(`${file.dir}/${file.base}`);
         });

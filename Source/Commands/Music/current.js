@@ -13,15 +13,15 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let connection = message.guild.voiceConnection;
+        const connection = message.guild.voiceConnection;
         if (!connection) return response.send(`Nothing is currently streaming.`);
 
-        let stream = this.client.streams.get(message.guild.id);
+        const stream = this.client.streams.get(message.guild.id);
 
-        let short = text => this.client.functions.shorten(text),
+        const short = text => this.client.functions.shorten(text),
             time = len => this.client.functions.length(len);
 
-        let remaining = stream.current.length_seconds - Math.floor(stream.dispatcher.time / 1000);
+        const remaining = stream.current.length_seconds - Math.floor(stream.dispatcher.time / 1000);
 
         response.send(`**__Currently Streaming:__** **${short(stream.current.title)}** (${time(remaining)} left) | Requested by **${stream.current.response.message.author.username}**`);
     }

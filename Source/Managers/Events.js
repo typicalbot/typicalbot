@@ -38,42 +38,42 @@ module.exports = class {
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
-            let command = await this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
+            const command = await this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
             if (!command || !command.dm || command.permission > 0) return;
 
-            let response = new Response(this.client, message);
+            const response = new Response(this.client, message);
             command.execute(message, response);
         } else {
             this.client.lastMessage = message.createdTimestamp;
 
-            let BotMember = message.guild.member(this.client.user);
+            const BotMember = message.guild.member(this.client.user);
             if (!BotMember || !message.channel.permissionsFor(BotMember).has("SEND_MESSAGES")) return;
 
-            let settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
+            const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
 
             if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.send(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
 
             message.guild.settings = settings;
 
-            let userPermissions = this.client.permissionsManager.get(message.guild, message.author);
+            const userPermissions = this.client.permissionsManager.get(message.guild, message.author);
             if (userPermissions.level === -1) return;
 
-            let response = new Response(this.client, message);
+            const response = new Response(this.client, message);
             if (userPermissions.level < 2) this.client.functions.inviteCheck(response);
 
-            let split = message.content.split(" ")[0];
-            let prefix = this.client.functions.matchPrefix(message.author, settings, split);
+            const split = message.content.split(" ")[0];
+            const prefix = this.client.functions.matchPrefix(message.author, settings, split);
             if (!prefix || !message.content.startsWith(prefix)) return;
 
-            let command = await this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());
+            const command = await this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());
             if (!command) return;
 
-            let mode = command.mode || "free";
+            const mode = command.mode || "free";
             if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
 
             if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
 
-            let actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
+            const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
             if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
 
             settings.embed === "Y" && command.embedExecute ?
@@ -87,12 +87,12 @@ module.exports = class {
 
         message.guild.settings = await this.client.settingsManager.fetch(message.guild.id);
 
-        let userPermissions = this.client.permissionsManager.get(message.guild, message.author);
+        const userPermissions = this.client.permissionsManager.get(message.guild, message.author);
         if (userPermissions.level >= 2) return;
 
-        let response = new Response(this.client, message);
+        const response = new Response(this.client, message);
 
-        let match = this.client.functions.inviteCheck(message.content) || this.client.functions.inviteCheck(util.inspect(response.message.embeds, { depth: 4 }));
+        const match = this.client.functions.inviteCheck(message.content) || this.client.functions.inviteCheck(util.inspect(response.message.embeds, { depth: 4 }));
 
         if (match && message.deletable) {
             this.client.eventsManager.guildInvitePosted(message.guild, message, message.author);
@@ -105,16 +105,16 @@ module.exports = class {
     async messageDelete(message) {
         if (message.channel.type !== "text") return;
 
-        let settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
+        const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
 
         if (!settings.logs || !settings.deletelog) return;
 
-        let channel = message.guild.channels.get(settings.logs);
+        const channel = message.guild.channels.get(settings.logs);
         if (!channel) return;
 
-        let user = message.author;
+        const user = message.author;
 
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
             .setColor(0x3EA7ED)
             .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
             .setDescription(this.client.functions.shorten(message.content, 100))
@@ -131,18 +131,18 @@ module.exports = class {
     }
 
     async guildMemberAdd(member) {
-        let guild = member.guild;
+        const guild = member.guild;
 
-        let settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settingsManager.fetch(guild.id);
 
-        let user = member.user;
+        const user = member.user;
 
         if (settings.joinlog !== "disabled") {
             if (guild.channels.has(settings.logs)) {
-                let channel = guild.channels.get(settings.logs);
+                const channel = guild.channels.get(settings.logs);
 
                 if (settings.joinlog === "--embed") {
-                    let embed = new RichEmbed()
+                    const embed = new RichEmbed()
                         .setColor(0x00FF00)
                         .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                         .setFooter("User Joined")
@@ -163,7 +163,7 @@ module.exports = class {
 
         if (settings.autonick) member.setNickname(this.client.functions.formatMessage("jn", guild, user, settings.autonick)).catch(() => console.log("Missing Permissions"));
 
-        let autorole = this.client.functions.fetchAutoRole(guild, settings);
+        const autorole = this.client.functions.fetchAutoRole(guild, settings);
         if (autorole && autorole.editable) setTimeout(() =>
             member.addRole(autorole).then(() => {
                 if (settings.autorolesilent === "N" && settings.logs && guild.channels.has(settings.logs)) guild.channels.get(settings.logs).sendMessage(`**${user.tag}** was given the autorole **${autorole.name}**.`);
@@ -172,21 +172,21 @@ module.exports = class {
     }
 
     async guildMemberRemove(member) {
-        let guild = member.guild;
+        const guild = member.guild;
 
-        let bans = await guild.fetchBans().catch(() => console.log("Missing Permissions"));
+        const bans = await guild.fetchBans().catch(() => console.log("Missing Permissions"));
         if (bans instanceof require("discord.js").Collection && bans.has(member.id)) return;
 
-        let settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settingsManager.fetch(guild.id);
         if (!settings.logs || settings.leavelog === "--disabled") return;
 
-        let user = member.user;
+        const user = member.user;
 
         if (!guild.channels.has(settings.logs)) return;
-        let channel = guild.channels.get(settings.logs);
+        const channel = guild.channels.get(settings.logs);
 
         if (settings.leavelog === "--embed") {
-            let embed = new RichEmbed()
+            const embed = new RichEmbed()
                 .setColor(0xFF6600)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Left")
@@ -203,19 +203,19 @@ module.exports = class {
     }
 
     async guildMemberUpdate(oldMember, member) {
-        let guild = member.guild;
+        const guild = member.guild;
 
-        let oldNickname = oldMember.nickname;
-        let nickname = member.nickname;
+        const oldNickname = oldMember.nickname;
+        const nickname = member.nickname;
         if (oldNickname === nickname) return;
 
-        let settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settingsManager.fetch(guild.id);
         if (!settings.logs || !settings.nicklog) return;
 
-        let user = member.user;
+        const user = member.user;
 
         if (!guild.channels.has(settings.logs)) return;
-        let channel = guild.channels.get(settings.logs);
+        const channel = guild.channels.get(settings.logs);
 
         if (settings.joinnick && nickname === this.client.functions.formatMessage("jn", guild, user, settings.joinnick)) return;
 
@@ -227,10 +227,10 @@ module.exports = class {
     }
 
     async guildBanAdd(guild, user) {
-        let settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settingsManager.fetch(guild.id);
 
         if (settings.modlogs && !this.client.softbanCache.has(user.id)) {
-            let cachedLog = this.client.banCache.get(user.id);
+            const cachedLog = this.client.banCache.get(user.id);
 
             this.client.modlogsManager.createLog(guild, Object.assign({ action: "ban", user }, cachedLog));
             this.client.banCache.delete(user.id);
@@ -239,10 +239,10 @@ module.exports = class {
         if (!settings.logs || settings.banlog === "--disabled") return;
 
         if (!guild.channels.has(settings.logs)) return;
-        let channel = guild.channels.get(settings.logs);
+        const channel = guild.channels.get(settings.logs);
 
         if (settings.banlog === "--embed") {
-            let embed = new RichEmbed()
+            const embed = new RichEmbed()
                 .setColor(0xFF0000)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Banned")
@@ -259,10 +259,10 @@ module.exports = class {
     }
 
     async guildBanRemove(guild, user) {
-        let settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settingsManager.fetch(guild.id);
 
         if (settings.modlogs && !this.client.softbanCache.has(user.id)) {
-            let cachedLog = this.client.unbanCache.get(user.id);
+            const cachedLog = this.client.unbanCache.get(user.id);
 
             this.client.modlogsManager.createLog(guild, Object.assign({ action: "unban", user }, cachedLog));
             this.client.unbanCache.delete(user.id);
@@ -271,10 +271,10 @@ module.exports = class {
         if (!settings.logs || settings.unbanlog === "--disabled") return;
 
         if (!guild.channels.has(settings.logs)) return;
-        let channel = guild.channels.get(settings.logs);
+        const channel = guild.channels.get(settings.logs);
 
         if (settings.unbanlog === "--embed") {
-            let embed = new RichEmbed()
+            const embed = new RichEmbed()
                 .setColor(0x3EA7ED)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Unbanned")
@@ -291,10 +291,10 @@ module.exports = class {
     }
 
     async guildInvitePosted(guild, message, user) {
-        let settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settingsManager.fetch(guild.id);
         if (!settings.logs || !settings.invitelog) return;
 
-        let channel = guild.channels.get(settings.logs);
+        const channel = guild.channels.get(settings.logs);
         if (!channel) return;
 
         channel.send(
@@ -306,12 +306,12 @@ module.exports = class {
 
     guildCreate(guild) {
         if (this.client.vr === "dev") {
-            let check = this.client.functions.checkTester(guild);
+            const check = this.client.functions.checkTester(guild);
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
         }
         if (this.client.vr === "alpha") {
-            let check = this.client.functions.checkDonor(guild);
+            const check = this.client.functions.checkDonor(guild);
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
         }

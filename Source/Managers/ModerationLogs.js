@@ -18,25 +18,25 @@ class ModerationLog {
     }
 
     caseMatch(message) {
-        let _case = message.embeds[0];
+        const _case = message.embeds[0];
 
-        let action = _case.description.match(regex.action)[0];
-        let user = _case.description.match(regex.user)[0];
-        let id = _case.footer.text;
-        let ts = _case.createdAt;
+        const action = _case.description.match(regex.action)[0];
+        const user = _case.description.match(regex.user)[0];
+        const id = _case.footer.text;
+        const ts = _case.createdAt;
 
         return { action, user, id, ts };
     }
 
     fetchChannel(guild) {
         return new Promise(async (resolve, reject) => {
-            let settings = await this.client.settingsManager.fetch(guild.id);
+            const settings = await this.client.settingsManager.fetch(guild.id);
 
-            let id = settings.modlogs;
+            const id = settings.modlogs;
 
             if (!id) return reject("Setting of modlogs is null.");
 
-            let channel = guild.channels.get(id);
+            const channel = guild.channels.get(id);
             if (!channel) return reject("Invalid channel.");
 
             return resolve(channel);
@@ -47,7 +47,7 @@ class ModerationLog {
         return new Promise((resolve, reject) => {
             this.fetchChannel(guild).then(channel => {
                 channel.fetchMessages({ limit: 100 }).then(messages => {
-                    let logs = messages.filter(m => {
+                    const logs = messages.filter(m => {
                         if (m.author.id !== this.client.user.id) return false;
                         if (!m.embeds[0]) return false;
                         if (m.embeds[0].type !== "rich") return false;
@@ -70,7 +70,7 @@ class ModerationLog {
                 if (id === "latest") return resolve(this.fetchLatest(guild));
 
                 channel.fetchMessages({ limit: 100 }).then(messages => {
-                    let logs = messages.filter(m => {
+                    const logs = messages.filter(m => {
                         if (m.author.id !== this.client.user.id) return false;
                         if (!m.embeds[0]) return false;
                         if (m.embeds[0].type !== "rich") return false;
@@ -90,17 +90,17 @@ class ModerationLog {
         return new Promise((resolve, reject) => {
             this.fetchChannel(guild).then(channel => {
                 this.fetchLatest(guild).then(log => {
-                    let last = log ? log.embeds[0].footer.text.match(/Case\s(\d+)/)[1] : 0;
+                    const last = log ? log.embeds[0].footer.text.match(/Case\s(\d+)/)[1] : 0;
 
-                    let type = types[action];
+                    const type = types[action];
 
-                    let _action = `**Action:** ${type.action}`;
-                    let _user = `**User:** ${user.username}#${user.discriminator} (${user.id})`;
-                    let _case = Number(last) + 1;
-                    let _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
+                    const _action = `**Action:** ${type.action}`;
+                    const _user = `**User:** ${user.username}#${user.discriminator} (${user.id})`;
+                    const _case = Number(last) + 1;
+                    const _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
 
 
-                    let embed = new RichEmbed()
+                    const embed = new RichEmbed()
                         .setColor(type.color || 0xC4C4C4)
                         .setURL(this.client.config.urls.website)
                         .setDescription(`${_action}\n${_user}\n${_reason}`)
@@ -119,10 +119,10 @@ class ModerationLog {
 
     editReason(_case, moderator, reason) {
         return new Promise((resolve, reject) => {
-            let { action, user, id, ts } = this.caseMatch(_case);
-            let _reason = `**Reason:** ${reason}`;
+            const { action, user, id, ts } = this.caseMatch(_case);
+            const _reason = `**Reason:** ${reason}`;
 
-            let embed = new RichEmbed()
+            const embed = new RichEmbed()
                 .setColor(_case.embeds[0].color || 0xC4C4C4)
                 .setURL(this.client.config.urls.website)
                 .setDescription(`${action}\n${user}\n${_reason}`)

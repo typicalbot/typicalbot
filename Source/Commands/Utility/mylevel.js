@@ -14,9 +14,9 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let split = message.content.split(" ")[1];
+        const split = message.content.split(" ")[1];
 
-        let permission = split && split === "--here" ?
+        const permission = split && split === "--here" ?
             this.client.permissionsManager.get(message.guild, message.author, true) :
             this.client.permissionsManager.get(message.guild, message.author);
 
@@ -24,13 +24,13 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response, permissionLevel) {
-        let split = message.content.split(" ")[1];
+        const split = message.content.split(" ")[1];
 
-        let permission = split && split === "--here" ?
+        const permission = split && split === "--here" ?
             this.client.permissionsManager.get(message.guild, message.author, true) :
             this.client.permissionsManager.get(message.guild, message.author);
 
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
             .setColor(0x00adff)
             .setTitle("User Permission Level")
             .setDescription(`Level ${permission.level} | ${permission.title}`);

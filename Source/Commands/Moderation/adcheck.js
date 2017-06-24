@@ -15,11 +15,11 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let members = message.guild.members.filter(m => m.user.presence.game && /(discord\.(gg|io|me|li)\/.+|discordapp\.com\/invite\/.+)/i.test(m.user.presence.game.name));
+        const members = message.guild.members.filter(m => m.user.presence.game && /(discord\.(gg|io|me|li)\/.+|discordapp\.com\/invite\/.+)/i.test(m.user.presence.game.name));
 
-        let list = members.map(m => `» ${m.displayName} (${m.id}) | ${m.user.presence.game.name}`);
+        const list = members.map(m => `» ${m.displayName} (${m.id}) | ${m.user.presence.game.name}`);
 
-        let embed = new RichEmbed().setColor(0xFF0000).setTitle("User with Invite in Playing Status").setDescription(list.length ? list.join("\n\n").substring(0, 2000) : "No users to display.");
+        const embed = new RichEmbed().setColor(0xFF0000).setTitle("User with Invite in Playing Status").setDescription(list.length ? list.join("\n\n").substring(0, 2000) : "No users to display.");
 
         return message.channel.send("", { embed });
     }

@@ -14,12 +14,12 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let match = /(?:youtube|yts)\s+(.+)/i.exec(message.content);
+        const match = /(?:youtube|yts)\s+(.+)/i.exec(message.content);
         if (!match) return response.usage("youtube");
 
         this.client.audioUtility.search(message.guild.settings, match[1]).then(results => {
             if (!results.length) return response.reply(`No results were found for the query **${match[1]}**.`);
-            let video = results[0];
+            const video = results[0];
 
             response.reply(`**${video.title}** by **${video.channel.title}**:\n<${video.url}>`);
         }).catch(error => response.error(`${this.client.audioUtility.searchError(error)}`));

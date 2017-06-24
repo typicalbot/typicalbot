@@ -33,7 +33,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response, permissionLevel) {
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
             .setColor(0x00adff)
             .setThumbnail(`${this.client.config.urls.website}/images/icon.png`)
             .setTitle("TypicalBot Statistics")

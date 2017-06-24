@@ -15,6 +15,6 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        let match = /(?:purge|prune)(?:\s+(?:bots|<@!?(\d+)>|<#(\d+)>|<@&(\d+)>))?\s+(\d+)/i.exec(message.content);
+        const match = /(?:purge|prune)(?:\s+(?:bots|<@!?(\d+)>|<#(\d+)>|<@&(\d+)>))?\s+(\d+)/i.exec(message.content);
     }
 };
