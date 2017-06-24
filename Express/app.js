@@ -49,7 +49,7 @@ class Webserver extends express {
         const isApplication = (req, res, next) => { if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next(); res.status(401).json({ "message": "Unauthorized" }); };
 
         const rgb = (hex) => {
-            let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return {
                 R: parseInt(result[1], 16),
                 G: parseInt(result[2], 16),
@@ -58,25 +58,25 @@ class Webserver extends express {
         };
 
         const timestamp = (ms) => {
-            let days = ms / 86400000;
-            let d = Math.floor(days);
-            let hours = (days - d) * 24;
-            let h = Math.floor(hours);
-            let minutes = (hours - h) * 60;
-            let m = Math.floor(minutes);
-            let seconds = (minutes - m) * 60;
-            let s = Math.floor(seconds);
+            const days = ms / 86400000;
+            const d = Math.floor(days);
+            const hours = (days - d) * 24;
+            const h = Math.floor(hours);
+            const minutes = (hours - h) * 60;
+            const m = Math.floor(minutes);
+            const seconds = (minutes - m) * 60;
+            const s = Math.floor(seconds);
             return { d, h, m, s };
         };
 
         const time = (ms) => {
-            let ts = timestamp(ms);
+            const ts = timestamp(ms);
 
-            let d = ts.d > 0 ? ts.d === 1 ? "1 day" : `${ts.d} days` : null;
-            let h = ts.h > 0 ? ts.h === 1 ? "1 hour" : `${ts.h} hours` : null;
-            let m = ts.m > 0 ? ts.m === 1 ? "1 minute" : `${ts.m} minutes` : null;
-            let s = ts.s > 0 ? ts.s === 1 ? "1 second" : `${ts.s} seconds` : null;
-            let l = [];
+            const d = ts.d > 0 ? ts.d === 1 ? "1 day" : `${ts.d} days` : null;
+            const h = ts.h > 0 ? ts.h === 1 ? "1 hour" : `${ts.h} hours` : null;
+            const m = ts.m > 0 ? ts.m === 1 ? "1 minute" : `${ts.m} minutes` : null;
+            const s = ts.s > 0 ? ts.s === 1 ? "1 second" : `${ts.s} seconds` : null;
+            const l = [];
             if (d) l.push(d); if (h) l.push(h); if (m) l.push(m); if (s) l.push(s);
             return l.join(", ");
         };
@@ -90,11 +90,11 @@ class Webserver extends express {
         */
 
         this.get("/api/bots/:bot/stats", isApplication, (req, res) => {
-            let bot = req.params.bot;
+            const bot = req.params.bot;
 
             if (bot !== "dev") return res.status(400).json({ message: "Unable to fetch requested stats" });
 
-            let data = {};
+            const data = {};
             master.shards.forEach(shard => {
                 Object.keys(shard.stats).forEach(key => {
                     data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key];
@@ -105,8 +105,8 @@ class Webserver extends express {
         });
 
         this.post("/api/channels/:channel/messages", isApplication, (req, res) => {
-            let channel = req.params.channel;
-            let content = req.body.content;
+            const channel = req.params.channel;
+            const content = req.body.content;
 
             if (!content) return res.status(400).json({ "message": "Missing Message Content" });
 
@@ -119,8 +119,8 @@ class Webserver extends express {
         });
 
         this.get("/message/:channel/:message", isStaff, (req, res) => {
-            let channel = req.params.channel;
-            let content = req.params.message;
+            const channel = req.params.channel;
+            const content = req.params.message;
 
             res.render(page("admin.ejs"), {
                 user: req.user,
@@ -184,11 +184,11 @@ class Webserver extends express {
                                                            - - - - - - - - - -
         */
 
-        let userGuilds = user => {
+        const userGuilds = user => {
             return new Promise((resolve, reject) => {
                 if (!user.guilds.length) return resolve({ in: [], not: [] });
 
-                let isin = [], notin = [];
+                const isin = [], notin = [];
 
                 user.guilds.forEach((g, i) => {
                     master.globalRequest("inguild", { guild: g.id }).then(() => {
@@ -236,7 +236,7 @@ class Webserver extends express {
         });
 
         this.get("/beta-apply", isAuthenticated, (req, res) => {
-            let inGuild = !!req.user.guilds.filter(g => g.id = "163038706117115906")[0];
+            const inGuild = !!req.user.guilds.filter(g => g.id = "163038706117115906")[0];
             if (!inGuild) return res.status(401).json({ "message": "You are not in TypicalBot Lounge." });
 
             res.render(page("beta-apply.ejs"), {
@@ -247,11 +247,11 @@ class Webserver extends express {
         });
 
         this.get("/beta-apply/form", isAuthenticated, (req, res) => {
-            let inGuild = !!req.user.guilds.filter(g => g.id = "163038706117115906")[0];
+            const inGuild = !!req.user.guilds.filter(g => g.id = "163038706117115906")[0];
             if (!inGuild) return res.status(401).json({ "message": "You are not in TypicalBot Lounge." });
 
-            let username = req.query.username;
-            let why = req.query.why;
+            const username = req.query.username;
+            const why = req.query.why;
             if (!username || !why) return res.status(401).json({ "message": "Invalid query options." });
 
             master.transmit("channelmessage", { "channel": "308348915420364810", "content": `${req.user.username}#${req.user.discriminator} | **Stated Username:** ${username} | **Reason:** ${why}\n\n\u200B` });
@@ -276,9 +276,9 @@ class Webserver extends express {
         });
 
         this.get("/guild/:guild", isAuthenticated, async (req, res) => {
-            let guild = req.params.guild;
+            const guild = req.params.guild;
 
-            let userInGuild = req.user.guilds.filter(g => g.id === guild)[0];
+            const userInGuild = req.user.guilds.filter(g => g.id === guild)[0];
             if (!userInGuild && !master.staff(req.user.id)) return res.redirect("/access-denied");
 
             master.globalRequest("inguild", { guild }).then(() => {
@@ -301,7 +301,7 @@ class Webserver extends express {
             }).catch(() => {
                 if (!userInGuild) return res.redirect("/404");
 
-                let userPerms = new Perms(userInGuild.permissions);
+                const userPerms = new Perms(userInGuild.permissions);
                 if (!userPerms.has("MANAGE_GUILD")) return res.status(401).json({ "message": "You do not have permissions to add the bot to that guild." });
 
                 res.redirect(botOAuth(config.clientID, guild));
@@ -309,9 +309,9 @@ class Webserver extends express {
         });
 
         this.get("/guild/:guild/leave", isAuthenticated, async (req, res) => {
-            let guild = req.params.guild;
+            const guild = req.params.guild;
 
-            let userInGuild = req.user.guilds.filter(g => g.id === guild)[0];
+            const userInGuild = req.user.guilds.filter(g => g.id === guild)[0];
             if (!userInGuild && master.userLevel(req.user.id) < 6) return res.status(401).json({ "message": "You do not have access to that guild." });
 
             master.globalRequest("inguild", { guild }).then(() => {
@@ -326,7 +326,7 @@ class Webserver extends express {
             }).catch(() => {
                 if (!userInGuild) return res.redirect("/");
 
-                let userPerms = new Perms(userInGuild.permissions);
+                const userPerms = new Perms(userInGuild.permissions);
                 if (!userPerms.has("MANAGE_GUILD")) return res.status(401).json({ "message": "You do not have permissions to add the bot to that guild." });
 
                 res.redirect(botOAuth(config.clientID, guild));
