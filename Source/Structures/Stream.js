@@ -17,7 +17,7 @@ class Stream {
             this.dispatcher = dispatcher;
             this.current = video;
 
-            video.response.send(`🎵 Now streaming **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.length(video.length_seconds)}**.`);
+            video.response.send(`🎵 Now streaming **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.convertTime(video.length_seconds * 1000)}**.`);
 
             dispatcher.on("error", err => {
                 video.response.error(err);

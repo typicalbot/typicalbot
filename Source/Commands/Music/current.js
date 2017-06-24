@@ -18,8 +18,8 @@ module.exports = class extends Command {
 
         const stream = this.client.streams.get(message.guild.id);
 
-        const short = text => this.client.functions.shorten(text),
-            time = len => this.client.functions.length(len);
+        const short = text => this.client.functions.lengthen(-1, text, 45),
+            time = len => this.client.functions.convertTime(len * 1000);
 
         const remaining = stream.current.length_seconds - Math.floor(stream.dispatcher.time / 1000);
 
