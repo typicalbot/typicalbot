@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const { Collection } = require("discord.js");
 
 const DefaultData = {
     "embed": "N",
@@ -43,7 +44,7 @@ class Settings {
     constructor(client) {
         this.client = client;
 
-        this.data = new Map();
+        this.data = new Collection();
 
         this.default = DefaultData;
     }

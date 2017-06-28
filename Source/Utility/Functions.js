@@ -177,7 +177,7 @@ module.exports = class {
     pagify(list, page = 1) {
         const listSize = list.length;
         const pageCount = Math.ceil(listSize / 10);
-        page = page > pageCount ? 0 : page--;
+        page = page > pageCount ? 0 : page - 1;
         const currentPage = list.splice((page) * 10, 10);
 
         const pageContent = currentPage.map((item, index) => `• ${this.lengthen(1, (index + 1) + 10 * page, String(10 + (10 * page)).length, "before")}: ${item}`).join("\n");
