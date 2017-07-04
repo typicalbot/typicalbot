@@ -1,5 +1,5 @@
 const Command = require("../../Structures/Command.js");
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -24,14 +24,14 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response, permissionLevel) {
-        const fail = new RichEmbed()
+        const fail = new MessageEmbed()
         .setColor(0xFF0000)
         .setTitle("Error")
         .setDescription(`You must be in TypicalBot's Lounge in order to use this command.`)
         .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
         .setTimestamp();
 
-        const success = new RichEmbed()
+        const success = new MessageEmbed()
         .setColor(0x00adff)
         .setTitle("Success")
         .setDescription("You are now subscribed to TypicalBot's announcements!")

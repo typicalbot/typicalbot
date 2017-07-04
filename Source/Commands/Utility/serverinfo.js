@@ -1,5 +1,5 @@
 const Command = require("../../Structures/Command.js");
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 const moment = require("moment");
 
 module.exports = class extends Command {
@@ -43,7 +43,7 @@ module.exports = class extends Command {
 
         const guildOwner = message.guild.member(message.guild.ownerID).user;
 
-        if (!option) return response.embed(new RichEmbed()
+        if (!option) return response.embed(new MessageEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Server Information`)
             .addField("» Name", message.guild.name, true)

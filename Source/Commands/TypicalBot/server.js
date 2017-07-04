@@ -1,5 +1,5 @@
 const Command = require("../../Structures/Command.js");
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -19,7 +19,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response){
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor(0x00adff)
             .setTitle("TypicalBot Lounge Invite")
             .setDescription(`You can join the TypicalBot Lounge [here](${this.client.config.urls.server}).`)

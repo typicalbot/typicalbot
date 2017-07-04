@@ -1,5 +1,5 @@
 const Command = require("../../Structures/Command.js");
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -19,7 +19,7 @@ module.exports = class extends Command {
 
         const list = members.map(m => `» ${m.displayName} (${m.id}) | ${m.user.presence.game.name}`);
 
-        const embed = new RichEmbed().setColor(0xFF0000).setTitle("User with Invite in Playing Status").setDescription(list.length ? list.join("\n\n").substring(0, 2000) : "No users to display.");
+        const embed = new MessageEmbed().setColor(0xFF0000).setTitle("User with Invite in Playing Status").setDescription(list.length ? list.join("\n\n").substring(0, 2000) : "No users to display.");
 
         return message.channel.send("", { embed });
     }

@@ -1,4 +1,4 @@
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 const types = {
     warn: { color: 0xFFFF00, action: "Warn" },
     vmute: { color: 0xFF9900, action: "Voice Mute" },
@@ -100,7 +100,7 @@ class ModerationLog {
                     const _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
 
 
-                    const embed = new RichEmbed()
+                    const embed = new MessageEmbed()
                         .setColor(type.color || 0xC4C4C4)
                         .setURL(this.client.config.urls.website)
                         .setDescription(`${_action}\n${_user}\n${_reason}`)
@@ -122,7 +122,7 @@ class ModerationLog {
             const { action, user, id, ts } = this.caseMatch(_case);
             const _reason = `**Reason:** ${reason}`;
 
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setColor(_case.embeds[0].color || 0xC4C4C4)
                 .setURL(this.client.config.urls.website)
                 .setDescription(`${action}\n${user}\n${_reason}`)

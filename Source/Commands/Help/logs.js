@@ -1,5 +1,5 @@
 const Command = require("../../Structures/Command.js");
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor(0x00adff)
             .setTitle("Possible logs").setURL(this.client.config.urls.website)
             .setDescription(`You can set your server full of logs! Including activity and moderation.\n\n[Click here for more information on settings.](${this.client.config.urls.settings})`)

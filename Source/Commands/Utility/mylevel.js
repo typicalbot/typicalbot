@@ -1,5 +1,5 @@
 const Command = require("../../Structures/Command.js");
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -30,7 +30,7 @@ module.exports = class extends Command {
             this.client.permissionsManager.get(message.guild, message.author, true) :
             this.client.permissionsManager.get(message.guild, message.author);
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor(0x00adff)
             .setTitle("User Permission Level")
             .setDescription(`Level ${permission.level} | ${permission.title}`);

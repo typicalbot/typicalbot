@@ -1,5 +1,5 @@
 const Command = require("../../Structures/Command.js");
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 
 const settingsList = {
     "embed": "Embed responses from TypicalBot.",
@@ -98,7 +98,7 @@ module.exports = class extends Command {
 
             const list = settings.splice((page -1) * 10, 10);
 
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setColor(0x00ADFF)
                 .setTitle(`TypicalBot Settings | Page ${page} / ${count}`)
                 .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")

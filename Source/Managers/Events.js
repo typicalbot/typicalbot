@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const RichEmbed = Discord.RichEmbed;
+const MessageEmbed = Discord.MessageEmbed;
 const Response = require("../Structures/Response");
 const util = require("util");
 
@@ -114,7 +114,7 @@ module.exports = class {
 
         const user = message.author;
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor(0x3EA7ED)
             .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
             .setDescription(this.client.functions.shorten(message.content, 100))
@@ -142,7 +142,7 @@ module.exports = class {
                 const channel = guild.channels.get(settings.logs);
 
                 if (settings.joinlog === "--embed") {
-                    const embed = new RichEmbed()
+                    const embed = new MessageEmbed()
                         .setColor(0x00FF00)
                         .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                         .setFooter("User Joined")
@@ -186,7 +186,7 @@ module.exports = class {
         const channel = guild.channels.get(settings.logs);
 
         if (settings.leavelog === "--embed") {
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setColor(0xFF6600)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Left")
@@ -242,7 +242,7 @@ module.exports = class {
         const channel = guild.channels.get(settings.logs);
 
         if (settings.banlog === "--embed") {
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setColor(0xFF0000)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Banned")
@@ -274,7 +274,7 @@ module.exports = class {
         const channel = guild.channels.get(settings.logs);
 
         if (settings.unbanlog === "--embed") {
-            const embed = new RichEmbed()
+            const embed = new MessageEmbed()
                 .setColor(0x3EA7ED)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Unbanned")

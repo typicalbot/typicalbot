@@ -1,5 +1,5 @@
 const Command = require("../../Structures/Command.js");
-const RichEmbed = require("discord.js").RichEmbed;
+const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -33,7 +33,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response, permissionLevel) {
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setColor(0x00adff)
             .setThumbnail(`${this.client.config.urls.website}/images/icon.png`)
             .setTitle("TypicalBot Statistics")
