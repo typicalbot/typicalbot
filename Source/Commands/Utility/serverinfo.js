@@ -28,7 +28,7 @@ module.exports = class extends Command {
             + `Created             : ${moment(message.guild.createdAt).format("dddd MMMM Do, YYYY, hh:mm A")}\n`
             + `Region              : ${message.guild.region}\n`
             + `Verification Level  : ${message.guild.verificationLevel}\n`
-            + `Icon                : ${message.guild.iconURL ? message.guild.iconURL : "None"}\n`
+            + `Icon                : ${message.guild.iconURL({ "format": "png" }) || "None"}\n`
             + `Channels            : ${message.guild.channels.size}\n`
             + `Members             : ${message.guild.memberCount}\n`
             + `Roles               : ${message.guild.roles.size}\n`
@@ -56,7 +56,7 @@ module.exports = class extends Command {
             .addField("» Members", message.guild.memberCount, true)
             .addField("» Roles", message.guild.roles.size, true)
             .addField("» Emojis", message.guild.emojis.size, true)
-            .setThumbnail(message.guild.iconURL || null)
+            .setThumbnail(message.guild.iconURL("png", 2048) || null)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
             .setTimestamp()
         );

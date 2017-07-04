@@ -76,7 +76,7 @@ module.exports = class {
             const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
             if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
 
-            settings.embed === "Y" && command.embedExecute ?
+            settings.embed && command.embedExecute ?
                 command.embedExecute(message, response, userPermissions) :
                 command.execute(message, response, userPermissions);
         }

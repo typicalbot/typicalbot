@@ -25,7 +25,7 @@ const client = new class extends Discord.Client {
         this.shardNumber = +process.env.SHARD_ID + 1;
         this.shardCount = +process.env.SHARD_COUNT;
 
-        this.database = new Database(this);
+        this.database = new Database();
 
         this.processManager = new ProcessManager(this);
         this.eventsManager = new EventsManager(this);
@@ -148,5 +148,5 @@ const client = new class extends Discord.Client {
 };
 
 process.on("message", msg => client.processManager.message(msg))
-//.on("uncaughtException", err => client.log(err.stack, true))
+.on("uncaughtException", err => client.log(err.stack, true))
 .on("unhandledRejection", err => client.log(err.stack, true));

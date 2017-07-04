@@ -1,8 +1,10 @@
 const rt = require("rethinkdbdash");
+const vr = require("../../version").version;
+const options = require(`../../Configs/${vr}`).rethinkdb;
 
 class Database {
-    constructor(options) {
-        this.db = rt({ "db": "tb_development" });
+    constructor() {
+        this.db = rt(options);
     }
 
     get(table, key) {
@@ -17,8 +19,8 @@ class Database {
         return this.db.table(table).insert(data);
     }
 
-    update(table, key, column, value){
-        return this.get(table, key).update({ [column]: value });
+    update(table, key, object){
+        return this.db.table(table).get(key).update(object);
     }
 
     delete(table, key) {
