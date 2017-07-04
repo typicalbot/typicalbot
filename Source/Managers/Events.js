@@ -51,7 +51,7 @@ module.exports = class {
 
             const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
 
-            if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.send(`${message.author} | This server's prefix is ${settings.customprefix ? settings.originaldisabled === "Y" ? `\`${settings.customprefix}\`` : `\`${this.client.config.prefix}\` or \`${settings.customprefix}\`` : `\`${this.client.config.prefix}\``}.`);
+            if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.send(`${message.author} | This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
 
             message.guild.settings = settings;
 
@@ -92,7 +92,7 @@ module.exports = class {
 
         const response = new Response(this.client, message);
 
-        if (this.client.automod.inviteCheck(message)) return response.error(`An invite was detected in your message. Your message has been deleted.`);
+        this.client.automod.inviteCheck(message).then(() => { return response.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
     }
 
     async messageDelete(message) {
@@ -100,9 +100,9 @@ module.exports = class {
 
         const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
 
-        if (!settings.logs || !settings.deletelog) return;
+        if (!settings.logs.id || !settings.logs.delete) return;
 
-        const channel = message.guild.channels.get(settings.logs);
+        const channel = message.guild.channels.get(settings.logs.id);
         if (!channel) return;
 
         const user = message.author;
@@ -114,12 +114,12 @@ module.exports = class {
             .setFooter("Message Deleted")
             .setTimestamp();
 
-        if (settings.deletelog === "--embed") return channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
+        if (settings.logs.delete === "--embed") return channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
 
         channel.send(
-            settings.deletelog === "--enabled" ?
+            settings.logs.delete === "--enabled" ?
                 `**${user.username}#${user.discriminator}**'s message was deleted.` :
-                this.client.functions.formatMessage("logs-msgdel", message.guild, user, settings.deletelog, { message, channel: message.channel })
+                this.client.functions.formatMessage("logs-msgdel", message.guild, user, settings.logs.delete, { message, channel: message.channel })
         ).catch(() => console.log("Missing Permissions"));
     }
 
@@ -130,11 +130,11 @@ module.exports = class {
 
         const user = member.user;
 
-        if (settings.joinlog !== "disabled") {
-            if (guild.channels.has(settings.logs)) {
-                const channel = guild.channels.get(settings.logs);
+        if (settings.logs.join !== "disabled") {
+            if (guild.channels.has(settings.logs.id)) {
+                const channel = guild.channels.get(settings.logs.id);
 
-                if (settings.joinlog === "--embed") {
+                if (settings.logs.join === "--embed") {
                     const embed = new MessageEmbed()
                         .setColor(0x00FF00)
                         .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
@@ -144,23 +144,23 @@ module.exports = class {
                     channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
                 } else {
                     channel.send(
-                        settings.joinlog ?
-                            this.client.functions.formatMessage("logs", guild, user, settings.joinlog) :
+                        settings.logs.join ?
+                            this.client.functions.formatMessage("logs", guild, user, settings.logs.join) :
                             `**${user.username}#${user.discriminator}** has joined the server.`
                     ).catch(() => console.log("Missing Permissions"));
                 }
             }
         }
 
-        if (settings.automessage && !user.bot) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage("jm", guild, user, settings.automessage)}`).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.message && !user.bot) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage("jm", guild, user, settings.auto.message)}`).catch(() => console.log("Missing Permissions"));
 
-        if (settings.autonick) member.setNickname(this.client.functions.formatMessage("jn", guild, user, settings.autonick)).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage("jn", guild, user, settings.auto.nickname)).catch(() => console.log("Missing Permissions"));
 
         const autorole = this.client.functions.fetchAutoRole(guild, settings);
         if (autorole && autorole.editable) setTimeout(() =>
             member.addRole(autorole).then(() => {
-                if (settings.autorolesilent === "N" && settings.logs && guild.channels.has(settings.logs)) guild.channels.get(settings.logs).sendMessage(`**${user.tag}** was given the autorole **${autorole.name}**.`);
-            }).catch(() => console.log("Missing Permissions")), settings.autoroledelay || 2000
+                if (settings.auto.role.silent === "N" && settings.logs.id && guild.channels.has(settings.logs.id)) guild.channels.get(settings.logs.id).sendMessage(`**${user.tag}** was given the autorole **${autorole.name}**.`);
+            }).catch(() => console.log("Missing Permissions")), settings.audo.role.delay || 2000
         );
     }
 
@@ -171,14 +171,14 @@ module.exports = class {
         if (bans instanceof require("discord.js").Collection && bans.has(member.id)) return;
 
         const settings = await this.client.settingsManager.fetch(guild.id);
-        if (!settings.logs || settings.leavelog === "--disabled") return;
+        if (!settings.logs.id || settings.logs.leave === "--disabled") return;
 
         const user = member.user;
 
-        if (!guild.channels.has(settings.logs)) return;
-        const channel = guild.channels.get(settings.logs);
+        if (!guild.channels.has(settings.logs.id)) return;
+        const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.leavelog === "--embed") {
+        if (settings.logs.leave === "--embed") {
             const embed = new MessageEmbed()
                 .setColor(0xFF6600)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
@@ -188,8 +188,8 @@ module.exports = class {
             channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
         } else {
             channel.sendMessage(
-                settings.leavelog ?
-                    this.client.functions.formatMessage("logs", guild, user, settings.leavelog) :
+                settings.logs.leave ?
+                    this.client.functions.formatMessage("logs", guild, user, settings.logs.leave) :
                     `**${user.tag}** has left the server.`
             ).catch(() => console.log("Missing Permissions"));
         }
@@ -203,18 +203,18 @@ module.exports = class {
         if (oldNickname === nickname) return;
 
         const settings = await this.client.settingsManager.fetch(guild.id);
-        if (!settings.logs || !settings.nicklog) return;
+        if (!settings.logs.id || !settings.logs.nickname) return;
 
         const user = member.user;
 
-        if (!guild.channels.has(settings.logs)) return;
-        const channel = guild.channels.get(settings.logs);
+        if (!guild.channels.has(settings.logs.id)) return;
+        const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.joinnick && nickname === this.client.functions.formatMessage("jn", guild, user, settings.joinnick)) return;
+        if (settings.auto.nickname && nickname === this.client.functions.formatMessage("jn", guild, user, settings.auto.nickname)) return;
 
         channel.send(
-            settings.nicklog !== "--enabled" ?
-            this.client.functions.formatMessage("ann-nick", guild, user, settings.nicklog, { oldMember }) :
+            settings.logs.nickname !== "--enabled" ?
+            this.client.functions.formatMessage("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
             `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
         ).catch(() => console.log("Missing Permissions"));
     }
@@ -222,19 +222,19 @@ module.exports = class {
     async guildBanAdd(guild, user) {
         const settings = await this.client.settingsManager.fetch(guild.id);
 
-        if (settings.modlogs && !this.client.softbanCache.has(user.id)) {
+        if (settings.logs.moderation && !this.client.softbanCache.has(user.id)) {
             const cachedLog = this.client.banCache.get(user.id);
 
             this.client.modlogsManager.createLog(guild, Object.assign({ action: "ban", user }, cachedLog));
             this.client.banCache.delete(user.id);
         }
 
-        if (!settings.logs || settings.banlog === "--disabled") return;
+        if (!settings.logs.id || settings.logs.ban === "--disabled") return;
 
-        if (!guild.channels.has(settings.logs)) return;
-        const channel = guild.channels.get(settings.logs);
+        if (!guild.channels.has(settings.logs.id)) return;
+        const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.banlog === "--embed") {
+        if (settings.logs.ban === "--embed") {
             const embed = new MessageEmbed()
                 .setColor(0xFF0000)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
@@ -244,8 +244,8 @@ module.exports = class {
             channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
         } else {
             channel.send(
-                settings.banlog ?
-                    this.client.functions.formatMessage("logs", guild, user, settings.banlog) :
+                settings.logs.ban ?
+                    this.client.functions.formatMessage("logs", guild, user, settings.logs.ban) :
                     `**${user.tag}** has been banned from the server.`
             ).catch(() => console.log("Missing Permissions"));
         }
@@ -254,19 +254,19 @@ module.exports = class {
     async guildBanRemove(guild, user) {
         const settings = await this.client.settingsManager.fetch(guild.id);
 
-        if (settings.modlogs && !this.client.softbanCache.has(user.id)) {
+        if (settings.logs.moderation && !this.client.softbanCache.has(user.id)) {
             const cachedLog = this.client.unbanCache.get(user.id);
 
             this.client.modlogsManager.createLog(guild, Object.assign({ action: "unban", user }, cachedLog));
             this.client.unbanCache.delete(user.id);
         }
 
-        if (!settings.logs || settings.unbanlog === "--disabled") return;
+        if (!settings.logs.id || settings.logs.unban === "--disabled") return;
 
-        if (!guild.channels.has(settings.logs)) return;
-        const channel = guild.channels.get(settings.logs);
+        if (!guild.channels.has(settings.logs.id)) return;
+        const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.unbanlog === "--embed") {
+        if (settings.logs.umban === "--embed") {
             const embed = new MessageEmbed()
                 .setColor(0x3EA7ED)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
@@ -276,8 +276,8 @@ module.exports = class {
             channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
         } else {
             channel.send(
-                settings.unbanlog ?
-                    this.client.functions.formatMessage("logs", guild, user, settings.unbanlog) :
+                settings.logs.unban ?
+                    this.client.functions.formatMessage("logs", guild, user, settings.logs.unban) :
                     `**${user.tag}** has been unbanned from the server.`
             ).catch(() => console.log("Missing Permissions"));
         }
@@ -285,15 +285,15 @@ module.exports = class {
 
     async guildInvitePosted(guild, message, user) {
         const settings = await this.client.settingsManager.fetch(guild.id);
-        if (!settings.logs || !settings.invitelog) return;
+        if (!settings.logs.id || !settings.logs.invite) return;
 
-        const channel = guild.channels.get(settings.logs);
+        const channel = guild.channels.get(settings.logs.id);
         if (!channel) return;
 
         channel.send(
-            settings.invitelog === "--enabled" ?
+            settings.logs.invite === "--enabled" ?
                 `**${user.username}#${user.discriminator}** posted an invite in <#${message.channel.id}>.` :
-                this.client.functions.formatMessage("logs-invite", guild, user, settings.invitelog, { channel: message.channel })
+                this.client.functions.formatMessage("logs-invite", guild, user, settings.logs.invite, { channel: message.channel })
         );
     }
 

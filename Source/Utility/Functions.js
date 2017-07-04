@@ -117,7 +117,7 @@ module.exports = class {
     }
 
     fetchAutoRole(guild, settings) {
-        const roleSetting = settings.autorole; if (!roleSetting) return;
+        const roleSetting = settings.auto.role.id; if (!roleSetting) return;
 
         if (guild.roles.has(roleSetting)) return guild.roles.get(roleSetting);
         return;
