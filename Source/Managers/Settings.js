@@ -2,7 +2,7 @@ const { Collection } = require("discord.js");
 
 const DefaultData = 1;
 
-class Settings {
+module.exports = class {
     constructor(client) {
         this.client = client;
 
@@ -127,6 +127,4 @@ class Settings {
             });
         });
     }
-}
-
-module.exports = Settings;
+};

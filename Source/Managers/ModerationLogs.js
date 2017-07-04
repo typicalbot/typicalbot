@@ -12,7 +12,7 @@ const types = {
 
 const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*User:\*\*\s.+/gi };
 
-class ModerationLog {
+module.exports = class {
     constructor(client) {
         this.client = client;
     }
@@ -136,6 +136,4 @@ class ModerationLog {
             return resolve(id);
         });
     }
-}
-
-module.exports = ModerationLog;
+};

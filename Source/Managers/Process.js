@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 
-class ProcessManager {
+module.exports = class {
     constructor(client) { this.client = client; }
 
     async message(message) {
@@ -91,9 +91,7 @@ class ProcessManager {
             catch(err) { this.client.log(err, true); }
         }
     }
-}
-
-module.exports = ProcessManager;
+};
 
 /*
 if (message.type === "serverinfo") {

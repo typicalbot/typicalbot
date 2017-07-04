@@ -1,6 +1,6 @@
 const Stream = require("../Structures/Stream");
 
-class Audio {
+module.exports = class {
     constructor(client) {
         this.client = client;
     }
@@ -53,6 +53,4 @@ class Audio {
 
         return response.reply(`Enqueued **${video.title}**.`);
     }
-}
-
-module.exports = Audio;
+};

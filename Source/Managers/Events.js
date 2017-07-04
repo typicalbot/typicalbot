@@ -59,7 +59,7 @@ module.exports = class {
             if (userPermissions.level === -1) return;
 
             const response = new Response(this.client, message);
-            if (userPermissions.level < 2) this.client.functions.inviteCheck(response);
+            if (userPermissions.level < 2) this.client.automod.inviteCheck(message).then(() => { return response.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
 
             const split = message.content.split(" ")[0];
             const prefix = this.client.functions.matchPrefix(message.author, settings, split);
@@ -92,14 +92,7 @@ module.exports = class {
 
         const response = new Response(this.client, message);
 
-        const match = this.client.functions.inviteCheck(message.content) || this.client.functions.inviteCheck(util.inspect(response.message.embeds, { depth: 4 }));
-
-        if (match && message.deletable) {
-            this.client.eventsManager.guildInvitePosted(message.guild, message, message.author);
-            message.delete().then(() => {
-                response.error(`An invite url has been detected in your message. This server prohibits invites from being shared. Your message has been removed.`);
-            });
-        }
+        if (this.client.automod.inviteCheck(message)) return response.error(`An invite was detected in your message. Your message has been deleted.`);
     }
 
     async messageDelete(message) {

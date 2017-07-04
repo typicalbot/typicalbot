@@ -1,6 +1,6 @@
 class PermissionLevel { constructor(level, title, check) { this.level = level; this.title = title; this.check = check ? check : () => { return true; }; } }
 
-class PermissionLevels {
+module.exports = class {
     constructor(client) {
         this.client = client;
 
@@ -68,6 +68,4 @@ class PermissionLevels {
         if (this.levels[-1].check(guild, member)) return this.define(-1);
         return this.define(0);
     }
-}
-
-module.exports = PermissionLevels;
+};

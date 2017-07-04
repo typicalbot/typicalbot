@@ -2,7 +2,7 @@ const rt = require("rethinkdbdash");
 const vr = require("../../version").version;
 const options = require(`../../Configs/${vr}`).rethinkdb;
 
-class Database {
+module.exports = class {
     constructor() {
         this.db = rt(options);
     }
@@ -26,6 +26,4 @@ class Database {
     delete(table, key) {
         return this.db.table(table).delete(key);
     }
-}
-
-module.exports = Database;
+};

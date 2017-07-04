@@ -12,6 +12,7 @@ let ModlogsManager = require("./Managers/ModerationLogs");
 let AudioManager = require("./Managers/Audio");
 
 let Functions = require("./Utility/Functions");
+let AutoModeration = require("./Utility/AutoModeration");
 let AudioUtility = require("./Utility/Audio");
 
 const client = new class extends Discord.Client {
@@ -36,6 +37,7 @@ const client = new class extends Discord.Client {
         this.audioManager = new AudioManager(this);
 
         this.functions = new Functions(this);
+        this.automod = new AutoModeration(this);
         this.audioUtility = new AudioUtility(this);
 
         this.shardData = {};
@@ -139,6 +141,10 @@ const client = new class extends Discord.Client {
             delete require.cache[`${__dirname}/Utility/Functions.js`];
             Functions = require("./Utility/Functions");
             this.functions = new Functions(this);
+        } else if (all || mod === "automod") {
+            delete require.cache[`${__dirname}/Utility/AudoModeration.js`];
+            AutoModeration = require("./Utility/AutoModeration");
+            this.automod = new AutoModeration(this);
         } else if (all || mod === "audioutility") {
             delete require.cache[`${__dirname}/Utility/Audio.js`];
             AudioUtility = require("./Utility/Audio");

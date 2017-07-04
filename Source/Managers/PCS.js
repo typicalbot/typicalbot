@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const Collection = Discord.Collection;
 
-class PCS {
+module.exports = class {
     constructor(client) {
         this.client = client;
         this.connection = client.settingsManager.connection;
@@ -29,6 +29,4 @@ class PCS {
         const key = list.filter(d => d.trigger === text)[0];
         return key;
     }
-}
-
-module.exports = PCS;
+};
