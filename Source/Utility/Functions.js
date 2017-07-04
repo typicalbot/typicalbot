@@ -125,8 +125,8 @@ module.exports = class {
 
     matchPrefix(user, settings, command) {
         if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
-        if (settings.customprefix && command.startsWith(settings.customprefix)) return settings.customprefix;
-        if (settings.defaultprefix === "N" && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
+        if (settings["prefix.custom"] && command.startsWith(settings["prefix.custom"])) return settings["prefix.custom"];
+        if (settings["prefix.default"] === "N" && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
         return null;
     }
 

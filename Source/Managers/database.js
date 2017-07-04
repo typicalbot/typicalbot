@@ -1,30 +1,28 @@
-const mysql = require("mysql");
-const vr = require("../../version").version;
-const credentials = require(`../../Configs/${vr}`).mysql;
+const rt = require("rethinkdbdash");
 
 class Database {
-    constructor() {
-        this.connection = mysql.createConnection(credentials);
-
-        this.connection.connect();
+    constructor(options) {
+        this.db = rt({ "db": "tb_development" });
     }
 
-    reconnect() {
-        this.connection.end();
-
-        this.connection = mysql.createConnection(credentials);
-        this.connection.connect();
+    get(table, key) {
+        return this.db.table(table).get(key);
     }
 
-    query(query) {
-        return new Promise((resolve, reject) => {
-            if (this.connection.state !== "authenticated") this.reconnect();
+    async has(table, key) {
+        return !!(await this.db.get(table, key));
+    }
 
-            this.connection.query(query, (error, result) => {
-                if (error) return reject(error);
-                return resolve(result);
-            });
-        });
+    insert(table, data) {
+        return this.db.table(table).insert(data);
+    }
+
+    update(table, key, column, value){
+        return this.get(table, key).update({ [column]: value });
+    }
+
+    delete(table, key) {
+        return this.db.table(table).delete(key);
     }
 }
 

@@ -39,7 +39,7 @@ module.exports = class extends Command {
                 }).catch(err => {
                     response.embed({
                         "color": 0xFF0000,
-                        "description": `\n\n\`\`\`\n${err.stack}\n\`\`\``,
+                        "description": `\n\n\`\`\`\n${err ? err.stack : `Unknown Error`}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
                             "icon_url": "https://typicalbot.com/images/icon.png"

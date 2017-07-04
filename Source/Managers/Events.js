@@ -12,7 +12,7 @@ module.exports = class {
         this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
         this.client.transmitStat("guilds");
         this.client.user.setGame(`Client Starting`);
-        this.client.functions.transmitStatus();
+        //this.client.functions.transmitStatus();
         this.client.transmit("transmitDonors");
         this.client.transmit("transmitTesters");
 
@@ -24,7 +24,7 @@ module.exports = class {
             if (!this.client.functions.checkTester(g)) g.leave();
         }), 10000);
 
-        setInterval(() => this.client.functions.transmitStatus(), 20000);
+        //setInterval(() => this.client.functions.transmitStatus(), 20000);
 
         setInterval(() => {
             this.client.user.setGame(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);

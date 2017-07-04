@@ -51,7 +51,7 @@ const client = new class extends Discord.Client {
         this.softbanCache = new Collection();
 
         this.once("ready", () => this.eventsManager.onceReady())
-        .on("debug", debug => console.log(debug.replace(this.token, "REDACTED")))
+        //.on("debug", debug => console.log(debug.replace(this.token, "REDACTED")))
         .on("warn", err => this.log(err, true))
         .on("error", err => this.log(err, true))
         .on("message", message => this.eventsManager.message(message))
@@ -99,7 +99,6 @@ const client = new class extends Discord.Client {
         const all = input === "all";
 
         if (mod === "database") {
-            this.database.connection.end();
             delete require.cache[`${__dirname}/Managers/Database.js`];
             Database = require("./Managers/Database");
             this.database = new Database();
@@ -149,5 +148,5 @@ const client = new class extends Discord.Client {
 };
 
 process.on("message", msg => client.processManager.message(msg))
-.on("uncaughtException", err => client.log(err.stack, true))
+//.on("uncaughtException", err => client.log(err.stack, true))
 .on("unhandledRejection", err => client.log(err.stack, true));
