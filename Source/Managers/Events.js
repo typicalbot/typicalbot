@@ -152,14 +152,14 @@ module.exports = class {
             }
         }
 
-        if (settings.auto.message && !user.bot) user.sendMessage(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage("jm", guild, user, settings.auto.message)}`).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.message && !user.bot) user.send(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage("jm", guild, user, settings.auto.message)}`).catch(() => console.log("Missing Permissions"));
 
         if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage("jn", guild, user, settings.auto.nickname)).catch(() => console.log("Missing Permissions"));
 
         const autorole = this.client.functions.fetchAutoRole(guild, settings);
         if (autorole && autorole.editable) setTimeout(() =>
             member.addRole(autorole).then(() => {
-                if (settings.auto.role.silent === "N" && settings.logs.id && guild.channels.has(settings.logs.id)) guild.channels.get(settings.logs.id).sendMessage(`**${user.tag}** was given the autorole **${autorole.name}**.`);
+                if (settings.auto.role.silent === "N" && settings.logs.id && guild.channels.has(settings.logs.id)) guild.channels.get(settings.logs.id).send(`**${user.tag}** was given the autorole **${autorole.name}**.`);
             }).catch(() => console.log("Missing Permissions")), settings.audo.role.delay || 2000
         );
     }
@@ -187,7 +187,7 @@ module.exports = class {
 
             channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
         } else {
-            channel.sendMessage(
+            channel.send(
                 settings.logs.leave ?
                     this.client.functions.formatMessage("logs", guild, user, settings.logs.leave) :
                     `**${user.tag}** has left the server.`
@@ -266,7 +266,7 @@ module.exports = class {
         if (!guild.channels.has(settings.logs.id)) return;
         const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.logs.umban === "--embed") {
+        if (settings.logs.unban === "--embed") {
             const embed = new MessageEmbed()
                 .setColor(0x3EA7ED)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)

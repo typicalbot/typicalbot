@@ -32,7 +32,7 @@ module.exports = class {
         return new Promise(async (resolve, reject) => {
             const settings = await this.client.settingsManager.fetch(guild.id);
 
-            const id = settings.modlogs;
+            const id = settings.logs.moderation;
 
             if (!id) return reject("Setting of modlogs is null.");
 
