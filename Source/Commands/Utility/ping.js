@@ -15,6 +15,6 @@ module.exports = class extends Command {
 
     async execute(message, response, permissionLevel) {
         const msg = await response.send("Pinging...");
-        msg.edit(`Command Execution Time : ${msg.createdTimestamp - message.createdTimestamp}ms | Discord API Latency : ${Math.floor(this.client.ping)}ms`);
+        msg.edit(`Command Execution Time : ${msg.createdTimestamp - message.createdTimestamp}ms | Discord API Latency : ${Math.floor(this.client.pings[0])}ms`);
     }
 };
