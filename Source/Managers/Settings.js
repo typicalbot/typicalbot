@@ -106,10 +106,12 @@ module.exports = class {
         });
     }
 
-    update(id, setting, value) {
+    update(id, object) {
         return new Promise((resolve, reject) => {
-            this.client.database.update("guilds", id, setting, value).then(result => {
-                this.data.get(id)[setting] = value;
+            this.client.database.update("guilds", id, object).then(result => {
+                const data = this.data.get(id);
+                Object.assign(data, object);
+                this.data.set(id, data);
                 return resolve();
             }).catch(err => {
                 return reject(err);
