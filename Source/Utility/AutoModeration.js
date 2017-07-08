@@ -14,7 +14,7 @@ module.exports = class {
                 if (contentMatch || embedMatch) {
                     this.client.eventsManager.guildInvitePosted(response.message.guild, response.message, response.message.author);
                     response.message.delete().then(() => {
-                        response.error(`An invite was detected in your message. Your message has been deleted.`);
+                        response.error(`This server prohibits invites from being sent. Your message has been deleted.`);
                     });
                 }
             }
