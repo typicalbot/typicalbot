@@ -1,9 +1,12 @@
+require("./Extenders");
+
 const Discord = require("discord.js");
 const Collection = Discord.Collection;
 
 const ProcessManager = require("./Managers/Process");
 
 let Database = require("./Managers/Database");
+
 let EventsManager = require("./Managers/Events");
 let CommandsManager = require("./Managers/Commands");
 let SettingsManager = require("./Managers/Settings");

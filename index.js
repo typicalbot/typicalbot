@@ -23,7 +23,6 @@ class Shard extends cp.fork {
         this.master = master;
 
         this.status = null;
-        this.mysqlStatus = null;
         this.uptime = null;
 
         this.on("message", message => {
@@ -31,10 +30,9 @@ class Shard extends cp.fork {
                 this.master.changeStats(this.id, message.data);
             } else if (message.type === "status") {
                 this.status = message.data.status;
-                this.mysqlStatus = message.data.mysqlStatus;
                 this.uptime = message.data.uptime;
             } else if (message.type === "masterrequest") {
-                let r = this.master.pendingRequests.get(message.data.id);
+                const r = this.master.pendingRequests.get(message.data.id);
                 if (!r) return;
                 r.callback(message);
             } else {
@@ -68,11 +66,11 @@ new class {
 
     globalRequest(request, data) {
         return new Promise((resolve, reject) => {
-            let id = Math.random();
+            const id = Math.random();
 
-            let timeout = setTimeout(() => { this.pendingRequests.delete(id); return reject("Timed Out"); }, 5000);
+            const timeout = setTimeout(() => { this.pendingRequests.delete(id); return reject("Timed Out"); }, 5000);
 
-            let callback = (response) => {
+            const callback = (response) => {
                 clearTimeout(timeout);
                 this.pendingRequests.delete(id);
                 return resolve(response.data);
@@ -94,7 +92,7 @@ new class {
     }
 
     relayStats() {
-        let data = {};
+        const data = {};
         this.shards.forEach(shard => {
             Object.keys(shard.stats).forEach(key => {
                 data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key];

@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const MessageEmbed = Discord.MessageEmbed;
 const Response = require("../Structures/Response");
 const util = require("util");
 
@@ -12,7 +11,7 @@ module.exports = class {
         this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
         this.client.transmitStat("guilds");
         this.client.user.setGame(`Client Starting`);
-        //this.client.functions.transmitStatus();
+        this.client.functions.transmitStatus();
         this.client.transmit("transmitDonors");
         this.client.transmit("transmitTesters");
 
@@ -24,7 +23,7 @@ module.exports = class {
             if (!this.client.functions.checkTester(g)) g.leave();
         }), 10000);
 
-        //setInterval(() => this.client.functions.transmitStatus(), 20000);
+        setInterval(() => this.client.functions.transmitStatus(), 20000);
 
         setInterval(() => {
             this.client.user.setGame(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
@@ -107,14 +106,15 @@ module.exports = class {
 
         const user = message.author;
 
-        const embed = new MessageEmbed()
+        if (settings.logs.delete === "--embed") return channel.buildEmbed()
             .setColor(0x3EA7ED)
             .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
             .setDescription(this.client.functions.shorten(message.content, 100))
             .setFooter("Message Deleted")
-            .setTimestamp();
+            .setTimestamp()
+            .send()
+            .catch(() => console.log("Missing Permissions"));
 
-        if (settings.logs.delete === "--embed") return channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
 
         channel.send(
             settings.logs.delete === "--enabled" ?
@@ -135,13 +135,13 @@ module.exports = class {
                 const channel = guild.channels.get(settings.logs.id);
 
                 if (settings.logs.join === "--embed") {
-                    const embed = new MessageEmbed()
+                    channel.buildEmbed()
                         .setColor(0x00FF00)
                         .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                         .setFooter("User Joined")
-                        .setTimestamp();
-
-                    channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
+                        .setTimestamp()
+                        .send()
+                        .catch(() => console.log("Missing Permissions"));
                 } else {
                     channel.send(
                         settings.logs.join ?
@@ -179,13 +179,13 @@ module.exports = class {
         const channel = guild.channels.get(settings.logs.id);
 
         if (settings.logs.leave === "--embed") {
-            const embed = new MessageEmbed()
+            channel.buildEmbed()
                 .setColor(0xFF6600)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Left")
-                .setTimestamp();
-
-            channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
+                .setTimestamp()
+                .send()
+                .catch(() => console.log("Missing Permissions"));
         } else {
             channel.send(
                 settings.logs.leave ?
@@ -235,13 +235,13 @@ module.exports = class {
         const channel = guild.channels.get(settings.logs.id);
 
         if (settings.logs.ban === "--embed") {
-            const embed = new MessageEmbed()
+            channel.buildEmbed()
                 .setColor(0xFF0000)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Banned")
-                .setTimestamp();
-
-            channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
+                .setTimestamp()
+                .send()
+                .catch(() => console.log("Missing Permissions"));
         } else {
             channel.send(
                 settings.logs.ban ?
@@ -267,13 +267,13 @@ module.exports = class {
         const channel = guild.channels.get(settings.logs.id);
 
         if (settings.logs.unban === "--embed") {
-            const embed = new MessageEmbed()
+            channel.buildEmbed()
                 .setColor(0x3EA7ED)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter("User Unbanned")
-                .setTimestamp();
-
-            channel.send("", { embed }).catch(() => console.log("Missing Permissions"));
+                .setTimestamp()
+                .send()
+                .catch(() => console.log("Missing Permissions"));
         } else {
             channel.send(
                 settings.logs.unban ?

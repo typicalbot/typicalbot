@@ -1,5 +1,4 @@
 const Command = require("../../Structures/Command.js");
-const MessageEmbed = require("discord.js").MessageEmbed;
 
 const settingsList = {
     "embed": "Embed responses from TypicalBot.",
@@ -98,7 +97,7 @@ module.exports = class extends Command {
 
             const list = settings.splice((page -1) * 10, 10);
 
-            const embed = new MessageEmbed()
+            const embed = response.buildEmbed()
                 .setColor(0x00ADFF)
                 .setTitle(`TypicalBot Settings | Page ${page} / ${count}`)
                 .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
@@ -106,7 +105,7 @@ module.exports = class extends Command {
 
             list.forEach(k => embed.addField(`» ${k}`, settingsList[k]));
 
-            response.embed(embed);
+            embed.send();
         } else if (action === "view") {
             response.reply("Settings View");
         } else if (action === "edit") {

@@ -32,13 +32,12 @@ module.exports = class extends Command {
 
         const paged = this.client.functions.pagify(this.client.guilds.sort((a,b) => b.memberCount - a.memberCount).map(g => `${lengthen(1, `${g.name.replace(/[^a-z0-9 '"/\\\[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`), page);
 
-        const embed = new MessageEmbed()
+        response.buildEmbed()
             .setColor(0x00adff)
             .setTitle(`Servers on Shard ${this.client.shardNumber} / ${this.client.shardCount}`)
             .setDescription(`\`\`\`autohotkey\n${paged}\`\`\``)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp();
-
-        return response.embed(embed);
+            .setTimestamp()
+            .send();
     }
 };

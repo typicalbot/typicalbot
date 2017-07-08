@@ -1,5 +1,4 @@
 const Command = require("../../Structures/Command.js");
-const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -19,13 +18,12 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response){
-        const embed = new MessageEmbed()
+        response.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("Donate to TypicalBot's Creator")
             .setDescription(`You can donate to TypicalBot's creator [here](${this.client.config.urls.donate}>).\n\nDonations go to the creator of TypicalBot for any finances.`)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp();
-
-        response.embed(embed);
+            .setTimestamp()
+            .send();
     }
 };

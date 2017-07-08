@@ -45,6 +45,10 @@ class Response {
             this.message.author.send(content, { embed }) :
             this.message.author.send(content);
     }
+
+    buildEmbed() {
+        return this.message.channel.buildEmbed();
+    }
 }
 
 module.exports = Response;

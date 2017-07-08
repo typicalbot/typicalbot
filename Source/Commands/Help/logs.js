@@ -1,5 +1,4 @@
 const Command = require("../../Structures/Command.js");
-const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -12,7 +11,7 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        const embed = new MessageEmbed()
+        response.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Possible logs").setURL(this.client.config.urls.website)
             .setDescription(`You can set your server full of logs! Including activity and moderation.\n\n[Click here for more information on settings.](${this.client.config.urls.settings})`)
@@ -25,8 +24,7 @@ module.exports = class extends Command {
             .addField("**__Changing Invite Sent Logs__**", "**Disabled** By Default\n**Setting:** logs-invite\n**Options:**\n- 'disable'\n- 'enable'\n- 'default'\n- desired-message", true)
             .addField("**__Setting Up Moderation Logs__**", "To set up moderation logs, use the settings edit command for the modlogs setting. `$settings edit modlogs <#channel>`", false)
             .setFooter("TypicalBot Support", `${this.client.config.urls.website}/images/icon.png`)
-            .setTimestamp();
-
-        response.embed(embed);
+            .setTimestamp()
+            .send();
     }
 };

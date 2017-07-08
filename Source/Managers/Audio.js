@@ -16,7 +16,7 @@ module.exports = class {
                 this.client.emit("voiceConnectionChange");
                 return resolve(connection);
             }).catch(err => {
-                return reject("An error occured while connecting to your voice channel.");
+                return reject("An error occured while connecting to your voice channel.\n\n" + err);
             });
         });
     }

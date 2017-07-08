@@ -45,7 +45,7 @@ class AudioUtil {
 
     search(settings, query) {
         return new Promise((resolve, reject) => {
-            const YT = settings.apikey ? new YAPI(settings.apikey) : TBYT;
+            const YT = settings.music.apikey ? new YAPI(settings.music.apikey) : TBYT;
             YT.search(query, 10).then(results => {
                 const filtered = results.filter(a => a.type === "video");
                 return resolve(filtered);
@@ -67,8 +67,8 @@ class AudioUtil {
     permissionCheck(message, command, permissions) {
         const level = permissions.level;
 
-        const musicperms = message.guild.settings.musicperms;
-        const override = message.guild.settings[`or${command.name}`];
+        const musicperms = message.guild.settings.music.default;
+        const override = message.guild.settings.music[`${command.name}`];
         if (override === "off") if (musicperms === "all" || musicperms === "dj" && level >= 1 || musicperms === "moderator" && level >= 2 || musicperms === "administrator" && level >= 3) return { has: true };
         if (override === "all" || override === "dj" && level >= 1 || override === "moderator" && level >= 2 || override === "administrator" && level >= 3) return { has: true };
         return { has: false, req: override === "off" ? musicperms : override };

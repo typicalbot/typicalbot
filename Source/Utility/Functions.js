@@ -71,8 +71,8 @@ module.exports = class {
     transmitStatus() {
         this.client.transmit("status", {
             "status": this.client.status === Discord.Constants.Status.READY ? 0 : 1,
-            "uptime": this.client.uptime,
-            "mysqlStatus": this.client.database.connection.state === "authenticated" ? 0 : 1 });
+            "uptime": this.client.uptime
+        });
     }
 
     convertTime(ms) {

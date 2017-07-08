@@ -1,5 +1,4 @@
 const Command = require("../../Structures/Command.js");
-const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -36,25 +35,24 @@ module.exports = class extends Command {
     async embedExecute(message, response, permissionLevel) {
         const commandInput = message.content.split(" ")[1];
         const command = await this.client.commandsManager.get(commandInput);
-        const defaultEmbed = new MessageEmbed()
+
+        if (!commandInput) return response.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Info")
             .setDescription(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp();
+            .setTimestamp()
+            .send();
 
-        if (!commandInput) return response.embed(defaultEmbed);
-
-        const noCommandEmbed = new MessageEmbed()
+        if (!command) return response.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Invalid Command Input`)
             .setDescription(`The command \`${commandInput}\` does not exist.`)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp();
+            .setTimestamp()
+            .send();
 
-        if (!command) return response.embed(noCommandEmbed);
-
-        const reponseCommand = new MessageEmbed()
+        response.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Command Usage: ${commandInput}`)
             .setDescription(`• [[Parameter]]() - Optional Parameter\n• [<Parameter>]() - Required Parameter`)
@@ -63,8 +61,7 @@ module.exports = class extends Command {
             .addField("» Description", command.description)
             .addField("» Usage", command.usage)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp();
-
-        response.embed(reponseCommand);
+            .setTimestamp()
+            .send();
     }
 };

@@ -14,6 +14,7 @@
     "passport-discord": "^0.1.2",
     "path": "^0.12.7",
     "request": "^2.81.0",
+    "rethinkdbdash": "^2.3.29",
     "simple-youtube-api": "github:hypercoder2975/simple-youtube-api",
     "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
     "superagent": "^3.5.2",

@@ -1,5 +1,4 @@
 const Command = require("../../Structures/Command.js");
-const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -20,13 +19,12 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response){
-        const embed = new MessageEmbed()
+        response.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Information")
             .setDescription(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp();
-
-        response.embed(embed);
+            .setTimestamp()
+            .send();
     }
 };
