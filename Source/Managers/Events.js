@@ -5,6 +5,8 @@ const util = require("util");
 module.exports = class {
     constructor(client) {
         this.client = client;
+
+        this.mentionRegex;
     }
 
     onceReady() {
@@ -34,6 +36,8 @@ module.exports = class {
     }
 
     async message(message) {
+        if (!this.mentionRegex) this.mentionRegex = new RegExp(`^<@!?${this.client.user.id}>$`);
+
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
@@ -45,12 +49,9 @@ module.exports = class {
         } else {
             this.client.lastMessage = message.createdTimestamp;
 
-            const BotMember = message.guild.member(this.client.user);
-            if (!BotMember || !message.channel.permissionsFor(BotMember).has("SEND_MESSAGES")) return;
-
             const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
 
-            if (message.content.match(new RegExp(`^<@!?${this.client.user.id}>$`))) return message.channel.send(`${message.author} | This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
+            if (message.content.match(this.mentionRegex)) return message.channel.send(`${message.author} | This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
 
             message.guild.settings = settings;
 
@@ -58,7 +59,7 @@ module.exports = class {
             if (userPermissions.level === -1) return;
 
             const response = new Response(this.client, message);
-            if (userPermissions.level < 2) this.client.automod.inviteCheck(message).then(() => { return response.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
+            if (userPermissions.level < 2) this.client.automod.inviteCheck(response);
 
             const split = message.content.split(" ")[0];
             const prefix = this.client.functions.matchPrefix(message.author, settings, split);
@@ -91,7 +92,7 @@ module.exports = class {
 
         const response = new Response(this.client, message);
 
-        this.client.automod.inviteCheck(message).then(() => { return response.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
+        this.client.automod.inviteCheck(response).then(() => { return response.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
     }
 
     async messageDelete(message) {
