@@ -5,21 +5,19 @@ module.exports = class {
         this.client = client;
     }
 
-    inviteCheck(message) {
+    inviteCheck(response) {
         return new Promise((resolve, reject) => {
-            if (message.guild.settings.automod.invite) {
-                const contentMatch = this.client.functions.inviteCheck(message.content);
-                const embedMatch = this.client.functions.inviteCheck(inspect(message.embeds, { depth: 4 }));
+            if (response.message.guild.settings.automod.invite) {
+                const contentMatch = this.client.functions.inviteCheck(response.message.content);
+                const embedMatch = this.client.functions.inviteCheck(inspect(response.message.embeds, { depth: 4 }));
 
                 if (contentMatch || embedMatch) {
-                    if (!message.deletable) return reject("`message.disable` returned false");
-
-                    this.client.eventsManager.guildInvitePosted(message.guild, message, message.author);
-                    message.delete().then(() => {
-                        return resolve();
+                    this.client.eventsManager.guildInvitePosted(response.message.guild, response.message, response.message.author);
+                    response.message.delete().then(() => {
+                        response.error(`An invite was detected in your message. Your message has been deleted.`);
                     });
                 }
-            } else { return reject("`automod.invite` returned false"); }
+            }
         });
     }
 };
