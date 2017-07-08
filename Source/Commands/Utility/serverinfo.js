@@ -43,7 +43,7 @@ module.exports = class extends Command {
 
         const guildOwner = message.guild.member(message.guild.ownerID).user;
 
-        if (!option) return response.embed(new MessageEmbed()
+        if (!option) return response.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Server Information`)
             .addField("» Name", message.guild.name, true)
@@ -59,7 +59,7 @@ module.exports = class extends Command {
             .setThumbnail(message.guild.iconURL({ "format": "png", "size": 2048 }) || null)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
             .setTimestamp()
-        );
+            .send();
     }
 };
 

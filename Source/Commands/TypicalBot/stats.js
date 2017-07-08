@@ -1,5 +1,4 @@
 const Command = require("../../Structures/Command.js");
-const MessageEmbed = require("discord.js").MessageEmbed;
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -33,7 +32,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, response, permissionLevel) {
-        const embed = new MessageEmbed()
+        response.buildEmbed()
             .setColor(0x00adff)
             .setThumbnail(`${this.client.config.urls.website}/images/icon.png`)
             .setTitle("TypicalBot Statistics")
@@ -46,8 +45,7 @@ module.exports = class extends Command {
             .addField("» Channels on Shard", `${this.client.channels.size.toLocaleString()}`, true)
             .addField("» Users on Shard", `${this.client.users.size.toLocaleString()}`, true)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp();
-
-        response.embed(embed);
+            .setTimestamp()
+            .send();
     }
 };

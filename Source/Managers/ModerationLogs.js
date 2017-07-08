@@ -100,7 +100,7 @@ module.exports = class {
                     const _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
 
 
-                    const embed = new MessageEmbed()
+                    const embed = channel.buildEmbed()
                         .setColor(type.color || 0xC4C4C4)
                         .setURL(this.client.config.urls.website)
                         .setDescription(`${_action}\n${_user}\n${_reason}`)
@@ -109,7 +109,7 @@ module.exports = class {
 
                     if (moderator) embed.setAuthor(`${moderator.tag} (${moderator.id})`, moderator.avatarURL());
 
-                    channel.send("", { embed });
+                    embed.send();
 
                     return resolve(_case);
                 }).catch( reject );
