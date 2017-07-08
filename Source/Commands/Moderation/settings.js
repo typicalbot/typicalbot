@@ -107,7 +107,25 @@ module.exports = class extends Command {
 
             embed.send();
         } else if (action === "view") {
-            response.reply("Settings View");
+            if (setting) {
+                if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                }
+            } else {
+                const embed = response.buildEmbed()
+                    .setColor(0x00ADFF)
+                    .setTitle(`Currently Set Settings`)
+                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                    .setTimestamp();
+
+                embed.send();
+            }
         } else if (action === "edit") {
             response.reply("Settings Edit");
         }
