@@ -11,7 +11,7 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        response.buildEmbed()
+        /*response.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Permission Levels").setURL(this.client.config.urls.website)
             .setDescription(`There's three possible permissions to get. These include...\n\n[Click here for more information on settings.](${this.client.config.urls.settings})`)
@@ -26,6 +26,19 @@ module.exports = class extends Command {
             .addField("**__Assigning Permission Level 2__**", "By default, anyone with the role `TypicalBot Mod` will get this permission. You can set it with `$set edit modrole <role-name>` to change it.", true)
             .addField("**__Assigning Permission Level 3__**", "By default, anyone with the role `TypicalBot Admin` will get this permission. You can set it with `$set edit masterrole <role-name>` to change it.", true)
             .addField("**__Assigning Permission Level 4__**", "It is impossible to assign this permission level, unless giving up ownership of the server. Only one person can have this permission level.", true)
+            .setFooter("TypicalBot Support", `${this.client.config.urls.website}/images/icon.png`)
+            .setTimestamp()
+            .send();*/
+        response.buildEmbed()
+            .setColor(0x00adff)
+            .setTitle("Permission Levels").setURL(this.client.config.urls.website)
+            .setDescription(`There are six possible permission levels to have. Commands for all levels can be seen with \`d$commands\`.`)
+            .addField("» Blacklisted [-1]", "**Description:** Users with this role are unable to use the bot.\n**Inherits From:** N/A\n**Setup Command:** `$set edit blacklistrole <role-name>`\n**Default Role:** `TypicalBot Blacklisted`")
+            .addField("» Server Member [0]", "**Description:** Users with this role are able to use the default commands in the bot.\n**Inherits From:** N/A\n**Setup Command:** N/A\n**Default Role:** N/A")
+            .addField("» Server DJ [1]", "**Description:** Users with this role are able to use DJ-only music commands.\n**Inherits From:** `Server Member`\n**Setup Command:** `$set edit djrole <role-name>`\n**Default Role:** N/A")
+            .addField("» Server Moderator [2]", "**Description:** Users with this role are able to use moderation commands.\n**Inherits From:** `Server DJ`\n**Setup Command:** `$set edit modrole <role-name>`\n**Default Role:** `TypicalBot Moderator`")
+            .addField("» Server Administator [3]", "**Description:** Users with this role are able to use the `$settings` command\n**Inherits From:** `Server Moderator`\n**Setup Command:** `$set edit adminrole <role-name>`\n**Default Role:** `TypicalBot Administrator`")
+            .addField("» Server Owner [4]", "**Description:** Users with this role are immune to all moderation commands and have access to every command. Can only be obtained if the user is the owner of the server, OR has ownership transfered to them by the current owner.\n**Inherits From:** `Server Administrator`\n**Setup Command:** N/A\n**Default Role:** N/A")
             .setFooter("TypicalBot Support", `${this.client.config.urls.website}/images/icon.png`)
             .setTimestamp()
             .send();
