@@ -21,7 +21,7 @@ module.exports = class extends Command {
         response.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("Donate to TypicalBot's Creator")
-            .setDescription(`You can donate to TypicalBot's creator [here](${this.client.config.urls.donate}>).\n\nDonations go to the creator of TypicalBot for any finances.`)
+            .setDescription(`You can donate to TypicalBot [here](${this.client.config.urls.donate}>).\n\nDonations go to the creator of TypicalBot for any finances.`)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
             .setTimestamp()
             .send();

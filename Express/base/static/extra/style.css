@@ -91,11 +91,16 @@
     left: 100%;
     margin-left: 15px;
 }
+.page-container .section .title[data-center] {
+    padding: 0;
+    margin-left: 0;
+    text-align: center;
+}
 
 .page-container .guild-tab .section {
     margin-bottom: 0;
 }
-.page-container .guild-tab .section span {
+.page-container .guild-tab .section .title {
     padding: 0;
     margin-left: 0;
     text-align: center;
@@ -111,7 +116,8 @@
 }
 .page-container .quote .panel-heading {
     font-size: 15px;
-    background: red; /* For browsers that do not support gradients */
+    color: white;
+    background: #00adff; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left top, #00adff, #8af9ff); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(bottom right, #00adff, #8af9ff); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(bottom right, #00adff, #8af9ff); /* For Firefox 3.6 to 15 */
@@ -169,6 +175,33 @@
 }
 .page-container form a:hover {
     background-color: #007FBB;
+}
+
+.page-container .guilds tr td img {
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+}
+.page-container .guilds tr td canvas {
+    height: 50px;
+    width: 50px;
+    float: left;
+    margin-right: 14px;
+}
+.page-container .guilds tr td {
+    line-height: 56px;
+}
+.page-container .guilds tr td a button {
+    background-color: #333;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    transition: background 0.25s linear !important;
+}
+.page-container .guilds tr td a button:hover {
+    background-color: #00ADFF;
 }
 
 .page-container .guild-list {
@@ -242,23 +275,6 @@
 }
 .page-container .guild-tab .leave:hover {
     background-color: red;
-}
-
-.page-container .st-edit {
-    color: white;
-    float: right;
-    font-size: 14px;
-    height: 20px;
-    line-height: 20px;
-    transition: color 0.25s linear !important;
-    text-decoration: none;
-}
-.page-container .st-edit:hover {
-    color: black;
-}
-.page-container .panel-heading {
-    background-color: #00adff !important;
-    color: white !important;
 }
 
 .page-container .search a {

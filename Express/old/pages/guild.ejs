@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <%- include("parts/head.ejs") %>
+        <script src="/extra/bootstrap-confirmation.js"></script>
+        <link href="/extra/style.css" rel="stylesheet" type="text/css">
+        <link href="/images/icon.png" rel="icon" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <title><%= guild.name %> – TypicalBot</title>
+    </head>
+    <body>
+        <%- include("parts/nav.ejs", { master, auth, user: auth ? user : null }) %>
+        <div class="page-container container-fluid">
+            <span class="section section-large"><p>Server Dashboard</p></span>
+            <div class="guild-tab col-md-2">
+                <img class="icon" src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.jpg?size=1024` : `/images/unknown.png` %>">
+                <div class="info">
+                    <span class="section"><p class="title"><%= guild.name %></p></span>
+                    <p class="text"><i class="fa fa-puzzle-piece" aria-hidden="true"></i><span class="text-right">Shard <b><%= guild.shard %></b></span></p>
+                    <p class="text"><i class="fa fa-users" aria-hidden="true"></i><span class="text-right"><b><%= Number(guild.memberCount).toLocaleString() %></b> Members</span></p>
+                    <p class="text"><i class="fa fa-tags" aria-hidden="true"></i><span class="text-right"><b><%= guild.roles.length %></b> Roles</span></p>
+                    <p class="text"><i class="fa fa-microphone" aria-hidden="true"></i><span class="text-right"><b><%= guild.channels.filter(c => c.type === "voice").length %></b> Voice Channels</span></p>
+                    <p class="text"><i class="fa fa-hashtag" aria-hidden="true"></i><span class="text-right"><b><%= guild.channels.filter(c => c.type === "text").length %></b> Text Channels</span></p>
+                    <span class="section"><p class="text">Owned By <b><%= guild.owner.username %>#<%= guild.owner.discriminator %></b></p></span>
+                </div>
+                <a class="leave"
+                    data-btn-ok-label="Continue"
+                    data-btn-ok-icon="glyphicon glyphicon-ok"
+                    data-btn-ok-class="btn-danger"
+                    data-btn-cancel-label="Cancel"
+                    data-btn-cancel-icon="glyphicon glyphicon-remove"
+                    data-btn-cancel-class="btn-success"
+                    data-title="Are you sure?"
+                    data-popout="true">
+                  Leave Server
+              </a>
+            </div>
+            <div class="col-md-10">
+                <div class="col-md-6">
+                    <span class="section"><p>Server Settings</p></span>
+                    <br>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><a href="#" class="fa fa-wrench st-edit" aria-hidden="true"></a>Server Setting</div>
+                            <div class="panel-body">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><a href="#" class="fa fa-wrench st-edit" aria-hidden="true"></a>Server Setting</div>
+                            <div class="panel-body">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<%- include("parts/footer.ejs") %>
+
+<script type="text/javascript">
+    $('.leave').confirmation({
+      onConfirm: function() {
+          window.location.href = "/guild/<%= guild.id %>/leave";
+      }
+    });
+</script>

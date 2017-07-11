@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <%- include("parts/head.ejs") %>
+        <link href="/extra/style.css" rel="stylesheet" type="text/css">
+        <link href="/images/icon.png" rel="icon" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <title><%= user.username %> – TypicalBot</title>
+    </head>
+    <body>
+        <%- include("parts/nav.ejs", { master, auth, user: auth ? user : null }) %>
+        <div class="page-container container-fluid">
+            <span class="section section-large"><p>Emptiness!</p></span>
+            <p class="text">Hello, <%= user.username %>. There's nothing to display right now, so here's Wumpus.</p>
+            <img src="/images/wumpus.png">
+        </div>
+    </body>
+</html>
+
+<%- include("parts/footer.ejs") %>

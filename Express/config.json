@@ -1,9 +1,0 @@
-{
-    "botToken": "MjkzOTIwMTE4MTcyNDE4MDQ4.DEW2qg.sgCcGc-2NyLnbUPTPqvnDpp-Euo",
-
-    "port": 3000,
-
-    "clientID": "293920118172418048",
-    "clientSecret": "1nG-P4tTQYBTJwgrw7XJ5ti6AqOqQzu7",
-    "redirectUri": "http://192.168.1.9:3000/auth/callback"
-}

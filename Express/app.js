@@ -145,10 +145,6 @@ module.exports = class extends express {
                                                            - - - - - - - - - -
         */
 
-        this.all("/api*", (req, res) => {
-            res.status(401).json({ "message": "Unknown Endpoint or Invalid Method" });
-        });
-
         this.get("/api/bots/:bot/stats", isApplication, (req, res) => {
             const bot = req.params.bot;
 
@@ -162,6 +158,10 @@ module.exports = class extends express {
             });
 
             res.status(200).json({ "guilds": data.guilds });
+        });
+
+        this.all("/api*", (req, res) => {
+            res.status(401).json({ "message": "Unknown Endpoint or Invalid Method" });
         });
 
         /*
@@ -190,6 +190,14 @@ module.exports = class extends express {
 
         this.get("/contact-us", (req, res) => {
             res.render(page("main", "contact-us.ejs"), {
+                master,
+                user: req.user,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        this.get("/user", (req, res) => {
+            res.render(page("main", "user.ejs"), {
                 master,
                 user: req.user,
                 auth: req.isAuthenticated()
@@ -264,31 +272,46 @@ module.exports = class extends express {
                                                            - - - - - - - - - -
         */
 
-        const Perms = Discord.Permissions;
-
-        const userGuilds = user => {
+        function userData(user) {
             return new Promise((resolve, reject) => {
-                if (!user.guilds.length) return resolve({ in: [], not: [] });
+                const guilds = user.guilds;
+                const guildData = [];
 
-                const isin = [], notin = [];
+                guilds.forEach((g, i) => {
+                    master.globalRequest("dashrequest", { guild: g.id, user: user.id }).then(data => {
+                        g.inGuild = data.inGuild; g.permLevel = data.permissions || null;
+                        if (data.inGuild && data.permissions.level >= 2) guildData.push(g);
+                        if (!data.inGuild && new Discord.Permissions(g.permissions).has("MANAGE_GUILD")) guildData.push(g);
 
-                user.guilds.forEach((g, i) => {
-                    master.globalRequest("inguild", { guild: g.id }).then(() => {
-                        master.globalRequest("userlevel", { guild: g.id, user: user.id }).then(data => {
-                            data.permissions.level >= 2 ? isin.push(g) : null;
-
-                            if (i + 1 === user.guilds.length) return resolve({ in: isin, not: notin });
-                        }).catch(() => {
-                            return reject("An error occured.");
-                        });
-                    }).catch(() => {
-                        new Perms(g.permissions).has("MANAGE_GUILD") ? notin.push(g) : null;
-
-                        if (i + 1 === user.guilds.length) return resolve({ in: isin, not: notin });
+                        if (i + 1 === user.guilds.length) setTimeout(() => {
+                            resolve(guildData);
+                        }, 100);
+                    }).catch(err => {
+                        console.error(err);
+                        if (i + 1 === user.guilds.length) return resolve(guildData);
                     });
                 });
+
+                /*
+                const guildData = { in: [], not: [] };
+
+                if (!guilds.length) return resolve(guildData);
+
+                guilds.forEach((g, i) => {
+                    master.globalRequest("dashrequest", { guild: g.id, user: user.id }).then(data => {
+                        if (data.inGuild && data.permissions.level >= 2) guildData.in.push(g);
+                        if (!data.inGuild && new Discord.Permissions(g.permissions).has("MANAGE_GUILD")) guildData.not.push(g);
+
+                        if (i + 1 === user.guilds.length) setTimeout(() => {
+                            resolve(guildData);
+                        }, 100);
+                    }).catch(err => {
+                        console.error(err);
+                        if (i + 1 === user.guilds.length) return resolve(guildData);
+                    });
+                });*/
             });
-        };
+        }
 
         this.get("/dashboard", (req, res) => {
             if (!req.isAuthenticated()) return res.render(page("dashboard", "index.ejs"), {
@@ -297,15 +320,15 @@ module.exports = class extends express {
                 auth: req.isAuthenticated()
             });
 
-            userGuilds(req.user).then(guilds => {
+            userData(req.user).then(guilds => {
                 res.render(page("dashboard", "index.ejs"), {
                     master,
-                    guilds: guilds,
+                    guilds,
                     user: req.user,
                     auth: req.isAuthenticated()
                 });
             }).catch(err => {
-                console.log(err);
+                console.error(err);
                 res.status(500).send("An error occured.");
             });
         });
@@ -336,8 +359,8 @@ module.exports = class extends express {
             }).catch(() => {
                 if (!userInGuild) return res.redirect("/404");
 
-                const userPerms = new Perms(userInGuild.permissions);
-                if (!userPerms.has("MANAGE_GUILD")) return res.status(401).json({ "message": "You do not have permissions to add the bot to that guild." });
+                const userPerms = new Discord.Permissions(userInGuild.permissions);
+                if (!userPerms.has("MANAGE_GUILD")) return res.status(403).json({ "message": "You do not have permissions to add the bot to that guild." });
 
                 res.redirect(botOAuth(config.clientID, guild));
             });
@@ -351,7 +374,7 @@ module.exports = class extends express {
 
             master.globalRequest("inguild", { guild }).then(() => {
                 master.globalRequest("userlevel", { guild, user: req.user.id }).then(data => {
-                    if (data.permissions.level < 2) return res.status(401).json({ "message": "You do not have access to the requested guild." });
+                    if (data.permissions.level < 2) return res.status(403).json({ "message": "You do not have access to the requested guild." });
 
                     master.globalRequest("leaveguild", { guild });
                     res.redirect("/");
@@ -361,8 +384,8 @@ module.exports = class extends express {
             }).catch(() => {
                 if (!userInGuild) return res.redirect("/");
 
-                const userPerms = new Perms(userInGuild.permissions);
-                if (!userPerms.has("MANAGE_GUILD")) return res.status(401).json({ "message": "You do not have permissions to add the bot to that guild." });
+                const userPerms = new Discord.Permissions(userInGuild.permissions);
+                if (!userPerms.has("MANAGE_GUILD")) return res.status(403).json({ "message": "You do not have permissions to add the bot to that guild." });
 
                 res.redirect(botOAuth(config.clientID, guild));
             });
@@ -394,6 +417,9 @@ module.exports = class extends express {
         */
 
         this.use(express.static(`${__dirname}/base/static`));
+        this.use((req, res) => {
+            res.status(404).render(page("main", "404.ejs"), { master, user: req.user, auth: req.isAuthenticated() });
+        });
         this.listen(config.port, () => console.log(`Express Server Created | Listening on Port :${config.port}`));
     }
 };
