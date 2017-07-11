@@ -106,12 +106,22 @@ module.exports = class {
         });
     }
 
+    _update(target, source) {
+        for (const key of Object.keys(source)) {
+            if (source[key] instanceof Object && !(source[key] instanceof Array)) {
+                target[key] = this._update(target[key], source[key]);
+            } else {
+                target[key] = source[key];
+            }
+        }
+
+        return target;
+    }
+
     update(id, object) {
         return new Promise((resolve, reject) => {
             this.client.database.update("guilds", id, object).then(result => {
-                const data = this.data.get(id);
-                Object.assign(data, object);
-                this.data.set(id, data);
+                this.data.set(id, this._update(this.data.get(id), object));
                 return resolve();
             }).catch(err => {
                 return reject(err);

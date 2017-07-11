@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <%- include("../parts/head.ejs") %>
+        <title>Staff Panel – TypicalBot</title>
+    </head>
+	<body>
+        <%- include("../parts/navigation.ejs", { master, auth, user: auth ? user : null }) %>
+
+        <div class="page-container container-fluid">
+            <div class="section">
+                <span class="title"><p>Staff Roles</p></span>
+                <% if (roles.length) { %>
+                    <ul class="roles">
+                        <% roles.forEach(r => { %>
+                            <% let color = rgb(r.hexColor); %>
+                            <li style="background-color: rgba(<%= color.R %>, <%= color.G %>, <%= color.B %>, 0.0980392);
+                                border-color: rgb(<%= color.R %>, <%= color.G %>, <%= color.B %>);
+                                color: rgb(<%= color.R %>, <%= color.G %>, <%= color.B %>)"><%= r.name %></li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p class="text">No roles to display.</p>
+                <% } %>
+            </div>
+            <div class="section">
+                <span class="title"><p>Guild Search</p></span>
+                <form class="search">
+        			<input type="text" name="guildid" placeholder="Guild ID">
+                    <a onclick="this.parentNode.submit()" style="cursor: pointer">Get Guild Information</a>
+        		</form>
+            </div>
+            <div class="section">
+                <span class="title"><p>Shards</p></span>
+                <div class="shards panel panel-default">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-md-1">Shard</th>
+                                <th class="col-md-1">Servers</th>
+                                <th class="col-md-6"></th>
+                                <th class="col-md-2">Uptime</th>
+                                <th class="col-md-1">RethinkDB</th>
+                                <th class="col-md-1">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% master.shards.forEach(s => { %>
+                                <tr>
+                                    <td><%= s.id %></td>
+                                    <td><%= s.stats.guilds ? Number(s.stats.guilds).toLocaleString() : "Unavailable" %></td>
+                                    <td></td>
+                                    <td><%= s.uptime && s.uptime > 20000 ? time(s.uptime) : "Unavailable" %></td>
+                                    <td status="<%= s.mysqlStatus === null ? '2' : s.mysqlStatus === 0 ? '1' : s.mysqlStatus === 1 ? '3' : '2' %>">
+                                        <i class="fa fa-<%= s.mysqlStatus === null ? 'question-circle' : s.mysqlStatus === 0 ? 'check-square' : s.mysqlStatus === 1 ? 'exclamation-triangle' : 'question-circle' %>" aria-hidden="true">
+                                        </i> <%= s.mysqlStatus === null ? 'Unavailable' : s.mysqlStatus === 0 ? 'Connected' : s.mysqlStatus === 1 ? 'Disconnected' : 'Unavailable' %></td>
+                                    <td status="<%= s.status === null ? '2' : s.status === 0 ? '1' : s.status === 1 ? '3' : '2' %>">
+                                        <i class="fa fa-<%= s.status === null ? 'question-circle' : s.status === 0 ? 'check-square' : s.status === 1 ? 'exclamation-triangle' : 'question-circle' %>" aria-hidden="true">
+                                        </i> <%= s.status === null ? 'Unavailable' : s.status === 0 ? 'Active' : s.status === 1 ? 'Unresponsive' : 'Unavailable' %></td>
+                                </tr>
+                            <% }) %>
+                            <!--
+                            <tr>
+                                <td>1</td>
+                                <td><%= Number(1267).toLocaleString() %></td>
+                                <td status="1"><i class="fa fa-check-square" aria-hidden="true"></i> Active</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><%= Number(1442).toLocaleString() %></td>
+                                <td status="3"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Unresponsive</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td></td>
+                                <td status="2"><i class="fa fa-question-circle" aria-hidden="true"></i> Unavailable</td>
+                            </tr>
+                            -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <%- include("../parts/foot.ejs") %>
+	</body>
+</html>

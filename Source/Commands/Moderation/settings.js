@@ -33,7 +33,7 @@ module.exports = class extends Command {
         super(client, filePath, {
             name: "settings",
             description: "Customize your servers setting and enable/discord specific features.",
-            usage: "settings <'view'|'edit'> <setting> <value>",
+            usage: "settings <'list'|'view'|'edit'> [setting] ['add'|'remove'] [value]",
             aliases: ["set"],
             mode: "strict"
         });
@@ -41,13 +41,12 @@ module.exports = class extends Command {
         this.client = client;
     }
 
-    execute(message, response, permissionLevel) {
-        const match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*((?:.|[\r\n])+)?)?/i.exec(message.content);
+    execute(message, response, permissionLevel) {const match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(message.content);
         if (!match) return response.usage(this);
 
         const realPermissionLevel = this.client.permissionsManager.get(message.guild, message.author, true);
 
-        const action = match[1], setting = match[2], value = match[3];
+        const action = match[1], setting = match[2], ar = match[3], value = match[4];
 
         if (action === "edit" && realPermissionLevel.level < 2) return response.perms({ permission: 2 }, realPermissionLevel);
 
@@ -72,20 +71,260 @@ module.exports = class extends Command {
 
                 }
             } else {
-
+                response.send(`**__Currently Set Settings:__**\n\n`);
             }
         } else if (action === "edit") {
-            response.reply("Settings Edit");
+            if (setting && value) {
+                if (setting === "embed") {
+                    if (value === "enable") {
+                        this.client.settingsManager.update(message.guild.id, {
+                            embed: true
+                        }).then(() => response.success("Setting successfully updated."));
+                    } else if (value === "disable") {
+                        this.client.settingsManager.update(message.guild.id, {
+                            embed: false
+                        }).then(() => response.success("Setting successfully updated."));
+                    } else {
+                        response.error("An invalid option was supplied.");
+                    }
+                } else if (setting === "adminrole" || setting === "3") {
+                    if (value === "disable" || value === "clear") {
+                        this.client.settingsManager.update(message.guild.id, { roles: { administrator: [] }}).then(() => response.success("Setting successfully updated."));
+                    } else {
+                        if (ar) {
+                            if (ar === "add") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.error(`The role you specified does not exist.`);
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (currentList.includes(role.id)) return response.error(`The specified role is already included in the list of roles for the administrator permission level.`);
+
+                                currentList.push(role.id);
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        administrator: currentList
+                                    }
+                                }).then(() => response.success("Setting successfully updated."));
+                            } else if (ar === "remove") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.error(`The role you specified does not exist.`);
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (!currentList.includes(role.id)) return response.error(`The specified role is not included in of list of roles for the administrator permission level.`);
+
+                                currentList.splice(currentList.indexOf(role.id));
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        administrator: currentList
+                                    }
+                                }).then(() => response.success("Setting successfully updated."));
+                            }
+                        } else {
+                            const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                            const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                            if (!role) return response.error(`The role you specified does not exist.`);
+
+                            this.client.settingsManager.update(message.guild.id, {
+                                roles: {
+                                    administrator: [ role.id ]
+                                }
+                            }).then(() => response.success("Setting successfully updated."));
+                        }
+                    }
+                } else if (setting === "modrole" || setting === "2") {
+                    if (value === "disable" || value === "clear") {
+                        this.client.settingsManager.update(message.guild.id, { roles: { moderator: [] }}).then(() => response.success("Setting successfully updated."));
+                    } else {
+                        if (ar) {
+                            if (ar === "add") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.error(`The role you specified does not exist.`);
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (currentList.includes(role.id)) return response.error(`The specified role is already included in the list of roles for the administrator permission level.`);
+
+                                currentList.push(role.id);
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        moderator: currentList
+                                    }
+                                }).then(() => response.success("Setting successfully updated."));
+                            } else if (ar === "remove") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.error(`The role you specified does not exist.`);
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (!currentList.includes(role.id)) return response.error(`The specified role is not included in of list of roles for the administrator permission level.`);
+
+                                currentList.splice(currentList.indexOf(role.id));
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        moderator: currentList
+                                    }
+                                }).then(() => response.success("Setting successfully updated."));
+                            }
+                        } else {
+                            const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                            const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                            if (!role) return response.error(`The role you specified does not exist.`);
+
+                            this.client.settingsManager.update(message.guild.id, {
+                                roles: {
+                                    moderator: [ role.id ]
+                                }
+                            }).then(() => response.success("Setting successfully updated."));
+                        }
+                    }
+                } else if (setting === "djrole" || setting === "1") {
+                    if (value === "disable" || value === "clear") {
+                        this.client.settingsManager.update(message.guild.id, { roles: { dj: [] }}).then(() => response.success("Setting successfully updated."));
+                    } else {
+                        if (ar) {
+                            if (ar === "add") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.error(`The role you specified does not exist.`);
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (currentList.includes(role.id)) return response.error(`The specified role is already included in the list of roles for the administrator permission level.`);
+
+                                currentList.push(role.id);
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        dj: currentList
+                                    }
+                                }).then(() => response.success("Setting successfully updated."));
+                            } else if (ar === "remove") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.error(`The role you specified does not exist.`);
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (!currentList.includes(role.id)) return response.error(`The specified role is not included in of list of roles for the administrator permission level.`);
+
+                                currentList.splice(currentList.indexOf(role.id));
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        dj: currentList
+                                    }
+                                }).then(() => response.success("Setting successfully updated."));
+                            }
+                        } else {
+                            const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                            const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                            if (!role) return response.error(`The role you specified does not exist.`);
+
+                            this.client.settingsManager.update(message.guild.id, {
+                                roles: {
+                                    dj: [ role.id ]
+                                }
+                            }).then(() => response.success("Setting successfully updated."));
+                        }
+                    }
+                } else if (setting === "blacklistrole" || setting === "-1") {
+                    if (value === "disable" || value === "clear") {
+                        this.client.settingsManager.update(message.guild.id, { roles: { blacklist: [] }}).then(() => response.success("Setting successfully updated."));
+                    } else {
+                        if (ar) {
+                            if (ar === "add") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.error(`The role you specified does not exist.`);
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (currentList.includes(role.id)) return response.error(`The specified role is already included in the list of roles for the administrator permission level.`);
+
+                                currentList.push(role.id);
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        blacklist: currentList
+                                    }
+                                }).then(() => response.success("Setting successfully updated."));
+                            } else if (ar === "remove") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.error(`The role you specified does not exist.`);
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (!currentList.includes(role.id)) return response.error(`The specified role is not included in of list of roles for the administrator permission level.`);
+
+                                currentList.splice(currentList.indexOf(role.id));
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        blacklist: currentList
+                                    }
+                                }).then(() => response.success("Setting successfully updated."));
+                            }
+                        } else {
+                            const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                            const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                            if (!role) return response.error(`The role you specified does not exist.`);
+
+                            this.client.settingsManager.update(message.guild.id, {
+                                roles: {
+                                    blacklist: [ role.id ]
+                                }
+                            }).then(() => response.success("Setting successfully updated."));
+                        }
+                    }
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                }
+            } else return response.usage(this);
         }
     }
 
     embedExecute(message, response, permissionLevel) {
-        const match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*((?:.|[\r\n])+)?)?/i.exec(message.content);
+        const match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(message.content);
         if (!match) return response.usage(this);
 
         const realPermissionLevel = this.client.permissionsManager.get(message.guild, message.author, true);
 
-        const action = match[1], setting = match[2], value = match[3];
+        const action = match[1], setting = match[2], ar = match[3], value = match[4];
 
         if (action === "edit" && realPermissionLevel.level < 2) return response.perms({ permission: 2 }, realPermissionLevel);
 
@@ -127,7 +366,361 @@ module.exports = class extends Command {
                 embed.send();
             }
         } else if (action === "edit") {
-            response.reply("Settings Edit");
+            if (setting && value) {
+                if (setting === "embed") {
+                    if (value === "enable") {
+                        this.client.settingsManager.update(message.guild.id, {
+                            embed: true
+                        }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                            .setTitle("Success")
+                            .setDescription("Setting successfully updated.")
+                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setTimestamp()
+                            .send()
+                        );
+                    } else if (value === "disable") {
+                        this.client.settingsManager.update(message.guild.id, {
+                            embed: false
+                        }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                            .setTitle("Success")
+                            .setDescription("Setting successfully updated.")
+                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setTimestamp()
+                            .send()
+                        );
+                    } else {
+                        response.buildEmbed()
+                            .setColor(0xFF0000)
+                            .setTitle("Error")
+                            .setDescription(`An invalid option was supplied.`)
+                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setTimestamp()
+                            .send();
+                    }
+                } else if (setting === "adminrole" || setting === "3") {
+                    if (value === "disable" || value === "clear") {
+                        this.client.settingsManager.update(message.guild.id, { roles: { administrator: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
+                            .setTitle("Success")
+                            .setDescription("Setting successfully updated.")
+                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setTimestamp()
+                            .send()
+                        );
+                    } else {
+                        if (ar) {
+                            if (ar === "add") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                currentList.push(role.id);
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        administrator: currentList
+                                    }
+                                }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                    .setTitle("Success")
+                                    .setDescription("Setting successfully updated.")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setTimestamp()
+                                    .send()
+                                );
+                            } else if (ar === "remove") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                currentList.splice(currentList.indexOf(role.id));
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        administrator: currentList
+                                    }
+                                }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                    .setTitle("Success")
+                                    .setDescription("Setting successfully updated.")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setTimestamp()
+                                    .send()
+                                );
+                            }
+                        } else {
+                            const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                            const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The role you specified does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                            this.client.settingsManager.update(message.guild.id, {
+                                roles: {
+                                    administrator: [ role.id ]
+                                }
+                            }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                .setTitle("Success")
+                                .setDescription("Setting successfully updated.")
+                                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                .setTimestamp()
+                                .send()
+                            );
+                        }
+                    }
+                } else if (setting === "modrole" || setting === "2") {
+                    if (value === "disable" || value === "clear") {
+                        this.client.settingsManager.update(message.guild.id, { roles: { moderator: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
+                            .setTitle("Success")
+                            .setDescription("Setting successfully updated.")
+                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setTimestamp()
+                            .send()
+                        );
+                    } else {
+                        if (ar) {
+                            if (ar === "add") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                currentList.push(role.id);
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        moderator: currentList
+                                    }
+                                }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                    .setTitle("Success")
+                                    .setDescription("Setting successfully updated.")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setTimestamp()
+                                    .send()
+                                );
+                            } else if (ar === "remove") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                currentList.splice(currentList.indexOf(role.id));
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        moderator: currentList
+                                    }
+                                }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                    .setTitle("Success")
+                                    .setDescription("Setting successfully updated.")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setTimestamp()
+                                    .send()
+                                );
+                            }
+                        } else {
+                            const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                            const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The role you specified does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                            this.client.settingsManager.update(message.guild.id, {
+                                roles: {
+                                    moderator: [ role.id ]
+                                }
+                            }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                .setTitle("Success")
+                                .setDescription("Setting successfully updated.")
+                                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                .setTimestamp()
+                                .send()
+                            );
+                        }
+                    }
+                } else if (setting === "djrole" || setting === "1") {
+                    if (value === "disable" || value === "clear") {
+                        this.client.settingsManager.update(message.guild.id, { roles: { dj: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
+                            .setTitle("Success")
+                            .setDescription("Setting successfully updated.")
+                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setTimestamp()
+                            .send()
+                        );
+                    } else {
+                        if (ar) {
+                            if (ar === "add") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                currentList.push(role.id);
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        dj: currentList
+                                    }
+                                }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                    .setTitle("Success")
+                                    .setDescription("Setting successfully updated.")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setTimestamp()
+                                    .send()
+                                );
+                            } else if (ar === "remove") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                currentList.splice(currentList.indexOf(role.id));
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        dj: currentList
+                                    }
+                                }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                    .setTitle("Success")
+                                    .setDescription("Setting successfully updated.")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setTimestamp()
+                                    .send()
+                                );
+                            }
+                        } else {
+                            const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                            const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The role you specified does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                            this.client.settingsManager.update(message.guild.id, {
+                                roles: {
+                                    dj: [ role.id ]
+                                }
+                            }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                .setTitle("Success")
+                                .setDescription("Setting successfully updated.")
+                                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                .setTimestamp()
+                                .send()
+                            );
+                        }
+                    }
+                } else if (setting === "blacklistrole" || setting === "-1") {
+                    if (value === "disable" || value === "clear") {
+                        this.client.settingsManager.update(message.guild.id, { roles: { blacklist: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
+                            .setTitle("Success")
+                            .setDescription("Setting successfully updated.")
+                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setTimestamp()
+                            .send()
+                        );
+                    } else {
+                        if (ar) {
+                            if (ar === "add") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                currentList.push(role.id);
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        blacklist: currentList
+                                    }
+                                }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                    .setTitle("Success")
+                                    .setDescription("Setting successfully updated.")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setTimestamp()
+                                    .send()
+                                );
+                            } else if (ar === "remove") {
+                                const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                                const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                const currentList = message.guild.settings.roles.administrator;
+                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                                currentList.splice(currentList.indexOf(role.id));
+
+                                this.client.settingsManager.update(message.guild.id, {
+                                    roles: {
+                                        blacklist: currentList
+                                    }
+                                }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                    .setTitle("Success")
+                                    .setDescription("Setting successfully updated.")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setTimestamp()
+                                    .send()
+                                );
+                            }
+                        } else {
+                            const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
+
+                            const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
+                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The role you specified does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+
+                            this.client.settingsManager.update(message.guild.id, {
+                                roles: {
+                                    blacklist: [ role.id ]
+                                }
+                            }).then(() => response.buildEmbed().setColor(0x00ADFF)
+                                .setTitle("Success")
+                                .setDescription("Setting successfully updated.")
+                                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                .setTimestamp()
+                                .send()
+                            );
+                        }
+                    }
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                } else if (setting === "") {
+
+                }
+            } else return response.usage(this);
         }
     }
 };

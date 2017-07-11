@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+        <%- include("../parts/head.ejs") %>
+        <title>Beta Tester Application – TypicalBot</title>
+	</head>
+	<body>
+		<%- include("../parts/navigation.ejs", { master, auth, user: auth ? user : null }) %>
+
+		<div class="page-container container-fluid">
+            <div class="section">
+				<span class="title"><cetner><p>Beta Tester Application</p></center></span>
+                <form action="beta-tester/form">
+                    <ol>
+                        <li>
+                            <p>Discord Tag</p>
+                            <textarea type="text" name="tag" placeholder="HyperCoder#2975"></textarea>
+                        </li>
+                        <li>
+                            <p>In at least one complete sentence, explain why you would like to be a Beta Tester.</p>
+                            <textarea type="text" name="why" placeholder="cuz testing is kewl"></textarea>
+                        </li>
+                    </ol>
+
+                    <a onclick="this.parentNode.submit()" style="cursor: pointer">Submit Application</a>
+                </form>
+			</div>
+        </div>
+
+		<%- include("../parts/foot.ejs") %>
+	</body>
+</html>

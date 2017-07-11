@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <%- include("../parts/head.ejs") %>
+        <script src="/extra/bootstrap-confirmation.js"></script>
+        <title><%= guild.name %> – TypicalBot</title>
+    </head>
+	<body>
+        <%- include("../parts/navigation.ejs", { master, auth, user: auth ? user : null }) %>
+
+        <div class="page-container container-fluid">
+            <div class="section">
+                <span class="title"><p>Guild Dashboard</p></span>
+                <div class="guild-tab col-md-2">
+                    <img class="icon" src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.jpg?size=1024` : `/images/unknown.png` %>">
+                    <div class="info">
+                        <div class="section"><span class="title"><p><%= guild.name %></p></span></div>
+                        <p class="text"><i class="fa fa-puzzle-piece" aria-hidden="true"></i><span class="text-right">Shard <b><%= guild.shard %></b></span></p>
+                        <p class="text"><i class="fa fa-users" aria-hidden="true"></i><span class="text-right"><b><%= Number(guild.memberCount).toLocaleString() %></b> Members</span></p>
+                        <p class="text"><i class="fa fa-tags" aria-hidden="true"></i><span class="text-right"><b><%= guild.roles.length %></b> Roles</span></p>
+                        <p class="text"><i class="fa fa-microphone" aria-hidden="true"></i><span class="text-right"><b><%= guild.channels.filter(c => c.type === "voice").length %></b> Voice Channels</span></p>
+                        <p class="text"><i class="fa fa-hashtag" aria-hidden="true"></i><span class="text-right"><b><%= guild.channels.filter(c => c.type === "text").length %></b> Text Channels</span></p>
+                        <div class="section"><span class="title"><p data-lower>Owned By <b><%= guild.owner.username %>#<%= guild.owner.discriminator %></p></span></div>
+                    </div>
+                    <a class="leave"
+                        data-btn-ok-label="Continue"
+                        data-btn-ok-icon="glyphicon glyphicon-ok"
+                        data-btn-ok-class="btn-danger"
+                        data-btn-cancel-label="Cancel"
+                        data-btn-cancel-icon="glyphicon glyphicon-remove"
+                        data-btn-cancel-class="btn-success"
+                        data-title="Are you sure?"
+                        data-popout="true">
+                      Leave Server
+                  </a>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-6">
+                        <div class="section">
+                            <span class="title"><p>Guild Settings</p></span>
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><a href="#" class="fa fa-wrench st-edit" aria-hidden="true"></a>Guild Setting</div>
+                                    <div class="panel-body">
+                                        -
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><a href="#" class="fa fa-wrench st-edit" aria-hidden="true"></a>Guild Setting</div>
+                                    <div class="panel-body">
+                                        -
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include("../parts/foot.ejs") %>
+	</body>
+</html>
+
+<script type="text/javascript"> $('.leave').confirmation({ onConfirm: function() { window.location.href = "/dashboard/guild/<%= guild.id %>/leave"; } }); </script>

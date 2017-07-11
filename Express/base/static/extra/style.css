@@ -1,0 +1,324 @@
+.navbar {
+    background-color: #00adff;
+    padding: 0 40px;
+    margin: 0;
+}
+.navbar img {
+    display: inline-block;
+    float: left;
+    margin: 7px 0 7px 7px;
+    height: 36px;
+}
+.navbar .navbar-head {
+    color: white !important;
+    font-family: "Bree Serif", serif;
+    font-size: 20px;
+    line-height: 18px;
+}
+.navbar .navbar-link-list li a {
+    padding-top: 17px;
+    padding-bottom: 13px;
+    font-family: "Poppins", serif;
+    color: white !important;
+    transition: background 0.25s linear !important;
+}
+.navbar .navbar-link-list .open > a {
+    background-color: #007FBB !important;
+}
+.navbar .navbar-link-list li a:hover {
+    background-color: #007FBB !important;
+}
+.navbar .navbar-link-list .dropdown a img {
+    float: left;
+    height: 26px;
+    border-radius: 100%;
+    margin: -3px 10px 0 0;
+}
+.navbar .navbar-link-list .dropdown .dropdown-menu {
+    width: 150px;
+}
+.navbar .navbar-link-list .dropdown .dropdown-menu li a {
+    text-align: right;
+    color: black !important;
+    padding: 3px 20px;
+}
+.navbar .navbar-link-list .dropdown .dropdown-menu li a:hover {
+    color: white !important;
+}
+
+.page-container {
+    padding: 30px 60px;
+    font-family: "Cabin", serif;
+}
+.page-container p,
+.page-container a {
+    font-size: 16px;
+}
+
+.page-container .section {
+    padding-left: 20px;
+    margin-bottom: 40px;
+}
+.page-container .section .title {
+    margin-left: -20px;
+    display: block;
+    padding-left: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.page-container .section .title p {
+    font-size: 20px;
+    position: relative;
+    display: inline-block;
+    font-weight: lighter;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+.page-container .section .title p:before,
+.page-container .section .title p:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: #000;
+}
+.page-container .section .title p:before {
+    right: 100%;
+    margin-right: 15px;
+}
+.page-container .section .title p:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+.page-container .guild-tab .section {
+    margin-bottom: 0;
+}
+.page-container .guild-tab .section span {
+    padding: 0;
+    margin-left: 0;
+    text-align: center;
+}
+.page-container .guild-tab .section p[data-lower] {
+    text-transform: none;
+    font-size: 16px;
+}
+
+.page-container .quote {
+    margin-left: auto;
+    margin-right: auto;
+}
+.page-container .quote .panel-heading {
+    font-size: 15px;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #00adff, #8af9ff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #00adff, #8af9ff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #00adff, #8af9ff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(60deg, #00adff, #8af9ff); /* Standard syntax */
+}
+.page-container .quote .panel-body {
+    font-size: 16px;
+    font-style: italic;
+    word-break: break-all;
+    text-align: center;
+}
+.page-container .quote-sm {
+    font-family: "Architects Daughter";
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -ms-filter: blur(2px);
+    -o-filter: blur(2px);
+    filter: blur(2px);
+    margin-top: 14px;
+    width: 80%;
+}
+.page-container .quote-sm .panel-heading {
+    font-size: 9px;
+}
+.page-container .quote-sm .panel-body {
+    font-size: 10px;
+}
+
+.page-container form ol {
+    list-style-type: upper-roman;
+}
+.page-container form ol li {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.page-container form ol li textarea {
+    font-weight: normal;
+}
+.page-container form ol li textarea {
+    width: 60%;
+    font-size: 16px;
+    padding: 4px;
+    resize: none;
+    overflow-y: hidden;
+}
+.page-container form a {
+    background-color: #00adff;
+    border-radius: 2px;
+    color: white;
+    font-size: 16px;
+    padding: 6px 10px;
+    margin: 10px 0 10px 5px;
+    text-decoration: none;
+    transition: background 0.25s linear !important;
+}
+.page-container form a:hover {
+    background-color: #007FBB;
+}
+
+.page-container .guild-list {
+    list-style: none;
+	padding: 10px 45px;
+    font-size: 18px;
+}
+.page-container .guild-list li {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.page-container .guild-list li a {
+    background-color: #e6e6e6;
+    text-decoration: none;
+    padding: 8px 15px;
+	line-height: 20px;
+	display: inline-block;
+    color: black;
+    border-radius: 4px;
+    transition: all 0.25s linear;
+}
+.page-container .guild-list li a:hover {
+    background-color: #00aaff;
+    color: white;
+}
+.page-container .guild-list li a img {
+	float: left;
+	height: 20px;
+	border-radius: 100%;
+	margin-right: 10px;
+}
+
+.page-container .guild-tab {
+    border-radius: 4px;
+    border: 1px solid #000;
+    padding: 0px;
+}
+.page-container .guild-tab .icon {
+    width: 100%;
+}
+.page-container .guild-tab .info {
+    padding: 8px 15px;
+}
+.page-container .guild-tab .info .section {
+    text-align: center !important;
+    padding: 0;
+}
+.page-container .guild-tab .info .title {
+    font-weight: bold;
+    font-size: 20px !important;
+}
+.page-container .guild-tab .info .text {
+    font-size: 16px;
+}
+.page-container .guild-tab .info .text-right {
+    float: right;
+}
+.page-container .guild-tab .info .text .glyphicon {
+    margin-right: 4px;
+}
+.page-container .guild-tab .leave {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgb(202, 60, 60);;
+    padding: 6px 0;
+    color: white;
+    width: 100%;
+    transition: background 0.25s linear !important;
+}
+.page-container .guild-tab .leave:hover {
+    background-color: red;
+}
+
+.page-container .st-edit {
+    color: white;
+    float: right;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    transition: color 0.25s linear !important;
+    text-decoration: none;
+}
+.page-container .st-edit:hover {
+    color: black;
+}
+.page-container .panel-heading {
+    background-color: #00adff !important;
+    color: white !important;
+}
+
+.page-container .search a {
+    background-color: #333;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    padding: 4px 8px;
+    margin: 10px 0 10px 5px;
+    text-decoration: none;
+    transition: background 0.25s linear !important;
+}
+.page-container .search a:hover {
+    background-color: #00adff;
+}
+.page-container .search input[type=text] {
+    background-image: url(/images/search.png);
+    background-position: 8px 8px;
+    border: 1px solid #00adff;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+    margin: 10px 10px 10px 40px;
+    padding: 8px 18px 8px 40px;
+}
+
+.shards {
+    margin: 0 40px;
+}
+.shards tbody tr td:nth-child(5)[status="1"],
+.shards tbody tr td:nth-child(6)[status="1"] {
+    color: green;
+}
+.shards tbody tr td:nth-child(5)[status="2"],
+.shards tbody tr td:nth-child(6)[status="2"] {
+    color: orange;
+}
+.shards tbody tr td:nth-child(5)[status="3"],
+.shards tbody tr td:nth-child(6)[status="3"] {
+    color: red;
+}
+
+.page-container .roles {
+    list-style-type: none;
+}
+.page-container .roles li {
+    display: inline-block;
+    padding: 1px 6px;
+    border: 1px solid;
+    margin: 0 4px 4px 0;
+    border-radius: 4px;
+}
+
+.footer {
+    margin: 20px 40px 10px 40px;
+    border-top: 1px solid #909090;
+}
+.footer p {
+    text-align: right;
+    margin-top: 10px;
+    color: #909090;
+}

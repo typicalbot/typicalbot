@@ -1,35 +1,31 @@
 const express = require("express");
-const passport = require("passport");
 const session = require("express-session");
-const Strategy = require("passport-discord").Strategy;
+const passport = require("passport");
+const { Strategy } = require("passport-discord");
+const request = require("superagent");
+
+const Discord = require("discord.js");
 
 const url = require("url");
 const path = require("path");
 const bodyParser = require("body-parser");
 
-const Discord = require("discord.js");
-const Perms = Discord.Permissions;
+const config = require("./config");
 
-const page = file => path.resolve(`${__dirname}${path.sep}pages${path.sep}${file}`);
+const page = (directory, fileName) => path.join(__dirname, "base", "pages", directory, fileName);
 
 const botOAuth = (client, guild) => `https://discordapp.com/oauth2/authorize?client_id=${client}&permissions=8&scope=bot&redirect_uri=http://dev.typicalbot.com:3000/&response_type=code&guild_id=${guild}`;
 
-class Webserver extends express {
-    constructor(master, config) {
+module.exports = class extends express {
+    constructor(master) {
         super();
 
         passport.serializeUser((user, done) => { done(null, user); });
         passport.deserializeUser((obj, done) => { done(null, obj); });
 
         passport.use(
-            new Strategy({
-                clientID: config.clientID,
-                clientSecret: config.clientSecret,
-                callbackURL: config.redirectUri,
-                scope: ["identify", "guilds"]
-            }, (accessToken, refreshToken, profile, done) => {
-                process.nextTick(() => done(null, profile));
-            })
+            new Strategy({ clientID: config.clientID, clientSecret: config.clientSecret, callbackURL: config.redirectUri, scope: ["identify", "guilds"] },
+            (accessToken, refreshToken, profile, done) => { process.nextTick(() => done(null, profile)); })
         );
 
         this.use(session({
@@ -44,9 +40,22 @@ class Webserver extends express {
         this.engine("html", require("ejs").renderFile);
         this.set("view engine", "html");
 
-        const isAuthenticated = (req, res, next) => { if (req.isAuthenticated()) return next(); req.session.backURL = req.url; res.redirect("/auth/login"); };
-        const isStaff = (req, res, next) => { if (req.isAuthenticated() && master.staff(req.user.id)) return next(); req.session.backURL = req.url/*originalURL*/; res.redirect("/"); };
-        const isApplication = (req, res, next) => { if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next(); res.status(401).json({ "message": "Unauthorized" }); };
+        function isAuthenticated(req, res, next) {
+            if (req.isAuthenticated()) return next();
+            req.session.backURL = req.url;
+            res.redirect("/auth/login");
+        }
+
+        function isStaff(req, res, next) {
+            if (req.isAuthenticated() && master.staff(req.user.id)) return next();
+            req.session.backURL = req.url;
+            res.redirect("/");
+        }
+
+        function isApplication (req, res, next) {
+            if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next();
+            res.status(401).json({ "message": "Unauthorized" });
+        }
 
         const rgb = (hex) => {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -84,53 +93,6 @@ class Webserver extends express {
         /*
                                                            - - - - - - - - - -
 
-                                                                API
-
-                                                           - - - - - - - - - -
-        */
-
-        this.get("/api/bots/:bot/stats", isApplication, (req, res) => {
-            const bot = req.params.bot;
-
-            if (bot !== "dev") return res.status(400).json({ message: "Unable to fetch requested stats" });
-
-            const data = {};
-            master.shards.forEach(shard => {
-                Object.keys(shard.stats).forEach(key => {
-                    data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key];
-                });
-            });
-
-            res.status(200).json({ "guilds": data.guilds });
-        });
-
-        this.post("/api/channels/:channel/messages", isApplication, (req, res) => {
-            const channel = req.params.channel;
-            const content = req.body.content;
-
-            if (!content) return res.status(400).json({ "message": "Missing Message Content" });
-
-            master.transmit("channelmessage", { channel, content });
-            res.status(200).json({ "message": "OKAY" });
-        });
-
-        this.all("/api*", (req, res) => {
-            res.status(401).json({ "message": "Unknown Endpoint or Invalid Method" });
-        });
-
-        this.get("/message/:channel/:message", isStaff, (req, res) => {
-            const channel = req.params.channel;
-            const content = req.params.message;
-
-            res.render(page("admin.ejs"), {
-                user: req.user,
-                auth: true
-            });
-        });
-
-        /*
-                                                           - - - - - - - - - -
-
                                                                 AUTHENTICATION
 
                                                            - - - - - - - - - -
@@ -151,7 +113,7 @@ class Webserver extends express {
         }, passport.authenticate("discord"));
 
         this.get("/auth/callback", passport.authenticate("discord", {
-            failureRedirect: `/failed`
+            failureRedirect: `/access-denied`
         }), (req, res) => {
             console.log(`${req.user.username} signed in.`);
 
@@ -170,7 +132,6 @@ class Webserver extends express {
 
         this.get("/access-denied", (req, res) => {
             res.render(page("403.ejs"), {
-                master,
                 user: req.user || null,
                 auth: req.isAuthenticated()
             });
@@ -179,10 +140,131 @@ class Webserver extends express {
         /*
                                                            - - - - - - - - - -
 
-                                                                DASHBOARD
+                                                                API
 
                                                            - - - - - - - - - -
         */
+
+        this.all("/api*", (req, res) => {
+            res.status(401).json({ "message": "Unknown Endpoint or Invalid Method" });
+        });
+
+        this.get("/api/bots/:bot/stats", isApplication, (req, res) => {
+            const bot = req.params.bot;
+
+            if (bot !== "dev") return res.status(400).json({ message: "Unable to fetch requested stats" });
+
+            const data = {};
+            master.shards.forEach(shard => {
+                Object.keys(shard.stats).forEach(key => {
+                    data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key];
+                });
+            });
+
+            res.status(200).json({ "guilds": data.guilds });
+        });
+
+        /*
+                                                           - - - - - - - - - -
+
+                                                                MAIN PAGES
+
+                                                           - - - - - - - - - -
+        */
+
+        this.get("/", (req, res) => {
+            res.render(page("main", "index.ejs"), {
+                master,
+                user: req.user,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        this.get("/documentation", (req, res) => {
+            res.render(page("main", "documentation.ejs"), {
+                master,
+                user: req.user,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        this.get("/contact-us", (req, res) => {
+            res.render(page("main", "contact-us.ejs"), {
+                master,
+                user: req.user,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        /*
+                                                           - - - - - - - - - -
+
+                                                                APPLICATIONS PAGES
+
+                                                           - - - - - - - - - -
+        */
+
+        this.get("/applications", (req, res) => {
+            res.render(page("applications", "index.ejs"), {
+                master,
+                user: req.user,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        this.get("/applications/beta-tester", isAuthenticated, (req, res) => {
+            res.render(page("applications", "beta-tester.ejs"), {
+                master,
+                user: req.user,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        const sendData = (user, tag, why) => {
+            request
+                .post(`https://discordapp.com/api/channels/334000451643244564/messages`)
+                .set("Authorization", `Bot ${config.botToken}`)
+                .set("Content-Type", "application/json")
+                .send({ "content": `**${user.username}#${user.discriminator}** (${user.id}) | Tag: “${tag}” | Reason: “${why}”` })
+                .end((err, res) => { if (err) console.error(err); });
+        };
+
+        this.get("/applications/beta-tester/form", isAuthenticated, (req, res) => {
+            const inGuild = req.user.guilds.map(g => g.id ).includes("163038706117115906");
+            if (!inGuild) return res.status(401).json({ "message": "You are not in TypicalBot Lounge." });
+
+            const tag = req.query.tag, why = req.query.why;
+            if (!tag || !why) return res.status(401).json({ "message": "Invalid query options." });
+
+            sendData(req.user, tag, why);
+            res.redirect("/");
+        });
+
+        this.get("/applications/partner", isAuthenticated, (req, res) => {
+            res.render(page("applications", "partner.ejs"), {
+                master,
+                user: req.user,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        this.get("/applications/staff", isAuthenticated, (req, res) => {
+            res.render(page("applications", "staff.ejs"), {
+                master,
+                user: req.user,
+                auth: req.isAuthenticated()
+            });
+        });
+
+        /*
+                                                           - - - - - - - - - -
+
+                                                                APPLICATIONS PAGES
+
+                                                           - - - - - - - - - -
+        */
+
+        const Perms = Discord.Permissions;
 
         const userGuilds = user => {
             return new Promise((resolve, reject) => {
@@ -208,14 +290,15 @@ class Webserver extends express {
             });
         };
 
-        this.get("/", (req, res) => {
-            if (!req.isAuthenticated()) return res.render(page("index.ejs"), {
+        this.get("/dashboard", (req, res) => {
+            if (!req.isAuthenticated()) return res.render(page("dashboard", "index.ejs"), {
                 master,
+                user: req.user,
                 auth: req.isAuthenticated()
             });
 
             userGuilds(req.user).then(guilds => {
-                res.render(page("index.ejs"), {
+                res.render(page("dashboard", "index.ejs"), {
                     master,
                     guilds: guilds,
                     user: req.user,
@@ -227,55 +310,7 @@ class Webserver extends express {
             });
         });
 
-        this.get("/user", isAuthenticated, (req, res) => {
-            res.render(page("user.ejs"), {
-                master,
-                user: req.user,
-                auth: true
-            });
-        });
-
-        this.get("/beta-apply", isAuthenticated, (req, res) => {
-            const inGuild = !!req.user.guilds.filter(g => g.id = "163038706117115906")[0];
-            if (!inGuild) return res.status(401).json({ "message": "You are not in TypicalBot Lounge." });
-
-            res.render(page("beta-apply.ejs"), {
-                master,
-                user: req.user,
-                auth: true
-            });
-        });
-
-        this.get("/beta-apply/form", isAuthenticated, (req, res) => {
-            const inGuild = !!req.user.guilds.filter(g => g.id = "163038706117115906")[0];
-            if (!inGuild) return res.status(401).json({ "message": "You are not in TypicalBot Lounge." });
-
-            const username = req.query.username;
-            const why = req.query.why;
-            if (!username || !why) return res.status(401).json({ "message": "Invalid query options." });
-
-            master.transmit("channelmessage", { "channel": "308348915420364810", "content": `${req.user.username}#${req.user.discriminator} | **Stated Username:** ${username} | **Reason:** ${why}\n\n\u200B` });
-            res.redirect("/");
-        });
-
-        this.get("/staff", isStaff, (req, res) => {
-            if (req.query.guildid) return res.redirect(`/guild/${req.query.guildid}`);
-
-            master.globalRequest("staffposition", { user: req.user.id }).then(data => {
-                res.render(page("staff.ejs"), {
-                    master,
-                    user: req.user,
-                    auth: true,
-                    roles: data.roles,
-                    rgb,
-                    time
-                });
-            }).catch(() => {
-                return res.status(400).json({ "message": "An error occured." });
-            });
-        });
-
-        this.get("/guild/:guild", isAuthenticated, async (req, res) => {
+        this.get("/dashboard/guild/:guild", isAuthenticated, async (req, res) => {
             const guild = req.params.guild;
 
             const userInGuild = req.user.guilds.filter(g => g.id === guild)[0];
@@ -286,7 +321,7 @@ class Webserver extends express {
                     if (data.permissions.level < 2) return res.redirect("/access-denied");
 
                     master.globalRequest("guildinfo", { guild }).then(data => {
-                        res.render(page("guild.ejs"), {
+                        res.render(page("dashboard", "guild.ejs"), {
                             master,
                             guild: data.guild,
                             user: req.user,
@@ -308,7 +343,7 @@ class Webserver extends express {
             });
         });
 
-        this.get("/guild/:guild/leave", isAuthenticated, async (req, res) => {
+        this.get("/dashboard/guild/:guild/leave", isAuthenticated, async (req, res) => {
             const guild = req.params.guild;
 
             const userInGuild = req.user.guilds.filter(g => g.id === guild)[0];
@@ -333,13 +368,32 @@ class Webserver extends express {
             });
         });
 
-        this.use(express.static(`${__dirname}/static`));
-        this.use((req, res) => {
-            if (!req.isAuthenticated()) return res.status(404).render(page("404.ejs"), { master, auth: req.isAuthenticated() });
-            res.status(404).render(page("404.ejs"), { master, user: req.user, auth: req.isAuthenticated() });
-        });
-        this.listen(3000, () => console.log("Listening to port 3000."));
-    }
-}
+        this.get("/dashboard/staff", isStaff, (req, res) => {
+            if (req.query.guildid) return res.redirect(`/dashboard/guild/${req.query.guildid}`);
 
-module.exports = Webserver;
+            master.globalRequest("staffposition", { user: req.user.id }).then(data => {
+                res.render(page("dashboard", "staff.ejs"), {
+                    master,
+                    user: req.user,
+                    auth: true,
+                    roles: data.roles,
+                    rgb,
+                    time
+                });
+            }).catch(() => {
+                return res.status(400).json({ "message": "An error occured." });
+            });
+        });
+
+        /*
+                                                           - - - - - - - - - -
+
+                                                                INIT EXPRESS
+
+                                                           - - - - - - - - - -
+        */
+
+        this.use(express.static(`${__dirname}/base/static`));
+        this.listen(config.port, () => console.log(`Express Server Created | Listening on Port :${config.port}`));
+    }
+};
