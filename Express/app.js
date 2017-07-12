@@ -35,11 +35,7 @@ module.exports = class extends express {
             })
         );
 
-        this.use(session({
-            secret: "typicalbot",
-            resave: false,
-            saveUninitialized: false
-        }));
+        this.use(session({ secret: "typicalbot", resave: false, saveUninitialized: false }));
         this.use(passport.initialize());
         this.use(passport.session());
         this.use(bodyParser.json());
@@ -47,33 +43,13 @@ module.exports = class extends express {
         this.engine("html", require("ejs").renderFile);
         this.set("view engine", "html");
 
-        function isAuthenticated(req, res, next) {
-            if (req.isAuthenticated()) return next();
-            req.session.backURL = req.url;
-            res.redirect("/auth/login");
-        }
+        function isAuthenticated(req, res, next) { if (req.isAuthenticated()) return next(); req.session.backURL = req.url; res.redirect("/auth/login"); }
+        function isStaff(req, res, next) { if (req.isAuthenticated() && master.staff(req.user.id)) return next(); req.session.backURL = req.url; res.redirect("/"); }
+        function isApplication (req, res, next) { if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next(); res.status(401).json({ "message": "Unauthorized" }); }
 
-        function isStaff(req, res, next) {
-            if (req.isAuthenticated() && master.staff(req.user.id)) return next();
-            req.session.backURL = req.url;
-            res.redirect("/");
-        }
+        function rgb(hex) { const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex); return { R: parseInt(result[1], 16), G: parseInt(result[2], 16), B: parseInt(result[3], 16) }; }
 
-        function isApplication (req, res, next) {
-            if (req.headers.authorization && req.headers.authorization === "HyperCoder#2975") return next();
-            res.status(401).json({ "message": "Unauthorized" });
-        }
-
-        const rgb = (hex) => {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return {
-                R: parseInt(result[1], 16),
-                G: parseInt(result[2], 16),
-                B: parseInt(result[3], 16)
-            };
-        };
-
-        const timestamp = (ms) => {
+        function timestamp(ms) {
             const days = ms / 86400000;
             const d = Math.floor(days);
             const hours = (days - d) * 24;
@@ -83,9 +59,9 @@ module.exports = class extends express {
             const seconds = (minutes - m) * 60;
             const s = Math.floor(seconds);
             return { d, h, m, s };
-        };
+        }
 
-        const time = (ms) => {
+        function time(ms) {
             const ts = timestamp(ms);
 
             const d = ts.d > 0 ? ts.d === 1 ? "1 day" : `${ts.d} days` : null;
@@ -95,7 +71,7 @@ module.exports = class extends express {
             const l = [];
             if (d) l.push(d); if (h) l.push(h); if (m) l.push(m); if (s) l.push(s);
             return l.join(", ");
-        };
+        }
 
         /*
                                                            - - - - - - - - - -
@@ -296,13 +272,10 @@ module.exports = class extends express {
         this.get("/dashboard", async (req, res) => {
             if (!req.isAuthenticated()) return res.render(page("dashboard", "index.ejs"), { master, user: req.user, auth: req.isAuthenticated() });
 
-            //const userData = master.donorData.includes(req.user.id) || master.staff(req.user.id) ? await this.database.table("users").get(req.user.id) : null;
-
             fetchUserData(req.user).then(guilds => {
                 res.render(page("dashboard", "index.ejs"), {
                     master,
                     guilds,
-                    //theme: userData ? userData.theme : "blue",
                     user: req.user,
                     auth: req.isAuthenticated()
                 });
@@ -396,9 +369,8 @@ module.exports = class extends express {
         */
 
         this.use(express.static(`${__dirname}/base/static`));
-        this.use((req, res) => {
-            res.status(404).render(page("main", "404.ejs"), { master, user: req.user, auth: req.isAuthenticated() });
-        });
+        this.use((req, res) => { res.status(404).render(page("main", "404.ejs"), { master, user: req.user, auth: req.isAuthenticated() }); });
+        
         this.listen(this.config.port, () => console.log(`Express Server Created | Listening on Port :${this.config.port}`));
     }
 };
