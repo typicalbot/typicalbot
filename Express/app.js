@@ -10,10 +10,8 @@ const path = require("path");
 
 const { Permissions, Collection } = require("discord.js");
 
-const page = (directory, fileName) => path.join(__dirname, "base", "pages", directory, fileName);
-const botOAuth = (client, guild) => `https://discordapp.com/oauth2/authorize?client_id=${client}&permissions=8&scope=bot&redirect_uri=http://dev.typicalbot.com:3000/&response_type=code&guild_id=${guild}`;
-
-const users = new Collection();
+function page(dir, file) { return path.join(__dirname, "base", "pages", dir, file); }
+function OAuth(client, guild) { return `https://discordapp.com/oauth2/authorize?client_id=${client}&permissions=8&scope=bot&redirect_uri=http://dev.typicalbot.com:3000/&response_type=code&guild_id=${guild}`; }
 
 const User = require("./Utility/DashboardUser");
 
@@ -22,16 +20,17 @@ module.exports = class extends express {
         super();
 
         this.config = require("./config");
-
         this.database = require("rethinkdbdash")(this.config.rethinkdb);
 
+        this.users = new Collection();
+
         passport.serializeUser((id, done) => { done(null, id); });
-        passport.deserializeUser((id, done) => { done(null, users.get(id)); });
+        passport.deserializeUser((id, done) => { done(null, this.users.get(id)); });
 
         passport.use(
             new Strategy({ clientID: this.config.clientID, clientSecret: this.config.clientSecret, callbackURL: this.config.redirectUri, scope: ["identify", "guilds"] },
             (accessToken, refreshToken, profile, done) => {
-                users.set(profile.id, new User(profile));
+                this.users.set(profile.id, new User(profile));
                 process.nextTick(() => done(null, profile.id));
             })
         );
@@ -342,7 +341,7 @@ module.exports = class extends express {
                 const userPerms = new Permissions(userInGuild.permissions);
                 if (!userPerms.has("MANAGE_GUILD")) return res.status(403).json({ "message": "You do not have permissions to add the bot to that guild." });
 
-                res.redirect(botOAuth(this.config.clientID, guild));
+                res.redirect(OAuth(this.config.clientID, guild));
             });
         });
 
@@ -367,7 +366,7 @@ module.exports = class extends express {
                 const userPerms = new Permissions(userInGuild.permissions);
                 if (!userPerms.has("MANAGE_GUILD")) return res.status(403).json({ "message": "You do not have permissions to add the bot to that guild." });
 
-                res.redirect(botOAuth(this.config.clientID, guild));
+                res.redirect(OAuth(this.config.clientID, guild));
             });
         });
 
