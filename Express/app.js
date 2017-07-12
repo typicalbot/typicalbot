@@ -29,10 +29,7 @@ module.exports = class extends express {
 
         passport.use(
             new Strategy({ clientID: this.config.clientID, clientSecret: this.config.clientSecret, callbackURL: this.config.redirectUri, scope: ["identify", "guilds"] },
-            (accessToken, refreshToken, profile, done) => {
-                this.users.set(profile.id, new User(profile));
-                process.nextTick(() => done(null, profile.id));
-            })
+            (accessToken, refreshToken, profile, done) => { this.users.set(profile.id, new User(profile)); process.nextTick(() => done(null, profile.id)); })
         );
 
         this.use(session({ secret: "typicalbot", resave: false, saveUninitialized: false }));
@@ -98,8 +95,6 @@ module.exports = class extends express {
         this.get("/auth/callback", passport.authenticate("discord", {
             failureRedirect: `/access-denied`
         }), (req, res) => {
-            console.log(`${req.user.username} signed in.`);
-
             if (req.session.backURL) {
                 res.redirect(req.session.backURL);
                 req.session.backURL = null;
@@ -370,7 +365,7 @@ module.exports = class extends express {
 
         this.use(express.static(`${__dirname}/base/static`));
         this.use((req, res) => { res.status(404).render(page("main", "404.ejs"), { master, user: req.user, auth: req.isAuthenticated() }); });
-        
+
         this.listen(this.config.port, () => console.log(`Express Server Created | Listening on Port :${this.config.port}`));
     }
 };

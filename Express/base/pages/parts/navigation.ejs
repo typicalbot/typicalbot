@@ -15,7 +15,7 @@
         <% if (auth) { %>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png">
+                    <img src="<%= user.avatarURL %>">
                     <%= user.username %> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
