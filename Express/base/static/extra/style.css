@@ -38,7 +38,7 @@
     width: 150px;
 }
 .navbar .navbar-link-list .dropdown .dropdown-menu li a {
-    text-align: right;
+    /* text-align: right; */
     color: black !important;
     padding: 3px 20px;
 }
@@ -193,7 +193,7 @@
     line-height: 56px;
 }
 .page-container .guilds tr td a button {
-    background-color: #333;
+    background-color: #00ADFF;
     color: white;
     padding: 8px 16px;
     border: none;
@@ -201,7 +201,7 @@
     transition: background 0.25s linear !important;
 }
 .page-container .guilds tr td a button:hover {
-    background-color: #00ADFF;
+    background-color: #007FBB;
 }
 
 .page-container .guild-list {
@@ -276,6 +276,21 @@
 .page-container .guild-tab .leave:hover {
     background-color: red;
 }
+
+.page-container .guild-settings thead tr th[data-align-right] { text-align: right; }
+.page-container .guild-settings tbody tr { height: 50px; }
+.page-container .guild-settings tbody tr td { vertical-align: middle; }
+.page-container .guild-settings tbody tr td .value { display: block; margin: 4px 5px 3px 5px; border: 1px solid black; padding: 2px 5px; text-align: right; background-color: white; border-radius: 3px; }
+
+.page-container .guild-settings .switch { position: relative; display: inline-block; width: 45px; height: 25px; margin: 5px 5px 0 5px; float: right; }
+.page-container .guild-settings .switch input { display: none; }
+.page-container .guild-settings .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s; }
+.page-container .guild-settings .slider:before { position: absolute; content: ""; height: 17px; width: 17px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s; }
+.page-container .guild-settings input:checked + .slider { background-color: #2196F3; }
+.page-container .guild-settings input:focus + .slider { box-shadow: 0 0 1px #2196F3; }
+.page-container .guild-settings input:checked + .slider:before { -webkit-transform: translateX(20px); -ms-transform: translateX(20px); transform: translateX(20px); }
+.page-container .guild-settings .slider.round { border-radius: 25px; }
+.page-container .guild-settings .slider.round:before { border-radius: 50%; }
 
 .page-container .search a {
     background-color: #333;

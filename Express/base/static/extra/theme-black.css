@@ -30,8 +30,8 @@ body {
 }
 
 .page-container .guilds tr td a button {
-    background-color: #00ADFF;
+    background-color: #333;
 }
 .page-container .guilds tr td a button:hover {
-    background-color: #333;
+    background-color: #00ADFF;
 }

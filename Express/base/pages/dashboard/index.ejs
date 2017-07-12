@@ -3,7 +3,7 @@
 <html>
     <head>
         <%- include("../parts/head.ejs") %>
-        <link href="/extra/dashboard.css" rel="stylesheet" type="text/css">
+        <!--<link href="/extra/dashboard.css" rel="stylesheet" type="text/css">-->
         <title>Dashboard – TypicalBot</title>
     </head>
 	<body>
@@ -20,14 +20,14 @@
                     <% if (!user.guilds || !user.guilds.length) { %>
                         <p class="text">No servers to display.</p>
                     <% } else { %>
-                        <div class="shards panel panel-default">
+                        <div class="panel panel-default">
                             <table class="guilds table table-striped">
                                 <tbody>
                                     <thead>
                                         <tr>
-                                            <th class="col-md-2">Guild</th>
-                                            <th class="col-md-6">Permission Level</th>
-                                            <th class="col-md-4">Action</th>
+                                            <th class="col-md-8">Guild</th>
+                                            <th class="col-md-2">Permission Level</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

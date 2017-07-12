@@ -2,30 +2,38 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 const { Strategy } = require("passport-discord");
-const request = require("superagent");
-
-const Discord = require("discord.js");
-
-const url = require("url");
-const path = require("path");
 const bodyParser = require("body-parser");
 
-const config = require("./config");
+const request = require("superagent");
+const url = require("url");
+const path = require("path");
+
+const { Permissions, Collection } = require("discord.js");
 
 const page = (directory, fileName) => path.join(__dirname, "base", "pages", directory, fileName);
-
 const botOAuth = (client, guild) => `https://discordapp.com/oauth2/authorize?client_id=${client}&permissions=8&scope=bot&redirect_uri=http://dev.typicalbot.com:3000/&response_type=code&guild_id=${guild}`;
+
+const users = new Collection();
+
+const User = require("./Utility/DashboardUser");
 
 module.exports = class extends express {
     constructor(master) {
         super();
 
-        passport.serializeUser((user, done) => { done(null, user); });
-        passport.deserializeUser((obj, done) => { done(null, obj); });
+        this.config = require("./config");
+
+        this.database = require("rethinkdbdash")(this.config.rethinkdb);
+
+        passport.serializeUser((id, done) => { done(null, id); });
+        passport.deserializeUser((id, done) => { done(null, users.get(id)); });
 
         passport.use(
-            new Strategy({ clientID: config.clientID, clientSecret: config.clientSecret, callbackURL: config.redirectUri, scope: ["identify", "guilds"] },
-            (accessToken, refreshToken, profile, done) => { process.nextTick(() => done(null, profile)); })
+            new Strategy({ clientID: this.config.clientID, clientSecret: this.config.clientSecret, callbackURL: this.config.redirectUri, scope: ["identify", "guilds"] },
+            (accessToken, refreshToken, profile, done) => {
+                users.set(profile.id, new User(profile));
+                process.nextTick(() => done(null, profile.id));
+            })
         );
 
         this.use(session({
@@ -131,7 +139,7 @@ module.exports = class extends express {
         });
 
         this.get("/access-denied", (req, res) => {
-            res.render(page("403.ejs"), {
+            res.render(page("main", "403.ejs"), {
                 user: req.user || null,
                 auth: req.isAuthenticated()
             });
@@ -145,7 +153,7 @@ module.exports = class extends express {
                                                            - - - - - - - - - -
         */
 
-        this.get("/api/bots/:bot/stats", isApplication, (req, res) => {
+        this.get("/api/bots/:bot/stats", /*isApplication, */(req, res) => {
             const bot = req.params.bot;
 
             if (bot !== "dev") return res.status(400).json({ message: "Unable to fetch requested stats" });
@@ -196,14 +204,6 @@ module.exports = class extends express {
             });
         });
 
-        this.get("/user", (req, res) => {
-            res.render(page("main", "user.ejs"), {
-                master,
-                user: req.user,
-                auth: req.isAuthenticated()
-            });
-        });
-
         /*
                                                            - - - - - - - - - -
 
@@ -231,7 +231,7 @@ module.exports = class extends express {
         const sendData = (user, tag, why) => {
             request
                 .post(`https://discordapp.com/api/channels/334000451643244564/messages`)
-                .set("Authorization", `Bot ${config.botToken}`)
+                .set("Authorization", `Bot ${this.config.botToken}`)
                 .set("Content-Type", "application/json")
                 .send({ "content": `**${user.username}#${user.discriminator}** (${user.id}) | Tag: “${tag}” | Reason: “${why}”` })
                 .end((err, res) => { if (err) console.error(err); });
@@ -272,7 +272,7 @@ module.exports = class extends express {
                                                            - - - - - - - - - -
         */
 
-        function userData(user) {
+        function fetchUserData(user) {
             return new Promise((resolve, reject) => {
                 const guilds = user.guilds;
                 const guildData = [];
@@ -281,7 +281,7 @@ module.exports = class extends express {
                     master.globalRequest("dashrequest", { guild: g.id, user: user.id }).then(data => {
                         g.inGuild = data.inGuild; g.permLevel = data.permissions || null;
                         if (data.inGuild && data.permissions.level >= 2) guildData.push(g);
-                        if (!data.inGuild && new Discord.Permissions(g.permissions).has("MANAGE_GUILD")) guildData.push(g);
+                        if (!data.inGuild && new Permissions(g.permissions).has("MANAGE_GUILD")) guildData.push(g);
 
                         if (i + 1 === user.guilds.length) setTimeout(() => {
                             resolve(guildData);
@@ -291,39 +291,19 @@ module.exports = class extends express {
                         if (i + 1 === user.guilds.length) return resolve(guildData);
                     });
                 });
-
-                /*
-                const guildData = { in: [], not: [] };
-
-                if (!guilds.length) return resolve(guildData);
-
-                guilds.forEach((g, i) => {
-                    master.globalRequest("dashrequest", { guild: g.id, user: user.id }).then(data => {
-                        if (data.inGuild && data.permissions.level >= 2) guildData.in.push(g);
-                        if (!data.inGuild && new Discord.Permissions(g.permissions).has("MANAGE_GUILD")) guildData.not.push(g);
-
-                        if (i + 1 === user.guilds.length) setTimeout(() => {
-                            resolve(guildData);
-                        }, 100);
-                    }).catch(err => {
-                        console.error(err);
-                        if (i + 1 === user.guilds.length) return resolve(guildData);
-                    });
-                });*/
             });
         }
 
-        this.get("/dashboard", (req, res) => {
-            if (!req.isAuthenticated()) return res.render(page("dashboard", "index.ejs"), {
-                master,
-                user: req.user,
-                auth: req.isAuthenticated()
-            });
+        this.get("/dashboard", async (req, res) => {
+            if (!req.isAuthenticated()) return res.render(page("dashboard", "index.ejs"), { master, user: req.user, auth: req.isAuthenticated() });
 
-            userData(req.user).then(guilds => {
+            //const userData = master.donorData.includes(req.user.id) || master.staff(req.user.id) ? await this.database.table("users").get(req.user.id) : null;
+
+            fetchUserData(req.user).then(guilds => {
                 res.render(page("dashboard", "index.ejs"), {
                     master,
                     guilds,
+                    //theme: userData ? userData.theme : "blue",
                     user: req.user,
                     auth: req.isAuthenticated()
                 });
@@ -359,10 +339,10 @@ module.exports = class extends express {
             }).catch(() => {
                 if (!userInGuild) return res.redirect("/404");
 
-                const userPerms = new Discord.Permissions(userInGuild.permissions);
+                const userPerms = new Permissions(userInGuild.permissions);
                 if (!userPerms.has("MANAGE_GUILD")) return res.status(403).json({ "message": "You do not have permissions to add the bot to that guild." });
 
-                res.redirect(botOAuth(config.clientID, guild));
+                res.redirect(botOAuth(this.config.clientID, guild));
             });
         });
 
@@ -384,10 +364,10 @@ module.exports = class extends express {
             }).catch(() => {
                 if (!userInGuild) return res.redirect("/");
 
-                const userPerms = new Discord.Permissions(userInGuild.permissions);
+                const userPerms = new Permissions(userInGuild.permissions);
                 if (!userPerms.has("MANAGE_GUILD")) return res.status(403).json({ "message": "You do not have permissions to add the bot to that guild." });
 
-                res.redirect(botOAuth(config.clientID, guild));
+                res.redirect(botOAuth(this.config.clientID, guild));
             });
         });
 
@@ -420,6 +400,6 @@ module.exports = class extends express {
         this.use((req, res) => {
             res.status(404).render(page("main", "404.ejs"), { master, user: req.user, auth: req.isAuthenticated() });
         });
-        this.listen(config.port, () => console.log(`Express Server Created | Listening on Port :${config.port}`));
+        this.listen(this.config.port, () => console.log(`Express Server Created | Listening on Port :${this.config.port}`));
     }
 };

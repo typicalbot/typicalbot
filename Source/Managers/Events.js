@@ -30,7 +30,7 @@ module.exports = class {
         setInterval(() => {
             this.client.user.setGame(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
 
-            if (this.client.vr === "alpha" && this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
+            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
             if (this.client.vr === "dev" && this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
         }, 300000);
     }

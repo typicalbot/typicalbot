@@ -35,6 +35,9 @@ class Shard extends cp.fork {
                 const r = this.master.pendingRequests.get(message.data.id);
                 if (!r) return;
                 r.callback(message);
+            } else if (message.type === "donors") {
+                this.master.donorData = message.data;
+                this.master.transmit(message.type, message.data);
             } else {
                 this.master.transmit(message.type, message.data);
             }
@@ -47,6 +50,8 @@ new class {
         this.shards = new Discord.Collection();
         this.stats = [];
         this.pendingRequests = new Discord.Collection();
+
+        this.donorData = [];
 
         this.webserver = new Webserver(this, config);
 

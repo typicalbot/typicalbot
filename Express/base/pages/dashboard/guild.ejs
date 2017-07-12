@@ -3,7 +3,7 @@
 <html>
     <head>
         <%- include("../parts/head.ejs") %>
-        <link href="/extra/dashboard.css" rel="stylesheet" type="text/css">
+        <!--<link href="/extra/dashboard.css" rel="stylesheet" type="text/css">-->
         <script src="/extra/bootstrap-confirmation.js"></script>
         <title><%= guild.name %> – TypicalBot</title>
     </head>
@@ -40,21 +40,49 @@
                     <div class="col-md-6">
                         <div class="section">
                             <span class="title"><p>Guild Settings</p></span>
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"><a href="#" class="fa fa-wrench st-edit" aria-hidden="true"></a>Guild Setting</div>
-                                    <div class="panel-body">
-                                        -
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"><a href="#" class="fa fa-wrench st-edit" aria-hidden="true"></a>Guild Setting</div>
-                                    <div class="panel-body">
-                                        -
-                                    </div>
-                                </div>
+                            <div class="guild-settings panel panel-default">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-8">Setting</th>
+                                            <th class="col-md-4" data-align-right>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Embed</td>
+                                            <td><label class="switch" checked><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Administrator Roles</td>
+                                            <td><p class="value">None</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Moderator Roles</td>
+                                            <td><p class="value">None</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>DJ Roles</td>
+                                            <td><p class="value">None</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blacklist Roles</td>
+                                            <td><p class="value">None</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Automatic Roles</td>
+                                            <td><p class="value">None</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Automatic Roles Delay</td>
+                                            <td><p class="value">100ms</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Automatic Roles Silent</td>
+                                            <td><label class="switch" checked><input type="checkbox" checked><span class="slider round"></span></label></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
