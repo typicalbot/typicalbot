@@ -113,7 +113,7 @@ module.exports = class {
     }
 
     inviteCheck(text) {
-        return /(discord\.gg\/.+|discordapp\.com\/invite\/.+|discord\.me\/.+)/gi.test(text);
+        return /(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/.+/i.test(text);
     }
 
     fetchAutoRole(guild, settings) {

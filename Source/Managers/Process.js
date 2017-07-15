@@ -48,7 +48,7 @@ module.exports = class {
                 }
             });
         } else if (type === "dashrequest") {
-            if (!this.client.guilds.has(data.guild)) return this.client.transmit("masterrequest", { inGuild: false, id: data.id });
+            if (!this.client.guilds.has(data.guild)) return; // this.client.transmit("masterrequest", { inGuild: false, id: data.id });
 
             const guild = this.client.guilds.get(data.guild);
             guild.settings = await this.client.settingsManager.fetch(data.guild);

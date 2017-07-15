@@ -317,20 +317,16 @@
     padding: 8px 18px 8px 40px;
 }
 
-.shards {
-    margin: 0 40px;
-}
-.shards tbody tr td:nth-child(5)[status="1"],
-.shards tbody tr td:nth-child(6)[status="1"] {
-    color: green;
-}
-.shards tbody tr td:nth-child(5)[status="2"],
-.shards tbody tr td:nth-child(6)[status="2"] {
-    color: orange;
-}
-.shards tbody tr td:nth-child(5)[status="3"],
-.shards tbody tr td:nth-child(6)[status="3"] {
-    color: red;
+.shards { margin: 0 40px; }
+.shards tbody tr td:nth-child(8)[status="1"] { color: green; }
+.shards tbody tr td:nth-child(8)[status="2"] { color: orange; }
+.shards tbody tr td:nth-child(8)[status="3"] { color: red; }
+
+#commandStats{
+    min-width: 40%;
+    max-width: 80%;
+    height: 400px;
+    margin: 0 auto;
 }
 
 .page-container .roles {

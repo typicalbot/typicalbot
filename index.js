@@ -20,14 +20,18 @@ class Shard extends cp.fork {
 
         this.stats = {};
 
+        this.commands = Array(60).fill(0);
+
         this.master = master;
 
         this.status = null;
         this.uptime = null;
 
         this.on("message", message => {
-            if (message.type === "stat") {
+            if (message.type === "stat" || message.type === "stats") {
                 this.master.changeStats(this.id, message.data);
+            } else if (message.type === "commands") {
+                this.commands = message.data.commands;
             } else if (message.type === "status") {
                 this.status = message.data.status;
                 this.uptime = message.data.uptime;
@@ -73,7 +77,7 @@ new class {
         return new Promise((resolve, reject) => {
             const id = Math.random();
 
-            const timeout = setTimeout(() => { this.pendingRequests.delete(id); return reject("Timed Out"); }, 5000);
+            const timeout = setTimeout(() => { this.pendingRequests.delete(id); return reject("Timed Out"); }, 100);
 
             const callback = (response) => {
                 clearTimeout(timeout);

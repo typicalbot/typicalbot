@@ -39,51 +39,111 @@
                         <thead>
                             <tr>
                                 <th class="col-md-1">Shard</th>
-                                <th class="col-md-1">Servers</th>
-                                <th class="col-md-6"></th>
+                                <th class="col-md-4"></th>
+                                <th class="col-md-1">Guilds</th>
+                                <th class="col-md-1">Channels</th>
+                                <th class="col-md-1">Voice Connections</th>
+                                <th class="col-md-1">Users</th>
                                 <th class="col-md-2">Uptime</th>
-                                <th class="col-md-1">RethinkDB</th>
                                 <th class="col-md-1">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% master.shards.forEach(s => { %>
+                                <% console.log(s); %>
                                 <tr>
                                     <td><%= s.id %></td>
-                                    <td><%= s.stats.guilds ? Number(s.stats.guilds).toLocaleString() : "Unavailable" %></td>
                                     <td></td>
+                                    <td><%= s.stats.guilds ? Number(s.stats.guilds).toLocaleString() : "Unavailable" %></td>
+                                    <td><%= s.stats.channels ? Number(s.stats.channels).toLocaleString() : "Unavailable" %></td>
+                                    <td><%= String(s.stats.voiceConnections) ? Number(s.stats.voiceConnections).toLocaleString() : "Unavailable" %></td>
+                                    <td><%= s.stats.users ? Number(s.stats.users).toLocaleString() : "Unavailable" %></td>
                                     <td><%= s.uptime && s.uptime > 20000 ? time(s.uptime) : "Unavailable" %></td>
-                                    <td status="<%= s.mysqlStatus === null ? '2' : s.mysqlStatus === 0 ? '1' : s.mysqlStatus === 1 ? '3' : '2' %>">
-                                        <i class="fa fa-<%= s.mysqlStatus === null ? 'question-circle' : s.mysqlStatus === 0 ? 'check-square' : s.mysqlStatus === 1 ? 'exclamation-triangle' : 'question-circle' %>" aria-hidden="true">
-                                        </i> <%= s.mysqlStatus === null ? 'Unavailable' : s.mysqlStatus === 0 ? 'Connected' : s.mysqlStatus === 1 ? 'Disconnected' : 'Unavailable' %></td>
                                     <td status="<%= s.status === null ? '2' : s.status === 0 ? '1' : s.status === 1 ? '3' : '2' %>">
                                         <i class="fa fa-<%= s.status === null ? 'question-circle' : s.status === 0 ? 'check-square' : s.status === 1 ? 'exclamation-triangle' : 'question-circle' %>" aria-hidden="true">
                                         </i> <%= s.status === null ? 'Unavailable' : s.status === 0 ? 'Active' : s.status === 1 ? 'Unresponsive' : 'Unavailable' %></td>
                                 </tr>
                             <% }) %>
-                            <!--
-                            <tr>
-                                <td>1</td>
-                                <td><%= Number(1267).toLocaleString() %></td>
-                                <td status="1"><i class="fa fa-check-square" aria-hidden="true"></i> Active</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><%= Number(1442).toLocaleString() %></td>
-                                <td status="3"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Unresponsive</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td></td>
-                                <td status="2"><i class="fa fa-question-circle" aria-hidden="true"></i> Unavailable</td>
-                            </tr>
-                            -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
+        <div id="commandStats"></div>
+
         <%- include("../parts/foot.ejs") %>
 	</body>
 </html>
+
+<script>$(".shards td:contains('Unavailable')").css("color", "orange").text(" Unavailable").prepend('<i class="fa fa-question-circle" aria-hidden="true">');</script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script>
+	let now = new Date();
+	let commandStats = Highcharts.chart('commandStats', {
+		chart: {
+			events: {
+				load: requestData
+			}
+		},
+
+		title: {
+			text: "Command Statistics"
+		},
+
+		credits: {
+			enabled: false
+		},
+
+		xAxis: {
+			type: 'datetime'
+		},
+
+		yAxis: {
+			title: {
+				text: null
+			},
+			allowDecimals: false
+		},
+
+		plotOptions: {
+			series: {
+				pointStart: now.setHours(now.getHours() - 1),
+				pointInterval: 60 * 1000
+			}
+		},
+
+		series: [
+            <% master.shards.forEach((s, i) => { %>
+                { name: 'Shard <%= s.id %>', data: [<%= s.commands || Array(60).fill(0) %>], color: `#${Math.floor(Math.random()*16777215).toString(16)}` }<%= i + 1 === master.shards.length ? "" : "," %>
+            <% }) %>
+		],
+
+		navigation: {
+			buttonOptions: {
+				enabled: false
+			}
+		}
+
+	});
+
+	function requestData() {
+		$.ajax({
+			url: '/api/bots/dev/stats',
+			success: function(data) {
+                data.shards.forEach((s, i) => {
+                    let series = commandStats.series[i];
+        			let shift = series.data.length > 60;
+
+                    commandStats.series[i].addPoint(s.commands, true, shift);
+                });
+
+				setTimeout(requestData, 60000);
+			},
+			cache: false
+		});
+	}
+</script>

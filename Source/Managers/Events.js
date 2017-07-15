@@ -11,7 +11,7 @@ module.exports = class {
 
     onceReady() {
         this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
-        this.client.transmitStat("guilds");
+        this.client.transmitStats();
         this.client.user.setGame(`Client Starting`);
         this.client.functions.transmitStatus();
         this.client.transmit("transmitDonors");
@@ -25,6 +25,7 @@ module.exports = class {
             if (!this.client.functions.checkTester(g)) g.leave();
         }), 10000);
 
+        setInterval(() => this.client.transmit("commands", { "commands": this.client.commandsStats }), 1000 * 25);
         setInterval(() => this.client.functions.transmitStatus(), 20000);
 
         setInterval(() => {
@@ -75,6 +76,8 @@ module.exports = class {
 
             const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
             if (command.permission < 7 && (userPermissions.level === 7 || userPermissions.level === 8) && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
+
+            this.client.commandsStats[this.client.commandsStats.length - 1]++;
 
             settings.embed && command.embedExecute ?
                 command.embedExecute(message, response, userPermissions) :
@@ -312,11 +315,11 @@ module.exports = class {
 
         if (this.client.vr === "stable") this.client.functions.postStats("b");
 
-        this.client.transmitStat("guilds");
+        this.client.transmitStats();
     }
 
     guildDelete(guild) {
-        this.client.transmitStat("guilds");
+        this.client.transmitStats();
         this.client.settingsManager.delete(guild.id);
     }
 };

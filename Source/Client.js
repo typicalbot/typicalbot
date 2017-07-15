@@ -49,6 +49,8 @@ const client = new class extends Discord.Client {
 
         this.lastMessage = null;
 
+        this.commandsStats = Array(60).fill(0);
+
         this.streams = new Collection();
 
         this.banCache = new Collection();
@@ -72,6 +74,11 @@ const client = new class extends Discord.Client {
 
         if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 
+        this.setInterval(() => {
+            this.commandsStats.shift();
+            this.commandsStats.push(0);
+        }, 60000);
+
 /*
         setInterval(() => {
             if (this.settingsManager.connection.state === "disconnected") this.settingsManager.connection.connect();
@@ -94,6 +101,15 @@ const client = new class extends Discord.Client {
 
     transmitStat(stat) {
         this.transmit("stat", { [stat]: this[stat].size });
+    }
+
+    transmitStats() {
+        this.transmit("stats", {
+            guilds: this.guilds.size,
+            channels: this.channels.size,
+            voiceConnections: this.voiceConnections.size,
+            users: this.users.size
+        });
     }
 
     reload(input) {

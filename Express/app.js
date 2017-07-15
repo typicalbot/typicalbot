@@ -130,12 +130,18 @@ module.exports = class extends express {
 
             const data = {};
             master.shards.forEach(shard => {
+                const obj = {};
                 Object.keys(shard.stats).forEach(key => {
                     data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key];
+
+                    if (!data.shards) data.shards = {};
+
+                    Object.assign(obj, { [key]: shard.stats[key] });
                 });
+                data.shards ? data.shards[shard.id] = obj : data.shards = { [shard.id]: obj };
             });
 
-            res.status(200).json({ "guilds": data.guilds });
+            res.status(200).json(data);
         });
 
         this.all("/api*", (req, res) => {
@@ -242,7 +248,7 @@ module.exports = class extends express {
                                                            - - - - - - - - - -
         */
 
-        function fetchUserData(user) {
+        async function fetchUserData(user) {
             return new Promise((resolve, reject) => {
                 const guilds = user.guilds;
                 const guildData = [];
@@ -250,15 +256,19 @@ module.exports = class extends express {
                 guilds.forEach((g, i) => {
                     master.globalRequest("dashrequest", { guild: g.id, user: user.id }).then(data => {
                         g.inGuild = data.inGuild; g.permLevel = data.permissions || null;
-                        if (data.inGuild && data.permissions.level >= 2) guildData.push(g);
-                        if (!data.inGuild && new Permissions(g.permissions).has("MANAGE_GUILD")) guildData.push(g);
+                        if (data.permissions.level >= 2) guildData.push(g);
 
                         if (i + 1 === user.guilds.length) setTimeout(() => {
                             resolve(guildData);
                         }, 100);
-                    }).catch(err => {
-                        console.error(err);
-                        if (i + 1 === user.guilds.length) return resolve(guildData);
+                    }).catch(() => {
+                        g.inGuild = false;
+
+                        if (new Permissions(g.permissions).has("MANAGE_GUILD")) guildData.push(g);
+
+                        if (i + 1 === user.guilds.length) setTimeout(() => {
+                            resolve(guildData);
+                        }, 100);
                     });
                 });
             });
