@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+	<head>
+        <%- include("../parts/head.ejs") %>
+        <title>Home – TypicalBot</title>
+	</head>
+	<body>
+		<%- include("../parts/navigation.ejs", { master, auth, user: auth ? user : null }) %>
+
+		<div class="page-container container-fluid">
+            <div class="section">
+				<span class="title"><p>TypicalBot Documentation</p></span>
+				<h2 style="text-align: center;">TypicalBot Documentation</h2>
+	            <br>
+	            <ul class="nav nav-tabs">
+	                <li class="active"><a href="#fun" data-toggle="tab">Fun</a></li>
+	                <li class=""><a href="#pictures" data-toggle="tab">Pictures</a></li>
+	                <li class=""><a href="#moderation" data-toggle="tab">Moderation</a></li>
+	                <li class=""><a href="#utility" data-toggle="tab">Utility</a></li>
+	                <li class=""><a href="#typicalbot" data-toggle="tab">TypicalBot</a></li>
+	                <li class=""><a href="#help" data-toggle="tab">Help</a></li>
+	                <li class="pull-right"><a href="#settings" data-toggle="tab">Settings Documentation</a></li>
+	                <li class="pull-right"><a href="#pub-roles" data-toggle="tab">Public Roles</a></li>
+	            </ul>
+	            <div class="tab-content">
+	                <div class="tab-pane fade in active container-fluid" id="fun">
+	                    <table class="table">
+	                        <thead>
+	                            <tr>
+	                                <th class="col-md-2">Command</th>
+	                                <th class="col-md-1">Alias(es)</th>
+	                                <th class="col-md-4">Usage</th>
+	                                <th class="col-md-5">Description</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr>
+	                                <td>$8ball</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$8ball <code id="input">&lt;question&gt;</code></li>
+	                                </ul></td>
+	                                <td>Gives you a prediction to your question.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$cookie</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$cookie</li>
+	                                    <li>$cookie <code id="input">&lt;@user&gt;</code></li>
+	                                </ul></td>
+	                                <td>Give a cookie to another member or hoard them for yourself.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$dice</td>
+	                                <td><ul>
+	                                    <li>$roll</li>
+	                                </ul></td>
+	                                <td><ul>
+	                                    <li>$dice</li>
+	                                    <li>$dice <code id="input">&lt;number&gt;</code></li>
+	                                </ul></td>
+	                                <td>Rolls a number on a dice from 1 to the amount you put. Defaulted to 6.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$hug</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$hug</li>
+	                                    <li>$hug <code id="input">&lt;@user&gt;</code></li>
+	                                </ul></td>
+	                                <td>Give either yourself or another member a hug.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$joke</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$joke</li>
+	                                </ul></td>
+	                                <td>Gives you a random and possibly funny joke.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$punch</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$punch</li>
+	                                    <li>$punch <code id="input">&lt;@user&gt;</code></li>
+	                                </ul></td>
+	                                <td>Punch yourself or another member.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$quote</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$quote</li>
+	                                </ul></td>
+	                                <td>Gives you a random quote.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$shoot</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$shoot</li>
+	                                    <li>$shoot <code id="input">&lt;@user&gt;</code></li>
+	                                </ul></td>
+	                                <td>Shoot at yourself or at another member.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$slap</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$slap</li>
+	                                    <li>$slap <code id="input">&lt;@user&gt;</code></li>
+	                                </ul></td>
+	                                <td>Slap yourself or another member.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$stab</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$stab</li>
+	                                    <li>$stab <code id="input">&lt;@user&gt;</code></li>
+	                                </ul></td>
+	                                <td>Stab yourself or another member.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$toast</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$toast</li>
+	                                    <li>$toast <code id="input">&lt;@user&gt;</code></li>
+	                                </ul></td>
+	                                <td>Give yourself or another member some toast.</td>
+	                            </tr>
+	                            <tr>
+	                                <td>$yomomma</td>
+	                                <td></td>
+	                                <td><ul>
+	                                    <li>$yomomma</li>
+	                                </ul></td>
+	                                <td>Gives you a random and possibly funny yomomma joke.</td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	            </div>
+			</div>
+		</div>
+
+		<%- include("../parts/foot.ejs") %>
+	</body>
+</html>
