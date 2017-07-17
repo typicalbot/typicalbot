@@ -1,4 +1,5 @@
-const MessageEmbed = require("discord.js").MessageEmbed;
+const { MessageEmbed } = require("discord.js");
+
 const types = {
     warn: { color: 0xFFFF00, action: "Warn" },
     vmute: { color: 0xFF9900, action: "Voice Mute" },

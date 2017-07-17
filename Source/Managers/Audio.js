@@ -1,4 +1,4 @@
-const Stream = require("../Structures/Stream");
+const Stream = require("../structures/Stream");
 
 module.exports = class {
     constructor(client) {

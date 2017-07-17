@@ -68,13 +68,6 @@ module.exports = class {
         return true;
     }
 
-    transmitStatus() {
-        this.client.transmit("status", {
-            "status": this.client.status === Discord.Constants.Status.READY ? 0 : 1,
-            "uptime": this.client.uptime
-        });
-    }
-
     convertTime(ms) {
         const days = ms / 86400000;
         const absoluteDays = Math.floor(days);

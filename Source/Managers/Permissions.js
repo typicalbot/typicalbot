@@ -28,7 +28,7 @@ module.exports = class {
             "7" : new PermissionLevel(7, "TypicalBot Staff", (guild, id) => this.client.config.staff[id]),
             "8" : new PermissionLevel(8, "TypicalBot Development Helper", (guild, id) => id === client.config.devhelp),
             "9" : new PermissionLevel(9, "TypicalBot Management", (guild, id) => this.client.config.management[id]),
-            "10" : new PermissionLevel(10, "TypicalBot Creator", (guild, id) => id === client.config.owner),
+            "10" : new PermissionLevel(10, "TypicalBot Creator", (guild, id) => id === client.config.creator),
 
         };
     }

@@ -1,6 +1,6 @@
 const klaw = require("klaw");
 const path = require("path");
-const commandsPath = path.join(__dirname, "..", "Commands");
+const commandsPath = path.join(__dirname, "..", "commands");
 
 module.exports = class {
     constructor(client) {

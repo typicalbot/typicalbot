@@ -1,4 +1,4 @@
-const Command = require("../../Structures/Command.js");
+const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -8,8 +8,6 @@ module.exports = class extends Command {
             usage: "play <video-name|url>",
             mode: "lite"
         });
-
-        this.client = client;
     }
 
     execute(message, response, permissionLevel) {

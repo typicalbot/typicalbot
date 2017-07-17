@@ -1,5 +1,5 @@
-const Command = require("../../Structures/Command.js");
-const MessageEmbed = require("discord.js").MessageEmbed;
+const Command = require("../../structures/Command");
+const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
 module.exports = class extends Command {
@@ -10,8 +10,6 @@ module.exports = class extends Command {
             usage: "serverinfo ['bots'|'channels']",
             mode: "strict"
         });
-
-        this.client = client;
     }
 
     execute(message, response, permissionLevel) {

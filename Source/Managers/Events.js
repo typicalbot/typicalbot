@@ -1,44 +1,37 @@
-const Discord = require("discord.js");
-const Response = require("../Structures/Response");
+const { Collection } = require("discord.js");
+const Response = require("../structures/Response");
 const util = require("util");
 
 module.exports = class {
     constructor(client) {
         this.client = client;
 
-        this.mentionRegex;
+        this.mentionRegex = new RegExp(`^<@!?${this.client.config.id}>$`);
     }
 
-    onceReady() {
+    ready() {
         this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
+        this.client.user.setGame(`Client Started`);
         this.client.transmitStats();
-        this.client.user.setGame(`Client Starting`);
-        this.client.functions.transmitStatus();
         this.client.transmit("transmitDonors");
         this.client.transmit("transmitTesters");
 
-        if (this.client.vr === "alpha") setTimeout(() => this.client.guilds.forEach(g => {
-            if (!this.client.functions.checkDonor(g)) g.leave();
-        }), 10000);
+        setTimeout(() => {
+            if (this.client.build === "alpha") this.client.guilds.forEach(g => { if (!this.client.functions.checkDonor(g)) g.leave(); });
+            if (this.client.build === "development") this.client.guilds.forEach(g => { if (!this.client.functions.checkTester(g)) g.leave(); });
+        }, 1000 * 60);
 
-        if (this.client.vr === "dev") setTimeout(() => this.client.guilds.forEach(g => {
-            if (!this.client.functions.checkTester(g)) g.leave();
-        }), 10000);
-
-        setInterval(() => this.client.transmit("commands", { "commands": this.client.commandsStats }), 1000 * 25);
-        setInterval(() => this.client.functions.transmitStatus(), 20000);
+        setInterval(() => this.client.transmitStats(), 1000 * 30);
 
         setInterval(() => {
             this.client.user.setGame(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
 
             if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
-            if (this.client.vr === "dev" && this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
-        }, 300000);
+            if (this.client.build === "dev" && this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
+        }, 1000 * 60 * 5);
     }
 
     async message(message) {
-        if (!this.mentionRegex) this.mentionRegex = new RegExp(`^<@!?${this.client.user.id}>$`);
-
         if (message.author.bot) return;
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
@@ -172,7 +165,7 @@ module.exports = class {
         const guild = member.guild;
 
         const bans = await guild.fetchBans().catch(() => console.log("Missing Permissions"));
-        if (bans instanceof require("discord.js").Collection && bans.has(member.id)) return;
+        if (bans instanceof Collection && bans.has(member.id)) return;
 
         const settings = await this.client.settingsManager.fetch(guild.id);
         if (!settings.logs.id || settings.logs.leave === "--disabled") return;
@@ -302,24 +295,23 @@ module.exports = class {
     }
 
     guildCreate(guild) {
-        if (this.client.vr === "dev") {
+        if (this.client.build === "dev") {
             const check = this.client.functions.checkTester(guild);
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
         }
-        if (this.client.vr === "alpha") {
+        if (this.client.build === "alpha") {
             const check = this.client.functions.checkDonor(guild);
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
         }
 
-        if (this.client.vr === "stable") this.client.functions.postStats("b");
+        if (this.client.build === "stable") this.client.functions.postStats("b");
 
         this.client.transmitStats();
     }
 
     guildDelete(guild) {
         this.client.transmitStats();
-        this.client.settingsManager.delete(guild.id);
     }
 };

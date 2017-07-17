@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const Collection = Discord.Collection;
+const { Collection } = Collection;
 
 module.exports = class {
     constructor(client) {

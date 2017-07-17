@@ -1,4 +1,4 @@
-const Command = require("../../Structures/Command.js");
+const Command = require("../../structures/Command");
 const util = require("util");
 
 module.exports = class extends Command {
@@ -8,8 +8,6 @@ module.exports = class extends Command {
             mode: "strict",
             permission: 10
         });
-
-        this.client = client;
     }
 
     execute(message, response, permissionLevel) {

@@ -1,20 +1,17 @@
-const cp            = require("child_process");
-const pathModule    = require("path");
-const vr            = require("./version").version;
-const config        = require(`./Configs/${vr}`);
-const Discord       = require("discord.js");
-const request       = require("superagent");
+const { fork } = require("child_process");
+const { build } = require("./package");
+const config = require(`./configs/${build}`);
+const Discord = require("discord.js");
+const request = require("superagent");
 
 const SHARD_COUNT   = config.shards;
 const CLIENT_TOKEN  = config.token;
 
-const Webserver     = require("./Express/app");
+const Webserver     = require("./express/app");
 
-const path          = pathModule.join(__dirname, `Source`, `client.js`);
-
-class Shard extends cp.fork {
+class Shard extends fork {
     constructor(master, id) {
-        super(path, [], { env: { SHARD_ID: id, SHARD_COUNT, CLIENT_TOKEN, CLIENT_VR: vr } });
+        super(`${__dirname}/source/client.js`, [], { env: { SHARD_ID: id, SHARD_COUNT, CLIENT_TOKEN, CLIENT_BUILD: build } });
 
         this.id = id;
 
@@ -64,7 +61,7 @@ new class {
 
     staff(userid) {
         if (
-            userid === config.owner ||
+            userid === config.creator ||
             config.management[userid] ||
             userid === config.devhelp ||
             config.staff[userid] ||

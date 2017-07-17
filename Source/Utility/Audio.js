@@ -2,8 +2,8 @@ const ytdl = require("ytdl-core");
 const SYS = require("simple-youtube-stream");
 const sys = new SYS();
 
-const vr = require("../../version").version;
-const apiKey = require(`../../Configs/${vr}`).youtubekey;
+const { build } = require("../../package");
+const apiKey = require(`../../configs/${build}`).youtubekey;
 
 const YAPI = require("simple-youtube-api");
 const TBYT = new YAPI(apiKey);

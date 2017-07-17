@@ -1,4 +1,4 @@
-const Command = require("../../Structures/Command.js");
+const Command = require("../../structures/Command");
 
 const settingsList = {
     "embed": "Embed responses from TypicalBot.",
@@ -37,8 +37,6 @@ module.exports = class extends Command {
             aliases: ["set"],
             mode: "strict"
         });
-
-        this.client = client;
     }
 
     execute(message, response, permissionLevel) {const match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(message.content);

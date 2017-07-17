@@ -1,6 +1,6 @@
 const rt = require("rethinkdbdash");
-const vr = require("../../version").version;
-const options = require(`../../Configs/${vr}`).rethinkdb;
+const { build } = require("../../package");
+const options = require(`../../configs/${build}`).rethinkdb;
 
 module.exports = class {
     constructor() {

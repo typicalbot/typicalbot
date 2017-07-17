@@ -1,16 +1,14 @@
-const Command = require("../../Structures/Command.js");
+const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
     constructor(client, filePath) {
         super(client, filePath, {
             name: "kick",
             description: "Kick a member from the server.",
-            usage: "kick <@user>",
+            usage: "kick <@user> [reason]",
             mode: "strict",
             permission: 2
         });
-
-        this.client = client;
     }
 
     async execute(message, response, permissionLevel) {

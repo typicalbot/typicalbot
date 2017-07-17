@@ -1,29 +1,28 @@
-require("./Extenders");
+require("./utility/Extenders");
 
-const Discord = require("discord.js");
-const Collection = Discord.Collection;
+const { Client, Collection, Constants } = require("discord.js");
 
-const ProcessManager = require("./Managers/Process");
+const ProcessManager = require("./managers/Process");
 
-let Database = require("./Managers/Database");
+let Database = require("./managers/Database");
 
-let EventsManager = require("./Managers/Events");
-let CommandsManager = require("./Managers/Commands");
-let SettingsManager = require("./Managers/Settings");
-let PermissionsManager = require("./Managers/Permissions");
-let ModlogsManager = require("./Managers/ModerationLogs");
-let AudioManager = require("./Managers/Audio");
+let EventsManager = require("./managers/Events");
+let CommandsManager = require("./managers/Commands");
+let SettingsManager = require("./managers/Settings");
+let PermissionsManager = require("./managers/Permissions");
+let ModlogsManager = require("./managers/ModerationLogs");
+let AudioManager = require("./managers/Audio");
 
-let Functions = require("./Utility/Functions");
-let AutoModeration = require("./Utility/AutoModeration");
-let AudioUtility = require("./Utility/Audio");
+let Functions = require("./utility/Functions");
+let AutoModeration = require("./utility/AutoModeration");
+let AudioUtility = require("./utility/Audio");
 
-const client = new class extends Discord.Client {
+const client = new class extends Client {
     constructor() {
         super({ messageCacheMaxSize: 150 });
 
-        this.vr = process.env.CLIENT_VR;
-        this.config = require(`../Configs/${this.vr}`);
+        this.build = process.env.CLIENT_BUILD;
+        this.config = require(`../configs/${this.build}`);
 
         this.shardID = +process.env.SHARD_ID;
         this.shardNumber = +process.env.SHARD_ID + 1;
@@ -57,7 +56,7 @@ const client = new class extends Discord.Client {
         this.unbanCache = new Collection();
         this.softbanCache = new Collection();
 
-        this.once("ready", () => this.eventsManager.onceReady())
+        this.once("ready", () => this.eventsManager.ready())
         //.on("debug", debug => console.log(debug.replace(this.token, "REDACTED")))
         .on("warn", err => this.log(err, true))
         .on("error", err => this.log(err, true))
@@ -74,10 +73,7 @@ const client = new class extends Discord.Client {
 
         if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 
-        this.setInterval(() => {
-            this.commandsStats.shift();
-            this.commandsStats.push(0);
-        }, 60000);
+        this.setInterval(() => { this.commandsStats.shift(); this.commandsStats.push(0); }, 60000);
 
 /*
         setInterval(() => {
@@ -109,6 +105,10 @@ const client = new class extends Discord.Client {
             channels: this.channels.size,
             voiceConnections: this.voiceConnections.size,
             users: this.users.size
+        });
+        this.transmit("status", {
+            "status": this.status === Constants.Status.READY ? 0 : 1,
+            "uptime": this.uptime
         });
     }
 

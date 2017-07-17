@@ -84,61 +84,25 @@
 <script>
 	let now = new Date();
 	let commandStats = Highcharts.chart('commandStats', {
-		chart: {
-			events: {
-				load: requestData
-			}
-		},
-
-		title: {
-			text: "Command Statistics"
-		},
-
-		credits: {
-			enabled: false
-		},
-
-		xAxis: {
-			type: 'datetime'
-		},
-
-		yAxis: {
-			title: {
-				text: null
-			},
-			allowDecimals: false
-		},
-
-		plotOptions: {
-			series: {
-				pointStart: now.setHours(now.getHours() - 1),
-				pointInterval: 60 * 1000
-			}
-		},
-
-		series: [
-            <% master.shards.forEach((s, i) => { %>
-                { name: 'Shard <%= s.id %>', data: [<%= s.commands || Array(60).fill(0) %>], color: `#${Math.floor(Math.random()*16777215).toString(16)}` }<%= i + 1 === master.shards.length ? "" : "," %>
-            <% }) %>
-		],
-
-		navigation: {
-			buttonOptions: {
-				enabled: false
-			}
-		}
-
+		chart: { events: { load: requestData } },
+		title: { text: "Command Statistics" },
+		credits: { enabled: false },
+        xAxis: { type: 'datetime' },
+        yAxis: { title: { text: null }, allowDecimals: false },
+        plotOptions: { series: { pointStart: now.setHours(now.getHours() - 1), pointInterval: 60 * 1000 } },
+        navigation: { buttonOptions: { enabled: false } },
+        series: [ <% master.shards.forEach((s, i) => { %> { name: 'Shard <%= s.id %>', data: [<%= s.commands || Array(60).fill(0) %>], color: `#${Math.floor(Math.random()*16777215).toString(16)}` }<%= i + 1 === master.shards.length ? "" : "," %> <% }) %> ]
 	});
 
 	function requestData() {
 		$.ajax({
 			url: '/api/bots/dev/stats',
 			success: function(data) {
-                data.shards.forEach((s, i) => {
-                    let series = commandStats.series[i];
+                Object.keys(data.shards).forEach(s => {
+                    let series = commandStats.series[s];
         			let shift = series.data.length > 60;
 
-                    commandStats.series[i].addPoint(s.commands, true, shift);
+                    commandStats.series[s].addPoint(data.shards[s].commands, true, shift);
                 });
 
 				setTimeout(requestData, 60000);
