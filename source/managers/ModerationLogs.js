@@ -2,13 +2,24 @@ const { MessageEmbed } = require("discord.js");
 
 const types = {
     warn: { color: 0xFFFF00, action: "Warn" },
-    vmute: { color: 0xFF9900, action: "Voice Mute" },
+
+    purge: { color: 0xFFFF00, action: "Message Purge" },
+
+    tempmute: { color: 0xFF9900, action: "Temporary Mute" },
     mute: { color: 0xFF9900, action: "Mute" },
+
+    tempvmute: { color: 0xFF9900, action: "Temporary Voice Mute" },
+    vmute: { color: 0xFF9900, action: "Voice Mute" },
+
     kick: { color: 0xFF3300, action: "Kick" },
     vkick: { color: 0xFF3300, action: "Voice Kick" },
+
+    softban: { color: 0xFF2F00, action: "Softban" },
+
+    tempban: { color: 0xFF0000, action: "Temporary Ban" },
     ban: { color: 0xFF0000, action: "Ban" },
-    unban: { color: 0x006699, action: "Unban" },
-    softban: { color: 0xFF2F00, action: "Softban" }
+
+    unban: { color: 0x006699, action: "Unban" }
 };
 
 const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*User:\*\*\s.+/gi };

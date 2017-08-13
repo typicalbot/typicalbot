@@ -102,7 +102,7 @@
                     let series = commandStats.series[s];
         			let shift = series.data.length > 60;
 
-                    commandStats.series[s].addPoint(data.shards[s].commands, true, shift);
+                    commandStats.series[s].addPoint(data.shards[s].commands[data.shards[s].commands.length -1], true, shift);
                 });
 
 				setTimeout(requestData, 60000);

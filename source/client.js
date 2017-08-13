@@ -71,7 +71,7 @@ const client = new class extends Client {
         .on("guildCreate", (guild) => this.eventsManager.guildCreate(guild))
         .on("guildDelete", (guild) => this.eventsManager.guildDelete(guild));
 
-        if (this.vr === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
+        if (this.build === "stable") setInterval(() => this.functions.sendStats("c"), 1200000);
 
         this.setInterval(() => { this.commandsStats.shift(); this.commandsStats.push(0); }, 60000);
 
@@ -109,6 +109,9 @@ const client = new class extends Client {
         this.transmit("status", {
             "status": this.status === Constants.Status.READY ? 0 : 1,
             "uptime": this.uptime
+        });
+        this.transmit("commands", {
+            "commands": this.commands
         });
     }
 
