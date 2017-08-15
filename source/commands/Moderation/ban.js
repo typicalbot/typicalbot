@@ -20,7 +20,7 @@ module.exports = class extends Command {
             if (!member) return response.error(`User not found.`);
 
             if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot ban a user with either the same or higher highest role.`);
-            if (!member.bannable) return response.error(`I cannot kick that user.`);
+            if (!member.bannable) return response.error(`I cannot ban that user.`);
 
             member.ban().then(async () =>  {
                 if (message.guild.settings.modlogs) {
