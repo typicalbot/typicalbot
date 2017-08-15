@@ -12,32 +12,32 @@ module.exports = class extends Command {
     }
 
     async execute(message, response, permissionLevel) {
-        const match = /kick\s+(?:<@!?)?(\d+)>?(?:\s+(.+))?/i.exec(message.content);
+        const match = /ban\s+(?:<@!?)?(\d+)>?(?:\s+(.+))?/i.exec(message.content);
         if (!match) return response.usage(this);
 
         this.client.fetchUser(match[1]).then(user => {
             const member = message.guild.member(user);
             if (!member) return response.error(`User not found.`);
 
-            if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);
-            if (!member.kickable) return response.error(`I cannot kick that user.`);
+            if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot ban a user with either the same or higher highest role.`);
+            if (!member.bannable) return response.error(`I cannot kick that user.`);
 
-            member.kick().then(async () =>  {
+            member.ban().then(async () =>  {
                 if (message.guild.settings.modlogs) {
                     const _case = await this.client.modlogsManager.createLog(message.guild,
                         match[2] ? {
-                            action: "kick",
+                            action: "ban",
                             user: member.user,
                             reason: match[2],
                             moderator: message.author
                         } : {
-                            action: "kick",
+                            action: "ban",
                             user: member.user,
                             moderator: message.author
                         }
                     );
-                    response.success(`Successfully kicked user \`${member.user.tag}\` and created case #${_case}${match[2] ? ` with reason \`${match[2]}\`` : ""}.`);
-                } else return response.success(`Successfully kicked user \`${member.user.tag}\`.`);
+                    response.success(`Successfully banned user \`${member.user.tag}\` and created case #${_case}${match[2] ? ` with reason \`${match[2]}\`` : ""}.`);
+                } else return response.success(`Successfully banned user \`${member.user.tag}\`.`);
             }).catch(err => response.error(`An error occured:\n\n${err}`));
         }).catch(err => response.error(`An error occured:\n\n${err}`));
     }
