@@ -35,7 +35,7 @@ class Stream {
                 );
             });
         }).catch(err => {
-            video.response.error(`An error occured fetching information for the requested song.`);
+            video.response.error(`An error occured fetching information for the requested song.${video.response.message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
         });
     }
 
