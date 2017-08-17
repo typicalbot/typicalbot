@@ -12,10 +12,12 @@ module.exports = class extends Command {
     execute(message, response, permissionLevel) {
         const user = message.mentions.users.first();
 
-        const r_addition = Math.floor(Math.random() * 9);
-        const addition = r_addition === 1 ? `Someone call the police!` : r_addition === 3 ? "Wait! They missed!" : r_addition === 5 ? "Bam! Headshot!" : null;
+        const randomAddonNum = Math.random();
+        const randomAddon = randomAddonNum <= 0.1 ? " Someone call the police!" :
+            randomAddonNum <= 0.2 && randomAddonNum > 0.1 ? " Wait! They missed!" :
+            randomAddonNum <= 0.3 && randomAddonNum > 0.2 ? " Bam! Headshot!" : null;
 
-        if (!user || user.id === message.author.id) return response.send(`${message.author} just shot at themselves! :scream:${addition ? ` ${addition}` : ""}`);
-        response.send(`${message.author} just shot at ${user}! :scream:${addition ? ` ${addition}` : ""}`);
+        if (!user || user.id === message.author.id) return response.send(`${message.author} just shot at themselves! :scream:${randomAddon || ""}`);
+        response.send(`${message.author} just shot at ${user}! :scream:${randomAddon || ""}`);
     }
 };
