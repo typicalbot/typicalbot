@@ -24,6 +24,24 @@ module.exports = class extends Command {
                 const resp = res.body.list[0];
                 if(!resp) return response.error(`No matches for the query **"${query}"**.`);
 
+                response.reply(`**__${query}:__** ${resp.definition}`);
+            });
+    }
+
+    embedExecute(message, response, permissionLevel) {
+        const args  = /urban (.*)/gi.exec(message.content);
+        if (!args) return response.usage(this);
+
+        const query = args[1];
+       
+        request
+            .get(`http://api.urbandictionary.com/v0/define?term=${query}`)
+            .end((err, res) => {
+                if(err) return response.error("An error occured while trying to complete this request");
+
+                const resp = res.body.list[0];
+                if(!resp) return response.error(`No matches for the query **"${query}"**.`);
+
                 message.channel.buildEmbed()
                     .setColor(0x00adff)
                     .setTitle(query)
