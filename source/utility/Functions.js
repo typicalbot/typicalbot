@@ -68,15 +68,12 @@ module.exports = class {
         return true;
     }
 
-    convertTime(ms) {
-        const days = ms / 86400000;
-        const absoluteDays = Math.floor(days);
-        const hours = (days - absoluteDays) * 24;
-        const absoluteHours = Math.floor(hours);
-        const minutes = (hours - absoluteHours) * 60;
-        const absoluteMinutes = Math.floor(minutes);
-        const seconds = (minutes - absoluteMinutes) * 60;
-        const absoluteSeconds = Math.floor(seconds);
+    convertTime(t) {
+        const ms = parseInt((t)%1000);
+        const absoluteSeconds = parseInt((t/(1000))%60);
+        const absoluteMinutes = parseInt((t/(1000*60))%60);
+        const absoluteHours = parseInt((t/(1000*60*60))%24);
+        const absoluteDays = parseInt((t/(1000*60*60*24)));
 
         const d = absoluteDays > 0 ? absoluteDays === 1 ? "1 day" : `${absoluteDays} days` : null;
         const h = absoluteHours > 0 ? absoluteHours === 1 ? "1 hour" : `${absoluteHours} hours` : null;
