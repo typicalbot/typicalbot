@@ -18,7 +18,7 @@ module.exports = class {
 
     reload(filePath) {
         delete require.cache[filePath];
-        const command = new (require(filePath))(this.client);
+        const command = new (require(filePath))(this.client, filePath);
         this.data.set(command.name, command);
     }
 
