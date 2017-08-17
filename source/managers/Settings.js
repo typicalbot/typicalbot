@@ -1,14 +1,10 @@
 const { Collection } = require("discord.js");
 
-const DefaultData = 1;
-
 module.exports = class {
     constructor(client) {
         this.client = client;
 
         this.data = new Collection();
-
-        this.default = DefaultData;
     }
 
     _defaultData(id) {
