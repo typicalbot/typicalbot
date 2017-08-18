@@ -11,7 +11,7 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        const args  = /urban (.*)/gi.exec(message.content);
+        const args = /urban (.*)/gi.exec(message.content);
         if (!args) return response.usage(this);
 
         const query = args[1];
@@ -19,17 +19,17 @@ module.exports = class extends Command {
         request
             .get(`http://api.urbandictionary.com/v0/define?term=${query}`)
             .end((err, res) => {
-                if(err) return response.error("An error occured while trying to complete this request");
+                if (err) return response.error("An error occured while trying to complete this request");
 
                 const resp = res.body.list[0];
-                if(!resp) return response.error(`No matches for the query **${query}**.`);
+                if (!resp) return response.error(`No matches for the query **${query}**.`);
 
                 response.reply(`**__${query}:__** ${resp.definition}`);
             });
     }
 
     embedExecute(message, response, permissionLevel) {
-        const args  = /urban (.*)/gi.exec(message.content);
+        const args = /urban (.*)/gi.exec(message.content);
         if (!args) return response.usage(this);
 
         const query = args[1];
@@ -37,20 +37,32 @@ module.exports = class extends Command {
         request
             .get(`http://api.urbandictionary.com/v0/define?term=${query}`)
             .end((err, res) => {
-                if(err) return response.error("An error occured while trying to complete this request");
+                if (err) return response.error("An error occured while trying to complete this request");
 
                 const resp = res.body.list[0];
-                if(!resp) return response.error(`No matches for the query **${query}**.`);
+                if (!resp) return response.error(`No matches for the query **${query}**.`);
 
-                message.channel.buildEmbed()
-                    .setColor(0x00adff)
-                    .setTitle(query)
-                    .setURL(resp.permalink)
-                    .addField(`Definition 1 out of ${res.body.list.length}`, `\n\u200B    ${resp.definition}`)
-                    .addField("Rating", `\u200B    \\👍  ${resp.thumbs_up}    |    \\👎  ${resp.thumbs_down}    |    ${Math.round((resp.thumbs_up/(resp.thumbs_up + resp.thumbs_down))*100)}% of ${resp.thumbs_up + resp.thumbs_down} like this definition.`)
-                    .setThumbnail("http://i.imgur.com/CcIZZsa.png")
-                    .setFooter("Urban Dictionary Defintion")
-                    .send();
+                if (isNaN(Math.round((resp.thumbs_up / (resp.thumbs_up + resp.thumbs_down)) * 100))) {
+                    return message.channel.buildEmbed()
+                        .setColor(0x00adff)
+                        .setTitle(query)
+                        .setURL(resp.permalink)
+                        .addField(`Definition 1 out of ${res.body.list.length}`, `\n\u200B    ${resp.definition}`)
+                        .addField("Rating", `\u200B    \\👍  ${resp.thumbs_up}    |    \\👎  ${resp.thumbs_down}`)
+                        .setThumbnail("http://i.imgur.com/CcIZZsa.png")
+                        .setFooter("Urban Dictionary Defintion")
+                        .send();
+                } else {
+                    return message.channel.buildEmbed()
+                        .setColor(0x00adff)
+                        .setTitle(query)
+                        .setURL(resp.permalink)
+                        .addField(`Definition 1 out of ${res.body.list.length}`, `\n\u200B    ${resp.definition}`)
+                        .addField("Rating", `\u200B    \\👍  ${resp.thumbs_up}    |    \\👎  ${resp.thumbs_down}    |    ${Math.round((resp.thumbs_up / (resp.thumbs_up + resp.thumbs_down)) * 100)}% of ${resp.thumbs_up + resp.thumbs_down} like this definition.`)
+                        .setThumbnail("http://i.imgur.com/CcIZZsa.png")
+                        .setFooter("Urban Dictionary Defintion")
+                        .send();
+                }
             });
     }
 };
