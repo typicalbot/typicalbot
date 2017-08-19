@@ -15,7 +15,7 @@ module.exports = class extends Command {
             .end((err, res) => {
                 if (err) return response.error("An error occured making that request.");
 
-                return response.send(res.body.response);
+                return response.send(JSON.parse(res.text).response);
             });
     }
 };

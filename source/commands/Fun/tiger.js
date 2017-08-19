@@ -15,7 +15,16 @@ module.exports = class extends Command {
             .end((err, res) => {
                 if (err) return response.error("An error occured making that request.");
 
-                return response.send(res.body.response);
+                return response.send(JSON.parse(res.text).response);
+            });
+    }
+
+    embedExecute(message, response, permissionLevel) {
+        request.get("https://typicalbot.com/api/tiger/")
+            .end((err, res) => {
+                if (err) return response.error("An error occured making that request.");
+
+                return response.buildEmbed().setColor(0x00adff).setImage(JSON.parse(res.text).response).send();
             });
     }
 };
