@@ -1,2 +1,3 @@
+node_modules/*
 configs/*
-Express/config.json
+express/config.json
