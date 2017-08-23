@@ -26,7 +26,7 @@ module.exports = class extends Command {
         if (!list.size) return response.reply(`There are no matches for the query **${query}**.`);
 
         const content = this.client.functions.pagify(
-            list.map(m => m.nickname ? `${this.client.functions.lengthen(1, m.user.name, 30)} : ${m.nickname}` : m.user.username),
+            list.map(m => m.nickname ? `${this.client.functions.lengthen(1, m.user.username, 30)} : ${m.nickname}` : m.user.username),
             page
         );
 
