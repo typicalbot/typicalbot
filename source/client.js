@@ -123,12 +123,12 @@ const client = new class extends Client {
         const all = input === "all";
 
         if (mod === "database") {
-            delete require.cache[`${__dirname}/Managers/Database.js`];
-            Database = require("./Managers/Database");
+            delete require.cache[`${__dirname}/managers/Database.js`];
+            Database = require("./managers/Database");
             this.database = new Database();
         } else if (all || mod === "events") {
-            delete require.cache[`${__dirname}/Managers/Events.js`];
-            EventsManager = require("./Managers/Events");
+            delete require.cache[`${__dirname}/managers/Events.js`];
+            EventsManager = require("./managers/Events");
             this.eventsManager = new EventsManager(this);
         } else if (mod === "commands") {
             const command = match[2];
@@ -138,38 +138,38 @@ const client = new class extends Client {
                     if (!cmd) return; this.commandsManager.reload(cmd.path);
                 });
             } else {
-                delete require.cache[`${__dirname}/Managers/Commands.js`];
-                CommandsManager = require("./Managers/Commands");
+                delete require.cache[`${__dirname}/managers/Commands.js`];
+                CommandsManager = require("./managers/Commands");
                 this.commandsManager = new CommandsManager(this);
             }
         } else if (mod === "settings") {
-            delete require.cache[`${__dirname}/Managers/Settings.js`];
-            SettingsManager = require("./Managers/Settings");
+            delete require.cache[`${__dirname}/managers/Settings.js`];
+            SettingsManager = require("./managers/Settings");
             this.settingsManager = new SettingsManager(this);
         } else if (all || mod === "permissions") {
-            delete require.cache[`${__dirname}/Managers/Permissions.js`];
-            PermissionsManager = require("./Managers/Permissions");
+            delete require.cache[`${__dirname}/managers/Permissions.js`];
+            PermissionsManager = require("./managers/Permissions");
             this.permissionsManager = new PermissionsManager(this);
         } else if (all || mod === "modlogs") {
-            delete require.cache[`${__dirname}/Managers/ModerationLogs.js`];
-            ModlogsManager = require("./Managers/ModerationLogs");
+            delete require.cache[`${__dirname}/managers/ModerationLogs.js`];
+            ModlogsManager = require("./managers/ModerationLogs");
             this.modlogsManager = new ModlogsManager(this);
         } else if (all || mod === "audio") {
-            delete require.cache[`${__dirname}/Managers/Audio.js`];
+            delete require.cache[`${__dirname}/managers/Audio.js`];
             delete require.cache[`${__dirname}/Structures/Stream.js`];
-            AudioManager = require("./Managers/Audio");
+            AudioManager = require("./managers/Audio");
             this.audioManager = new AudioManager(this);
         } else if (all || mod === "functions") {
-            delete require.cache[`${__dirname}/Utility/Functions.js`];
-            Functions = require("./Utility/Functions");
+            delete require.cache[`${__dirname}/utility/Functions.js`];
+            Functions = require("./utility/Functions");
             this.functions = new Functions(this);
         } else if (all || mod === "automod") {
-            delete require.cache[`${__dirname}/Utility/AudoModeration.js`];
-            AutoModeration = require("./Utility/AutoModeration");
+            delete require.cache[`${__dirname}/utility/AudoModeration.js`];
+            AutoModeration = require("./utility/AutoModeration");
             this.automod = new AutoModeration(this);
         } else if (all || mod === "audioutility") {
-            delete require.cache[`${__dirname}/Utility/Audio.js`];
-            AudioUtility = require("./Utility/Audio");
+            delete require.cache[`${__dirname}/utility/Audio.js`];
+            AudioUtility = require("./utility/Audio");
             this.audioUtility = new AudioUtility(this);
         }
     }
