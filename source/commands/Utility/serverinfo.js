@@ -13,8 +13,8 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        const match = /serverinfo\s+(.+)/i.exec(message.content);
-        const option = match ? match[1] : null;
+        const args = /serverinfo\s+(.+)/i.exec(message.content);
+        const option = args ? args[1] : null;
 
         const guildOwner = message.guild.member(message.guild.ownerID);
 
@@ -56,7 +56,6 @@ module.exports = class extends Command {
             .addField("» Emojis", message.guild.emojis.size, true)
             .setThumbnail(message.guild.iconURL({ "format": "png", "size": 2048 }) || null)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp()
             .send();
     }
 };
