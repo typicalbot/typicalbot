@@ -120,6 +120,28 @@ module.exports = class {
         return null;
     }
 
+    resolveMember(message, args) {
+        return new Promise(async (resolve, reject) => {
+            if (!args) return resolve(message.member);
+
+            const id = args[1];
+            const username = args[2], discriminator = args[3];
+
+            if (id) {
+                const member = await message.guild.fetchMember(id);
+                return resolve(member || message.member);
+            } else if (username && discriminator) {
+                const memberList = await message.guild.fetchMembers({ "query": username });
+                if (!memberList) return resolve(message.member);
+
+                const member = memberList.find(m => m.user.discriminator === discriminator);
+                return resolve(member || message.member);
+            } else {
+                return resolve(message.member);
+            }
+        });
+    }
+
     formatMessage(type, guild, user, content, options = {}) {
         const member = guild.member(user);
 
