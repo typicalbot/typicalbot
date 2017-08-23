@@ -7,56 +7,58 @@ module.exports = class extends Command {
         super(client, filePath, {
             name: "userinfo",
             description: "Displays a user's information.",
-            usage: "userinfo",
-            mode: "strict"
+            usage: "userinfo [@user|user-id|user-tag]",
+            mode: "lite"
         });
     }
 
-    execute(message, response, permissionLevel) {
-        const match = /serverinfo\s+(.+)/i.exec(message.content);
-        const option = match ? match[1] : null;
+    async execute(message, response, permissionLevel) {
+        const args = /userinfo\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i.exec(message.content);
 
-        const guildOwner = message.guild.member(message.guild.ownerID);
+        const member = await this.client.functions.resolveMember(message, args);
+        const user = member.user;
 
-        if (!option) return response.reply(
-            `**__Server Information For:__** ${message.guild.name}\n`
+        response.reply(
+            `**__User Information:__** ${message.guild.name}\n`
             + `\`\`\`\n`
-            + `Name                : ${message.guild.name} (${message.guild.id})\n`
-            + `Owner               : ${guildOwner.user.username}#${guildOwner.user.discriminator} (${guildOwner.user.id})\n`
-            + `Created             : ${moment(message.guild.createdAt).format("dddd MMMM Do, YYYY, hh:mm A")}\n`
-            + `Region              : ${message.guild.region}\n`
-            + `Verification Level  : ${message.guild.verificationLevel}\n`
-            + `Icon                : ${message.guild.iconURL({ "format": "png", "size": 2048 }) || "None"}\n`
-            + `Channels            : ${message.guild.channels.size}\n`
-            + `Members             : ${message.guild.memberCount}\n`
-            + `Roles               : ${message.guild.roles.size}\n`
-            + `Emojis              : ${message.guild.emojis.size}\n`
+            + `Tag                 : ${user.tag}\n`
+            + `ID                  : ${user.id}\n`
+            + (user.avatarURL() ? `Avatar              : ${user.avatarURL("png", 2048)}\n` : "")
+            + `Joined Discord      : ${moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A")}\n`
+            + `Status              : ${user.presence.status}\n`
+            + (user.presence.game ? `Playing             : ${user.presence.game.name}\n` : "")
+            + (member.nickname ? `Nickname            : ${member.nickname}\n` : "")
+            + (member.roles.size > 1 ? `Roles               : ${member.roles.array().filter(r => r.position !== 0).sort((a,b) => b.position - a.position).map(r => r.name).join(", ")}\n` : "")
+            + `Joined Server       : ${member.joinedAt}\n`
             + `\`\`\``
         );
     }
 
-    embedExecute(message, response, permissionLevel) {
-        const match = /serverinfo\s+(.+)/i.exec(message.content);
-        const option = match ? match[1] : null;
+    async embedExecute(message, response, permissionLevel) {
+        const args = /userinfo\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i.exec(message.content);
 
-        const guildOwner = message.guild.member(message.guild.ownerID).user;
+        const member = await this.client.functions.resolveMember(message, args);
+        const user = member.user;
 
-        if (!option) return response.buildEmbed()
+        const embed = response.buildEmbed()
             .setColor(0x00ADFF)
-            .setTitle(`Server Information`)
-            .addField("» Name", message.guild.name, true)
-            .addField("» ID", message.guild.id, true)
-            .addField("» Owner", `${guildOwner.tag}\n${guildOwner.id}`, true)
-            .addField("» Created", `${moment(message.guild.createdAt).format("dddd MMMM Do, YYYY")}\n${moment(message.guild.createdAt).format("hh:mm A")}`, true)
-            .addField("» Region", message.guild.region.toUpperCase(), true)
-            .addField("» Verification Level", message.guild.verificationLevel, true)
-            .addField("» Channels", message.guild.channels.size, true)
-            .addField("» Members", message.guild.memberCount, true)
-            .addField("» Roles", message.guild.roles.size, true)
-            .addField("» Emojis", message.guild.emojis.size, true)
-            .setThumbnail(message.guild.iconURL({ "format": "png", "size": 2048 }) || null)
+            .setTitle("User Information")
+            .addField("» Tag", user.tag, true)
+            .addField("» ID", user.id, true);
+
+        if (user.avatarURL()) embed.setThumbnail(user.avatarURL("png", 2048));
+
+        embed
+            .addField("» Joined Discord", moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"), true)
+            .addField("» Status", user.presence.status, true);
+
+        if (user.presence.game) embed.addField("» Playing", user.presence.game.name, true);
+        if (member.nickname) embed.addField("» Nickname", member.nickname, true);
+        if (member.roles.size > 1) embed.addField("» Roles", `${member.roles.filterArray(r => r.position !== 0).sort((a,b) => b.position - a.position).map(r => r.name).join(", ")}\n`, true);
+
+        embed
+            .addField("» Joined Server", moment(member.joinedAt).format("MMM DD, YYYY @ hh:mm A"), true)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
-            .setTimestamp()
             .send();
     }
 };
