@@ -120,33 +120,25 @@ module.exports = class {
         return null;
     }
 
-    resolveMember(message, args) {
-        return new Promise(async (resolve, reject) => {
-            if (!args) return resolve(message.member);
+    async resolveMember(message, [ match, id, username, discriminator ]) {
+        if (id) {
+            const user = await this.client.fetchUser(id).catch(err => { console.error(err); });
+            if (!user) return message.member;
 
-            const id = args[1];
-            const username = args[2], discriminator = args[3];
+            const member = await message.guild.fetchMember(user).catch(err => { console.error(err); });
+            if (!member) return message.member;
 
-            if (id) {
-                const user = await this.client.fetchUser(id).catch(() => { return; });
-                if (!user) return resolve(message.member);
+            return member;
+        } else if (username && discriminator) {
+            await message.guild.fetchMembers({ "query": username }).catch(err => { console.error(err); });
 
-                const member = await message.guild.fetchMember(user).catch(() => { return; });
-                if (!member) return resolve(message.member);
+            const member = message.guild.members.find(m => m.user.tag === `${username}#${discriminator}`);
+            if (!member) return message.member;
 
-                return resolve(member);
-            } else if (username && discriminator) {
-                const memberList = await message.guild.fetchMembers({ "query": username }).catch(() => { return; });
-                if (!memberList) return resolve(message.member);
-
-                const member = memberList.find(m => m.user.discriminator === discriminator);
-                if (!member) return resolve(message.member);
-
-                return resolve(member);
-            } else {
-                return resolve(message.member);
-            }
-        });
+            return member;
+        } else {
+            return message.member;
+        }
     }
 
     formatMessage(type, guild, user, content, options = {}) {
