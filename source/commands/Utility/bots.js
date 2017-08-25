@@ -4,9 +4,9 @@ const request = require("superagent");
 module.exports = class extends Command {
     constructor(client, filePath) {
         super(client, filePath, {
-            name: "search",
-            description: "Searches in the user list for a username or nickname.",
-            usage: "search <query>",
+            name: "bots",
+            description: "Gives a list of bots from Carbonitex ranked by server count.",
+            usage: "bots [page-number]",
             mode: "lite"
         });
     }
