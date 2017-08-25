@@ -21,9 +21,9 @@ module.exports = class extends Command {
 
             const bots = res.body
                 .filter(bot => bot.botid > 10 && bot.servercount > 0)
+                .sort((a,b) => b.servercount - a.servercount)
                 .filter(bot => bot.name = bot.name.replace(/[^a-z0-9]/gmi, "").replace(/\s+/g, ""))
-                .filter(bot => bot.servercount = Number(bot.servercount).toLocaleString())
-                .sort((a,b) => b.servercount - a.servercount);
+                .filter(bot => bot.servercount = Number(bot.servercount).toLocaleString());
 
             const content = this.client.functions.pagify(
                 bots.map(bot => `${this.client.functions.lengthen(1, `${bot.name}`, 40)}: ${bot.servercount}${bot.compliant ? ` | Carbon Compliant` : ""}`),
