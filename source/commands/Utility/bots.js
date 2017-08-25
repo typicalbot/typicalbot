@@ -26,7 +26,7 @@ module.exports = class extends Command {
                 .filter(bot => bot.servercount = Number(bot.servercount).toLocaleString());
 
             const content = this.client.functions.pagify(
-                bots.map(bot => `${this.client.functions.lengthen(1, `${bot.name}`, 40)}: ${bot.servercount}${bot.compliant ? ` | Carbon Compliant` : ""}`),
+                bots.map(bot => `${this.client.functions.lengthen(1, `${bot.name}`, 20)}: ${bot.servercount}${bot.compliant ? ` | Carbon Compliant` : ""}`),
                 page
             );
 

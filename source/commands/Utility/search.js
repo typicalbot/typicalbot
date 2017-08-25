@@ -30,6 +30,6 @@ module.exports = class extends Command {
             page
         );
 
-        response.send(`**__Results:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
+        response.send(`**__Results for Query:__** ${query}\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
     }
 };
