@@ -122,23 +122,21 @@ module.exports = class {
 
     async resolveMember(message, [ match, id, username, discriminator ]) {
         if (id) {
-            const user = await this.client.fetchUser(id).catch(err => { console.error(err); });
+            const user = await this.client.fetchUser(id).catch(console.error);
             if (!user) return message.member;
 
-            const member = await message.guild.fetchMember(user).catch(err => { console.error(err); });
+            const member = await message.guild.fetchMember(user).catch(console.error);
             if (!member) return message.member;
 
             return member;
         } else if (username && discriminator) {
-            await message.guild.fetchMembers({ "query": username }).catch(err => { console.error(err); });
+            await message.guild.fetchMembers({ "query": username }).catch(console.error);
 
             const member = message.guild.members.find(m => m.user.tag === `${username}#${discriminator}`);
             if (!member) return message.member;
 
             return member;
-        } else {
-            return message.member;
-        }
+        } else return message.member;
     }
 
     formatMessage(type, guild, user, content, options = {}) {
