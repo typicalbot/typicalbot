@@ -31,7 +31,7 @@ module.exports = class {
             const guild = this.client.guilds.get(data.guild);
             const settings = await this.client.settingsManager.fetch(data.guild);
 
-            const guildOwner = await this.client.fetchUser(guild.ownerID);
+            const guildOwner = await this.client.users.fetch(guild.ownerID);
 
             this.client.transmit("masterrequest", {
                 "id": data.id,

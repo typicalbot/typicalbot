@@ -17,7 +17,7 @@ module.exports = class extends Command {
 
         const user = args[1], reason = args[2];
 
-        this.client.fetchUser(user).then(async cachedUser => {
+        this.client.users.fetch(user).then(async cachedUser => {
             const member = await message.guild.fetchMember(cachedUser);
             if (!member) return response.error(`The requested user could not be found.`);
 

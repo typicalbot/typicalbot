@@ -17,7 +17,7 @@ module.exports = class extends Command {
 
         const user = args[1], purgeDays = args[2] || 0, reason = args[3];
 
-        this.client.fetchUser(user).then(async cachedUser => {
+        this.client.users.fetch(user).then(async cachedUser => {
             const member = await message.guild.fetchMember(cachedUser).catch(err => { return; });
 
             if (member && message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot ban a user with either the same or higher highest role.`);

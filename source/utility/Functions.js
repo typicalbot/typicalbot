@@ -122,7 +122,7 @@ module.exports = class {
 
     async resolveMember(message, [ match, id, username, discriminator ]) {
         if (id) {
-            const user = await this.client.fetchUser(id).catch(console.error);
+            const user = await this.client.users.fetch(id).catch(console.error);
             if (!user) return message.member;
 
             const member = await message.guild.fetchMember(user).catch(console.error);
