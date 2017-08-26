@@ -5,7 +5,7 @@ module.exports = class extends Command {
         super(client, filePath, {
             name: "discriminator",
             description: "Provides a list of all uers with a given discriminator.",
-            aliases: ["disrcim"],
+            aliases: ["discrim"],
             usage: "disrciminator [four-digit-discriminator]",
             mode: "lite"
         });
@@ -18,7 +18,7 @@ module.exports = class extends Command {
         const page = args[2] || 1;
 
         const list = this.client.users.findAll("discriminator", discriminator);
-        if (!list.size) response.reply(`There are no users with the discriminator **${discriminator}** on record.`);
+        if (!list.length) return response.reply(`There are no users with the discriminator **${discriminator}** on record.`);
 
         const content = this.client.functions.pagify(
             list.map(u => `${this.client.functions.lengthen(1, u.tag, 30)} ${u.id}`),
