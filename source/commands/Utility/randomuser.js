@@ -1,5 +1,4 @@
 const Command = require("../../structures/Command");
-const canvas = require("canvas-constructor");
 
 module.exports = class extends Command {
     constructor(client, filePath) {
