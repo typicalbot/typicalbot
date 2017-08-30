@@ -42,11 +42,11 @@ module.exports = class extends Command {
     execute(message, response, permissionLevel) {const match = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(message.content);
         if (!match) return response.usage(this);
 
-        const realPermissionLevel = this.client.permissionsManager.get(message.guild, message.author, true);
+        const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
 
         const action = match[1], setting = match[2], ar = match[3], value = match[4];
 
-        if (action === "edit" && realPermissionLevel.level < 2) return response.perms({ permission: 2 }, realPermissionLevel);
+        if (action === "edit" && actualUserPermissions.level < 2) return response.perms({ permission: 2 }, actualUserPermissions);
 
         if (action === "list") {
             let page = setting || 1;
