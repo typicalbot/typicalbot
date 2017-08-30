@@ -13,10 +13,10 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        const args = /hex\s+#?([0-9a-fA-F]{6})/i.exec(message.content);
+        const args = /hex\s+#?([0-9a-fA-F]{6}|random)/i.exec(message.content);
         if (!args) return response.usage(this);
 
-        const hex = args[1];
+        const hex = args[1] === "random" ? Math.floor(Math.random()*16777215).toString(16) : args[1];
 
         message.channel.send(
             new Attachment(
