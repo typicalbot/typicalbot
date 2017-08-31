@@ -17,17 +17,17 @@ module.exports = class {
         this.client.transmit("transmitTesters");
 
         setTimeout(() => {
-            if (this.client.build === "alpha") this.client.guilds.forEach(g => { if (!this.client.functions.checkDonor(g)) g.leave(); });
+            if (this.client.build === "prime") this.client.guilds.forEach(g => { if (!this.client.functions.checkDonor(g)) g.leave(); });
             if (this.client.build === "development") this.client.guilds.forEach(g => { if (!this.client.functions.checkTester(g)) g.leave(); });
         }, 1000 * 60);
 
-        setInterval(() => this.client.transmitStats(), 1000 * 30);
+        setInterval(() => this.client.transmitStats(), 1000 * 5);
 
         setInterval(() => {
             this.client.user.setGame(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
 
             if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
-            if (this.client.build === "dev" && this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
+            if (this.client.build === "development" && this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
         }, 1000 * 60 * 5);
     }
 
@@ -295,12 +295,12 @@ module.exports = class {
     }
 
     guildCreate(guild) {
-        if (this.client.build === "dev") {
+        if (this.client.build === "development") {
             const check = this.client.functions.checkTester(guild);
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
         }
-        if (this.client.build === "alpha") {
+        if (this.client.build === "prime") {
             const check = this.client.functions.checkDonor(guild);
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
