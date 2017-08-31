@@ -54,7 +54,7 @@ new class {
 
         this.donorData = [];
 
-        this.webserver = new Webserver(this, config);
+        this.webserver = build === "development" ? new Webserver(this, config) : null;
 
         this.init();
     }
