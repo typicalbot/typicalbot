@@ -60,14 +60,113 @@ module.exports = class extends Command {
             response.send(`**__Available settings to use with TypicalBot:__**\n\n**Page ${page} / ${count}**\n${list.join("\n")}`);
         } else if (action === "view") {
             if (setting) {
-                if (setting === "") {
+                if (setting === "embed") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.embed ? "Enabled" : "Disabled"}`);
+                } else if (setting === "adminrole") {
+                    const rawList = message.guild.settings.roles.administrator;
+                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.roles.get(r).name}*`);
 
-                } else if (setting === "") {
+                    if (!list.length) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${list.join(", ")}`);
+                } else if (setting === "modrole") {
+                    const rawList = message.guild.settings.roles.moderator;
+                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.roles.get(r).name}*`);
 
-                } else if (setting === "") {
+                    if (!list.length) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${list.join(", ")}`);
+                } else if (setting === "djrole") {
+                    const rawList = message.guild.settings.roles.dj;
+                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.roles.get(r).name}*`);
 
-                } else if (setting === "") {
+                    if (!list.length) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${list.join(", ")}`);
+                } else if (setting === "blacklistrole") {
+                    const rawList = message.guild.settings.roles.blacklist;
+                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.roles.get(r).name}*`);
 
+                    if (!list.length) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${list.join(", ")}`);
+                } else if (setting === "autorole") {
+                    const role = message.guild.roles.get(message.guild.settings.auto.role.id);
+
+                    if (!role) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${role.name}`);
+                } else if (setting === "autoroledelay") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.auto.role.delay ? `${message.guild.settings.auto.role.delay}ms` : "Default"}`);
+                } else if (setting === "autorolesilent") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.auto.role.silent ? "Enabled" : "Disabled"}`);
+                } else if (setting === "announcements") {
+                    const channel = message.guild.channels.get(message.guild.settings.announcements.id);
+
+                    if (!channel) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${channel.toString()}`);
+                } else if (setting === "announcements-mention" || setting === "ann-mention") {
+                    const role = message.guild.roles.get(message.guild.settings.announcements.mention);
+
+                    if (!role) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${role.name}`);
+                } else if (setting === "logs") {
+                    const channel = message.guild.channels.get(message.guild.settings.logs.id);
+
+                    if (!channel) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${channel.toString()}`);
+                } else if (setting === "logs-join") {
+                    const log = message.guild.settings.logs.join;
+                    const disabled = log === "--disabled", embed = log === "--embed";
+                    const logText = !log ? "Default" : disabled ? "Disabled" : embed ? "Embed" : `\`\`\`txt\n${log}\n\`\`\``;
+
+                    response.reply(`**__Current Value:__** ${logText}`);
+                } else if (setting === "logs-leave") {
+                    const log = message.guild.settings.logs.leave;
+                    const disabled = log === "--disabled", embed = log === "--embed";
+                    const logText = !log ? "Default" : disabled ? "Disabled" : embed ? "Embed" : `\`\`\`txt\n${log}\n\`\`\``;
+
+                    response.reply(`**__Current Value:__** ${logText}`);
+                } else if (setting === "logs-ban") {
+                    const log = message.guild.settings.logs.ban;
+                    const disabled = log === "--disabled", embed = log === "--embed";
+                    const logText = !log ? "Default" : disabled ? "Disabled" : embed ? "Embed" : `\`\`\`txt\n${log}\n\`\`\``;
+
+                    response.reply(`**__Current Value:__** ${logText}`);
+                } else if (setting === "logs-unban") {
+                    const log = message.guild.settings.logs.unban;
+                    const disabled = log === "--disabled", embed = log === "--embed";
+                    const logText = !log ? "Default" : disabled ? "Disabled" : embed ? "Embed" : `\`\`\`txt\n${log}\n\`\`\``;
+
+                    response.reply(`**__Current Value:__** ${logText}`);
+                } else if (setting === "logs-nickname") {
+                    const log = message.guild.settings.logs.nickname;
+                    const enabled = log === "--enabled";
+                    const logText = enabled ? "Default" : !log ? "Disabled" : `\`\`\`txt\n${log}\n\`\`\``;
+
+                    response.reply(`**__Current Value:__** ${logText}`);
+                } else if (setting === "logs-invite") {
+                    const log = message.guild.settings.logs.invite;
+                    const enabled = log === "--enabled";
+                    const logText = enabled ? "Default" : !log ? "Disabled" : `\`\`\`txt\n${log}\n\`\`\``;
+
+                    response.reply(`**__Current Value:__** ${logText}`);
+                } else if (setting === "modlogs" || setting === "logs-moderation") {
+                    const channel = message.guild.channels.get(message.guild.settings.logs.moderation);
+
+                    if (!channel) return response.reply(`**__Current Value:__** None`);
+                    response.reply(`**__Current Value:__** ${channel.toString()}`);
+                } else if (setting === "automessage") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.auto.message ? `\`\`\`txt\n${message.guild.settings.auto.message}\n\`\`\`` : "None"}`);
+                } else if (setting === "autonickname") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.auto.nickname ? `\`\`\`txt\n${message.guild.settings.auto.nickname}\n\`\`\`` : "None"}`);
+                } else if (setting === "mode") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.mode}`);
+                } else if (setting === "customprefix") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.prefix.custom ? message.guild.settings.prefix.custom : "None"}`);
+                } else if (setting === "defaultprefix") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.prefix.default ? "Enabled" : "Disabled"}`);
+                } else if (setting === "antiinvite") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.automod.invite ? "Enabled" : "Disabled"}`);
+                } else if (setting === "nonickname") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.nonickname ? "Enabled" : "Disabled"}`);
+                } else {
+                    response.error("The requested setting doesn't exist");
                 }
             } else {
                 response.send(`**__Currently Set Settings:__**\n\n`);
@@ -404,7 +503,7 @@ module.exports = class extends Command {
 
                         this.client.settingsManager.update(message.guild.id, { auto: { message: value } }).then(() => response.success("Setting successfully updated."));
                     }
-                } else if (setting === "") {
+                } else if (setting === "mode") {
                     if (value === "free") {
                         this.client.settingsManager.update(message.guild.id, { mode: "free" }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "lite") {
@@ -451,7 +550,7 @@ module.exports = class extends Command {
                         response.error("An invalid option was given.");
                     }
                 } else {
-                    response.error("The requested setting is not valid.");
+                    response.error("The requested setting doesn't exist");
                 }
             } else return response.usage(this);
         }
