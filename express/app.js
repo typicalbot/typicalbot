@@ -11,7 +11,7 @@ const path = require("path");
 const { Permissions, Collection } = require("discord.js");
 
 function page(dir, file) { return path.join(__dirname, "base", "pages", dir, file); }
-function OAuth(client, guild) { return `https://discordapp.com/oauth2/authorize?client_id=${client}&permissions=8&scope=bot&redirect_uri=http://dev.typicalbot.com:3000/&response_type=code&guild_id=${guild}`; }
+function OAuth(client, guild) { return `https://discordapp.com/oauth2/authorize?client_id=${client}&permissions=8&scope=bot&redirect_uri=http://dashboard.typicalbot.com:2095/&response_type=code&guild_id=${guild}`; }
 
 const User = require("./utility/DashboardUser");
 
@@ -138,7 +138,9 @@ module.exports = class extends express {
 
                     Object.assign(obj, { [key]: shard.stats[key] });
                 });
-                Object.assign(obj, { commands: shard.commands });
+
+                obj.commands = shard.commands;
+
                 data.shards ? data.shards[shard.id] = obj : data.shards = { [shard.id]: obj };
             });
 
