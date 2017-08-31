@@ -6,7 +6,7 @@ module.exports = class extends Command {
             name: "purge",
             description: "Purge messages in a channel.",
             alises: ["prune"],
-            usage: "purge [@user|#channel|@role] <message-count>",
+            usage: "purge [@user|#channel|@role|'me'|'you'|'bots'] <message-count>",
             mode: "strict",
             permission: 2
         });
