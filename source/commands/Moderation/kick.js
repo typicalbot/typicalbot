@@ -18,7 +18,7 @@ module.exports = class extends Command {
         const user = args[1], reason = args[2];
 
         this.client.users.fetch(user).then(async cachedUser => {
-            const member = await message.guild.fetchMember(cachedUser);
+            const member = await message.guild.members.fetch(cachedUser);
             if (!member) return response.error(`The requested user could not be found.`);
 
             if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);

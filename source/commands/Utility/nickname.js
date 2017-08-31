@@ -14,7 +14,7 @@ module.exports = class extends Command {
     async execute(message, response, permissionLevel) {
         const args = /nick(?:name)?(?:\s+(?:<@!?)?(\d{17,20})>?)?(?:\s+(.{1,32}))?/i.exec(message.content);
 
-        const member = args[1] ? await message.guild.fetchMember(args[1]) : null;
+        const member = args[1] ? await message.guild.members.fetch(args[1]) : null;
         const nickname = args[2];
         const reset = !nickname || nickname === "reset";
 

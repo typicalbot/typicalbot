@@ -125,7 +125,7 @@ module.exports = class {
             const user = await this.client.users.fetch(id).catch(console.error);
             if (!user) return returnSelf ? message.member : null;
 
-            const member = await message.guild.fetchMember(user).catch(console.error);
+            const member = await message.guild.members.fetch(user).catch(console.error);
             if (!member) return returnSelf ? message.member : null;
 
             return member;
