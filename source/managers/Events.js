@@ -157,7 +157,7 @@ module.exports = class {
         if (autorole && autorole.editable) setTimeout(() =>
             member.addRole(autorole).then(() => {
                 if (settings.auto.role.silent === "N" && settings.logs.id && guild.channels.has(settings.logs.id)) guild.channels.get(settings.logs.id).send(`**${user.tag}** was given the autorole **${autorole.name}**.`);
-            }).catch(() => console.log("Missing Permissions")), settings.audo.role.delay || 2000
+            }).catch(() => console.log("Missing Permissions")), settings.auto.role.delay || 2000
         );
     }
 
