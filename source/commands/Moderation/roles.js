@@ -44,10 +44,10 @@ module.exports = class extends Command {
             const subPage = subArgs[4];
 
             const subRole = subArgs[2] || subArgs[5] ? message.guild.roles.get(subArgs[2] || subArgs[5]) : subArgs[3] || subArgs[6] ? message.guild.roles.find(r => subArgs[3] ? r.name.toLowerCase() === subArgs[3].toLowerCase() : r.name.toLowerCase() ===  subArgs[6].toLowerCase()) : null;
-            if (!subRole) return response.error("Invalid role. Please make sure your spelling and capitalization is correct, and that the role actualls exists.");
+            if (!subRole) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
             if (subAction === "members") {
-                await message.guild.fetchMembers().catch(console.error);
+                await message.guild.members.fetch().catch(console.error);
 
                 const content = this.client.functions.pagify(
                     subRole.members.map(m => `${this.client.functions.lengthen(1, m.user.username, 30)} : ${m.id}`),
@@ -66,7 +66,7 @@ module.exports = class extends Command {
             if (!subMember) return response.error("Couldn't fetch the requested member.");
 
             const subRole = subArgs[4] ? message.guild.roles.get(subArgs[4]) : subArgs[5] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[5].toLowerCase()) : null;
-            if (!subRole) return response.error("Invalid role. Please make sure your spelling and capitalization is correct, and that the role actualls exists.");
+            if (!subRole) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
             if (!subRole.editable) return response.error(`Insignificant permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give or take and that I have the Manage Roles permission.`);
 
             subMember.addRole(subRole)
@@ -82,7 +82,7 @@ module.exports = class extends Command {
             if (!subMember) return response.error("Couldn't fetch the requested member.");
 
             const subRole = subArgs[4] ? message.guild.roles.get(subArgs[4]) : subArgs[5] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[5].toLowerCase()) : null;
-            if (!subRole) return response.error("Invalid role. Please make sure your spelling and capitalization is correct, and that the role actualls exists.");
+            if (!subRole) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
             if (!subRole.editable) return response.error(`Insignificant permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give or take and that I have the Manage Roles permission.`);
 
             subMember.removeRole(subRole)
@@ -109,10 +109,9 @@ module.exports = class extends Command {
             } else if (subAction === "add") {
                 if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
 
-                if (!subRole) return response.error("Invalid role. Please make sure your spelling and capitalization is correct, and that the role actualls exists.");
+                if (!subRole) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
                 const roleList = message.guild.settings.roles.public.filter(r => message.guild.roles.has(r));
-                if (!roleList.length) return response.reply("There are no public roles set up for this server.");
 
                 if (roleList.includes(subRole.id)) return response.error("The request role is already in the list of public roles.");
 
@@ -124,10 +123,9 @@ module.exports = class extends Command {
             } else if (subAction === "remove") {
                 if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
 
-                if (!subRole) return response.error("Invalid role. Please make sure your spelling and capitalization is correct, and that the role actualls exists.");
+                if (!subRole) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
                 const roleList = message.guild.settings.roles.public.filter(r => message.guild.roles.has(r));
-                if (!roleList.length) return response.reply("There are no public roles set up for this server.");
 
                 if (!roleList.includes(subRole.id)) return response.error("The request role isn't in the list of public roles.");
 
