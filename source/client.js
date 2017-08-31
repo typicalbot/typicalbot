@@ -111,7 +111,7 @@ const client = new class extends Client {
             "uptime": this.uptime
         });
         this.transmit("commands", {
-            "commands": this.commands
+            "commands": this.commandsStats
         });
     }
 
