@@ -32,7 +32,7 @@ module.exports = class extends Command {
     embedExecute(message, response, permissionLevel) {
         response.buildEmbed()
             .setColor(0x00adff)
-            .setThumbnail(`${this.client.config.urls.website}/images/icon.png`)
+            .setThumbnail(`https://typicalbot.com/images/icon.png`)
             .setTitle("TypicalBot Statistics")
             .addField("» Uptime", this.client.functions.convertTime(this.client.uptime), true)
             .addField("» Servers", `${this.client.shardData.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})`, true)
