@@ -4,6 +4,7 @@
     <head>
         <%- include("../parts/head.ejs") %>
         <!--<link href="/extra/dashboard.css" rel="stylesheet" type="text/css">-->
+        <meta http-equiv="refresh" content="30">
         <title>Staff Panel – TypicalBot</title>
     </head>
 	<body>
@@ -84,7 +85,6 @@
 <script>
 	let now = new Date();
 	let commandStats = Highcharts.chart('commandStats', {
-		chart: { events: { load: requestData } },
 		title: { text: "Command Statistics" },
 		credits: { enabled: false },
         xAxis: { type: 'datetime' },
@@ -93,21 +93,4 @@
         navigation: { buttonOptions: { enabled: false } },
         series: [ <% master.shards.forEach((s, i) => { %> { name: 'Shard <%= s.id %>', data: [<%= s.commands || Array(60).fill(0) %>], color: `#${Math.floor(Math.random()*16777215).toString(16)}` }<%= i + 1 === master.shards.length ? "" : "," %> <% }) %> ]
 	});
-
-	function requestData() {
-		$.ajax({
-			url: '/api/bots/dev/stats',
-			success: function(data) {
-                Object.keys(data.shards).forEach(s => {
-                    let series = commandStats.series[s];
-        			let shift = series.data.length > 60;
-
-                    commandStats.series[s].addPoint(data.shards[s].commands[data.shards[s].commands.length -1], true, shift);
-                });
-
-				setTimeout(requestData, 60000);
-			},
-			cache: false
-		});
-	}
 </script>
