@@ -58,7 +58,7 @@ module.exports = class {
     fetchLatest(guild) {
         return new Promise((resolve, reject) => {
             this.fetchChannel(guild).then(channel => {
-                channel.fetchMessages({ limit: 100 }).then(messages => {
+                channel.messages.fetch({ limit: 100 }).then(messages => {
                     const logs = messages.filter(m => {
                         if (m.author.id !== this.client.user.id) return false;
                         if (!m.embeds[0]) return false;
@@ -81,7 +81,7 @@ module.exports = class {
             this.fetchChannel(guild).then(channel => {
                 if (id === "latest") return resolve(this.fetchLatest(guild));
 
-                channel.fetchMessages({ limit: 100 }).then(messages => {
+                channel.messages.fetch({ limit: 100 }).then(messages => {
                     const logs = messages.filter(m => {
                         if (m.author.id !== this.client.user.id) return false;
                         if (!m.embeds[0]) return false;
