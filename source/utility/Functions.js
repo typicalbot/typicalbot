@@ -130,7 +130,7 @@ module.exports = class {
 
             return member;
         } else if (username && discriminator) {
-            await message.guild.fetchMembers({ "query": username }).catch(console.error);
+            await message.guild.members.fetch({ "query": username }).catch(console.error);
 
             const member = message.guild.members.find(m => m.user.tag === `${username}#${discriminator}`);
             if (!member) return returnSelf ? message.member : null;
