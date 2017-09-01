@@ -64,25 +64,25 @@ module.exports = class extends Command {
                     response.reply(`**__Current Value:__** ${message.guild.settings.embed ? "Enabled" : "Disabled"}`);
                 } else if (setting === "adminrole") {
                     const rawList = message.guild.settings.roles.administrator;
-                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.roles.get(r).name}*`);
+                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
 
                     if (!list.length) return response.reply(`**__Current Value:__** None`);
                     response.reply(`**__Current Value:__** ${list.join(", ")}`);
                 } else if (setting === "modrole") {
                     const rawList = message.guild.settings.roles.moderator;
-                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.roles.get(r).name}*`);
+                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
 
                     if (!list.length) return response.reply(`**__Current Value:__** None`);
                     response.reply(`**__Current Value:__** ${list.join(", ")}`);
                 } else if (setting === "djrole") {
                     const rawList = message.guild.settings.roles.dj;
-                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.roles.get(r).name}*`);
+                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
 
                     if (!list.length) return response.reply(`**__Current Value:__** None`);
                     response.reply(`**__Current Value:__** ${list.join(", ")}`);
                 } else if (setting === "blacklistrole") {
                     const rawList = message.guild.settings.roles.blacklist;
-                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.roles.get(r).name}*`);
+                    const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
 
                     if (!list.length) return response.reply(`**__Current Value:__** None`);
                     response.reply(`**__Current Value:__** ${list.join(", ")}`);
