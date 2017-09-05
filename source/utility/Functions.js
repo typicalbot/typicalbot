@@ -167,7 +167,7 @@ module.exports = class {
             .replace(/{channel.id}/gi, options.channel.id);
         if (type === "logs-msgdel") return this.formatMessage("logs", guild, user, content)
             .replace(/{message.content}|{message.text}/gi, options.message.content)
-            .replace(/{message.content:short}|{message.text:short}/gi, this.shorten(options.message.content, 100))
+            .replace(/{message.content:short}|{message.text:short}/gi, this.lengthen(-1, options.message.content, 100))
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{channel}/gi, options.channel.toString())
             .replace(/{channel.name}/gi, options.channel.name)
