@@ -40,10 +40,10 @@ module.exports = class {
     fetch(guild, permission) {
         const setting = guild.settings.roles[permission];
         if (!setting.length || !setting.filter(r => guild.roles.has(r)).length) {
-            if (permission === "administrator") return guild.roles.find("name", "TypicalBot Administrator");
-            if (permission === "moderator") return guild.roles.find("name", "TypicalBot Moderator");
-            if (permission === "dj") return guild.roles.find("name", "TypicalBot DJ");
-            if (permission === "blacklist") return guild.roles.find("name", "TypicalBot Blacklisted");
+            if (permission === "administrator") return guild.roles.find(r => r.name.toLowerCase() === "typicalbot administrator");
+            if (permission === "moderator") return guild.roles.find(r => r.name.toLowerCase() === "typicalbot moderator");
+            if (permission === "dj") return guild.roles.find(r => r.name.toLowerCase() === "typicalbot dj");
+            if (permission === "blacklist") return guild.roles.find(r => r.name.toLowerCase() === "typicalbot blacklist");
         }
 
         return setting.filter(r => guild.roles.has(r)).map(r => guild.roles.get(r));
