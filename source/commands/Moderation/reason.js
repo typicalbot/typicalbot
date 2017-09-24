@@ -3,9 +3,9 @@ const Command = require("../../structures/Command");
 module.exports = class extends Command {
     constructor(client, filePath) {
         super(client, filePath, {
-            name: "warn",
-            description: "Warm a member in the server.",
-            usage: "warn <@user> [reason]",
+            name: "reason",
+            description: "Change or set a reason for a case in moderation logs.",
+            usage: "reason <case-id|'latest'> [reason]",
             mode: "strict",
             permission: 2
         });
@@ -14,23 +14,19 @@ module.exports = class extends Command {
     async execute(message, response, permissionLevel) {
         if (!message.guild.settings.logs.moderation) return response.error("You must have moderation logs enabled to use this command.");
 
-        const args = /warn\s+(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(message.content);
+        const args = /reason\s+(\d+|latest)(?:\s+(.+))/i.exec(message.content);
         if (!args) return response.usage(this);
 
-        const user = args[1], reason = args[2];
+        const id = args[1], reason = args[2];
 
-        this.client.users.fetch(user).then(async cachedUser => {
-            const member = await message.guild.members.fetch(cachedUser);
-            if (!member) return response.error(`The requested user could not be found.`);
+        this.client.modlogsManager.fetchCase(message.guild, id).then(log => {
+            if (!log) return response.error(`There are no moderation logs under the given case ID.`);
 
-            if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);
-            if (!member.kickable) return response.error(`In order to complete the request, I need the **KICK_MEMBERS** permission and my highest role needs to be the requested user's highest role.`);
-
-            const log = { "action": "warn", "user": member.user, "moderator": message.author };
-            if (reason) Object.assign(log, { reason });
-
-            const _case = await this.client.modlogsManager.createLog(message.guild, log);
-            response.success(`Successfully warned user \`${cachedUser.tag}\`.`);
-        }).catch(err => response.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
+            this.client.modlogsManager.editReason(log, message.author, reason).then(
+                () => response.reply("Successfully updated the case.").then(msg => { msg.delete({ timeout: 2500 }); message.delete({ timeout: 2500 }); })
+            ).catch(err => response.error(`An error occured while updating the given case.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
+        }).catch(err => {
+            response.error(`An error occured while fetching the requested case.`);
+        });
     }
 };
