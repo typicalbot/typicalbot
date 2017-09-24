@@ -31,7 +31,7 @@ module.exports = class extends Command {
             this.client.banCache.set(toBan.id || toBan, log);
 
             message.guild.ban(toBan, { days: purgeDays }).then(actioned => {
-                response.success(`Successfully banned user \`${actioned.tag || actioned}\`.`);
+                response.success(`Successfully banned user \`${actioned.tag || actioned.id || actioned}\`.`);
             }).catch(err => {
                 if (err === "Error: Couldn't resolve the user ID to ban.") return response.error(`The requested user could not be found.`);
 
