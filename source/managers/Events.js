@@ -33,6 +33,7 @@ module.exports = class {
 
     async message(message) {
         if (message.author.bot) return;
+
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
             const command = await this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
@@ -41,6 +42,8 @@ module.exports = class {
             const response = new Response(this.client, message);
             command.execute(message, response);
         } else {
+            if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
+
             this.client.lastMessage = message.createdTimestamp;
 
             const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
@@ -127,7 +130,7 @@ module.exports = class {
 
         const user = member.user;
 
-        if (settings.logs.join !== "disabled") {
+        if (settings.logs.join !== "--disabled") {
             if (guild.channels.has(settings.logs.id)) {
                 const channel = guild.channels.get(settings.logs.id);
 
