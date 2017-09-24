@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+        <%- include("../parts/head.ejs") %>
+        <title>Staff Application – TypicalBot</title>
+	</head>
+	<body>
+		<%- include("../parts/navigation.ejs", { master, auth, user: auth ? user : null }) %>
+
+		<div class="page-container container-fluid">
+            <div class="section">
+				<span class="title"><cetner><p>Staff Application</p></center></span>
+                <p>Application in Progress</p>
+			</div>
+        </div>
+
+		<%- include("../parts/foot.ejs") %>
+	</body>
+</html>
