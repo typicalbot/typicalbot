@@ -1,5 +1,4 @@
 const Command = require("../../structures/Command");
-const regex = require("../../utility/RegExp");
 
 module.exports = class extends Command {
     constructor(client, filePath) {
