@@ -1,5 +1,4 @@
 const Command = require("../../structures/Command");
-const regex = require("../../utility/RegExp");
 
 module.exports = class extends Command {
     constructor(client, filePath) {
@@ -14,7 +13,7 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        const args = regex.say.exec(message.content);
+        const args = /(?:say|speak)(?:\s+(?:<#)?(\d+)>?)?\s+((?:.|[\r\n])+)?/i.exec(message.content);
         if (!args) return response.usage(this);
 
         const channel = message.guild.channels.get(args[1]);
