@@ -47,7 +47,7 @@ module.exports = class extends Command {
 
         const action = args[1], setting = args[2], ar = args[3], value = args[4];
 
-        if (action === "edit" && actualUserPermissions.level < 2) return response.perms({ permission: 2 }, actualUserPermissions);
+        if (action === "edit" && actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
 
         if (action === "list") {
             let page = setting || 1;
