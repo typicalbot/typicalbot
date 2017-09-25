@@ -5,7 +5,7 @@ module.exports = class extends Command {
         super(client, filePath, {
             name: "purge",
             description: "Purge messages in a channel.",
-            alises: ["prune"],
+            aliases: ["prune"],
             usage: "purge [@user|#channel|@role|'me'|'you'|'bots'] <message-count>",
             mode: "strict",
             permission: 2
