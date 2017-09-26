@@ -23,10 +23,8 @@ module.exports = class {
                 const role = this.fetch(guild, "administrator"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole; } else { return member.roles.has(role.id); }
             }),
-            "4" : new PermissionLevel(4, false, "Server Owner", (guild, member) => member.id === guild.ownerID),
-            "6" : new PermissionLevel(6, false, "TypicalBot Support", (guild, id) => this.client.config.support[id]),
-            "7" : new PermissionLevel(7, false, "TypicalBot Staff", (guild, id) => this.client.config.staff[id]),
-            "8" : new PermissionLevel(8, true, "TypicalBot Development Helper", (guild, id) => id === client.config.devhelp),
+            "4" : new PermissionLevel(4, false, "Server Owner", (guild, member) => member.id === guild.su),
+            "8" : new PermissionLevel(8, false, "TypicalBot Support", (guild, id) => this.client.config.support[id]),
             "9" : new PermissionLevel(9, true, "TypicalBot Administrator", (guild, id) => this.client.config.administrators[id]),
             "10" : new PermissionLevel(10, true, "TypicalBot Creator", (guild, id) => id === client.config.creator),
 
@@ -54,9 +52,7 @@ module.exports = class {
 
         if (this.levels[10].check(guild, id)) return this.define(10);
         if (this.levels[9].check(guild, id)) return this.define(9);
-        if (this.levels[8].check(guild, id)) return this.define(8);
-        if (!globalIgnore && this.levels[7].check(guild, id)) return this.define(7);
-        if (!globalIgnore && this.levels[6].check(guild, id)) return this.define(6);
+        if (!globalIgnore && this.levels[8].check(guild, id)) return this.define(8);
 
         member = guild.member(member);
         if (!member) return this.define(0);
