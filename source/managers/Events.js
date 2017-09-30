@@ -71,7 +71,7 @@ module.exports = class {
             if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
 
             const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
-            if (command.permission < 6 && !userPermissions.global && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
+            if (actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
 
             this.client.commandsStats[this.client.commandsStats.length - 1]++;
 
