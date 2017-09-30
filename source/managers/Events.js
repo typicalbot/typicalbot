@@ -42,7 +42,7 @@ module.exports = class {
             const response = new Response(this.client, message);
             command.execute(message, response);
         } else {
-            if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
+            if (message.guild.me && !message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
             this.client.lastMessage = message.createdTimestamp;
 
@@ -214,8 +214,8 @@ module.exports = class {
 
         channel.send(
             settings.logs.nickname !== "--enabled" ?
-            this.client.functions.formatMessage("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
-            `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
+                this.client.functions.formatMessage("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
+                `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
         ).catch(() => console.log("Missing Permissions"));
     }
 
