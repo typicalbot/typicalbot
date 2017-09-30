@@ -22,7 +22,7 @@ module.exports = class extends Command {
             if (!member) return response.error(`The requested user could not be found.`);
 
             if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);
-            if (!member.kickable) return response.error(`In order to complete the request, I need the **KICK_MEMBERS** permission and my highest role needs to be the requested user's highest role.`);
+            if (!member.kickable) return response.error(`In order to complete the request, I need the **KICK_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.`);
 
             member.kick().then(async actioned => {
                 if (message.guild.settings.logs.moderation) {

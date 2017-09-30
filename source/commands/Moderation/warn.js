@@ -23,8 +23,7 @@ module.exports = class extends Command {
             const member = await message.guild.members.fetch(cachedUser);
             if (!member) return response.error(`The requested user could not be found.`);
 
-            if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot kick a user with either the same or higher highest role.`);
-            if (!member.kickable) return response.error(`In order to complete the request, I need the **KICK_MEMBERS** permission and my highest role needs to be the requested user's highest role.`);
+            if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot warn a user with either the same or higher highest role.`);
 
             const log = { "action": "warn", "user": member.user, "moderator": message.author };
             if (reason) Object.assign(log, { reason });

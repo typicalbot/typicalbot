@@ -11,7 +11,7 @@ module.exports = class {
 
     ready() {
         this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
-        this.client.user.setGame(`Client Started`);
+        this.client.user.setActivity(`Client Started`);
         this.client.transmitStats();
         this.client.transmit("transmitDonors");
         this.client.transmit("transmitTesters");
@@ -24,7 +24,7 @@ module.exports = class {
         setInterval(() => this.client.transmitStats(), 1000 * 5);
 
         setInterval(() => {
-            this.client.user.setGame(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
+            this.client.user.setActivity(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
 
             if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
             if (this.client.build === "development" && this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
@@ -42,7 +42,7 @@ module.exports = class {
             const response = new Response(this.client, message);
             command.execute(message, response);
         } else {
-            if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
+            if (message.guild.me && !message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
             this.client.lastMessage = message.createdTimestamp;
 
@@ -71,7 +71,7 @@ module.exports = class {
             if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
 
             const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
-            if (command.permission < 6 && !userPermissions.global && actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
+            if (actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
 
             this.client.commandsStats[this.client.commandsStats.length - 1]++;
 
@@ -214,8 +214,8 @@ module.exports = class {
 
         channel.send(
             settings.logs.nickname !== "--enabled" ?
-            this.client.functions.formatMessage("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
-            `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
+                this.client.functions.formatMessage("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
+                `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
         ).catch(() => console.log("Missing Permissions"));
     }
 
