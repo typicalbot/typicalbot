@@ -11,28 +11,28 @@ module.exports = class {
     postStats(provider) {
         if (provider === "a" || provider === "c") {
             request.post("https://www.carbonitex.net/discord/data/botdata.php")
-            .set("Content-Type", "application/json")
-            .send({
-                "key": this.client.config.carbonkey,
-                "shardid": this.client.shardID.toString(),
-                "shardcount": this.client.shardCount.toString(),
-                "servercount": this.client.guilds.size.toString()
-            })
-            .end((err, res) => {
-                if (err || res.statusCode != 200) this.client.log("Carbinitex Stats Transfer Failed", true);
-            });
+                .set("Content-Type", "application/json")
+                .send({
+                    "key": this.client.config.carbonkey,
+                    "shardid": this.client.shardID.toString(),
+                    "shardcount": this.client.shardCount.toString(),
+                    "servercount": this.client.guilds.size.toString()
+                })
+                .end((err, res) => {
+                    if (err || res.statusCode != 200) this.client.log("Carbinitex Stats Transfer Failed", true);
+                });
         } else if (provider === "a" || provider === "b") {
             request.post("https://bots.discord.pw/api/bots/153613756348366849/stats")
-            .set("Authorization", this.client.config.discordpwkey)
-            .set("Content-Type", "application/json")
-            .send({
-                "shard_id": this.client.shardID.toString(),
-                "shard_count": this.client.shardCount.toString(),
-                "server_count": this.client.guilds.size.toString()
-            })
-            .end((err, res) => {
-                if (err || res.statusCode != 200) this.client.log("bots.discord.pw Stats Transfer Failed", true);
-            });
+                .set("Authorization", this.client.config.discordpwkey)
+                .set("Content-Type", "application/json")
+                .send({
+                    "shard_id": this.client.shardID.toString(),
+                    "shard_count": this.client.shardCount.toString(),
+                    "server_count": this.client.guilds.size.toString()
+                })
+                .end((err, res) => {
+                    if (err || res.statusCode != 200) this.client.log("bots.discord.pw Stats Transfer Failed", true);
+                });
         }
     }
 
@@ -45,8 +45,7 @@ module.exports = class {
     checkTester(guild) {
         if (!this.client.testerData.includes(guild.ownerID) &&
             guild.ownerID !== this.client.config.owner &&
-            !this.client.config.management[guild.ownerID] &&
-            !this.client.config.staff[guild.ownerID] &&
+            !this.client.config.administrators[guild.ownerID] &&
             !this.client.config.support[guild.ownerID]
         ) return false;
         return true;
@@ -61,8 +60,7 @@ module.exports = class {
     checkDonor(guild) {
         if (!this.client.donorData.includes(guild.ownerID) &&
             guild.ownerID !== this.client.config.owner &&
-            !this.client.config.management[guild.ownerID] &&
-            !this.client.config.staff[guild.ownerID] &&
+            !this.client.config.administrators[guild.ownerID] &&
             !this.client.config.support[guild.ownerID]
         ) return false;
         return true;
