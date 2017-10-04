@@ -29,7 +29,7 @@ module.exports = class extends express {
 
         passport.use(
             new Strategy({ clientID: this.config.clientID, clientSecret: this.config.clientSecret, callbackURL: this.config.redirectUri, scope: ["identify", "guilds"] },
-            (accessToken, refreshToken, profile, done) => { this.users.set(profile.id, new User(profile)); process.nextTick(() => done(null, profile.id)); })
+                (accessToken, refreshToken, profile, done) => { this.users.set(profile.id, new User(profile)); process.nextTick(() => done(null, profile.id)); })
         );
 
         this.use(session({ secret: "typicalbot", resave: false, saveUninitialized: false }));
