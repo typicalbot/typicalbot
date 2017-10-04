@@ -152,9 +152,9 @@ module.exports = class {
             }
         }
 
-        if (settings.auto.message && !user.bot) user.send(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage("jm", guild, user, settings.auto.message)}`).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.message && !user.bot) user.send(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage("automessage", guild, user, settings.auto.message)}`).catch(() => console.log("Missing Permissions"));
 
-        if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage("jn", guild, user, settings.auto.nickname)).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage("autonick", guild, user, settings.auto.nickname)).catch(() => console.log("Missing Permissions"));
 
         const autorole = this.client.functions.fetchAutoRole(guild, settings);
         if (autorole && autorole.editable) setTimeout(() =>
