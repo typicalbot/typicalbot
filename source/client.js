@@ -5,7 +5,7 @@ const config = require(`../configs/${this.build}`);
 
 const EventStore = require("./stores/Events.js");
 
-class TypicalBot extends Client {
+new class TypicalBot extends Client {
     constructor() {
         super(config.clientOptions);
 
@@ -18,4 +18,4 @@ class TypicalBot extends Client {
 
         this.events = new EventStore(this);
     }
-}
+};
