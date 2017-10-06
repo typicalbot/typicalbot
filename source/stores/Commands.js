@@ -10,7 +10,7 @@ class CommandStore extends Store {
 
     async get(text) {
         if (this.has(text)) return super.get(text);
-        if (this.has(c => c.aliases.includes(text))) return super.get(c => c.aliases.includes(text));
+        if (this.find(c => c.aliases.includes(text))) return super.find(c => c.aliases.includes(text));
         return null;
     }
 }
