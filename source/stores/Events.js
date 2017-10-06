@@ -1,9 +1,15 @@
 const Store = require("../structures/Store");
 
-module.exports = class extends Store {
+class EventStore extends Store {
     constructor(client) {
-        super(client, "../events");
+        super(client, "events", "../events");
 
-        this.loadAll();
+        this.loadAll().then(events => {
+            events.forEach(e => {
+                client.on(e.event, (...args) => e.execute(...args));
+            });
+        });
     }
-};
+}
+
+module.exports = EventStore;
