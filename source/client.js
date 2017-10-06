@@ -1,7 +1,7 @@
 const { Client } = require("discord.js");
 
 const build = process.env.CLIENT_BUILD;
-const config = require(`../configs/${this.build}`);
+const config = require(`../configs/${build}`);
 
 const EventStore = require("./stores/Events.js");
 
@@ -20,4 +20,12 @@ new class TypicalBot extends Client {
 
         this.login(config.token);
     }
+
+    log(content, error = false) {
+        error ?
+            console.error(content) :
+            console.log(content);
+    }
 };
+
+process.on("uncaughtException", err => console.error(err.stack));
