@@ -13,7 +13,7 @@ class New extends Event {
 
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
-            const command = await this.client.commandsManager.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
+            const command = await this.client.commands.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
             if (!command || !command.dm || command.permission > 0) return;
 
             const response = new Response(this.client, message);
@@ -39,7 +39,7 @@ class New extends Event {
             const prefix = this.client.functions.matchPrefix.execute(message.author, settings, split);
             if (!prefix || !message.content.startsWith(prefix)) return;
 
-            const command = await this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());
+            const command = await this.client.commands.get(split.slice(prefix.length).toLowerCase());
             if (!command) return;
 
             const mode = command.mode || "free";

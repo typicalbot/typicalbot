@@ -7,6 +7,12 @@ class CommandStore extends Store {
 
         this.loadAll();
     }
+
+    async get(text) {
+        if (this.has(text)) return super.get(text);
+        if (this.has(c => c.aliases.includes(text))) return super.get(text);
+        return null;
+    }
 }
 
 module.exports = CommandStore;
