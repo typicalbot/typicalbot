@@ -3,6 +3,8 @@ class Function {
         this.client = client;
 
         this.name = name;
+
+        return this.execute;
     }
 }
 
