@@ -8,6 +8,8 @@ class Store {
         this.type = type;
 
         this.dir = dir;
+
+        this.c = 0;
     }
 
     load(path, name) {
@@ -22,13 +24,14 @@ class Store {
             const start = Date.now();
 
             klaw(this.dir).on("data", item => {
+                this.c++;
+
                 const file = path.parse(item.path);
                 if (!file.ext || file.ext !== ".js") return;
 
                 this.load(path.join(file.dir, file.base), file.name);
             }).on("end", () => {
-                console.log(`Loaded ${Object.keys(this.store).length} ${this.type} in ${Date.now() - start}ms`);
-                this.applyToClass(this.store, this);
+                console.log(`Loaded ${this.c} ${this.type} in ${Date.now() - start}ms`);
 
                 return resolve();
             });
