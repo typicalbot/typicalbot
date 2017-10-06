@@ -20,14 +20,16 @@ class Store extends Collection {
         this.set(name, req);
     }
 
-    async loadAll() {
-        klaw(this.dir).on("data", item => {
-            const file = path.parse(item.path);
-            if (!file.ext || file.ext !== ".js") return;
+    loadAll() {
+        return new Promise((resolve, reject) => {
+            klaw(this.dir).on("data", item => {
+                const file = path.parse(item.path);
+                if (!file.ext || file.ext !== ".js") return;
 
-            this.load(path.join(file.dir, file.base), file.name);
-        }).on("end", () => {
-            return this;
+                this.load(path.join(file.dir, file.base), file.name);
+            }).on("end", () => {
+                return resolve();
+            });
         });
     }
 }
