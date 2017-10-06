@@ -3,6 +3,8 @@ const Event = require("../structures/Event");
 class New extends Event {
     constructor(client, name) {
         super(client, name);
+
+        this.once = true;
     }
 
     async execute() {

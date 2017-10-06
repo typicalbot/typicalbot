@@ -1,6 +1,6 @@
 require("./utility/Extenders");
 
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, Constants } = require("discord.js");
 
 const build = process.env.CLIENT_BUILD;
 const config = require(`../configs/${build}`);
@@ -64,6 +64,30 @@ new class TypicalBot extends Client {
         error ?
             console.error(content) :
             console.log(content);
+    }
+
+    transmit(type, data = {}) {
+        process.send({ type, data });
+    }
+
+    transmitStat(stat) {
+        this.transmit("stat", { [stat]: this[stat].size });
+    }
+
+    transmitStats() {
+        this.transmit("stats", {
+            guilds: this.guilds.size,
+            channels: this.channels.size,
+            voiceConnections: this.voiceConnections.size,
+            users: this.users.size
+        });
+        this.transmit("status", {
+            "status": this.status === Constants.Status.READY ? 0 : 1,
+            "uptime": this.uptime
+        });
+        this.transmit("commands", {
+            "commands": this.commandsStats
+        });
     }
 };
 
