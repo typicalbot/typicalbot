@@ -6,8 +6,6 @@ const Discord = require("discord.js");
 const SHARD_COUNT   = config.shards;
 const CLIENT_TOKEN  = config.token;
 
-const Webserver     = require("./express/app");
-
 class Shard extends fork {
     constructor(master, id) {
         super(`${__dirname}/source/client.js`, [], { env: { SHARD_ID: id, SHARD_COUNT, CLIENT_TOKEN, CLIENT_BUILD: build } });
@@ -52,8 +50,6 @@ new class {
         this.pendingRequests = new Discord.Collection();
 
         this.donorData = [];
-
-        this.webserver = build === "development" ? new Webserver(this, config) : null;
 
         this.init();
     }
