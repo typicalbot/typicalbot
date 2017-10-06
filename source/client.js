@@ -7,6 +7,7 @@ const config = require(`../configs/${build}`);
 
 const Database = require("./managers/Database");
 const SettingsManager = require("./managers/Settings");
+
 const PermissionsManager = require("./managers/Permissions");
 const ModlogsManager = require("./managers/ModerationLogs");
 const AudioManager = require("./managers/Audio");
@@ -28,6 +29,8 @@ new class TypicalBot extends Client {
         this.shardID = Number(process.env.SHARD_ID);
         this.shardNumber = Number(process.env.SHARD_ID) + 1;
         this.shardCount = Number(process.env.SHARD_COUNT);
+
+        this.database = new Database();
 
         this.events = new EventStore(this);
         this.functions = new FunctionStore(this);
