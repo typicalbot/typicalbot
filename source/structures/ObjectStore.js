@@ -8,15 +8,13 @@ class Store {
         this.type = type;
 
         this.dir = dir;
-
-        this.store = new Object();
     }
 
     load(path, name) {
         const file = require(path);
         const req = new file(this.client, name);
 
-        this.store[name] = req;
+        this[name] = req;
     }
 
     loadAll() {
@@ -35,12 +33,6 @@ class Store {
                 return resolve();
             });
         });
-    }
-
-    applyToClass(base, structure, skips = []) {
-        for (const method of Object.getOwnPropertyNames(base.prototype)) {
-            if (!skips.includes(method)) Object.defineProperty(structure.prototype, method, Object.getOwnPropertyDescriptor(base.prototype, method));
-        }
     }
 }
 
