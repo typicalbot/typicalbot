@@ -11,9 +11,9 @@ module.exports = class {
         } else if (type === "reload") {
             this.client.reload(data);
         } else if (type === "transmitTesters") {
-            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
+            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters.execute();
         } else if (type === "transmitDonors") {
-            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
+            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors.execute();
         } else if (type === "testers") {
             this.client.testerData = data;
         } else if (type === "donors") {

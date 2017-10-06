@@ -31,7 +31,7 @@ class New extends Event {
         } else {
             channel.send(
                 settings.logs.ban ?
-                    this.client.functions.formatMessage("logs", guild, user, settings.logs.ban) :
+                    this.client.functions.formatMessage.execute("logs", guild, user, settings.logs.ban) :
                     `**${user.tag}** has been banned from the server.`
             ).catch(() => console.log("Missing Permissions"));
         }

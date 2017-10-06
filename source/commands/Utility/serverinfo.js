@@ -110,7 +110,7 @@ if (!after) {
 let lengthen = client.functions.lengthen;
 if (after === "roles") {
     let page = message.content.split(" ")[2];
-    let paged = client.functions.pagify(
+    let paged = client.functions.pagify.execute(
         message.guild.roles.filter(r => r.position !== 0).array().sort((a,b) => b.position - a.position).map(r => `${lengthen(r.name, 20)} : ${r.id}`),
         page
     );
@@ -120,7 +120,7 @@ if (after === "roles") {
 }
 if (after === "channels") {
     let page = message.content.split(" ")[2];
-    let paged = client.functions.pagify(
+    let paged = client.functions.pagify.execute(
         message.guild.channels.filter(c => c.type === "text").array().sort((a,b) => a.position - b.position).map(c => `${lengthen(c.name, 20)} : ${c.id}`),
         page
     );
@@ -130,8 +130,8 @@ if (after === "channels") {
 }
 if (after === "bots") {
     let page = message.content.split(" ")[2];
-    let paged = client.functions.pagify(
-        message.guild.members.filter(m => m.user.bot).map(b => `${client.functions.lengthen(b.user.username, 20)} : ${b.user.id}`),
+    let paged = client.functions.pagify.execute(
+        message.guild.members.filter(m => m.user.bot).map(b => `${client.functions.lengthen.execute(b.user.username, 20)} : ${b.user.id}`),
         page
     );
     return response.reply(

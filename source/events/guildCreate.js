@@ -7,17 +7,17 @@ class New extends Event {
 
     async execute(guild) {
         /*if (this.client.build === "development") {
-            const check = this.client.functions.checkTester(guild);
+            const check = this.client.functions.checkTester.execute(guild);
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
         }
         if (this.client.build === "prime") {
-            const check = this.client.functions.checkDonor(guild);
+            const check = this.client.functions.checkDonor.execute(guild);
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
         }
 
-        if (this.client.build === "stable") this.client.functions.postStats("b");
+        if (this.client.build === "stable") this.client.functions.postStats.execute("b");
 
         this.client.transmitStats();*/
     }

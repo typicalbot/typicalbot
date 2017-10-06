@@ -23,7 +23,7 @@ module.exports = class {
 
     stream(response, video) {
         return new Promise((resolve, reject) => {
-            if (!this.client.audioUtility.withinLimit(video, response)) return response.error(`The song requested is too long to play. The maximum song length is ${this.client.functions.length(response.message.guild.settings.lengthLimit || 1800)}.`);
+            if (!this.client.audioUtility.withinLimit(video, response)) return response.error(`The song requested is too long to play. The maximum song length is ${this.client.functions.length.execute(response.message.guild.settings.lengthLimit || 1800)}.`);
 
             const currentConnection = response.message.guild.voiceConnection;
             if (currentConnection) {

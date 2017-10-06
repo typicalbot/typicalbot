@@ -28,8 +28,8 @@ module.exports = class extends Command {
                 + "```"
             );
         } else if (subcommand === "list") {
-            const content = this.client.functions.pagify(
-                message.guild.roles.filterArray(r => r.position !== 0).sort((a,b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`),
+            const content = this.client.functions.pagify.execute(
+                message.guild.roles.filterArray(r => r.position !== 0).sort((a,b) => b.position - a.position).map(r => `${this.client.functions.lengthen.execute(1, r.name, 30)} : ${r.id}`),
                 args2 || 1
             );
 
@@ -47,8 +47,8 @@ module.exports = class extends Command {
             if (subAction === "members") {
                 await message.guild.members.fetch().catch(console.error);
 
-                const content = this.client.functions.pagify(
-                    subRole.members.map(m => `${this.client.functions.lengthen(1, m.user.username, 30)} : ${m.id}`),
+                const content = this.client.functions.pagify.execute(
+                    subRole.members.map(m => `${this.client.functions.lengthen.execute(1, m.user.username, 30)} : ${m.id}`),
                     subPage || 1
                 );
 
@@ -60,7 +60,7 @@ module.exports = class extends Command {
             const subArgs = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))\s+(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(args2);
             if (!subArgs) return response.usage(this);
 
-            const subMember = await this.client.functions.resolveMember(message, subArgs, false);
+            const subMember = await this.client.functions.resolveMember.execute(message, subArgs, false);
             if (!subMember) return response.error("Couldn't fetch the requested member.");
 
             const subRole = subArgs[4] ? message.guild.roles.get(subArgs[4]) : subArgs[5] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[5].toLowerCase()) : null;
@@ -76,7 +76,7 @@ module.exports = class extends Command {
             const subArgs = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))\s+(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(args2);
             if (!subArgs) return response.usage(this);
 
-            const subMember = await this.client.functions.resolveMember(message, subArgs, false);
+            const subMember = await this.client.functions.resolveMember.execute(message, subArgs, false);
             if (!subMember) return response.error("Couldn't fetch the requested member.");
 
             const subRole = subArgs[4] ? message.guild.roles.get(subArgs[4]) : subArgs[5] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[5].toLowerCase()) : null;
@@ -98,8 +98,8 @@ module.exports = class extends Command {
                 const roleList = message.guild.settings.roles.public.filter(r => message.guild.roles.has(r)).map(r => message.guild.roles.get(r));
                 if (!roleList.length) return response.reply("There are no public roles set up for this server.");
 
-                const content = this.client.functions.pagify(
-                    roleList.sort((a,b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`),
+                const content = this.client.functions.pagify.execute(
+                    roleList.sort((a,b) => b.position - a.position).map(r => `${this.client.functions.lengthen.execute(1, r.name, 30)} : ${r.id}`),
                     subArgs[3] || 1
                 );
 

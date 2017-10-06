@@ -36,7 +36,7 @@ class New extends Event {
             if (userPermissions.level < 2) this.client.automod.inviteCheck(response);
 
             const split = message.content.split(" ")[0];
-            const prefix = this.client.functions.matchPrefix(message.author, settings, split);
+            const prefix = this.client.functions.matchPrefix.execute(message.author, settings, split);
             if (!prefix || !message.content.startsWith(prefix)) return;
 
             const command = await this.client.commandsManager.get(split.slice(prefix.length).toLowerCase());

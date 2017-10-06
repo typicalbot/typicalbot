@@ -15,7 +15,7 @@ class New extends Event {
         channel.send(
             settings.logs.invite === "--enabled" ?
                 `**${user.username}#${user.discriminator}** posted an invite in <#${message.channel.id}>.` :
-                this.client.functions.formatMessage("logs-invite", guild, user, settings.logs.invite, { channel: message.channel })
+                this.client.functions.formatMessage.execute("logs-invite", guild, user, settings.logs.invite, { channel: message.channel })
         );
     }
 }
