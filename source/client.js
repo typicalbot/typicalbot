@@ -17,5 +17,7 @@ new class TypicalBot extends Client {
         this.shardCount = Number(process.env.SHARD_COUNT);
 
         this.events = new EventStore(this);
+
+        this.login(config.token);
     }
 };
