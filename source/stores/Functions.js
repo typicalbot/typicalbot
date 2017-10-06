@@ -1,4 +1,4 @@
-const Store = require("../structures/ObjectStore");
+const Store = require("../structures/Store");
 const path = require("path");
 
 class FunctionStore extends Store {

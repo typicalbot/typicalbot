@@ -20,7 +20,7 @@ module.exports = class extends Command {
 
             shard < 100 ?
                 this.client.transmit("shardping", { "channel": message.channel.id, shard, timestamp: Date.now() }) :
-                this.client.functions.request.execute(`https://typicalbot.com/api/shard/?guild_id=${shard}&shard_count=${this.client.shardCount}`).then(data => {
+                this.client.functions.get("request").execute(`https://typicalbot.com/api/shard/?guild_id=${shard}&shard_count=${this.client.shardCount}`).then(data => {
                     this.client.transmit("shardping", { "channel": message.channel.id, "shard": +data, timestamp: Date.now() });
                 });
         } else if (action === "restart") {
@@ -30,11 +30,11 @@ module.exports = class extends Command {
 
             shard < 100 ?
                 this.client.transmit("restartshard", { shard }) :
-                this.client.functions.request.execute(`https://typicalbot.com/api/shard/?guild_id=${shard}&shard_count=${this.client.shardCount}`).then(data => {
+                this.client.functions.get("request").execute(`https://typicalbot.com/api/shard/?guild_id=${shard}&shard_count=${this.client.shardCount}`).then(data => {
                     this.client.transmit("restartshard", { "shard": +data });
                 });
         } else {
-            this.client.functions.request.execute(`https://typicalbot.com/api/shard/?guild_id=${action}&shard_count=${this.client.shardCount}`).then(data => {
+            this.client.functions.get("request").execute(`https://typicalbot.com/api/shard/?guild_id=${action}&shard_count=${this.client.shardCount}`).then(data => {
                 response.reply(`Guild ${action} is on Shard ${+data + 1} / ${this.client.shardCount}.`);
             });
         }

@@ -31,7 +31,7 @@ class New extends Event {
         } else {
             channel.send(
                 settings.logs.leave ?
-                    this.client.functions.formatMessage.execute("logs", guild, user, settings.logs.leave) :
+                    this.client.functions.get("formatMessage").execute("logs", guild, user, settings.logs.leave) :
                     `**${user.tag}** has left the server.`
             ).catch(() => console.log("Missing Permissions"));
         }

@@ -27,18 +27,18 @@ class New extends Event {
                 } else {
                     channel.send(
                         settings.logs.join ?
-                            this.client.functions.formatMessage.execute("logs", guild, user, settings.logs.join) :
+                            this.client.functions.get("formatMessage").execute("logs", guild, user, settings.logs.join) :
                             `**${user.username}#${user.discriminator}** has joined the server.`
                     ).catch(() => console.log("Missing Permissions"));
                 }
             }
         }
 
-        if (settings.auto.message && !user.bot) user.send(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage.execute("automessage", guild, user, settings.auto.message)}`).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.message && !user.bot) user.send(`**${guild.name}'s Join Message:**\n\n${this.client.functions.get("formatMessage").execute("automessage", guild, user, settings.auto.message)}`).catch(() => console.log("Missing Permissions"));
 
-        if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage.execute("autonick", guild, user, settings.auto.nickname)).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.nickname) member.setNickname(this.client.functions.get("formatMessage").execute("autonick", guild, user, settings.auto.nickname)).catch(() => console.log("Missing Permissions"));
 
-        const autorole = this.client.functions.fetchAutoRole.execute(guild, settings);
+        const autorole = this.client.functions.get("fetchAutoRole").execute(guild, settings);
         if (autorole && autorole.editable) setTimeout(() =>
             member.addRole(autorole).then(() => {
                 if (settings.auto.role.silent === "N" && settings.logs.id && guild.channels.has(settings.logs.id)) guild.channels.get(settings.logs.id).send(`**${user.tag}** was given the autorole **${autorole.name}**.`);

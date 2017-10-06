@@ -16,8 +16,8 @@ module.exports = class extends Command {
         const stream = this.client.streams.get(message.guild.id);
         const queue = stream.queue;
 
-        const short = text => this.client.functions.lengthen.execute(-1, text, 45),
-            time = len => this.client.functions.convertTime.execute(len * 1000);
+        const short = text => this.client.functions.get("lengthen").execute(-1, text, 45),
+            time = len => this.client.functions.get("convertTime").execute(len * 1000);
 
         if (!queue.length) return  response.send(`**__Queue:__** There are no videos in the queue.\n\n**__Currently Streaming:__** **${short(stream.current.title)}** (${time(stream.current.length_seconds)}) | Requested by **${stream.current.response.message.author.username}**`);
 

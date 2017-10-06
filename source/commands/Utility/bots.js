@@ -24,8 +24,8 @@ module.exports = class extends Command {
                 .filter(bot => bot.name = bot.name.replace(/[^a-z0-9]/gmi, "").replace(/\s+/g, ""))
                 .filter(bot => bot.servercount = Number(bot.servercount).toLocaleString());
 
-            const content = this.client.functions.pagify.execute(
-                bots.map(bot => `${this.client.functions.lengthen.execute(1, `${bot.name}`, 20)}: ${bot.servercount}${bot.compliant ? ` | Carbon Compliant` : ""}`),
+            const content = this.client.functions.get("pagify").execute(
+                bots.map(bot => `${this.client.functions.get("lengthen").execute(1, `${bot.name}`, 20)}: ${bot.servercount}${bot.compliant ? ` | Carbon Compliant` : ""}`),
                 page
             );
 

@@ -20,7 +20,7 @@ class New extends Event {
         if (settings.logs.delete === "--embed") return channel.buildEmbed()
             .setColor(0x3EA7ED)
             .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
-            .setDescription(this.client.functions.lengthen.execute(-1, message.content, 100))
+            .setDescription(this.client.functions.get("lengthen").execute(-1, message.content, 100))
             .setFooter("Message Deleted")
             .setTimestamp()
             .send()
@@ -30,7 +30,7 @@ class New extends Event {
         channel.send(
             settings.logs.delete === "--enabled" ?
                 `**${user.username}#${user.discriminator}**'s message was deleted.` :
-                this.client.functions.formatMessage.execute("logs-msgdel", message.guild, user, settings.logs.delete, { message, channel: message.channel })
+                this.client.functions.get("formatMessage").execute("logs-msgdel", message.guild, user, settings.logs.delete, { message, channel: message.channel })
         ).catch(() => console.log("Missing Permissions"));
     }
 }
