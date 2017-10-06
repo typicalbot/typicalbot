@@ -24,10 +24,10 @@ class Store {
             const start = Date.now();
 
             klaw(this.dir).on("data", item => {
-                this.c++;
-
                 const file = path.parse(item.path);
                 if (!file.ext || file.ext !== ".js") return;
+
+                this.c++;
 
                 this.load(path.join(file.dir, file.base), file.name);
             }).on("end", () => {
