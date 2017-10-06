@@ -7,7 +7,7 @@ class EventStore extends Store {
 
         this.loadAll().then(() => {
             this.forEach(e => {
-                client.on(e.event, (...args) => e.execute(...args));
+                client.on(e.name, (...args) => e.execute(...args));
             });
         });
     }

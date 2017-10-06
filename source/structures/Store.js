@@ -22,12 +22,16 @@ class Store extends Collection {
 
     loadAll() {
         return new Promise((resolve, reject) => {
+            const start = Date.now();
+
             klaw(this.dir).on("data", item => {
                 const file = path.parse(item.path);
                 if (!file.ext || file.ext !== ".js") return;
 
                 this.load(path.join(file.dir, file.base), file.name);
             }).on("end", () => {
+                console.log(`Loaded ${this.size} ${this.type} in ${Date.now() - start}ms`);
+
                 return resolve();
             });
         });

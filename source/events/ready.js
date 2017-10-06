@@ -1,14 +1,14 @@
 const Event = require("../structures/Event");
 
-class Ready extends Event {
+class New extends Event {
     constructor(client, name) {
         super(client, name);
     }
 
-    execute() {
+    async execute() {
         this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
         this.client.user.setActivity(`Client Started`);
     }
 }
 
-module.exports = Ready;
+module.exports = New;

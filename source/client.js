@@ -1,9 +1,22 @@
-const { Client } = require("discord.js");
+require("../utility/Extenders");
+
+const { Client, Collection } = require("discord.js");
 
 const build = process.env.CLIENT_BUILD;
 const config = require(`../configs/${build}`);
 
-const EventStore = require("./stores/Events.js");
+const Database = require("./managers/Database");
+const SettingsManager = require("./managers/Settings");
+const PermissionsManager = require("./managers/Permissions");
+const ModlogsManager = require("./managers/ModerationLogs");
+const AudioManager = require("./managers/Audio");
+
+const EventStore = require("./stores/Events");
+const FunctionStore = require("./stores/Functions");
+const CommandStore = require("./stores/Commands");
+
+const AutoModeration = require("./utility/AutoModeration");
+const AudioUtility = require("./utility/Audio");
 
 new class TypicalBot extends Client {
     constructor() {
@@ -17,6 +30,29 @@ new class TypicalBot extends Client {
         this.shardCount = Number(process.env.SHARD_COUNT);
 
         this.events = new EventStore(this);
+        this.functions = new FunctionStore(this);
+        this.commands = new CommandStore(this);
+
+        this.settingsManager = new SettingsManager(this);
+        this.permissionsManager = new PermissionsManager(this);
+        this.modlogsManager = new ModlogsManager(this);
+        this.audioManager = new AudioManager(this);
+        this.automod = new AutoModeration(this);
+        this.audioUtility = new AudioUtility(this);
+
+        this.shardData = {};
+        this.testerData = [];
+        this.donorData = [];
+
+        this.lastMessage = null;
+
+        this.commandsStats = Array(60).fill(0);
+
+        this.streams = new Collection();
+
+        this.banCache = new Collection();
+        this.unbanCache = new Collection();
+        this.softbanCache = new Collection();
 
         this.login(config.token);
     }

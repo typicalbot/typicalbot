@@ -1,4 +1,4 @@
-class Event {
+class Function {
     constructor(client, name) {
         this.client = client;
 
@@ -6,4 +6,4 @@ class Event {
     }
 }
 
-module.exports = Event;
+module.exports = Function;
