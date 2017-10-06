@@ -32,8 +32,8 @@ new class TypicalBot extends Client {
 
         this.database = new Database();
 
-        this.events = new EventStore(this);
         this.functions = new FunctionStore(this);
+        this.events = new EventStore(this);
         this.commands = new CommandStore(this);
 
         this.settingsManager = new SettingsManager(this);
@@ -67,4 +67,7 @@ new class TypicalBot extends Client {
     }
 };
 
-process.on("uncaughtException", err => console.error(err.stack));
+process.on('unhandledRejection', (err) => {
+    if (!err) return;
+    console.error(`Uncaught Promise Error: \n${err.stack || err}`);
+});
