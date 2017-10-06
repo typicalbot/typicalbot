@@ -10,7 +10,6 @@ class EventStore extends Store {
                 client.on(e.name, (...args) => e.execute(...args));
             });
             this.filter(e => e.once).forEach(e => {
-                console.log(e.name);
                 client.once(e.name, (...args) => e.execute(...args));
             });
         });
