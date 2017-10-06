@@ -19,8 +19,8 @@ module.exports = class extends Command {
         const list = this.client.users.findAll("discriminator", discriminator);
         if (!list.length) return response.reply(`There are no users with the discriminator **${discriminator}** on record.`);
 
-        const content = this.client.functions.get("pagify").execute(
-            list.map(u => `${this.client.functions.get("lengthen").execute(1, u.tag, 30)} ${u.id}`),
+        const content = this.client.functions.pagify(
+            list.map(u => `${this.client.functions.lengthen(1, u.tag, 30)} ${u.id}`),
             page
         );
 

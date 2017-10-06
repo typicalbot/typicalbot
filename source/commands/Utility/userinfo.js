@@ -14,7 +14,7 @@ module.exports = class extends Command {
     async execute(message, response, permissionLevel) {
         const args = /userinfo(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(message.content);
 
-        const member = await this.client.functions.get("resolveMember").execute(message, args);
+        const member = await this.client.functions.resolveMember(message, args);
         const user = member.user;
 
         response.reply(
@@ -36,7 +36,7 @@ module.exports = class extends Command {
     async embedExecute(message, response, permissionLevel) {
         const args = /userinfo(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(message.content);
 
-        const member = await this.client.functions.get("resolveMember").execute(message, args);
+        const member = await this.client.functions.resolveMember(message, args);
         const user = member.user;
 
         const embed = response.buildEmbed()
@@ -113,7 +113,7 @@ if (!after) {
 let lengthen = client.functions.lengthen;
 if (after === "roles") {
     let page = message.content.split(" ")[2];
-    let paged = client.functions.get("pagify").execute(
+    let paged = client.functions.pagify(
         message.guild.roles.filter(r => r.position !== 0).array().sort((a,b) => b.position - a.position).map(r => `${lengthen(r.name, 20)} : ${r.id}`),
         page
     );
@@ -123,7 +123,7 @@ if (after === "roles") {
 }
 if (after === "channels") {
     let page = message.content.split(" ")[2];
-    let paged = client.functions.get("pagify").execute(
+    let paged = client.functions.pagify(
         message.guild.channels.filter(c => c.type === "text").array().sort((a,b) => a.position - b.position).map(c => `${lengthen(c.name, 20)} : ${c.id}`),
         page
     );
@@ -133,8 +133,8 @@ if (after === "channels") {
 }
 if (after === "bots") {
     let page = message.content.split(" ")[2];
-    let paged = client.functions.get("pagify").execute(
-        message.guild.members.filter(m => m.user.bot).map(b => `${client.functions.get("lengthen").execute(b.user.username, 20)} : ${b.user.id}`),
+    let paged = client.functions.pagify(
+        message.guild.members.filter(m => m.user.bot).map(b => `${client.functions.lengthen(b.user.username, 20)} : ${b.user.id}`),
         page
     );
     return response.reply(

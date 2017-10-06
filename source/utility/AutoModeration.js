@@ -8,8 +8,8 @@ module.exports = class {
     inviteCheck(response) {
         return new Promise((resolve, reject) => {
             if (response.message.guild.settings.automod.invite) {
-                const contentMatch = this.client.functions.get("inviteCheck").execute(response.message.content);
-                const embedMatch = this.client.functions.get("inviteCheck").execute(inspect(response.message.embeds, { depth: 4 }));
+                const contentMatch = this.client.functions.inviteCheck(response.message.content);
+                const embedMatch = this.client.functions.inviteCheck(inspect(response.message.embeds, { depth: 4 }));
 
                 if (contentMatch || embedMatch) {
                     this.client.eventsManager.guildInvitePosted(response.message.guild, response.message, response.message.author);

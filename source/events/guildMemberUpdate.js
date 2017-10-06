@@ -20,11 +20,11 @@ class New extends Event {
         if (!guild.channels.has(settings.logs.id)) return;
         const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.auto.nickname && nickname === this.client.functions.get("formatMessage").execute("jn", guild, user, settings.auto.nickname)) return;
+        if (settings.auto.nickname && nickname === this.client.functions.formatMessage("jn", guild, user, settings.auto.nickname)) return;
 
         channel.send(
             settings.logs.nickname !== "--enabled" ?
-                this.client.functions.get("formatMessage").execute("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
+                this.client.functions.formatMessage("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
                 `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
         ).catch(() => console.log("Missing Permissions"));
     }
