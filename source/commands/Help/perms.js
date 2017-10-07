@@ -3,6 +3,7 @@ const Command = require("../../structures/Command");
 module.exports = class extends Command {
     constructor(client, name) {
         super(client, name, {
+            description: "Sends a help embed in regards to permissions.",
             mode: "strict"
         });
     }

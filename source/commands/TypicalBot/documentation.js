@@ -3,7 +3,7 @@ const Command = require("../../structures/Command");
 module.exports = class extends Command {
     constructor(client, name) {
         super(client, name, {
-            description: "A check to see if TypicalBot is able to respond.",
+            description: "Grab a link to TypicalBot's documentation.",
             usage: "documentation",
             aliases: ["docs"],
             dm: true,
