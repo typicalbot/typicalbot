@@ -495,12 +495,12 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "autonickname") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { auto: { message: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settingsManager.update(message.guild.id, { auto: { nickname: null } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         if (value.length > 20) return response.error("Autonickname must contain no more than 20 characters.");
                         if (!value.includes("{user.name}")) return response.error("Autonickname must contain the `{user.name}` placeholder.");
 
-                        this.client.settingsManager.update(message.guild.id, { auto: { message: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settingsManager.update(message.guild.id, { auto: { nickname: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "mode") {
                     if (value === "free") {
