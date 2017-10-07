@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const { loadavg } = require('os');
 
 module.exports = class extends Command {
     constructor(client, name) {
@@ -24,6 +25,11 @@ module.exports = class extends Command {
             + `=> Servers           : ${this.client.guilds.size.toLocaleString()}\n`
             + `=> Channels          : ${this.client.channels.size.toLocaleString()}\n`
             + `=> Users             : ${this.client.users.size.toLocaleString()}\n`
+            + `    Usage:\n`
+            + `=> CPU               : ${Math.round(loadavg()[0] * 10000) / 100}%\n`
+            + `=> RAM (Used)        : ${Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100}MB\n`
+            + `=> RAM (Total)       : ${Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100}MB\n`
+            + `=> Users             : ${this.client.users.size.toLocaleString()}\n`
             + `\`\`\``
         );
     }
@@ -41,6 +47,9 @@ module.exports = class extends Command {
             .addField("» Servers on Shard", `${this.client.guilds.size.toLocaleString()}`, true)
             .addField("» Channels on Shard", `${this.client.channels.size.toLocaleString()}`, true)
             .addField("» Users on Shard", `${this.client.users.size.toLocaleString()}`, true)
+            .addField("» CPU Usage", `${Math.round(loadavg()[0] * 10000) / 100}%`, true)
+            .addField("» RAM (Used)", `${Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100}MB`, true)
+            .addField("» RAM (Total)", `${Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100}MB`, true)
             .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
             .setTimestamp()
             .send();
