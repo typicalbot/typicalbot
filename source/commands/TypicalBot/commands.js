@@ -17,11 +17,11 @@ module.exports = class extends Command {
         const commands = this.client.commands;
         const list = Array.from(commands.keys());
 
-        const level0 = list.filter(c => commands.get(c).permission === 0).map(c => `${this.client.config.prefix}${c}`);
-        const level1 = list.filter(c => commands.get(c).permission === 1).map(c => `${this.client.config.prefix}${c}`);
-        const level2 = list.filter(c => commands.get(c).permission === 2).map(c => `${this.client.config.prefix}${c}`);
-        const level3 = list.filter(c => commands.get(c).permission === 3).map(c => `${this.client.config.prefix}${c}`);
-        const level4 = list.filter(c => commands.get(c).permission === 4).map(c => `${this.client.config.prefix}${c}`);
+        const level0 = list.filter(c => commands._get(c).permission === 0).map(c => `${this.client.config.prefix}${c}`);
+        const level1 = list.filter(c => commands._get(c).permission === 1).map(c => `${this.client.config.prefix}${c}`);
+        const level2 = list.filter(c => commands._get(c).permission === 2).map(c => `${this.client.config.prefix}${c}`);
+        const level3 = list.filter(c => commands._get(c).permission === 3).map(c => `${this.client.config.prefix}${c}`);
+        const level4 = list.filter(c => commands._get(c).permission === 4).map(c => `${this.client.config.prefix}${c}`);
 
         response.dm(
             `**__TypicalBot's Commands:__**\nView Usage Here: ${this.client.config.urls.docs}\n\n`
