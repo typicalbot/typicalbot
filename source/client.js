@@ -6,6 +6,7 @@ const build = process.env.CLIENT_BUILD;
 const config = require(`../configs/${build}`);
 
 const Database = require("./managers/Database");
+const ProcessManager = require("./managers/Process");
 const SettingsManager = require("./managers/Settings");
 
 const PermissionsManager = require("./managers/Permissions");
@@ -19,7 +20,7 @@ const CommandStore = require("./stores/Commands");
 const AutoModeration = require("./utility/AutoModeration");
 const AudioUtility = require("./utility/Audio");
 
-new class TypicalBot extends Client {
+const client = new class TypicalBot extends Client {
     constructor() {
         super(config.clientOptions);
 
@@ -31,6 +32,7 @@ new class TypicalBot extends Client {
         this.shardCount = Number(process.env.SHARD_COUNT);
 
         this.database = new Database();
+        this.processManager = new ProcessManager(this);
 
         this.functions = new FunctionStore(this);
         this.events = new EventStore(this);
@@ -91,7 +93,10 @@ new class TypicalBot extends Client {
     }
 };
 
-process.on('unhandledRejection', (err) => {
-    if (!err) return;
-    console.error(`Uncaught Promise Error: \n${err.stack || err}`);
-});
+process
+    .on("message", msg => client.processManager.message(msg))
+    .on("uncaughtException", err => client.log(err.stack, true))
+    .on("unhandledRejection", err => {
+        if (!err) return;
+        console.error(`Uncaught Promise Error: \n${err.stack || err}`);
+    });
