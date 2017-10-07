@@ -14,7 +14,7 @@ module.exports = class extends Command {
     execute(message, response, permissionLevel) {
         if (message.channel.type === "text") response.reply(`Check your Direct Messages for my commands!`);
 
-        const commands = this.client.commands.data;
+        const commands = this.client.commands;
         const list = Array.from(commands.keys());
 
         const level0 = list.filter(c => commands.get(c).permission === 0).map(c => `${this.client.config.prefix}${c}`);
