@@ -3,7 +3,7 @@ const Command = require("../../structures/Command");
 module.exports = class extends Command {
     constructor(client, name) {
         super(client, name, {
-            description: "Softbans a member from the server.",
+            description: "Softban a member from the server.",
             usage: "softban <@user> [purge-days] [reason]",
             mode: "strict",
             permission: 2

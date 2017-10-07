@@ -3,7 +3,7 @@ const Command = require("../../structures/Command");
 module.exports = class extends Command {
     constructor(client, name) {
         super(client, name, {
-            description: "Gives you a random user.",
+            description: "Selects a random member in the server..",
             usage: "randomuser",
             mode: "lite"
         });

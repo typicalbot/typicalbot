@@ -6,7 +6,7 @@ module.exports = class extends Command {
     constructor(client, name) {
         super(client, name, {
             description: "Displays the server's information.",
-            usage: "serverinfo ['bots'|'channels']",
+            usage: "serverinfo",
             mode: "strict"
         });
     }

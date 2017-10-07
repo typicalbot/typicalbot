@@ -31,7 +31,7 @@ const settingsList = {
 module.exports = class extends Command {
     constructor(client, name) {
         super(client, name, {
-            description: "Customize your servers setting and enable/discord specific features.",
+            description: "View or customize your servers setting and enable/disable specific features.",
             usage: "settings <'list'|'view'|'edit'> [setting] ['add'|'remove'] [value]",
             aliases: ["set"],
             mode: "strict"

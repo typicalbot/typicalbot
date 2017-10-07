@@ -4,7 +4,7 @@ module.exports = class extends Command {
     constructor(client, name) {
         super(client, name, {
             description: "Searches in the user list for a username or nickname.",
-            usage: "search <query>",
+            usage: "search <query> [page-number]",
             mode: "lite"
         });
     }

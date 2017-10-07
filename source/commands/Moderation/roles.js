@@ -5,7 +5,7 @@ module.exports = class extends Command {
         super(client, name, {
             description: "Manage or view roles in a server.",
             usage: "Check `$roles help` for this command's usage.",
-            aliases: ["roles"],
+            aliases: ["role"],
             mode: "strict"
         });
     }
