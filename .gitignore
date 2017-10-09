@@ -1,0 +1,4 @@
+node_modules/*
+configs/*
+express/config.json
+package-lock.json
