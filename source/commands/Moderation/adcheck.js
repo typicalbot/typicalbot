@@ -13,7 +13,7 @@ module.exports = class extends Command {
     execute(message, response, permissionLevel) {
         const members = message.guild.members.filter(m => m.user.presence.activity && /(discord\.(gg|io|me|li)\/.+|discordapp\.com\/invite\/.+)/i.test(m.user.presence.activity.name));
 
-        const list = members.map(m => `» ${m.displayName} (${m.id}) | ${m.user.presence.game.name}`);
+        const list = members.map(m => `» ${m.displayName} (${m.id}) | ${m.user.presence.activity.name}`);
 
         response.buildEmbed()
             .setColor(0xFF0000)
