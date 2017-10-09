@@ -5,7 +5,7 @@ class New extends Event {
     constructor(client, name) {
         super(client, name);
 
-        this.mentionRegex = new RegExp(`^<@!?${this.client.user.id}>$`);
+        this.mentionRegex = new RegExp(`^<@!?${this.client.config.id}>$`);
     }
 
     async execute(message) {
