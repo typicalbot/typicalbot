@@ -10,7 +10,7 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        const args = /urban (.*)/gi.exec(message.content);
+        const args = /urban\s+(.*)/gi.exec(message.content);
         if (!args) return response.usage(this);
 
         const query = args[1];
