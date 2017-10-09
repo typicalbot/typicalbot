@@ -1,6 +1,6 @@
 const Command = require("../../structures/Command");
 const { Canvas } = require("canvas-constructor");
-const { Attachment } = require("discord.js");
+const { MessageAttachment } = require("discord.js");
 
 module.exports = class extends Command {
     constructor(client, name) {
@@ -18,7 +18,7 @@ module.exports = class extends Command {
         const hex = args[1] === "random" ? Math.floor(Math.random()*16777215).toString(16) : args[1];
 
         message.channel.send(
-            new Attachment(
+            new MessageAttachment(
                 new Canvas(200, 100)
                     .setColor(`#${hex}`)
                     .addRect(0, 0, 200, 100)
