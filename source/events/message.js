@@ -48,7 +48,7 @@ class New extends Event {
             if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
 
             const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
-            if (actualUserPermissions < command.permission) return response.perms(command, actualUserPermissions);
+            if (actualUserPermissions.level < command.permission) return response.perms(command, actualUserPermissions);
 
             this.client.commandsStats[this.client.commandsStats.length - 1]++;
 
