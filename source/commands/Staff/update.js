@@ -29,6 +29,7 @@ module.exports = class extends Command {
                         "TBP" : this.client.build === "beta" ?
                             "TBB" : this.client.build === "development" ?
                                 "TBD" : null }`,
+            { cwd: join(__dirname, "..", "..", "..") },
             (err, stdout, stderr) => {
                 if (err) return console.error(err);
             });
