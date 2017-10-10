@@ -25,7 +25,7 @@ module.exports = class extends Command {
 
             if (restart) embed.addField("\u200B", "Restarting now...");
 
-            exec(`pm2 restart ${
+            if (restart) exec(`pm2 restart ${
                 this.client.build === "stable" ?
                     "TB" : this.client.build === "prime" ?
                         "TBP" : this.client.build === "beta" ?
