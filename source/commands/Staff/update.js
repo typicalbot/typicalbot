@@ -13,7 +13,9 @@ module.exports = class extends Command {
     execute(message, response, permissionLevel) {
         const restart = /update\s+(?:-r|--restart)/.test(message.content);
 
-        exec("git pull", { cwd: join(__dirname, "..", "..", "..") }, (err, stdout, stderr) => {
+        const path = join(__dirname, "..", "..", "..");
+
+        exec("git pull", { cwd: path }, (err, stdout, stderr) => {
             if (err) return console.error(err);
 
             const embed = response.buildEmbed().setTitle("TypicalBot Updater").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setColor(0x00adff);
@@ -29,7 +31,7 @@ module.exports = class extends Command {
                         "TBP" : this.client.build === "beta" ?
                             "TBB" : this.client.build === "development" ?
                                 "TBD" : null }`,
-            { cwd: join(__dirname, "..", "..", "..") },
+            { cwd: path, env: { HOME: "/home/hypercoder" } },
             (err, stdout, stderr) => {
                 if (err) return console.error(err);
             });
