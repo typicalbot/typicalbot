@@ -23,7 +23,7 @@ module.exports = class extends Command {
             if (stdout) embed.addField("» STDOUT", stdout.toString().substring(0, 1024));
             if (stderr) embed.addField("» STDERR", stderr.toString().substring(0, 1024));
 
-            if (restart) embed.addBlankField().addField("Restart", "Restarting now...");
+            if (restart) embed.addField("\u200B", "Restarting now...");
 
             exec(`pm2 restart ${
                 this.client.build === "stable" ?
