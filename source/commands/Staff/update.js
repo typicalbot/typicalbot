@@ -19,7 +19,7 @@ module.exports = class extends Command {
             if (stdout) reply.push(`STDOUT:\n- - - - - - - - - -\n${stdout}`);
             if (stderr) reply.push(`STDERR:\n- - - - - - - - - -\n${stderr}`);
 
-            response.send(`\`\`\`\n${reply.join("\n--  --  --  --  --  --  --\n")}\n\`\`\``);
+            response.send(`\`\`\`\n${reply.join("\n--  --  --  --  --  --  --\n").subString(0, 1900)}\n\`\`\``);
         });
     }
 };
