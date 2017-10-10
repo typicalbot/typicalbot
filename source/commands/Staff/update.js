@@ -14,12 +14,12 @@ module.exports = class extends Command {
         exec("git pull", { cwd: join(__dirname, "..", "..", "..") }, (err, stdout, stderr) => {
             if (err) return console.error(err);
 
-            const reply = [];
+            const embed = response.buildEmbed().setTitle("TypicalBot Git-Pull").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png");
 
-            if (stdout) reply.push(`STDOUT:\n- - - - - - - - - -\n${stdout}`);
-            if (stderr) reply.push(`STDERR:\n- - - - - - - - - -\n${stderr}`);
+            if (stdout) embed.addField("STDOUT", stdout.toString().substring(0, 1024));
+            if (stderr) embed.addField("STDERR", stderr.toString().substring(0, 1024));
 
-            response.send(`\`\`\`\n${reply.join("\n--  --  --  --  --  --  --\n").subString(0, 1900)}\n\`\`\``);
+            embed.send();
         });
     }
 };
