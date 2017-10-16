@@ -13,7 +13,7 @@ module.exports = class extends Command {
     execute(message, response, permissionLevel) {
         const restart = /update\s+(?:-r|--restart)/.test(message.content);
 
-        const path = join(__dirname, "..", "..", "..");
+        const path = process.cwd();
 
         exec("git pull", { cwd: path }, (err, stdout, stderr) => {
             if (err) return console.error(err);
