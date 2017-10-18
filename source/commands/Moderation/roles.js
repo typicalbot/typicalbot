@@ -117,7 +117,7 @@ module.exports = class extends Command {
 
                 roleList.push(subRole.id);
 
-                this.client.settingsManager.update(message.guild.id, { roles: { public: roleList } })
+                this.client.settings.update(message.guild.id, { roles: { public: roleList } })
                     .then(() => response.reply("Success."))
                     .catch(err => response.error(`An error occured while processing that request\n${String(err).substring(0, 500)}`));
             } else if (subAction === "remove") {
@@ -131,14 +131,14 @@ module.exports = class extends Command {
 
                 roleList.splice(roleList.indexOf(subRole.id), 1);
 
-                this.client.settingsManager.update(message.guild.id, { roles: { public: roleList } })
+                this.client.settings.update(message.guild.id, { roles: { public: roleList } })
                     .then(() => response.reply("Success."))
                     .catch(err => response.error(`An error occured while processing that request.`));
 
             } else if (subAction === "clear") {
                 if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
 
-                this.client.settingsManager.update(message.guild.id, { roles: { public: [] } })
+                this.client.settings.update(message.guild.id, { roles: { public: [] } })
                     .then(() => response.reply("Success."))
                     .catch(err => response.error(`An error occured while processing that request.`));
             }

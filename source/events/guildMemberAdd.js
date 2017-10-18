@@ -8,7 +8,7 @@ class New extends Event {
     async execute(member) {
         const guild = member.guild;
 
-        const settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settings.fetch(guild.id);
 
         const user = member.user;
 

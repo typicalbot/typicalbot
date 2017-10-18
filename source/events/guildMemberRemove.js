@@ -12,7 +12,7 @@ class New extends Event {
         const bans = await guild.fetchBans().catch(() => console.log("Missing Permissions"));
         if (bans instanceof Collection && bans.has(member.id)) return;
 
-        const settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settings.fetch(guild.id);
         if (!settings.logs.id || settings.logs.leave === "--disabled") return;
 
         const user = member.user;

@@ -42,7 +42,7 @@ module.exports = class {
 
     fetchChannel(guild) {
         return new Promise(async (resolve, reject) => {
-            const settings = await this.client.settingsManager.fetch(guild.id);
+            const settings = await this.client.settings.fetch(guild.id);
 
             const id = settings.logs.moderation;
 

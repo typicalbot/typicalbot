@@ -12,7 +12,7 @@ class New extends Event {
         const nickname = member.nickname;
         if (oldNickname === nickname) return;
 
-        const settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settings.fetch(guild.id);
         if (!settings.logs.id || !settings.logs.nickname) return;
 
         const user = member.user;

@@ -6,7 +6,7 @@ class New extends Event {
     }
 
     async execute(guild, user) {
-        const settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settings.fetch(guild.id);
 
         if (settings.logs.moderation && !this.client.softbanCache.has(user.id)) {
             const cachedLog = this.client.unbanCache.get(user.id);

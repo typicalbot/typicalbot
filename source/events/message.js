@@ -23,7 +23,7 @@ class New extends Event {
 
             this.client.lastMessage = message.createdTimestamp;
 
-            const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
+            const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 
             if (message.content.match(this.mentionRegex)) return message.channel.send(`${message.author} | This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
 

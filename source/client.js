@@ -7,12 +7,13 @@ const config = require(`../configs/${build}`);
 
 const Database = require("./managers/Database");
 const ProcessManager = require("./managers/Process");
-const SettingsManager = require("./managers/Settings");
+//const SettingsManager = require("./managers/Settings");
 
 const PermissionsManager = require("./managers/Permissions");
 const ModlogsManager = require("./managers/ModerationLogs");
 const AudioManager = require("./managers/Audio");
 
+const SettingsStore = require("./stores/Settings");
 const EventStore = require("./stores/Events");
 const FunctionStore = require("./stores/Functions");
 const CommandStore = require("./stores/Commands");
@@ -34,11 +35,12 @@ const client = new class TypicalBot extends Client {
         this.database = new Database();
         this.processManager = new ProcessManager(this);
 
+        this.settings = new SettingsStore(this);
         this.functions = new FunctionStore(this);
         this.events = new EventStore(this);
         this.commands = new CommandStore(this);
 
-        this.settingsManager = new SettingsManager(this);
+        //this.settingsManager = new SettingsManager(this);
         this.permissionsManager = new PermissionsManager(this);
         this.modlogsManager = new ModlogsManager(this);
         this.audioManager = new AudioManager(this);

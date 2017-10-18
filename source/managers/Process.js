@@ -29,7 +29,7 @@ module.exports = class {
             if (!this.client.guilds.has(data.guild)) return;
 
             const guild = this.client.guilds.get(data.guild);
-            const settings = await this.client.settingsManager.fetch(data.guild);
+            const settings = await this.client.settings.fetch(data.guild);
 
             const guildOwner = await this.client.users.fetch(guild.ownerID);
 
@@ -51,7 +51,7 @@ module.exports = class {
             if (!this.client.guilds.has(data.guild)) return; // this.client.transmit("masterrequest", { inGuild: false, id: data.id });
 
             const guild = this.client.guilds.get(data.guild);
-            guild.settings = await this.client.settingsManager.fetch(data.guild);
+            guild.settings = await this.client.settings.fetch(data.guild);
 
             const permissions = this.client.permissionsManager.get(guild, data.user);
 
@@ -74,7 +74,7 @@ module.exports = class {
             if (!this.client.guilds.has(data.guild)) return;
 
             const guild = this.client.guilds.get(data.guild);
-            guild.settings = await this.client.settingsManager.fetch(data.guild);
+            guild.settings = await this.client.settings.fetch(data.guild);
 
             const permissions = this.client.permissionsManager.get(guild, data.user);
 
@@ -112,7 +112,7 @@ if (message.type === "serverinfo") {
     const guild = this.client.guilds.get(message.data.guild);
     const owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
 
-    this.client.settingsManager.fetch(guild.id).then(settings => {
+    this.client.settings.fetch(guild.id).then(settings => {
         let settingslist = [];
         Object.keys(settings).map(s => settingslist.push(`${s}: \`${settings[s]}\``));
 

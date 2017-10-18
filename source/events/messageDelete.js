@@ -8,7 +8,7 @@ class New extends Event {
     async execute(message) {
         if (message.channel.type !== "text") return;
 
-        const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
+        const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 
         if (!settings.logs.id || !settings.logs.delete) return;
 
