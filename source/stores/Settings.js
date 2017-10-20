@@ -80,7 +80,7 @@ class EventStore extends Store {
             return this._defaultData(id);
         }
 
-        this.data.set(id, row);
+        this.set(id, row);
         return row;
     }
 
@@ -107,7 +107,7 @@ class EventStore extends Store {
 
     async update(id, object) {
         await this.client.database.update("guilds", id, object);
-        await this.data.set(id, this._update(this.data.get(id), object));
+        await this.set(id, this._update(this.get(id), object));
 
         return;
     }
