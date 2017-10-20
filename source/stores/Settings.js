@@ -71,7 +71,7 @@ class EventStore extends Store {
     }
 
     async fetch(id) {
-        if (this.data.has(id)) return this.get(id);
+        if (this.has(id)) return this.get(id);
 
         const row = await this.client.database.get("guilds", id);
 
