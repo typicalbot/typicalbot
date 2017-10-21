@@ -19,7 +19,7 @@ let CommandStore = require("./stores/Commands");
 let AutoModeration = require("./utility/AutoModeration");
 let AudioUtility = require("./utility/Audio");
 
-const client = new class TypicalBot extends Client {
+class TypicalBot extends Client {
     constructor() {
         super(config.clientOptions);
 
@@ -153,7 +153,9 @@ const client = new class TypicalBot extends Client {
             }
         }
     }
-};
+}
+
+const client = new TypicalBot();
 
 process
     .on("message", msg => client.processManager.message(msg))
