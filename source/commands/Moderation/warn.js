@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "Warn a member in the server.",
             usage: "warn <@user> [reason]",
             mode: "strict",

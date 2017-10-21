@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "Take a role from you a role off of the public roles list.",
             usage: "take <role-name>",
             mode: "strict"

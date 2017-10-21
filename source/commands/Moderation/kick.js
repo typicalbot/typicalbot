@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "Kick a member from the server.",
             usage: "kick <@user> [reason]",
             mode: "strict",

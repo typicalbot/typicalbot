@@ -3,8 +3,8 @@ const { Canvas } = require("canvas-constructor");
 const { MessageAttachment } = require("discord.js");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "Sends a preview of a hex color.",
             usage: "hex <hex-color:0-9a-fA-F>",
             mode: "lite"

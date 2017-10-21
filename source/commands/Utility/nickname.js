@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "Change or clear either your nickname or another user's nickname.",
             aliases: ["nick"],
             usage: "nickname [@user] [nickname]",

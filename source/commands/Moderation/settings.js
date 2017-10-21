@@ -30,8 +30,8 @@ const settingsList = {
 };
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "View or customize your servers setting and enable/disable specific features.",
             usage: "settings <'list'|'view'|'edit'> [setting] ['add'|'remove'] [value]",
             aliases: ["set"],

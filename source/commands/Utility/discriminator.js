@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "Provides a list of all uers with a given discriminator.",
             aliases: ["discrim"],
             usage: "disrciminator [four-digit-discriminator]",

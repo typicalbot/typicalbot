@@ -3,8 +3,8 @@ const { exec } = require("child_process");
 const { join } = require("path");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             mode: "strict",
             permission: 10
         });

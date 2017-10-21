@@ -2,8 +2,8 @@ const Command = require("../../structures/Command");
 const request = require("superagent");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "Grabs the definition from Urban Dictionary for the specified word.",
             usage: "urban <query>"
         });

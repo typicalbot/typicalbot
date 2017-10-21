@@ -3,8 +3,8 @@ const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
 module.exports = class extends Command {
-    constructor(client, name, path) {
-        super(client, name, path, {
+    constructor(...args) {
+        super(...args, {
             description: "Displays the server's information.",
             usage: "serverinfo",
             mode: "strict"
