@@ -144,7 +144,7 @@ const client = new class TypicalBot extends Client {
 
             if (command) {
                 this.commands.get(command).then(cmd => {
-                    if (!cmd) return; this.commands.reload(cmd.path);
+                    if (!cmd) return; this.commands.reload(cmd);
                 });
             } else {
                 delete require.cache[`${__dirname}/stores/Commands.js`];
