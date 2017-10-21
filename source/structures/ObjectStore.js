@@ -14,7 +14,7 @@ class Store {
 
     load(path, name) {
         const file = require(path);
-        const req = new file(this.client, name);
+        const req = new file(this.client, name, path);
 
         this[name] = req;
     }
