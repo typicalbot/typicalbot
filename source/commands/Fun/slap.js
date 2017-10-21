@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(client, name, path) {
+        super(client, name, path, {
             description: "'Slap' another user in the server.",
             usage: "slap [@user]"
         });

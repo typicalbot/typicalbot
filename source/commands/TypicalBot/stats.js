@@ -2,8 +2,8 @@ const Command = require("../../structures/Command");
 const { loadavg } = require('os');
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(client, name, path) {
+        super(client, name, path, {
             description: "Get TypicalBot's current statistics.",
             usage: "stats",
             dm: true,

@@ -2,8 +2,8 @@ const Command = require("../../structures/Command");
 const util = require("util");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(client, name, path) {
+        super(client, name, path, {
             mode: "strict",
             permission: 10
         });

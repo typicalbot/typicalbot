@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(client, name, path) {
+        super(client, name, path, {
             description: "Search for a video from YouTube.",
             usage: "youtube <query>",
             aliases: ["yts"],

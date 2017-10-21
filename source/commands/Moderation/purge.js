@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(client, name, path) {
+        super(client, name, path, {
             description: "Purge messages in a channel.",
             aliases: ["prune"],
             usage: "purge [@user|#channel|@role|'me'|'you'|'bots'] <message-count>",

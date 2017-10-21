@@ -3,8 +3,8 @@ const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(client, name, path) {
+        super(client, name, path, {
             description: "Displays a user's information.",
             usage: "userinfo [@user|user-id|user-tag]",
             mode: "lite"
