@@ -48,10 +48,6 @@ class TypicalBot extends Client {
         this.testerData = [];
         this.donorData = [];
 
-        this.lastMessage = null;
-
-        this.commandsStats = Array(60).fill(0);
-
         this.streams = new Collection();
 
         this.banCache = new Collection();
@@ -81,13 +77,6 @@ class TypicalBot extends Client {
             channels: this.channels.size,
             voiceConnections: this.voiceConnections.size,
             users: this.users.size
-        });
-        this.transmit("status", {
-            "status": this.status === Constants.Status.READY ? 0 : 1,
-            "uptime": this.uptime
-        });
-        this.transmit("commands", {
-            "commands": this.commandsStats
         });
     }
 
