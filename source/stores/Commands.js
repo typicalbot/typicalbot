@@ -21,7 +21,7 @@ class CommandStore extends Store {
     async reload(command) {
         delete require.cache[command.path];
 
-        const file = require(path);
+        const file = require(command.path);
         const req = new file(this.client, command.name, command.path);
 
         this.set(req.name, req);
