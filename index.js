@@ -50,7 +50,7 @@ class ShardingMaster {
     init() {
         for (let s = 0; s < SHARD_COUNT; s++) {
             setTimeout(
-                () => this.create(this),
+                this.create.bind(this),
                 (9000 * s), s
             );
         }
