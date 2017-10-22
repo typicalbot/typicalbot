@@ -26,6 +26,7 @@ const settingsList = {
     "antiinvite": "Server moderation tool to delete any invites sent by users in the server.",
     "antiinvite-kick": "Auto-Kick users who send multiple invites in the server in a certain time span.",
     "modlogs": "A channel to send moderation logs in. Aka audit logs.",
+    "modlogs-purge": "A modlog to log when a moderator or administrator purges messages in a channel.",
     "nonickname": "A way to disable the `nickname` command from being used.",
 };
 
@@ -151,6 +152,8 @@ module.exports = class extends Command {
 
                     if (!channel) return response.reply(`**__Current Value:__** None`);
                     response.reply(`**__Current Value:__** ${channel.toString()}`);
+                } else if (setting === "modlogs-purge") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.prefix.default ? "Enabled" : "Disabled"}`);
                 } else if (setting === "automessage") {
                     response.reply(`**__Current Value:__** ${message.guild.settings.auto.message ? `\`\`\`txt\n${message.guild.settings.auto.message}\n\`\`\`` : "None"}`);
                 } else if (setting === "autonickname") {
@@ -487,6 +490,14 @@ module.exports = class extends Command {
                         if (!channel) return response.error("Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.");
 
                         this.client.settings.update(message.guild.id, { logs: { moderation: channel.id } }).then(() => response.success("Setting successfully updated."));
+                    }
+                } else if (setting === "modlogs-purge") {
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { logs: { purge: false } }).then(() => response.success("Setting successfully updated."));
+                    } else if (value === "enable") {
+                        this.client.settings.update(message.guild.id, { logs: { purge: true } }).then(() => response.success("Setting successfully updated."));
+                    } else {
+                        response.error("An invalid option was given.");
                     }
                 } else if (setting === "automessage") {
                     if (value === "disable") {
