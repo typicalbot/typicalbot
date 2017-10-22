@@ -107,7 +107,7 @@ module.exports = class {
                     const type = types[action];
 
                     const _action = `**Action:** ${type.action}`;
-                    const _user = `**User:** ${user.username}#${user.discriminator} (${user.id})`;
+                    const _user = `**User:** ${user ? `${user.username}#${user.discriminator} (${user.id})` : "N/A"}`;
                     const _case = Number(last) + 1;
                     const _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
 
