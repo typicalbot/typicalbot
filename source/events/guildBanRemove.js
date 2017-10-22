@@ -27,13 +27,13 @@ class New extends Event {
                 .setFooter("User Unbanned")
                 .setTimestamp()
                 .send()
-                .catch(() => console.log("Missing Permissions"));
+                .catch(() => { return; });
         } else {
             channel.send(
                 settings.logs.unban ?
                     this.client.functions.formatMessage("logs", guild, user, settings.logs.unban) :
                     `**${user.tag}** has been unbanned from the server.`
-            ).catch(() => console.log("Missing Permissions"));
+            ).catch(() => { return; });
         }
     }
 }

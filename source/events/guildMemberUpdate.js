@@ -26,7 +26,7 @@ class New extends Event {
             settings.logs.nickname !== "--enabled" ?
                 this.client.functions.formatMessage("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
                 `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
-        ).catch(() => console.log("Missing Permissions"));
+        ).catch(() => { return; });
     }
 }
 

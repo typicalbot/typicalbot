@@ -24,14 +24,14 @@ class New extends Event {
             .setFooter("Message Deleted")
             .setTimestamp()
             .send()
-            .catch(() => console.log("Missing Permissions"));
+            .catch(() => { return; });
 
 
         channel.send(
             settings.logs.delete === "--enabled" ?
                 `**${user.username}#${user.discriminator}**'s message was deleted.` :
                 this.client.functions.formatMessage("logs-msgdel", message.guild, user, settings.logs.delete, { message, channel: message.channel })
-        ).catch(() => console.log("Missing Permissions"));
+        ).catch(() => { return; });
     }
 }
 

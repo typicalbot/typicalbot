@@ -9,7 +9,7 @@ class New extends Event {
     async execute(member) {
         const guild = member.guild;
 
-        const bans = await guild.fetchBans().catch(() => console.log("Missing Permissions"));
+        const bans = await guild.fetchBans().catch(() => { return; });
         if (bans instanceof Collection && bans.has(member.id)) return;
 
         const settings = await this.client.settings.fetch(guild.id);
@@ -27,13 +27,13 @@ class New extends Event {
                 .setFooter("User Left")
                 .setTimestamp()
                 .send()
-                .catch(() => console.log("Missing Permissions"));
+                .catch(() => { return; });
         } else {
             channel.send(
                 settings.logs.leave ?
                     this.client.functions.formatMessage("logs", guild, user, settings.logs.leave) :
                     `**${user.tag}** has left the server.`
-            ).catch(() => console.log("Missing Permissions"));
+            ).catch(() => { return; });
         }
     }
 }
