@@ -19,7 +19,7 @@ module.exports = class extends Command {
         const roleFilter = args[2] ? message.guild.roles.get(args[2]) : null;
         const channelFilter = args[3] ? message.guild.channels.get(args[3]) : null;
         const otherFilter = args[4];
-        const reason = args[5];
+        const reason = args[6];
 
         let messageCount = args[5]; if (messageCount > 100) messageCount = 100;
         if (messageCount < 1) return response.error("Please provide a number of messages to delete from 1 to 100.");
