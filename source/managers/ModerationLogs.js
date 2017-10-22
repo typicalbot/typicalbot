@@ -22,7 +22,7 @@ const types = {
     unban: { color: 0x006699, action: "Unban" }
 };
 
-const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*User:\*\*\s.+/gi };
+const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*(?:User|Channel):\*\*\s.+/gi };
 
 module.exports = class {
     constructor(client) {
@@ -107,10 +107,9 @@ module.exports = class {
                     const type = types[action];
 
                     const _action = `**Action:** ${type.action}`;
-                    const _user = `**User:** ${user ? `${user.username}#${user.discriminator} (${user.id})` : "N/A"}`;
+                    const _user = user.discriminator ? `**User:** ${user.username}#${user.discriminator} (${user.id})` : user.guild ? `**Channel:** ${user.name} (${user.toString()})` : "N/A";
                     const _case = Number(last) + 1;
                     const _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
-
 
                     const embed = channel.buildEmbed()
                         .setColor(type.color || 0xC4C4C4)
