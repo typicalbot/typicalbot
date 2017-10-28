@@ -30,9 +30,13 @@ module.exports = class extends Command {
 
                     await this.client.modlogsManager.createLog(message.guild, log);
 
+                    const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTitle("TypicalBot Alert System").setDescription(`You have been kicked from **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
+                    if (reason) embed.addField("» Reason", reason);
+                    embed.send().catch(err => { return; });
+
                     response.success(`Successfully kicked user \`${actioned.user.tag}\`.`);
                 } else return response.success(`Successfully kicked user **${actioned.user.tag}**.`);
-            }).catch(err => response.error(`An error occured while trying to kick the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
-        }).catch(err => response.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
+            }).catch(err => response.error(`An error occured while trying to kick the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : `\n\n\`\`\`${err}\`\`\``}`));
+        }).catch(err => response.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : `\n\n\`\`\`${err}\`\`\``}`));
     }
 };
