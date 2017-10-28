@@ -57,7 +57,7 @@ module.exports = class extends Command {
 
         embed
             .addField("» Joined Server", moment(member.joinedAt).format("MMM DD, YYYY @ hh:mm A"), true)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .send();
     }
 };

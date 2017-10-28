@@ -32,7 +32,7 @@ module.exports = class extends Command {
             .setColor(0x00adff)
             .setTitle(`Servers on Shard ${this.client.shardNumber} / ${this.client.shardCount}`)
             .setDescription(`\`\`\`autohotkey\n${paged}\`\`\``)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
     }

@@ -21,7 +21,7 @@ module.exports = class extends Command {
             .addField("**__Changing Nickname Logs__**", "**Disabled** By Default\n**Setting:** logs-nick\n**Options:**\n- 'disable'\n- 'enable'\n- 'default'\n- desired-message", true)
             .addField("**__Changing Invite Sent Logs__**", "**Disabled** By Default\n**Setting:** logs-invite\n**Options:**\n- 'disable'\n- 'enable'\n- 'default'\n- desired-message", true)
             .addField("**__Setting Up Moderation Logs__**", "To set up moderation logs, use the settings edit command for the modlogs setting. `$settings edit modlogs <#channel>`", false)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
     }

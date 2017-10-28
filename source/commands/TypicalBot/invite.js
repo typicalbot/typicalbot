@@ -19,7 +19,7 @@ module.exports = class extends Command {
             .setColor(0x00adff)
             .setTitle("TypicalBot Invite Link")
             .setDescription(`You can add me to your server [here](${this.client.config.urls.oauth}).`)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
     }

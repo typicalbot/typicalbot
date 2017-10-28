@@ -20,7 +20,7 @@ module.exports = class extends Command {
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Documentation")
             .setDescription(`**Documentation can be found here:** <${this.client.config.urls.docs}>`)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
     }

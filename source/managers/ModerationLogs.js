@@ -115,7 +115,7 @@ module.exports = class {
                         .setColor(type.color || 0xC4C4C4)
                         .setURL(this.client.config.urls.website)
                         .setDescription(`${_action}\n${_user}\n${_reason}`)
-                        .setFooter(`Case ${_case}`, "https://typicalbot.com/images/icon.png")
+                        .setFooter(`Case ${_case}`, "https://typicalbot.com/x/images/icon.png")
                         .setTimestamp();
 
                     if (moderator) embed.setAuthor(`${moderator.tag} (${moderator.id})`, moderator.avatarURL());
@@ -137,7 +137,7 @@ module.exports = class {
                 .setColor(_case.embeds[0].color || 0xC4C4C4)
                 .setURL(this.client.config.urls.website)
                 .setDescription(`${action}\n${user}\n${_reason}`)
-                .setFooter(id, "https://typicalbot.com/images/icon.png")
+                .setFooter(id, "https://typicalbot.com/x/images/icon.png")
                 .setTimestamp(ts);
 
             if (moderator) embed.setAuthor(`${moderator.tag} (${moderator.id})`, moderator.avatarURL());

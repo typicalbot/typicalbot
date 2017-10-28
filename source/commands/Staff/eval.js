@@ -21,7 +21,7 @@ module.exports = class extends Command {
                         "description": `\n\n\`\`\`js\n${util.inspect(a, { depth: 0 })}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
-                            "icon_url": "https://typicalbot.com/images/icon.png"
+                            "icon_url": "https://typicalbot.com/x/images/icon.png"
                         }
                     }).catch(err => {
                         response.embed({
@@ -29,7 +29,7 @@ module.exports = class extends Command {
                             "description": `\`\`\`\n${err.stack}\n\`\`\``,
                             "footer": {
                                 "text": "TypicalBot Eval",
-                                "icon_url": "https://typicalbot.com/images/icon.png"
+                                "icon_url": "https://typicalbot.com/x/images/icon.png"
                             }
                         });
                     });
@@ -39,7 +39,7 @@ module.exports = class extends Command {
                         "description": `\n\n\`\`\`\n${err ? err.stack : `Unknown Error`}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
-                            "icon_url": "https://typicalbot.com/images/icon.png"
+                            "icon_url": "https://typicalbot.com/x/images/icon.png"
                         }
                     });
                 }) :
@@ -49,7 +49,7 @@ module.exports = class extends Command {
                         "description": `\`\`\`js\n${util.inspect(output, { depth: 0 })}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
-                            "icon_url": "https://typicalbot.com/images/icon.png"
+                            "icon_url": "https://typicalbot.com/x/images/icon.png"
                         }
                     }) :
                     response.embed({
@@ -57,7 +57,7 @@ module.exports = class extends Command {
                         "description": `\`\`\`\n${output}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
-                            "icon_url": "https://typicalbot.com/images/icon.png"
+                            "icon_url": "https://typicalbot.com/x/images/icon.png"
                         }
                     });
             //response.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`OUTPUT:\`\n\`\`\`\n${typeof output === "object" ? JSON.stringify(output, null, 4) : output}\n\`\`\``);
@@ -67,7 +67,7 @@ module.exports = class extends Command {
                 "description": `\`\`\`\n${err.stack}\n\`\`\``,
                 "footer": {
                     "text": "TypicalBot Eval",
-                    "icon_url": "https://typicalbot.com/images/icon.png"
+                    "icon_url": "https://typicalbot.com/x/images/icon.png"
                 }
             }).catch(err => {
                 response.reply("Cannot send embeds.");
