@@ -29,6 +29,12 @@ module.exports = class extends Command {
 
             this.client.banCache.set(toBan.id || toBan, log);
 
+            if (cachedUser) {
+                const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTitle("TypicalBot Alert System").setDescription(`You have been banned from **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
+                if (reason) embed.addField("» Reason", reason);
+                embed.send().catch(err => { return; });
+            }
+
             message.guild.ban(toBan, { days: purgeDays }).then(actioned => {
                 response.success(`Successfully banned user \`${actioned.tag || actioned.id || actioned}\`.`);
             }).catch(err => {
