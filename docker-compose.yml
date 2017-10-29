@@ -8,4 +8,4 @@ services:
   rethink:
     image: rethinkdb
     volumes:
-- ./data:/var/lib/rethinkdb
+      - ./data:/var/lib/rethinkdb
