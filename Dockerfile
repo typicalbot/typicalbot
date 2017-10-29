@@ -1,4 +1,4 @@
-FROM alpine
+FROM node:8-alpine
 
 WORKDIR /usr/src/bot
 COPY package.json ./
@@ -13,4 +13,4 @@ RUN apk del .build-deps
 
 COPY . .
 
-CMD ["node", "inidex.js"]
+CMD ["node", "index.js"]
