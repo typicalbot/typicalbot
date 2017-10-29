@@ -4,10 +4,11 @@ const settingsList = {
     "embed": "Embed responses from TypicalBot.",
     "adminrole": "Administrator role that will grant users with this role permission level 3.",
     "modrole": "Moderator role that will grant users with this role permission level 2.",
+    "djrole": "DJ role that will grant users with this role permission level 1.",
     "blacklistrole": "Users with this role will be denied access to any of TypicalBot's commands.",
     "autorole": "Users joining the server will automatically be given this role.",
     "autoroledelay": "The amount of time to wait before giving the autorole to allow for security levels to work.",
-    "autorolesilent": "if not silent, a message will be sent in the logs channel stating a user was given the autorole.",
+    "autorolesilent": "If not silent, a message will be sent in the logs channel stating a user was given the autorole.",
     "announcements": "A channel for announcements to be posted, used with the `announce` command.",
     "announcements-mention": "A mention to be put in the announcement when posted, such as a Subscriber role.",
     "logs": "A channel for activity logs to be posted.",
@@ -25,12 +26,13 @@ const settingsList = {
     "antiinvite": "Server moderation tool to delete any invites sent by users in the server.",
     "antiinvite-kick": "Auto-Kick users who send multiple invites in the server in a certain time span.",
     "modlogs": "A channel to send moderation logs in. Aka audit logs.",
+    "modlogs-purge": "A modlog to log when a moderator or administrator purges messages in a channel.",
     "nonickname": "A way to disable the `nickname` command from being used.",
 };
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "View or customize your servers setting and enable/disable specific features.",
             usage: "settings <'list'|'view'|'edit'> [setting] ['add'|'remove'] [value]",
             aliases: ["set"],
@@ -150,6 +152,8 @@ module.exports = class extends Command {
 
                     if (!channel) return response.reply(`**__Current Value:__** None`);
                     response.reply(`**__Current Value:__** ${channel.toString()}`);
+                } else if (setting === "modlogs-purge") {
+                    response.reply(`**__Current Value:__** ${message.guild.settings.prefix.default ? "Enabled" : "Disabled"}`);
                 } else if (setting === "automessage") {
                     response.reply(`**__Current Value:__** ${message.guild.settings.auto.message ? `\`\`\`txt\n${message.guild.settings.auto.message}\n\`\`\`` : "None"}`);
                 } else if (setting === "autonickname") {
@@ -174,15 +178,15 @@ module.exports = class extends Command {
             if (setting && value) {
                 if (setting === "embed") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { embed: false }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { embed: false }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { embed: true }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { embed: true }).then(() => response.success("Setting successfully updated."));
                     } else {
                         response.error("An invalid option was given.");
                     }
                 } else if (setting === "adminrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settingsManager.update(message.guild.id, { roles: { administrator: [] }}).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { roles: { administrator: [] }}).then(() => response.success("Setting successfully updated."));
                     } else {
                         if (ar) {
                             if (ar === "add") {
@@ -196,7 +200,7 @@ module.exports = class extends Command {
 
                                 currentList.push(role.id);
 
-                                this.client.settingsManager.update(message.guild.id, { roles: { administrator: currentList } }).then(() => response.success("Setting successfully updated."));
+                                this.client.settings.update(message.guild.id, { roles: { administrator: currentList } }).then(() => response.success("Setting successfully updated."));
                             } else if (ar === "remove") {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
@@ -208,7 +212,7 @@ module.exports = class extends Command {
 
                                 currentList.splice(currentList.indexOf(role.id));
 
-                                this.client.settingsManager.update(message.guild.id, { roles: { administrator: currentList } }).then(() => response.success("Setting successfully updated."));
+                                this.client.settings.update(message.guild.id, { roles: { administrator: currentList } }).then(() => response.success("Setting successfully updated."));
                             }
                         } else {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
@@ -216,12 +220,12 @@ module.exports = class extends Command {
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                             if (!role) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                            this.client.settingsManager.update(message.guild.id, { roles: { administrator: [ role.id ] } }).then(() => response.success("Setting successfully updated."));
+                            this.client.settings.update(message.guild.id, { roles: { administrator: [ role.id ] } }).then(() => response.success("Setting successfully updated."));
                         }
                     }
                 } else if (setting === "modrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settingsManager.update(message.guild.id, { roles: { moderator: [] }}).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { roles: { moderator: [] }}).then(() => response.success("Setting successfully updated."));
                     } else {
                         if (ar) {
                             if (ar === "add") {
@@ -235,7 +239,7 @@ module.exports = class extends Command {
 
                                 currentList.push(role.id);
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: { moderator: currentList } }).then(() => response.success("Setting successfully updated."));
                             } else if (ar === "remove") {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
@@ -248,7 +252,7 @@ module.exports = class extends Command {
 
                                 currentList.splice(currentList.indexOf(role.id));
 
-                                this.client.settingsManager.update(message.guild.id, { roles: { moderator: currentList } }).then(() => response.success("Setting successfully updated."));
+                                this.client.settings.update(message.guild.id, { roles: { moderator: currentList } }).then(() => response.success("Setting successfully updated."));
                             }
                         } else {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
@@ -256,12 +260,12 @@ module.exports = class extends Command {
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                             if (!role) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                            this.client.settingsManager.update(message.guild.id, { roles: { moderator: [ role.id ] } }).then(() => response.success("Setting successfully updated."));
+                            this.client.settings.update(message.guild.id, { roles: { moderator: [ role.id ] } }).then(() => response.success("Setting successfully updated."));
                         }
                     }
                 } else if (setting === "djrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settingsManager.update(message.guild.id, { roles: { dj: [] }}).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { roles: { dj: [] }}).then(() => response.success("Setting successfully updated."));
                     } else {
                         if (ar) {
                             if (ar === "add") {
@@ -275,7 +279,7 @@ module.exports = class extends Command {
 
                                 currentList.push(role.id);
 
-                                this.client.settingsManager.update(message.guild.id, { roles: { dj: currentList } }).then(() => response.success("Setting successfully updated."));
+                                this.client.settings.update(message.guild.id, { roles: { dj: currentList } }).then(() => response.success("Setting successfully updated."));
                             } else if (ar === "remove") {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
@@ -287,7 +291,7 @@ module.exports = class extends Command {
 
                                 currentList.splice(currentList.indexOf(role.id));
 
-                                this.client.settingsManager.update(message.guild.id, { roles: { dj: currentList } }).then(() => response.success("Setting successfully updated."));
+                                this.client.settings.update(message.guild.id, { roles: { dj: currentList } }).then(() => response.success("Setting successfully updated."));
                             }
                         } else {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
@@ -295,12 +299,12 @@ module.exports = class extends Command {
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                             if (!role) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                            this.client.settingsManager.update(message.guild.id, { roles: { dj: [ role.id ] } }).then(() => response.success("Setting successfully updated."));
+                            this.client.settings.update(message.guild.id, { roles: { dj: [ role.id ] } }).then(() => response.success("Setting successfully updated."));
                         }
                     }
                 } else if (setting === "blacklistrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settingsManager.update(message.guild.id, { roles: { blacklist: [] }}).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { roles: { blacklist: [] }}).then(() => response.success("Setting successfully updated."));
                     } else {
                         if (ar) {
                             if (ar === "add") {
@@ -314,7 +318,7 @@ module.exports = class extends Command {
 
                                 currentList.push(role.id);
 
-                                this.client.settingsManager.update(message.guild.id, { roles: { blacklist: currentList } }).then(() => response.success("Setting successfully updated."));
+                                this.client.settings.update(message.guild.id, { roles: { blacklist: currentList } }).then(() => response.success("Setting successfully updated."));
                             } else if (ar === "remove") {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
@@ -326,7 +330,7 @@ module.exports = class extends Command {
 
                                 currentList.splice(currentList.indexOf(role.id));
 
-                                this.client.settingsManager.update(message.guild.id, { roles: { blacklist: currentList } }).then(() => response.success("Setting successfully updated."));
+                                this.client.settings.update(message.guild.id, { roles: { blacklist: currentList } }).then(() => response.success("Setting successfully updated."));
                             }
                         } else {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
@@ -334,217 +338,225 @@ module.exports = class extends Command {
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                             if (!role) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                            this.client.settingsManager.update(message.guild.id, { roles: { blacklist: [ role.id ] } }).then(() => response.success("Setting successfully updated."));
+                            this.client.settings.update(message.guild.id, { roles: { blacklist: [ role.id ] } }).then(() => response.success("Setting successfully updated."));
                         }
                     }
                 } else if (setting === "autorole") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { auto: { role: { id: null } }}).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { role: { id: null } }}).then(() => response.success("Setting successfully updated."));
                     } else {
                         const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                         const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                         if (!role) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                        this.client.settingsManager.update(message.guild.id, { auto: { role: { id: role.id } } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { role: { id: role.id } } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "autoroledelay") {
                     if (value === "disable" || value === "default") {
-                        this.client.settingsManager.update(message.guild.id, { auto: { role: { delay: null } }}).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { role: { delay: null } }}).then(() => response.success("Setting successfully updated."));
                     } else {
                         const subArgs = /^(\d+)$/i.exec(value);
                         if (!subArgs || subArgs[1] > 600000 || subArgs[1] < 2000) return response.error("An invalid time was given. Try again with a time, in milliseconds, from 2000ms (2s) to 600000ms (10 min).");
 
-                        this.client.settingsManager.update(message.guild.id, { auto: { role: { delay: subArgs[1] } } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { role: { delay: subArgs[1] } } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "autorolesilent") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { auto: { role: { silent: false } } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { role: { silent: false } } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { auto: { role: { silent: true } } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { role: { silent: true } } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         response.error("An invalid option was given.");
                     }
                 } else if (setting === "announcements") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { announcements: { id: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { announcements: { id: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "here") {
-                        this.client.settingsManager.update(message.guild.id, { announcements: { id: message.channel.id } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { announcements: { id: message.channel.id } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         const subArgs = /(?:(?:<#)?(\d{17,20})>?|(.+))/i.exec(value);
 
                         const channel = subArgs[1] ? message.guild.channels.get(subArgs[1]) : message.guild.channels.find(c => c.name.toLowerCase() === subArgs[2].toLowerCase());
                         if (!channel) return response.error("Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.");
 
-                        this.client.settingsManager.update(message.guild.id, { announcements: { id: channel.id } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { announcements: { id: channel.id } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "announcements-mention" || setting === "ann-mention") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { announcements: { mention: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { announcements: { mention: null } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                         const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                         if (!role) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                        this.client.settingsManager.update(message.guild.id, { announcements: { mention: role.id } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { announcements: { mention: role.id } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { id: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { id: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "here") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { id: message.channel.id } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { id: message.channel.id } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         const subArgs = /(?:(?:<#)?(\d{17,20})>?|(.+))/i.exec(value);
 
                         const channel = subArgs[1] ? message.guild.channels.get(subArgs[1]) : message.guild.channels.find(c => c.name.toLowerCase() === subArgs[2].toLowerCase());
                         if (!channel) return response.error("Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.");
 
-                        this.client.settingsManager.update(message.guild.id, { logs: { id: channel.id } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { id: channel.id } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-join") {
                     if (!message.guild.settings.logs.id) return response.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { join: "--disabled" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { join: "--disabled" } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "default" || value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { join: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { join: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "embed") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { join: "--embed" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { join: "--embed" } }).then(() => response.success("Setting successfully updated."));
                     } else {
-                        this.client.settingsManager.update(message.guild.id, { logs: { join: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { join: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-leave") {
                     if (!message.guild.settings.logs.id) return response.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { leave: "--disabled" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { leave: "--disabled" } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "default" || value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { leave: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { leave: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "embed") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { leave: "--embed" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { leave: "--embed" } }).then(() => response.success("Setting successfully updated."));
                     } else {
-                        this.client.settingsManager.update(message.guild.id, { logs: { leave: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { leave: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-ban") {
                     if (!message.guild.settings.logs.id) return response.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { ban: "--disabled" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { ban: "--disabled" } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "default" || value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { ban: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { ban: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "embed") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { ban: "--embed" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { ban: "--embed" } }).then(() => response.success("Setting successfully updated."));
                     } else {
-                        this.client.settingsManager.update(message.guild.id, { logs: { ban: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { ban: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-unban") {
                     if (!message.guild.settings.logs.id) return response.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { unban: "--disabled" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { unban: "--disabled" } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "default" || value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { unban: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { unban: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "embed") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { unban: "--embed" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { unban: "--embed" } }).then(() => response.success("Setting successfully updated."));
                     } else {
-                        this.client.settingsManager.update(message.guild.id, { logs: { unban: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { unban: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-nickname") {
                     if (!message.guild.settings.logs.id) return response.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { nickname: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { nickname: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "default" || value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { nickname: "--enabled" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { nickname: "--enabled" } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "embed") {
                         response.error("This log option does not support embeds.");
                     } else {
-                        this.client.settingsManager.update(message.guild.id, { logs: { nickname: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { nickname: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-invite") {
                     if (!message.guild.settings.logs.id) return response.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { invite: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { invite: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "default" || value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { invite: "--enabled" } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { invite: "--enabled" } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "embed") {
                         response.error("This log option does not support embeds.");
                     } else {
-                        this.client.settingsManager.update(message.guild.id, { logs: { invite: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { invite: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "modlogs" || setting === "logs-moderation") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { moderation: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { moderation: null } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "here") {
-                        this.client.settingsManager.update(message.guild.id, { logs: { moderation: message.channel.id } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { moderation: message.channel.id } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         const subArgs = /(?:(?:<#)?(\d{17,20})>?|(.+))/i.exec(value);
 
                         const channel = subArgs[1] ? message.guild.channels.get(subArgs[1]) : message.guild.channels.find(c => c.name.toLowerCase() === subArgs[2].toLowerCase());
                         if (!channel) return response.error("Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.");
 
-                        this.client.settingsManager.update(message.guild.id, { logs: { moderation: channel.id } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { logs: { moderation: channel.id } }).then(() => response.success("Setting successfully updated."));
+                    }
+                } else if (setting === "modlogs-purge") {
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { logs: { purge: false } }).then(() => response.success("Setting successfully updated."));
+                    } else if (value === "enable") {
+                        this.client.settings.update(message.guild.id, { logs: { purge: true } }).then(() => response.success("Setting successfully updated."));
+                    } else {
+                        response.error("An invalid option was given.");
                     }
                 } else if (setting === "automessage") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { auto: { message: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { message: null } }).then(() => response.success("Setting successfully updated."));
                     } else {
-                        this.client.settingsManager.update(message.guild.id, { auto: { message: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { message: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "autonickname") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { auto: { nickname: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { nickname: null } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         if (value.length > 20) return response.error("Autonickname must contain no more than 20 characters.");
                         if (!value.includes("{user.name}")) return response.error("Autonickname must contain the `{user.name}` placeholder.");
 
-                        this.client.settingsManager.update(message.guild.id, { auto: { nickname: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { nickname: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "mode") {
                     if (value === "free") {
-                        this.client.settingsManager.update(message.guild.id, { mode: "free" }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { mode: "free" }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "lite") {
-                        this.client.settingsManager.update(message.guild.id, { mode: "free" }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { mode: "free" }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "strict") {
-                        this.client.settingsManager.update(message.guild.id, { mode: "strict" }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { mode: "strict" }).then(() => response.success("Setting successfully updated."));
                     } else {
                         response.error("Mode must be either `free`, `lite`, or `strict`.");
                     }
                 } else if (setting === "customprefix") {
                     if (value === "disable") {
-                        if (!message.guild.settings.prefix.default) this.client.settingsManager.update(message.guild.id, { prefix: { default: true } });
+                        if (!message.guild.settings.prefix.default) this.client.settings.update(message.guild.id, { prefix: { default: true } });
 
-                        this.client.settingsManager.update(message.guild.id, { prefix: { custom: null } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { prefix: { custom: null } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         if (value.length > 5) return response.error("Your custom prefix must contain no more than 5 characters.");
 
-                        this.client.settingsManager.update(message.guild.id, { prefix: { custom: value } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { prefix: { custom: value } }).then(() => response.success("Setting successfully updated."));
                     }
                 } else if (setting === "defaultprefix") {
                     if (value === "disable") {
                         if (!message.guild.settings.prefix.custom) return response.error("You must have a custom prefix set up to disable this.");
 
-                        this.client.settingsManager.update(message.guild.id, { prefix: { default: false } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { prefix: { default: false } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { prefix: { default: true } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { prefix: { default: true } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         response.error("An invalid option was given.");
                     }
                 } else if (setting === "antiinvite") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { automod: { invite: false } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { automod: { invite: false } }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { automod: { invite: true } }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { automod: { invite: true } }).then(() => response.success("Setting successfully updated."));
                     } else {
                         response.error("An invalid option was given.");
                     }
                 } else if (setting === "nonickname") {
                     if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, { nonickname: false }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { nonickname: false }).then(() => response.success("Setting successfully updated."));
                     } else if (value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, { nonickname: false }).then(() => response.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { nonickname: false }).then(() => response.success("Setting successfully updated."));
                     } else {
                         response.error("An invalid option was given.");
                     }
@@ -576,7 +588,7 @@ module.exports = class extends Command {
             const embed = response.buildEmbed()
                 .setColor(0x00ADFF)
                 .setTitle(`TypicalBot Settings | Page ${page} / ${count}`)
-                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                 .setTimestamp();
 
             list.forEach(k => embed.addField(`» ${k}`, settingsList[k]));
@@ -597,7 +609,7 @@ module.exports = class extends Command {
                 const embed = response.buildEmbed()
                     .setColor(0x00ADFF)
                     .setTitle(`Currently Set Settings`)
-                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                     .setTimestamp();
 
                 embed.send();
@@ -606,22 +618,22 @@ module.exports = class extends Command {
             if (setting && value) {
                 if (setting === "embed") {
                     if (value === "enable") {
-                        this.client.settingsManager.update(message.guild.id, {
+                        this.client.settings.update(message.guild.id, {
                             embed: true
                         }).then(() => response.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                             .setTimestamp()
                             .send()
                         );
                     } else if (value === "disable") {
-                        this.client.settingsManager.update(message.guild.id, {
+                        this.client.settings.update(message.guild.id, {
                             embed: false
                         }).then(() => response.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                             .setTimestamp()
                             .send()
                         );
@@ -630,16 +642,16 @@ module.exports = class extends Command {
                             .setColor(0xFF0000)
                             .setTitle("Error")
                             .setDescription(`An invalid option was given.`)
-                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                             .setTimestamp()
                             .send();
                     }
                 } else if (setting === "adminrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settingsManager.update(message.guild.id, { roles: { administrator: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
+                        this.client.settings.update(message.guild.id, { roles: { administrator: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                             .setTimestamp()
                             .send()
                         );
@@ -649,21 +661,21 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.push(role.id);
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: {
                                         administrator: currentList
                                     }
                                 }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                     .setTimestamp()
                                     .send()
                                 );
@@ -671,21 +683,21 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: {
                                         administrator: currentList
                                     }
                                 }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                     .setTimestamp()
                                     .send()
                                 );
@@ -694,16 +706,16 @@ module.exports = class extends Command {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                            this.client.settingsManager.update(message.guild.id, {
+                            this.client.settings.update(message.guild.id, {
                                 roles: {
                                     administrator: [ role.id ]
                                 }
                             }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                 .setTitle("Success")
                                 .setDescription("Setting successfully updated.")
-                                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                 .setTimestamp()
                                 .send()
                             );
@@ -711,10 +723,10 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "modrole" || setting === "2") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settingsManager.update(message.guild.id, { roles: { moderator: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
+                        this.client.settings.update(message.guild.id, { roles: { moderator: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                             .setTimestamp()
                             .send()
                         );
@@ -724,21 +736,21 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.push(role.id);
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: {
                                         moderator: currentList
                                     }
                                 }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                     .setTimestamp()
                                     .send()
                                 );
@@ -746,21 +758,21 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: {
                                         moderator: currentList
                                     }
                                 }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                     .setTimestamp()
                                     .send()
                                 );
@@ -769,16 +781,16 @@ module.exports = class extends Command {
                             const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
 
                             const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
-                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The role you specified does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The role you specified does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                            this.client.settingsManager.update(message.guild.id, {
+                            this.client.settings.update(message.guild.id, {
                                 roles: {
                                     moderator: [ role.id ]
                                 }
                             }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                 .setTitle("Success")
                                 .setDescription("Setting successfully updated.")
-                                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                 .setTimestamp()
                                 .send()
                             );
@@ -786,10 +798,10 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "djrole" || setting === "1") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settingsManager.update(message.guild.id, { roles: { dj: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
+                        this.client.settings.update(message.guild.id, { roles: { dj: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                             .setTimestamp()
                             .send()
                         );
@@ -799,21 +811,21 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.push(role.id);
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: {
                                         dj: currentList
                                     }
                                 }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                     .setTimestamp()
                                     .send()
                                 );
@@ -821,21 +833,21 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: {
                                         dj: currentList
                                     }
                                 }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                     .setTimestamp()
                                     .send()
                                 );
@@ -844,16 +856,16 @@ module.exports = class extends Command {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                            this.client.settingsManager.update(message.guild.id, {
+                            this.client.settings.update(message.guild.id, {
                                 roles: {
                                     dj: [ role.id ]
                                 }
                             }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                 .setTitle("Success")
                                 .setDescription("Setting successfully updated.")
-                                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                 .setTimestamp()
                                 .send()
                             );
@@ -861,10 +873,10 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "blacklistrole" || setting === "-1") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settingsManager.update(message.guild.id, { roles: { blacklist: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
+                        this.client.settings.update(message.guild.id, { roles: { blacklist: [] }}).then(() => response.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                             .setTimestamp()
                             .send()
                         );
@@ -874,21 +886,21 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.push(role.id);
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: {
                                         blacklist: currentList
                                     }
                                 }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                     .setTimestamp()
                                     .send()
                                 );
@@ -896,21 +908,21 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                                if (!currentList.includes(role.id)) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
 
-                                this.client.settingsManager.update(message.guild.id, {
+                                this.client.settings.update(message.guild.id, {
                                     roles: {
                                         blacklist: currentList
                                     }
                                 }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                     .setTimestamp()
                                     .send()
                                 );
@@ -919,16 +931,16 @@ module.exports = class extends Command {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/images/icon.png").setTimestamp().send();
+                            if (!role) return response.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                            this.client.settingsManager.update(message.guild.id, {
+                            this.client.settings.update(message.guild.id, {
                                 roles: {
                                     blacklist: [ role.id ]
                                 }
                             }).then(() => response.buildEmbed().setColor(0x00ADFF)
                                 .setTitle("Success")
                                 .setDescription("Setting successfully updated.")
-                                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                                 .setTimestamp()
                                 .send()
                             );

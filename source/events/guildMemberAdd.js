@@ -8,7 +8,7 @@ class New extends Event {
     async execute(member) {
         const guild = member.guild;
 
-        const settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settings.fetch(guild.id);
 
         const user = member.user;
 
@@ -23,20 +23,20 @@ class New extends Event {
                         .setFooter("User Joined")
                         .setTimestamp()
                         .send()
-                        .catch(() => console.log("Missing Permissions"));
+                        .catch(() => { return; });
                 } else {
                     channel.send(
                         settings.logs.join ?
                             this.client.functions.formatMessage("logs", guild, user, settings.logs.join) :
                             `**${user.username}#${user.discriminator}** has joined the server.`
-                    ).catch(() => console.log("Missing Permissions"));
+                    ).catch(() => { return; });
                 }
             }
         }
 
-        if (settings.auto.message && !user.bot) user.send(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage("automessage", guild, user, settings.auto.message)}`).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.message && !user.bot) user.send(`**${guild.name}'s Join Message:**\n\n${this.client.functions.formatMessage("automessage", guild, user, settings.auto.message)}`).catch(() => { return; });
 
-        if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage("autonick", guild, user, settings.auto.nickname)).catch(() => console.log("Missing Permissions"));
+        if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage("autonick", guild, user, settings.auto.nickname)).catch(() => { return; });
 
         const autorole = this.client.functions.fetchAutoRole(guild, settings);
         if (autorole && autorole.editable) setTimeout(() =>

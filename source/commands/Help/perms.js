@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Sends a help embed in regards to permissions.",
             mode: "strict"
         });
@@ -19,7 +19,7 @@ module.exports = class extends Command {
             .addField("» Server Moderator [2]", "**Description:** Users with this role are able to use moderation commands.\n**Inherits From:** `Server DJ`\n**Setup Command:** `$set edit modrole <role-name>`\n**Default Role:** `TypicalBot Moderator`")
             .addField("» Server Administrator [3]", "**Description:** Users with this role are able to use the `$settings` command\n**Inherits From:** `Server Moderator`\n**Setup Command:** `$set edit adminrole <role-name>`\n**Default Role:** `TypicalBot Administrator`")
             .addField("» Server Owner [4]", "**Description:** Users with this role are immune to all moderation commands and have access to every command. Can only be obtained if the user is the owner of the server, OR has ownership transferred to them by the current owner.\n**Inherits From:** `Server Administrator`\n**Setup Command:** N/A\n**Default Role:** N/A")
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
     }

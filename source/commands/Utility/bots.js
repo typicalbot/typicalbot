@@ -2,8 +2,8 @@ const Command = require("../../structures/Command");
 const request = require("superagent");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Gives a list of bots from Carbonitex ranked by server count.",
             usage: "bots [page-number]",
             mode: "lite"

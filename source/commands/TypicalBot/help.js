@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Get general information about TypicalBot or help with a specific command.",
             usage: "help [command]",
             dm: true,
@@ -24,7 +24,8 @@ module.exports = class extends Command {
             + `\`\`\`\n`
             + `Command        : ${command.name}\n`
             + `Aliases        : ${command.aliases.length ? command.aliases.join(", ") : "None"}\n`
-            + `description    : ${command.description}`
+            + `Description    : ${command.description}`
+            + `Usage          : ${command.usage}`
             + `\n\`\`\``
         );
     }
@@ -37,7 +38,7 @@ module.exports = class extends Command {
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Info")
             .setDescription(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
 
@@ -45,7 +46,7 @@ module.exports = class extends Command {
             .setColor(0x00ADFF)
             .setTitle(`Invalid Command Input`)
             .setDescription(`The command \`${commandInput}\` does not exist.`)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
 
@@ -57,7 +58,7 @@ module.exports = class extends Command {
             .addField("» Aliases", command.aliases.length ? command.aliases.join(", ") : "None")
             .addField("» Description", command.description)
             .addField("» Usage", command.usage)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
     }

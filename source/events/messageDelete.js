@@ -8,7 +8,7 @@ class New extends Event {
     async execute(message) {
         if (message.channel.type !== "text") return;
 
-        const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
+        const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 
         if (!settings.logs.id || !settings.logs.delete) return;
 
@@ -24,14 +24,14 @@ class New extends Event {
             .setFooter("Message Deleted")
             .setTimestamp()
             .send()
-            .catch(() => console.log("Missing Permissions"));
+            .catch(() => { return; });
 
 
         channel.send(
             settings.logs.delete === "--enabled" ?
                 `**${user.username}#${user.discriminator}**'s message was deleted.` :
                 this.client.functions.formatMessage("logs-msgdel", message.guild, user, settings.logs.delete, { message, channel: message.channel })
-        ).catch(() => console.log("Missing Permissions"));
+        ).catch(() => { return; });
     }
 }
 

@@ -2,8 +2,8 @@ const Command = require("../../structures/Command");
 const jokes = require("../../structures/jokes");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Gives you a random joke.",
             usage: "joke"
         });

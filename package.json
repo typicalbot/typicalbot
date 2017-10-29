@@ -14,5 +14,5 @@
         "ytdl-core": "github:fent/node-ytdl-core"
     },
 
-    "build": "stable"
+    "build": "development"
 }

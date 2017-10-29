@@ -2,8 +2,8 @@ const Command = require("../../structures/Command");
 const { loadavg } = require('os');
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Get TypicalBot's current statistics.",
             usage: "stats",
             dm: true,
@@ -37,7 +37,7 @@ module.exports = class extends Command {
     embedExecute(message, response, permissionLevel) {
         response.buildEmbed()
             .setColor(0x00adff)
-            .setThumbnail("https://typicalbot.com/images/icon.png")
+            .setThumbnail("https://typicalbot.com/x/images/icon.png")
             .setTitle("TypicalBot Statistics")
             .addField("» Uptime", this.client.functions.convertTime(this.client.uptime), true)
             .addField("» Servers", `${this.client.shardData.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})`, true)
@@ -50,7 +50,7 @@ module.exports = class extends Command {
             .addField("» CPU Usage", `${Math.round(loadavg()[0] * 10000) / 100}%`, true)
             .addField("» RAM (Used)", `${Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100}MB`, true)
             .addField("» RAM (Total)", `${Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100}MB`, true)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
     }

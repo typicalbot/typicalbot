@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Change the volume of the song currently streaming.",
             usage: "volume <percent:0-200>",
             mode: "lite"

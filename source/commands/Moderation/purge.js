@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Purge messages in a channel.",
             aliases: ["prune"],
             usage: "purge [@user|#channel|@role|'me'|'you'|'bots'] <message-count>",
@@ -12,13 +12,14 @@ module.exports = class extends Command {
     }
 
     async execute(message, response, permissionLevel) {
-        const args = /(?:purge|prune)(?:\s+(?:<@!?(\d{17,20})>|<@&(\d{17,20})>|<#(\d{17,20})>|(you|me|bots)))?\s+(\d+)/i.exec(message.content);
+        const args = /(?:purge|prune)(?:\s+(?:<@!?(\d{17,20})>|<@&(\d{17,20})>|<#(\d{17,20})>|(you|me|bots)))?\s+(\d+)(?:\s+((?:.|[\r\n])+))?/i.exec(message.content);
         if (!args) return response.usage(this);
 
         const userFilter = args[1];
         const roleFilter = args[2] ? message.guild.roles.get(args[2]) : null;
         const channelFilter = args[3] ? message.guild.channels.get(args[3]) : null;
         const otherFilter = args[4];
+        const reason = args[6];
 
         let messageCount = args[5]; if (messageCount > 100) messageCount = 100;
         if (messageCount < 1) return response.error("Please provide a number of messages to delete from 1 to 100.");
@@ -44,7 +45,14 @@ module.exports = class extends Command {
         }
 
         if (channelFilter) return channelFilter.bulkDelete(messages, true)
-            .then(msgs => {
+            .then(async msgs => {
+                if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
+                    const log = { "action": "purge", "user": channelFilter, "moderator": message.author };
+                    if (reason) Object.assign(log, { reason });
+        
+                    const _case = await this.client.modlogsManager.createLog(message.guild, log);
+                }
+
                 response.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
                     .then(msg => msg.delete({ timeout: 2500 }));
                 message.delete({ timeout: 2500 });
@@ -52,7 +60,14 @@ module.exports = class extends Command {
             .catch(err => response.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
 
         message.channel.bulkDelete(messages, true)
-            .then(msgs => {
+            .then(async msgs => {
+                if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
+                    const log = { "action": "purge", "user": message.channel, "moderator": message.author };
+                    if (reason) Object.assign(log, { reason });
+        
+                    const _case = await this.client.modlogsManager.createLog(message.guild, log);
+                }
+                
                 response.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
                     .then(msg => msg.delete({ timeout: 2500 }));
                 message.delete({ timeout: 2500 });

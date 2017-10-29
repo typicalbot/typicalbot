@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Makes the bot send a message with the content used.",
             usage: "say [#channel] <content>",
             aliases: ["speak"],

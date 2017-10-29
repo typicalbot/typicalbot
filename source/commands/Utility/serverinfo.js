@@ -3,8 +3,8 @@ const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Displays the server's information.",
             usage: "serverinfo",
             mode: "strict"
@@ -54,7 +54,7 @@ module.exports = class extends Command {
             .addField("» Roles", message.guild.roles.size, true)
             .addField("» Emojis", message.guild.emojis.size, true)
             .setThumbnail(message.guild.iconURL({ "format": "png", "size": 2048 }) || null)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .send();
     }
 };

@@ -18,8 +18,9 @@ class New extends Event {
         }
 
         if (this.client.build === "stable") this.client.functions.postStats("b");
-
-        this.client.transmitStats();*/
+        */
+        
+        this.client.transmitStats();
     }
 }
 
