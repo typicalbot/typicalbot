@@ -11,7 +11,7 @@ module.exports = class extends Command {
     }
 
     execute(message, response, permissionLevel) {
-        const args = /unignore\s+(channels|invites)/i.exec(message.content);
+        const args = /unignore\s+(commands|invites)/i.exec(message.content);
         if (!args) return response.usage(this);
 
         const commands = args[1] === "commands", invites = args[1] === "invites";
