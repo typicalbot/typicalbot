@@ -34,7 +34,8 @@ class EventStore extends Store {
                 "delete": null,
                 "nickname": null,
                 "invite": null,
-                "moderation": null
+                "moderation": null,
+                "purge": null
             },
             "auto": {
                 "role": {
@@ -66,7 +67,8 @@ class EventStore extends Store {
                 "timelimit": null,
                 "queuelimit": null,
                 "apikey": null
-            }
+            },
+            "subscriber": null
         };
     }
 
