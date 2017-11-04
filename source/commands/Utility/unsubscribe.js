@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Unsubscribe from TypicalBot's announcements.",
             usage: "unsubscribe",
             mode: "strict"
@@ -24,7 +24,7 @@ module.exports = class extends Command {
             .setColor(0xFF0000)
             .setTitle("Error")
             .setDescription(`You must be in TypicalBot's Lounge in order to use this command.`)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
 
@@ -35,7 +35,7 @@ module.exports = class extends Command {
                 .setColor(0x00adff)
                 .setTitle("Success")
                 .setDescription("You are no longer subscribed to TypicalBot's announcements!")
-                .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
                 .setTimestamp()
                 .send();
         });
