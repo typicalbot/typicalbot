@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Searches in the user list for a username or nickname.",
             usage: "search <query> [page-number]",
             mode: "lite"

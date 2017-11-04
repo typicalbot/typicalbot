@@ -3,8 +3,8 @@ const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Displays a user's information.",
             usage: "userinfo [@user|user-id|user-tag]",
             mode: "lite"
@@ -57,7 +57,7 @@ module.exports = class extends Command {
 
         embed
             .addField("» Joined Server", moment(member.joinedAt).format("MMM DD, YYYY @ hh:mm A"), true)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .send();
     }
 };

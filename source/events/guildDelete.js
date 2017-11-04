@@ -6,7 +6,7 @@ class New extends Event {
     }
 
     async execute(guild) {
-        //this.client.transmitStats();
+        this.client.transmitStats();
     }
 }
 

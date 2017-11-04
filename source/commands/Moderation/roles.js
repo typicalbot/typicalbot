@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Manage or view roles in a server.",
             usage: "Check `$roles help` for this command's usage.",
             aliases: ["role"],
@@ -66,6 +66,7 @@ module.exports = class extends Command {
             const subRole = subArgs[4] ? message.guild.roles.get(subArgs[4]) : subArgs[5] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[5].toLowerCase()) : null;
             if (!subRole) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
             if (!subRole.editable) return response.error(`Insignificant permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give or take and that I have the Manage Roles permission.`);
+            if (message.member.highestRole.position >= subRole.position) return response.error("You cannot give yourself or another user your highest role or any role higher.");
 
             subMember.addRole(subRole)
                 .then(() => response.reply(`Success.`))
@@ -82,6 +83,7 @@ module.exports = class extends Command {
             const subRole = subArgs[4] ? message.guild.roles.get(subArgs[4]) : subArgs[5] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[5].toLowerCase()) : null;
             if (!subRole) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
             if (!subRole.editable) return response.error(`Insignificant permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give or take and that I have the Manage Roles permission.`);
+            if (message.member.highestRole.position >= subRole.position) return response.error("You cannot take a role from yourself or another user when your highest role is lower than the given role.");
 
             subMember.removeRole(subRole)
                 .then(() => response.reply(`Success.`))
@@ -115,7 +117,7 @@ module.exports = class extends Command {
 
                 roleList.push(subRole.id);
 
-                this.client.settingsManager.update(message.guild.id, { roles: { public: roleList } })
+                this.client.settings.update(message.guild.id, { roles: { public: roleList } })
                     .then(() => response.reply("Success."))
                     .catch(err => response.error(`An error occured while processing that request\n${String(err).substring(0, 500)}`));
             } else if (subAction === "remove") {
@@ -129,14 +131,14 @@ module.exports = class extends Command {
 
                 roleList.splice(roleList.indexOf(subRole.id), 1);
 
-                this.client.settingsManager.update(message.guild.id, { roles: { public: roleList } })
+                this.client.settings.update(message.guild.id, { roles: { public: roleList } })
                     .then(() => response.reply("Success."))
                     .catch(err => response.error(`An error occured while processing that request.`));
 
             } else if (subAction === "clear") {
                 if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
 
-                this.client.settingsManager.update(message.guild.id, { roles: { public: [] } })
+                this.client.settings.update(message.guild.id, { roles: { public: [] } })
                     .then(() => response.reply("Success."))
                     .catch(err => response.error(`An error occured while processing that request.`));
             }

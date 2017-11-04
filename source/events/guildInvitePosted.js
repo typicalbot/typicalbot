@@ -6,7 +6,7 @@ class New extends Event {
     }
 
     async execute(guild, message, user) {
-        const settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settings.fetch(guild.id);
         if (!settings.logs.id || !settings.logs.invite) return;
 
         const channel = guild.channels.get(settings.logs.id);

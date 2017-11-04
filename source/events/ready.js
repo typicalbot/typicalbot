@@ -14,18 +14,13 @@ class New extends Event {
         this.client.transmit("transmitDonors");
         this.client.transmit("transmitTesters");
 
-        /*setTimeout(() => {
-            if (this.client.build === "prime") this.client.guilds.forEach(g => { if (!this.client.functions.checkDonor(g)) g.leave(); });
-            if (this.client.build === "development") this.client.guilds.forEach(g => { if (!this.client.functions.checkTester(g)) g.leave(); });
-        }, 1000 * 60);*/
-
-        setInterval(() => this.client.transmitStats(), 1000 * 5);
-
         setInterval(() => {
             this.client.user.setActivity(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
 
-            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
-            if (this.client.build === "development" && this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
+            if (this.client.guilds.has("163038706117115906")) {
+                this.client.functions.transmitDonors();
+                this.client.functions.transmitTesters();
+            }
         }, 1000 * 60 * 5);
     }
 }

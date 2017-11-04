@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Rolls a n-sided die.",
             aliases: ["die"],
             usage: "dice [number-of-sides]"

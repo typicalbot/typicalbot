@@ -13,6 +13,7 @@ class New extends Event {
 
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
+            
             const command = await this.client.commands.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
             if (!command || !command.dm || command.permission > 0) return;
 
@@ -21,9 +22,7 @@ class New extends Event {
         } else {
             if (message.guild.me && !message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
-            this.client.lastMessage = message.createdTimestamp;
-
-            const settings = await this.client.settingsManager.fetch(message.guild.id).catch(err => { return err; });
+            const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 
             if (message.content.match(this.mentionRegex)) return message.channel.send(`${message.author} | This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
 
@@ -49,8 +48,6 @@ class New extends Event {
 
             const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
             if (actualUserPermissions.level < command.permission) return response.perms(command, actualUserPermissions);
-
-            this.client.commandsStats[this.client.commandsStats.length - 1]++;
 
             settings.embed && command.embedExecute ?
                 command.embedExecute(message, response, userPermissions) :

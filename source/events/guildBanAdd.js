@@ -6,7 +6,7 @@ class New extends Event {
     }
 
     async execute(guild, user) {
-        const settings = await this.client.settingsManager.fetch(guild.id);
+        const settings = await this.client.settings.fetch(guild.id);
 
         if (settings.logs.moderation && !this.client.softbanCache.has(user.id)) {
             const cachedLog = this.client.banCache.get(user.id);
@@ -27,13 +27,13 @@ class New extends Event {
                 .setFooter("User Banned")
                 .setTimestamp()
                 .send()
-                .catch(() => console.log("Missing Permissions"));
+                .catch(() => { return; });
         } else {
             channel.send(
                 settings.logs.ban ?
                     this.client.functions.formatMessage("logs", guild, user, settings.logs.ban) :
                     `**${user.tag}** has been banned from the server.`
-            ).catch(() => console.log("Missing Permissions"));
+            ).catch(() => { return; });
         }
     }
 }

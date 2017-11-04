@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             mode: "strict",
             permission: 9
         });
@@ -16,7 +16,7 @@ module.exports = class extends Command {
         response.buildEmbed()
             .setColor(0x00FF00)
             .setDescription(`**Reloading Module:** \`${mod}\``)
-            .setFooter("TypicalBot", "https://typicalbot.com/images/icon.png")
+            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
             .setTimestamp()
             .send();
     }

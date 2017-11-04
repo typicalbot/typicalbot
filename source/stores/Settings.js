@@ -1,10 +1,9 @@
-const { Collection } = require("discord.js");
+const Store = require("../structures/Store");
+const path = require("path");
 
-module.exports = class {
+class EventStore extends Store {
     constructor(client) {
-        this.client = client;
-
-        this.data = new Collection();
+        super(client, "settings");
     }
 
     _defaultData(id) {
@@ -71,35 +70,27 @@ module.exports = class {
         };
     }
 
-    fetch(id) {
-        return new Promise((resolve, reject) => {
-            if (this.data.has(id)) return resolve(this.data.get(id));
+    async fetch(id) {
+        if (this.has(id)) return this.get(id);
 
-            this.client.database.get("guilds", id).then(row => {
-                if (!row) {
-                    this.create(id);
-                    return resolve(this._defaultData(id));
-                }
+        const row = await this.client.database.get("guilds", id);
 
-                this.data.set(id, row);
-                return resolve(row);
-            }).catch(err => {
-                return resolve(this._defaultData(id));
-            });
-        });
+        if (!row) {
+            this.create(id);
+            return this._defaultData(id);
+        }
+
+        this.set(id, row);
+        return row;
     }
 
-    create(id) {
-        return new Promise((resolve, reject) => {
-            const newData = this._defaultData(id);
+    async create(id) {
+        const newData = this._defaultData(id);
 
-            this.client.database.insert("guilds", newData).then(result => {
-                this.data.set(id, newData);
-                return resolve(newData);
-            }).catch(err => {
-                return resolve(newData);
-            });
-        });
+        await this.client.database.insert("guilds", newData);
+        this.set(id, newData);
+
+        return newData;
     }
 
     _update(target, source) {
@@ -114,25 +105,19 @@ module.exports = class {
         return target;
     }
 
-    update(id, object) {
-        return new Promise((resolve, reject) => {
-            this.client.database.update("guilds", id, object).then(result => {
-                this.data.set(id, this._update(this.data.get(id), object));
-                return resolve();
-            }).catch(err => {
-                return reject(err);
-            });
-        });
+    async update(id, object) {
+        await this.client.database.update("guilds", id, object);
+        await this.set(id, this._update(this.get(id), object));
+
+        return;
     }
 
-    delete(id) {
-        return new Promise((resolve, reject) => {
-            this.client.database.delete("guilds", id).then(result => {
-                this.data.delete(id);
-                return resolve();
-            }).catch(err => {
-                return reject();
-            });
-        });
+    async delete(id) {
+        await this.client.database.delete("guilds", id);
+        super.delete(id);
+
+        return;
     }
-};
+}
+
+module.exports = EventStore;

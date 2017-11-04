@@ -1,8 +1,8 @@
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Softban a member from the server.",
             usage: "softban <@user> [purge-days] [reason]",
             mode: "strict",
@@ -20,7 +20,7 @@ module.exports = class extends Command {
             const member = await message.guild.members.fetch(cachedUser);
             if (!member) return response.error(`The requested user could not be found.`);
 
-            if (message.member.highestRole.position <= member.highestRole.position) return response.error(`You cannot softban a user with either the same or higher highest role.`);
+            if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return response.error(`You cannot softban a user with either the same or higher highest role.`);
             if (!member.bannable) return response.error(`In order to complete the request, I need the **BAN_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.`);
 
             this.client.softbanCache.set(user.id || user, user.id || user);

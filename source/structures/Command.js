@@ -1,8 +1,10 @@
 class Command {
-    constructor(client, name, { description, usage, aliases, dm, permission, mode }) {
+    constructor(client, name, path, { description, usage, aliases, dm, permission, mode }) {
         this.client = client;
 
         this.name = name;
+
+        this.path = path;
 
         this.description = description || "Description Not Provided";
 

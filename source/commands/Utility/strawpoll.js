@@ -2,8 +2,8 @@ const Command = require("../../structures/Command");
 const request = require("superagent");
 
 module.exports = class extends Command {
-    constructor(client, name) {
-        super(client, name, {
+    constructor(...args) {
+        super(...args, {
             description: "Create a strawpoll vote. Use the '-m' flag for multiple choice.",
             usage: "strawpoll ['-m'] <question> | Choice1; Choice2; Choice+"
         });
