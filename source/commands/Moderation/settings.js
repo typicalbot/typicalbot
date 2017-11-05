@@ -369,6 +369,17 @@ module.exports = class extends Command {
                     } else {
                         response.error("An invalid option was given.");
                     }
+                } else if (setting === "subscriberrole") {
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { subscriber: null }).then(() => response.success("Setting successfully updated."));
+                    } else {
+                        const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
+
+                        const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
+                        if (!role) return response.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
+
+                        this.client.settings.update(message.guild.id, { subscriber: role.id }).then(() => response.success("Setting successfully updated."));
+                    }
                 } else if (setting === "announcements") {
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { announcements: { id: null } }).then(() => response.success("Setting successfully updated."));
