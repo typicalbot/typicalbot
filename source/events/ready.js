@@ -12,6 +12,7 @@ class New extends Event {
         this.client.user.setActivity(`Client Started`);
         this.client.transmitStats();
         this.client.transmit("transmitTesters");
+        this.client.functions.fetchDonors();
 
         setInterval(() => {
             this.client.user.setActivity(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);

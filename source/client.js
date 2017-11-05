@@ -56,8 +56,6 @@ class TypicalBot extends Client {
         this.softbanCache = new Collection();
 
         this.login(config.token);
-
-        this.once("ready", this.functions.fetchDonors.bind(this));
     }
 
     log(content, error = false) {
