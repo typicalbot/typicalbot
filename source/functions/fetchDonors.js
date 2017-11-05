@@ -9,7 +9,7 @@ class New extends Function {
         const data = await this.client.database.db.db("data").table("donors");
 
         data.forEach(e => {
-            if (e.id.length > 5) this.client.donors.push(e);
+            if (e.id.length > 5) this.client.donors.set(e.id, e);
         });
 
         return this.client.donors;
