@@ -19,7 +19,7 @@ class EventStore extends Store {
             },
             "ignored": {
                 "commands": [],
-                "invies": []
+                "invites": []
             },
             "announcements": {
                 "id": null,
