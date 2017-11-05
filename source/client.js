@@ -46,7 +46,8 @@ class TypicalBot extends Client {
 
         this.shardData = {};
         this.testerData = [];
-        this.donorData = [];
+        
+        this.donors = new Collection();
 
         this.streams = new Collection();
 
@@ -87,7 +88,10 @@ class TypicalBot extends Client {
         const mod = match ? match[1] : null;
         const all = input === "all";
 
-        if (mod === "process") {
+        if (mod === "donors") {
+            this.donors = new Collection();
+            this.client.functions.fetchDonors();
+        } else if (mod === "process") {
             delete require.cache[`${__dirname}/managers/Process.js`];
             ProcessManager = require("./managers/Process");
             this.processManager = new ProcessManager();
