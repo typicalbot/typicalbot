@@ -1,5 +1,5 @@
 class Command {
-    constructor(client, name, path, { description, usage, aliases, dm, permission, mode }) {
+    constructor(client, name, path, { description, usage, aliases, dm, permission, mode, access }) {
         this.client = client;
 
         this.name = name;
