@@ -17,6 +17,8 @@ class Command {
         this.permission = permission || 0;
 
         this.mode = mode || "free";
+
+        this.access = access || 0;
     }
 }
 
