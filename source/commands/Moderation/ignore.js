@@ -19,8 +19,9 @@ module.exports = class extends Command {
         if (commands && message.guild.settings.ignored.commands.includes(message.channel.id)) return response.error("This channel is already ignoring commands.");
         if (invites && message.guild.settings.ignored.commands.includes(message.channel.id)) return response.error("This channel is already ignoring invites.");
 
-        const newArray = message.guild.settings.ignored[commands ? "commands" : "invites"].push(message.channel.id);
+        const newArray = message.guild.settings.ignored[commands ? "commands" : "invites"];
+        newArray.push(message.channel.id);
 
-        this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray }}).then(() => response.success("Setting successfully updated."));
+        this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray }}).then(() => response.success(`Now ignoring ${commands ? "commands" : "invites"}.`));
     }
 };
