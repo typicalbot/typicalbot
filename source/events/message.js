@@ -32,7 +32,9 @@ class New extends Event {
             if (userPermissions.level === -1) return;
 
             const response = new Response(this.client, message);
-            if (userPermissions.level < 2) this.client.automod.inviteCheck(response);
+            if (userPermissions.level < 2 && !settings.ignored.invites.includes(message.channel.id)) this.client.automod.inviteCheck(response);
+
+            if (userPermissions.level < 2 && settings.ignored.commands.includes(message.channel.id)) return;
 
             const split = message.content.split(" ")[0];
             const prefix = this.client.functions.matchPrefix(message.author, settings, split);
