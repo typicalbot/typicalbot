@@ -12,12 +12,8 @@ module.exports = class {
             this.client.reload(data);
         } else if (type === "transmitTesters") {
             if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitTesters();
-        } else if (type === "transmitDonors") {
-            if (this.client.guilds.has("163038706117115906")) this.client.functions.transmitDonors();
         } else if (type === "testers") {
             this.client.testerData = data;
-        } else if (type === "donors") {
-            this.client.donorData = data;
         } else if (type === "message") {
             if (!this.client.channels.has(data.channel)) return;
 
