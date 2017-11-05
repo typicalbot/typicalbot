@@ -6,7 +6,7 @@ module.exports = class extends Command {
             description: "Displays a list of videos queued to stream.",
             usage: "queue",
             mode: "lite",
-            donor: true
+            access: 1
         });
     }
 

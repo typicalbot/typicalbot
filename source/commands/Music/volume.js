@@ -6,7 +6,7 @@ module.exports = class extends Command {
             description: "Change the volume of the song currently streaming.",
             usage: "volume <percent:0-200>",
             mode: "lite",
-            donor: true
+            access: 1
         });
     }
 

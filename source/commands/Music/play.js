@@ -6,7 +6,7 @@ module.exports = class extends Command {
             description: "Streams a song to a voice channel from YouTube.",
             usage: "play <video-name|url>",
             mode: "lite",
-            donor: true
+            access: 1
         });
     }
 

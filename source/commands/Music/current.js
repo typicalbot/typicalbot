@@ -6,7 +6,7 @@ module.exports = class extends Command {
             description: "Displays the song currently streaming.",
             usage: "current",
             mode: "lite",
-            donor: true
+            access: 1
         });
     }
 
