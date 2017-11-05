@@ -15,7 +15,7 @@ module.exports = class extends Command {
 
         if (!role) return response.error("No subscriber role is set up for this server.");
 
-        message.member.addRole(Role).then(() => {
+        message.member.addRole(role).then(() => {
             response.reply("You are now subscribed!");
         });
     }
@@ -34,7 +34,7 @@ module.exports = class extends Command {
 
         const Role = message.guild.roles.find("name", "Subscriber");
 
-        message.member.addRole(Role).then(() => {
+        message.member.addRole(role).then(() => {
             response.buildEmbed()
                 .setColor(0x00adff)
                 .setTitle("Success")
