@@ -57,7 +57,7 @@ class TypicalBot extends Client {
 
         this.login(config.token);
 
-        this.once("ready", this.fetchDonors.bind(this));
+        this.once("ready", this.functions.fetchDonors.bind(this));
     }
 
     log(content, error = false) {
