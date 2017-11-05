@@ -46,7 +46,8 @@ class TypicalBot extends Client {
 
         this.shardData = {};
         this.testerData = [];
-        this.donorData = [];
+        
+        this.donors = new Collection();
 
         this.streams = new Collection();
 
@@ -54,6 +55,7 @@ class TypicalBot extends Client {
         this.unbanCache = new Collection();
         this.softbanCache = new Collection();
 
+        this.functions.fetchDonors();
         this.login(config.token);
     }
 
