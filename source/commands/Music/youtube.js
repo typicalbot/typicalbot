@@ -12,7 +12,7 @@ module.exports = class extends Command {
 
     execute(message, response, permissionLevel) {
         const match = /(?:youtube|yts)\s+(.+)/i.exec(message.content);
-        if (!match) return response.usage("youtube");
+        if (!match) return response.usage(this);
 
         this.client.audioUtility.search(message.guild.settings, match[1]).then(results => {
             if (!results.length) return response.reply(`No results were found for the query **${match[1]}**.`);
