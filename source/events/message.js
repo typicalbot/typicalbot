@@ -44,7 +44,7 @@ class New extends Event {
             if (!command) return;
 
             const accessLevel = this.client.functions.fetchAccess(message.guild);
-            if (accessLevel.level < command.access) return response.error(`The server owner's access level is too low to execute that command. The command requires an access level of ${command.access}, but the owner only has a level of ${accessLevel.level} (${accessLevel.title}).`);
+            if (command.access && accessLevel.level < command.access) return response.error(`The server owner's access level is too low to execute that command. The command requires an access level of ${command.access}, but the owner only has a level of ${accessLevel.level} (${accessLevel.title}).`);
 
             const mode = command.mode || "free";
             if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
