@@ -11,7 +11,7 @@ module.exports = class extends Command {
 
     execute(message, response, permissionLevel) {
         const role = message.guild.settings.subscriber ? message.guild.roles.get(message.guild.settings.subscriber) : null;
-        if (message.guild.id !== "163038706117115906") role = message.guild.roles.find("name", "Subscriber");
+        if (message.guild.id === "163038706117115906") role = message.guild.roles.find("name", "Subscriber");
 
         if (!role) return response.error("No subscriber role is set up for this server.");
 
@@ -22,7 +22,7 @@ module.exports = class extends Command {
 
     embedExecute(message, response, permissionLevel) {
         const role = message.guild.settings.subscriber ? message.guild.roles.get(message.guild.settings.subscriber) : null;
-        if (message.guild.id !== "163038706117115906") role = message.guild.roles.find("name", "Subscriber");
+        if (message.guild.id === "163038706117115906") role = message.guild.roles.find("name", "Subscriber");
 
         if (!role) return response.buildEmbed()
             .setColor(0xFF0000)
