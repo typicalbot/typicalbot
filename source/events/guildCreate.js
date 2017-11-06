@@ -16,9 +16,9 @@ class New extends Event {
             console.log(`${guild.owner.user.username} | ${check}`);
             if (!check) setTimeout(() => guild.leave(), 2000);
         }
-
-        if (this.client.build === "stable") this.client.functions.postStats("b");
         */
+
+        if (this.client.build === "stable") this.client.functions.postStats("a");
         
         this.client.transmitStats();
     }
