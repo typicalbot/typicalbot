@@ -29,13 +29,13 @@ module.exports = class extends Command {
             
             member.kick().then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
-                    const log = { "action": "kick", "user": actioned.user, "moderator": message.author };
+                    const log = { "action": "kick", "user": member.user, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
 
                     await this.client.modlogsManager.createLog(message.guild, log);
 
-                    response.success(`Successfully kicked user \`${actioned.user.tag}\`.`);
-                } else return response.success(`Successfully kicked user **${actioned.user.tag}**.`);
+                    response.success(`Successfully kicked user \`${member.user.tag}\`.`);
+                } else return response.success(`Successfully kicked user **${member.user.tag}**.`);
             }).catch(err => response.error(`An error occured while trying to kick the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : `\n\n\`\`\`${err}\`\`\``}`));
         }).catch(err => response.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : `\n\n\`\`\`${err}\`\`\``}`));
     }
