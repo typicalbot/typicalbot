@@ -13,7 +13,7 @@ Message.prototype.send = function(content, embed) {
     const options = {};
     if (embed) Object.defineProperty(options, { embed });
     
-    this.channel.send(content, options);
+    return this.channel.send(content, options);
 }
 
 Message.prototype.reply = function(content, embed) {
