@@ -11,12 +11,12 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
-        response.send(`**Documentation can be found here:** <${this.client.config.urls.docs}>`);
+    execute(message, permissionLevel) {
+        message.send(`**Documentation can be found here:** <${this.client.config.urls.docs}>`);
     }
 
     embedExecute(message, response){
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Documentation")
             .setDescription(`**Documentation can be found here:** <${this.client.config.urls.docs}>`)

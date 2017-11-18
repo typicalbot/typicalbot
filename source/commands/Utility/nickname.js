@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
+    async execute(message, permissionLevel) {
         const args = /nick(?:name)?(?:\s+(?:<@!?)?(\d{17,20})>?)?(?:\s+(.{1,32}))?/i.exec(message.content);
 
         const member = args[1] ? await message.guild.members.fetch(args[1]) : null;
@@ -19,17 +19,17 @@ module.exports = class extends Command {
 
         if (member) {
             const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
-            if (actualUserPermissions.level < 2) return response.perms({ permission: 2 }, actualUserPermissions);
+            if (actualUserPermissions.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, actualUserPermissions));
 
             member.setNickname(reset ? "" : nickname)
-                .then(() => response.reply(`Successfully ${reset ? "reset" : "changed"} member's nickname.`))
-                .catch(err => response.error("An error occured. This most likely means I cannot manage member's nickname."));
+                .then(() => message.reply(`Successfully ${reset ? "reset" : "changed"} member's nickname.`))
+                .catch(err => message.error("An error occured. This most likely means I cannot manage member's nickname."));
         } else {
-            if (message.guild.settings.nonickname) return response.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
+            if (message.guild.settings.nonickname) return message.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
 
             message.member.setNickname(reset ? "" : nickname)
-                .then(() => response.reply(`Successfully ${reset ? "reset" : "changed"} your nickname.`))
-                .catch(err => response.error("An error occured. This most likely means I cannot manage your nickname."));
+                .then(() => message.reply(`Successfully ${reset ? "reset" : "changed"} your nickname.`))
+                .catch(err => message.error("An error occured. This most likely means I cannot manage your nickname."));
         }
     }
 };

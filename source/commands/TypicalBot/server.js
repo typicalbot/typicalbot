@@ -10,12 +10,12 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
-        response.reply(`You can join the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
+    execute(message, permissionLevel) {
+        message.reply(`You can join the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
     }
 
     embedExecute(message, response){
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("TypicalBot Lounge Invite")
             .setDescription(`You can join the TypicalBot Lounge [here](${this.client.config.urls.server}).`)

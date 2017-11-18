@@ -10,25 +10,25 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const type = Math.random() <= 0.25 ? "gif" : "poster";
 
         request.get(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.send(res.body.media[type]);
+                return message.send(res.body.media[type]);
             });
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         const type = Math.random() <= 0.25 ? "gif" : "poster";
 
         request.get(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.buildEmbed().setColor(0x00adff).setImage(res.body.media[type]).send();
+                return message.buildEmbed().setColor(0x00adff).setImage(res.body.media[type]).send();
             });
     }
 };

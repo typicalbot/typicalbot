@@ -8,12 +8,12 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const mod = message.content.slice(message.content.search(" ") + 1);
 
         this.client.transmit("reload", mod);
 
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00FF00)
             .setDescription(`**Reloading Module:** \`${mod}\``)
             .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")

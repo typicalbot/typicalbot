@@ -8,15 +8,15 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const match = /shard\s+(ping|restart|\d+)\s*(\d+)?/i.exec(message.content);
-        if (!match) return response.error("Invalid command usage.");
+        if (!match) return message.error("Invalid command usage.");
 
         const action = match[1];
         const shard = match[2];
 
         if (action === "ping") {
-            if (!shard) return response.error("No shard specified.");
+            if (!shard) return message.error("No shard specified.");
 
             shard < 100 ?
                 this.client.transmit("shardping", { "channel": message.channel.id, shard, timestamp: Date.now() }) :
@@ -24,9 +24,9 @@ module.exports = class extends Command {
                     this.client.transmit("shardping", { "channel": message.channel.id, "shard": +data, timestamp: Date.now() });
                 });
         } else if (action === "restart") {
-            if (shard || !shard) return response.error("Subcommand disabled.");
+            if (shard || !shard) return message.error("Subcommand disabled.");
 
-            if (!shard) return response.error("No shard specified.");
+            if (!shard) return message.error("No shard specified.");
 
             shard < 100 ?
                 this.client.transmit("restartshard", { shard }) :
@@ -35,7 +35,7 @@ module.exports = class extends Command {
                 });
         } else {
             this.client.functions.request(`https://typicalbot.com/api/shard/?guild_id=${action}&shard_count=${this.client.shardCount}`).then(data => {
-                response.reply(`Guild ${action} is on Shard ${+data + 1} / ${this.client.shardCount}.`);
+                message.reply(`Guild ${action} is on Shard ${+data + 1} / ${this.client.shardCount}.`);
             });
         }
     }

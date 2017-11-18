@@ -9,14 +9,14 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const page = message.content.split(" ")[1];
 
         const lengthen = this.client.functions.lengthen;
 
         const paged = this.client.functions.pagify(this.client.guilds.sort((a,b) => b.memberCount - a.memberCount).map(g => `${lengthen(1, `${g.name.replace(/[^a-z0-9 '"/\\\[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`), page);
 
-        return response.reply(
+        return message.reply(
             `**__Servers on shard ${this.client.shardNumber} / ${this.client.shardCount}:__**\n\`\`\`autohotkey\n${paged}\`\`\``
         );
     }
@@ -28,7 +28,7 @@ module.exports = class extends Command {
 
         const paged = this.client.functions.pagify(this.client.guilds.sort((a,b) => b.memberCount - a.memberCount).map(g => `${lengthen(1, `${g.name.replace(/[^a-z0-9 '"/\\\[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`), page);
 
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00adff)
             .setTitle(`Servers on Shard ${this.client.shardNumber} / ${this.client.shardCount}`)
             .setDescription(`\`\`\`autohotkey\n${paged}\`\`\``)

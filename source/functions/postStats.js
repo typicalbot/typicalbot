@@ -10,8 +10,8 @@ class New extends Function {
         if (provider === "a" || provider === "c") {
             request.post("https://www.carbonitex.net/discord/data/botdata.php")
                 .set("Content-Type", "application/json")
+                .set("key", this.client.config.carbonkey)
                 .send({
-                    "key": this.client.config.carbonkey,
                     "shardid": this.client.shardID.toString(),
                     "shardcount": this.client.shardCount.toString(),
                     "servercount": this.client.guilds.size.toString()

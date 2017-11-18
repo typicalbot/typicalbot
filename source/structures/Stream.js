@@ -17,15 +17,15 @@ class Stream {
             this.dispatcher = dispatcher;
             this.current = video;
 
-            video.response.send(`🎵 Now streaming **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.convertTime(video.length_seconds * 1000)}**.`);
+            video.message.send(`🎵 Now streaming **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.convertTime(video.length_seconds * 1000)}**.`);
 
             dispatcher.on("error", err => {
-                video.response.error(err);
+                video.message.error(err);
             });
 
             dispatcher.on("end", () => {
                 if (!this.queue.length) {
-                    video.response.send(`The queue has concluded.`);
+                    video.message.send(`The queue has concluded.`);
                     return this.kill();
                 }
 
@@ -35,7 +35,7 @@ class Stream {
                 );
             });
         }).catch(err => {
-            video.response.error(`An error occured fetching information for the requested song.${video.response.message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
+            video.message.error(`An error occured fetching information for the requested song.${video.response.message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
         });
     }
 

@@ -10,19 +10,19 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
-        if (!message.guild.settings.logs.moderation) return response.error("You must have moderation logs enabled to use this command.");
+    async execute(message, permissionLevel) {
+        if (!message.guild.settings.logs.moderation) return message.error("You must have moderation logs enabled to use this command.");
 
         const args = /warn\s+(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const user = args[1], reason = args[2];
 
         this.client.users.fetch(user).then(async cachedUser => {
             const member = await message.guild.members.fetch(cachedUser);
-            if (!member) return response.error(`The requested user could not be found.`);
+            if (!member) return message.error(`The requested user could not be found.`);
 
-            if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return response.error(`You cannot warn a user with either the same or higher highest role.`);
+            if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return message.error(`You cannot warn a user with either the same or higher highest role.`);
 
             const log = { "action": "warn", "user": member.user, "moderator": message.author };
             if (reason) Object.assign(log, { reason });
@@ -33,7 +33,7 @@ module.exports = class extends Command {
             if (reason) embed.addField("» Reason", reason);
             embed.send().catch(err => { return; });
 
-            response.success(`Successfully warned user \`${cachedUser.tag}\`.`);
-        }).catch(err => response.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
+            message.success(`Successfully warned user \`${cachedUser.tag}\`.`);
+        }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
     }
 };

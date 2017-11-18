@@ -10,21 +10,21 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         request.get("https://api.thedogapi.co.uk/v2/dog.php?limit=1")
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.send(res.body.data[0].url);
+                return message.send(res.body.data[0].url);
             });
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         request.get("https://api.thedogapi.co.uk/v2/dog.php?limit=1")
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.buildEmbed().setColor(0x00adff).setImage(res.body.data[0].url).send();
+                return message.buildEmbed().setColor(0x00adff).setImage(res.body.data[0].url).send();
             });
     }
 };

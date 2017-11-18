@@ -11,8 +11,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
-        response.send(
+    execute(message, permissionLevel) {
+        message.send(
             `**__TypicalBot's Statistics:__**\n`
             + `\`\`\`autohotkey\n`
             + `=> Uptime            : ${this.client.functions.convertTime(this.client.uptime)}\n`
@@ -34,8 +34,8 @@ module.exports = class extends Command {
         );
     }
 
-    embedExecute(message, response, permissionLevel) {
-        response.buildEmbed()
+    embedExecute(message, permissionLevel) {
+        message.buildEmbed()
             .setColor(0x00adff)
             .setThumbnail("https://typicalbot.com/x/images/icon.png")
             .setTitle("TypicalBot Statistics")

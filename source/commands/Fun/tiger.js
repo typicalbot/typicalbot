@@ -9,21 +9,21 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         request.get("https://typicalbot.com/api/tiger/")
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.send(JSON.parse(res.text).response);
+                return message.send(JSON.parse(res.text).response);
             });
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         request.get("https://typicalbot.com/api/tiger/")
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.buildEmbed().setColor(0x00adff).setImage(JSON.parse(res.text).response).send();
+                return message.buildEmbed().setColor(0x00adff).setImage(JSON.parse(res.text).response).send();
             });
     }
 };

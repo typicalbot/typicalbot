@@ -9,14 +9,14 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const code = message.content.slice(message.content.search(" ") + 1);
         try {
             const output = eval(code);
 
             output instanceof Promise ?
                 output.then(a => {
-                    response.embed({
+                    message.embed({
                         "color": 0x00FF00,
                         "description": `\n\n\`\`\`js\n${util.inspect(a, { depth: 0 })}\n\`\`\``,
                         "footer": {
@@ -24,7 +24,7 @@ module.exports = class extends Command {
                             "icon_url": "https://typicalbot.com/x/images/icon.png"
                         }
                     }).catch(err => {
-                        response.embed({
+                        message.embed({
                             "color": 0xFF0000,
                             "description": `\`\`\`\n${err.stack}\n\`\`\``,
                             "footer": {
@@ -34,7 +34,7 @@ module.exports = class extends Command {
                         });
                     });
                 }).catch(err => {
-                    response.embed({
+                    message.embed({
                         "color": 0xFF0000,
                         "description": `\n\n\`\`\`\n${err ? err.stack : `Unknown Error`}\n\`\`\``,
                         "footer": {
@@ -44,7 +44,7 @@ module.exports = class extends Command {
                     });
                 }) :
                 output instanceof Object ?
-                    response.embed({
+                    message.embed({
                         "color": 0x00FF00,
                         "description": `\`\`\`js\n${util.inspect(output, { depth: 0 })}\n\`\`\``,
                         "footer": {
@@ -52,7 +52,7 @@ module.exports = class extends Command {
                             "icon_url": "https://typicalbot.com/x/images/icon.png"
                         }
                     }) :
-                    response.embed({
+                    message.embed({
                         "color": 0x00FF00,
                         "description": `\`\`\`\n${output}\n\`\`\``,
                         "footer": {
@@ -60,9 +60,9 @@ module.exports = class extends Command {
                             "icon_url": "https://typicalbot.com/x/images/icon.png"
                         }
                     });
-            //response.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`OUTPUT:\`\n\`\`\`\n${typeof output === "object" ? JSON.stringify(output, null, 4) : output}\n\`\`\``);
+            //message.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`OUTPUT:\`\n\`\`\`\n${typeof output === "object" ? JSON.stringify(output, null, 4) : output}\n\`\`\``);
         } catch (err) {
-            response.embed({
+            message.embed({
                 "color": 0xFF0000,
                 "description": `\`\`\`\n${err.stack}\n\`\`\``,
                 "footer": {
@@ -70,10 +70,10 @@ module.exports = class extends Command {
                     "icon_url": "https://typicalbot.com/x/images/icon.png"
                 }
             }).catch(err => {
-                response.reply("Cannot send embeds.");
+                message.reply("Cannot send embeds.");
             });
 
-            //response.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`ERROR:\`\n\`\`\`${err}\n\`\`\``);
+            //message.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`ERROR:\`\n\`\`\`${err}\n\`\`\``);
         }
     }
 };

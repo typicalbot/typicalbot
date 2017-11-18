@@ -10,14 +10,14 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /announce(?:\s+(-e))?\s+((?:.|[\r\n])+)/i.exec(message.content);
-        if (!args) return response.error(`No announcement content was supplied.`);
+        if (!args) return message.error(`No announcement content was supplied.`);
 
         const embed = args[1], content = args[2];
 
         const toChannel = message.guild.channels.get(message.guild.settings.announcements.id);
-        if (!toChannel) return response.error(`There is not an announcements channel set up.`);
+        if (!toChannel) return message.error(`There is not an announcements channel set up.`);
 
         const mentionRole = message.guild.roles.get(message.guild.settings.announcements.mention);
 

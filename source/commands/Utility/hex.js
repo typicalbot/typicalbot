@@ -11,9 +11,9 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /hex\s+#?([0-9a-fA-F]{6}|random)/i.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const hex = args[1] === "random" ? Math.floor(Math.random()*16777215).toString(16) : args[1];
 
@@ -31,9 +31,9 @@ module.exports = class extends Command {
         );
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         const args = /hex\s+#?([0-9a-fA-F]{6}|random)/i.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const hex = args[1] === "random" ? Math.floor(Math.random()*16777215).toString(16) : args[1];
 

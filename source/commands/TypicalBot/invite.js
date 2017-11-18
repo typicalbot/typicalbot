@@ -10,12 +10,12 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
-        response.reply(`You can add me to your server at <${this.client.config.urls.oauth}>.`);
+    execute(message, permissionLevel) {
+        message.reply(`You can add me to your server at <${this.client.config.urls.oauth}>.`);
     }
 
     embedExecute(message, response){
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("TypicalBot Invite Link")
             .setDescription(`You can add me to your server [here](${this.client.config.urls.oauth}).`)

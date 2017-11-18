@@ -10,14 +10,14 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
+    async execute(message, permissionLevel) {
         const commandInput = message.content.split(" ")[1];
-        if (!commandInput) return response.send(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
+        if (!commandInput) return message.send(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
 
         const command = await this.client.commands.get(commandInput);
-        if (!command) return response.error(`The command \`${commandInput}\` does not exist.`);
+        if (!command) return message.error(`The command \`${commandInput}\` does not exist.`);
 
-        response.send(
+        message.send(
             `**__Usage For:__** ${commandInput}\n`
             + `**[Param]** means a parameter is optional.\n`
             + `**<Param>** means a parameter is required.\n\n`
@@ -30,11 +30,11 @@ module.exports = class extends Command {
         );
     }
 
-    async embedExecute(message, response, permissionLevel) {
+    async embedExecute(message, permissionLevel) {
         const commandInput = message.content.split(" ")[1];
         const command = await this.client.commands.get(commandInput);
 
-        if (!commandInput) return response.buildEmbed()
+        if (!commandInput) return message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Info")
             .setDescription(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`)
@@ -42,7 +42,7 @@ module.exports = class extends Command {
             .setTimestamp()
             .send();
 
-        if (!command) return response.buildEmbed()
+        if (!command) return message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Invalid Command Input`)
             .setDescription(`The command \`${commandInput}\` does not exist.`)
@@ -50,7 +50,7 @@ module.exports = class extends Command {
             .setTimestamp()
             .send();
 
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Command Usage: ${commandInput}`)
             .setDescription(`• [[Parameter]]() - Optional Parameter\n• [<Parameter>]() - Required Parameter`)

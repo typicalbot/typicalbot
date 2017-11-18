@@ -10,9 +10,9 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
+    async execute(message, permissionLevel) {
         const args = /unban\s+(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const user = args[1], reason = args[2];
 
@@ -23,14 +23,14 @@ module.exports = class extends Command {
             this.client.unbanCache.set(user, log);
 
             message.guild.unban(cachedUser.id).then(actioned => {
-                response.success(`Successfully unbanned user \`${actioned.tag || actioned}\`.`);
+                message.success(`Successfully unbanned user \`${actioned.tag || actioned}\`.`);
             }).catch(err => {
-                if (err === "Error: Couldn't resolve the user ID to unban.") return response.error(`The requested user could not be found.`);
+                if (err === "Error: Couldn't resolve the user ID to unban.") return message.error(`The requested user could not be found.`);
 
-                response.error(`An error occured while trying to unban the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
+                message.error(`An error occured while trying to unban the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
 
                 this.client.unbanCache.delete(cachedUser.id || cachedUser);
             });
-        }).catch(err => response.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
+        }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
     }
 };

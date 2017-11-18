@@ -10,11 +10,11 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /bots(?:\s+(\d+))?/i.exec(message.content);
 
         request.get("https://www.carbonitex.net/discord/api/listedbots").end((err, res) => {
-            if (err) return response.error("An error occured making that request.");
+            if (err) return message.error("An error occured making that request.");
 
             const page = args[1] || 1;
 
@@ -29,7 +29,7 @@ module.exports = class extends Command {
                 page
             );
 
-            response.send(`**__Ranked Bot List - Provided by Carbonitex:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
+            message.send(`**__Ranked Bot List - Provided by Carbonitex:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
         });
     }
 };

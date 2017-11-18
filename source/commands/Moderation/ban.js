@@ -10,17 +10,17 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
+    async execute(message, permissionLevel) {
         const args = /ban\s+(?:<@!?)?(\d{17,20})>?(?:\s+(\d+))?(?:\s+(.+))?/i.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const user = args[1], purgeDays = args[2] || 0, reason = args[3];
 
         this.client.users.fetch(user).then(async cachedUser => {
             const member = await message.guild.members.fetch(cachedUser).catch(err => { return; });
 
-            if (member && message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return response.error(`You cannot ban a user with either the same or higher highest role.`);
-            if (member && !member.bannable) return response.error(`In order to complete the request, I need the **BAN_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.`);
+            if (member && message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot ban a user with either the same or higher highest role.`);
+            if (member && !member.bannable) return message.error(`In order to complete the request, I need the **BAN_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.`);
 
             const toBan = cachedUser || user;
 
@@ -36,14 +36,14 @@ module.exports = class extends Command {
             }
 
             message.guild.ban(toBan, { days: purgeDays }).then(actioned => {
-                response.success(`Successfully banned user \`${actioned.tag || actioned.id || actioned}\`.`);
+                message.success(`Successfully banned user \`${actioned.tag || actioned.id || actioned}\`.`);
             }).catch(err => {
-                if (err === "Error: Couldn't resolve the user ID to ban.") return response.error(`The requested user could not be found.`);
+                if (err === "Error: Couldn't resolve the user ID to ban.") return message.error(`The requested user could not be found.`);
 
-                response.error(`An error occured while trying to ban the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
+                message.error(`An error occured while trying to ban the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
 
                 this.client.banCache.delete(toBan.id || toBan);
             });
-        }).catch(err => response.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
+        }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
     }
 };
