@@ -36,7 +36,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, permissionLevel) {
-        const match = /serverinfo\s+(.+)/i.exec(message.content);
+        const match = /s(?:erver)?info\s+(.+)/i.exec(message.content);
         const option = match ? match[1] : null;
 
         const guildOwner = message.guild.member(message.guild.ownerID).user;
