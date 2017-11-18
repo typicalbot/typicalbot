@@ -1,5 +1,4 @@
 const Event = require("../structures/Event");
-const Response = require("../structures/Response");
 
 class New extends Event {
     constructor(client, name) {

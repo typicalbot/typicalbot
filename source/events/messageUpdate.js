@@ -1,5 +1,4 @@
 const Event = require("../structures/Event");
-const Response = require("../structures/Response");
 
 class New extends Event {
     constructor(client, name) {
@@ -15,9 +14,7 @@ class New extends Event {
         const userPermissions = this.client.permissionsManager.get(message.guild, message.author);
         if (userPermissions.level >= 2) return;
 
-        const response = new Response(this.client, message);
-
-        this.client.automod.inviteCheck(response).then(() => { return response.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
+        this.client.automod.inviteCheck(message).then(() => { return message.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
     }
 }
 
