@@ -11,7 +11,7 @@ module.exports = class extends Command {
 
     execute(message, permissionLevel) {
         const args = /search\s+(\S+)(?:\s+(\d+))?/i.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const query = args[1];
         const page = args[2] || 1;
@@ -22,13 +22,13 @@ module.exports = class extends Command {
             return false;
         });
 
-        if (!list.size) return response.reply(`There are no matches for the query **${query}**.`);
+        if (!list.size) return message.reply(`There are no matches for the query **${query}**.`);
 
         const content = this.client.functions.pagify(
             list.map(m => `${this.client.functions.lengthen(1, `${m.user.username}${m.nickname ? ` (${m.nickname})` : ""}`, 40)}: ${m.id}`),
             page
         );
 
-        response.send(`**__Results for Query:__** ${query}\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
+        message.send(`**__Results for Query:__** ${query}\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
     }
 };

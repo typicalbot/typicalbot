@@ -9,7 +9,7 @@ module.exports = class extends Command {
     }
 
     execute(message, permissionLevel) {
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Possible logs").setURL(this.client.config.urls.website)
             .setDescription(`You can set your server full of logs! Including activity and moderation.\n\n[Click here for more information on settings.](${this.client.config.urls.settings})`)

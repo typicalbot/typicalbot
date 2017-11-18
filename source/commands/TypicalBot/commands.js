@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     execute(message, permissionLevel) {
-        if (message.channel.type === "text") response.reply(`Check your Direct Messages for my commands!`);
+        if (message.channel.type === "text") message.reply(`Check your Direct Messages for my commands!`);
 
         const commands = this.client.commands;
         const list = Array.from(commands.keys());

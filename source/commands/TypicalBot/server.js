@@ -11,11 +11,11 @@ module.exports = class extends Command {
     }
 
     execute(message, permissionLevel) {
-        response.reply(`You can join the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
+        message.reply(`You can join the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
     }
 
     embedExecute(message, response){
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("TypicalBot Lounge Invite")
             .setDescription(`You can join the TypicalBot Lounge [here](${this.client.config.urls.server}).`)

@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
     async execute(message, permissionLevel) {
         const args = /(?:purge|prune)(?:\s+(?:<@!?(\d{17,20})>|<@&(\d{17,20})>|<#(\d{17,20})>|(you|me|bots)))?\s+(\d+)(?:\s+((?:.|[\r\n])+))?/i.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const userFilter = args[1];
         const roleFilter = args[2] ? message.guild.roles.get(args[2]) : null;
@@ -22,7 +22,7 @@ module.exports = class extends Command {
         const reason = args[6];
 
         let messageCount = args[5]; if (messageCount > 100) messageCount = 100;
-        if (messageCount < 1) return response.error("Please provide a number of messages to delete from 1 to 100.");
+        if (messageCount < 1) return message.error("Please provide a number of messages to delete from 1 to 100.");
 
         let messages = await message.channel.messages.fetch({ limit: 100, before: message.id });
 
@@ -53,11 +53,11 @@ module.exports = class extends Command {
                     const _case = await this.client.modlogsManager.createLog(message.guild, log);
                 }
 
-                response.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
+                message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
                     .then(msg => msg.delete({ timeout: 2500 }));
                 message.delete({ timeout: 2500 });
             })
-            .catch(err => response.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
+            .catch(err => message.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
 
         message.channel.bulkDelete(messages, true)
             .then(async msgs => {
@@ -68,10 +68,10 @@ module.exports = class extends Command {
                     const _case = await this.client.modlogsManager.createLog(message.guild, log);
                 }
                 
-                response.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
+                message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
                     .then(msg => msg.delete({ timeout: 2500 }));
                 message.delete({ timeout: 2500 });
             })
-            .catch(err => response.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
+            .catch(err => message.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
     }
 };

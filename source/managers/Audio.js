@@ -23,11 +23,11 @@ module.exports = class {
 
     stream(response, video) {
         return new Promise((resolve, reject) => {
-            if (!this.client.audioUtility.withinLimit(video, response)) return response.error(`The song requested is too long to play. The maximum song length is ${this.client.functions.length(response.message.guild.settings.lengthLimit || 1800)}.`);
+            if (!this.client.audioUtility.withinLimit(video, response)) return message.error(`The song requested is too long to play. The maximum song length is ${this.client.functions.length(response.message.guild.settings.lengthLimit || 1800)}.`);
 
             const currentConnection = response.message.guild.voiceConnection;
             if (currentConnection) {
-                if (!response.message.member.voiceChannel || response.message.member.voiceChannel.id !== currentConnection.channel.id) return response.error("You must be in the same voice channel to request a song to be played.");
+                if (!response.message.member.voiceChannel || response.message.member.voiceChannel.id !== currentConnection.channel.id) return message.error("You must be in the same voice channel to request a song to be played.");
                 return this.queue(response, video);
             }
 
@@ -38,7 +38,7 @@ module.exports = class {
                 video.response = response;
                 guildStream.play(video);
             }).catch(err => {
-                return response.error(err);
+                return message.error(err);
             });
         });
     }
@@ -46,11 +46,11 @@ module.exports = class {
     queue(response, video) {
         const stream = this.client.streams.get(response.message.guild.id);
 
-        if (stream.queue.length >= (response.message.guild.settings.queuelimit || 10)) return response.error(`The queue limit of ${response.message.guild.settings.queuelimit || 10} has been reached.`);
+        if (stream.queue.length >= (response.message.guild.settings.queuelimit || 10)) return message.error(`The queue limit of ${response.message.guild.settings.queuelimit || 10} has been reached.`);
 
         video.response = response;
         stream.queue.push(video);
 
-        return response.reply(`Enqueued **${video.title}**.`);
+        return message.reply(`Enqueued **${video.title}**.`);
     }
 };

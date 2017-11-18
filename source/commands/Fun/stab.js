@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
         const randomAddon = Math.random() <= 0.25;
 
-        if (!user || user.id === message.author.id) return response.send(`${message.author} just stabbed themselves! :dagger::scream:${randomAddon ? ` Someone call the police!` : ""}`);
-        response.send(`${message.author} just stabbed ${user}! :dagger::scream:${randomAddon ? ` Someone call the police!` : ""}`);
+        if (!user || user.id === message.author.id) return message.send(`${message.author} just stabbed themselves! :dagger::scream:${randomAddon ? ` Someone call the police!` : ""}`);
+        message.send(`${message.author} just stabbed ${user}! :dagger::scream:${randomAddon ? ` Someone call the police!` : ""}`);
     }
 };

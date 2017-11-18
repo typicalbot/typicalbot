@@ -15,7 +15,7 @@ module.exports = class extends Command {
 
         const list = members.map(m => `» ${m.displayName} (${m.id}) | ${m.user.presence.activity.name}`);
 
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0xFF0000)
             .setTitle("Users with Invite in Playing Status")
             .setDescription(list.length ? list.join("\n\n").substring(0, 2000) : "No users to display.")

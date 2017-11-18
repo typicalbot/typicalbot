@@ -11,11 +11,11 @@ module.exports = class extends Command {
     }
 
     execute(message, permissionLevel) {
-        response.send(`**Donations can be sent here:** <${this.client.config.urls.donate}>\n\nDonations go to the creator of TypicalBot for any finances.`);
+        message.send(`**Donations can be sent here:** <${this.client.config.urls.donate}>\n\nDonations go to the creator of TypicalBot for any finances.`);
     }
 
     embedExecute(message, response){
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("Donate to TypicalBot's Creator")
             .setDescription(`You can donate to TypicalBot [here](${this.client.config.urls.donate}>).\n\nDonations go to the creator of TypicalBot for any finances.`)

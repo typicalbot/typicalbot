@@ -60,7 +60,7 @@ module.exports = class extends Command {
                             "icon_url": "https://typicalbot.com/x/images/icon.png"
                         }
                     });
-            //response.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`OUTPUT:\`\n\`\`\`\n${typeof output === "object" ? JSON.stringify(output, null, 4) : output}\n\`\`\``);
+            //message.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`OUTPUT:\`\n\`\`\`\n${typeof output === "object" ? JSON.stringify(output, null, 4) : output}\n\`\`\``);
         } catch (err) {
             response.embed({
                 "color": 0xFF0000,
@@ -70,10 +70,10 @@ module.exports = class extends Command {
                     "icon_url": "https://typicalbot.com/x/images/icon.png"
                 }
             }).catch(err => {
-                response.reply("Cannot send embeds.");
+                message.reply("Cannot send embeds.");
             });
 
-            //response.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`ERROR:\`\n\`\`\`${err}\n\`\`\``);
+            //message.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`ERROR:\`\n\`\`\`${err}\n\`\`\``);
         }
     }
 };

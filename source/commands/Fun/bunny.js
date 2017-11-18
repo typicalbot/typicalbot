@@ -15,9 +15,9 @@ module.exports = class extends Command {
 
         request.get(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.send(res.body.media[type]);
+                return message.send(res.body.media[type]);
             });
     }
 
@@ -26,9 +26,9 @@ module.exports = class extends Command {
 
         request.get(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.buildEmbed().setColor(0x00adff).setImage(res.body.media[type]).send();
+                return message.buildEmbed().setColor(0x00adff).setImage(res.body.media[type]).send();
             });
     }
 };

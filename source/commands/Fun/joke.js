@@ -10,6 +10,6 @@ module.exports = class extends Command {
     }
 
     execute(message, permissionLevel) {
-        response.send(jokes[Math.floor(Math.random() * jokes.length)]);
+        message.send(jokes[Math.floor(Math.random() * jokes.length)]);
     }
 };

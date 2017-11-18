@@ -11,39 +11,39 @@ module.exports = class extends Command {
 
     execute(message, permissionLevel) {
         const args = /urban\s+(.*)/gi.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const query = args[1];
 
         request
             .get(`http://api.urbandictionary.com/v0/define?term=${query}`)
             .end((err, res) => {
-                if (err) return response.error("An error occured while trying to complete this request.");
+                if (err) return message.error("An error occured while trying to complete this request.");
 
                 const resp = res.body.list[0];
-                if (!resp) return response.error(`No matches for the query **${query}**.`);
+                if (!resp) return message.error(`No matches for the query **${query}**.`);
 
-                response.reply(`**__${query}:__** ${resp.definition}`);
+                message.reply(`**__${query}:__** ${resp.definition}`);
             });
     }
 
     embedExecute(message, permissionLevel) {
         const args = /urban (.*)/gi.exec(message.content);
-        if (!args) return response.usage(this);
+        if (!args) return message.error(this.client.functions.error("usage", this));
 
         const query = args[1];
 
         request
             .get(`http://api.urbandictionary.com/v0/define?term=${query}`)
             .end((err, res) => {
-                if (err) return response.buildEmbed().setColor(0xFF0000).setDescription("An error occured while trying to complete this request.").send();
+                if (err) return message.buildEmbed().setColor(0xFF0000).setDescription("An error occured while trying to complete this request.").send();
 
                 const resp = res.body.list[0];
-                if (!resp) return response.buildEmbed().setColor(0xFF0000).setDescription(`No matches for the query **${query}**.`).send();
+                if (!resp) return message.buildEmbed().setColor(0xFF0000).setDescription(`No matches for the query **${query}**.`).send();
 
                 const rating = Math.round((resp.thumbs_up/(resp.thumbs_up + resp.thumbs_down))*100);
 
-                response.buildEmbed()
+                message.buildEmbed()
                     .setColor(0x00adff)
                     .setTitle(query)
                     .setURL(resp.permalink)

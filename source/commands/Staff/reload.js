@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
         this.client.transmit("reload", mod);
 
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00FF00)
             .setDescription(`**Reloading Module:** \`${mod}\``)
             .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")

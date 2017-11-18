@@ -12,9 +12,9 @@ module.exports = class extends Command {
     execute(message, permissionLevel) {
         request.get("https://typicalbot.com/api/quotes/")
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.send(JSON.parse(res.text).response);
+                return message.send(JSON.parse(res.text).response);
             });
     }
 };

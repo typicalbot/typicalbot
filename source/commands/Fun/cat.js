@@ -13,18 +13,18 @@ module.exports = class extends Command {
     execute(message, permissionLevel) {
         request.get("http://random.cat/meow")
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.send(res.body.file);
+                return message.send(res.body.file);
             });
     }
 
     embedExecute(message, permissionLevel) {
         request.get("http://random.cat/meow")
             .end((err, res) => {
-                if (err) return response.error("An error occured making that request.");
+                if (err) return message.error("An error occured making that request.");
 
-                return response.buildEmbed().setColor(0x00adff).setImage(res.body.file).send();
+                return message.buildEmbed().setColor(0x00adff).setImage(res.body.file).send();
             });
     }
 };

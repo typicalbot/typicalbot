@@ -12,13 +12,13 @@ module.exports = class extends Command {
 
     execute(message, permissionLevel) {
         const match = /(?:youtube|yts)\s+(.+)/i.exec(message.content);
-        if (!match) return response.usage(this);
+        if (!match) return message.error(this.client.functions.error("usage", this));
 
         this.client.audioUtility.search(message.guild.settings, match[1]).then(results => {
-            if (!results.length) return response.reply(`No results were found for the query **${match[1]}**.`);
+            if (!results.length) return message.reply(`No results were found for the query **${match[1]}**.`);
             const video = results[0];
 
-            response.reply(`**${video.title}** by **${video.channel.title}**:\n<${video.url}>`);
-        }).catch(error => response.error(`${this.client.audioUtility.searchError(error)}`));
+            message.reply(`**${video.title}** by **${video.channel.title}**:\n<${video.url}>`);
+        }).catch(error => message.error(`${this.client.audioUtility.searchError(error)}`));
     }
 };

@@ -17,7 +17,7 @@ module.exports = class extends Command {
 
         const guildOwner = message.guild.member(message.guild.ownerID);
 
-        if (!option) return response.reply(
+        if (!option) return message.reply(
             `**__Server Information For:__** ${message.guild.name}\n`
             + `\`\`\`\n`
             + `Name                : ${message.guild.name} (${message.guild.id})\n`
@@ -40,7 +40,7 @@ module.exports = class extends Command {
 
         const guildOwner = message.guild.member(message.guild.ownerID).user;
 
-        if (!option) return response.buildEmbed()
+        if (!option) return message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Server Information`)
             .addField("» Name", message.guild.name, true)
@@ -69,7 +69,7 @@ let owner = message.guild.owner ? message.guild.owner : message.guild.member(mes
 
 if (!after) {
     if (embed) {
-        return response.send("", {
+        return message.send("", {
             "color": 0x00ADFF,
             "description": `**__Server Information For:__** ${message.guild.name}`,
             "fields": [
@@ -89,7 +89,7 @@ if (!after) {
             }
         });
     } else {
-        return response.reply(
+        return message.reply(
             `**__Server Information For:__** ${message.guild.name}\n`
             + `\`\`\`\n`
             + `Name                : ${message.guild.name} (${message.guild.id})\n`
@@ -114,7 +114,7 @@ if (after === "roles") {
         message.guild.roles.filter(r => r.position !== 0).array().sort((a,b) => b.position - a.position).map(r => `${lengthen(r.name, 20)} : ${r.id}`),
         page
     );
-    return response.reply(
+    return message.reply(
         `**__Roles for server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
     );
 }
@@ -124,7 +124,7 @@ if (after === "channels") {
         message.guild.channels.filter(c => c.type === "text").array().sort((a,b) => a.position - b.position).map(c => `${lengthen(c.name, 20)} : ${c.id}`),
         page
     );
-    return response.reply(
+    return message.reply(
         `**__Text Channels for server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
     );
 }
@@ -134,7 +134,7 @@ if (after === "bots") {
         message.guild.members.filter(m => m.user.bot).map(b => `${client.functions.lengthen(b.user.username, 20)} : ${b.user.id}`),
         page
     );
-    return response.reply(
+    return message.reply(
         `**__Bots in server:__** ${message.guild.name}\n\`\`\`autohotkey\n${paged}\`\`\``
     );
 }

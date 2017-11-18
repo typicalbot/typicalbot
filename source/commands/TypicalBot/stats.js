@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     execute(message, permissionLevel) {
-        response.send(
+        message.send(
             `**__TypicalBot's Statistics:__**\n`
             + `\`\`\`autohotkey\n`
             + `=> Uptime            : ${this.client.functions.convertTime(this.client.uptime)}\n`
@@ -35,7 +35,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, permissionLevel) {
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00adff)
             .setThumbnail("https://typicalbot.com/x/images/icon.png")
             .setTitle("TypicalBot Statistics")

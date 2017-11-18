@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
         const randomAddon = Math.random() <= 0.25;
 
-        if (!user || user.id === message.author.id) return response.send(`${message.author} ${randomAddon ? "laughed like a madman while slowly eating the cookies they kept for themself in front of everyone." : "decided to keep all of the cookies for themself! What a jerk! :angry:"}`);
-        response.send(`${message.author} just gave ${user} a cookie. :cookie:`);
+        if (!user || user.id === message.author.id) return message.send(`${message.author} ${randomAddon ? "laughed like a madman while slowly eating the cookies they kept for themself in front of everyone." : "decided to keep all of the cookies for themself! What a jerk! :angry:"}`);
+        message.send(`${message.author} just gave ${user} a cookie. :cookie:`);
     }
 };

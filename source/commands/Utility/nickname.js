@@ -22,14 +22,14 @@ module.exports = class extends Command {
             if (actualUserPermissions.level < 2) return response.perms({ permission: 2 }, actualUserPermissions);
 
             member.setNickname(reset ? "" : nickname)
-                .then(() => response.reply(`Successfully ${reset ? "reset" : "changed"} member's nickname.`))
-                .catch(err => response.error("An error occured. This most likely means I cannot manage member's nickname."));
+                .then(() => message.reply(`Successfully ${reset ? "reset" : "changed"} member's nickname.`))
+                .catch(err => message.error("An error occured. This most likely means I cannot manage member's nickname."));
         } else {
-            if (message.guild.settings.nonickname) return response.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
+            if (message.guild.settings.nonickname) return message.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
 
             message.member.setNickname(reset ? "" : nickname)
-                .then(() => response.reply(`Successfully ${reset ? "reset" : "changed"} your nickname.`))
-                .catch(err => response.error("An error occured. This most likely means I cannot manage your nickname."));
+                .then(() => message.reply(`Successfully ${reset ? "reset" : "changed"} your nickname.`))
+                .catch(err => message.error("An error occured. This most likely means I cannot manage your nickname."));
         }
     }
 };

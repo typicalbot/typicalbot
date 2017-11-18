@@ -9,7 +9,7 @@ module.exports = class extends Command {
     }
 
     execute(message, permissionLevel) {
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Permission Levels").setURL(this.client.config.urls.website)
             .setDescription(`There are six possible permission levels to have. Commands for all levels can be seen with \`d$commands\`.`)

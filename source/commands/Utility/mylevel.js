@@ -16,7 +16,7 @@ module.exports = class extends Command {
             this.client.permissionsManager.get(message.guild, message.author, true) :
             this.client.permissionsManager.get(message.guild, message.author);
 
-        response.reply(`**__Your Permission Level:__** ${permission.level} | ${permission.title}`);
+        message.reply(`**__Your Permission Level:__** ${permission.level} | ${permission.title}`);
     }
 
     embedExecute(message, permissionLevel) {
@@ -26,7 +26,7 @@ module.exports = class extends Command {
             this.client.permissionsManager.get(message.guild, message.author, true) :
             this.client.permissionsManager.get(message.guild, message.author);
 
-        response.buildEmbed()
+        message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("User Permission Level")
             .setDescription(`Level ${permission.level} | ${permission.title}`)
