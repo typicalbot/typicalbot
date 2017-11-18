@@ -13,7 +13,7 @@ module.exports = class extends Command {
     }
 
     execute(message, permissionLevel) {
-        const args = /serverinfo\s+(.+)/i.exec(message.content);
+        const args = /s(?:erver)?info\s+(.+)/i.exec(message.content);
         const option = args ? args[1] : null;
 
         const guildOwner = message.guild.member(message.guild.ownerID);

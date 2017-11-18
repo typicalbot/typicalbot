@@ -13,7 +13,7 @@ module.exports = class extends Command {
     }
 
     async execute(message, permissionLevel) {
-        const args = /userinfo(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(message.content);
+        const args = /u(?:ser)?info(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(message.content);
 
         const member = await this.client.functions.resolveMember(message, args);
         const user = member.user;
