@@ -23,7 +23,7 @@ module.exports = class extends Command {
         const level3 = list.filter(c => commands._get(c).permission === 3).map(c => `${this.client.config.prefix}${c}`);
         const level4 = list.filter(c => commands._get(c).permission === 4).map(c => `${this.client.config.prefix}${c}`);
 
-        response.dm(
+        message.dm(
             `**__TypicalBot's Commands:__**\nView Usage Here: ${this.client.config.urls.docs}\n\n`
             + `__**Permission Level 4:** Server Owner__\n${level4.join(", ")}\n\n`
             + `__**Permission Level 3:** Server Administrator__\n${level3.join(", ")}\n\n`

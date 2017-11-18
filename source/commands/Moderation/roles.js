@@ -55,7 +55,7 @@ module.exports = class extends Command {
                 message.send(`**__${subRole.name}'s Members:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
             }
         } else if (subcommand === "give") {
-            if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
+            if (actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
             const subArgs = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))\s+(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(args2);
             if (!subArgs) return message.error(this.client.functions.error("usage", this));
@@ -72,7 +72,7 @@ module.exports = class extends Command {
                 .then(() => message.reply(`Success.`))
                 .catch(err => message.error(`An error occured while processing that request.`));
         } else if (subcommand === "take") {
-            if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
+            if (actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
             const subArgs = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))\s+(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(args2);
             if (!subArgs) return message.error(this.client.functions.error("usage", this));
@@ -107,7 +107,7 @@ module.exports = class extends Command {
 
                 message.send(`**__${message.guild.name}'s Public Roles:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
             } else if (subAction === "add") {
-                if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
+                if (actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
                 if (!subRole) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
@@ -121,7 +121,7 @@ module.exports = class extends Command {
                     .then(() => message.reply("Success."))
                     .catch(err => message.error(`An error occured while processing that request\n${String(err).substring(0, 500)}`));
             } else if (subAction === "remove") {
-                if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
+                if (actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
                 if (!subRole) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
@@ -136,17 +136,17 @@ module.exports = class extends Command {
                     .catch(err => message.error(`An error occured while processing that request.`));
 
             } else if (subAction === "clear") {
-                if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
+                if (actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
                 this.client.settings.update(message.guild.id, { roles: { public: [] } })
                     .then(() => message.reply("Success."))
                     .catch(err => message.error(`An error occured while processing that request.`));
             }
         } else if (subcommand === "create") {
-            if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
+            if (actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
         } else if (subcommand === "delete") {
-            if (actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
+            if (actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
         }
     }

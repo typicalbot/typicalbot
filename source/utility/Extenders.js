@@ -13,26 +13,30 @@ Message.prototype.send = function(content, embed, options) {
     if (embed) Object.defineProperty(options, { embed });
     
     return this.channel.send(content, options);
-}
+};
+
+Message.prototype.embed = function(embed) {
+    return this.send("", embed);
+};
 
 Message.prototype.reply = function(content, embed, options = {}) {
     return this.send(`${this.author} | ${content}`, embed);
-}
+};
 
 Message.prototype.success = function(content, embed, options = {}) {
     return this.send(`${this.author} | ✓ | ${content}`, embed);
-}
+};
 
 Message.prototype.error = function(content, embed, options = {}) {
     return this.send(`${this.author} | \\❌ | ${content}`, embed);
-}
+};
 
 Message.prototype.dm = function(content, embed, options = {}) {
     if (embed) Object.defineProperty(options, { embed });
     
     this.author.send(content, options);
-}
+};
 
 Message.prototype.buildEmbed = function() {
     return this.channel.buildEmbed();
-}
+};

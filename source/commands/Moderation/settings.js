@@ -48,7 +48,7 @@ module.exports = class extends Command {
 
         const action = args[1], setting = args[2], ar = args[3], value = args[4];
 
-        if (action === "edit" && actualUserPermissions.level < 3) return response.perms({ permission: 3 }, actualUserPermissions);
+        if (action === "edit" && actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
         if (action === "list") {
             let page = setting || 1;
@@ -586,7 +586,7 @@ module.exports = class extends Command {
 
         const action = args[1], setting = args[2], ar = args[3], value = args[4];
 
-        if (action === "edit" && realPermissionLevel.level < 2) return response.perms({ permission: 2 }, realPermissionLevel);
+        if (action === "edit" && realPermissionLevel.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, realPermissionLevel));
 
         if (action === "list") {
             let page = setting || 1;
