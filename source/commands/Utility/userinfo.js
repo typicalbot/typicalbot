@@ -6,6 +6,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Displays a user's information.",
+            aliases: ["uinfo"],
             usage: "userinfo [@user|user-id|user-tag]",
             mode: "lite"
         });

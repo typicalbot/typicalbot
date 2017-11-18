@@ -6,6 +6,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Displays the server's information.",
+            aliases: ["sinfo"],
             usage: "serverinfo",
             mode: "strict"
         });
