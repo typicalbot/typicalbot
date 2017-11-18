@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const code = message.content.slice(message.content.search(" ") + 1);
         try {
             const output = eval(code);

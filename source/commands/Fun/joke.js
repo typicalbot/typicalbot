@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         response.send(jokes[Math.floor(Math.random() * jokes.length)]);
     }
 };

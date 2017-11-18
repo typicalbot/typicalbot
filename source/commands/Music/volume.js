@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         if (!this.client.audioUtility.hasPermissions(response, this)) return;
 
         const currentConnection = message.guild.voiceConnection;

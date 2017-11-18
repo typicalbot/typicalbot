@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
+    async execute(message, permissionLevel) {
         const args = /unban\s+(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(message.content);
         if (!args) return response.usage(this);
 

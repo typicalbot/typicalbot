@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /urban\s+(.*)/gi.exec(message.content);
         if (!args) return response.usage(this);
 
@@ -27,7 +27,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         const args = /urban (.*)/gi.exec(message.content);
         if (!args) return response.usage(this);
 

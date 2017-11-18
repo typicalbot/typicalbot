@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const page = message.content.split(" ")[1];
 
         const lengthen = this.client.functions.lengthen;

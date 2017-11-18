@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         request.get("https://api.thedogapi.co.uk/v2/dog.php?limit=1")
             .end((err, res) => {
                 if (err) return response.error("An error occured making that request.");
@@ -19,7 +19,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         request.get("https://api.thedogapi.co.uk/v2/dog.php?limit=1")
             .end((err, res) => {
                 if (err) return response.error("An error occured making that request.");

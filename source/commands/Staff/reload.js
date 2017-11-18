@@ -8,7 +8,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const mod = message.content.slice(message.content.search(" ") + 1);
 
         this.client.transmit("reload", mod);

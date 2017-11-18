@@ -40,7 +40,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(message.content);
         if (!args) return response.usage(this);
 
@@ -578,7 +578,7 @@ module.exports = class extends Command {
         }
     }
 
-    NOembedExecute(message, response, permissionLevel) {
+    NOembedExecute(message, permissionLevel) {
         const args = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(message.content);
         if (!args) return response.usage(this);
 

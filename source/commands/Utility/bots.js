@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /bots(?:\s+(\d+))?/i.exec(message.content);
 
         request.get("https://www.carbonitex.net/discord/api/listedbots").end((err, res) => {

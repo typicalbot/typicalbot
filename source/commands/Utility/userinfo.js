@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
+    async execute(message, permissionLevel) {
         const args = /userinfo(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(message.content);
 
         const member = await this.client.functions.resolveMember(message, args);
@@ -33,7 +33,7 @@ module.exports = class extends Command {
         );
     }
 
-    async embedExecute(message, response, permissionLevel) {
+    async embedExecute(message, permissionLevel) {
         const args = /userinfo(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(message.content);
 
         const member = await this.client.functions.resolveMember(message, args);

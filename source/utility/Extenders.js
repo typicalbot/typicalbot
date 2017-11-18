@@ -9,28 +9,30 @@ TextChannel.prototype.buildEmbed = User.prototype.buildEmbed = DMChannel.prototy
     return Object.defineProperty(new MessageEmbed(), "sendToChannel", { value: this });
 };
 
-Message.prototype.send = function(content, embed) {
-    const options = {};
+Message.prototype.send = function(content, embed, options) {
     if (embed) Object.defineProperty(options, { embed });
     
     return this.channel.send(content, options);
 }
 
-Message.prototype.reply = function(content, embed) {
+Message.prototype.reply = function(content, embed, options = {}) {
     return this.send(`${this.author} | ${content}`, embed);
 }
 
-Message.prototype.success = function(content, embed) {
+Message.prototype.success = function(content, embed, options = {}) {
     return this.send(`${this.author} | ✓ | ${content}`, embed);
 }
 
-Message.prototype.error = function(content, embed) {
+Message.prototype.error = function(content, embed, options = {}) {
     return this.send(`${this.author} | \\❌ | ${content}`, embed);
 }
 
-Message.prototype.dm = function(content, embed) {
-    const options = {};
+Message.prototype.dm = function(content, embed, options = {}) {
     if (embed) Object.defineProperty(options, { embed });
     
     this.author.send(content, options);
+}
+
+Message.prototype.buildEmbed = function() {
+    return this.channel.buildEmbed();
 }

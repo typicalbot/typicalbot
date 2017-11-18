@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         response.reply(`You can add me to your server at <${this.client.config.urls.oauth}>.`);
     }
 

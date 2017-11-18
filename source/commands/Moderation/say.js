@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /(?:say|speak)(?:\s+(?:<#)?(\d+)>?)?\s+((?:.|[\r\n])+)?/i.exec(message.content);
         if (!args) return response.usage(this);
 

@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /give\s+(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(message.content);
         if (!args) return response.usage(this);
 

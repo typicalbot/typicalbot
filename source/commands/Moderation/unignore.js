@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /unignore\s+(commands|invites)/i.exec(message.content);
         if (!args) return response.usage(this);
 

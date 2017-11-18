@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
+    async execute(message, permissionLevel) {
         const args = /nick(?:name)?(?:\s+(?:<@!?)?(\d{17,20})>?)?(?:\s+(.{1,32}))?/i.exec(message.content);
 
         const member = args[1] ? await message.guild.members.fetch(args[1]) : null;

@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         response.reply(`You can join the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
     }
 

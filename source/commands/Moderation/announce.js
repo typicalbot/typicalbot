@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /announce(?:\s+(-e))?\s+((?:.|[\r\n])+)/i.exec(message.content);
         if (!args) return response.error(`No announcement content was supplied.`);
 

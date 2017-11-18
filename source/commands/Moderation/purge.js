@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, response, permissionLevel) {
+    async execute(message, permissionLevel) {
         const args = /(?:purge|prune)(?:\s+(?:<@!?(\d{17,20})>|<@&(\d{17,20})>|<#(\d{17,20})>|(you|me|bots)))?\s+(\d+)(?:\s+((?:.|[\r\n])+))?/i.exec(message.content);
         if (!args) return response.usage(this);
 

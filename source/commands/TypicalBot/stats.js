@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         response.send(
             `**__TypicalBot's Statistics:__**\n`
             + `\`\`\`autohotkey\n`
@@ -34,7 +34,7 @@ module.exports = class extends Command {
         );
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         response.buildEmbed()
             .setColor(0x00adff)
             .setThumbnail("https://typicalbot.com/x/images/icon.png")

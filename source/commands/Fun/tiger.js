@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         request.get("https://typicalbot.com/api/tiger/")
             .end((err, res) => {
                 if (err) return response.error("An error occured making that request.");
@@ -18,7 +18,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         request.get("https://typicalbot.com/api/tiger/")
             .end((err, res) => {
                 if (err) return response.error("An error occured making that request.");

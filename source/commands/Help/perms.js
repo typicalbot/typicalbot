@@ -8,7 +8,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         response.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Permission Levels").setURL(this.client.config.urls.website)

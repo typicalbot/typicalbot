@@ -17,8 +17,7 @@ class New extends Event {
             const command = await this.client.commands.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
             if (!command || !command.dm || command.permission > 0) return;
 
-            const response = new Response(this.client, message);
-            command.execute(message, response);
+            command.execute(message);
         } else {
             if (message.guild.me && !message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
@@ -31,8 +30,7 @@ class New extends Event {
             const userPermissions = this.client.permissionsManager.get(message.guild, message.author);
             if (userPermissions.level === -1) return;
 
-            const response = new Response(this.client, message);
-            if (userPermissions.level < 2 && !settings.ignored.invites.includes(message.channel.id)) this.client.automod.inviteCheck(response);
+            if (userPermissions.level < 2 && !settings.ignored.invites.includes(message.channel.id)) this.client.automod.inviteCheck(message);
 
             if (userPermissions.level < 2 && settings.ignored.commands.includes(message.channel.id)) return;
 
@@ -44,19 +42,19 @@ class New extends Event {
             if (!command) return;
 
             const accessLevel = this.client.functions.fetchAccess(message.guild);
-            if (command.access && accessLevel.level < command.access) return response.error(`The server owner's access level is too low to execute that command. The command requires an access level of ${command.access}, but the owner only has a level of ${accessLevel.level} (${accessLevel.title}).`);
+            if (command.access && accessLevel.level < command.access) return message.error(`The server owner's access level is too low to execute that command. The command requires an access level of ${command.access}, but the owner only has a level of ${accessLevel.level} (${accessLevel.title}).`);
 
             const mode = command.mode || "free";
-            if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return response.error(`That command is not enabled on this server.`);
+            if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === "lite" && mode === "free" || settings.mode === "strict" && (mode === "free" || mode === "lite")) return message.error(`That command is not enabled on this server.`);
 
-            if (userPermissions.level < command.permission) return response.perms(command, userPermissions);
+            if (userPermissions.level < command.permission) return message.error(this.client.functions.error("perms", command, userPermissions));
 
             const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
-            if (actualUserPermissions.level < command.permission) return response.perms(command, actualUserPermissions);
+            if (actualUserPermissions.level < command.permission) return message.error(this.client.functions.error("perms", command, actualUserPermissions));
 
             settings.embed && command.embedExecute ?
-                command.embedExecute(message, response, userPermissions) :
-                command.execute(message, response, userPermissions);
+                command.embedExecute(message, userPermissions) :
+                command.execute(message, userPermissions);
         }
     }
 }

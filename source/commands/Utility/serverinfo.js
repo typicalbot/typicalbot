@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, response, permissionLevel) {
+    execute(message, permissionLevel) {
         const args = /serverinfo\s+(.+)/i.exec(message.content);
         const option = args ? args[1] : null;
 
@@ -34,7 +34,7 @@ module.exports = class extends Command {
         );
     }
 
-    embedExecute(message, response, permissionLevel) {
+    embedExecute(message, permissionLevel) {
         const match = /serverinfo\s+(.+)/i.exec(message.content);
         const option = match ? match[1] : null;
 

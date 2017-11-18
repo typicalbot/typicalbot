@@ -5,16 +5,16 @@ module.exports = class {
         this.client = client;
     }
 
-    inviteCheck(response) {
+    inviteCheck(message) {
         return new Promise((resolve, reject) => {
-            if (response.message.guild.settings.automod.invite) {
-                const contentMatch = this.client.functions.inviteCheck(response.message.content);
-                const embedMatch = this.client.functions.inviteCheck(inspect(response.message.embeds, { depth: 4 }));
+            if (message.guild.settings.automod.invite) {
+                const contentMatch = this.client.functions.inviteCheck(message.content);
+                const embedMatch = this.client.functions.inviteCheck(inspect(message.embeds, { depth: 4 }));
 
                 if (contentMatch || embedMatch) {
-                    this.client.emit("guildInvitePosted", response.message.guild, response.message, response.message.author);
-                    response.message.delete().then(() => {
-                        response.error(`This server prohibits invites from being sent. Your message has been deleted.`);
+                    this.client.emit("guildInvitePosted", message.guild, message, message.author);
+                    message.delete().then(() => {
+                        message.error(`This server prohibits invites from being sent. Your message has been deleted.`);
                     });
                 }
             }
