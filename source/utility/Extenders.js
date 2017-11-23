@@ -9,8 +9,8 @@ TextChannel.prototype.buildEmbed = User.prototype.buildEmbed = DMChannel.prototy
     return Object.defineProperty(new MessageEmbed(), "sendToChannel", { value: this });
 };
 
-Message.prototype.send = function(content, embed, options) {
-    if (embed) Object.defineProperty(options, { embed });
+Message.prototype.send = function(content, embed, options = {}) {
+    if (embed) Object.defineProperty(options, "embed", { value: embed });
     
     return this.channel.send(content, options);
 };

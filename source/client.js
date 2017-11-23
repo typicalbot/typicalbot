@@ -90,7 +90,7 @@ class TypicalBot extends Client {
 
         if (mod === "donors") {
             this.donors = new Collection();
-            this.client.functions.fetchDonors();
+            this.functions.fetchDonors();
         } else if (mod === "process") {
             delete require.cache[`${__dirname}/managers/Process.js`];
             ProcessManager = require("./managers/Process");
