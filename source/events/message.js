@@ -12,13 +12,13 @@ class New extends Event {
 
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
-            
+
             const command = await this.client.commands.get(message.content.split(" ")[0].slice(this.client.config.prefix.length));
             if (!command || !command.dm || command.permission > 0) return;
 
             command.execute(message);
         } else {
-            if (message.guild.me && !message.guild.me.hasPermission("SEND_MESSAGES")) return;
+            if (!message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
 
             const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 
