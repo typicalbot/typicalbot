@@ -17,12 +17,12 @@ class ShardingMaster extends Collection {
         this.stats = [];
 
         for (let s = 0; s < SHARD_COUNT; s++) {
-            setTimeout(this.shards.set.bind(this), (9000 * s), s, new Shard(this, s, SHARD_COUNT, CLIENT_TOKEN, build));
+            setTimeout(this.set.bind(this), (9000 * s), s, new Shard(this, s, SHARD_COUNT, CLIENT_TOKEN, build));
         }
     }
 
     broadcast(type, data) {
-        this.shards.forEach(shard => {
+        this.forEach(shard => {
             shard.send({
                 type,
                 data
@@ -31,11 +31,11 @@ class ShardingMaster extends Collection {
     }
 
     updateStats(shard, data) {
-        Object.keys(data).map(key => this.shards.get(shard).stats[key] = data[key]);
+        Object.keys(data).map(key => this.get(shard).stats[key] = data[key]);
 
         const newData = {};
         
-        this.shards.forEach(shard => {
+        this.forEach(shard => {
             Object.keys(shard.stats).forEach(key => {
                 newData[key] ? newData[key] += shard.stats[key] : newData[key] = shard.stats[key];
             });
