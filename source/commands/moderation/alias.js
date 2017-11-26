@@ -47,11 +47,9 @@ module.exports = class extends Command {
             const list = this.removeKey(message.guild.settings.aliases, command);
 
             this.client.settings.update(message.guild.id, { aliases: "VALUE:REMOVE" })
-                .then(() => {
-                    this.client.settings.update(message.guild.id, { aliases: list })
-                        .then(() => message.success("Successfully removed alias."))
-                        .cach(err => message.error("An error occured while removing the alias."));
-                })
+            
+            this.client.settings.update(message.guild.id, { aliases: list })
+                .then(() => message.success("Successfully removed alias."))
                 .cach(err => message.error("An error occured while removing the alias."));
         }
     }
