@@ -32,7 +32,7 @@ module.exports = class extends Command {
 
     async embedexecute(message, parameters, permissionLevel) {
         const commandInput = message.content.split(" ")[1];
-        const command = await this.client.commands.get(commandInput);
+        const command = await this.client.commands.get(commandInput, message.guild.settings.aliases);
 
         if (!commandInput) return message.buildEmbed()
             .setColor(0x00ADFF)
