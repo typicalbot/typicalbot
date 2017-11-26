@@ -15,7 +15,7 @@ class CommandStore extends Store {
     async get(text, aliases) {
         if (this.has(text)) return super.get(text);
         if (this.find(c => c.aliases.includes(text))) return super.find(c => c.aliases.includes(text));
-        if (aliases && aliases.map(x => x.alias).includes(text)) return super.get(aliases.map(x => x.alias).indexOf(text));
+        if (aliases && aliases.map(x => x.alias).includes(text)) return super.get(aliases(aliases.map(x => x.alias).indexOf(text)).command);
         return null;
     }
 
