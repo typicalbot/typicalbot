@@ -37,7 +37,7 @@ class New extends Event {
             const prefix = this.client.functions.matchPrefix(message.author, settings, split);
             if (!prefix || !message.content.startsWith(prefix)) return;
 
-            const command = await this.client.commands.get(split.slice(prefix.length).toLowerCase());
+            const command = await this.client.commands.get(split.slice(prefix.length).toLowerCase(), message.guild.settings.aliases);
             if (!command) return;
 
             const accessLevel = this.client.functions.fetchAccess(message.guild);
