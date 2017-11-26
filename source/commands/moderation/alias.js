@@ -46,7 +46,7 @@ module.exports = class extends Command {
 
             const list = this.removeKey(message.guild.settings.aliases, command);
 
-            message.reply(list.toString());
+            message.reply(JSON.stringify(list));
 
             this.client.settings.update(message.guild.id, { aliases: null })
                 .then(() => {
