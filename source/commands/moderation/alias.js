@@ -27,7 +27,7 @@ module.exports = class extends Command {
             const aliasListF = message.guild.settings.aliases.map(a => a.alias);
             if (aliasListF.includes(alias)) return message.error(`The given alias already points to the \`${(await this.client.commands.get(aliasList[aliasListF.indexOf(alias)].command)).name}\` command.`);
 
-            aliasList.push({ "alias": "", "command": "" });
+            aliasList.push({ alias, command: cmd.name });
 
             this.client.settings.update(message.guild.id, { aliases: aliasList })
                 .then(() => message.success("Successfully added alias."))
