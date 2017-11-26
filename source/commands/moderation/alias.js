@@ -4,7 +4,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Create an alias for commands.",
-            usage: "alias <'list'|'add'|'remove'|'clear'> <add/remove:command> <add:new-alias",
+            usage: "alias <'list'|'add'|'remove'|'clear'> <add/remove:command> <add:new-alias>",
             aliases: ["aliases"],
             mode: "strict",
             permission: 3,
@@ -29,6 +29,8 @@ module.exports = class extends Command {
             const aliasList = message.guild.settings.aliases;
             const aliasListF = message.guild.settings.aliases.map(a => a.alias);
             if (aliasListF.includes(alias)) return message.error(`The given alias already points to the \`${(await this.client.commands.get(aliasList[aliasListF.indexOf(alias)].command)).name}\` command.`);
+
+            if (alias.length > 10) return message.error("You cannot create an alias longer than 10 characters.");
 
             aliasList.push({ alias, command: cmd.name });
 
