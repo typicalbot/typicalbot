@@ -25,6 +25,7 @@ class EventStore extends Store {
                 "id": null,
                 "mention": null
             },
+            "aliases": {},
             "logs": {
                 "id": null,
                 "join": null,
