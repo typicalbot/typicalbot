@@ -19,7 +19,7 @@ module.exports = class extends Command {
         message.reply(`**__Your Permission Level:__** ${permission.level} | ${permission.title}`);
     }
 
-    embedexecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         const split = message.content.split(" ")[1];
 
         const permission = split && split === "--here" ?

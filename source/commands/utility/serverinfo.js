@@ -35,7 +35,7 @@ module.exports = class extends Command {
         );
     }
 
-    embedexecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         const match = /(.+)/i.exec(message.content);
         const option = match ? match[1] : null;
 

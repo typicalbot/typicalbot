@@ -31,7 +31,7 @@ module.exports = class extends Command {
         );
     }
 
-    embedexecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         const args = /hex\s+#?([0-9a-fA-F]{6}|random)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 

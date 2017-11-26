@@ -18,7 +18,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedexecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         request.get("https://typicalbot.com/api/tiger/")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");

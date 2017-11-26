@@ -578,7 +578,7 @@ module.exports = class extends Command {
         }
     }
 
-    NOembedexecute(message, parameters, permissionLevel) {
+    NOembedExecute(message, parameters, permissionLevel) {
         const args = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 

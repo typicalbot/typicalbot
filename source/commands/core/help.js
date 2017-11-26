@@ -30,7 +30,7 @@ module.exports = class extends Command {
         );
     }
 
-    async embedexecute(message, parameters, permissionLevel) {
+    async embedExecute(message, parameters, permissionLevel) {
         const commandInput = message.content.split(" ")[1];
         const command = await this.client.commands.get(commandInput, message.guild.settings.aliases);
 

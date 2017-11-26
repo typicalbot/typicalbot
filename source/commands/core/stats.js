@@ -34,7 +34,7 @@ module.exports = class extends Command {
         );
     }
 
-    embedexecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         message.buildEmbed()
             .setColor(0x00adff)
             .setThumbnail("https://typicalbot.com/x/images/icon.png")

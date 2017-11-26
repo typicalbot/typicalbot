@@ -27,7 +27,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedexecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         const args = /urban (.*)/gi.exec(message.content);
         if (!args) return message.error(this.client.functions.error("usage", this));
 

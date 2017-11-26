@@ -34,7 +34,7 @@ module.exports = class extends Command {
         );
     }
 
-    async embedexecute(message, parameters, permissionLevel) {
+    async embedExecute(message, parameters, permissionLevel) {
         const args = /u(?:ser)?info(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(parameters);
 
         const member = await this.client.functions.resolveMember(message, args);

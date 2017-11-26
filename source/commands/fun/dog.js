@@ -19,7 +19,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedexecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         request.get("https://api.thedogapi.co.uk/v2/dog.php?limit=1")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");

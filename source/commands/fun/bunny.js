@@ -21,7 +21,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedexecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         const type = Math.random() <= 0.25 ? "gif" : "poster";
 
         request.get(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
