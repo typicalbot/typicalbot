@@ -12,12 +12,14 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        const args = /(add|remove)\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?/i.exec(parameters);
+        const args = /(list|add|remove)\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const action = args[1], command = args[2], alias = args[3];
 
-        if (action === "add") {
+        if (action === "list") {
+            message.reply(`Current aliases:\n${message.guild.settings.aliases.length ? message.guild.settings.aliases.map(a => `${a.alias} -> ${a.command}`) : "None"}`);
+        } else if (action === "add") {
             if (!alias) return message.error(this.client.functions.error("usage", this));
 
             const cmd = await this.client.commands.get(command);
@@ -41,6 +43,10 @@ module.exports = class extends Command {
 
             this.client.settings.update(message.guild.id, { aliases: aliasList })
                 .then(() => message.success("Successfully removed alias."))
+                .catch(err => message.error("An error occured while removing the alias."));
+        } else if (action === "clear") {
+            this.client.settings.update(message.guild.id, { aliases: [] })
+                .then(() => message.success("Successfully removed aliases."))
                 .catch(err => message.error("An error occured while removing the alias."));
         }
     }
