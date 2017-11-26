@@ -18,7 +18,7 @@ module.exports = class extends Command {
         const action = args[1], command = args[2], alias = args[3];
 
         if (action === "list") {
-            message.reply(`Current aliases:\n${message.guild.settings.aliases.length ? message.guild.settings.aliases.map(a => `${a.alias} -> ${a.command}`) : "None"}`);
+            message.reply(`Current aliases:\n${message.guild.settings.aliases.length ? message.guild.settings.aliases.map(a => `${a.alias} -> ${a.command}`).join("\n") : "None"}`);
         } else if (action === "add") {
             if (!alias) return message.error(this.client.functions.error("usage", this));
 
