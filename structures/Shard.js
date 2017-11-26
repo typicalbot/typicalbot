@@ -11,7 +11,8 @@ class Shard extends fork {
         this.stats = {};
 
         this.on("message", message => {
-            const { type , data } = message;
+            const { type, data } = message;
+            
             if (type === "stats") {
                 this.master.updateStats(this.id, message.data);
             } else {
