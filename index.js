@@ -3,6 +3,7 @@ require.extensions['.txt'] = function (module, filename) { module.exports = requ
 const { Collection } = require("discord.js");
 
 const build = require("./build");
+console.log(build);
 const config = require(`./configs/${build}`);
 
 const SHARD_COUNT   = config.shards;

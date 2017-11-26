@@ -1,3 +1,5 @@
+require.extensions['.txt'] = function (module, filename) { module.exports = require("fs").readFileSync(filename, 'utf8'); };
+
 const { MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
 
 MessageEmbed.prototype.send = function(content) {
