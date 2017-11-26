@@ -37,7 +37,7 @@ module.exports = class extends Command {
             const aliasListF = message.guild.settings.aliases.map(a => a.alias);
             if (!aliasListF.includes(command)) return message.error("The requested alias does not exist.");
 
-            aliasList.splice(aliasListF.indexOf(command));
+            aliasList.splice(aliasListF.indexOf(command), 1);
 
             this.client.settings.update(message.guild.id, { aliases: aliasList })
                 .then(() => message.success("Successfully removed alias."))
