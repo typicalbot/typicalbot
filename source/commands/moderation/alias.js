@@ -4,7 +4,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Create an alias for commands.",
-            usage: "alias <'add'|'remove'> <command> <if create:new-alias",
+            usage: "alias <'list'|'add'|'remove'|'clear'> <add/remove:command> <add:new-alias",
             aliases: ["aliases"],
             mode: "strict",
             permission: 3
@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        const args = /(list|add|remove)\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?/i.exec(parameters);
+        const args = /(list|add|remove|clear)(?:\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const action = args[1], command = args[2], alias = args[3];
@@ -20,7 +20,7 @@ module.exports = class extends Command {
         if (action === "list") {
             message.reply(`Current aliases:\n${message.guild.settings.aliases.length ? message.guild.settings.aliases.map(a => `${a.alias} -> ${a.command}`).join("\n") : "None"}`);
         } else if (action === "add") {
-            if (!alias) return message.error(this.client.functions.error("usage", this));
+            if (!command || !alias) return message.error(this.client.functions.error("usage", this));
 
             const cmd = await this.client.commands.get(command);
             if (!cmd) return message.error(`The provided command doesn't exist.`);
@@ -35,6 +35,8 @@ module.exports = class extends Command {
                 .then(() => message.success("Successfully added alias."))
                 .catch(err => message.error("An error occured while adding the alias."));
         } else if (action === "remove") {
+            if (!command) return message.error(this.client.functions.error("usage", this));
+
             const aliasList = message.guild.settings.aliases;
             const aliasListF = message.guild.settings.aliases.map(a => a.alias);
             if (!aliasListF.includes(command)) return message.error("The requested alias does not exist.");
