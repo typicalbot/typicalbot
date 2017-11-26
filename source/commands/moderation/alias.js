@@ -11,16 +11,6 @@ module.exports = class extends Command {
         });
     }
 
-    removeKey(list, key) {
-        const sList = Object.keys(list);
-        sList.splice(sList.indexOf(key), 1);
-
-        const newList = {};
-        sList.map(x => newList[x] = list[x]);
-
-        return newList;
-    }
-
     async execute(message, permissionLevel) {
         const args = /alias(?:es)?\s+(add|remove)\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?/i.exec(message.content);
         if (!args) return message.error(this.client.functions.error("usage", this));
@@ -33,22 +23,23 @@ module.exports = class extends Command {
             const cmd = await this.client.commands.get(command);
             if (!cmd) return message.error(`The provided command doesn't exist.`);
 
-            if (message.guild.settings.aliases[alias]) return message.error(`The given alias already points to the \`${(await this.client.commands.get(message.guild.settings.aliases[alias])).name}\` command.`);
+            const aliasList = message.guild.settings.aliases;
+            const aliasListF = message.guild.settings.aliases.map(a => a.alias);
+            if (aliasListF.includes(alias)) return message.error(`The given alias already points to the \`${(await this.client.commands.get(aliasList[aliasListF.indexOf(alias)].command)).name}\` command.`);
 
-            const list = message.guild.settings.aliases;
-            list[alias] = cmd.name;
+            aliasList.push({ "alias": "", "command": "" });
 
-            this.client.settings.update(message.guild.id, { aliases: list })
+            this.client.settings.update(message.guild.id, { aliases: aliasList })
                 .then(() => message.success("Successfully added alias."))
                 .cach(err => message.error("An error occured while adding the alias."));
         } else if (action === "remove") {
-            if (!message.guild.settings.aliases[command]) return message.error("The request alias does not exist.");
+            const aliasList = message.guild.settings.aliases;
+            const aliasListF = message.guild.settings.aliases.map(a => a.alias);
+            if (!aliasListF.includes(alias)) return message.error("The requested alias does not exist.");
 
-            const list = this.removeKey(message.guild.settings.aliases, command);
+            aliasList.splice(aliasListF.indexOf(command));
 
-            this.client.settings.update(message.guild.id, { aliases: "VALUE:REMOVE" })
-            
-            this.client.settings.update(message.guild.id, { aliases: list })
+            this.client.settings.update(message.guild.id, { aliases: aliasList })
                 .then(() => message.success("Successfully removed alias."))
                 .cach(err => message.error("An error occured while removing the alias."));
         }
