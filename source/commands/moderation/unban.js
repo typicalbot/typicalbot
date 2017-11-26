@@ -10,8 +10,8 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, permissionLevel) {
-        const args = /unban\s+(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(message.content);
+    async execute(message, parameters, permissionLevel) {
+        const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const user = args[1], reason = args[2];

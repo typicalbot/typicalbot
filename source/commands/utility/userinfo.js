@@ -12,8 +12,8 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, permissionLevel) {
-        const args = /u(?:ser)?info(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(message.content);
+    async execute(message, parameters, permissionLevel) {
+        const args = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i.exec(parameters);
 
         const member = await this.client.functions.resolveMember(message, args);
         const user = member.user;
@@ -34,8 +34,8 @@ module.exports = class extends Command {
         );
     }
 
-    async embedExecute(message, permissionLevel) {
-        const args = /u(?:ser)?info(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(message.content);
+    async embedexecute(message, parameters, permissionLevel) {
+        const args = /u(?:ser)?info(?:\s+(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4}))))?/i.exec(parameters);
 
         const member = await this.client.functions.resolveMember(message, args);
         const user = member.user;

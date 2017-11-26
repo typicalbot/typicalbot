@@ -9,8 +9,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /search\s+(\S+)(?:\s+(\d+))?/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(\S+)(?:\s+(\d+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const query = args[1];

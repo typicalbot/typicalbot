@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, permissionLevel) {
+    async execute(message, parameters, permissionLevel) {
         const commandInput = message.content.split(" ")[1];
         if (!commandInput) return message.send(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
 
@@ -30,7 +30,7 @@ module.exports = class extends Command {
         );
     }
 
-    async embedExecute(message, permissionLevel) {
+    async embedexecute(message, parameters, permissionLevel) {
         const commandInput = message.content.split(" ")[1];
         const command = await this.client.commands.get(commandInput);
 

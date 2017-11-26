@@ -9,8 +9,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /strawpoll(?:\s+(-m))?\s+(.+)\s+\|\s+(.+)/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(?:(-m)\s+)?(.+)\s+\|\s+(.+)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const multi = !!args[1];

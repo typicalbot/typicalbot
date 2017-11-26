@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         const restart = /update\s+(?:-r|--restart)/.test(message.content);
 
         const path = process.cwd();

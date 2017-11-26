@@ -12,8 +12,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /s(?:erver)?info\s+(.+)/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(.+)/i.exec(parameters);
         const option = args ? args[1] : null;
 
         const guildOwner = message.guild.member(message.guild.ownerID);
@@ -35,8 +35,8 @@ module.exports = class extends Command {
         );
     }
 
-    embedExecute(message, permissionLevel) {
-        const match = /s(?:erver)?info\s+(.+)/i.exec(message.content);
+    embedexecute(message, parameters, permissionLevel) {
+        const match = /(.+)/i.exec(message.content);
         const option = match ? match[1] : null;
 
         const guildOwner = message.guild.member(message.guild.ownerID).user;

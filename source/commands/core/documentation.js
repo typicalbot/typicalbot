@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         message.send(`**Documentation can be found here:** <${this.client.config.urls.docs}>`);
     }
 

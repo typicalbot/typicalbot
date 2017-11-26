@@ -10,10 +10,10 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, permissionLevel) {
+    async execute(message, parameters, permissionLevel) {
         if (!message.guild.settings.logs.moderation) return message.error("You must have moderation logs enabled to use this command.");
 
-        const args = /reason\s+(\d+|latest)(?:\s+(.+))/i.exec(message.content);
+        const args = /(\d+|latest)(?:\s+(.+))/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const id = args[1], reason = args[2];

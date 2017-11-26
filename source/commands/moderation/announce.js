@@ -10,8 +10,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /announce(?:\s+(-e))?\s+((?:.|[\r\n])+)/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(?:(-e)\s+)?((?:.|[\r\n])+)/i.exec(parameters);
         if (!args) return message.error(`No announcement content was supplied.`);
 
         const embed = args[1], content = args[2];

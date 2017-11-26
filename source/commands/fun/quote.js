@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         request.get("https://typicalbot.com/api/quotes/")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");

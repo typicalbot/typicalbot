@@ -9,8 +9,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /urban\s+(.*)/gi.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(.*)/gi.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const query = args[1];
@@ -27,7 +27,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedExecute(message, permissionLevel) {
+    embedexecute(message, parameters, permissionLevel) {
         const args = /urban (.*)/gi.exec(message.content);
         if (!args) return message.error(this.client.functions.error("usage", this));
 

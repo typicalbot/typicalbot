@@ -11,8 +11,8 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, permissionLevel) {
-        const args = /alias(?:es)?\s+(add|remove)\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?/i.exec(message.content);
+    async execute(message, parameters, permissionLevel) {
+        const args = /(add|remove)\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const action = args[1], command = args[2], alias = args[3];

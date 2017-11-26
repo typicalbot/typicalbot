@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         if (message.channel.type === "text") message.reply(`Check your Direct Messages for my commands!`);
 
         const commands = this.client.commands;

@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         const split = message.content.split(" ")[1];
 
         const permission = split && split === "--here" ?
@@ -19,7 +19,7 @@ module.exports = class extends Command {
         message.reply(`**__Your Permission Level:__** ${permission.level} | ${permission.title}`);
     }
 
-    embedExecute(message, permissionLevel) {
+    embedexecute(message, parameters, permissionLevel) {
         const split = message.content.split(" ")[1];
 
         const permission = split && split === "--here" ?

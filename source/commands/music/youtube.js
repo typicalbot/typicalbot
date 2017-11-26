@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         const match = /(?:youtube|yts)\s+(.+)/i.exec(message.content);
         if (!match) return message.error(this.client.functions.error("usage", this));
 

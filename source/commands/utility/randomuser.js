@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         const user = message.guild.members.random().user;
 
         message.send(`Your random pick is: **${user.username}#${user.discriminator}** (${user.id}).`);

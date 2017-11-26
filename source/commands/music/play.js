@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         if (!this.client.audioUtility.hasPermissions(response, this)) return;
 
         const match = /play\s+(.+)/i.exec(message.content);
