@@ -31,7 +31,7 @@ module.exports = class extends Command {
 
             this.client.settings.update(message.guild.id, { aliases: aliasList })
                 .then(() => message.success("Successfully added alias."))
-                .cach(err => message.error("An error occured while adding the alias."));
+                .catch(err => message.error("An error occured while adding the alias."));
         } else if (action === "remove") {
             const aliasList = message.guild.settings.aliases;
             const aliasListF = message.guild.settings.aliases.map(a => a.alias);
@@ -41,7 +41,7 @@ module.exports = class extends Command {
 
             this.client.settings.update(message.guild.id, { aliases: aliasList })
                 .then(() => message.success("Successfully removed alias."))
-                .cach(err => message.error("An error occured while removing the alias."));
+                .catch(err => message.error("An error occured while removing the alias."));
         }
     }
 };
