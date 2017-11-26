@@ -7,7 +7,8 @@ module.exports = class extends Command {
             usage: "alias <'list'|'add'|'remove'|'clear'> <add/remove:command> <add:new-alias",
             aliases: ["aliases"],
             mode: "strict",
-            permission: 3
+            permission: 3,
+            access: 1
         });
     }
 
