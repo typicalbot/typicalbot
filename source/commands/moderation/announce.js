@@ -22,7 +22,7 @@ module.exports = class extends Command {
         const mentionRole = message.guild.roles.get(message.guild.settings.announcements.mention);
 
         embed ?
-            toChannel.buildEmbed().setColor(0x00adff).setTitle(`Announcement`).setDescription(content).setFooter(message.author.tag, message.author.avatarURL() || null).send(`${mentionRole ? mentionRole.toString() : ""}`) :
-            toChannel.send(`**__Announcement from ${message.author.username}#${message.author.discriminator}:__**\n\n${content}`);
+            toChannel.buildEmbed(mentionRole ? mentionRole.toString() : "").setColor(0x00adff).setTitle(`Announcement`).setDescription(content).setFooter(message.author.tag, message.author.avatarURL() || null).send(`${mentionRole ? mentionRole.toString() : ""}`) :
+            toChannel.send(`**__Announcement from ${message.author.username}#${message.author.discriminator}:__**${mentionRole ? ` ${mentionRole.toString()}` : ""}\n\n${content}`);
     }
 };
