@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const args = /(?:<#)?(\d+)>?\s+((?:.|[\r\n])+)?/i.exec(parameters);
+        const args = /(?:<#(\d+)>\s+)?((?:.|[\r\n])+)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const channel = message.guild.channels.get(args[1]);
