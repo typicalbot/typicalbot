@@ -13,8 +13,8 @@ class AudioUtil {
         this.client = client;
     }
 
-    withinLimit(video, response) {
-        return video.length_seconds <= (response.message.guild.settings.lengthLimit || 1800) ? true : false;
+    withinLimit(video, message) {
+        return video.length_seconds <= (message.guild.settings.lengthLimit || 1800) ? true : false;
     }
 
     fetchInfo(url) {
@@ -60,7 +60,7 @@ class AudioUtil {
         const err = error.errors[0].reason;
         if (!err) return `An unknown error occured while requesting that video:\n${error}`;
         if (err === "keyInvalid") return "**__An unknown error occured while requesting that video:__**\n\nThis server entered an invalid YouTube API Key.";
-        else if (err === "quotaExceeded") return "**__An error occured while requesting that video:__**\n\nOur Global YouTube API Quota limit exceeded, meaning no more searches can be made until it is reset at 3 AM EST.\n\n**__How to Resolve the Issue:__**\n```md\n# You can resolve the issue by creating your own YouTube Data API v3 Key.\n\n< Join TypicalBot\'s server and use the command '/tag apikeyhowto' for more information on how to do so.```\n**Link:** <https://typicalbot.com/join-our-server/>";
+        else if (err === "quotaExceeded") return "**__An error occured while requesting that video:__**\n\nOur Global YouTube API Quota limit exceeded, meaning no more searches can be made until it is reset at 3 AM EST.\n\n**__How to Resolve the Issue:__**\n```md\n# You can resolve the issue by creating your own YouTube Data API v3 Key.\n\n< Join TypicalBot's server and use the command '/tag apikeyhowto' for more information on how to do so.```\n**Link:** <https://typicalbot.com/join-our-server/>";
         else return `An unknown error occured while requesting that video:\n${err}`;
     }
 
@@ -74,12 +74,12 @@ class AudioUtil {
         return { has: false, req: override === "off" ? musicperms : override };
     }
 
-    hasPermissions(response, command) {
-        const userTrueLevel = this.client.permissionsManager.get(response.message.guild, response.message.author, true);
+    hasPermissions(message, command) {
+        const userTrueLevel = this.client.permissionsManager.get(message.guild, message.author, true);
 
-        const permissionCheck = this.permissionCheck(response.message, command, userTrueLevel);
+        const permissionCheck = this.permissionCheck(message, command, userTrueLevel);
         if (permissionCheck.has) { return true; } else {
-            response.elevation(this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0 );
+            message.elevation(this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0 );
             return false;
         }
     }
