@@ -11,14 +11,14 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        if (!this.client.audioUtility.hasPermissions(response, this)) return;
+        if (!this.client.audioUtility.hasPermissions(message, this)) return;
 
         const currentConnection = message.guild.voiceConnection;
         if (!currentConnection) return message.send(`Nothing is currently streaming.`);
 
         const stream = this.client.streams.get(message.guild.id);
 
-        const match = /volume\s+(\d+)/i.exec(message.content);
+        const match = /(\d+)/i.exec(message.content);
         if (!match) return message.reply(`The audio streaming is at ${stream.dispatcher.volume * 100}% volume.`);
 
         const volume = match[1];

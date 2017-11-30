@@ -11,7 +11,7 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const match = /(?:youtube|yts)\s+(.+)/i.exec(message.content);
+        const match = /(.+)/i.exec(message.content);
         if (!match) return message.error(this.client.functions.error("usage", this));
 
         this.client.audioUtility.search(message.guild.settings, match[1]).then(results => {
