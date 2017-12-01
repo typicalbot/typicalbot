@@ -18,7 +18,7 @@ class ShardingMaster extends Collection {
         this.stats = [];
 
         for (let s = 0; s < SHARD_COUNT; s++) {
-            setTimeout(this.set.bind(this), (9000 * s), s, new Shard(this, s, SHARD_COUNT, CLIENT_TOKEN, build));
+            setTimeout(() => this.set(s, new Shard(this, s, SHARD_COUNT, CLIENT_TOKEN, build)), (9000 * s));
         }
     }
 
