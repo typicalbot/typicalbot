@@ -20,6 +20,8 @@ module.exports = class extends Command {
         const publicList = message.guild.settings.roles.public;
         if (!publicList.includes(role.id)) return message.error("The requested role isn't on the list of public roles.");
 
+        if (!message.member) return message.error("Apparently you don't exist! I'm not too sure what is causing this, but it's an issue with the Discord.JS library. Sorry!");
+
         message.member.removeRole(role)
             .then(() => message.reply(`Success.`))
             .catch(err => message.error(`An error occured while processing that request.`));
