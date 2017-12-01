@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         const type = Math.random() <= 0.25 ? "gif" : "poster";
 
         request.get(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
@@ -21,7 +21,7 @@ module.exports = class extends Command {
             });
     }
 
-    embedExecute(message, permissionLevel) {
+    embedExecute(message, parameters, permissionLevel) {
         const type = Math.random() <= 0.25 ? "gif" : "poster";
 
         request.get(`https://api.bunnies.io/v2/loop/random/?media=${type}`)

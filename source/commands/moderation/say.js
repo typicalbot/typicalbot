@@ -11,8 +11,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /(?:say|speak)(?:\s+(?:<#)?(\d+)>?)?\s+((?:.|[\r\n])+)?/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(?:<#(\d+)>\s+)?((?:.|[\r\n])+)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const channel = message.guild.channels.get(args[1]);

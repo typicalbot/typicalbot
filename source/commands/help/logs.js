@@ -8,7 +8,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Possible logs").setURL(this.client.config.urls.website)

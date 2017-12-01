@@ -10,8 +10,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /announce(?:\s+(-e))?\s+((?:.|[\r\n])+)/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(?:(-e)\s+)?((?:.|[\r\n])+)/i.exec(parameters);
         if (!args) return message.error(`No announcement content was supplied.`);
 
         const embed = args[1], content = args[2];
@@ -22,7 +22,7 @@ module.exports = class extends Command {
         const mentionRole = message.guild.roles.get(message.guild.settings.announcements.mention);
 
         embed ?
-            toChannel.buildEmbed().setColor(0x00adff).setTitle(`Announcement`).setDescription(content).setFooter(message.author.tag, message.author.avatarURL() || null).send(`${mentionRole ? mentionRole.toString() : ""}`) :
-            toChannel.send(`**__Announcement from ${message.author.username}#${message.author.discriminator}:__**\n\n${content}`);
+            toChannel.buildEmbed(mentionRole ? mentionRole.toString() : "").setColor(0x00adff).setTitle(`Announcement`).setDescription(content).setFooter(message.author.tag, message.author.avatarURL() || null).send(`${mentionRole ? mentionRole.toString() : ""}`) :
+            toChannel.send(`**__Announcement from ${message.author.username}#${message.author.discriminator}:__**${mentionRole ? ` ${mentionRole.toString()}` : ""}\n\n${content}`);
     }
 };

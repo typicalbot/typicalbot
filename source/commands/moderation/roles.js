@@ -10,8 +10,8 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, permissionLevel) {
-        const args = /roles?\s+(help|list|give|take|public|info|information)(?:\s+(.+))?/i.exec(message.content);
+    async execute(message, parameters, permissionLevel) {
+        const args = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);

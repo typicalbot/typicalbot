@@ -10,8 +10,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /unignore\s+(commands|invites)/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(commands|invites)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const commands = args[1] === "commands", invites = args[1] === "invites";

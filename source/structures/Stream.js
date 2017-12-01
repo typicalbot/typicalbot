@@ -17,7 +17,7 @@ class Stream {
             this.dispatcher = dispatcher;
             this.current = video;
 
-            video.message.send(`🎵 Now streaming **${video.title}** requested by **${video.response.message.author.username}** for **${this.client.functions.convertTime(video.length_seconds * 1000)}**.`);
+            video.message.send(`🎵 Now streaming **${video.title}** requested by **${video.message.author.username}** for **${this.client.functions.convertTime(video.length_seconds * 1000)}**.`);
 
             dispatcher.on("error", err => {
                 video.message.error(err);
@@ -29,13 +29,10 @@ class Stream {
                     return this.kill();
                 }
 
-                setTimeout(() =>
-                    this.play(this.queue.splice(0, 1)[0]),
-                    1000
-                );
+                setTimeout(() => this.play(this.queue.splice(0, 1)[0]), 1000);
             });
         }).catch(err => {
-            video.message.error(`An error occured fetching information for the requested song.${video.response.message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
+            video.message.error(`An error occured fetching information for the requested song.${video.message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
         });
     }
 

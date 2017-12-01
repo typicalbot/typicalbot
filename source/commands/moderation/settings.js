@@ -40,8 +40,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
@@ -578,8 +578,8 @@ module.exports = class extends Command {
         }
     }
 
-    NOembedExecute(message, permissionLevel) {
-        const args = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(message.content);
+    NOembedExecute(message, parameters, permissionLevel) {
+        const args = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const realPermissionLevel = this.client.permissionsManager.get(message.guild, message.author, true);

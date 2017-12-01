@@ -9,8 +9,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
-        const args = /give\s+(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(message.content);
+    execute(message, parameters, permissionLevel) {
+        const args = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const role = args[1] ? message.guild.roles.get(args[1]) : args[2] ? message.guild.roles.find(r => r.name.toLowerCase() === args[2].toLowerCase()) : null;

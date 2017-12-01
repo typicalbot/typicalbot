@@ -37,8 +37,10 @@ class New extends Event {
             const prefix = this.client.functions.matchPrefix(message.author, settings, split);
             if (!prefix || !message.content.startsWith(prefix)) return;
 
-            const command = await this.client.commands.get(split.slice(prefix.length).toLowerCase());
+            const command = await this.client.commands.get(split.slice(prefix.length).toLowerCase(), message.guild.settings.aliases);
             if (!command) return;
+
+            const param = message.content.includes(" ") ? message.content.slice(message.content.indexOf(" ") + 1) : "";
 
             const accessLevel = this.client.functions.fetchAccess(message.guild);
             if (command.access && accessLevel.level < command.access) return message.error(`The server owner's access level is too low to execute that command. The command requires an access level of ${command.access}, but the owner only has a level of ${accessLevel.level} (${accessLevel.title}). The owner can raise their access level by donating $5 or more to TypicalBot.`);
@@ -52,8 +54,8 @@ class New extends Event {
             if (actualUserPermissions.level < command.permission) return message.error(this.client.functions.error("perms", command, actualUserPermissions));
 
             settings.embed && command.embedExecute ?
-                command.embedExecute(message, userPermissions) :
-                command.execute(message, userPermissions);
+                command.embedExecute(message, param, userPermissions) :
+                command.execute(message, param, userPermissions);
         }
     }
 }

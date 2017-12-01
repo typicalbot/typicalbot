@@ -8,7 +8,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, permissionLevel) {
+    execute(message, parameters, permissionLevel) {
         const match = /shard\s+(ping|restart|\d+)\s*(\d+)?/i.exec(message.content);
         if (!match) return message.error("Invalid command usage.");
 

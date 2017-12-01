@@ -10,7 +10,9 @@ class New extends Function {
 
         const permissionLevel = this.client.permissionsManager.get(guild, owner);
 
-        if (permissionLevel.level > 5) return { "level": 2, "title": "TypicalBot Staff" };
+        if (permissionLevel.level > 5) return { "level": 3, "title": "TypicalBot Staff" };
+
+        if (this.client.config.partners[owner.id]) return { "level": 2, "title": "TypicalBot Partner" };
 
         if (this.client.donors.has(owner.id) && this.client.donors.get(owner.id).amount >= 5) return { "level": 1, "title": "TypicalBot Donor" };
 
