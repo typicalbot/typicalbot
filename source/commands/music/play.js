@@ -31,7 +31,7 @@ module.exports = class extends Command {
                 this.client.audioUtility.fetchInfo(video.url).then(videoInfo => {
                     videoInfo.url = video.url;
 
-                    this.client.audioManager.stream(message, videoInfo).catch(err => message.error(err.stack ? message.author.id === "105408136285818880" ? err.stack : err : err));
+                    this.client.audioManager.stream(message, videoInfo).catch(err => message.error(err));
                 }).catch(err => message.error(`Information cannot be fetched from that song. Please try another song name.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
             }).catch(error => message.error(`${this.client.audioUtility.searchError(error)}`));
         }
