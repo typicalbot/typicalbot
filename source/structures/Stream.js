@@ -12,7 +12,7 @@ class Stream {
     }
 
     async play(video) {
-        const stream = await this.client.audioUtility.fetchStream(video);
+        const stream = await this.client.audioUtility.fetchStream(video).catch(err => { throw err; });;
 
         this.dispatcher = this.connection.playStream(stream, { volume: .5 });
         this.current = video;

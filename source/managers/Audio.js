@@ -12,7 +12,7 @@ module.exports = class {
         if (!channel.joinable) throw "I require joining permissions to use music features.";
         if (!channel.speakable) throw "I require speaking permissions to use music features.";
 
-        const connection = await channel.join();
+        const connection = await channel.join().catch(err => { throw err; });
             
         this.client.emit("voiceConnectionUpdate", connection);
 
@@ -31,7 +31,7 @@ module.exports = class {
             return message.guild.voiceConnection.guildStream.addQueue(video);
         }
 
-        const connection = await this.connect(message);
+        const connection = await this.connect(message).catch(err => { throw err; });
 
         connection.guildStream.play(video);
     }
