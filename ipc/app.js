@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+const port = 10000;
+
 class IPC extends express {
     constructor(master) {
         super();
@@ -62,7 +64,7 @@ class IPC extends express {
                                                            - - - - - - - - - -
         */
 
-        this.listen("10000", () => console.log(`Express Server Created | Listening on Port :${this.config.port}`));
+        this.listen(port, () => console.log(`Express Server Created | Listening on Port :${port}`));
     }
 }
 
