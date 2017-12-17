@@ -48,6 +48,8 @@ module.exports = class {
     async playlist(message, id) {
         const queue = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
 
+        console.log(queue[0]);
+
         queue.filter(v => this.client.audioUtility.withinLimit(message, v));
         queue.forEach(v => Object.defineProperty(v, "requester", { value: message }));
 
