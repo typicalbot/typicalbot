@@ -55,6 +55,8 @@ class AudioUtil {
             queue.push(await this.fetchInfo(video.url).catch(err => { console.log(err); }));
         }
 
+        console.log(queue.filter(v => !!v));
+
         return queue.filter(v => !!v);
     }
 
