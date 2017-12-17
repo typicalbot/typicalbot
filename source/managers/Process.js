@@ -28,7 +28,7 @@ module.exports = class {
             if (!this.client.guilds.has(data.guild)) return;
 
             const guild = this.client.guilds.get(data.guild);
-            const settings = await this.client.settings.get(data.guild);
+            const settings = await this.client.settings.fetch(data.guild);
 
             const guildOwner = await this.client.users.fetch(guild.ownerID);
 
@@ -50,7 +50,7 @@ module.exports = class {
             if (!this.client.users.has(data.guild)) return;
 
             const guild = this.client.guilds.get(data.guild);
-            guild.settings = await this.client.settings.get(data.guild);
+            guild.settings = await this.client.settings.fetch(data.guild);
 
             const permissions = this.client.permissionsManager.get(guild, data.user);
 
