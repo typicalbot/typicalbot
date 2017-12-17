@@ -33,8 +33,7 @@ module.exports = class {
         if (message.guild.voiceConnection) {
             if (!message.member.voiceChannel || message.member.voiceChannel.id !== message.guild.voiceConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
             
-            if (!playlist) return message.guild.voiceConnection.guildStream.addQueue(video);
-            return playlistQueue.forEach(v => message.guild.voiceConnection.guildStream.queue.push(v));
+            return message.guild.voiceConnection.guildStream.addQueue(video);
         }
 
         const connection = await this.connect(message).catch(err => { throw err; });

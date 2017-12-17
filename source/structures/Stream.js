@@ -53,17 +53,23 @@ class Stream {
         return this.dispatcher.setVolume(volume);
     }
 
-    setQueue(array) {
-        this.queue = array;
+    setQueue(list) {
+        this.queue = list;
         return this.queue;
     }
-
+    
     addQueue(video) {
-        if (this.queue.length >= (video.requester.guild.settings.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.queuelimit || 10} has been reached.`);
+        if (video instanceof Array) {
+            video.forEach(v => this.queue.push(v));
 
-        this.queue.push(video);
+            return this.queue;
+        } else {
+            if (this.queue.length >= (video.requester.guild.settings.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.queuelimit || 10} has been reached.`);
 
-        return video.requester.reply(`Enqueued **${video.title}**.`);
+            this.queue.push(video);
+
+            return video.requester.reply(`Enqueued **${video.title}**.`);
+        }
     }
 }
 
