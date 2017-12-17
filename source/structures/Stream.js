@@ -47,6 +47,15 @@ class Stream {
     setVolume(volume) {
         return this.dispatcher.setVolume(volume);
     }
+
+    addQueue(message, video) {
+        if (this.queue.length >= (message.guild.settings.queuelimit || 10)) return message.error(`The queue limit of ${message.guild.settings.queuelimit || 10} has been reached.`);
+
+        video.requester = message;
+        this.queue.push(video);
+
+        return message.reply(`Enqueued **${video.title}**.`);
+    }
 }
 
 module.exports = Stream;

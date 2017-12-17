@@ -30,22 +30,11 @@ module.exports = class {
         
         if (connection) {
             if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
-            return connection.guildStream.queue(video);
+            return connection.guildStream.addQueue(video);
         }
 
         connection = await this.connect(message).catch(err => { throw err; });
 
         connection.guildStream.play(video);
-    }
-
-    queue(message, video) {
-        const stream = this.client.streams.get(message.guild.id);
-
-        if (stream.queue.length >= (message.guild.settings.queuelimit || 10)) return message.error(`The queue limit of ${message.guild.settings.queuelimit || 10} has been reached.`);
-
-        video.message = message;
-        stream.queue.push(video);
-
-        return message.reply(`Enqueued **${video.title}**.`);
     }
 };
