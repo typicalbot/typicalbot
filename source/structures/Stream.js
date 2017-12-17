@@ -60,6 +60,7 @@ class Stream {
     
     addQueue(video) {
         if (video instanceof Array) {
+            video.splice(0, 1);
             video.forEach(v => this.queue.push(v));
 
             return this.queue;
