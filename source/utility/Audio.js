@@ -49,6 +49,7 @@ class AudioUtil {
         const playlist = await YT.getPlaylistByID(id).catch(err => { throw err; });
         const videos = await playlist.getVideos().catch(err => { throw err; });
 
+        videos.forEach(v => v.url = `https://youtube.com/watch?v=${v.id}`);
         videos.map(async v => await this.fetchInfo(v.id).catch(err => { return; }));
 
         console.log(videos[0]);
