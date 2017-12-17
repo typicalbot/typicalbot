@@ -20,7 +20,7 @@ module.exports = class extends Command {
 
         const args = /(\d+)/i.exec(parameters);
 
-        if (args[1]) connection.guildStream.queue.splice(0, args[1] - 1);
+        if (args && args[1]) connection.guildStream.queue.splice(0, args[1] - 1);
 
         const song = connection.guildStream.skip();
 
