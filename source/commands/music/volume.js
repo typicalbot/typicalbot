@@ -19,7 +19,7 @@ module.exports = class extends Command {
         const match = /(\d+)/i.exec(message.content);
         if (!match) {
             const x = Math.round(connection.dispatcher.volume * 10);
-            return message.reply(`Volume: ${"▰".repeat(x > 10 ? (x/2) : x) + "▱".repeat(x > 10 ? 10 - (x/2) : 10 - x)} ${connection.guildStream.dispatcher.volume * 100}%`);
+            return message.reply(`Volume: ${"▰".repeat(x > 10 ? (x/2) : x) + "▱".repeat(x > 10 ? 10 - (x/2) : 10 - x)} ${Math.round(connection.guildStream.dispatcher.volume * 100)}%`);
         }
 
         const volume = match[1];
@@ -30,6 +30,6 @@ module.exports = class extends Command {
         connection.guildStream.setVolume(volume * 0.01);
 
         const x = Math.round(connection.dispatcher.volume * 10);
-        message.reply(`Volume: ${"▰".repeat(x > 10 ? (x/2) : x) + "▱".repeat(x > 10 ? 10 - (x/2) : 10 - x)} ${connection.guildStream.dispatcher.volume * 100}%`);
+        message.reply(`Volume: ${"▰".repeat(x > 10 ? (x/2) : x) + "▱".repeat(x > 10 ? 10 - (x/2) : 10 - x)} ${Math.round(connection.guildStream.dispatcher.volume * 100)}%`);
     }
 };
