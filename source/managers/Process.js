@@ -25,9 +25,7 @@ module.exports = class {
             try { this.client.log(eval(data.code)); }
             catch(err) { this.client.log(err, true); }
         } else if (type === "guildData") {
-            console.log("guildDataRequest");
             if (!this.client.guilds.has(data.guild)) return;
-            console.log("Bueno");
 
             const guild = this.client.guilds.get(data.guild);
             const settings = await this.client.settings.fetch(data.guild);
@@ -52,6 +50,9 @@ module.exports = class {
             if (!this.client.users.has(data.user)) return;
 
             const guild = this.client.guilds.get(data.guild);
+
+            if (!guild) return;
+
             guild.settings = await this.client.settings.fetch(data.guild);
 
             const permissions = this.client.permissionsManager.get(guild, data.user);
