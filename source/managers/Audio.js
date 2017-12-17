@@ -38,7 +38,7 @@ module.exports = class {
 
         const connection = await this.connect(message).catch(err => { throw err; });
 
-        connection.guildStream.setQueue(playlistQueue);
+        if (playlist) connection.guildStream.setQueue(playlistQueue);
 
         playlist ? 
             connection.guildStream.play(playlistQueue[0]).catch(err => { throw err; }) :
