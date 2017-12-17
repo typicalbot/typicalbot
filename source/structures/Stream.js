@@ -25,7 +25,8 @@ class Stream {
         });
 
         this.dispatcher.on("end", () => {
-            if (this.queue.length) return setTimeout(() => this.play(this.queue.splice(0, 1)[0]), 1000);
+            this.queue.splice(0, 1);
+            if (this.queue.length) return setTimeout(() => this.play(this.queue[0]), 1000);
 
             video.requester.send("The queue has concluded.");
             this.destroy();
@@ -40,7 +41,9 @@ class Stream {
 
     skip() {
         const song = this.current;
+
         this.dispatcher.end();
+
         return song;
     }
 
