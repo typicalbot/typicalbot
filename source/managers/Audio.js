@@ -50,6 +50,7 @@ module.exports = class {
         const playlist = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
 
         const first = await this.client.audioUtility.fetchInfo(playlist[0].url).catch(err => { return; });
+        Object.defineProperty(first, "requester", { value: message });
 
         playlist.forEach(async v => {
             const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
