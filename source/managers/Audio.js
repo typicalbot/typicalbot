@@ -26,14 +26,12 @@ module.exports = class {
 
         Object.defineProperty(video, "requestor", { value: message });
 
-        let connection = message.guild.voiceConnection;
-        
-        if (connection) {
-            if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
-            return connection.guildStream.addQueue(video);
+        if (message.guild.voiceConnection) {
+            if (!message.member.voiceChannel || message.member.voiceChannel.id !== message.guild.voiceConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
+            return message.guild.voiceConnection.guildStream.addQueue(video);
         }
 
-        connection = await this.connect(message).catch(err => { throw err; });
+        const connection = await this.connect(message).catch(err => { throw err; });
 
         connection.guildStream.play(video);
     }
