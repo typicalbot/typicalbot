@@ -5,52 +5,34 @@ module.exports = class {
         this.client = client;
     }
 
-    connect(message) {
-        return new Promise((resolve, reject) => {
-            const memberConnection = message.member.voiceChannel;
-            if (!memberConnection) return reject("You do not seem to be connected to a voice channel. Please join one.");
-            if (!memberConnection.joinable) return reject("I cannot connect to the voice channel you're currently in.");
-            if (!memberConnection.speakable) return reject("I cannot speak in the voice channel you're currently in.");
+    async connect(message) {
+        const channel = message.member.voiceChannel;
 
-            memberConnection.join().then(connection => {
-                this.client.emit("voiceConnectionChange");
-                return resolve(connection);
-            }).catch(err => {
-                return reject("An error occured while connecting to your voice channel.\n\n" + err);
-            });
-        });
+        if (!channel) throw "You must be connected to a voice channel to use music features.";
+        if (!channel.joinable) throw "I require joining permissions to use music features.";
+        if (!channel.speakable) throw "I require speaking permissions to use music features.";
+
+        const connection = await channel.join();
+            
+        this.client.emit("voiceConnectionUpdate", connection);
+
+        Object.defineProperty(connection, "guildStream", { value: new Stream(this.client, connection) });
+
+        return connection;
     }
 
-    stream(message, video) {
-        return new Promise((resolve, reject) => {
-            if (!this.client.audioUtility.withinLimit(video, message)) return message.error(`The song requested is too long to play. The maximum song length is ${this.client.functions.length(message.guild.settings.lengthLimit || 1800)}.`);
+    async stream(message, video) {
+        if (!this.client.audioUtility.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.lengthLimit * 1000 || 1800 * 1000)}.`;
 
-            const currentConnection = message.guild.voiceConnection;
-            if (currentConnection) {
-                if (!message.member.voiceChannel || message.member.voiceChannel.id !== currentConnection.channel.id) return message.error("You must be in the same voice channel to request a song to be played.");
-                return this.queue(message, video);
-            }
+        Object.defineProperty(video, "requester", { value: message });
 
-            this.connect(message).then(connection => {
-                const guildStream = new Stream(this.client, connection);
-                this.client.streams.set(message.guild.id, guildStream);
+        if (message.guild.voiceConnection) {
+            if (!message.member.voiceChannel || message.member.voiceChannel.id !== message.guild.voiceConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
+            return message.guild.voiceConnection.guildStream.addQueue(video);
+        }
 
-                video.message = message;
-                guildStream.play(video);
-            }).catch(err => {
-                return message.error(err);
-            });
-        });
-    }
+        const connection = await this.connect(message);
 
-    queue(message, video) {
-        const stream = this.client.streams.get(message.guild.id);
-
-        if (stream.queue.length >= (message.guild.settings.queuelimit || 10)) return message.error(`The queue limit of ${message.guild.settings.queuelimit || 10} has been reached.`);
-
-        video.message = message;
-        stream.queue.push(video);
-
-        return message.reply(`Enqueued **${video.title}**.`);
+        connection.guildStream.play(video);
     }
 };

@@ -69,7 +69,7 @@ class TypicalBot extends Client {
     }
 
     transmitStat(stat) {
-        this.transmit("stat", { [stat]: this[stat].size });
+        this.transmit("stats", { [stat]: this[stat].size });
     }
 
     transmitStats() {
