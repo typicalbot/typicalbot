@@ -28,7 +28,7 @@ module.exports = class {
             Object.defineProperty(video, "requester", { value: message });
         }
 
-        const playlistQueue = playlist ? this.playlist(message, video) : null;
+        const playlistQueue = playlist ? await this.playlist(message, video) : null;
 
         if (message.guild.voiceConnection) {
             if (!message.member.voiceChannel || message.member.voiceChannel.id !== message.guild.voiceConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
