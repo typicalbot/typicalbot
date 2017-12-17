@@ -44,7 +44,7 @@ class ShardingMaster extends Collection {
 
             this.pendingRequests.set(id, { callback, timeout });
 
-            this.transmit(request, Object.assign(data, { id }));
+            this.broadcast(request, Object.assign(data, { id }));
         });
     }
 
