@@ -20,13 +20,13 @@ class IPC extends express {
         */
 
         this.get("/stats", (req, res, next) => {
-            res.sendJSON(master.stats);
+            res.JSON(master.stats);
         });
 
         this.get("/guilds/:guildid", (req, res, next) => {
             const guild = req.params.guildid;
 
-            this.master.shardRequest("guildData", { guild }).then(data => {
+            this.master.globalRequest("guildData", { guild }).then(data => {
                 return res.status(200).JSON(data);
             }).catch(() => {
                 return res.status(500).JSON({ "message": "Request Timed Out" });
@@ -36,7 +36,7 @@ class IPC extends express {
         this.post("/guilds/:guildid/leave", (req, res, next) => {
             const guild = req.params.guildid;
 
-            this.master.shardRequest("leaveGuild", { guild }).then(data => {
+            this.master.globalRequest("leaveGuild", { guild }).then(data => {
                 return res.status(200);
             }).catch(() => {
                 return res.status(500).JSON({ "message": "Request Timed Out" });
@@ -47,7 +47,7 @@ class IPC extends express {
             const guild = req.params.guildid;
             const user = req.params.userid;
 
-            this.master.shardRequest("userData", { guild, user }).then(data => {
+            this.master.globalRequest("userData", { guild, user }).then(data => {
                 if (data.permissions.level < 2) return res.redirect("/access-denied");
 
                 return res.status(200).JSON(data);
