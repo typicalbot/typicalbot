@@ -24,6 +24,6 @@ module.exports = class extends Command {
 
         const song = connection.guildStream.skip();
 
-        message.reply(`Skipping **${song.title}** requested by **${song.requester.author.username}**${args[1] ? ` and ${args[1] - 1} of the following songs.` : ""}.`);
+        message.reply(`Skipping **${song.title}** requested by **${song.requester.author.username}**${args ? ` and ${args[1] - 1} of the following songs.` : ""}.`);
     }
 };
