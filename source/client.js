@@ -49,8 +49,6 @@ class TypicalBot extends Client {
         
         this.donors = new Collection();
 
-        this.streams = new Collection();
-
         this.banCache = new Collection();
         this.unbanCache = new Collection();
         this.softbanCache = new Collection();

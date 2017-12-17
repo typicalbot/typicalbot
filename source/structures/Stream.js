@@ -53,6 +53,14 @@ class Stream {
         return this.dispatcher.setVolume(volume);
     }
 
+    pause() {
+        this.dispatcher.pause();
+    }
+
+    resume() {
+        this.dispatcher.resume();
+    }
+
     setQueue(list) {
         this.queue = list;
         return this.queue;
@@ -61,11 +69,12 @@ class Stream {
     addQueue(video) {
         if (video instanceof Array) {
             video.splice(0, 1);
+            
             video.forEach(v => this.queue.push(v));
 
             return this.queue;
         } else {
-            if (this.queue.length >= (video.requester.guild.settings.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.queuelimit || 10} has been reached.`);
+            if (this.queue.length >= (video.requester.guild.settings.music.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.music.queuelimit || 10} has been reached.`);
 
             this.queue.push(video);
 

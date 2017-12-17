@@ -14,7 +14,7 @@ class AudioUtil {
     }
 
     withinLimit(message, video) {
-        return video.length_seconds <= (message.guild.settings.lengthLimit || 1800) ? true : false;
+        return video.length_seconds <= (message.guild.settings.music.timelimit || 1800) ? true : false;
     }
 
     fetchInfo(url) {
