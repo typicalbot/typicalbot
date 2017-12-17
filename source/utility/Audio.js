@@ -51,6 +51,8 @@ class AudioUtil {
 
         videos.map(v => this.fetchInfo(v.id).catch(err => { return; }));
 
+        console.log(videos[0]);
+
         const queue = [];
         
         videos.forEach(async v => {
