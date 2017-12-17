@@ -26,7 +26,7 @@ class Stream {
 
         this.dispatcher.on("end", () => {
             if (this.queue.length) {
-                setTimeout(() => this.play(this.queue[0]), 1000);
+                this.play(this.queue[0]);
                 return this.queue.splice(0, 1);
             }
 
