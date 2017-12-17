@@ -17,7 +17,11 @@ module.exports = class extends Command {
         if (!connection) return message.send(`Nothing is currently streaming.`);
 
         const match = /(\d+)/i.exec(message.content);
-        if (!match) return message.reply(`The audio streaming is at ${connection.guildStream.dispatcher.volume * 100}% volume.`);
+        if (!match) {
+            const x = Math.round(connection.dispatcher.volume * 10);
+            
+            return message.reply(`Current Volume: ${"▰".repeat(x > 10 ? (x/2) : x) + "▱".repeat(x > 10 ? 10 - (x/2) : 10 - x)} ${connection.guildStream.dispatcher.volume * 100}%`);
+        }
 
         const volume = match[1];
         if (volume < 0 || volume > 200) return message.error(`Invalid command usage. Volume must be a percent from 0% to 200%.`);
