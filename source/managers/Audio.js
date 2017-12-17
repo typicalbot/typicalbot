@@ -54,6 +54,7 @@ module.exports = class {
 
         playlist.forEach(async v => {
             const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
+            if (!video) return;
 
             if (!this.client.audioUtility.withinLimit(message, video)) return;
 
@@ -72,6 +73,7 @@ module.exports = class {
 
         playlist.forEach(async v => {
             const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
+            if (!video) return;
 
             if (!this.client.audioUtility.withinLimit(message, video)) return;
 
