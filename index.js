@@ -38,7 +38,7 @@ class ShardingMaster extends Collection {
                 clearTimeout(timeout);
 
                 this.pendingRequests.delete(id);
-                
+
                 return resolve(response.data);
             };
 
@@ -67,6 +67,8 @@ class ShardingMaster extends Collection {
                 newData[key] ? newData[key] += shard.stats[key] : newData[key] = shard.stats[key];
             });
         });
+
+        this.stats = newData;
 
         this.broadcast("stats", newData);
     }
