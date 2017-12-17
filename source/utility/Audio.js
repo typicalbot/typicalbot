@@ -53,11 +53,11 @@ class AudioUtil {
         
         videos.forEach(v => {
             this.fetchInfo(v.url).then(v => queue.push(v)).catch(err => { console.log(err); });
-        }).filter(v => !!v);
+        });
 
-        console.log(queue);
+        console.log(queue.filter(v => !!v));
 
-        return queue;
+        return queue.filter(v => !!v);
     }
 
     search(settings, query) {
