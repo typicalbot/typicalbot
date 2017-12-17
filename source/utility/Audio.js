@@ -50,7 +50,7 @@ class AudioUtil {
         const videos = await playlist.getVideos().catch(err => { throw err; });
 
         const queue = videos.map(async v => {
-            return await this.fetchInfo(v.url).catch(err => { return; });
+            return await this.fetchInfo(v.url).catch(err => { console.log(err); });
         }).filter(v => !!v);
 
         console.log(queue);
