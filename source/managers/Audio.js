@@ -28,7 +28,7 @@ module.exports = class {
             Object.defineProperty(video, "requester", { value: message });
         }
 
-        const playlistQueue = playlist ? await this.playlist(message, video) : null;
+        const playlistQueue = playlist ? await this.playlist(message, video).catch(err => { throw err; }) : null;
 
         if (message.guild.voiceConnection) {
             if (!message.member.voiceChannel || message.member.voiceChannel.id !== message.guild.voiceConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
@@ -47,6 +47,8 @@ module.exports = class {
 
     async playlist(message, id) {
         const queue = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
+
+        console.log(queue[0]);
 
         queue.filter(v => this.client.audioUtility.withinLimit(message, v));
         queue.forEach(v => Object.defineProperty(v, "requester", { value: message }));
