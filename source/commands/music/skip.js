@@ -3,8 +3,8 @@ const Command = require("../../structures/Command");
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Stop what is currently playing.",
-            usage: "stop",
+            description: "Skip what is currently playing.",
+            usage: "skip [amount]",
             mode: "lite",
             access: 1
         });
@@ -24,6 +24,6 @@ module.exports = class extends Command {
 
         const song = connection.guildStream.skip();
 
-        message.reply(`Skipping **${song.title}** requested by **${song.requester.author.username}**${args ? ` and ${args[1] - 1} of the following songs.` : ""}.`);
+        message.reply(`Skipping **${song.title}** requested by **${song.requester.author.username}**${args ? ` and ${args[1] - 1} of the following songs` : ""}.`);
     }
 };
