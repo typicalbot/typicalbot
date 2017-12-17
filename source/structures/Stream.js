@@ -25,8 +25,11 @@ class Stream {
         });
 
         this.dispatcher.on("end", () => {
+            console.log(this.queue);
             this.queue.splice(0, 1);
+            console.log(this.queue);
             if (this.queue.length) return setTimeout(() => this.play(this.queue[0]), 1000);
+            console.log(this.queue);
 
             video.requester.send("The queue has concluded.");
             this.destroy();
