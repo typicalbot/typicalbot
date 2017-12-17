@@ -49,7 +49,9 @@ class AudioUtil {
         const playlist = await YT.getPlaylistByID(id).catch(err => { throw err; });
         const videos = await playlist.getVideos().catch(err => { throw err; });
 
-        const queue = videos.map(async v => await this.fetchInfo(v.url).catch(err => { return; })).filter(v => !!v);
+        const queue = videos.map(async v => {
+            return await this.fetchInfo(v.url).catch(err => { return; }).filter(v => !!v);
+        });
 
         console.log(queue);
 
