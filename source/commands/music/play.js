@@ -13,7 +13,7 @@ module.exports = class extends Command {
     execute(message, parameters, permissionLevel) {
         if (!this.client.audioUtility.hasPermissions(message, this)) return;
 
-        const match = /(.+)/i.exec(message.content);
+        const match = /(.+)/i.exec(parameters);
         if (!match) return message.error(this.client.functions.error("usage", this));
 
         const url = /(?:https?:\/\/)?(?:(?:www|m)\.)?(?:youtube\.com|youtu\.be)\/(.+)/i.exec(match[1]);
