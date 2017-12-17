@@ -12,9 +12,13 @@ class Shard extends fork {
 
         this.on("message", message => {
             const { type, data } = message;
-            
+
             if (type === "stats") {
                 this.master.updateStats(this.id, message.data);
+            } else if (type === "masterrequest") {
+                const r = this.master.pendingRequests.get(message.data.id);
+                if (!r) return;
+                r.callback(message);
             } else {
                 this.master.broadcast(message.type, message.data);
             }
