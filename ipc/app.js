@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const port = 10000;
+const port = 5000;
 
 class IPC extends express {
     constructor(master) {
