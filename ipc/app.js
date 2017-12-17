@@ -38,8 +38,8 @@ class IPC extends express {
 
             this.master.globalRequest("leaveGuild", { guild }).then(data => {
                 return res.status(200);
-            }).catch(() => {
-                return res.status(500).json({ "message": "Request Timed Out" });
+            }).catch(err => {
+                return res.status(500).json({ "message": "Request Timed Out", "error": err  });
             });
         });
 
@@ -51,8 +51,8 @@ class IPC extends express {
                 if (data.permissions.level < 2) return res.redirect("/access-denied");
 
                 return res.status(200).json(data);
-            }).catch(() => {
-                return res.status(500).json({ "message": "Request Timed Out" });
+            }).catch(err => {
+                return res.status(500).json({ "message": "Request Timed Out", "error": err  });
             });
         });
 
