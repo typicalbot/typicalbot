@@ -49,7 +49,7 @@ module.exports = class {
                 }
             });
         } else if (type === "userData") {
-            if (!this.client.users.has(data.guild)) return;
+            if (!this.client.users.has(data.user)) return;
 
             const guild = this.client.guilds.get(data.guild);
             guild.settings = await this.client.settings.fetch(data.guild);
