@@ -35,7 +35,7 @@ class Stream {
     destroy() {
         this.queue = [];
         this.connection.disconnect();
-        this.client.emit("voiceConnectionChange");
+        this.client.emit("voiceConnectionUpdate");
     }
 
     skip() {
