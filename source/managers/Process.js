@@ -25,6 +25,7 @@ module.exports = class {
             try { this.client.log(eval(data.code)); }
             catch(err) { this.client.log(err, true); }
         } else if (type === "guildData") {
+            console.log("guildDataRequest");
             if (!this.client.guilds.has(data.guild)) return;
 
             const guild = this.client.guilds.get(data.guild);
