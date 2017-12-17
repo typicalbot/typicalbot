@@ -12,7 +12,7 @@ module.exports = class {
         if (!channel.joinable) throw "I require joining permissions to use music features.";
         if (!channel.speakable) throw "I require speaking permissions to use music features.";
 
-        channel.join().then(connection => {
+        return channel.join().then(connection => {
             this.client.emit("voiceConnectionUpdate", connection);
 
             Object.defineProperty(connection, "guildStream", { value: new Stream(this.client, connection) });
