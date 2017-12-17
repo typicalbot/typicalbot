@@ -53,6 +53,11 @@ class Stream {
         return this.dispatcher.setVolume(volume);
     }
 
+    setQueue(array) {
+        this.queue = array;
+        return this.queue;
+    }
+
     addQueue(video) {
         if (this.queue.length >= (video.requester.guild.settings.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.queuelimit || 10} has been reached.`);
 
