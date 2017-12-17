@@ -22,7 +22,7 @@ module.exports = class {
     }
 
     async stream(message, video) {
-        if (!this.client.audioUtility.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(this.client.functions.length(message.guild.settings.lengthLimit * 1000 || 1800 * 1000))}.`;
+        if (!this.client.audioUtility.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.lengthLimit * 1000 || 1800 * 1000)}.`;
 
         Object.defineProperty(video, "requester", { value: message });
 
