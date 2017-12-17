@@ -21,7 +21,7 @@ module.exports = class extends Command {
         if (url) {
             this.client.audioUtility.fetchInfo(url[1]).then(videoInfo => {
                 videoInfo.url = url[1];
-                return this.client.audioManager.stream(message, videoInfo);
+                return this.client.audioManager.stream(message, videoInfo).catch(err => message.error(err));
             }).catch(err => message.error(`Information cannot be fetched from that song. Please try another url.`));
         } else {
             this.client.audioUtility.search(message.guild.settings, match[1]).then(results => {
