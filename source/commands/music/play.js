@@ -19,7 +19,7 @@ module.exports = class extends Command {
         const args = /(?:(?:https?:\/\/www\.youtube\.com\/playlist\?list=(.+))|(?:https?:\/\/)?(?:(?:www|m)\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+))/i.exec(parameters);
         
         if (args && args[1]) {
-            this.client.audioManager.stream(message, args[1], true).catch(err => message.error(err));
+            this.client.audioManager.stream(message, args[1], true).catch(err => message.error(err.stack));
         } else if (args && args[2]) {
             this.client.audioUtility.fetchInfo(args[2]).then(videoInfo => {
                 videoInfo.url = args[2];
