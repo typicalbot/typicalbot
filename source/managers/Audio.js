@@ -35,32 +35,37 @@ module.exports = class {
             return message.guild.voiceConnection.guildStream.addQueue(video);
         }
 
-        const playlistQueue = playlist ? await this.playlist(message, video).catch(err => { throw err; }) : null;
-
         const connection = await this.connect(message).catch(err => { throw err; });
 
-        if (playlist) connection.guildStream.setQueue(playlistQueue);
+        const playlistFirst = playlist ? await this.startPlaylist(message, video, connection.guildStream).catch(err => { throw err; }) : null;
 
         playlist ?
-            connection.guildStream.play(playlistQueue[0]).catch(err => { throw err; }) :
+            connection.guildStream.play(playlistFirst).catch(err => { throw err; }) :
             connection.guildStream.play(video).catch(err => { throw err; });
     }
 
     async startPlaylist(message, id, guildStream) {
-        message.reply(`Loading the playlist into the queue. This may take a couple of seconds.`);
+        message.reply(`Loading the playlist into the queue. This may take a while.`);
 
         const playlist = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
 
-        const first = playlist[0];
+        const first = await this.client.audioUtility.fetchInfo(playlist[0].url).catch(err => { return; });
 
-        const queue = playlist.map(async video => { const v = await this.client.audioUtility.fetchInfo(video.url).catch(err => { console.log(err); }); Object.defineProperty(v, "requester", { value: message }); return v; })
-            .filter(v => this.client.audioUtility.withinLimit(message, v));
+        playlist.forEach(async v => {
+            const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
+
+            if (!this.client.audioUtility.withinLimit(message, video)) return;
+
+            Object.defineProperty(video, "requester", { value: message });
+
+            guildStream.addQueue(video, true);
+        });
 
         return first;
     }
 
     async queuePlaylist(message, id, guildStream) {
-        message.reply(`Loading the playlist into the queue. This may take a couple of seconds.`);
+        message.reply(`Loading the playlist into the queue. This may take a while.`);
 
         const playlist = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
 
