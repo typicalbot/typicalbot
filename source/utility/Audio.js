@@ -99,7 +99,7 @@ class AudioUtil {
 
         const permissionCheck = this.permissionCheck(message, command, userTrueLevel);
         if (permissionCheck.has) { return true; } else {
-            message.elevation(this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0 );
+            message.error(this.client.functions.error("elevation", this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0 ));
             return false;
         }
     }

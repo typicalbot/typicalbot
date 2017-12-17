@@ -3,8 +3,8 @@ const Command = require("../../structures/Command");
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Pause the song currently streaming.",
-            usage: "pause",
+            description: "Resume the song paused.",
+            usage: "resume",
             mode: "lite",
             access: 1
         });
