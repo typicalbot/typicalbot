@@ -18,6 +18,7 @@ class AudioUtil {
     }
 
     fetchInfo(url) {
+        console.log(url);
         return new Promise((resolve, reject) => {
             ytdl.getInfo(url, (err, info) => {
                 if (err) return reject(err);
@@ -49,7 +50,7 @@ class AudioUtil {
         const playlist = await YT.getPlaylistByID(id).catch(err => { throw err; });
         const videos = await playlist.getVideos().catch(err => { throw err; });
 
-        return videos.map(async v => await this.fetchInfo(v.url).catch(err => { return; }));
+        return videos.map(async v => await this.fetchInfo(v.url).catch(err => { return; })).filter(v => !!v);
     }
 
     search(settings, query) {
