@@ -53,7 +53,7 @@ class AudioUtil {
         
         videos.forEach(async v => {
             this.validate(v.id).then(() => {
-                queue.push(v.url);
+                queue.push(v.id);
             }).catch(err => { return; });
         });
 
