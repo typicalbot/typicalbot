@@ -32,7 +32,7 @@ class ShardingMaster extends Collection {
         return new Promise((resolve, reject) => {
             const id = Math.random();
 
-            const timeout = setTimeout(() => { this.pendingRequests.delete(id); return reject("Timed Out"); }, 100);
+            const timeout = setTimeout(() => { this.pendingRequests.delete(id); return reject("Timed Out"); }, 1000);
 
             const callback = (response) => {
                 clearTimeout(timeout);
