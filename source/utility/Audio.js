@@ -13,7 +13,7 @@ class AudioUtil {
         this.client = client;
     }
 
-    withinLimit(video, message) {
+    withinLimit(message, video) {
         return video.length_seconds <= (message.guild.settings.lengthLimit || 1800) ? true : false;
     }
 
