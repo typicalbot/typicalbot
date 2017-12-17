@@ -49,11 +49,13 @@ class AudioUtil {
         const playlist = await YT.getPlaylistByID(id).catch(err => { throw err; });
         const videos = await playlist.getVideos().catch(err => { throw err; });
 
+        videos.map(v => this.fetchInfo(v.id).catch(err => { return; }));
+
         const queue = [];
         
         videos.forEach(async v => {
-            this.validate(v.id).then(() => {
-                queue.push(v.id);
+            this.validate(v.url).then(() => {
+                queue.push(v.url);
             }).catch(err => { return; });
         });
 
