@@ -13,14 +13,12 @@ module.exports = class extends Command {
     execute(message, parameters, permissionLevel) {
         if (!this.client.audioUtility.hasPermissions(message, this)) return;
 
-        const currentConnection = message.guild.voiceConnection;
-        if (!currentConnection) return message.send(`Nothing is currently streaming.`);
+        const connection = message.guild.voiceConnection;
+        if (!connection) return message.send(`Nothing is currently streaming.`);
 
-        const stream = this.client.streams.get(message.guild.id);
+        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to preform that command.");
 
-        if (!message.member.voiceChannel || message.member.voiceChannel.id !== currentConnection.channel.id) return message.error("You must be in the same voice channel to preform that command.");
-
-        stream.kill();
+        connection.guildStream.kill();
 
         message.reply(`Leaving the channel.`);
     }
