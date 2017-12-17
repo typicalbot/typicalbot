@@ -28,11 +28,11 @@ class Stream {
             if (this.queue.length) return setTimeout(() => this.play(this.queue.splice(0, 1)[0]), 1000);
 
             video.requester.send("The queue has concluded.");
-            this.end();
+            this.destroy();
         });
     }
 
-    kill() {
+    destroy() {
         this.queue = [];
         this.connection.disconnect();
         this.client.emit("voiceConnectionChange");
