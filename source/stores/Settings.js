@@ -62,9 +62,10 @@ class EventStore extends Store {
                 "play": "off",
                 "skip": "off",
                 "stop": "off",
+                "pause": "off",
+                "resume": "off",
                 "unqueue": "off",
                 "volume": "off",
-                "pause-resume": "off",
                 "timelimit": null,
                 "queuelimit": null,
                 "apikey": null
