@@ -46,6 +46,8 @@ module.exports = class {
     }
 
     async playlist(message, id) {
+        message.reply(`Loading the playlist into the queue. This may take a couple of seconds.`);
+        
         const queue = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
 
         queue.filter(v => this.client.audioUtility.withinLimit(message, v));
