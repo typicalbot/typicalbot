@@ -155,6 +155,6 @@ process
     .on("uncaughtException", err => client.log(err.stack, true))
     .on("unhandledRejection", err => {
         if (!err) return;
-        console.error(`Uncaught Promise Error: \n${err.stack || err}`);
+        console.error(`Uncaught Promise Error:\n${err.stack || JSON.stringify(err)|| err}`);
     });
     

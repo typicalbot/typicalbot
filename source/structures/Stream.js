@@ -12,7 +12,7 @@ class Stream {
     }
 
     async play(video) {
-        const stream = await this.client.audioUtility.fetchStream(video);
+        const stream = await this.client.audioUtility.fetchStream(video).catch(err => { throw err; });
 
         this.dispatcher = this.connection.playStream(stream, { volume: .5 });
         this.current = video;
@@ -53,12 +53,24 @@ class Stream {
         return this.dispatcher.setVolume(volume);
     }
 
+    setQueue(list) {
+        this.queue = list;
+        return this.queue;
+    }
+    
     addQueue(video) {
-        if (this.queue.length >= (video.requester.guild.settings.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.queuelimit || 10} has been reached.`);
+        if (video instanceof Array) {
+            video.splice(0, 1);
+            video.forEach(v => this.queue.push(v));
 
-        this.queue.push(video);
+            return this.queue;
+        } else {
+            if (this.queue.length >= (video.requester.guild.settings.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.queuelimit || 10} has been reached.`);
 
-        return video.requester.reply(`Enqueued **${video.title}**.`);
+            this.queue.push(video);
+
+            return video.requester.reply(`Enqueued **${video.title}**.`);
+        }
     }
 }
 

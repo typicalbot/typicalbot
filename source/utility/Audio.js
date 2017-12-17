@@ -43,6 +43,26 @@ class AudioUtil {
         });
     }
 
+    async fetchPlaylist(message, id) {
+        const t = Date.now();
+        const YT = message.guild.settings.music.apikey ? new YAPI(message.guild.settings.music.apikey) : TBYT;
+
+        const playlist = await YT.getPlaylistByID(id).catch(err => { throw err; });
+        const videos = await playlist.getVideos().catch(err => { throw err; });
+
+        console.log(`1: ${Date.now() - t}`);
+
+        const queue = [];
+
+        for (let video of videos) {
+            queue.push(await this.fetchInfo(video.url).catch(err => { console.log(err); }));
+        }
+
+        console.log(`2: ${Date.now() - t}`);
+
+        return queue.filter(v => !!v);
+    }
+
     search(settings, query) {
         return new Promise((resolve, reject) => {
             const YT = settings.music.apikey ? new YAPI(settings.music.apikey) : TBYT;
