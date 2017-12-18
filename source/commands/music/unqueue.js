@@ -31,7 +31,9 @@ module.exports = class extends Command {
 
             message.send(`Multiple videos were found that matched your query. Select from the choices below (type \`cancel\` to cancel):\n\n${videos}`);
             
-            this.awaitMessage(message, videos, connection.guildStream.queue).then(r => console.log(r)/* essage.reply(`Removed **${r}** video${r === 1 ? "" : "s"} from the queue.`)*/);
+            const r = await this.awaitMessage(message, videos, connection.guildStream.queue);
+        
+            message.reply(`Removed **${r}** video${r === 1 ? "" : "s"} from the queue.`);
         } else {
             queue.splice(queue.indexOf(search[0]), 1);
             message.reply(`Removed **${search[0]}** from the queue.`);
@@ -40,7 +42,8 @@ module.exports = class extends Command {
 
     async awaitMessage(message, videos, queue) {
         const titles = videos.split("\n").map(s => /\*\*\d+:\*\*\s(.+)/.exec(s)[1]);
-        message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 10000, errors: ["time"] })
+
+        return message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 10000, errors: ["time"] })
             .then(async c => {
                 if (c.first().content === "cancel") {
                     message.reply("Canceled").then(m => m.delete({timeout:5000}));
