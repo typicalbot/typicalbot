@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 const Command = require("../../structures/Command");
 
 module.exports = class extends Command {
