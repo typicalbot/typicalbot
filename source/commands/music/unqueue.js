@@ -21,6 +21,9 @@ module.exports = class extends Command {
 
         const query = args[1].toLowerCase();
 
+        console.log(query);
+        console.log(queue.filter(v => v.title.toLowerCase() === query));
+
         const search = queue.filter(v => v.title.toLowerCase() === query);
         if (!search.length) return message.error("The given video title was not found in the queue.");
         if (search.length > 1) {
