@@ -234,7 +234,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guild.settings.roles.administrator;
+                                const currentList = message.guild.settings.roles.moderator;
                                 if (currentList.includes(role.id)) return message.error("The specified role is already included in the list of roles for the administrator permission level.");
 
                                 currentList.push(role.id);
@@ -247,7 +247,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guild.settings.roles.administrator;
+                                const currentList = message.guild.settings.roles.moderator;
                                 if (!currentList.includes(role.id)) return message.error("The specified role is not included in of list of roles for the administrator permission level.");
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -274,7 +274,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guild.settings.roles.administrator;
+                                const currentList = message.guild.settings.roles.dj;
                                 if (currentList.includes(role.id)) return message.error("The specified role is already included in the list of roles for the administrator permission level.");
 
                                 currentList.push(role.id);
@@ -286,7 +286,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guild.settings.roles.administrator;
+                                const currentList = message.guild.settings.roles.dj;
                                 if (!currentList.includes(role.id)) return message.error("The specified role is not included in of list of roles for the administrator permission level.");
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -313,7 +313,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guild.settings.roles.administrator;
+                                const currentList = message.guild.settings.roles.blacklist;
                                 if (currentList.includes(role.id)) return message.error("The specified role is already included in the list of roles for the administrator permission level.");
 
                                 currentList.push(role.id);
@@ -325,7 +325,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guild.settings.roles.administrator;
+                                const currentList = message.guild.settings.roles.blacklist;
                                 if (!currentList.includes(role.id)) return message.error("The specified role is not included in of list of roles for the administrator permission level.");
 
                                 currentList.splice(currentList.indexOf(role.id));

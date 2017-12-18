@@ -61,18 +61,9 @@ class Stream {
         this.dispatcher.resume();
     }
 
-    setQueue(list) {
-        this.queue = list;
-        return this.queue;
-    }
-    
-    addQueue(video) {
-        if (video instanceof Array) {
-            video.splice(0, 1);
-            
-            video.forEach(v => this.queue.push(v));
-
-            return this.queue;
+    addQueue(video, silent = false) {
+        if (silent) {
+            this.queue.push(video);
         } else {
             if (this.queue.length >= (video.requester.guild.settings.music.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.music.queuelimit || 10} has been reached.`);
 

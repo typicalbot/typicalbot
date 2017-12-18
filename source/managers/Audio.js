@@ -13,7 +13,7 @@ module.exports = class {
         if (!channel.speakable) throw "I require speaking permissions to use music features.";
 
         const connection = await channel.join().catch(err => { throw err; });
-            
+
         this.client.emit("voiceConnectionUpdate", connection);
 
         Object.defineProperty(connection, "guildStream", { value: new Stream(this.client, connection) });
@@ -28,31 +28,58 @@ module.exports = class {
             Object.defineProperty(video, "requester", { value: message });
         }
 
-        const playlistQueue = playlist ? await this.playlist(message, video).catch(err => { throw err; }) : null;
-
         if (message.guild.voiceConnection) {
             if (!message.member.voiceChannel || message.member.voiceChannel.id !== message.guild.voiceConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
-            
-            return message.guild.voiceConnection.guildStream.addQueue(playlist ? playlistQueue : video);
+
+            if (playlist) return this.queuePlaylist(message, video, message.guild.voiceConnection.guildStream).catch(err => { throw err; });
+            return message.guild.voiceConnection.guildStream.addQueue(video);
         }
 
         const connection = await this.connect(message).catch(err => { throw err; });
 
-        if (playlist) connection.guildStream.setQueue(playlistQueue);
+        const playlistFirst = playlist ? await this.startPlaylist(message, video, connection.guildStream).catch(err => { throw err; }) : null;
 
-        playlist ? 
-            connection.guildStream.play(playlistQueue[0]).catch(err => { throw err; }) :
+        playlist ?
+            connection.guildStream.play(playlistFirst).catch(err => { throw err; }) :
             connection.guildStream.play(video).catch(err => { throw err; });
     }
 
-    async playlist(message, id) {
-        message.reply(`Loading the playlist into the queue. This may take a couple of seconds.`);
-        
-        const queue = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
+    async startPlaylist(message, id, guildStream) {
+        message.reply(`Loading the playlist into the queue. This may take a while.`);
 
-        queue.filter(v => this.client.audioUtility.withinLimit(message, v));
-        queue.forEach(v => Object.defineProperty(v, "requester", { value: message }));
+        const playlist = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
 
-        return queue;
+        const first = await this.client.audioUtility.fetchInfo(playlist[0].url).catch(err => { return; });
+        Object.defineProperty(first, "requester", { value: message });
+
+        playlist.forEach(async v => {
+            const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
+            if (!video) return;
+
+            if (!this.client.audioUtility.withinLimit(message, video)) return;
+
+            Object.defineProperty(video, "requester", { value: message });
+
+            guildStream.addQueue(video, true);
+        });
+
+        return first;
+    }
+
+    async queuePlaylist(message, id, guildStream) {
+        message.reply(`Loading the playlist into the queue. This may take a while.`);
+
+        const playlist = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
+
+        playlist.forEach(async v => {
+            const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
+            if (!video) return;
+
+            if (!this.client.audioUtility.withinLimit(message, video)) return;
+
+            Object.defineProperty(video, "requester", { value: message });
+
+            guildStream.addQueue(video, true);
+        });
     }
 };

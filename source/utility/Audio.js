@@ -50,17 +50,7 @@ class AudioUtil {
         const playlist = await YT.getPlaylistByID(id).catch(err => { throw err; });
         const videos = await playlist.getVideos().catch(err => { throw err; });
 
-        console.log(`1: ${Date.now() - t}`);
-
-        const queue = [];
-
-        for (let video of videos) {
-            queue.push(await this.fetchInfo(video.url).catch(err => { console.log(err); }));
-        }
-
-        console.log(`2: ${Date.now() - t}`);
-
-        return queue.filter(v => !!v);
+        return videos;
     }
 
     search(settings, query) {
