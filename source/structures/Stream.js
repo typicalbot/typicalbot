@@ -65,8 +65,6 @@ class Stream {
         if (silent) {
             this.queue.push(video);
         } else {
-            if (this.queue.length >= (video.requester.guild.settings.music.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.music.queuelimit || 10} has been reached.`);
-
             this.queue.push(video);
 
             return video.requester.reply(`Enqueued **${video.title}**.`);
