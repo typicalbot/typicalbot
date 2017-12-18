@@ -31,9 +31,7 @@ module.exports = class extends Command {
 
             message.send(`Multiple videos were found that matched your query. Select from the choices below (type \`cancel\` to cancel):\n\n${videos}`);
             
-            const result = await this.awaitMessage(message, videos, connection.guildStream.queue);
-            
-            message.reply(`Removed **${result}** video${result === 1 ? "" : "s"} from the queue.`);
+            this.awaitMessage(message, videos, connection.guildStream.queue).then(r => message.reply(`Removed **${r}** video${r === 1 ? "" : "s"} from the queue.`));
         } else {
             queue.splice(queue.indexOf(search[0]), 1);
             message.reply(`Removed **${search[0]}** from the queue.`);
