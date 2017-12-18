@@ -31,9 +31,7 @@ module.exports = class extends Command {
 
             message.send(`Multiple videos were found that matched your query. Select from the choices below (type \`cancel\` to cancel):\n\n${videos}`);
             const result = await this.awaitMessage(message, videos, connection.guildStream.queue);
-            if (result == false) return;
-
-            message.reply(`Removed **${result}** video${result === 1 ? "" : "s"} from the queue.`);
+            if (result) return message.reply(`Removed **${result}** video${result === 1 ? "" : "s"} from the queue.`);
         } else {
             queue.splice(queue.indexOf(search[0]), 1);
             message.reply(`Removed **${search[0]}** from the queue.`);
@@ -59,6 +57,6 @@ module.exports = class extends Command {
                     message.error("Please provide a number, say `all`, or `cancel`.");
                     return await this.awaitMessage(message, videos);
                 }
-            });
+            }).catch(err => message.error("You didn't answer."));
     }
 };
