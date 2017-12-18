@@ -57,7 +57,7 @@ module.exports = class {
         message.reply(`Loading the playlist into the queue. This may take a while.`);
 
         const playlist = this.shuffle(await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; }));
-        playlist.splice(100, Infinity);
+        playlist.splice(101, Infinity);
 
         const first = await this.client.audioUtility.fetchInfo(playlist[0].url).catch(err => { return; });
         Object.defineProperty(first, "requester", { value: message });
@@ -80,7 +80,7 @@ module.exports = class {
         message.reply(`Loading the playlist into the queue. This may take a while.`);
 
         const playlist = this.shuffle(await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; }));
-        playlist.splice(100, Infinity);
+        playlist.splice(101, Infinity);
 
         playlist.forEach(async v => {
             const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
