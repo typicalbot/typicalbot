@@ -45,10 +45,18 @@ module.exports = class {
             connection.guildStream.play(video).catch(err => { throw err; });
     }
 
+    shuffle(arr) {
+        for (let i = arr.length; i; i--) {
+            const j = Math.floor(Math.random() * i);
+            [arr[i - 1], arr[j]] = [arr[j], arr[i - 1]];
+        }
+        return arr;
+    }
+
     async startPlaylist(message, id, guildStream) {
         message.reply(`Loading the playlist into the queue. This may take a while.`);
 
-        const playlist = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
+        const playlist = this.shuffle(await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; }));
         playlist.splice(100, Infinity);
 
         const first = await this.client.audioUtility.fetchInfo(playlist[0].url).catch(err => { return; });
@@ -71,7 +79,7 @@ module.exports = class {
     async queuePlaylist(message, id, guildStream) {
         message.reply(`Loading the playlist into the queue. This may take a while.`);
 
-        const playlist = await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; });
+        const playlist = this.shuffle(await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; }));
         playlist.splice(100, Infinity);
 
         playlist.forEach(async v => {
