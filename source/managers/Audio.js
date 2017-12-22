@@ -31,7 +31,7 @@ module.exports = class {
         const currConnection = message.guild.voiceConnection;
 
         if (currConnection) {
-            if (currConnection.guildStream.mode === "queue") throw "You can only add to the queue while in queue mode.";
+            if (currConnection.guildStream.mode !== "queue") throw "You can only add to the queue while in queue mode.";
 
             if (!message.member.voiceChannel || message.member.voiceChannel.id !== currConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
             if (currConnection.guildStream.queue.length >= (video.requester.guild.settings.music.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.music.queuelimit || 10} has been reached.`);
