@@ -49,9 +49,9 @@ module.exports = class extends Command {
                 return message.error("Please provide a number, say `all`, or `cancel`.");
             }
         } else {
-            queue.splice(queue.indexOf(results[0]), 1);
+            queue.splice(queue.indexOf(results[0].title), 1);
             
-            message.reply(`Removed **${results[0]}** from the queue.`);
+            message.reply(`Removed **${results[0].title}** from the queue.`);
         }
     }
 };
