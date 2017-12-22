@@ -23,7 +23,7 @@ class New extends Event {
         }, 1000 * 60 * 5);
 
         setInterval(() => {
-            this.client.voiceConnections.filter(c => c.channel.members.filter(m => !m.user.bot).size === 0).forEach(c => c.guildStream.destroy());
+            this.client.voiceConnections.filter(c => c.channel.members.filter(m => !m.user.bot).size === 0).forEach(c => c.guildStream.end());
         }, 1000 * 30);
     }
 }
