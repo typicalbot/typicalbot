@@ -14,6 +14,10 @@ class Stream {
     }
 
     async play(video) {
+        if (video.live_playback) return this.playLivestream(video);
+
+        this.mode = "queue";
+
         const stream = await this.client.audioUtility.fetchStream(video).catch(err => { throw err; });
 
         this.dispatcher = this.connection.playStream(stream, { volume: .5 });
@@ -37,8 +41,28 @@ class Stream {
         });
     }
 
+    async playLivestream(video) {
+        this.mode = "live";
+
+        const stream = await this.client.audioUtility.fetchStream(video).catch(err => { throw err; });
+
+        this.dispatcher = this.connection.playStream(stream, { volume: .5 });
+        this.current = video;
+
+        video.requester.send(`🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}**.`);
+
+        this.dispatcher.on("error", err => {
+            video.requester.send(`An error occured while trying to play the livestream. Leaving the channel.`);
+            this.end();
+        });
+
+        this.dispatcher.on("end", () => {
+            video.requester.send("The livestream has concluded.");
+            this.end();
+        });
+    }
+
     end() {
-        this.queue = [];
         this.connection.disconnect();
         this.client.emit("voiceConnectionUpdate");
     }

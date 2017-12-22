@@ -20,6 +20,6 @@ module.exports = class extends Command {
 
         connection.guildStream.end();
 
-        message.reply(`Leaving the channel.`);
+        message.reply("Stopping all streaming audio.");
     }
 };
