@@ -14,6 +14,8 @@ module.exports = class extends Command {
         const connection = message.guild.voiceConnection;
         if (!connection) return message.send(`Nothing is currently streaming.`);
 
+        if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
+
         const queue = connection.guildStream.queue;
 
         const short = text => this.client.functions.lengthen(-1, text, 45),

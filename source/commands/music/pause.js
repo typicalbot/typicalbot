@@ -18,6 +18,8 @@ module.exports = class extends Command {
 
         if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to preform that command.");
 
+        if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
+
         connection.guildStream.pause();
 
         message.reply(`Streaming is now paused.`);

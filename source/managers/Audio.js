@@ -30,7 +30,7 @@ module.exports = class {
 
         if (message.guild.voiceConnection) {
             if (!message.member.voiceChannel || message.member.voiceChannel.id !== message.guild.voiceConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
-            if (this.queue.length >= (video.requester.guild.settings.music.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.music.queuelimit || 10} has been reached.`);
+            if (message.guild.voiceConnection.guildStream.queue.length >= (video.requester.guild.settings.music.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.music.queuelimit || 10} has been reached.`);
 
             if (playlist) return this.queuePlaylist(message, video, message.guild.voiceConnection.guildStream).catch(err => { throw err; });
             return message.guild.voiceConnection.guildStream.addQueue(video);
