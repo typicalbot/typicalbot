@@ -14,52 +14,44 @@ module.exports = class extends Command {
         const connection = message.guild.voiceConnection;
         if (!connection) return message.send(`Nothing is currently streaming.`);
 
+        if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
+
         const args = /(.+)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const queue = connection.guildStream.queue;
+        const query = args[1];
 
-        const query = args[1].toLowerCase();
+        const results = queue.filter(v => v.title.toLowerCase().includes(query.toLowerCase()));
+        if (!results.length) return message.error(`No results were found in the queue for the query **${query}**.`);
 
-        console.log(query);
-        console.log(queue.filter(v => v.title.toLowerCase() === query));
+        if (results.length > 1) {
+            const videos = results.map((v, i) => `**${i + 1}:** ${v.title}`).join("\n");
 
-        const search = queue.filter(v => v.title.toLowerCase().includes(query));
-        if (!search.length) return message.error("The given video title was not found in the queue.");
-        if (search.length > 1) {
-            const videos = search.map((v, i) => `**${i + 1}:** ${v.title}`).join("\n");
-
-            message.send(`Multiple videos were found that matched your query. Select from the choices below (type \`cancel\` to cancel):\n\n${videos}`);
+            message.send(`Multiple videos were found that matched your query. Type \`cancel\` to cancel or \`all\` to remove all. Otherwise, select from the videos listed below:\n\n${videos}`);
             
-            const r = await this.awaitMessage(message, videos, connection.guildStream.queue);
-        
-            if (r) message.reply(`Removed **${r}** video${r === 1 ? "" : "s"} from the queue.`);
+            const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 10000, errors: ["time"] }).catch(err => { return message.error("No response was given."); });
+            const m = messages.first();
+
+            if (m.content === "cancel") {
+                message.reply("Canceled.");
+            } else if (m.content === "all") {
+                results.forEach(v => {
+                    queue.splice(queue.indexOf(v), 1);
+                });
+                
+                message.reply(`Removed **${results.length}** videos from the queue.`);
+            } else if ((/^\d+$/).test(m.content)) {
+                queue.splice(queue.indexOf(results[m.content - 1]), 1);
+                
+                message.reply(`Removed **${results[0]}** videos from the queue.`);
+            } else {
+                return message.error("Please provide a number, say `all`, or `cancel`.");
+            }
         } else {
-            queue.splice(queue.indexOf(search[0]), 1);
-            message.reply(`Removed **${search[0]}** from the queue.`);
+            queue.splice(queue.indexOf(results[0]), 1);
+            
+            message.reply(`Removed **${results[0]}** from the queue.`);
         }
-    }
-
-    async awaitMessage(message, videos, queue) {
-        const titles = videos.split("\n").map(s => /\*\*\d+:\*\*\s(.+)/.exec(s)[1]);
-
-        return message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 10000, errors: ["time"] })
-            .then(async c => {
-                if (c.first().content === "cancel") {
-                    message.reply("Canceled").then(m => m.delete({timeout:5000}));
-                    return 0;
-                } else if (c.first().content === "all") {
-                    titles.forEach(v => {
-                        queue.splice(queue.indexOf(v), 1);
-                    });
-                    return titles.length;
-                } else if ((/^\d+$/).test(c.first().content)) {
-                    queue.splice(queue.indexOf(titles[c.first().content - 1]), 1);
-                    return 1;
-                } else {
-                    message.error("Please provide a number, say `all`, or `cancel`.");
-                    return await this.awaitMessage(message, videos);
-                }
-            }).catch(err => message.error("You didn't answer!"));
     }
 };
