@@ -21,7 +21,7 @@ class AudioUtil {
         return new Promise((resolve, reject) => {
             ytdl.getInfo(url, (err, info) => {
                 if (err) return reject(err);
-                return resolve({ title: info.title, length_seconds: info.length_seconds, url });
+                return resolve({ title: info.title, length_seconds: info.length_seconds, url, live_playback: !!info.live_playback });
             });
         });
     }
@@ -34,9 +34,17 @@ class AudioUtil {
         });
     }
 
-    async fetchStream(video) {
-        const audioStream = ytdl(video.url, { filter: "audioonly" });
-        return audioStream;
+    fetchStream(video) {
+        return new Promise((resolve, reject) => {
+            this.validate(video.url).then(() => {
+                const options = {};
+                
+                if (video.live_playback) Object.assign(options, { filter: "audioonly"});
+                
+                const audioStream = ytdl(video.url, options);
+                return resolve(audioStream);
+            }).catch(reject);
+        });
     }
 
     async fetchPlaylist(message, id) {
