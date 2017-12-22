@@ -46,7 +46,7 @@ module.exports = class extends Command {
             } else if ((/^\d+$/).test(m.content)) {
                 queue.splice(queue.indexOf(results[m.content - 1]), 1);
                 
-                message.reply(`Removed **${results[0]}** videos from the queue.`);
+                message.reply(`Removed **${results[0].title}** videos from the queue.`);
             } else {
                 return message.error("Please provide a number, say `all`, or `cancel`.");
             }
