@@ -30,7 +30,9 @@ module.exports = class extends Command {
 
             message.send(`Multiple videos were found that matched your query. Type \`cancel\` to cancel or \`all\` to remove all. Otherwise, select from the videos listed below:\n\n${videos}`);
             
-            const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 10000, errors: ["time"] }).catch(err => { return message.error("No response was given."); });
+            const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 10000, errors: ["time"] });
+            if (!messages) return message.error("No response was given.");
+            
             const m = messages.first();
 
             if (m.content === "cancel") {
