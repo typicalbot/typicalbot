@@ -18,7 +18,7 @@ module.exports = class extends Command {
 
         if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to preform that command.");
 
-        connection.guildStream.destroy();
+        connection.guildStream.end();
 
         message.reply(`Leaving the channel.`);
     }

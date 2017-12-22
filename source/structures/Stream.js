@@ -4,6 +4,8 @@ class Stream {
 
         this.connection = connection;
 
+        this.mode = null;
+
         this.current = null;
 
         this.dispatcher = null;
@@ -31,11 +33,11 @@ class Stream {
             }, 1000);
 
             video.requester.send("The queue has concluded.");
-            this.destroy();
+            this.end();
         });
     }
 
-    destroy() {
+    end() {
         this.queue = [];
         this.connection.disconnect();
         this.client.emit("voiceConnectionUpdate");

@@ -34,13 +34,9 @@ class AudioUtil {
         });
     }
 
-    fetchStream(video) {
-        return new Promise((resolve, reject) => {
-            this.validate(video.url).then(() => {
-                const audioStream = ytdl(video.url, { filter: "audioonly" });
-                return resolve(audioStream);
-            }).catch(reject);
-        });
+    async fetchStream(video) {
+        const audioStream = ytdl(video.url, { filter: "audioonly" });
+        return audioStream;
     }
 
     async fetchPlaylist(message, id) {
