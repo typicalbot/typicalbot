@@ -39,7 +39,7 @@ class AudioUtil {
             this.validate(video.url).then(() => {
                 const options = {};
                 
-                if (video.live_playback) Object.assign(options, { filter: "audioonly"});
+                if (!video.live_playback) Object.assign(options, { filter: "audioonly"});
                 
                 const audioStream = ytdl(video.url, options);
                 return resolve(audioStream);
