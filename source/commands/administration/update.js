@@ -23,6 +23,8 @@ module.exports = class extends Command {
             if (stdout) embed.addField("» STDOUT", stdout.toString().substring(0, 1024));
             if (stderr) embed.addField("» STDERR", stderr.toString().substring(0, 1024));
 
+            embed.send();
+
             if (restart) {
                 message.reply("Are you sure?");
                 
@@ -32,7 +34,7 @@ module.exports = class extends Command {
         
                         if (msg.content.toLowerCase() !== "y" && msg.content.toLowerCase() !== "yes") return message.reply("Canceling.");
 
-                        embed.addField("\u200B", "Restarting now...");
+                        message.reply("Restarting now...");
 
                         exec(`pm2 restart ${
                             this.client.build === "stable" ?
@@ -48,8 +50,6 @@ module.exports = class extends Command {
                         message.error("An answer was not given.");
                     });
             }
-
-            embed.send();
         });
     }
 };
