@@ -20,7 +20,7 @@ class New extends Event {
         } else {
             if (!message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
 
-            const settings = await message.guild.settings || await message.guild.fetchSettings();
+            const settings = message.guild.settings || await message.guild.fetchSettings();
 
             if (this.mentionRegex.test(message.content)) return message.reply(`This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
 
