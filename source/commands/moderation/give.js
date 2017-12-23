@@ -17,7 +17,7 @@ module.exports = class extends Command {
         if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
         if (!role.editable) return message.error(`Insufficient permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give and that I have the Manage Roles permission.`);
 
-        const publicList = message.guildSettings.roles.public;
+        const publicList = message.guild.settings.roles.public;
         if (!publicList.includes(role.id)) return message.error("The requested role isn't on the list of public roles.");
 
         if (!message.member) return message.error("Apparently you don't exist! I'm not too sure what is causing this, but it's an issue with the Discord.JS library. Sorry!");

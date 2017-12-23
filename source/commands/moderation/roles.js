@@ -97,7 +97,7 @@ module.exports = class extends Command {
             const subRole = subArgs[2] ? message.guild.roles.get(subArgs[2]) : subArgs[3] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[3].toLowerCase()) : null;
 
             if (subAction === "list") {
-                const roleList = message.guildSettings.roles.public.filter(r => message.guild.roles.has(r)).map(r => message.guild.roles.get(r));
+                const roleList = message.guild.settings.roles.public.filter(r => message.guild.roles.has(r)).map(r => message.guild.roles.get(r));
                 if (!roleList.length) return message.reply("There are no public roles set up for this server.");
 
                 const content = this.client.functions.pagify(
@@ -111,7 +111,7 @@ module.exports = class extends Command {
 
                 if (!subRole) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                const roleList = message.guildSettings.roles.public.filter(r => message.guild.roles.has(r));
+                const roleList = message.guild.settings.roles.public.filter(r => message.guild.roles.has(r));
 
                 if (roleList.includes(subRole.id)) return message.error("The request role is already in the list of public roles.");
 
@@ -125,7 +125,7 @@ module.exports = class extends Command {
 
                 if (!subRole) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                const roleList = message.guildSettings.roles.public.filter(r => message.guild.roles.has(r));
+                const roleList = message.guild.settings.roles.public.filter(r => message.guild.roles.has(r));
 
                 if (!roleList.includes(subRole.id)) return message.error("The request role isn't in the list of public roles.");
 

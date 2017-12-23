@@ -27,7 +27,7 @@ module.exports = class extends Command {
                 this.client.audioManager.stream(message, videoInfo).catch(err => message.error(err.stack || err));
             }).catch(err => message.error(`Information cannot be fetched from that song. Please try another url.`));
         } else {
-            this.client.audioUtility.search(message.guildSettings, match[1]).then(results => {
+            this.client.audioUtility.search(message.guild.settings, match[1]).then(results => {
                 if (!results.length) return message.reply(`No results were found for the query **${match[1]}**.`);
                 const video = results[0];
 

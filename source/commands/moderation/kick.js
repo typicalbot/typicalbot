@@ -28,7 +28,7 @@ module.exports = class extends Command {
             embed.send().catch(err => { return; });
             
             member.kick().then(async actioned => {
-                if (message.guildSettings.logs.moderation) {
+                if (message.guild.settings.logs.moderation) {
                     const log = { "action": "kick", "user": member.user, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
 

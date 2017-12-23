@@ -7,7 +7,7 @@ module.exports = class {
 
     inviteCheck(message) {
         return new Promise((resolve, reject) => {
-            if (message.guildSettings.automod.invite) {
+            if (message.guild.settings.automod.invite) {
                 const contentMatch = this.client.functions.inviteCheck(message.content);
                 const embedMatch = this.client.functions.inviteCheck(inspect(message.embeds, { depth: 4 }));
 

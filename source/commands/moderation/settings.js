@@ -62,112 +62,112 @@ module.exports = class extends Command {
         } else if (action === "view") {
             if (setting) {
                 if (setting === "embed") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.embed ? "Enabled" : "Disabled"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.embed ? "Enabled" : "Disabled"}`);
                 } else if (setting === "adminrole") {
-                    const rawList = message.guildSettings.roles.administrator;
+                    const rawList = message.guild.settings.roles.administrator;
                     const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
 
                     if (!list.length) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${list.join(", ")}`);
                 } else if (setting === "modrole") {
-                    const rawList = message.guildSettings.roles.moderator;
+                    const rawList = message.guild.settings.roles.moderator;
                     const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
 
                     if (!list.length) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${list.join(", ")}`);
                 } else if (setting === "djrole") {
-                    const rawList = message.guildSettings.roles.dj;
+                    const rawList = message.guild.settings.roles.dj;
                     const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
 
                     if (!list.length) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${list.join(", ")}`);
                 } else if (setting === "blacklistrole") {
-                    const rawList = message.guildSettings.roles.blacklist;
+                    const rawList = message.guild.settings.roles.blacklist;
                     const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
 
                     if (!list.length) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${list.join(", ")}`);
                 } else if (setting === "autorole") {
-                    const role = message.guild.roles.get(message.guildSettings.auto.role.id);
+                    const role = message.guild.roles.get(message.guild.settings.auto.role.id);
 
                     if (!role) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${role.name}`);
                 } else if (setting === "autoroledelay") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.auto.role.delay ? `${message.guildSettings.auto.role.delay}ms` : "Default"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.auto.role.delay ? `${message.guild.settings.auto.role.delay}ms` : "Default"}`);
                 } else if (setting === "autorolesilent") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.auto.role.silent ? "Enabled" : "Disabled"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.auto.role.silent ? "Enabled" : "Disabled"}`);
                 } else if (setting === "announcements") {
-                    const channel = message.guild.channels.get(message.guildSettings.announcements.id);
+                    const channel = message.guild.channels.get(message.guild.settings.announcements.id);
 
                     if (!channel) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${channel.toString()}`);
                 } else if (setting === "announcements-mention" || setting === "ann-mention") {
-                    const role = message.guild.roles.get(message.guildSettings.announcements.mention);
+                    const role = message.guild.roles.get(message.guild.settings.announcements.mention);
 
                     if (!role) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${role.name}`);
                 } else if (setting === "logs") {
-                    const channel = message.guild.channels.get(message.guildSettings.logs.id);
+                    const channel = message.guild.channels.get(message.guild.settings.logs.id);
 
                     if (!channel) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${channel.toString()}`);
                 } else if (setting === "logs-join") {
-                    const log = message.guildSettings.logs.join;
+                    const log = message.guild.settings.logs.join;
                     const disabled = log === "--disabled", embed = log === "--embed";
                     const logText = !log ? "Default" : disabled ? "Disabled" : embed ? "Embed" : `\`\`\`txt\n${log}\n\`\`\``;
 
                     message.reply(`**__Current Value:__** ${logText}`);
                 } else if (setting === "logs-leave") {
-                    const log = message.guildSettings.logs.leave;
+                    const log = message.guild.settings.logs.leave;
                     const disabled = log === "--disabled", embed = log === "--embed";
                     const logText = !log ? "Default" : disabled ? "Disabled" : embed ? "Embed" : `\`\`\`txt\n${log}\n\`\`\``;
 
                     message.reply(`**__Current Value:__** ${logText}`);
                 } else if (setting === "logs-ban") {
-                    const log = message.guildSettings.logs.ban;
+                    const log = message.guild.settings.logs.ban;
                     const disabled = log === "--disabled", embed = log === "--embed";
                     const logText = !log ? "Default" : disabled ? "Disabled" : embed ? "Embed" : `\`\`\`txt\n${log}\n\`\`\``;
 
                     message.reply(`**__Current Value:__** ${logText}`);
                 } else if (setting === "logs-unban") {
-                    const log = message.guildSettings.logs.unban;
+                    const log = message.guild.settings.logs.unban;
                     const disabled = log === "--disabled", embed = log === "--embed";
                     const logText = !log ? "Default" : disabled ? "Disabled" : embed ? "Embed" : `\`\`\`txt\n${log}\n\`\`\``;
 
                     message.reply(`**__Current Value:__** ${logText}`);
                 } else if (setting === "logs-nickname") {
-                    const log = message.guildSettings.logs.nickname;
+                    const log = message.guild.settings.logs.nickname;
                     const enabled = log === "--enabled";
                     const logText = enabled ? "Default" : !log ? "Disabled" : `\`\`\`txt\n${log}\n\`\`\``;
 
                     message.reply(`**__Current Value:__** ${logText}`);
                 } else if (setting === "logs-invite") {
-                    const log = message.guildSettings.logs.invite;
+                    const log = message.guild.settings.logs.invite;
                     const enabled = log === "--enabled";
                     const logText = enabled ? "Default" : !log ? "Disabled" : `\`\`\`txt\n${log}\n\`\`\``;
 
                     message.reply(`**__Current Value:__** ${logText}`);
                 } else if (setting === "modlogs" || setting === "logs-moderation") {
-                    const channel = message.guild.channels.get(message.guildSettings.logs.moderation);
+                    const channel = message.guild.channels.get(message.guild.settings.logs.moderation);
 
                     if (!channel) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${channel.toString()}`);
                 } else if (setting === "modlogs-purge") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.prefix.default ? "Enabled" : "Disabled"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.prefix.default ? "Enabled" : "Disabled"}`);
                 } else if (setting === "automessage") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.auto.message ? `\`\`\`txt\n${message.guildSettings.auto.message}\n\`\`\`` : "None"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.auto.message ? `\`\`\`txt\n${message.guild.settings.auto.message}\n\`\`\`` : "None"}`);
                 } else if (setting === "autonickname") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.auto.nickname ? `\`\`\`txt\n${message.guildSettings.auto.nickname}\n\`\`\`` : "None"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.auto.nickname ? `\`\`\`txt\n${message.guild.settings.auto.nickname}\n\`\`\`` : "None"}`);
                 } else if (setting === "mode") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.mode}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.mode}`);
                 } else if (setting === "customprefix") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.prefix.custom ? message.guildSettings.prefix.custom : "None"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.prefix.custom ? message.guild.settings.prefix.custom : "None"}`);
                 } else if (setting === "defaultprefix") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.prefix.default ? "Enabled" : "Disabled"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.prefix.default ? "Enabled" : "Disabled"}`);
                 } else if (setting === "antiinvite") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.automod.invite ? "Enabled" : "Disabled"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.automod.invite ? "Enabled" : "Disabled"}`);
                 } else if (setting === "nonickname") {
-                    message.reply(`**__Current Value:__** ${message.guildSettings.nonickname ? "Enabled" : "Disabled"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.nonickname ? "Enabled" : "Disabled"}`);
                 } else {
                     message.error("The requested setting doesn't exist");
                 }
@@ -195,7 +195,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (currentList.includes(role.id)) return message.error("The specified role is already included in the list of roles for the administrator permission level.");
 
                                 currentList.push(role.id);
@@ -207,7 +207,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (!currentList.includes(role.id)) return message.error("The specified role is not included in of list of roles for the administrator permission level.");
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -234,7 +234,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guildSettings.roles.moderator;
+                                const currentList = message.guild.settings.roles.moderator;
                                 if (currentList.includes(role.id)) return message.error("The specified role is already included in the list of roles for the administrator permission level.");
 
                                 currentList.push(role.id);
@@ -247,7 +247,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guildSettings.roles.moderator;
+                                const currentList = message.guild.settings.roles.moderator;
                                 if (!currentList.includes(role.id)) return message.error("The specified role is not included in of list of roles for the administrator permission level.");
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -274,7 +274,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guildSettings.roles.dj;
+                                const currentList = message.guild.settings.roles.dj;
                                 if (currentList.includes(role.id)) return message.error("The specified role is already included in the list of roles for the administrator permission level.");
 
                                 currentList.push(role.id);
@@ -286,7 +286,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guildSettings.roles.dj;
+                                const currentList = message.guild.settings.roles.dj;
                                 if (!currentList.includes(role.id)) return message.error("The specified role is not included in of list of roles for the administrator permission level.");
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -313,7 +313,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guildSettings.roles.blacklist;
+                                const currentList = message.guild.settings.roles.blacklist;
                                 if (currentList.includes(role.id)) return message.error("The specified role is already included in the list of roles for the administrator permission level.");
 
                                 currentList.push(role.id);
@@ -325,7 +325,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                                const currentList = message.guildSettings.roles.blacklist;
+                                const currentList = message.guild.settings.roles.blacklist;
                                 if (!currentList.includes(role.id)) return message.error("The specified role is not included in of list of roles for the administrator permission level.");
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -418,8 +418,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { logs: { id: channel.id } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-join") {
-                    if (!message.guildSettings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
-
+                    if (!message.guild.settings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { logs: { join: "--disabled" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "default" || value === "enable") {
@@ -430,7 +429,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { logs: { join: value } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-leave") {
-                    if (!message.guildSettings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
+                    if (!message.guild.settings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { logs: { leave: "--disabled" } }).then(() => message.success("Setting successfully updated."));
@@ -442,7 +441,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { logs: { leave: value } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-ban") {
-                    if (!message.guildSettings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
+                    if (!message.guild.settings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { logs: { ban: "--disabled" } }).then(() => message.success("Setting successfully updated."));
@@ -454,7 +453,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { logs: { ban: value } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-unban") {
-                    if (!message.guildSettings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
+                    if (!message.guild.settings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { logs: { unban: "--disabled" } }).then(() => message.success("Setting successfully updated."));
@@ -466,7 +465,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { logs: { unban: value } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-nickname") {
-                    if (!message.guildSettings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
+                    if (!message.guild.settings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { logs: { nickname: null } }).then(() => message.success("Setting successfully updated."));
@@ -478,7 +477,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { logs: { nickname: value } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else if (setting === "logs-invite") {
-                    if (!message.guildSettings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
+                    if (!message.guild.settings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
 
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { logs: { invite: null } }).then(() => message.success("Setting successfully updated."));
@@ -537,7 +536,7 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "customprefix") {
                     if (value === "disable") {
-                        if (!message.guildSettings.prefix.default) this.client.settings.update(message.guild.id, { prefix: { default: true } });
+                        if (!message.guild.settings.prefix.default) this.client.settings.update(message.guild.id, { prefix: { default: true } });
 
                         this.client.settings.update(message.guild.id, { prefix: { custom: null } }).then(() => message.success("Setting successfully updated."));
                     } else {
@@ -547,7 +546,7 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "defaultprefix") {
                     if (value === "disable") {
-                        if (!message.guildSettings.prefix.custom) return message.error("You must have a custom prefix set up to disable this.");
+                        if (!message.guild.settings.prefix.custom) return message.error("You must have a custom prefix set up to disable this.");
 
                         this.client.settings.update(message.guild.id, { prefix: { default: false } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "enable") {
@@ -674,7 +673,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.push(role.id);
@@ -696,7 +695,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -749,7 +748,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.push(role.id);
@@ -771,7 +770,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -824,7 +823,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.push(role.id);
@@ -846,7 +845,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
@@ -899,7 +898,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.push(role.id);
@@ -921,7 +920,7 @@ module.exports = class extends Command {
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                                 if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
-                                const currentList = message.guildSettings.roles.administrator;
+                                const currentList = message.guild.settings.roles.administrator;
                                 if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));

@@ -14,7 +14,7 @@ module.exports = class extends Command {
         const match = /(.+)/i.exec(parameters);
         if (!match) return message.error(this.client.functions.error("usage", this));
 
-        this.client.audioUtility.search(message.guildSettings, match[1]).then(results => {
+        this.client.audioUtility.search(message.guild.settings, match[1]).then(results => {
             if (!results.length) return message.reply(`No results were found for the query **${match[1]}**.`);
             const video = results[0];
 
