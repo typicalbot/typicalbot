@@ -9,7 +9,7 @@ Object.defineProperty(Guild.prototype, 'settings', {
 });
 
 Guild.prototype.fetchSettings = async function() { 
-    return this.client.settings.fetch(this.guild.id).then(settings => { 
+    return this.client.settings.fetch(this.id).then(settings => { 
         return settings; 
     }).catch(err => { 
         throw err; 
