@@ -127,7 +127,7 @@ class TypicalBot extends Client {
             FunctionStore = require("./stores/Functions");
             this.functions = new FunctionStore(this);
         } else if (mod === "events") {
-            this.client.events.forEach(e => this.client.removeAllListeners(e.name));
+            this.events.forEach(e => this.client.removeAllListeners(e.name));
             this.events.reload();
             
             delete require.cache[`${__dirname}/stores/Events.js`];
