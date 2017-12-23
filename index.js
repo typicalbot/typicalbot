@@ -5,7 +5,6 @@ const { Collection } = require("discord.js");
 const API = require("./ipc/app");
 
 const build = require("./build");
-console.log(build);
 const config = require(`./configs/${build}`);
 
 const SHARD_COUNT   = config.shards;
