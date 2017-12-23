@@ -21,7 +21,7 @@ class New extends Event {
             .setColor(0x3EA7ED)
             .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
             .setDescription(this.client.functions.lengthen(-1, message.content, 100))
-            .setFooter(`Message Deleted in #${channel.name} (${channel.id})`)
+            .setFooter(`Message Deleted in #${message.channel.name} (${message.channel.id})`)
             .setTimestamp()
             .send()
             .catch(() => { return; });

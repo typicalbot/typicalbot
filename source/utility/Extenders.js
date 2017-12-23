@@ -1,6 +1,16 @@
 require.extensions['.txt'] = function (module, filename) { module.exports = require("fs").readFileSync(filename, 'utf8'); };
 
-const { MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
+const { Guild, MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
+
+Guild.prototype.fetchSettings = async function() {
+    return this.client.settings.fetch(this.id).then(settings => {
+        Object.defineProperty(this, "settings", { value: settings });
+        
+        return settings;
+    }).catch(err => {
+        throw err;
+    });
+};
 
 MessageEmbed.prototype.send = function(content) {
     if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel");

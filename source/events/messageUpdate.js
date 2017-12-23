@@ -11,7 +11,7 @@ class New extends Event {
 
         message.guild.settings = await this.client.settings.fetch(message.guild.id);
 
-        const userPermissions = this.client.permissionsManager.get(message.guild, message.author);
+        const userPermissions = this.client.permissions.fetch(message.guild, message.author);
         if (userPermissions.level >= 2) return;
 
         this.client.automod.inviteCheck(message).then(() => { return message.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);

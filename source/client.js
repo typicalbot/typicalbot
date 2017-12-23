@@ -32,7 +32,7 @@ class TypicalBot extends Client {
 
         this.processManager = new ProcessManager(this);
         this.database = new Database();
-        this.permissionsManager = new PermissionsManager(this);
+        this.permissions = new PermissionsManager(this);
         this.modlogsManager = new ModlogsManager(this);
         this.audioManager = new AudioManager(this);
 

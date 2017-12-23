@@ -8,7 +8,7 @@ class New extends Function {
     execute(guild) {
         const owner = guild.owner ? guild.owner.user : guild.member(guild.ownerID).user;
 
-        const permissionLevel = this.client.permissionsManager.get(guild, owner);
+        const permissionLevel = this.client.permissions.fetch(guild, owner);
 
         if (permissionLevel.level > 5) return { "level": 3, "title": "TypicalBot Staff" };
 

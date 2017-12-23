@@ -14,7 +14,7 @@ module.exports = class extends Command {
         const args = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
+        const actualUserPermissions = this.client.permissions.fetch(message.guild, message.author, true);
 
         const subcommand = args[1], args2 = args[2];
 

@@ -23,12 +23,12 @@ module.exports = class extends Command {
         } else if (action === "add") {
             if (!command || !alias) return message.error(this.client.functions.error("usage", this));
 
-            const cmd = await this.client.commands.get(command);
+            const cmd = await this.client.commands.fetch(command);
             if (!cmd) return message.error(`The provided command doesn't exist.`);
 
             const aliasList = message.guild.settings.aliases;
             const aliasListF = message.guild.settings.aliases.map(a => a.alias);
-            if (aliasListF.includes(alias)) return message.error(`The given alias already points to the \`${(await this.client.commands.get(aliasList[aliasListF.indexOf(alias)].command)).name}\` command.`);
+            if (aliasListF.includes(alias)) return message.error(`The given alias already points to the \`${(await this.client.commands.fetch(aliasList[aliasListF.indexOf(alias)].command)).name}\` command.`);
 
             if (alias.length > 10) return message.error("You cannot create an alias longer than 10 characters.");
 

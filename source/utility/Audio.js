@@ -89,7 +89,7 @@ class AudioUtil {
     }
 
     hasPermissions(message, command) {
-        const userTrueLevel = this.client.permissionsManager.get(message.guild, message.author, true);
+        const userTrueLevel = this.client.permissions.fetch(message.guild, message.author, true);
 
         const permissionCheck = this.permissionCheck(message, command, userTrueLevel);
         if (permissionCheck.has) { return true; } else {
