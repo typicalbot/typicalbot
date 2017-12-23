@@ -9,7 +9,7 @@ class New extends Event {
         if (message.author.bot) return;
         if (message.channel.type !== "text") return;
 
-        message.guildSettings = await this.client.settings.fetch(message.guild.id);
+        const settings = await message.fetchSettings().catch(err => this.client.log(err, true)); message.guild.settings = settings
 
         const userPermissions = this.client.permissions.fetch(message.guild, message.author);
         if (userPermissions.level >= 2) return;
