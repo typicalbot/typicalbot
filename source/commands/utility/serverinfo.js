@@ -63,7 +63,7 @@ module.exports = class extends Command {
 
 
 /*
-let embed = message.guildSettings.embed === "Y";
+let embed = message.guild.settings.embed === "Y";
 let after = message.content.split(" ")[1];
 
 let owner = message.guild.owner ? message.guild.owner : message.guild.member(message.guild.ownerID);

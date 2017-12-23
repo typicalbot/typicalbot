@@ -28,7 +28,7 @@ module.exports = class extends Command {
             member.ban({ days }).then(actioned => {
                 setTimeout(() => {
                     message.guild.unban(actioned.id).then(async () => {
-                        if (message.guildSettings.logs.moderation) {
+                        if (message.guild.settings.logs.moderation) {
                             const log = { "action": "softban", "user": actioned.user, "moderator": message.author };
                             if (reason) Object.assign(log, { reason });
 
