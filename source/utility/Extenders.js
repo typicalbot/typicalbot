@@ -6,7 +6,7 @@ Message.prototype.fetchSettings = async function() {
     if (!this.guild) throw "Message doesn't belong to a guild.";
     
     return this.client.settings.fetch(this.guild.id).then(settings => {
-        Object.defineProperty(this, "guildSettings", { value: settings });
+        this.guildSettings = settings;
         
         return settings;
     }).catch(err => {
