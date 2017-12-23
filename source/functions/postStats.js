@@ -10,11 +10,11 @@ class New extends Function {
         if (provider === "a" || provider === "c") {
             request.post("https://www.carbonitex.net/discord/data/botdata.php")
                 .set("Content-Type", "application/json")
-                .set("key", this.client.config.carbonkey)
                 .send({
                     "shardid": this.client.shardID.toString(),
                     "shardcount": this.client.shardCount.toString(),
-                    "servercount": this.client.guilds.size.toString()
+                    "servercount": this.client.guilds.size.toString(),
+                    "key": this.client.config.carbonkey
                 })
                 .end((err, res) => {
                     if (err || res.statusCode != 200) this.client.log(`Carbinitex Stats Transfer Failed ${err.body || err}`, true);

@@ -24,7 +24,7 @@ TextChannel.prototype.buildEmbed = User.prototype.buildEmbed = DMChannel.prototy
 };
 
 Message.prototype.send = function(content, embed, options = {}) {
-    if (embed) Object.defineProperty(options, "embed", { value: embed });
+    if (embed) Object.assign(options, { embed });
     
     return this.channel.send(content, options);
 };
@@ -46,7 +46,7 @@ Message.prototype.error = function(content, embed, options = {}) {
 };
 
 Message.prototype.dm = function(content, embed, options = {}) {
-    if (embed) Object.defineProperty(options, { embed });
+    if (embed) Object.assign(options, { embed });
     
     this.author.send(content, options);
 };
