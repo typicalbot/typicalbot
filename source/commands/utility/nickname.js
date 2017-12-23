@@ -25,7 +25,7 @@ module.exports = class extends Command {
                 .then(() => message.reply(`Successfully ${reset ? "reset" : "changed"} member's nickname.`))
                 .catch(err => message.error("An error occured. This most likely means I cannot manage member's nickname."));
         } else {
-            if (message.guild.settings.nonickname) return message.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
+            if (message.guildSettings.nonickname) return message.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
 
             message.member.setNickname(reset ? "" : nickname)
                 .then(() => message.reply(`Successfully ${reset ? "reset" : "changed"} your nickname.`))

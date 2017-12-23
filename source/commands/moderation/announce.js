@@ -16,10 +16,10 @@ module.exports = class extends Command {
 
         const embed = args[1], content = args[2];
 
-        const toChannel = message.guild.channels.get(message.guild.settings.announcements.id);
+        const toChannel = message.guild.channels.get(message.guildSettings.announcements.id);
         if (!toChannel) return message.error(`There is not an announcements channel set up.`);
 
-        const mentionRole = message.guild.roles.get(message.guild.settings.announcements.mention);
+        const mentionRole = message.guild.roles.get(message.guildSettings.announcements.mention);
 
         embed ?
             toChannel.buildEmbed(mentionRole ? mentionRole.toString() : "").setColor(0x00adff).setTitle(`Announcement`).setDescription(content).setFooter(message.author.tag, message.author.avatarURL() || null).send(`${mentionRole ? mentionRole.toString() : ""}`) :

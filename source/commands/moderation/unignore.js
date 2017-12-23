@@ -16,10 +16,10 @@ module.exports = class extends Command {
 
         const commands = args[1] === "commands", invites = args[1] === "invites";
 
-        if (commands && !message.guild.settings.ignored.commands.includes(message.channel.id)) return message.error("This channel isn't ignoring commands.");
-        if (invites && !message.guild.settings.ignored.invites.includes(message.channel.id)) return message.error("This channel isn't ignoring invites.");
+        if (commands && !message.guildSettings.ignored.commands.includes(message.channel.id)) return message.error("This channel isn't ignoring commands.");
+        if (invites && !message.guildSettings.ignored.invites.includes(message.channel.id)) return message.error("This channel isn't ignoring invites.");
 
-        const newArray = message.guild.settings.ignored[commands ? "commands" : "invites"];
+        const newArray = message.guildSettings.ignored[commands ? "commands" : "invites"];
         newArray.splice(newArray.indexOf(message.channel.id), 1);
 
         this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray }}).then(() => message.success(`Now listening to ${commands ? "commands" : "invites"}.`));

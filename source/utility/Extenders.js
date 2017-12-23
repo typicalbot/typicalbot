@@ -2,9 +2,9 @@ require.extensions['.txt'] = function (module, filename) { module.exports = requ
 
 const { Guild, MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
 
-Guild.prototype.fetchSettings = async function() {
-    return this.client.settings.fetch(this.id).then(settings => {
-        Object.defineProperty(this, "settings", { value: settings });
+Message.prototype.fetchSettings = async function() {
+    return this.client.settings.fetch(this.guild.id).then(settings => {
+        Object.defineProperty(this, "guildSettings", { value: settings });
         
         return settings;
     }).catch(err => {

@@ -46,7 +46,7 @@ module.exports = class extends Command {
 
         if (channelFilter) return channelFilter.bulkDelete(messages, true)
             .then(async msgs => {
-                if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
+                if (message.guildSettings.logs.moderation && message.guildSettings.logs.purge) {
                     const log = { "action": "purge", "user": channelFilter, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
         
@@ -61,7 +61,7 @@ module.exports = class extends Command {
 
         message.channel.bulkDelete(messages, true)
             .then(async msgs => {
-                if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
+                if (message.guildSettings.logs.moderation && message.guildSettings.logs.purge) {
                     const log = { "action": "purge", "user": message.channel, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
         

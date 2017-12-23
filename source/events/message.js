@@ -26,9 +26,7 @@ class New extends Event {
 
             const userPermissions = this.client.permissions.fetch(message.guild, message.author);
             if (userPermissions.level === -1) return;
-
             if (userPermissions.level < 2 && !settings.ignored.invites.includes(message.channel.id)) this.client.automod.inviteCheck(message);
-
             if (userPermissions.level < 2 && settings.ignored.commands.includes(message.channel.id)) return;
 
             const split = message.content.split(" ")[0];
