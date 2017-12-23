@@ -18,14 +18,14 @@ module.exports = class extends Command {
         const reset = !nickname || nickname === "reset";
 
         if (member) {
-            const actualUserPermissions = this.client.permissionsManager.get(message.guild, message.author, true);
+            const actualUserPermissions = this.client.permissions.fetch(message.guild, message.author, true);
             if (actualUserPermissions.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, actualUserPermissions));
 
             member.setNickname(reset ? "" : nickname)
                 .then(() => message.reply(`Successfully ${reset ? "reset" : "changed"} member's nickname.`))
                 .catch(err => message.error("An error occured. This most likely means I cannot manage member's nickname."));
         } else {
-            if (message.guild.settings.nonickname) return message.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
+            if (message.guildSettings.nonickname) return message.error(`This command is currently disabled. Disable the \`nonickname\` setting to enable this command.`);
 
             message.member.setNickname(reset ? "" : nickname)
                 .then(() => message.reply(`Successfully ${reset ? "reset" : "changed"} your nickname.`))

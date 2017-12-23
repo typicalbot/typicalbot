@@ -6,7 +6,7 @@ class Store extends Collection {
     constructor(client, type, dir) {
         super();
 
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
 
         this.type = type;
 

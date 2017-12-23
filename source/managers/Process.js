@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class {
-    constructor(client) { this.client = client; }
+    constructor(client) { Object.defineProperty(this, "client", { value: client }); }
 
     async message(message) {
         const { type, data } = message;
@@ -55,7 +55,7 @@ module.exports = class {
 
             guild.settings = await this.client.settings.fetch(data.guild);
 
-            const permissions = this.client.permissionsManager.get(guild, data.user);
+            const permissions = this.client.permissions.fetch(guild, data.user);
 
             this.client.transmit("masterrequest", {
                 id: data.id,

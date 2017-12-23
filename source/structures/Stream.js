@@ -1,6 +1,6 @@
 class Stream {
     constructor(client, connection) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
 
         this.connection = connection;
 

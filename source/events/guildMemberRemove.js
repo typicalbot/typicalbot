@@ -2,8 +2,8 @@ const Event = require("../structures/Event");
 const { Collection } = require("discord.js");
 
 class New extends Event {
-    constructor(client, name) {
-        super(client, name);
+    constructor(...args) {
+        super(...args);
     }
 
     async execute(member) {

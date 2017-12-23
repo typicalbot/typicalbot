@@ -23,8 +23,8 @@ class TypicalBot extends Client {
     constructor() {
         super(config.clientOptions);
 
-        this.build = build;
-        this.config = config;
+        Object.defineProperty(this, "build", { value: build });
+        Object.defineProperty(this, "config", { value: config });
 
         this.shardID = Number(process.env.SHARD_ID);
         this.shardNumber = Number(process.env.SHARD_ID) + 1;
@@ -32,7 +32,7 @@ class TypicalBot extends Client {
 
         this.processManager = new ProcessManager(this);
         this.database = new Database();
-        this.permissionsManager = new PermissionsManager(this);
+        this.permissions = new PermissionsManager(this);
         this.modlogsManager = new ModlogsManager(this);
         this.audioManager = new AudioManager(this);
 
@@ -127,6 +127,9 @@ class TypicalBot extends Client {
             FunctionStore = require("./stores/Functions");
             this.functions = new FunctionStore(this);
         } else if (mod === "events") {
+            this.events.forEach(e => this.removeAllListeners(e.name));
+            this.events.reload();
+            
             delete require.cache[`${__dirname}/stores/Events.js`];
             EventStore = require("./stores/Events");
             this.events = new EventStore(this);

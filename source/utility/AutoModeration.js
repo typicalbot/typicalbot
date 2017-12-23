@@ -2,12 +2,12 @@ const { inspect } = require("util");
 
 module.exports = class {
     constructor(client) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
     }
 
     inviteCheck(message) {
         return new Promise((resolve, reject) => {
-            if (message.guild.settings.automod.invite) {
+            if (message.guildSettings.automod.invite) {
                 const contentMatch = this.client.functions.inviteCheck(message.content);
                 const embedMatch = this.client.functions.inviteCheck(inspect(message.embeds, { depth: 4 }));
 

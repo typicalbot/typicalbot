@@ -1,6 +1,18 @@
 require.extensions['.txt'] = function (module, filename) { module.exports = require("fs").readFileSync(filename, 'utf8'); };
 
-const { MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
+const { Guild, MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
+
+Message.prototype.fetchSettings = async function() {
+    if (!this.guild) throw "Message doesn't belong to a guild.";
+    
+    return this.client.settings.fetch(this.guild.id).then(settings => {
+        Object.defineProperty(this, "guildSettings", { value: settings });
+        
+        return settings;
+    }).catch(err => {
+        throw err;
+    });
+};
 
 MessageEmbed.prototype.send = function(content) {
     if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel");
@@ -12,7 +24,7 @@ TextChannel.prototype.buildEmbed = User.prototype.buildEmbed = DMChannel.prototy
 };
 
 Message.prototype.send = function(content, embed, options = {}) {
-    if (embed) Object.defineProperty(options, "embed", { value: embed });
+    if (embed) Object.assign(options, { embed });
     
     return this.channel.send(content, options);
 };
@@ -34,7 +46,7 @@ Message.prototype.error = function(content, embed, options = {}) {
 };
 
 Message.prototype.dm = function(content, embed, options = {}) {
-    if (embed) Object.defineProperty(options, { embed });
+    if (embed) Object.assign(options, { embed });
     
     this.author.send(content, options);
 };

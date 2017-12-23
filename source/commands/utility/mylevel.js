@@ -13,8 +13,8 @@ module.exports = class extends Command {
         const split = message.content.split(" ")[1];
 
         const permission = split && split === "--here" ?
-            this.client.permissionsManager.get(message.guild, message.author, true) :
-            this.client.permissionsManager.get(message.guild, message.author);
+            this.client.permissions.fetch(message.guild, message.author, true) :
+            this.client.permissions.fetch(message.guild, message.author);
 
         message.reply(`**__Your Permission Level:__** ${permission.level} | ${permission.title}`);
     }
@@ -23,8 +23,8 @@ module.exports = class extends Command {
         const split = message.content.split(" ")[1];
 
         const permission = split && split === "--here" ?
-            this.client.permissionsManager.get(message.guild, message.author, true) :
-            this.client.permissionsManager.get(message.guild, message.author);
+            this.client.permissions.fetch(message.guild, message.author, true) :
+            this.client.permissions.fetch(message.guild, message.author);
 
         message.buildEmbed()
             .setColor(0x00adff)

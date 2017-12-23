@@ -10,11 +10,11 @@ const TBYT = new YAPI(apiKey);
 
 class AudioUtil {
     constructor(client) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
     }
 
     withinLimit(message, video) {
-        return video.length_seconds <= (message.guild.settings.music.timelimit || 1800) ? true : false;
+        return video.length_seconds <= (message.guildSettings.music.timelimit || 1800) ? true : false;
     }
 
     fetchInfo(url) {
@@ -49,7 +49,7 @@ class AudioUtil {
 
     async fetchPlaylist(message, id) {
         const t = Date.now();
-        const YT = message.guild.settings.music.apikey ? new YAPI(message.guild.settings.music.apikey) : TBYT;
+        const YT = message.guildSettings.music.apikey ? new YAPI(message.guildSettings.music.apikey) : TBYT;
 
         const playlist = await YT.getPlaylistByID(id).catch(err => { throw err; });
         const videos = await playlist.getVideos().catch(err => { throw err; });
@@ -81,15 +81,15 @@ class AudioUtil {
     permissionCheck(message, command, permissions) {
         const level = permissions.level;
 
-        const musicperms = message.guild.settings.music.default;
-        const override = message.guild.settings.music[`${command.name}`];
+        const musicperms = message.guildSettings.music.default;
+        const override = message.guildSettings.music[`${command.name}`];
         if (override === "off") if (musicperms === "all" || musicperms === "dj" && level >= 1 || musicperms === "moderator" && level >= 2 || musicperms === "administrator" && level >= 3) return { has: true };
         if (override === "all" || override === "dj" && level >= 1 || override === "moderator" && level >= 2 || override === "administrator" && level >= 3) return { has: true };
         return { has: false, req: override === "off" ? musicperms : override };
     }
 
     hasPermissions(message, command) {
-        const userTrueLevel = this.client.permissionsManager.get(message.guild, message.author, true);
+        const userTrueLevel = this.client.permissions.fetch(message.guild, message.author, true);
 
         const permissionCheck = this.permissionCheck(message, command, userTrueLevel);
         if (permissionCheck.has) { return true; } else {

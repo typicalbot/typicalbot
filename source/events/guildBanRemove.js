@@ -1,8 +1,8 @@
 const Event = require("../structures/Event");
 
 class New extends Event {
-    constructor(client, name) {
-        super(client, name);
+    constructor(...args) {
+        super(...args);
     }
 
     async execute(guild, user) {

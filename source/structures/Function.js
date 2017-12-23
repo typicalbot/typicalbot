@@ -1,6 +1,6 @@
 class Function {
     constructor(client, name) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
 
         this.name = name;
 
