@@ -26,7 +26,7 @@ const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*(?:User|Channel):\*\
 
 module.exports = class {
     constructor(client) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
     }
 
     caseMatch(message) {

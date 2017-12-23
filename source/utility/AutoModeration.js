@@ -2,7 +2,7 @@ const { inspect } = require("util");
 
 module.exports = class {
     constructor(client) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
     }
 
     inviteCheck(message) {

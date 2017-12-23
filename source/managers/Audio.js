@@ -2,7 +2,7 @@ const Stream = require("../structures/Stream");
 
 module.exports = class {
     constructor(client) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
     }
 
     async connect(message) {

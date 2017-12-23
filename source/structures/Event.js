@@ -1,6 +1,6 @@
 class Event {
     constructor(client, name, path) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
 
         this.name = name;
 

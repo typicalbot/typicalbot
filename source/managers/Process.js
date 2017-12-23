@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class {
-    constructor(client) { this.client = client; }
+    constructor(client) { Object.defineProperty(this, "client", { value: client }); }
 
     async message(message) {
         const { type, data } = message;

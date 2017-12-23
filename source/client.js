@@ -23,8 +23,8 @@ class TypicalBot extends Client {
     constructor() {
         super(config.clientOptions);
 
-        this.build = build;
-        this.config = config;
+        Object.defineProperty(this, "build", { value: build });
+        Object.defineProperty(this, "config", { value: config });
 
         this.shardID = Number(process.env.SHARD_ID);
         this.shardNumber = Number(process.env.SHARD_ID) + 1;

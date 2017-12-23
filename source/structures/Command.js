@@ -1,6 +1,6 @@
 class Command {
     constructor(client, name, path, { description, usage, aliases, dm, permission, mode, access }) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
 
         this.name = name;
 

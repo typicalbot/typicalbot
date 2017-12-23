@@ -3,7 +3,7 @@ const klaw = require("klaw");
 
 class Store {
     constructor(client, type, dir) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
 
         this.type = type;
 

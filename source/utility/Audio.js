@@ -10,7 +10,7 @@ const TBYT = new YAPI(apiKey);
 
 class AudioUtil {
     constructor(client) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
     }
 
     withinLimit(message, video) {

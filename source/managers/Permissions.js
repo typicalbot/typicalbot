@@ -2,7 +2,7 @@ class PermissionLevel { constructor(level, title, check) { this.level = level; t
 
 module.exports = class {
     constructor(client) {
-        this.client = client;
+        Object.defineProperty(this, "client", { value: client });
 
         this.levels = {
 
