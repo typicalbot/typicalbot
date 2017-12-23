@@ -1,8 +1,10 @@
 class Event {
-    constructor(client, name) {
+    constructor(client, name, path) {
         this.client = client;
 
         this.name = name;
+
+        this.path = path;
     }
 }
 

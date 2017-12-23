@@ -14,6 +14,10 @@ class EventStore extends Store {
             });
         });
     }
+
+    reload() {
+        this.forEach(e => delete require.cache[e.path]);
+    }
 }
 
 module.exports = EventStore;
