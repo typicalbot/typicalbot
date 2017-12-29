@@ -22,7 +22,7 @@ module.exports = class extends Command {
 
             this.client.unbanCache.set(user, log);
 
-            message.guild.unban(cachedUser.id).then(actioned => {
+            message.guild.unban(cachedUser.id, { reason: `Unbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(actioned => {
                 message.success(`Successfully unbanned user \`${actioned.tag || actioned}\`.`);
             }).catch(err => {
                 if (err === "Error: Couldn't resolve the user ID to unban.") return message.error(`The requested user could not be found.`);

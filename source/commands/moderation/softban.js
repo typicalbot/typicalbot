@@ -25,9 +25,9 @@ module.exports = class extends Command {
 
             this.client.softbanCache.set(user.id || user, user.id || user);
 
-            member.ban({ days }).then(actioned => {
+            member.ban({ days, reason: `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}` }).then(actioned => {
                 setTimeout(() => {
-                    message.guild.unban(actioned.id).then(async () => {
+                    message.guild.unban(actioned.id, { reason: `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}` }).then(async () => {
                         if (message.guild.settings.logs.moderation) {
                             const log = { "action": "softban", "user": actioned.user, "moderator": message.author };
                             if (reason) Object.assign(log, { reason });

@@ -27,7 +27,7 @@ module.exports = class extends Command {
             if (reason) embed.addField("» Reason", reason);
             embed.send().catch(err => { return; });
             
-            member.kick().then(async actioned => {
+            member.kick(`Banned by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
                     const log = { "action": "kick", "user": member.user, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
