@@ -5,8 +5,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Stop what is currently playing.",
             usage: "stop",
-            mode: "lite",
-            access: 1
+            mode: "lite"
         });
     }
 
