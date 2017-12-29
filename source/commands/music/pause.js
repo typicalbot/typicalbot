@@ -5,8 +5,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Pause the song currently streaming.",
             usage: "pause",
-            mode: "lite",
-            access: 1
+            mode: "lite"
         });
     }
 

@@ -5,8 +5,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Removes a song from the server's queue.",
             usage: "unqueue",
-            mode: "lite",
-            access: 1
+            mode: "lite"
         });
     }
 
