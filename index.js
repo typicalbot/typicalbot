@@ -2,7 +2,7 @@ require.extensions['.txt'] = function (module, filename) { module.exports = requ
 
 const { Collection } = require("discord.js");
 
-const API = require("./ipc/app");
+const IPC = require("./ipc/app");
 
 const build = require("./build");
 const config = require(`./configs/${build}`);
@@ -18,7 +18,7 @@ class ShardingMaster extends Collection {
 
         this.stats = [];
 
-        this.ipc = new API(this);
+        if (build === "stable") this.ipc = new IPC(this);
 
         this.pendingRequests = new Collection();
 
