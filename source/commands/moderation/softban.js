@@ -27,7 +27,7 @@ module.exports = class extends Command {
 
             member.ban({ days, reason: `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}` }).then(actioned => {
                 setTimeout(() => {
-                    message.guild.unban(actioned.id, { reason: `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}` }).then(async () => {
+                    message.guild.unban(actioned.id, `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(async () => {
                         if (message.guild.settings.logs.moderation) {
                             const log = { "action": "softban", "user": actioned.user, "moderator": message.author };
                             if (reason) Object.assign(log, { reason });
