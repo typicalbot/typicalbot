@@ -18,7 +18,7 @@ class ShardingMaster extends Collection {
 
         this.stats = [];
 
-        if (build === "stable") this.ipc = new IPC(this);
+        if (build === "development") this.ipc = new IPC(this);
 
         this.pendingRequests = new Collection();
 
