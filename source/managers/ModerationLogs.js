@@ -19,6 +19,7 @@ const types = {
     tempban: { color: 0xFF0000, action: "Temporary Ban" },
     ban: { color: 0xFF0000, action: "Ban" },
 
+    unmute: { color: 0x006699, action: "Unmute"},
     unban: { color: 0x006699, action: "Unban" }
 };
 
