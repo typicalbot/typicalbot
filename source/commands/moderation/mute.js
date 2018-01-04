@@ -11,10 +11,11 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(parameters);
+        const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)\s*d(?:ays)?)?\s*(?:(\d+)\s*h(?:ours|rs|r)?)?\s*(?:(\d+)\s*m(?:inutes|in)?)?\s*(?:(\d+)\s*s(?:econds|ec)?))?(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const user = args[1], reason = args[2];
+        const user = args[1], days = args[2], hours = args[3], minutes = args[4], seconds = args[5], reason = args[6];
+        const time = ((60 * 60 * 24 * (days ? Number(days) : 0)) + (60 * 60 * (hours ? Number(hours) : 0)) + (60 * (minutes ? Number(minutes) : 0)) + (seconds ? Number(seconds) : 0)) * 1000;
 
         this.client.users.fetch(user).then(async cachedUser => {
             const member = await message.guild.members.fetch(cachedUser);
@@ -33,6 +34,8 @@ module.exports = class extends Command {
                     if (reason) Object.assign(log, { reason });
 
                     await this.client.modlogsManager.createLog(message.guild, log);
+
+                    this.client.timers.get("mutes").create(member, Date.now() + time);
 
                     message.success(`Successfully muted user \`${member.user.tag}\`.`);
                 } else return message.success(`Successfully muted user **${member.user.tag}**.`);
