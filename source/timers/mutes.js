@@ -8,7 +8,8 @@ class New extends Timer {
     }
 
     async create(member, end) {
-        const id = 10e6 + Math.floor(Math.random() * (10e7 - 1));
+        //const id = 10e6 + Math.floor(Math.random() * (10e7 - 1));
+        const id = `${member.guild.id}:${member.id}`;
         const newData = { id, end, "guild": member.guild.id, "member": member.id };
 
         await this.client.database.insert("mutes", newData);
@@ -21,6 +22,12 @@ class New extends Timer {
         await this.client.database.delete("mutes", id);
         super.delete(id);
 
+        return;
+    }
+
+    async clear(member) {
+        if (this.has(`${member.guild.id}:${member.id}`)) return this.delete(`${member.guild.id}:${member.id}`);
+        
         return;
     }
 
