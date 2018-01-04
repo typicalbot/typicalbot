@@ -17,29 +17,32 @@ module.exports = class extends Command {
         const user = args[1], purgeDays = args[2] || 0, reason = args[3];
 
         this.client.users.fetch(user).then(async cachedUser => {
-            const member = await message.guild.members.fetch(cachedUser).catch(err => { return; });
+            const member = await message.guild.members.fetch(cachedUser);
+            if (!member) return message.error(`The requested user could not be found.`);
 
-            if (member && message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot mute a user with either the same or higher highest role.`);
-            if(!message.guild.settings.roles.mute) return message.error(`No mute role has been set. Try \`$set edit muterole <role-name>\``);
-            //if (member && !member.bannable) return message.error(`In order to complete the request, I need the **MANAGE ROLES** permission and my highest role needs to be higher than the requested user's highest role.`);
-            if (member && !message.guild.settings.roles.mute.editable) return message.error(`In order to complete the request, I need the **MANAGE ROLES** permission. Also, my highest role needs to be higher than the requested user's highest role and the mute role.`);
+            if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot mute a user with either the same or higher highest role.`);
+
+            if (!message.guild.settings.roles.mute || !message.guild.roles.has(message.guild.settings.roles.mute)) return message.error(`No mute role has been set. Try \`$set edit muterole <role-name>\``);
+
+            const role = message.guild.roles.get(message.guild.settings.roles.mute);
+            if (!role.editable) return message.error(`In order to complete the request, I need the **MANAGE ROLES** permission. Also, my highest role needs to be higher than the requested user's highest role and the mute role.`);
 
             member.addRole(message.guild.settings.roles.mute).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
                     const log = { "action": "mute", "user": member.user, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
-    
+
                     await this.client.modlogsManager.createLog(message.guild, log);
-    
+
                     message.success(`Successfully muted user \`${member.user.tag}\`.`);
                 } else return message.success(`Successfully muted user **${member.user.tag}**.`);
             }).catch(err => {
                 message.error(`An error occured while trying to mute the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
             });
 
-            
 
-            
+
+
 
             const log = { "moderator": message.author };
             if (reason) Object.assign(log, { reason });
