@@ -14,7 +14,7 @@ module.exports = class extends Command {
         const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const user = args[1], purgeDays = args[2] || 0, reason = args[3];
+        const user = args[1], reason = args[2];
 
         this.client.users.fetch(user).then(async cachedUser => {
             const member = await message.guild.members.fetch(cachedUser);
