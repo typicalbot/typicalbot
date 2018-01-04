@@ -13,7 +13,7 @@ class TimerStore extends Store {
     interval() {
         this.intervals.push(setInterval(() => {
             this.forEach(t => {
-                t.filter(e => e.end >= Date.now()).forEach(e => t.execute(e));
+                t.filter(e => Date.now() >= e.end).forEach(e => t.execute(e));
             });
         }, 1000));
     }
