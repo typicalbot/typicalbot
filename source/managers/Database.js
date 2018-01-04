@@ -8,6 +8,8 @@ module.exports = class {
     }
 
     get(table, key) {
+        if (!key) return this.db.table(table);
+        
         return this.db.table(table).get(key);
     }
 
