@@ -15,6 +15,7 @@ let SettingStore = require("./stores/Settings");
 let FunctionStore = require("./stores/Functions");
 let EventStore = require("./stores/Events");
 let CommandStore = require("./stores/Commands");
+let TimerStore = require("./stores/Timers");
 
 let AutoModeration = require("./utility/AutoModeration");
 let AudioUtility = require("./utility/Audio");
@@ -43,6 +44,7 @@ class TypicalBot extends Client {
         this.functions = new FunctionStore(this);
         this.events = new EventStore(this);
         this.commands = new CommandStore(this);
+        this.timers = new TimerStore(this);
 
         this.shardData = {};
         this.testerData = [];
