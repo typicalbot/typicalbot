@@ -25,8 +25,8 @@ class New extends Timer {
     }
 
     async execute(timer) {
-        const guild = this.client.guilds.get(timer.guild); if (!guild) return;
-        const member = await guild.members.fetch(timer.member); if (!member) return;
+        const guild = this.client.guilds.get(timer.guild); if (!guild) return console.log("No guild");
+        const member = await guild.members.fetch(timer.member); if (!member) return console.log("No member");
 
         const settings = await guild.fetchSettings();
 
