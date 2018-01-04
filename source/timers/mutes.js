@@ -4,7 +4,7 @@ class New extends Timer {
     constructor(...args) {
         super(...args);
 
-        this.client.database.get("mutes").then(data => data.keyArray().forEach(k => this.set(k, data[k])));
+        this.client.database.get("mutes").then(data => data.forEach(e => this.set(e.id, e)));
     }
 
     async create(member, end) {
