@@ -30,7 +30,7 @@ module.exports = class extends Command {
 
             member.addRole(message.guild.settings.roles.mute).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
-                    const log = { "action": "mute", "user": member.user, "moderator": message.author };
+                    const log = { "action": "mute", "user": member.user, "moderator": message.author, "length": time };
                     if (reason) Object.assign(log, { reason });
 
                     await this.client.modlogsManager.createLog(message.guild, log);
@@ -42,10 +42,6 @@ module.exports = class extends Command {
             }).catch(err => {
                 message.error(`An error occured while trying to mute the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
             });
-
-
-
-
 
             const log = { "moderator": message.author };
             if (reason) Object.assign(log, { reason });
