@@ -15,7 +15,7 @@ class Video {
         this.requestor;
     }
 
-    setRequestor(message) {
+    setRequester(message) {
         Object.defineProperty(this, "requestor", { value: message });
         
         return this;
