@@ -12,7 +12,7 @@ class Video {
 
         this.live = !!live_playback;
 
-        this.requestor = requester;
+        this.requester = requester;
     }
 
     async validate(url) {
