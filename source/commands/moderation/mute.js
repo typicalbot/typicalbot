@@ -11,7 +11,7 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)\s*d(?:ays)?)?\s*(?:(\d+)\s*h(?:ours|rs|r)?)?\s*(?:(\d+)\s*m(?:inutes|in)?)?\s*(?:(\d+)\s*s(?:econds|ec)?))?(?:\s+(.+))?/i.exec(parameters);
+        const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)\s*d(?:ays?)?)?\s*?(?:(\d+)\s*h(?:ours?|rs?)?)?\s*?(?:(\d+)\s*m(?:inutes?|in)?)?\s*?(?:(\d+)\s*s(?:econds?|ec)?)?)?(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const user = args[1], days = args[2], hours = args[3], minutes = args[4], seconds = args[5], reason = args[6];
