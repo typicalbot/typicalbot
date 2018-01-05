@@ -8,7 +8,6 @@ class New extends Timer {
     }
 
     async create(member, end) {
-        //const id = 10e6 + Math.floor(Math.random() * (10e7 - 1));
         const id = `${member.guild.id}:${member.id}`;
         const newData = { id, end, "guild": member.guild.id, "member": member.id };
 
@@ -43,10 +42,10 @@ class New extends Timer {
 
         if (!guild.roles.has(settings.roles.mute).editable) return;
 
-        const log = { "action": "unmute", "user": member.user, "moderator": this.client.user };
+        const log = { "action": "unmute", "user": member.user, "moderator": this.client.user, "reason": "Automatic Unmute: User's mute time has passed." };
         await this.client.modlogsManager.createLog(guild, log);
 
-        member.removeRole(settings.roles.mute, "Automatic unmute.");
+        member.removeRole(settings.roles.mute, "Automatic Unmute: User's mute time has passed.");
         return this.delete(timer.id);
     }
 }
