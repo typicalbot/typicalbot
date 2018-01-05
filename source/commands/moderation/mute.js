@@ -4,7 +4,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Mute a member in the server.",
-            usage: "mute <@user> [reason]",
+            usage: "mute <@user> [time:xd(ays) xh(ours) xm(inutes) xs(seconds)] [reason]",
             mode: "strict",
             permission: 2
         });
