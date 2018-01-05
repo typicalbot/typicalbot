@@ -24,7 +24,7 @@ class AudioUtil {
             ytdl.getInfo(url, (err, info) => {
                 if (err) return reject(err);
 
-                const video = new Video({ url, info });
+                const video = new Video(url, info);
                 return resolve(video);
             });
         });
