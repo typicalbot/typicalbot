@@ -40,7 +40,7 @@ class New extends Timer {
 
         if (!member.roles.has(settings.roles.mute)) return this.delete(timer.id);
 
-        if (!guild.roles.has(settings.roles.mute).editable) return;
+        if (!guild.roles.get(settings.roles.mute).editable) return;
 
         const log = { "action": "unmute", "user": member.user, "moderator": this.client.user, "reason": "Automatic Unmute: User's mute time has passed." };
         await this.client.modlogsManager.createLog(guild, log);
