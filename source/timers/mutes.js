@@ -33,7 +33,7 @@ class New extends Timer {
 
     async execute(timer) {
         const guild = this.client.guilds.get(timer.guild); if (!guild) return;
-        const member = await guild.members.fetch(timer.member); if (!member) return;
+        const member = await guild.members.fetch(timer.member).catch(err => this.delete(timer.id)); if (!member) return;
 
         const settings = await guild.fetchSettings();
 

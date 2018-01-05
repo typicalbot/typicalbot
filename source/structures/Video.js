@@ -3,7 +3,7 @@ const SYS = require("simple-youtube-stream");
 const sys = new SYS();
 
 class Video {
-    constructor(url, { title, length_seconds, live_playback }) {
+    constructor(url, { title, length_seconds, live_playback }, requester) {
         this.url = url;
 
         this.title = title;
@@ -12,13 +12,7 @@ class Video {
 
         this.live = !!live_playback;
 
-        this.requestor;
-    }
-
-    setRequester(message) {
-        Object.defineProperty(this, "requestor", { value: message });
-        
-        return this;
+        this.requestor = requester;
     }
 
     async validate(url) {

@@ -19,12 +19,12 @@ class AudioUtil {
         return video.length <= (message.guild.settings.music.timelimit || 1800) ? true : false;
     }
 
-    fetchInfo(url) {
+    fetchInfo(url, message) {
         return new Promise((resolve, reject) => {
             ytdl.getInfo(url, (err, info) => {
                 if (err) return reject(err);
 
-                const video = new Video(url, info);
+                const video = new Video(url, info, message);
                 return resolve(video);
             });
         });

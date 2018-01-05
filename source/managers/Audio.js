@@ -22,10 +22,7 @@ module.exports = class {
     }
 
     async stream(message, video, playlist = false) {
-        if (!playlist) {
-            if (!this.client.audioUtility.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
-            video.setRequester(message);
-        }
+        if (!playlist) if (!this.client.audioUtility.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
 
         const currConnection = message.guild.voiceConnection;
 
@@ -66,12 +63,10 @@ module.exports = class {
         Object.defineProperty(first, "requester", { value: message });
 
         playlist.forEach(async v => {
-            const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
+            const video = await this.client.audioUtility.fetchInfo(v.url, message).catch(err => { return; });
             if (!video) return;
 
             if (!this.client.audioUtility.withinLimit(message, video)) return;
-
-            video.setRequester(message);
 
             guildStream.addQueue(video, true);
         });
@@ -86,7 +81,7 @@ module.exports = class {
         playlist.splice(101, Infinity);
 
         playlist.forEach(async v => {
-            const video = await this.client.audioUtility.fetchInfo(v.url).catch(err => { return; });
+            const video = await this.client.audioUtility.fetchInfo(v.url, message).catch(err => { return; });
             if (!video) return;
 
             if (!this.client.audioUtility.withinLimit(message, video)) return;

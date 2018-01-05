@@ -20,7 +20,7 @@ module.exports = class extends Command {
         if (args && args[1]) {
             this.client.audioManager.stream(message, args[1], true).catch(err => message.error(err.stack || err));
         } else if (args && args[2]) {
-            this.client.audioUtility.fetchInfo(args[2]).then(videoInfo => {
+            this.client.audioUtility.fetchInfo(args[2], message).then(videoInfo => {
                 videoInfo.url = args[2];
 
                 this.client.audioManager.stream(message, videoInfo).catch(err => message.error(err.stack || err));
@@ -30,7 +30,7 @@ module.exports = class extends Command {
                 if (!results.length) return message.reply(`No results were found for the query **${match[1]}**.`);
                 const video = results[0];
 
-                this.client.audioUtility.fetchInfo(video.url).then(videoInfo => {
+                this.client.audioUtility.fetchInfo(video.url, message).then(videoInfo => {
                     videoInfo.url = video.url;
 
                     this.client.audioManager.stream(message, videoInfo).catch(err => message.error(err.stack || err));
