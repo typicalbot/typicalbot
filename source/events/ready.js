@@ -5,6 +5,8 @@ class New extends Event {
         super(...args);
 
         this.once = true;
+
+        this.intervals = [];
     }
 
     async execute() {
@@ -14,17 +16,17 @@ class New extends Event {
         this.client.transmit("transmitTesters");
         this.client.functions.fetchDonors();
 
-        setInterval(() => {
+        this.intervals.push(setInterval(() => {
             this.client.user.setActivity(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
 
             if (this.client.guilds.has("163038706117115906")) {
                 this.client.functions.transmitTesters();
             }
-        }, 1000 * 60 * 5);
+        }, 1000 * 60 * 5));
 
-        setInterval(() => {
+        this.intervals.push(setInterval(() => {
             this.client.voiceConnections.filter(c => c.channel.members.filter(m => !m.user.bot).size === 0).forEach(c => c.guildStream.end());
-        }, 1000 * 30);
+        }, 1000 * 30));
     }
 }
 

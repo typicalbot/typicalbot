@@ -19,6 +19,7 @@ const types = {
     tempban: { color: 0xFF0000, action: "Temporary Ban" },
     ban: { color: 0xFF0000, action: "Ban" },
 
+    unmute: { color: 0x006699, action: "Unmute"},
     unban: { color: 0x006699, action: "Unban" }
 };
 
@@ -98,7 +99,7 @@ module.exports = class {
         });
     }
 
-    createLog(guild, { action, moderator, user, reason }) {
+    createLog(guild, { action, moderator, user, reason, length }) {
         return new Promise((resolve, reject) => {
             this.fetchChannel(guild).then(channel => {
                 this.fetchLatest(guild).then(log => {
@@ -106,7 +107,7 @@ module.exports = class {
 
                     const type = types[action];
 
-                    const _action = `**Action:** ${type.action}`;
+                    const _action = `**Action:** ${type.action}${length ? ` (${this.client.functions.convertTime(length)})` : ""}`;
                     const _user = user.discriminator ? `**User:** ${user.username}#${user.discriminator} (${user.id})` : user.guild ? `**Channel:** ${user.name} (${user.toString()})` : "N/A";
                     const _case = Number(last) + 1;
                     const _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;

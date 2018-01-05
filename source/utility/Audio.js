@@ -8,42 +8,25 @@ const apiKey = require(`../../configs/${build}`).youtubekey;
 const YAPI = require("simple-youtube-api");
 const TBYT = new YAPI(apiKey);
 
+const Video = require("../structures/Video");
+
 class AudioUtil {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
     }
 
     withinLimit(message, video) {
-        return video.length_seconds <= (message.guild.settings.music.timelimit || 1800) ? true : false;
+        return video.length <= (message.guild.settings.music.timelimit || 1800) ? true : false;
     }
 
-    fetchInfo(url) {
+    fetchInfo(url, message) {
         return new Promise((resolve, reject) => {
             ytdl.getInfo(url, (err, info) => {
                 if (err) return reject(err);
-                return resolve({ title: info.title, length_seconds: info.length_seconds, url, live_playback: !!info.live_playback });
+
+                const video = new Video(url, info, message);
+                return resolve(video);
             });
-        });
-    }
-
-    validate(url) {
-        const id = /[a-zA-Z0-9-_]{11}$/.exec(url);
-        if (id) url = id;
-        return new Promise((resolve, reject) => {
-            return sys.fetchInfo(url).then(resolve).catch(reject);
-        });
-    }
-
-    fetchStream(video) {
-        return new Promise((resolve, reject) => {
-            this.validate(video.url).then(() => {
-                const options = {};
-                
-                if (!video.live_playback) Object.assign(options, { filter: "audioonly"});
-                
-                const audioStream = ytdl(video.url, options);
-                return resolve(audioStream);
-            }).catch(reject);
         });
     }
 

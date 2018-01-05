@@ -5,6 +5,7 @@ const settingsList = {
     "adminrole": "Administrator role that will grant users with this role permission level 3.",
     "modrole": "Moderator role that will grant users with this role permission level 2.",
     "djrole": "DJ role that will grant users with this role permission level 1.",
+    "muterole": "A role the bot will give users when muted.",
     "blacklistrole": "Users with this role will be denied access to any of TypicalBot's commands.",
     "autorole": "Users joining the server will automatically be given this role.",
     "autoroledelay": "The amount of time to wait before giving the autorole to allow for security levels to work.",
@@ -81,6 +82,11 @@ module.exports = class extends Command {
 
                     if (!list.length) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${list.join(", ")}`);
+                } else if (setting === "muterole") {
+                    const role = message.guild.roles.get(message.guild.settings.roles.mute);
+
+                    if (!role) return message.reply(`**__Current Value:__** None`);
+                    message.reply(`**__Current Value:__** ${role.name}`);
                 } else if (setting === "blacklistrole") {
                     const rawList = message.guild.settings.roles.blacklist;
                     const list = rawList.filter(r => message.guild.roles.has(r)).map(r => `*${message.guild.id === r ? message.guild.roles.get(r).name.slice(1) : message.guild.roles.get(r).name}*`);
@@ -301,6 +307,17 @@ module.exports = class extends Command {
 
                             this.client.settings.update(message.guild.id, { roles: { dj: [ role.id ] } }).then(() => message.success("Setting successfully updated."));
                         }
+                    }
+                } else if (setting === "muterole") {
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { roles: { mute: null } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
+
+                        const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
+                        if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
+
+                        this.client.settings.update(message.guild.id, { roles: { mute: role.id } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else if (setting === "blacklistrole") {
                     if (value === "disable" || value === "clear") {

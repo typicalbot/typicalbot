@@ -15,7 +15,8 @@ class EventStore extends Store {
                 "moderator": [],
                 "dj": [],
                 "blacklist": [],
-                "public": []
+                "public": [],
+                "mute": null
             },
             "ignored": {
                 "commands": [],
