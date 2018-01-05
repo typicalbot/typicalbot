@@ -37,7 +37,11 @@ class New extends Timer {
 
         const settings = await guild.fetchSettings();
 
+        if (!settings.roles.mute) return this.delete(timer.id);
+
         if (!member.roles.has(settings.roles.mute)) return this.delete(timer.id);
+
+        if (!guild.roles.has(settings.roles.mute).editable) return;
 
         member.removeRole(settings.roles.mute, "Automatic unmute.");
         return this.delete(timer.id);
