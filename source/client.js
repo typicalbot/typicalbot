@@ -130,6 +130,7 @@ class TypicalBot extends Client {
             this.functions = new FunctionStore(this);
         } else if (mod === "events") {
             this.events.forEach(e => this.removeAllListeners(e.name));
+            this.events.filter(e => e.intervals && e.intervals.length).forEach(e => e.intervals.forEach(i => clearInterval(i)));
             this.events.reload();
             
             delete require.cache[`${__dirname}/stores/Events.js`];

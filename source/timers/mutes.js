@@ -27,7 +27,7 @@ class New extends Timer {
 
     async clear(member) {
         if (this.has(`${member.guild.id}:${member.id}`)) return this.delete(`${member.guild.id}:${member.id}`);
-        
+
         return;
     }
 
@@ -42,6 +42,9 @@ class New extends Timer {
         if (!member.roles.has(settings.roles.mute)) return this.delete(timer.id);
 
         if (!guild.roles.has(settings.roles.mute).editable) return;
+
+        const log = { "action": "unmute", "user": member.user, "moderator": this.client.user };
+        await this.client.modlogsManager.createLog(guild, log);
 
         member.removeRole(settings.roles.mute, "Automatic unmute.");
         return this.delete(timer.id);
