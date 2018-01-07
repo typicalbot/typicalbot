@@ -13,6 +13,10 @@ module.exports = class extends Command {
     execute(message, parameters, permissionLevel) {
         const connection = message.guild.voiceConnection;
         if (!connection) return message.send(`Nothing is currently streaming.`);
+        if (!connection.guildStream) {
+            connection.disconnect();
+            return message.error("An error occured while trying to complete this action, and requires me to leave the voice channel. Sorry!");
+        }
 
         const short = text => this.client.functions.lengthen(-1, text, 45),
             time = len => this.client.functions.convertTime(len * 1000);
