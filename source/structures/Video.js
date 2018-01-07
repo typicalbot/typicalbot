@@ -27,7 +27,7 @@ class Video {
         const validated = await this.validate(this.url).catch(err => { throw err; });
 
         const options = {};
-        if (!this.live_playback) Object.assign(options, { filter: "audioonly"});
+        if (!this.live) Object.assign(options, { filter: "audioonly"});
             
         const audioStream = ytdl(this.url, options);
         return audioStream;

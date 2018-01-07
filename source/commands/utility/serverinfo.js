@@ -18,7 +18,7 @@ module.exports = class extends Command {
 
         const guildOwner = message.guild.member(message.guild.ownerID);
 
-        if (!option) return message.reply(
+        /*if (!option) return*/ message.reply(
             `**__Server Information For:__** ${message.guild.name}\n`
             + `\`\`\`\n`
             + `Name                : ${message.guild.name} (${message.guild.id})\n`
@@ -41,7 +41,7 @@ module.exports = class extends Command {
 
         const guildOwner = message.guild.member(message.guild.ownerID).user;
 
-        if (!option) return message.buildEmbed()
+        /*if (!option) return*/ message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Server Information`)
             .addField("» Name", message.guild.name, true)
