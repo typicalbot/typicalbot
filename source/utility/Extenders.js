@@ -1,6 +1,7 @@
 require.extensions['.txt'] = function (module, filename) { module.exports = require("fs").readFileSync(filename, 'utf8'); };
 
-const { Guild, MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
+const { Guild, MessageEmbed, TextChannel, DMChannel, User, Message, VoiceConnection } = require("discord.js");
+const Stream = require("../structures/Stream");
 
 Guild.prototype.fetchSettings = async function() { 
     return this.client.settings.fetch(this.id).then(settings => { 
@@ -50,3 +51,9 @@ Message.prototype.dm = function (content, embed, options = {}) {
 Message.prototype.buildEmbed = function () {
     return this.channel.buildEmbed();
 };
+
+Object.defineProperty(VoiceConnection.prototype, "guildStream", {
+    get() {
+        return new Stream(this.client, this);
+    }
+});
