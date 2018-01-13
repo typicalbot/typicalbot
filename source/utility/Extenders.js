@@ -10,11 +10,11 @@ Guild.prototype.fetchSettings = async function() {
     }).catch(err => { 
         throw err; 
     }); 
-}; 
+};
 
 MessageEmbed.prototype.send = function (content) {
     if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel");
-    return this.sendToChannel.send(content || "", { embed: this });
+    return this.sendToChannel.send(content || "", { embed: this }).catch(err => err);
 };
 
 TextChannel.prototype.buildEmbed = User.prototype.buildEmbed = DMChannel.prototype.buildEmbed = function () {
@@ -24,7 +24,7 @@ TextChannel.prototype.buildEmbed = User.prototype.buildEmbed = DMChannel.prototy
 Message.prototype.send = function (content, embed, options = {}) {
     if (embed) Object.assign(options, { embed });
 
-    return this.channel.send(content, options);
+    return this.channel.send(content, options).catch(err => err);
 };
 
 Message.prototype.embed = function (embed) {
@@ -46,7 +46,7 @@ Message.prototype.error = function (content, embed, options = {}) {
 Message.prototype.dm = function (content, embed, options = {}) {
     if (embed) Object.assign(options, { embed });
 
-    this.author.send(content, options);
+    this.author.send(content, options).catch(err => err);
 };
 
 Message.prototype.buildEmbed = function () {
