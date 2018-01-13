@@ -55,6 +55,8 @@ Message.prototype.buildEmbed = function () {
 
 Object.defineProperty(VoiceConnection.prototype, "guildStream", {
     get() {
-        return new Stream(this.client, this);
+        if (!this._guildStream) this._guildStream = new Stream(this.client, this);
+
+        return this._guildStream;
     }
 });
