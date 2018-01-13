@@ -7,9 +7,7 @@ class New extends Event {
         this.mentionRegex = new RegExp(`^<@!?${this.client.config.id}>$`);
     }
 
-    async execute(message) {
-        if (!message.guild.available) return;
-        
+    async execute(message) {        
         if (message.author.bot) return;
 
         if (message.channel.type === "dm") {
@@ -20,6 +18,8 @@ class New extends Event {
 
             command.execute(message);
         } else {
+            if (!message.guild.available) return;
+            
             if (!message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
 
             const settings = message.guild.settings = await message.guild.fetchSettings();
