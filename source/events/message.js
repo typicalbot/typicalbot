@@ -8,6 +8,8 @@ class New extends Event {
     }
 
     async execute(message) {
+        if (!message.guild.available) return;
+        
         if (message.author.bot) return;
 
         if (message.channel.type === "dm") {

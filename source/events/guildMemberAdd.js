@@ -6,6 +6,8 @@ class New extends Event {
     }
 
     async execute(member) {
+        if (!member.guild.available) return;
+        
         const guild = member.guild;
 
         const settings = await this.client.settings.fetch(guild.id);

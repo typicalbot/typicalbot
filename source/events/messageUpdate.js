@@ -6,6 +6,8 @@ class New extends Event {
     }
 
     async execute(oldMessage, message) {
+        if (!message.guild.available) return;
+        
         if (message.author.bot) return;
         if (message.channel.type !== "text") return;
 

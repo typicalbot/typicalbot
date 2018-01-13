@@ -6,18 +6,8 @@ class New extends Event {
     }
 
     async execute(guild) {
-        /*if (this.client.build === "development") {
-            const check = this.client.functions.checkTester(guild);
-            console.log(`${guild.owner.user.username} | ${check}`);
-            if (!check) setTimeout(() => guild.leave(), 2000);
-        }
-        if (this.client.build === "prime") {
-            const check = this.client.functions.checkDonor(guild);
-            console.log(`${guild.owner.user.username} | ${check}`);
-            if (!check) setTimeout(() => guild.leave(), 2000);
-        }
-        */
-
+        if (!guild.available) return;
+        
         if (this.client.build === "stable") this.client.functions.postStats("a");
         
         this.client.transmitStats();
