@@ -5,8 +5,9 @@ class New extends Event {
         super(...args);
     }
 
-    async execute(message) {
+    async execute(message) {        
         if (message.channel.type !== "text") return;
+        if (!message.guild.available) return;
 
         const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 

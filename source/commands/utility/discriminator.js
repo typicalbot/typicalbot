@@ -5,7 +5,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Provides a list of all uers with a given discriminator.",
             aliases: ["discrim"],
-            usage: "disrciminator [four-digit-discriminator]",
+            usage: "discriminator [four-digit-discriminator]",
             mode: "lite"
         });
     }

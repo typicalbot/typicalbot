@@ -16,8 +16,6 @@ module.exports = class {
 
         this.client.emit("voiceConnectionUpdate", connection);
 
-        Object.defineProperty(connection, "guildStream", { value: new Stream(this.client, connection) });
-
         return connection;
     }
 

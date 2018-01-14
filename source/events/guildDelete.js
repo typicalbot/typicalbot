@@ -6,6 +6,8 @@ class New extends Event {
     }
 
     async execute(guild) {
+        if (!guild.available) return;
+        
         this.client.transmitStats();
     }
 }
