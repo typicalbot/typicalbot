@@ -19,7 +19,7 @@ module.exports = class extends Command {
         const permissionsHere = this.client.permissions.fetch(message.guild, user, true);
         const permissions = this.client.permissions.fetch(message.guild, user);
 
-        message.reply(`**__Your Permission Level:__** ${permissions.level} | ${permissions.title}${permissionsHere.level !== permissions.level ? ` (${permissionsHere.level} | ${permissionsHere.title})` : ""}`);
+        message.reply(`**__${user.tag}'s Permission Level:__** ${permissions.level} | ${permissions.title}${permissionsHere.level !== permissions.level ? ` (${permissionsHere.level} | ${permissionsHere.title})` : ""}`);
     }
 
     async embedExecute(message, parameters, permissionLevel) {
@@ -33,7 +33,7 @@ module.exports = class extends Command {
 
         message.buildEmbed()
             .setColor(0x00adff)
-            .setTitle("User Permission Level")
+            .setTitle(`${user.tag}'s Permission Level`)
             .setDescription(`Level ${permissions.level} | ${permissions.title}${permissionsHere.level !== permissions.level ? ` (${permissionsHere.level} | ${permissionsHere.title})` : ""}`)
             .send();
     }
