@@ -9,14 +9,14 @@ class New extends Event {
         if (!member.guild.available) return;
         
         const guild = member.guild;
+        const user = member.user;
 
         const settings = await this.client.settings.fetch(guild.id);
-
-        const user = member.user;
 
         if (settings.logs.join !== "--disabled") {
             if (guild.channels.has(settings.logs.id)) {
                 const channel = guild.channels.get(settings.logs.id);
+                if (channel.type !== "text") return;
 
                 if (settings.logs.join === "--embed") {
                     channel.buildEmbed()

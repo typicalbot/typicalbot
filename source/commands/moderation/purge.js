@@ -54,8 +54,8 @@ module.exports = class extends Command {
                 }
 
                 message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
-                    .then(msg => msg.delete({ timeout: 2500 }).catch(err => err));
-                message.delete({ timeout: 2500 }).catch(err => err);
+                    .then(msg => msg.delete({ timeout: 2500 }).catch(() => {}));
+                message.delete({ timeout: 2500 }).catch(() => {});
             })
             .catch(err => message.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
 
@@ -69,8 +69,8 @@ module.exports = class extends Command {
                 }
                 
                 message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
-                    .then(msg => msg.delete({ timeout: 2500 }).catch(err => err));
-                message.delete({ timeout: 2500 }).catch(err => err);
+                    .then(msg => msg.delete({ timeout: 2500 }).catch(() => {}));
+                message.delete({ timeout: 2500 }).catch(() => {});
             })
             .catch(err => message.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
     }
