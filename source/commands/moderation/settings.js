@@ -407,6 +407,7 @@ module.exports = class extends Command {
 
                         const channel = subArgs[1] ? message.guild.channels.get(subArgs[1]) : message.guild.channels.find(c => c.name.toLowerCase() === subArgs[2].toLowerCase());
                         if (!channel) return message.error("Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.");
+                        if (channel.type !== "text") return message.error("The channel must be a text channel.");
 
                         this.client.settings.update(message.guild.id, { announcements: { id: channel.id } }).then(() => message.success("Setting successfully updated."));
                     }
@@ -431,6 +432,7 @@ module.exports = class extends Command {
 
                         const channel = subArgs[1] ? message.guild.channels.get(subArgs[1]) : message.guild.channels.find(c => c.name.toLowerCase() === subArgs[2].toLowerCase());
                         if (!channel) return message.error("Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.");
+                        if (channel.type !== "text") return message.error("The channel must be a text channel.");
 
                         this.client.settings.update(message.guild.id, { logs: { id: channel.id } }).then(() => message.success("Setting successfully updated."));
                     }
@@ -515,6 +517,7 @@ module.exports = class extends Command {
 
                         const channel = subArgs[1] ? message.guild.channels.get(subArgs[1]) : message.guild.channels.find(c => c.name.toLowerCase() === subArgs[2].toLowerCase());
                         if (!channel) return message.error("Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.");
+                        if (channel.type !== "text") return message.error("The channel must be a text channel.");
 
                         this.client.settings.update(message.guild.id, { logs: { moderation: channel.id } }).then(() => message.success("Setting successfully updated."));
                     }
