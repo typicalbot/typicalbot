@@ -5,7 +5,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Provides either your permission level or another user's level.",
             aliases: ["mylevel"],
-            usage: "perms [@user]",
+            usage: "perms [@user|user-id|user-tag]",
             mode: "strict"
         });
     }
