@@ -33,7 +33,7 @@ module.exports = class extends Command {
 
         message.buildEmbed()
             .setColor(0x00adff)
-            .setTitle(`User Permission Level: **${user.tag}**`)
+            .setTitle(`${user.tag}'s Permission Level`)
             .setDescription(`Level ${permissions.level} | ${permissions.title}${permissionsHere.level !== permissions.level ? ` (${permissionsHere.level} | ${permissionsHere.title})` : ""}`)
             .send();
     }
