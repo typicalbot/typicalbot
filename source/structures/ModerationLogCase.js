@@ -88,9 +88,13 @@ class ModerationLogCase {
         const latest = await this.client.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
         console.log(require("util").inspect(latest, { "depth": 0 }));
         console.log(Constants.ModerationLog.Regex.CASE.exec(latest.embeds[0].footer.text));
-        
-        if (!this.id) this.setId(latest ? Number(Constants.ModerationLog.Regex.CASE.exec(latest.embeds[0].footer.text)[1]) + 1 : 1);
 
+        if (!this.id) {
+            const newIdMatch = latest ? Constants.ModerationLog.Regex.CASE.exec(latest.embeds[0].footer.text) : null;
+            const newId = latest ? Number(newIdMatch[1]) + 1 : 1;
+            this.setId(newId);
+        }
+        
         const embed = this.embed;
 
         channel.send("", { embed });
