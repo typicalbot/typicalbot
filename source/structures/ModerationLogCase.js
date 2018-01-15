@@ -48,8 +48,8 @@ class ModerationLogCase {
     }
 
     async send() {
-        const channel = this.client.modlogsManager.fetchChannel(this.guild).catch(err => { throw err; });
-        const latest = this.client.modlogsManager.fetchLatest(this.guild).catch(err => { throw err; });
+        const channel = await this.client.modlogsManager.fetchChannel(this.guild).catch(err => { throw err; });
+        const latest = await this.client.modlogsManager.fetchLatest(this.guild).catch(err => { throw err; });
 
         const type = this.client.modlogsManager.types[this.action];
 
