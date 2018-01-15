@@ -97,6 +97,7 @@ class ModerationLogCase {
         const embed = message.embeds[0];
 
         const id = embed.footer.text;
+        const _action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s(.+)/gi.exec(action)[1])[0][1];
         const action = embed.description.match(Constants.ModerationLog.Regex.ACTION)[0];
         const moderator = embed.author ? { display: embed.author.name, icon: embed.author.iconURL } : null;
         const user = embed.description.match(Constants.ModerationLog.Regex.USER)[0];
@@ -104,10 +105,7 @@ class ModerationLogCase {
         const reason = _reason ? _reason[0] : null;
         const timestamp = embed.createdAt;
 
-        this._action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s(.+)/gi.exec(action)[1])[0][1];
-        console.log(this._action);
-
-        const data = { id, action, user, timestamp };
+        const data = { id, _action, action, user, timestamp };
         
         if (moderator) Object.assign(data, { moderator });
         if (reason) Object.assign(data, { reason });
