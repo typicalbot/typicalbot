@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -38,7 +39,7 @@ module.exports = class extends Command {
 
             member.addRole(role).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
-                    const log = { "action": "MUTE", "user": member.user, "moderator": message.author, "length": time };
+                    const log = { "action": Constants.ModerationLog.Types.MUTE, "user": member.user, "moderator": message.author, "length": time };
                     if (reason) Object.assign(log, { reason });
 
                     await this.client.moderationLog.createLog(message.guild, log);

@@ -93,15 +93,13 @@ module.exports = class {
                 this.fetchLatest(guild).then(log => {
                     const last = log ? log.embeds[0].footer.text.match(/Case\s(\d+)/)[1] : 0;
 
-                    const type = Constants.ModerationLog.Types[action];
-
-                    const _action = `**Action:** ${type.action}${length ? ` (${this.client.functions.convertTime(length)})` : ""}`;
+                    const _action = `**Action:** ${action.display}${length ? ` (${this.client.functions.convertTime(length)})` : ""}`;
                     const _user = user.discriminator ? `**User:** ${user.username}#${user.discriminator} (${user.id})` : user.guild ? `**Channel:** ${user.name} (${user.toString()})` : "N/A";
                     const _case = Number(last) + 1;
                     const _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
 
                     const embed = channel.buildEmbed()
-                        .setColor(type.color || 0xC4C4C4)
+                        .setColor(action.hex || 0xC4C4C4)
                         .setURL(this.client.config.urls.website)
                         .setDescription(`${_action}\n${_user}\n${_reason}`)
                         .setFooter(`Case ${_case}`, "https://typicalbot.com/x/images/icon.png")

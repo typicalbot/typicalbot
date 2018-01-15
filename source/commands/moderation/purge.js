@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -47,7 +48,7 @@ module.exports = class extends Command {
         if (channelFilter) return channelFilter.bulkDelete(messages, true)
             .then(async msgs => {
                 if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
-                    const log = { "action": "PURGE", "user": channelFilter, "moderator": message.author };
+                    const log = { "action": Constants.ModerationLog.Types.PURGE, "user": channelFilter, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
         
                     const _case = await this.client.moderationLog.createLog(message.guild, log);
@@ -62,7 +63,7 @@ module.exports = class extends Command {
         message.channel.bulkDelete(messages, true)
             .then(async msgs => {
                 if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
-                    const log = { "action": "PURGE", "user": message.channel, "moderator": message.author };
+                    const log = { "action": Constants.ModerationLog.Types.PURGE, "user": message.channel, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
         
                     const _case = await this.client.moderationLog.createLog(message.guild, log);

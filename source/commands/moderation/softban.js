@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -29,7 +30,7 @@ module.exports = class extends Command {
                 setTimeout(() => {
                     message.guild.unban(actioned.id, `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(async () => {
                         if (message.guild.settings.logs.moderation) {
-                            const log = { "action": "SOFTBAN", "user": actioned.user, "moderator": message.author };
+                            const log = { "action": Constants.ModerationLog.Types.SOFTBAN, "user": actioned.user, "moderator": message.author };
                             if (reason) Object.assign(log, { reason });
 
                             await this.client.moderationLog.createLog(message.guild, log);

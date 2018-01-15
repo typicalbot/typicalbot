@@ -1,4 +1,5 @@
 const Event = require("../structures/Event");
+const Constants = require(`../utility/Constants`);
 
 class New extends Event {
     constructor(...args) {
@@ -13,7 +14,7 @@ class New extends Event {
         if (settings.logs.moderation && !this.client.softbanCache.has(user.id)) {
             const cachedLog = this.client.unbanCache.get(user.id);
 
-            this.client.moderationLog.createLog(guild, Object.assign({ action: "UNBAN", user }, cachedLog));
+            this.client.moderationLog.createLog(guild, Object.assign({ action: Constants.ModerationLog.Types.UNBAN, user }, cachedLog));
             this.client.unbanCache.delete(user.id);
         }
 

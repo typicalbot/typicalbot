@@ -1,14 +1,16 @@
 const Constants = require(`../utility/Constants`);
+const { MessageEmbed } = require("discord.js");
 
 class ModerationLogCase {
-    constructor(client, guild, { action, id, moderator, user, channel, reason, expiration, timestamp }) {
+    constructor(client, guild, { id, action, moderator, user, channel, reason, expiration, timestamp }) {
         Object.defineProperty(this, "client", { value: client });
 
         this.guild = guild;
 
-        this.action = action;
-
         this.id = id;
+
+        this._action;
+        this.action = action;
 
         this.moderator = moderator;
 
@@ -23,74 +25,84 @@ class ModerationLogCase {
         this.timestamp = timestamp;
     }
 
-    setAction(newData) {
-        this.action = newData;
+    setId(data) {
+        this.id = `Case ${data}`;
         return this;
     }
 
-    setModerator(newData) {
-        this.moderator = newData;
+    setAction(data) {
+        this._action = data;
+        this.action = `**Action:** ${data.display}${this.expiration ? ` (${this.client.functions.convertTime(this.expiration)})` : ""}`;
         return this;
     }
 
-    setUser(newData) {
-        this.user = newData;
+    setModerator(data) {
+        this.moderator = { display: data.username, icon: data.displayAvatarURL() };
         return this;
     }
 
-    setChannel(newData) {
-        this.channel = newData;
+    setUser(data) {
+        this.user = `**User:** ${data.tag} (${data.id})`;
         return this;
     }
 
-    setReason(newData) {
-        this.reason = newData;
+    setChannel(data) {
+        this.channel = `**Channel:** ${data.name} (${data.toString()})`;
         return this;
     }
 
-    setExpiration(newData) {
-        this.expiration = newData;
+    setReason(data) {
+        this.reason = `**Reason:** ${data}`;
         return this;
     }
 
-    async embed() {
-        const channel = await this.client.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
-        const latest = await this.client.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
+    setExpiration(data) {
+        this.expiration = data;
+        return this;
+    }
 
-        const type = Constants.ModerationLog.Types[this.action];
+    setTimestamp(data) {
+        this.timestamp = data;
+        return this;
+    }
 
-        const _action = `**Action:** ${type.action}${this.length ? ` (${this.client.functions.convertTime(this.length)})` : ""}`;
-        const _user = this.user ? `**User:** ${this.user.tag} (${this.user.id})` : this.channel ? `**Channel:** ${this.user.name} (${this.user.toString()})` : "N/A";
-        const _case = latest ? Number(latest.embeds[0].footer.text.match(/Case\s(\d+)/)[1]) + 1 : 1;
-        const _reason = `**Reason:** ${this.reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
-
-        const message = channel.buildEmbed()
-            .setColor(type.color || 0xC4C4C4)
+    embed() {
+        const embed = new MessageEmbed()
+            .setColor(this._action.hex)
             .setURL(this.client.config.urls.website)
-            .setDescription(`${_action}\n${_user}\n${_reason}`)
-            .setFooter(`Case ${_case}`, "https://typicalbot.com/x/images/icon.png")
-            .setTimestamp();
+            .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason || `Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
+            .setFooter(`Case ${this.id}`, "https://typicalbot.com/x/images/icon.png")
+            .setTimestamp(this.timestamp);
 
-        if (this.moderator) message.setAuthor(`${this.moderator.tag} (${this.moderator.id})`, this.moderator.displayAvatarURL());
+        if (this.moderator) embed.setAuthor(this.moderator.display, this.moderator.icon);
 
-        return message;
+        return embed;
     }
 
     async send() {
-        return await this.embed().send();
+        const channel = await this.client.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
+        const latest = await this.client.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
+        
+        if (!this.id) this.id = latest ? Number(latest.embeds[0].footer.text.match(/Case\s(\d+)/)[1]) + 1 : 1;
+
+        const message = this.embed();
+
+        channel.send("", { message });
+
+        return this.id;
     }
 
     static parse(message) {
         const embed = message.embeds[0];
 
-        const action = embed.description.match(Constants.ModerationLog.Regex.ACTION)[0];
         const id = embed.footer.text;
+        const action = embed.description.match(Constants.ModerationLog.Regex.ACTION)[0];
         const moderator = embed.author ? { display: embed.author.name, icon: embed.author.iconURL } : null;
         const user = embed.description.match(Constants.ModerationLog.Regex.USER)[0];
         const reason = embed.description.match(Constants.ModerationLog.Regex.REASON)[0];
         const timestamp = embed.createdAt;
 
-        return new ModerationLogCase(message.client, message.guild, { action, id, moderator, user, reason, timestamp });
+        return new ModerationLogCase(message.client, message.guild, { id, action, moderator, user, reason, timestamp });
     }
 }
 

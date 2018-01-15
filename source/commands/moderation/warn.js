@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -24,7 +25,7 @@ module.exports = class extends Command {
 
             if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return message.error(`You cannot warn a user with either the same or higher highest role.`);
 
-            const log = { "action": "WARN", "user": member.user, "moderator": message.author };
+            const log = { "action": Constants.ModerationLog.Types.WARN, "user": member.user, "moderator": message.author };
             if (reason) Object.assign(log, { reason });
 
             const _case = await this.client.moderationLog.createLog(message.guild, log);
