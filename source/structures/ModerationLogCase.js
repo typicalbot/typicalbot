@@ -103,7 +103,12 @@ class ModerationLogCase {
         const reason = reason ? reason[0] : null;
         const timestamp = embed.createdAt;
 
-        return new ModerationLogCase(message.client, message.guild, { id, action, moderator, user, reason, timestamp });
+        const data = { id, action, user, timestamp };
+        
+        if (moderator) Object.assign(data, { moderator });
+        if (reason) Object.assign(data, { reason });
+
+        return new ModerationLogCase(message.client, message.guild, data);
     }
 }
 
