@@ -8,6 +8,8 @@ class ModerationLogCase {
         this.guild = guild;
 
         this.id = id;
+
+        this._id = /Case\s(\d+)/i.exec(id)[1];
         
         this.action = action;
 
@@ -67,7 +69,7 @@ class ModerationLogCase {
         return this;
     }
 
-    embed() {
+    get embed() {
         const embed = new MessageEmbed()
             .setColor(this._action.hex)
             .setURL(this.client.config.urls.website)
@@ -86,7 +88,7 @@ class ModerationLogCase {
         
         if (!this.id) this.id = latest ? Number(latest.embeds[0].footer.text.match(/Case\s(\d+)/)[1]) + 1 : 1;
 
-        const embed = this.embed();
+        const embed = this.embed;
 
         channel.send("", { embed });
 

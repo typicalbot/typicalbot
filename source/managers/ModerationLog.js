@@ -115,23 +115,14 @@ module.exports = class {
         });
     }
 
-    editReason(_case, moderator, reason) {
-        return new Promise((resolve, reject) => {
-            const { action, user, id, ts } = this.caseMatch(_case);
-            const _reason = `**Reason:** ${reason}`;
+    async edit(_case, moderator, reason) {
+        const parsedCase = ModerationLogCase.parse(_case);
 
-            const embed = new MessageEmbed()
-                .setColor(_case.embeds[0].color || 0xC4C4C4)
-                .setURL(this.client.config.urls.website)
-                .setDescription(`${action}\n${user}\n${_reason}`)
-                .setFooter(id, "https://typicalbot.com/x/images/icon.png")
-                .setTimestamp(ts);
+        parsedCase.setModerator(moderator);
+        parsedCase.setReason(reason);
 
-            if (moderator) embed.setAuthor(`${moderator.tag} (${moderator.id})`, moderator.avatarURL());
+        _case.edit("", { embed: parsedCase.embed });
 
-            _case.edit("", { embed });
-
-            return resolve(id);
-        });
+        return parsedCase._id;
     }
 };

@@ -21,7 +21,7 @@ module.exports = class extends Command {
         this.client.moderationLog.fetchCase(message.guild, id).then(log => {
             if (!log) return message.error(`There are no moderation logs under the given case ID.`);
 
-            this.client.moderationLog.editReason(log, message.author, reason).then(
+            this.client.moderationLog.edit(log, message.author, reason).then(
                 () => message.reply("Successfully updated the case.").then(msg => { msg.delete({ timeout: 2500 }); message.delete({ timeout: 2500 }); })
             ).catch(err => message.error(`An error occured while updating the given case.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
         }).catch(err => {
