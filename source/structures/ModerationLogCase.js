@@ -91,10 +91,10 @@ class ModerationLogCase {
 
         if (!this.id) {
             const newIdMatch = latest ? Constants.ModerationLog.Regex.CASE.exec(latest.embeds[0].footer.text) : null;
-            const newId = latest ? Number(newIdMatch[1]) + 1 : 1;
+            const newId = latest ? Number((await newIdMatch)[1]) + 1 : 1;
             this.setId(newId);
         }
-        
+
         const embed = this.embed;
 
         channel.send("", { embed });
