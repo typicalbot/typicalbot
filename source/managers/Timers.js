@@ -10,8 +10,6 @@ module.exports = class extends Collection {
 
         this.taskTypes = new Collection();
 
-        this.tasks = new Collection();
-
         this.init();
     }
 
