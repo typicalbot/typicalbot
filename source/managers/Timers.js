@@ -74,4 +74,11 @@ module.exports = class extends Collection {
 
         return;
     }
+
+    async clear(member) {
+        const task = this.find(t => t.guild === member.guild.id && t.member === member.id);
+        if (!task) throw "Not Found";
+
+        return this.delete(task.id);
+    }
 };
