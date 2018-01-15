@@ -100,7 +100,7 @@ class ModerationLogCase {
         const moderator = embed.author ? { display: embed.author.name, icon: embed.author.iconURL } : null;
         const user = embed.description.match(Constants.ModerationLog.Regex.USER)[0];
         const _reason = embed.description.match(Constants.ModerationLog.Regex.REASON); 
-        const reason = reason ? reason[0] : null;
+        const reason = _reason ? _reason[0] : null;
         const timestamp = embed.createdAt;
 
         const data = { id, action, user, timestamp };
