@@ -11,7 +11,7 @@ module.exports = class extends Task {
 
         const settings = await guild.fetchSettings();
 
-        if (!settings.roles.mute || !member.roles.has(settings.roles.mute) || !guild.roles.get(settings.roles.mute).editable) return this.delete(this.id);
+        if (!settings.roles.mute || !member.roles.has(settings.roles.mute) || !guild.roles.get(settings.roles.mute).editable) return this.timers.delete(this.id);
 
         const log = { "action": "unmute", "user": member.user, "moderator": this.client.user, "reason": "Automatic Unmute: User's mute time has passed." };
         await this.client.modlogsManager.createLog(guild, log);
