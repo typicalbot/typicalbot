@@ -2,16 +2,16 @@ const Constants = require(`../utility/Constants`);
 const { MessageEmbed } = require("discord.js");
 
 class ModerationLogCase {
-    constructor(client, guild, { id, action, moderator, user, channel, reason, expiration, timestamp }) {
+    constructor(client, guild, { id, action, _action, moderator, user, channel, reason, expiration, timestamp }) {
         Object.defineProperty(this, "client", { value: client });
 
         this.guild = guild;
 
         this.id = id;
-
-        this._action;
         
         this.action = action;
+
+        this._action = _action;
 
         this.moderator = moderator;
 
@@ -97,15 +97,15 @@ class ModerationLogCase {
         const embed = message.embeds[0];
 
         const id = embed.footer.text;
-        const _action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s(.+)/gi.exec(action)[1])[0][1];
         const action = embed.description.match(Constants.ModerationLog.Regex.ACTION)[0];
+        const _action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s(.+)/gi.exec(action)[1])[0][1];
         const moderator = embed.author ? { display: embed.author.name, icon: embed.author.iconURL } : null;
         const user = embed.description.match(Constants.ModerationLog.Regex.USER)[0];
         const _reason = embed.description.match(Constants.ModerationLog.Regex.REASON); 
         const reason = _reason ? _reason[0] : null;
         const timestamp = embed.createdAt;
 
-        const data = { id, _action, action, user, timestamp };
+        const data = { id, action, _action, user, timestamp };
         
         if (moderator) Object.assign(data, { moderator });
         if (reason) Object.assign(data, { reason });
