@@ -17,6 +17,6 @@ module.exports = class extends Task {
         await this.client.modlogsManager.createLog(guild, log);
 
         member.removeRole(settings.roles.mute, "Automatic Unmute: User's mute time has passed.");
-        return this.delete(this.id);
+        return this.timers.delete(this.id);
     }
 };

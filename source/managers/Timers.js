@@ -36,7 +36,7 @@ module.exports = class extends Collection {
 
                 this.set(
                     task.id,
-                    new taskType(this.client, task)
+                    new taskType(this.client, this, task)
                 );
             });
         });
@@ -61,7 +61,7 @@ module.exports = class extends Collection {
         await this.client.database.insert("tasks", newData);
 
         const taskType = this.taskTypes.get(type);
-        const task = new taskType(this.client, newData);
+        const task = new taskType(this.client, this, newData);
 
         this.set(id, task);
 
