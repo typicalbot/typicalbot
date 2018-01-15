@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Send an announcement to the announcements channel. Use the flag '-e' before your content to make the message an embed. If the announcements mention role is set, it will always use it.",
             usage: "announce ['-e'] <content>",
-            mode: "strict",
-            permission: 3
+            permission: Constants.Permissions.SERVER_ADMINISTRATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 

@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -7,20 +8,20 @@ module.exports = class extends Command {
             usage: "documentation",
             aliases: ["docs"],
             dm: true,
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 
     execute(message, parameters, permissionLevel) {
-        message.send(`**Documentation can be found here:** <${this.client.config.urls.docs}>`);
+        message.send(`**Documentation can be found here:** <${Constants.Links.DOCUMENTATION}>`);
     }
 
-    embedExecute(message, response){
+    embedExecute(message, response) {
         message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Documentation")
-            .setDescription(`**Documentation can be found here:** <${this.client.config.urls.docs}>`)
-            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+            .setDescription(`**Documentation can be found here:** <${Constants.Links.DOCUMENTATION}>`)
+            .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
     }

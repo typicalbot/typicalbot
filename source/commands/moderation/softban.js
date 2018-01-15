@@ -6,8 +6,8 @@ module.exports = class extends Command {
         super(...args, {
             description: "Softban a member from the server.",
             usage: "softban <@user> [purge-days] [reason]",
-            mode: "strict",
-            permission: 2
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 

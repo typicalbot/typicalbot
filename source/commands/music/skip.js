@@ -1,11 +1,12 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Skip what is currently playing.",
             usage: "skip [amount]",
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 

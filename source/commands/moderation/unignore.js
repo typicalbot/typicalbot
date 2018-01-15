@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Makes the bot unignore commands or invites in a channel.",
             usage: "unignore ['commands'|'invites']",
-            mode: "strict",
-            permission: 3
+            permission: Constants.Permissions.SERVER_ADMINISTRATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 

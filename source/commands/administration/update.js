@@ -1,12 +1,15 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 const { exec } = require("child_process");
 const { join } = require("path");
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            mode: "strict",
-            permission: 10
+            description: "A command to update and restart the bot.",
+            usage: "update ['-r'|'--restart']",
+            permission: Constants.Permissions.TYPICALBOT_CREATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -18,7 +21,7 @@ module.exports = class extends Command {
         exec("git pull", { cwd: path }, (err, stdout, stderr) => {
             if (err) return console.error(err);
 
-            const embed = message.buildEmbed().setTitle("TypicalBot Updater").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setColor(0x00adff);
+            const embed = message.buildEmbed().setTitle("TypicalBot Updater").setFooter("TypicalBot", Constants.Links.ICON).setColor(0x00adff);
 
             if (stdout) embed.addField("» STDOUT", stdout.toString().substring(0, 1024));
             if (stderr) embed.addField("» STDERR", stderr.toString().substring(0, 1024));

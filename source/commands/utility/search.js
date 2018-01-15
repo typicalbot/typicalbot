@@ -1,11 +1,12 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Searches in the user list for a username or nickname.",
             usage: "search <query> [page-number]",
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 

@@ -6,8 +6,8 @@ module.exports = class extends Command {
         super(...args, {
             description: "Warn a member in the server.",
             usage: "warn <@user> [reason]",
-            mode: "strict",
-            permission: 2
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -28,7 +28,7 @@ module.exports = class extends Command {
             const newCase = this.client.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.WARN).setModerator(message.author).setUser(member.user);
             if (reason) newCase.setReason(reason); newCase.send();
 
-            const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTitle("TypicalBot Alert System").setDescription(`You have been warned in **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
+            const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", Constants.Links.ICON).setTitle("TypicalBot Alert System").setDescription(`You have been warned in **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
             if (reason) embed.addField("» Reason", reason);
             embed.send().catch(err => { return; });
 

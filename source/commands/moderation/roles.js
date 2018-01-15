@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -6,7 +7,7 @@ module.exports = class extends Command {
             description: "Manage or view roles in a server.",
             usage: "Check `$roles help` for this command's usage.",
             aliases: ["role"],
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 

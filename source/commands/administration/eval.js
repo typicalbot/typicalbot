@@ -5,8 +5,10 @@ const util = require("util");
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            mode: "strict",
-            permission: 10
+            description: "An eval command for the creator.",
+            usage: "eval <code>",
+            permission: Constants.Permissions.TYPICALBOT_CREATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -22,7 +24,7 @@ module.exports = class extends Command {
                         "description": `\n\n\`\`\`js\n${util.inspect(a, { depth: 0 })}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
-                            "icon_url": "https://typicalbot.com/x/images/icon.png"
+                            "icon_url": Constants.Links.ICON
                         }
                     }).catch(err => {
                         message.embed({
@@ -30,7 +32,7 @@ module.exports = class extends Command {
                             "description": `\`\`\`\n${err.stack}\n\`\`\``,
                             "footer": {
                                 "text": "TypicalBot Eval",
-                                "icon_url": "https://typicalbot.com/x/images/icon.png"
+                                "icon_url": Constants.Links.ICON
                             }
                         });
                     });
@@ -40,7 +42,7 @@ module.exports = class extends Command {
                         "description": `\n\n\`\`\`\n${err ? err.stack : `Unknown Error`}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
-                            "icon_url": "https://typicalbot.com/x/images/icon.png"
+                            "icon_url": Constants.Links.ICON
                         }
                     });
                 }) :
@@ -50,7 +52,7 @@ module.exports = class extends Command {
                         "description": `\`\`\`js\n${util.inspect(output, { depth: 0 })}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
-                            "icon_url": "https://typicalbot.com/x/images/icon.png"
+                            "icon_url": Constants.Links.ICON
                         }
                     }) :
                     message.embed({
@@ -58,7 +60,7 @@ module.exports = class extends Command {
                         "description": `\`\`\`\n${output}\n\`\`\``,
                         "footer": {
                             "text": "TypicalBot Eval",
-                            "icon_url": "https://typicalbot.com/x/images/icon.png"
+                            "icon_url": Constants.Links.ICON
                         }
                     });
             //message.send(`\`INPUT:\`\n\`\`\`\n${code}\n\`\`\`\n\`OUTPUT:\`\n\`\`\`\n${typeof output === "object" ? JSON.stringify(output, null, 4) : output}\n\`\`\``);
@@ -68,7 +70,7 @@ module.exports = class extends Command {
                 "description": `\`\`\`\n${err.stack}\n\`\`\``,
                 "footer": {
                     "text": "TypicalBot Eval",
-                    "icon_url": "https://typicalbot.com/x/images/icon.png"
+                    "icon_url": Constants.Links.ICON
                 }
             }).catch(err => {
                 message.reply("Cannot send embeds.");

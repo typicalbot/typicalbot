@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -6,9 +7,9 @@ module.exports = class extends Command {
             description: "Create an alias for commands.",
             usage: "alias <'list'|'add'|'remove'|'clear'> <add/remove:command> <add:new-alias>",
             aliases: ["aliases"],
-            mode: "strict",
-            permission: 3,
-            access: 1
+            permission: Constants.Permissions.SERVER_ADMINISTRATOR,
+            mode: Constants.Modes.STRICT,
+            access: Constants.Access.DONOR
         });
     }
 

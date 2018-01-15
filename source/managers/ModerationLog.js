@@ -102,7 +102,7 @@ module.exports = class {
                         .setColor(action.hex || 0xC4C4C4)
                         .setURL(this.client.config.urls.website)
                         .setDescription(`${_action}\n${_user}\n${_reason}`)
-                        .setFooter(`Case ${_case}`, "https://typicalbot.com/x/images/icon.png")
+                        .setFooter(`Case ${_case}`, Constants.Links.ICON)
                         .setTimestamp();
 
                     if (moderator) embed.setAuthor(`${moderator.tag} (${moderator.id})`, moderator.avatarURL());

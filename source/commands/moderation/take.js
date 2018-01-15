@@ -1,11 +1,12 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Take a role from you a role off of the public roles list.",
             usage: "take <role-name>",
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 

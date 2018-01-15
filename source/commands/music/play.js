@@ -1,11 +1,12 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Streams a song to a voice channel from YouTube.",
             usage: "play <video-name|url>",
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 

@@ -5,8 +5,8 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Gives you a random bunny picture.",
-            aliases: ["rabbit"],
-            usage: "bunny"
+            usage: "bunny",
+            aliases: ["rabbit"]
         });
     }
 

@@ -75,7 +75,7 @@ class ModerationLogCase {
             .setColor(this._action.hex)
             .setURL(this.client.config.urls.website)
             .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason || `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
-            .setFooter(this.id, "https://typicalbot.com/x/images/icon.png")
+            .setFooter(this.id, Constants.Links.ICON)
             .setTimestamp(this.timestamp);
 
         if (this.moderator) embed.setAuthor(this.moderator.display, this.moderator.icon);

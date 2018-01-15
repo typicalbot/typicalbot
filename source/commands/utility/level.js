@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Provides either your permission level or another user's level.",
-            aliases: ["mylevel"],
             usage: "level [@user|user-id|user-tag]",
-            mode: "strict"
+            aliases: ["mylevel"],
+            mode: Constants.Modes.STRICT
         });
     }
 

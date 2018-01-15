@@ -75,7 +75,7 @@ module.exports = class extends Collection {
 
     async clear(member) {
         const task = this.filter(t => t.guild === member.guild.id && t.member === member.id);
-        if (!task.size) throw "Not Found";
+        if (!task.size) return;
 
         task.forEach(t => this.delete(t.id));
 

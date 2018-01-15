@@ -5,10 +5,10 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Purge messages in a channel.",
-            aliases: ["prune"],
             usage: "purge [@user|#channel|@role|'me'|'you'|'bots'] <message-count>",
-            mode: "strict",
-            permission: 2
+            aliases: ["prune"],
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 

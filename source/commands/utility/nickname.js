@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Change or clear either your nickname or another user's nickname.",
-            aliases: ["nick"],
             usage: "nickname [@user] [nickname]",
-            mode: "lite"
+            aliases: ["nick"],
+            mode: Constants.Modes.LITE
         });
     }
 

@@ -1,3 +1,44 @@
+exports.Links = {
+    BASE: "https://www.typicalbot.com",
+    OAUTH: `${exports.Links.BASE}/invite`,
+    SERVER: `${exports.Links.BASE}/join-us`,
+    DONATE: `${exports.Links.BASE}/donate`,
+    DOCUMENTATION: `${exports.Links.BASE}/documentation`,
+    SETTINGS: `${exports.Links.DOCUMENTATION}/#!settings`,
+    ICON: `${exports.Links.BASE}/x/images/icon.png`
+};
+
+exports.Colors = {
+    DEFAULT: 0x00ADFF,
+    SUCCESS: 0x00FF00,
+    ERROR: 0xFF0000
+};
+
+exports.Access = {
+    DEFAULT: 0,
+    DONOR: 1,
+    PARTNER: 2,
+    STAFF: 3
+};
+
+exports.Permissions = {
+    SERVER_BLACKLISTED: -1,
+    SERVER_MEMBER: 0,
+    SERVER_DJ: 1,
+    SERVER_MODERATOR: 2,
+    SERVER_ADMINISTRATOR: 3,
+    SERVER_OWNER: 4,
+    TYPICALBOT_SUPPORT: 8,
+    TYPICALBOT_ADMINISTRATOR: 9,
+    TYPICALBOT_CREATOR: 10
+};
+
+exports.Modes = {
+    FREE: 0,
+    LITE: 1,
+    STRICT: 2
+};
+
 exports.ModerationLog = {
 
 };
