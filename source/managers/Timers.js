@@ -23,8 +23,8 @@ module.exports = class {
             console.log(taskType);
             this.taskTypes.set(file.name, taskType);
         }).on("end", () => {
-            //this.taskInit();
-            //this.startInterval();
+            this.taskInit();
+            this.startInterval();
         });
     }
 

@@ -6,7 +6,7 @@ class Task {
 
         this.end = end;
         
-        Object.keys().forEach(k => this[k] = data[k]);
+        Object.keys(data).forEach(k => this[k] = data[k]);
     }
 }
 
