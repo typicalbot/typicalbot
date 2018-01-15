@@ -40,7 +40,7 @@ class ModerationLogCase {
     }
 
     setModerator(data) {
-        this.moderator = { display: data.username, icon: data.displayAvatarURL() };
+        this.moderator = { display: `${data.tag} (${data.id})`, icon: data.displayAvatarURL() };
         return this;
     }
 
