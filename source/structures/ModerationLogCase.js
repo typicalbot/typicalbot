@@ -9,7 +9,7 @@ class ModerationLogCase {
 
         this.id = id;
 
-        this._id = id ? Constants.ModerationLog.Regex.CASE.exec(id)[1] : null;
+        this._id = id ? id.match(Constants.ModerationLog.Regex.CASE)[1] : null;
         
         this.action = action;
 
@@ -86,15 +86,9 @@ class ModerationLogCase {
     async send() {
         const channel = await this.client.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
         const latest = await this.client.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
-        console.log(require("util").inspect(latest, { "depth": 0 }));
-        console.log(Constants.ModerationLog.Regex.CASE.exec(latest.embeds[0].footer.text));
-
-        if (!this.id) {
-            const newIdMatch = latest ? Constants.ModerationLog.Regex.CASE.exec(latest.embeds[0].footer.text) : null;
-            const newId = newIdMatch ? Number(newIdMatch[1]) + 1 : 1;
-            this.setId(newId);
-        }
         
+        if (!this.id) this.setId(latest ? Number(latest.embeds[0].footer.text.match(Constants.ModerationLog.Regex.CASE)[1]) + 1 : 1);
+
         const embed = this.embed;
 
         channel.send("", { embed });
