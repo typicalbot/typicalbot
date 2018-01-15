@@ -36,10 +36,8 @@ module.exports = class extends Command {
 
             member.removeRole(role).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
-                    const log = { "action": Constants.ModerationLog.Types.UNMUTE, "user": member.user, "moderator": message.author };
-                    if (reason) Object.assign(log, { reason });
-
-                    await this.client.moderationLog.createLog(message.guild, log);
+                    const newCase = this.client.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.UNMUTE).setModerator(message.author).setUser(member.user);
+                    if (reason) newCase.setReason(reason); newCase.send();
 
                     this.client.timers.clear(member);
 

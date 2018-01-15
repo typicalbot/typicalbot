@@ -14,7 +14,9 @@ class New extends Event {
         if (settings.logs.moderation && !this.client.softbanCache.has(user.id)) {
             const cachedLog = this.client.banCache.get(user.id);
 
-            this.client.moderationLog.createLog(guild, Object.assign({ action: Constants.ModerationLog.Types.BAN, user }, cachedLog));
+            const newCase = this.client.moderationLog.buildCase(guild).setAction(Constants.ModerationLog.Types.BAN).setUser(user);
+            if (cachedLog) { newCase.setModerator(cachedLog.moderator); if (cachedLog.reason) newCase.setReason(cachedLog.reason); } newCase.send();
+
             this.client.banCache.delete(user.id);
         }
 

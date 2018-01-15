@@ -14,8 +14,8 @@ module.exports = class extends Task {
 
         if (!settings.roles.mute || !member.roles.has(settings.roles.mute) || !guild.roles.get(settings.roles.mute).editable) return this.timers.delete(this.id);
 
-        const log = { "action": Constants.ModerationLog.Types.UNMUTE, "user": member.user, "moderator": this.client.user, "reason": "Automatic Unmute: User's mute time has passed." };
-        await this.client.moderationLog.createLog(guild, log);
+        const newCase = this.client.moderationLog.buildCase(guild).setAction(Constants.ModerationLog.Types.UNMUTE).setModerator(this.client.user).setUser(member.user).setReason("Automatic Unmute: User's mute time has passed.");
+        newCase.send();
 
         member.removeRole(settings.roles.mute, "Automatic Unmute: User's mute time has passed.");
         return this.timers.delete(this.id);

@@ -39,10 +39,8 @@ module.exports = class extends Command {
 
             member.addRole(role).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
-                    const log = { "action": Constants.ModerationLog.Types.MUTE, "user": member.user, "moderator": message.author, "length": time };
-                    if (reason) Object.assign(log, { reason });
-
-                    await this.client.moderationLog.createLog(message.guild, log);
+                    const newCase = this.client.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.MUTE).setModerator(message.author).setUser(member.user);
+                    if (reason) newCase.setReason(reason); if (time) newCase.setExpiration(time); newCase.send();
 
                     if (time) this.client.timers.create("unmute", Date.now() + time, { guild: message.guild.id, member: member.id });
 
