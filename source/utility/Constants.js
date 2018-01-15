@@ -19,6 +19,7 @@ exports.ModerationLog.Types = {
 };
 
 exports.ModerationLog.Regex = {
+    CASE: /Case\s(\d+)/gi,
     ACTION: /\*\*Action:\*\*\s.+/gi,
     USER: /\*\*(?:User|Channel):\*\*\s.+/gi,
     REASON: /\*\*Reason:\*\*\s.+/gi

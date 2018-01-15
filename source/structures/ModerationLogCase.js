@@ -9,7 +9,7 @@ class ModerationLogCase {
 
         this.id = id;
 
-        this._id = /Case\s(\d+)/i.exec(id)[1];
+        this._id = id ? Constants.ModerationLog.Regex.CASE.exec(id)[1] : null;
         
         this.action = action;
 
@@ -29,6 +29,7 @@ class ModerationLogCase {
     }
 
     setId(data) {
+        this._id = data;
         this.id = `Case ${data}`;
         return this;
     }
@@ -86,7 +87,7 @@ class ModerationLogCase {
         const channel = await this.client.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
         const latest = await this.client.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
         
-        if (!this.id) this.setId(latest ? Number(latest.embeds[0].footer.text.match(/Case\s(\d+)/)[1]) + 1 : 1);
+        if (!this.id) this.setId(latest ? Number(latest.embeds[0].footer.text.match(Constants.ModerationLog.Regex.CASE)[1]) + 1 : 1);
 
         const embed = this.embed;
 
