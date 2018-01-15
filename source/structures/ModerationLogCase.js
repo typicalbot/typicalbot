@@ -99,7 +99,8 @@ class ModerationLogCase {
         const action = embed.description.match(Constants.ModerationLog.Regex.ACTION)[0];
         const moderator = embed.author ? { display: embed.author.name, icon: embed.author.iconURL } : null;
         const user = embed.description.match(Constants.ModerationLog.Regex.USER)[0];
-        const reason = embed.description.match(Constants.ModerationLog.Regex.REASON)[0];
+        const _reason = embed.description.match(Constants.ModerationLog.Regex.REASON); 
+        const reason = reason ? reason[0] : null;
         const timestamp = embed.createdAt;
 
         return new ModerationLogCase(message.client, message.guild, { id, action, moderator, user, reason, timestamp });
