@@ -2,8 +2,10 @@ const { Collection } = require("discord.js");
 const path = require("path");
 const klaw = require("klaw");
 
-module.exports = class {
+module.exports = class extends Collection {
     constructor(client) {
+        super();
+        
         Object.defineProperty(this, "client", { value: client });
 
         this.taskTypes = new Collection();
@@ -19,8 +21,7 @@ module.exports = class {
             if (!file.ext || file.ext !== ".js") return;
 
             const taskType = require(path.join(file.dir, file.base));
-            console.log(typeof taskType);
-            console.log(taskType);
+
             this.taskTypes.set(file.name, taskType);
         }).on("end", () => {
             this.taskInit();
@@ -33,7 +34,7 @@ module.exports = class {
             list.forEach(task => {
                 const taskType = this.taskTypes.get(task.type);
 
-                this.tasks.set(
+                this.set(
                     task.id,
                     new taskType(this.client, task)
                 );
@@ -43,7 +44,7 @@ module.exports = class {
 
     startInterval() {
         this.interval = setInterval(() => {
-            this.tasks
+            this
                 .filter(task => Date.now() >= task.end)
                 .forEach(task => task.execute());
         }, 1000);
