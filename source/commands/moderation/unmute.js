@@ -40,7 +40,7 @@ module.exports = class extends Command {
 
                     await this.client.modlogsManager.createLog(message.guild, log);
 
-                    this.client.timers.get("mutes").clear(member);
+                    this.client.timers.clear(member);
 
                     message.success(`Successfully unmuted user \`${member.user.tag}\`.`);
                 } else return message.success(`Successfully unmuted user **${member.user.tag}**.`);
