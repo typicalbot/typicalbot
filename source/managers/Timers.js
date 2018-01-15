@@ -5,7 +5,7 @@ const klaw = require("klaw");
 module.exports = class extends Collection {
     constructor(client) {
         super();
-        
+
         Object.defineProperty(this, "client", { value: client });
 
         this.taskTypes = new Collection();
@@ -32,7 +32,7 @@ module.exports = class extends Collection {
     taskInit() {
         this.client.database.get("tasks").then(list => {
             list.forEach(task => {
-                const taskType = this.taskTypes.get(task.type);
+                const taskType = this.taskTypes.get(task.data.type);
 
                 this.set(
                     task.id,
