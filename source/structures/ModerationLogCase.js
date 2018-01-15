@@ -87,7 +87,7 @@ class ModerationLogCase {
         const channel = await this.client.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
         const latest = await this.client.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
         
-        if (!this.id) this.setId(latest ? Number(latest.embeds[0].footer.text.match(Constants.ModerationLog.Regex.CASE)[1]) + 1 : 1);
+        if (!this.id) this.setId(20);//latest ? Number(latest.embeds[0].footer.text.match(Constants.ModerationLog.Regex.CASE)[1]) + 1 : 1);
 
         const embed = this.embed;
 
