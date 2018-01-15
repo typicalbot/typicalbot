@@ -85,9 +85,9 @@ class ModerationLogCase {
         
         if (!this.id) this.id = latest ? Number(latest.embeds[0].footer.text.match(/Case\s(\d+)/)[1]) + 1 : 1;
 
-        const message = this.embed();
+        const embed = this.embed();
 
-        channel.send("", { message });
+        channel.send("", { embed });
 
         return this.id;
     }
