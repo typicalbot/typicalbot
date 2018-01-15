@@ -105,6 +105,7 @@ class ModerationLogCase {
         const timestamp = embed.createdAt;
 
         this._action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s(.+)/gi.exec(action)[1])[0][1];
+        console.log(this._action);
 
         const data = { id, action, user, timestamp };
         
