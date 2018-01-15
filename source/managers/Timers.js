@@ -20,10 +20,11 @@ module.exports = class {
 
             const taskType = require(path.join(file.dir, file.base));
             console.log(typeof taskType);
+            console.log(taskType);
             this.taskTypes.set(file.name, taskType);
         }).on("end", () => {
-            this.taskInit();
-            this.startInterval();
+            //this.taskInit();
+            //this.startInterval();
         });
     }
 
