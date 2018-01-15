@@ -10,6 +10,10 @@ module.exports = class {
         Object.defineProperty(this, "client", { value: client });
     }
 
+    get parse() {
+        return ModerationLogCase.parse;
+    }
+
     caseMatch(message) {
         const _case = message.embeds[0];
 
