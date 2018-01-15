@@ -29,9 +29,11 @@ module.exports = class {
     taskInit() {
         this.client.database.get("tasks").then(list => {
             list.forEach(task => {
+                const taskType = this.taskTypes.get(task.type);
+
                 this.tasks.set(
                     task.id,
-                    new [this.taskTypes.get(task.type)](this.client, task)
+                    new taskType(this.client, task)
                 );
             });
         });
@@ -55,7 +57,8 @@ module.exports = class {
 
         await this.client.database.insert("tasks", newData);
 
-        const task = new [this.taskTypes.get(data.type)](this.client, newData);
+        const taskType = this.taskTypes.get(data.type);
+        const task = new taskType(this.client, newData);
 
         this.set(id, task);
 
