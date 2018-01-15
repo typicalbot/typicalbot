@@ -1,11 +1,11 @@
 exports.Links = {
-    BASE: "https://www.typicalbot.com",
-    OAUTH: `${exports.Links.BASE}/invite`,
-    SERVER: `${exports.Links.BASE}/join-us`,
-    DONATE: `${exports.Links.BASE}/donate`,
-    DOCUMENTATION: `${exports.Links.BASE}/documentation`,
-    SETTINGS: `${exports.Links.DOCUMENTATION}/#!settings`,
-    ICON: `${exports.Links.BASE}/x/images/icon.png`
+    BASE: "https://www.typicalbot.com/",
+    OAUTH: "https://www.typicalbot.com/invite/",
+    SERVER: "https://www.typicalbot.com/join-us/",
+    DONATE: "https://www.typicalbot.com/donate/",
+    DOCUMENTATION: "https://www.typicalbot.com/documentation/",
+    SETTINGS: "https://www.typicalbot.com/documentation/#!settings",
+    ICON: "https://www.typicalbot.com/x/images/icon.png"
 };
 
 exports.Colors = {
