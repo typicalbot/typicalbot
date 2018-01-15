@@ -74,7 +74,7 @@ class ModerationLogCase {
             .setColor(this._action.hex)
             .setURL(this.client.config.urls.website)
             .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason || `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
-            .setFooter(`Case ${this.id}`, "https://typicalbot.com/x/images/icon.png")
+            .setFooter(this.id, "https://typicalbot.com/x/images/icon.png")
             .setTimestamp(this.timestamp);
 
         if (this.moderator) embed.setAuthor(this.moderator.display, this.moderator.icon);
@@ -86,7 +86,7 @@ class ModerationLogCase {
         const channel = await this.client.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
         const latest = await this.client.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
         
-        if (!this.id) this.id = latest ? Number(latest.embeds[0].footer.text.match(/Case\s(\d+)/)[1]) + 1 : 1;
+        if (!this.id) this.setId(latest ? Number(latest.embeds[0].footer.text.match(/Case\s(\d+)/)[1]) + 1 : 1);
 
         const embed = this.embed;
 
