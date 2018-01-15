@@ -30,10 +30,8 @@ module.exports = class extends Command {
             
             member.kick(`Kicked by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
-                    const log = { "action": Constants.ModerationLog.Types.KICK, "user": member.user, "moderator": message.author };
-                    if (reason) Object.assign(log, { reason });
-
-                    await this.client.moderationLog.createLog(message.guild, log);
+                    const newCase = this.client.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.KICK).setModerator(message.author).setUser(member.user);
+                    if (reason) newCase.setReason(reason); newCase.send();
 
                     message.success(`Successfully kicked user \`${member.user.tag}\`.`);
                 } else return message.success(`Successfully kicked user **${member.user.tag}**.`);
