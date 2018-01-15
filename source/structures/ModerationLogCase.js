@@ -10,6 +10,7 @@ class ModerationLogCase {
         this.id = id;
 
         this._action;
+        
         this.action = action;
 
         this.moderator = moderator;
@@ -70,7 +71,7 @@ class ModerationLogCase {
         const embed = new MessageEmbed()
             .setColor(this._action.hex)
             .setURL(this.client.config.urls.website)
-            .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason || `Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
+            .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason || `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
             .setFooter(`Case ${this.id}`, "https://typicalbot.com/x/images/icon.png")
             .setTimestamp(this.timestamp);
 
@@ -102,6 +103,8 @@ class ModerationLogCase {
         const _reason = embed.description.match(Constants.ModerationLog.Regex.REASON); 
         const reason = _reason ? _reason[0] : null;
         const timestamp = embed.createdAt;
+
+        this._action = Constants.ModerationLog.Types[Object.keys(Constants.ModerationLog.Types).filter(t => t.display = /\*\*Action:\*\*\s(.+)/gi.exec(action)[1])[0]];
 
         const data = { id, action, user, timestamp };
         
