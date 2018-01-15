@@ -44,7 +44,7 @@ class New extends Event {
         const actualUserPermissions = this.client.permissions.fetch(message.guild, message.author, true);
         if (actualUserPermissions.level < command.permission) return message.error(this.client.functions.error("perms", command, actualUserPermissions));
 
-        if (settings.embed && message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS")) return command.embedExecute(message, param, userPermissions);
+        if (settings.embed && command.embedExecute && message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS")) return command.embedExecute(message, param, userPermissions);
         command.execute(message, param, userPermissions);
     }
 
