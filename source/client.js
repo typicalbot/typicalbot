@@ -8,7 +8,7 @@ const config = require(`../configs/${build}`);
 let ProcessManager = require("./managers/Process");
 let Database = require("./managers/Database");
 let PermissionsManager = require("./managers/Permissions");
-let ModlogsManager = require("./managers/ModerationLogs");
+let ModerationLogManager = require("./managers/ModerationLog");
 let AudioManager = require("./managers/Audio");
 let TimerManager = require("./managers/Timers");
 
@@ -34,7 +34,7 @@ class TypicalBot extends Client {
         this.processManager = new ProcessManager(this);
         this.database = new Database();
         this.permissions = new PermissionsManager(this);
-        this.modlogsManager = new ModlogsManager(this);
+        this.moderationLog = new ModerationLogManager(this);
         this.audioManager = new AudioManager(this);
         this.timers = new TimerManager(this);
 
@@ -103,10 +103,10 @@ class TypicalBot extends Client {
             delete require.cache[`${__dirname}/managers/Permissions.js`];
             PermissionsManager = require("./managers/Permissions");
             this.permissionsManager = new PermissionsManager(this);
-        } else if (mod === "modlogs") {
-            delete require.cache[`${__dirname}/managers/ModerationLogs.js`];
-            ModlogsManager = require("./managers/ModerationLogs");
-            this.modlogsManager = new ModlogsManager(this);
+        } else if (mod === "moderationlog") {
+            delete require.cache[`${__dirname}/managers/ModerationLog.js`];
+            ModerationLogManager = require("./managers/ModerationLog");
+            this.moderationLog = new ModerationLogManager(this);
         } else if (mod === "audio") {
             delete require.cache[`${__dirname}/managers/Audio.js`];
             delete require.cache[`${__dirname}/Structures/Stream.js`];

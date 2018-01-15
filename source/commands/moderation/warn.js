@@ -24,10 +24,10 @@ module.exports = class extends Command {
 
             if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return message.error(`You cannot warn a user with either the same or higher highest role.`);
 
-            const log = { "action": "warn", "user": member.user, "moderator": message.author };
+            const log = { "action": "WARN", "user": member.user, "moderator": message.author };
             if (reason) Object.assign(log, { reason });
 
-            const _case = await this.client.modlogsManager.createLog(message.guild, log);
+            const _case = await this.client.moderationLog.createLog(message.guild, log);
 
             const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTitle("TypicalBot Alert System").setDescription(`You have been warned in **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
             if (reason) embed.addField("» Reason", reason);

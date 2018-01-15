@@ -13,7 +13,7 @@ class New extends Event {
         if (settings.logs.moderation && !this.client.softbanCache.has(user.id)) {
             const cachedLog = this.client.unbanCache.get(user.id);
 
-            this.client.modlogsManager.createLog(guild, Object.assign({ action: "unban", user }, cachedLog));
+            this.client.moderationLog.createLog(guild, Object.assign({ action: "UNBAN", user }, cachedLog));
             this.client.unbanCache.delete(user.id);
         }
 

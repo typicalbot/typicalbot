@@ -47,10 +47,10 @@ module.exports = class extends Command {
         if (channelFilter) return channelFilter.bulkDelete(messages, true)
             .then(async msgs => {
                 if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
-                    const log = { "action": "purge", "user": channelFilter, "moderator": message.author };
+                    const log = { "action": "PURGE", "user": channelFilter, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
         
-                    const _case = await this.client.modlogsManager.createLog(message.guild, log);
+                    const _case = await this.client.moderationLog.createLog(message.guild, log);
                 }
 
                 message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
@@ -62,10 +62,10 @@ module.exports = class extends Command {
         message.channel.bulkDelete(messages, true)
             .then(async msgs => {
                 if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
-                    const log = { "action": "purge", "user": message.channel, "moderator": message.author };
+                    const log = { "action": "PURGE", "user": message.channel, "moderator": message.author };
                     if (reason) Object.assign(log, { reason });
         
-                    const _case = await this.client.modlogsManager.createLog(message.guild, log);
+                    const _case = await this.client.moderationLog.createLog(message.guild, log);
                 }
                 
                 message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)

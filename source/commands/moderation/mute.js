@@ -38,10 +38,10 @@ module.exports = class extends Command {
 
             member.addRole(role).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
-                    const log = { "action": "mute", "user": member.user, "moderator": message.author, "length": time };
+                    const log = { "action": "MUTE", "user": member.user, "moderator": message.author, "length": time };
                     if (reason) Object.assign(log, { reason });
 
-                    await this.client.modlogsManager.createLog(message.guild, log);
+                    await this.client.moderationLog.createLog(message.guild, log);
 
                     if (time) this.client.timers.create("unmute", Date.now() + time, { guild: message.guild.id, member: member.id });
 

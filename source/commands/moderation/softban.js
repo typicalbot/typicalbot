@@ -29,10 +29,10 @@ module.exports = class extends Command {
                 setTimeout(() => {
                     message.guild.unban(actioned.id, `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(async () => {
                         if (message.guild.settings.logs.moderation) {
-                            const log = { "action": "softban", "user": actioned.user, "moderator": message.author };
+                            const log = { "action": "SOFTBAN", "user": actioned.user, "moderator": message.author };
                             if (reason) Object.assign(log, { reason });
 
-                            await this.client.modlogsManager.createLog(message.guild, log);
+                            await this.client.moderationLog.createLog(message.guild, log);
 
                             message.success(`Successfully softbanned user \`${actioned.user.tag}\`.`);
                         } else return message.success(`Successfully softbanned user **${member.user.tag}**.`);

@@ -1,36 +1,13 @@
 const { MessageEmbed } = require("discord.js");
 const ModerationLogCase = require("../structures/ModerationLogCase");
 
-const types = {
-    warn: { color: 0xFFFF00, action: "Warn" },
-
-    purge: { color: 0xFFFF00, action: "Message Purge" },
-
-    tempmute: { color: 0xFF9900, action: "Temporary Mute" },
-    mute: { color: 0xFF9900, action: "Mute" },
-
-    tempvmute: { color: 0xFF9900, action: "Temporary Voice Mute" },
-    vmute: { color: 0xFF9900, action: "Voice Mute" },
-
-    kick: { color: 0xFF3300, action: "Kick" },
-    vkick: { color: 0xFF3300, action: "Voice Kick" },
-
-    softban: { color: 0xFF2F00, action: "Softban" },
-
-    tempban: { color: 0xFF0000, action: "Temporary Ban" },
-    ban: { color: 0xFF0000, action: "Ban" },
-
-    unmute: { color: 0x006699, action: "Unmute"},
-    unban: { color: 0x006699, action: "Unban" }
-};
+const Constants = require(`${process.cwd()}/utility/Constants`);
 
 const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*(?:User|Channel):\*\*\s.+/gi };
 
 module.exports = class {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
-
-        this.types = types;
     }
 
     caseMatch(message) {
@@ -102,7 +79,7 @@ module.exports = class {
         });
     }
 
-    buildLog(guild, data = {}) {
+    buildCase(guild, data = {}) {
         return new ModerationLogCase(this.client, guild, data);
     }
 
@@ -112,7 +89,7 @@ module.exports = class {
                 this.fetchLatest(guild).then(log => {
                     const last = log ? log.embeds[0].footer.text.match(/Case\s(\d+)/)[1] : 0;
 
-                    const type = types[action];
+                    const type = Constants.ModerationLog.Types[action];
 
                     const _action = `**Action:** ${type.action}${length ? ` (${this.client.functions.convertTime(length)})` : ""}`;
                     const _user = user.discriminator ? `**User:** ${user.username}#${user.discriminator} (${user.id})` : user.guild ? `**Channel:** ${user.name} (${user.toString()})` : "N/A";
