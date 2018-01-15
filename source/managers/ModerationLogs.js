@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const ModerationLogCase = require("../structures/ModerationLogCase");
 
 const types = {
     warn: { color: 0xFFFF00, action: "Warn" },
@@ -28,6 +29,8 @@ const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*(?:User|Channel):\*\
 module.exports = class {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
+
+        this.types = types;
     }
 
     caseMatch(message) {
@@ -97,6 +100,10 @@ module.exports = class {
                 }).catch( reject );
             }).catch( reject );
         });
+    }
+
+    buildLog(guild, data = {}) {
+        return new ModerationLogCase(this.client, guild, data);
     }
 
     createLog(guild, { action, moderator, user, reason, length }) {
