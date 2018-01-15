@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 const ModerationLogCase = require("../structures/ModerationLogCase");
 
-const Constants = require(`${process.cwd()}/utility/Constants`);
+const Constants = require(`../utility/Constants`);
 
 const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*(?:User|Channel):\*\*\s.+/gi };
 

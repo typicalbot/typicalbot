@@ -1,4 +1,4 @@
-const Constants = require(`${process.cwd()}/utility/Constants`);
+const Constants = require(`../utility/Constants`);
 
 class ModerationLogCase {
     constructor(client, guild, { action, id, moderator, user, channel, reason, expiration, timestamp }) {
