@@ -32,7 +32,7 @@ module.exports = class extends Collection {
     taskInit() {
         this.client.database.get("tasks").then(list => {
             list.forEach(task => {
-                const taskType = this.taskTypes.get(task.data.type);
+                const taskType = this.taskTypes.get(task.type);
 
                 this.set(
                     task.id,
@@ -54,17 +54,24 @@ module.exports = class extends Collection {
         return 10e4 + Math.floor(Math.random() * (10e4 - 1));
     }
 
-    async create(data, end) {
+    async create(type, end, data) {
         const id = this.idGenerate();
-        const newData = { id, end, data };
+        const newData = { id, type, end, data };
 
         await this.client.database.insert("tasks", newData);
 
-        const taskType = this.taskTypes.get(data.type);
+        const taskType = this.taskTypes.get(type);
         const task = new taskType(this.client, newData);
 
         this.set(id, task);
 
         return task;
+    }
+
+    async delete(id) {
+        await this.client.database.delete("tasks", id);
+        super.delete(id);
+
+        return;
     }
 };

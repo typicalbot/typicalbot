@@ -43,7 +43,7 @@ module.exports = class extends Command {
 
                     await this.client.modlogsManager.createLog(message.guild, log);
 
-                    if (time) this.client.timers.get("mutes").create(member, Date.now() + time);
+                    if (time) this.client.timers.get("mutes").create("unmute", { guild: message.guild.id, member: member.id }, Date.now() + time);
 
                     message.success(`Successfully muted user \`${member.user.tag}\`.`);
                 } else return message.success(`Successfully muted user **${member.user.tag}**.`);
