@@ -18,7 +18,8 @@ module.exports = class {
             const file = path.parse(item.path);
             if (!file.ext || file.ext !== ".js") return;
 
-            const taskType = require(item.path);
+            const taskType = require(path.join(file.dir, file.base));
+            console.log(typeof taskType);
             this.taskTypes.set(file.name, taskType);
         }).on("end", () => {
             this.taskInit();
