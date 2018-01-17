@@ -22,6 +22,7 @@ module.exports = class extends Command {
         const level2 = list.filter(c => this.client.commands._get(c).permission === 2).map(c => `${this.client.config.prefix}${c}`);
         const level1 = list.filter(c => this.client.commands._get(c).permission === 1).map(c => `${this.client.config.prefix}${c}`);
         const level0 = list.filter(c => this.client.commands._get(c).permission === 0).map(c => `${this.client.config.prefix}${c}`);
+        console.log(level4.join(", ")); //debug
 
         message.author.buildEmbed()
             .setColor(0x00ADFF)
