@@ -10,7 +10,7 @@ class New extends Event {
     }
 
     async execute() {
-        this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
+        this.client.handlers.process.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
         this.client.user.setActivity(`Client Started`);
         this.client.handlers.process.transmitStats();
         this.client.handlers.process.transmit("transmitTesters");

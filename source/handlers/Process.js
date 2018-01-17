@@ -26,8 +26,8 @@ class ProcessHandler {
 
             channel.send(data.content, options).catch(err => channel.send(`An error occued while executing an external message.`));
         } else if (type === "globaleval") {
-            try { this.client.log(eval(data.code)); }
-            catch(err) { this.client.log(err, true); }
+            try { this.client.handlers.process.log(eval(data.code)); }
+            catch(err) { this.client.handlers.process.log(err, true); }
         } else if (type === "guildData") {
             if (!this.client.guilds.has(data.guild)) return;
 
