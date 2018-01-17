@@ -29,7 +29,7 @@ module.exports = class extends Command {
             .addField("» Server Owner", level4.length ? level4.join(", ") : "No commands to display.")
             .addField("» Server Administrator", level3.length ? level3.join(", ") : "No commands to display.")
             .addField("» Server Moderator", level2.length ? level2.join(", ") : "No commands to display.")
-            .addField("» Server DJ", level1.length ? level1.join(", ") : "No commands to display.".join(", "))
+            .addField("» Server DJ", level1.length ? level1.join(", ") : "No commands to display.")
             .addField("» Server Member", level0.length ? level0.join(", ") : "No commands to display.")
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
