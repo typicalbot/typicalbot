@@ -22,16 +22,15 @@ module.exports = class extends Command {
         const level2 = list.filter(c => this.client.commands._get(c).permission === 2).map(c => `${this.client.config.prefix}${c}`);
         const level1 = list.filter(c => this.client.commands._get(c).permission === 1).map(c => `${this.client.config.prefix}${c}`);
         const level0 = list.filter(c => this.client.commands._get(c).permission === 0).map(c => `${this.client.config.prefix}${c}`);
-        console.log(level4.join(", ")); //debug
 
         message.author.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Commands")
-            .addField("» Server Owner", level4.join(", "))
-            .addField("» Server Administrator", level3.join(", "))
-            .addField("» Server Moderator", level2.join(", "))
-            .addField("» Server DJ", level1.join(", "))
-            .addField("» Server Member", level0.join(", "))
+            .addField("» Server Owner", level4.length ? level4.join(", ") : "No commands to display.")
+            .addField("» Server Administrator", level3.length ? level4.join(", ") : "No commands to display.")
+            .addField("» Server Moderator", level2.length ? level4.join(", ") : "No commands to display.")
+            .addField("» Server DJ", level1.length ? level4.join(", ") : "No commands to display.".join(", "))
+            .addField("» Server Member", level0.length ? level4.join(", ") : "No commands to display.")
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send(); 
