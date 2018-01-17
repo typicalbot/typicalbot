@@ -10,7 +10,7 @@ class DatabaseHandler {
 
     get(table, key) {
         let query = this.connection.table(table);
-        if (key) query = query.key(key);
+        if (key) query = query.get(key);
 
         return query;
     }
