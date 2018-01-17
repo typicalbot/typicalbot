@@ -21,7 +21,7 @@ class New extends Event {
         const userPermissions = this.client.handlers.permissions.fetch(message.guild, message.author);
         
         if (userPermissions.level === Constants.Permissions.SERVER_BLACKLISTED) return;
-        if (userPermissions.level < Constants.Permissions.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.client.automod.inviteCheck(message);
+        if (userPermissions.level < Constants.Permissions.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.client.handlers.automoderation.inviteCheck(message);
         if (userPermissions.level < Constants.Permissions.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id)) return;
 
         const split = message.content.split(" ")[0];
