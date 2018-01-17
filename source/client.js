@@ -1,4 +1,4 @@
-require("../utility/Extenders");
+require("./utility/Extenders");
 
 const { Client, Collection }    = require("discord.js");
 
