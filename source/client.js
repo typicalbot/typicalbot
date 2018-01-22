@@ -58,7 +58,7 @@ class TypicalBot extends Client {
         this.caches.softbans            = new Collection();
 
         this.utility                    = {};
-        this.utility.MusicHandler       = new MusicUtility(this);
+        this.utility.music              = new MusicUtility(this);
 
         this.login(this.config.token);
     }
