@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
     execute(message, parameters, permissionLevel) {
         try {
-            const args = /(return\s+)?(.+)$/i(parameters);
+            const args = /(return\s+)?(.+)$/i.exec(parameters);
             let code = parameters;
 
             if (!args[1]) code = code.replace(/(.+)$/, `return ${args[2]}`);
