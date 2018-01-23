@@ -20,7 +20,7 @@ module.exports = class extends Command {
             .setColor(0x00ADFF)
             .setTitle("Credits")
             .setDescription(`To those who have helped with specific pieces of the bot.`)
-            .addField("For creation of the TypicalBot icon.", "» Aklixio#0588 (84430408447426560)")
+            .addField("Designer of TypicalBot's Icon:", "» Aklixio#0588 (84430408447426560)")
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
