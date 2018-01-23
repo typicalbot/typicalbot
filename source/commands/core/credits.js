@@ -12,14 +12,14 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        message.send(`To those who have helped with specific pieces of the bot:\n\nFor creation of the TypicalBot icon.\n» Aklixio#0588 (84430408447426560)`);
+        message.send(`The TypicalBot Team would like to gives thanks to the following people for making contributions to me:\n\nDesigner of TypicalBot's Icon\n» Aklixio#0588 (84430408447426560)`);
     }
 
     embedExecute(message, response){
         message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("Credits")
-            .setDescription(`To those who have helped with specific pieces of the bot.`)
+            .setDescription(`The TypicalBot Team would like to gives thanks to the following people for making contributions to me:`)
             .addField("Designer of TypicalBot's Icon:", "» Aklixio#0588 (84430408447426560)")
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
