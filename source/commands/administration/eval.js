@@ -13,8 +13,12 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const code = message.content.slice(message.content.search(" ") + 1);
         try {
+            const args = /(return\s+)?(.+)$/i(parameters);
+            let code = parameters;
+
+            if (!args[1]) code = code.replace(/(.+)$/, `return ${args[2]}`);
+
             const output = eval(`(async () => { ${code} })()`);
 
             output instanceof Promise ?
