@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        message.send(`The TypicalBot Team would like to gives thanks to the following people for making contributions to me:\n\nDesigner of TypicalBot's Icon\n» Aklixio#0588 (84430408447426560)`);
+        message.send(`The TypicalBot Team would like to gives thanks to the following people for making contributions to me:\n\n» Aklixio#0588 (84430408447426560) - Designer of TypicalBot's icon.`);
     }
 
     embedExecute(message, response){
@@ -20,7 +20,7 @@ module.exports = class extends Command {
             .setColor(0x00ADFF)
             .setTitle("Credits")
             .setDescription(`The TypicalBot Team would like to gives thanks to the following people for making contributions to me:`)
-            .addField("Designer of TypicalBot's Icon:", "» Aklixio#0588 (84430408447426560)")
+            .addField("» Aklixio#0588 (84430408447426560)", "Designer of TypicalBot's icon.")
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
