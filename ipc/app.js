@@ -11,6 +11,11 @@ class IPC extends express {
 
         this.use(bodyParser.json());
 
+        function isAuthenticated(req, res, next) {
+            if (req.get("Authentication").replace("'", "") === this.master.config.apitoken) return next();
+            return res.status(403).json({ "message": "Authentication Required" });
+        }
+
         /*
                                                            - - - - - - - - - -
 
@@ -19,11 +24,11 @@ class IPC extends express {
                                                            - - - - - - - - - -
         */
 
-        this.get("/stats", (req, res, next) => {
+        this.get("/stats", isAuthenticated, (req, res, next) => {
             res.json(master.stats);
         });
 
-        this.get("/guilds/:guildid", (req, res, next) => {
+        this.get("/guilds/:guildid", isAuthenticated, (req, res, next) => {
             const guild = req.params.guildid;
 
             this.master.globalRequest("guildData", { guild }).then(data => {
@@ -33,9 +38,7 @@ class IPC extends express {
             });
         });
 
-        this.post("/guilds/:guildid/leave", (req, res, next) => {
-            if (req.get("token").replace("'", "") !== this.master.config.apitoken) return res.status(403).json({ "message": "Not Authenticated" });
-
+        this.post("/guilds/:guildid/leave", isAuthenticated, (req, res, next) => {
             const guild = req.params.guildid;
 
             this.master.globalRequest("leaveGuild", { guild }).then(data => {
@@ -45,7 +48,7 @@ class IPC extends express {
             });
         });
 
-        this.get("/guilds/:guildid/users/:userid", (req, res, next) => {
+        this.get("/guilds/:guildid/users/:userid", isAuthenticated, (req, res, next) => {
             const guild = req.params.guildid;
             const user = req.params.userid;
 
