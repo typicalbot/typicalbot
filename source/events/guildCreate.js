@@ -10,7 +10,7 @@ class New extends Event {
         
         if (this.client.build === "stable") this.client.functions.postStats("a");
         
-        this.client.handler.process.transmitStats();
+        this.client.handlers.process.transmitStats();
     }
 }
 
