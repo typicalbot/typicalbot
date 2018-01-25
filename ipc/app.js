@@ -39,7 +39,7 @@ class IPC extends express {
             const guild = req.params.guildid;
 
             this.master.globalRequest("leaveGuild", { guild }).then(data => {
-                return res.status(200);
+                return res.status(200).json({ "message": "Success" });
             }).catch(err => {
                 return res.status(500).json({ "message": "Request Timed Out", "error": err  });
             });
