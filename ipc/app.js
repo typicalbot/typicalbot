@@ -34,6 +34,8 @@ class IPC extends express {
         });
 
         this.post("/guilds/:guildid/leave", (req, res, next) => {
+            if (req.headers.token !== this.config.token) return res.status(403).json({ "message": "Not Authenticated" });
+            
             const guild = req.params.guildid;
 
             this.master.globalRequest("leaveGuild", { guild }).then(data => {
