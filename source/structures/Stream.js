@@ -27,7 +27,7 @@ class Stream {
         this.dispatcher = this.connection.playStream(stream, { volume: this.volume });
         this.current = video;
 
-        video.requester.send(`🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`);
+        display(`🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`);
 
         this.dispatcher.on("error", err => {
             video.requester.send(`An error occured playing the video. ${this.queue.length ? "Attempting to play the next video in the queue." : "Leaving the channel."}`);
