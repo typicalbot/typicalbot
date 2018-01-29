@@ -13,14 +13,14 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        message.send(`**Documentation can be found here:** <${Constants.Links.DOCUMENTATION}>`);
+        message.send(`Documentation for all commands and settings can be found at **<${Constants.Links.DOCUMENTATION}>**.`);
     }
 
     embedExecute(message, response) {
         message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Documentation")
-            .setDescription(`**Documentation can be found here:** <${Constants.Links.DOCUMENTATION}>`)
+            .setDescription(`Documentation for all commands and settings can be found at **<${Constants.Links.DOCUMENTATION}>**.`)
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();

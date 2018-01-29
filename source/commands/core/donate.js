@@ -12,14 +12,14 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        message.send(`**Donations can be sent here:** <${Constants.Links.DONATE}>\n\nDonations go to the creator of TypicalBot for any finances.`);
+        message.send(`You can donate to my creator at **<${Constants.Links.DONATE}>** to help support my growth, development, and stability.`);
     }
 
     embedExecute(message, response){
         message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("Donate to TypicalBot's Creator")
-            .setDescription(`You can donate to TypicalBot [here](${Constants.Links.DONATE}>).\n\nDonations go to the creator of TypicalBot for any finances.`)
+            .setDescription(`You can donate to my creator at **<${Constants.Links.DONATE}>** to help support my growth, development, and stability.`)
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();

@@ -12,10 +12,10 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        if (!parameters) return message.send(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${Constants.Links.DOCUMENTATION}>. If you need help, join us in the TypicalBot Lounge at <${Constants.Links.SERVER}>.`);
+        if (!parameters) return message.send(`Hello there; I'm TypicalBot! I was created by HyperCoder#2975. If you would like to access my list of commands, try using \`${this.client.config.prefix}commands\`. If you need any help with commands or settings, you can find documentation at **<${Constants.Links.DOCUMENTATION}>**. If you cannot figure out how to use a command or setting, or would like to chat, you can join us in the TypicalBot Lounge at **<${Constants.Links.SERVER}>**.\n\n\t\t\t*Built upon over a year of experience, TypicalBot is the ironically-named bot that is far from typical.\n\t\t\tStable, lightning fast, and easy to use, TypicalBot is there for you and will seamlessly help you moderate\n\t\t\tyour server and offer some entertaining features for your users, every step of the way.*`);
 
         const command = await this.client.commands.fetch(parameters, message.guild.settings.aliases);
-        if (!command) return message.error(`The command \`${parameters}\` does not exist.`);
+        if (!command) return message.error(`There is not a command named \`${parameters}\`. Try searching something else.`);
 
         message.send(
             `**__Usage For:__** ${parameters}\n`
@@ -34,7 +34,7 @@ module.exports = class extends Command {
         if (!parameters) return message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Info")
-            .setDescription(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${Constants.Links.DOCUMENTATION}>. If you need help, join us in the TypicalBot Lounge at <${Constants.Links.SERVER}>.`)
+            .setDescription(`Hello there; I'm TypicalBot! I was created by HyperCoder#2975. If you would like to access my list of commands, try using \`${this.client.config.prefix}commands\`. If you need any help with commands or settings, you can find documentation at **<${Constants.Links.DOCUMENTATION}>**. If you cannot figure out how to use a command or setting, or would like to chat, you can join us in the TypicalBot Lounge at **<${Constants.Links.SERVER}>**.\n\n\t\t\t*Built upon over a year of experience, TypicalBot is the ironically-named bot that is far from typical.\n\t\t\tStable, lightning fast, and easy to use, TypicalBot is there for you and will seamlessly help you moderate\n\t\t\tyour server and offer some entertaining features for your users, every step of the way.*`)
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
