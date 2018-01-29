@@ -73,7 +73,7 @@ class TaskHandler extends Collection {
         return;
     }
 
-    async clear(member) {
+    async clear(type, member) {
         const task = this.filter(t => t.guild === member.guild.id && t.member === member.id);
         if (!task.size) return;
 
