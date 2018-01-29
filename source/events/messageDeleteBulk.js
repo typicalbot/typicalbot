@@ -19,7 +19,7 @@ class New extends Event {
 
         const channel = messages.first().channel;
 
-        const haste = await this.client.functions.hastebin(messages.map(m => `${moment().format("dddd MMMM Do, YYYY, hh:mm A")} | ${m.author.tag} (${m.author.id}):\n${m.content}`).join("\n\n--  --  --  --  --\n\n"));
+        const haste = await this.client.functions.hastebin(messages.map(m => `${moment(m.createdAt).format("dddd MMMM Do, YYYY, hh:mm A")} | ${m.author.tag} (${m.author.id}):\n${m.content}`).join("\n\n--  --  --  --  --\n\n"));
 
         if (settings.logs.delete === "--embed") return channel.buildEmbed()
             .setColor(0x3EA7ED)
