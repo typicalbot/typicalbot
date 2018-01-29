@@ -15,7 +15,7 @@ module.exports = class extends Command {
         const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)\s*d(?:ays?)?)?\s?(?:(\d+)\s*h(?:ours?|rs?)?)?\s?(?:(\d+)\s*m(?:inutes?|in)?)?\s?(?:(\d+)\s*s(?:econds?|ec)?)?)?(?:\s+(\d+))?(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const user = args[1], days = args[2], hours = args[3], minutes = args[4], seconds = args[5], purgeDays = args[6], reason = args[7];
+        const user = args[1], days = args[2], hours = args[3], minutes = args[4], seconds = args[5], purgeDays = args[6] || 0, reason = args[7];
         const time = ((60 * 60 * 24 * (days ? Number(days) : 0)) + (60 * 60 * (hours ? Number(hours) : 0)) + (60 * (minutes ? Number(minutes) : 0)) + (seconds ? Number(seconds) : 0)) * 1000;
 
         if (time > (1000 * 60 * 60 * 24 * 7)) return message.error("You cannot ban a user for more than a week.");
