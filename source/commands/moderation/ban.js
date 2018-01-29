@@ -46,10 +46,10 @@ module.exports = class extends Command {
             }).catch(err => {
                 if (err === "Error: Couldn't resolve the user ID to ban.") return message.error(`The requested user could not be found.`);
 
-                message.error(`An error occured while trying to ban the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
+                message.error(`An error occured while trying to ban the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err.stack}\`\`\`` : ""}`);
 
                 this.client.caches.bans.delete(toBan.id || toBan);
             });
-        }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
+        }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err.stack}\`\`\`` : ""}`));
     }
 };
