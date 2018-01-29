@@ -1,85 +1,92 @@
-const ytdl      = require("ytdl-core");
+const Stream = require("../structures/Stream");
 
-const SYS       = require("simple-youtube-stream");
-const sys       = new SYS();
-
-const apiKey    = require(`../../configs/${process.env.CLIENT_BUILD}`).youtubekey;
-
-const YAPI      = require("simple-youtube-api");
-const TBYT      = new YAPI(apiKey);
-
-const Video = require("../structures/Video");
-
-class AudioUtil {
+module.exports = class {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
     }
 
-    withinLimit(message, video) {
-        return video.length <= (message.guild.settings.music.timelimit || 1800) ? true : false;
+    async connect(message) {
+        const channel = message.member.voiceChannel;
+
+        if (!channel) throw "You must be connected to a voice channel to use music features.";
+        if (!channel.joinable) throw "I require joining permissions to use music features.";
+        if (!channel.speakable) throw "I require speaking permissions to use music features.";
+
+        const connection = await channel.join().catch(err => { throw err; });
+
+        this.client.emit("voiceConnectionUpdate", connection);
+
+        return connection;
     }
 
-    fetchInfo(url, message) {
-        return new Promise((resolve, reject) => {
-            ytdl.getInfo(url, (err, info) => {
-                if (err) return reject(err);
+    async stream(message, video, playlist = false) {
+        if (!playlist) if (!this.client.audioUtility.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
 
-                const video = new Video(url, info, message);
-                return resolve(video);
-            });
-        });
-    }
+        const currConnection = message.guild.voiceConnection;
 
-    async fetchPlaylist(message, id) {
-        const t = Date.now();
-        const YT = message.guild.settings.music.apikey ? new YAPI(message.guild.settings.music.apikey) : TBYT;
+        if (currConnection) {
+            if (currConnection.guildStream.mode !== "queue") throw "You can only add to the queue while in queue mode.";
 
-        const playlist = await YT.getPlaylistByID(id).catch(err => { throw err; });
-        const videos = await playlist.getVideos().catch(err => { throw err; });
+            if (!message.member.voiceChannel || message.member.voiceChannel.id !== currConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
+            if (currConnection.guildStream.queue.length >= (video.requester.guild.settings.music.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.music.queuelimit || 10} has been reached.`);
 
-        return videos;
-    }
-
-    search(settings, query) {
-        return new Promise((resolve, reject) => {
-            const YT = settings.music.apikey ? new YAPI(settings.music.apikey) : TBYT;
-            YT.search(query, 10).then(results => {
-                const filtered = results.filter(a => a.type === "video");
-                return resolve(filtered);
-            }).catch(error => {
-                return reject(error);
-            });
-        });
-    }
-
-    searchError(error) {
-        if (!error.errors) return `An unknown error occured while requesting that video:\n${error.stack}`;
-        const err = error.errors[0].reason;
-        if (!err) return `An unknown error occured while requesting that video:\n${error}`;
-        if (err === "keyInvalid") return "**__An unknown error occured while requesting that video:__**\n\nThis server entered an invalid YouTube API Key.";
-        else if (err === "quotaExceeded") return "**__An error occured while requesting that video:__**\n\nOur Global YouTube API Quota limit exceeded, meaning no more searches can be made until it is reset at 3 AM EST.\n\n**__How to Resolve the Issue:__**\n```md\n# You can resolve the issue by creating your own YouTube Data API v3 Key.\n\n< Join TypicalBot's server and use the command '/tag apikeyhowto' for more information on how to do so.```\n**Link:** <https://typicalbot.com/join-our-server/>";
-        else return `An unknown error occured while requesting that video:\n${err}`;
-    }
-
-    permissionCheck(message, command, permissions) {
-        const level = permissions.level;
-
-        const musicperms = message.guild.settings.music.default;
-        const override = message.guild.settings.music[`${command.name}`];
-        if (override === "off") if (musicperms === "all" || musicperms === "dj" && level >= 1 || musicperms === "moderator" && level >= 2 || musicperms === "administrator" && level >= 3) return { has: true };
-        if (override === "all" || override === "dj" && level >= 1 || override === "moderator" && level >= 2 || override === "administrator" && level >= 3) return { has: true };
-        return { has: false, req: override === "off" ? musicperms : override };
-    }
-
-    hasPermissions(message, command) {
-        const userTrueLevel = this.client.handlers.permissions.fetch(message.guild, message.author, true);
-
-        const permissionCheck = this.permissionCheck(message, command, userTrueLevel);
-        if (permissionCheck.has) { return true; } else {
-            message.error(this.client.functions.error("elevation", this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0 ));
-            return false;
+            if (playlist) return this.queuePlaylist(message, video, currConnection.guildStream).catch(err => { throw err; });
+            return currConnection.guildStream.addQueue(video);
         }
-    }
-}
 
-module.exports = AudioUtil;
+        const connection = await this.connect(message).catch(err => { throw err; });
+
+        const playlistFirst = playlist ? await this.startPlaylist(message, video, connection.guildStream).catch(err => { throw err; }) : null;
+
+        playlist ?
+            connection.guildStream.play(playlistFirst).catch(err => { throw err; }) :
+            connection.guildStream.play(video).catch(err => { throw err; });
+    }
+
+    shuffle(arr) {
+        for (let i = arr.length; i; i--) {
+            const j = Math.floor(Math.random() * i);
+            [arr[i - 1], arr[j]] = [arr[j], arr[i - 1]];
+        }
+        return arr;
+    }
+
+    async startPlaylist(message, id, guildStream) {
+        message.reply(`Loading the playlist into the queue. This may take a while.`);
+
+        const playlist = this.shuffle(await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; }));
+        playlist.splice(101, Infinity);
+
+        const first = await this.client.audioUtility.fetchInfo(playlist[0].url).catch(err => { return; });
+        Object.defineProperty(first, "requester", { value: message });
+
+        playlist.forEach(async v => {
+            const video = await this.client.audioUtility.fetchInfo(v.url, message).catch(err => { return; });
+            if (!video) return;
+
+            if (!this.client.audioUtility.withinLimit(message, video)) return;
+
+            guildStream.addQueue(video, true);
+        });
+
+        return first;
+    }
+
+    async queuePlaylist(message, id, guildStream) {
+        message.reply(`Loading the playlist into the queue. This may take a while.`);
+
+        const playlist = this.shuffle(await this.client.audioUtility.fetchPlaylist(message, id).catch(err => { throw err; }));
+        playlist.splice(101, Infinity);
+
+        playlist.forEach(async v => {
+            const video = await this.client.audioUtility.fetchInfo(v.url, message).catch(err => { return; });
+            if (!video) return;
+
+            if (!this.client.audioUtility.withinLimit(message, video)) return;
+
+            video.setRequester(message);
+
+            guildStream.addQueue(video, true);
+        });
+    }
+};
