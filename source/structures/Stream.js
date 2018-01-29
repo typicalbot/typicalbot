@@ -22,6 +22,8 @@ class Stream {
 
         const stream = await video.stream().catch(err => { throw err; });
 
+        const display = this.current && video.requester.channel.lastMessageID === this.current.requester.id ? video.requester.edit : video.requester.send;
+
         this.dispatcher = this.connection.playStream(stream, { volume: this.volume });
         this.current = video;
 

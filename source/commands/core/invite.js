@@ -18,7 +18,7 @@ module.exports = class extends Command {
     embedExecute(message, response){
         message.buildEmbed()
             .setColor(0x00adff)
-            .setTitle("TypicalBot Invite Link")
+            .setTitle("TypicalBot Invite")
             .setDescription(`You can add me to your server [here](${Constants.Links.OAUTH}).`)
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()

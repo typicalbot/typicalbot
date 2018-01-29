@@ -16,7 +16,7 @@ module.exports = class extends Command {
 
         const list = members.map(m => `» ${m.displayName} (${m.id}) | ${m.user.presence.activity.name}`);
 
-        message.send(`**__Users with an invite in their playing status:__**\n\n${list.length ? list.join("\n\n").substring(0, 2000) : "No users to display."}`)
+        message.send(list.length ? `There ${list.length === 1 ? "is 1 user" : `are ${list.length} users`} with an invite in their status:\n\n${list.join("\n\n").substring(0, 2000)}` : "There are no users with an invite in their status.");
     }
 
     embedExecute(message, parameters, permissionLevel) {
@@ -27,7 +27,7 @@ module.exports = class extends Command {
         message.buildEmbed()
             .setColor(0xFF0000)
             .setTitle("Users with Invite in Playing Status")
-            .setDescription(list.length ? list.join("\n\n").substring(0, 2000) : "No users to display.")
+            .setDescription(list.length ? list.join("\n\n").substring(0, 2000) : "There are no users with an invite in their status.")
             .send();
     }
 };
