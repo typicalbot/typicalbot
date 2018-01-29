@@ -67,7 +67,7 @@ module.exports = class extends Command {
             const subRole = subArgs[4] ? message.guild.roles.get(subArgs[4]) : subArgs[5] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[5].toLowerCase()) : null;
             if (!subRole) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
             if (!subRole.editable) return message.error(`Insignificant permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give or take and that I have the Manage Roles permission.`);
-            if (message.member.highestRole.position <= subRole.position) return message.error("You cannot give yourself or another user your highest role or any role higher.");
+            if (message.member.roles.highest.position <= subRole.position) return message.error("You cannot give yourself or another user your highest role or any role higher.");
 
             subMember.addRole(subRole)
                 .then(() => message.reply(`Success.`))
@@ -84,7 +84,7 @@ module.exports = class extends Command {
             const subRole = subArgs[4] ? message.guild.roles.get(subArgs[4]) : subArgs[5] ? message.guild.roles.find(r => r.name.toLowerCase() === subArgs[5].toLowerCase()) : null;
             if (!subRole) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
             if (!subRole.editable) return message.error(`Insignificant permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give or take and that I have the Manage Roles permission.`);
-            if (message.member.highestRole.position <= subRole.position) return message.error("You cannot take a role from yourself or another user when your highest role is lower than the given role.");
+            if (message.member.roles.highest.position <= subRole.position) return message.error("You cannot take a role from yourself or another user when your highest role is lower than the given role.");
 
             subMember.removeRole(subRole)
                 .then(() => message.reply(`Success.`))

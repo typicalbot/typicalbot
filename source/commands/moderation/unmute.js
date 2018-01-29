@@ -25,7 +25,7 @@ module.exports = class extends Command {
 
             if (!member.roles.has(message.guild.settings.roles.mute)) return message.error("The requested user is not muted.");
 
-            if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot mute a user with either the same or higher highest role.`);
+            if (message.member.roles.highest.position <= member.roles.highest.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot mute a user with either the same or higher highest role.`);
 
             const role = message.guild.roles.get(message.guild.settings.roles.mute);
             if (!role.editable) return message.error(`In order to complete the request, I need the **MANAGE ROLES** permission. Also, my highest role needs to be higher than the requested user's highest role and the mute role.`);
