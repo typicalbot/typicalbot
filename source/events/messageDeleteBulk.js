@@ -13,19 +13,23 @@ class New extends Event {
 
         if (!settings.logs.id || !settings.logs.delete) return;
 
-        const channel = messages.first().guild.channels.get(settings.logs.id);
-        if (!channel) return;
+        const logsChannel = messages.first().guild.channels.get(settings.logs.id);
+        if (!logsChannel) return;
+
+        const channel = messages.first().channel;
+
+        const haste = await this.client.functions.hastebin(messages.map(m => `${m.author.tag} (${m.author.id}):\n${m.content}`).join("\n"));
 
         if (settings.logs.delete === "--embed") return channel.buildEmbed()
             .setColor(0x3EA7ED)
-            .setDescription(await this.client.functions.hastebin())
+            .setDescription(haste)
             .setFooter(`Messages Deleted in #${channel.name} (${channel.id})`)
             .setTimestamp()
             .send()
             .catch(() => { return; });
 
 
-        channel.send(`${messages.size} messages were purged in ${channel.toString()} (${channel.id})`).catch(() => { return; });
+        logsChannel.send(`${messages.size} messages were purged in ${channel.toString()} (${channel.id}): ${haste}`).catch(() => { return; });
     }
 }
 
