@@ -26,7 +26,7 @@ module.exports = class extends Command {
         message.author.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Commands")
-            .setDescription(`Use \`${this.client.config.prefix}help <command>\` to get more information on a specific command.`)
+            .setDescription(`Use ***${this.client.config.prefix}help <command>*** to get more information on a specific command.`)
             .addField("» Server Owner", level4.length ? level4.join(", ") : "No commands to display.")
             .addField("» Server Administrator", level3.length ? level3.join(", ") : "No commands to display.")
             .addField("» Server Moderator", level2.length ? level2.join(", ") : "No commands to display.")
