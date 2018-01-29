@@ -1,4 +1,5 @@
 const Event = require("../structures/Event");
+const moment = require("moment");
 
 class New extends Event {
     constructor(...args) {
@@ -18,7 +19,7 @@ class New extends Event {
 
         const channel = messages.first().channel;
 
-        const haste = await this.client.functions.hastebin(messages.map(m => `${m.author.tag} (${m.author.id}):\n${m.content}`).join("\n"));
+        const haste = await this.client.functions.hastebin(messages.map(m => `${moment().format("dddd MMMM Do, YYYY, hh:mm A")} | ${m.author.tag} (${m.author.id}):\n${m.content}`).join("\n\n--  --  --  --  --\n\n"));
 
         if (settings.logs.delete === "--embed") return channel.buildEmbed()
             .setColor(0x3EA7ED)
