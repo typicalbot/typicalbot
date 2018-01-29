@@ -7,7 +7,7 @@ class New extends Function {
     }
 
     async execute(content) {
-        const { body } = await snekfetch.get("https://hastebin.com/documents").send(content).catch(e => { throw e; });
+        const { body } = await snekfetch.post("https://hastebin.com/documents").send(content).catch(e => { throw e; });
 
         return `https://hastebin.com/${body.key}`;
     }
