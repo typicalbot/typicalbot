@@ -7,7 +7,7 @@ module.exports = class extends Command {
             description: "Create an alias for commands.",
             usage: "alias <'list'|'add'|'remove'|'clear'> <add/remove:command> <add:new-alias>",
             aliases: ["aliases"],
-            permission: Constants.Permissions.SERVER_ADMINISTRATOR,
+            permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
             mode: Constants.Modes.STRICT,
             access: Constants.Access.DONOR
         });

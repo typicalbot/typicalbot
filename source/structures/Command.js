@@ -16,7 +16,7 @@ class Command {
 
         this.dm = dm || false;
 
-        this.permission = permission || Constants.Permissions.SERVER_MEMBER;
+        this.permission = permission || Constants.Permissions.Levels.SERVER_MEMBER;
 
         this.mode = mode || Constants.Modes.FREE;
 

@@ -6,7 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Mute a member in the server.",
             usage: "mute <@user> [time:xd(ays) xh(ours) xm(inutes) xs(seconds)] [reason]",
-            permission: Constants.Permissions.SERVER_MODERATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }

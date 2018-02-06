@@ -20,9 +20,9 @@ class New extends Event {
 
         const userPermissions = this.client.handlers.permissions.fetch(message.guild, message.author);
         
-        if (userPermissions.level === Constants.Permissions.SERVER_BLACKLISTED) return;
-        if (userPermissions.level < Constants.Permissions.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.client.handlers.automoderation.inviteCheck(message);
-        if (userPermissions.level < Constants.Permissions.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id)) return;
+        if (userPermissions.level === Constants.Permissions.Levels.SERVER_BLACKLISTED) return;
+        if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.client.handlers.automoderation.inviteCheck(message);
+        if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id)) return;
 
         const split = message.content.split(" ")[0];
         
@@ -52,7 +52,7 @@ class New extends Event {
         if (!message.content.startsWith(this.client.config.prefix)) return;
 
         const command = await this.client.commands.fetch(message.content.split(" ")[0].slice(this.client.config.prefix.length));
-        if (!command || !command.dm || command.permission > Constants.Permissions.SERVER_MEMBER) return;
+        if (!command || !command.dm || command.permission > Constants.Permissions.Levels.SERVER_MEMBER) return;
 
         command.execute(message);
     }

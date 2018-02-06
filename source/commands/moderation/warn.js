@@ -6,7 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Warn a member in the server.",
             usage: "warn <@user> [reason]",
-            permission: Constants.Permissions.SERVER_MODERATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }
