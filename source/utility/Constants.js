@@ -22,6 +22,10 @@ exports.Access = {
 };
 
 exports.Permissions = {
+
+};
+
+exports.Permissions.Levels = {
     SERVER_BLACKLISTED: -1,
     SERVER_MEMBER: 0,
     SERVER_DJ: 1,
@@ -31,6 +35,13 @@ exports.Permissions = {
     TYPICALBOT_SUPPORT: 8,
     TYPICALBOT_ADMINISTRATOR: 9,
     TYPICALBOT_CREATOR: 10
+};
+
+exports.Permissions.RoleTitles = {
+    ADMINISTRATOR: "TypicalBot Administrator",
+    MODERATOR: "TypicalBot Moderator",
+    DJ: "TypicalBot DJ",
+    BLACKLIST: "TypicalBot Blacklist"
 };
 
 exports.Modes = {

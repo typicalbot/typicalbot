@@ -6,7 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "A command to reload modules.",
             usage: "reload <module>",
-            permission: Constants.Permissions.TYPICALBOT_ADMINISTRATOR,
+            permission: Constants.Permissions.Levels.TYPICALBOT_ADMINISTRATOR,
             mode: Constants.Modes.STRICT
         });
     }

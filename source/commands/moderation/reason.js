@@ -6,7 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Change or set a reason for a case in moderation logs.",
             usage: "reason <case-id|'latest'> [reason]",
-            permission: Constants.Permissions.SERVER_MODERATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }
