@@ -12,12 +12,12 @@ class New extends Function {
             return `Invalid command usage. Check \`${this.client.config.prefix}help ${command.name}\` for more information.`;
         } else if (error === "perms") {
             const [ command, uLevel ] = args;
-            const rLevel = this.client.permissions.define(command.permission);
+            const rLevel = this.client.handlers.permissions.define(command.permission);
             
             return `Your permission level is too low to execute that command. The command requires permission level ${rLevel.level} (${rLevel.title}) and you are level ${uLevel.level} (${uLevel.title}).`;
         } else if (error === "elevation") {
             const [ command, uLevel, rLevel ] = args;
-            const rrLevel = this.client.permissions.define(rLevel);
+            const rrLevel = this.client.handlers.permissions.define(rLevel);
             
             return `This server requires elevated permissions to use that command. The command requires permission level ${rrLevel.level} (${rrLevel.title}) and you are level ${uLevel.level} (${uLevel.title}).`;
         }

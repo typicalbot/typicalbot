@@ -1,13 +1,14 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Purge messages in a channel.",
-            aliases: ["prune"],
             usage: "purge [@user|#channel|@role|'me'|'you'|'bots'] <message-count>",
-            mode: "strict",
-            permission: 2
+            aliases: ["prune"],
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -47,10 +48,8 @@ module.exports = class extends Command {
         if (channelFilter) return channelFilter.bulkDelete(messages, true)
             .then(async msgs => {
                 if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
-                    const log = { "action": "purge", "user": channelFilter, "moderator": message.author };
-                    if (reason) Object.assign(log, { reason });
-        
-                    const _case = await this.client.modlogsManager.createLog(message.guild, log);
+                    const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.PURGE).setModerator(message.author).setChannel(channelFilter);
+                    if (reason) newCase.setReason(reason); newCase.send();
                 }
 
                 message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
@@ -62,10 +61,8 @@ module.exports = class extends Command {
         message.channel.bulkDelete(messages, true)
             .then(async msgs => {
                 if (message.guild.settings.logs.moderation && message.guild.settings.logs.purge) {
-                    const log = { "action": "purge", "user": message.channel, "moderator": message.author };
-                    if (reason) Object.assign(log, { reason });
-        
-                    const _case = await this.client.modlogsManager.createLog(message.guild, log);
+                    const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.PURGE).setModerator(message.author).setChannel(message.channel);
+                    if (reason) newCase.setReason(reason); newCase.send();
                 }
                 
                 message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)

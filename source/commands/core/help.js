@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -6,19 +7,18 @@ module.exports = class extends Command {
             description: "Get general information about TypicalBot or help with a specific command.",
             usage: "help [command]",
             dm: true,
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 
     async execute(message, parameters, permissionLevel) {
-        const commandInput = message.content.split(" ")[1];
-        if (!commandInput) return message.send(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`);
+        if (!parameters) return message.send(`\u200B\t\tHello there; I'm TypicalBot! I was created by HyperCoder#2975. If you would like to access my list of commands, try using \`${this.client.config.prefix}commands\`. If you need any help with commands or settings, you can find documentation at **<${Constants.Links.DOCUMENTATION}>**. If you cannot figure out how to use a command or setting, or would like to chat, you can join us in the TypicalBot Lounge at **<${Constants.Links.SERVER}>**.\n\n\t\t*Built upon over a year of experience, TypicalBot is the ironically-named bot that is far from typical. Stable, lightning fast, and easy to use, TypicalBot is there for you and will seamlessly help you moderate your server and offer some entertaining features for your users, every step of the way.*`);
 
-        const command = await this.client.commands.fetch(commandInput, message.guild.settings.aliases);
-        if (!command) return message.error(`The command \`${commandInput}\` does not exist.`);
+        const command = await this.client.commands.fetch(parameters, message.guild.settings.aliases);
+        if (!command) return message.error(`There is not a command named \`${parameters}\`. Try searching something else.`);
 
         message.send(
-            `**__Usage For:__** ${commandInput}\n`
+            `**__Usage For:__** ${parameters}\n`
             + `**[Param]** means a parameter is optional.\n`
             + `**<Param>** means a parameter is required.\n\n`
             + `\`\`\`\n`
@@ -31,34 +31,33 @@ module.exports = class extends Command {
     }
 
     async embedExecute(message, parameters, permissionLevel) {
-        const commandInput = message.content.split(" ")[1];
-        const command = await this.client.commands.fetch(commandInput, message.guild.settings.aliases);
-
-        if (!commandInput) return message.buildEmbed()
+        if (!parameters) return message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Info")
-            .setDescription(`**Hello, I'm TypicalBot!** I was created by HyperCoder#2975. You can get a list of my commands with \`${this.client.config.prefix}commands\` and my documentation can be found at <${this.client.config.urls.docs}>. If you need help, join us in the TypicalBot Lounge at <${this.client.config.urls.server}>.`)
-            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+            .setDescription(`\u200B\t\tHello there; I'm TypicalBot! I was created by HyperCoder#2975. If you would like to access my list of commands, try using \`${this.client.config.prefix}commands\`. If you need any help with commands or settings, you can find documentation at **<${Constants.Links.DOCUMENTATION}>**. If you cannot figure out how to use a command or setting, or would like to chat, you can join us in the TypicalBot Lounge at **<${Constants.Links.SERVER}>**.\n\n\t\t*Built upon over a year of experience, TypicalBot is the ironically-named bot that is far from typical. Stable, lightning fast, and easy to use, TypicalBot is there for you and will seamlessly help you moderate your server and offer some entertaining features for your users, every step of the way.*`)
+            .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
+
+        const command = await this.client.commands.fetch(parameters, message.guild.settings.aliases);
 
         if (!command) return message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle(`Invalid Command Input`)
-            .setDescription(`The command \`${commandInput}\` does not exist.`)
-            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+            .setDescription(`The command \`${parameters}\` does not exist.`)
+            .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
 
         message.buildEmbed()
             .setColor(0x00ADFF)
-            .setTitle(`Command Usage: ${commandInput}`)
+            .setTitle(`Command Usage: ${parameters}`)
             .setDescription(`• [[Parameter]]() - Optional Parameter\n• [<Parameter>]() - Required Parameter`)
             .addField("» Command", command.name, true)
             .addField("» Aliases", command.aliases.length ? command.aliases.join(", ") : "None")
             .addField("» Description", command.description)
             .addField("» Usage", command.usage)
-            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+            .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
     }

@@ -1,12 +1,12 @@
-const ytdl = require("ytdl-core");
-const SYS = require("simple-youtube-stream");
-const sys = new SYS();
+const ytdl      = require("ytdl-core");
 
-const build = require("../../build");
-const apiKey = require(`../../configs/${build}`).youtubekey;
+const SYS       = require("simple-youtube-stream");
+const sys       = new SYS();
 
-const YAPI = require("simple-youtube-api");
-const TBYT = new YAPI(apiKey);
+const apiKey    = require(`../../configs/${process.env.CLIENT_BUILD}`).youtubekey;
+
+const YAPI      = require("simple-youtube-api");
+const TBYT      = new YAPI(apiKey);
 
 const Video = require("../structures/Video");
 
@@ -72,7 +72,7 @@ class AudioUtil {
     }
 
     hasPermissions(message, command) {
-        const userTrueLevel = this.client.permissions.fetch(message.guild, message.author, true);
+        const userTrueLevel = this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
         const permissionCheck = this.permissionCheck(message, command, userTrueLevel);
         if (permissionCheck.has) { return true; } else {

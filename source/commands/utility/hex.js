@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 const { Canvas } = require("canvas-constructor");
 const { MessageAttachment } = require("discord.js");
 
@@ -7,7 +8,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Sends a preview of a hex color.",
             usage: "hex <hex-color:0-9a-fA-F>",
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 

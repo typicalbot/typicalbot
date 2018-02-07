@@ -8,7 +8,7 @@ class New extends Function {
     execute() {
         const donor = this.client.guilds.get("163038706117115906").roles.find("name", "Donor");
         const list = []; donor.members.forEach(m => list.push(m.id));
-        this.client.transmit("donors", list);
+        this.client.handlers.process.transmit("donors", list);
     }
 }
 

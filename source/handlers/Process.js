@@ -1,13 +1,17 @@
-const { MessageEmbed } = require("discord.js");
+class ProcessHandler {
+    constructor(client) {
+        Object.defineProperty(this, "client", { value: client });
 
-module.exports = class {
-    constructor(client) { Object.defineProperty(this, "client", { value: client }); }
+        process.on("message", message => this.message(message));
+        process.on("uncaughtException", err => this.log(err.stack, true));
+        process.on("unhandledRejection", err => { if (!err) return; this.log(`Uncaught Promise Error:\n${err.stack || JSON.stringify(err)|| err}`, true); });
+    }
 
     async message(message) {
         const { type, data } = message;
 
         if (type === "stats") {
-            this.client.shardData = data;
+            this.client.shards = data;
         } else if (type === "reload") {
             this.client.reload(data);
         } else if (type === "transmitTesters") {
@@ -22,8 +26,8 @@ module.exports = class {
 
             channel.send(data.content, options).catch(err => channel.send(`An error occued while executing an external message.`));
         } else if (type === "globaleval") {
-            try { this.client.log(eval(data.code)); }
-            catch(err) { this.client.log(err, true); }
+            try { this.client.handlers.process.log(eval(data.code)); }
+            catch(err) { this.client.handlers.process.log(err, true); }
         } else if (type === "guildData") {
             if (!this.client.guilds.has(data.guild)) return;
 
@@ -32,7 +36,7 @@ module.exports = class {
 
             const guildOwner = await this.client.users.fetch(guild.ownerID);
 
-            this.client.transmit("masterrequest", {
+            this.client.handlers.process.transmit("masterrequest", {
                 id: data.id,
                 guild: {
                     name: guild.name,
@@ -55,9 +59,9 @@ module.exports = class {
 
             guild.settings = await this.client.settings.fetch(data.guild);
 
-            const permissions = this.client.permissions.fetch(guild, data.user);
+            const permissions = this.client.handlers.permissions.fetch(guild, data.user);
 
-            this.client.transmit("masterrequest", {
+            this.client.handlers.process.transmit("masterrequest", {
                 id: data.id,
                 permissions
             });
@@ -66,9 +70,32 @@ module.exports = class {
 
             this.client.guilds.get(data.guild).leave();
 
-            this.client.transmit("masterrequest", {
+            this.client.handlers.process.transmit("masterrequest", {
                 id: data.id,
             });
         }
     }
-};
+
+    log(message, error = false) {
+        console[error ? "error" : "log"](message);
+    }
+
+    transmit(type, data = {}) {
+        process.send({ type, data });
+    }
+
+    transmitStat(stat) {
+        this.transmit("stats", { [stat]: this.client[stat].size });
+    }
+
+    transmitStats() {
+        this.transmit("stats", {
+            guilds: this.client.guilds.size,
+            channels: this.client.channels.size,
+            voiceConnections: this.client.voiceConnections.size,
+            users: this.client.users.size
+        });
+    }
+}
+
+module.exports = ProcessHandler;

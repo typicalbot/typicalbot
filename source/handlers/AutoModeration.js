@@ -1,6 +1,6 @@
 const { inspect } = require("util");
 
-module.exports = class {
+class AutoModerationHandler {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
     }
@@ -20,4 +20,6 @@ module.exports = class {
             }
         });
     }
-};
+}
+
+module.exports = AutoModerationHandler;

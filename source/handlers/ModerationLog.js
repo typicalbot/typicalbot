@@ -1,40 +1,22 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed }      = require("discord.js");
+const ModerationLogCase     = require("../structures/ModerationLogCase");
 
-const types = {
-    warn: { color: 0xFFFF00, action: "Warn" },
-
-    purge: { color: 0xFFFF00, action: "Message Purge" },
-
-    tempmute: { color: 0xFF9900, action: "Temporary Mute" },
-    mute: { color: 0xFF9900, action: "Mute" },
-
-    tempvmute: { color: 0xFF9900, action: "Temporary Voice Mute" },
-    vmute: { color: 0xFF9900, action: "Voice Mute" },
-
-    kick: { color: 0xFF3300, action: "Kick" },
-    vkick: { color: 0xFF3300, action: "Voice Kick" },
-
-    softban: { color: 0xFF2F00, action: "Softban" },
-
-    tempban: { color: 0xFF0000, action: "Temporary Ban" },
-    ban: { color: 0xFF0000, action: "Ban" },
-
-    unmute: { color: 0x006699, action: "Unmute"},
-    unban: { color: 0x006699, action: "Unban" }
-};
-
-const regex = { action: /\*\*Action:\*\*\s.+/gi, user: /\*\*(?:User|Channel):\*\*\s.+/gi };
+const Constants             = require(`../utility/Constants`);
 
 module.exports = class {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
     }
 
+    get parse() {
+        return ModerationLogCase.parse;
+    }
+
     caseMatch(message) {
         const _case = message.embeds[0];
 
-        const action = _case.description.match(regex.action)[0];
-        const user = _case.description.match(regex.user)[0];
+        const action = _case.description.match(Constants.ModerationLog.Regex.ACTION)[0];
+        const user = _case.description.match(Constants.ModerationLog.Regex.USER)[0];
         const id = _case.footer.text;
         const ts = _case.createdAt;
 
@@ -99,24 +81,26 @@ module.exports = class {
         });
     }
 
+    buildCase(guild, data = {}) {
+        return new ModerationLogCase(this.client, guild, data);
+    }
+
     createLog(guild, { action, moderator, user, reason, length }) {
         return new Promise((resolve, reject) => {
             this.fetchChannel(guild).then(channel => {
                 this.fetchLatest(guild).then(log => {
                     const last = log ? log.embeds[0].footer.text.match(/Case\s(\d+)/)[1] : 0;
 
-                    const type = types[action];
-
-                    const _action = `**Action:** ${type.action}${length ? ` (${this.client.functions.convertTime(length)})` : ""}`;
+                    const _action = `**Action:** ${action.display}${length ? ` (${this.client.functions.convertTime(length)})` : ""}`;
                     const _user = user.discriminator ? `**User:** ${user.username}#${user.discriminator} (${user.id})` : user.guild ? `**Channel:** ${user.name} (${user.toString()})` : "N/A";
                     const _case = Number(last) + 1;
                     const _reason = `**Reason:** ${reason || `Awaiting moderator's input. Use \`$reason ${_case} <reason>\`.`}`;
 
                     const embed = channel.buildEmbed()
-                        .setColor(type.color || 0xC4C4C4)
+                        .setColor(action.hex || 0xC4C4C4)
                         .setURL(this.client.config.urls.website)
                         .setDescription(`${_action}\n${_user}\n${_reason}`)
-                        .setFooter(`Case ${_case}`, "https://typicalbot.com/x/images/icon.png")
+                        .setFooter(`Case ${_case}`, Constants.Links.ICON)
                         .setTimestamp();
 
                     if (moderator) embed.setAuthor(`${moderator.tag} (${moderator.id})`, moderator.avatarURL());
@@ -129,23 +113,14 @@ module.exports = class {
         });
     }
 
-    editReason(_case, moderator, reason) {
-        return new Promise((resolve, reject) => {
-            const { action, user, id, ts } = this.caseMatch(_case);
-            const _reason = `**Reason:** ${reason}`;
+    async edit(_case, moderator, reason) {
+        const parsedCase = ModerationLogCase.parse(_case);
 
-            const embed = new MessageEmbed()
-                .setColor(_case.embeds[0].color || 0xC4C4C4)
-                .setURL(this.client.config.urls.website)
-                .setDescription(`${action}\n${user}\n${_reason}`)
-                .setFooter(id, "https://typicalbot.com/x/images/icon.png")
-                .setTimestamp(ts);
+        parsedCase.setModerator(moderator);
+        parsedCase.setReason(reason);
 
-            if (moderator) embed.setAuthor(`${moderator.tag} (${moderator.id})`, moderator.avatarURL());
+        _case.edit("", { embed: parsedCase.embed });
 
-            _case.edit("", { embed });
-
-            return resolve(id);
-        });
+        return parsedCase._id;
     }
 };

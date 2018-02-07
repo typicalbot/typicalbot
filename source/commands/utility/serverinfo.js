@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
@@ -6,9 +7,9 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Displays the server's information.",
-            aliases: ["sinfo"],
             usage: "serverinfo",
-            mode: "strict"
+            aliases: ["sinfo"],
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -55,7 +56,7 @@ module.exports = class extends Command {
             .addField("» Roles", message.guild.roles.size, true)
             .addField("» Emojis", message.guild.emojis.size, true)
             .setThumbnail(message.guild.iconURL({ "format": "png", "size": 2048 }) || null)
-            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+            .setFooter("TypicalBot", Constants.Links.ICON)
             .send();
     }
 };

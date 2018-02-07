@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -6,7 +7,7 @@ module.exports = class extends Command {
             description: "Manage or view roles in a server.",
             usage: "Check `$roles help` for this command's usage.",
             aliases: ["role"],
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -14,7 +15,7 @@ module.exports = class extends Command {
         const args = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const actualUserPermissions = this.client.permissions.fetch(message.guild, message.author, true);
+        const actualUserPermissions = this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
         const subcommand = args[1], args2 = args[2];
 

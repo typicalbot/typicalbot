@@ -1,3 +1,5 @@
+const Constants = require("../utility/Constants");
+
 class Command {
     constructor(client, name, path, { description, usage, aliases, dm, permission, mode, access }) {
         Object.defineProperty(this, "client", { value: client });
@@ -14,11 +16,11 @@ class Command {
 
         this.dm = dm || false;
 
-        this.permission = permission || 0;
+        this.permission = permission || Constants.Permissions.SERVER_MEMBER;
 
-        this.mode = mode || "free";
+        this.mode = mode || Constants.Modes.FREE;
 
-        this.access = access || 0;
+        this.access = access || Constants.Access.DEFAULT;
     }
 }
 

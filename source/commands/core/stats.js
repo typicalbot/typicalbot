@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 const { loadavg } = require('os');
 
 module.exports = class extends Command {
@@ -7,7 +8,7 @@ module.exports = class extends Command {
             description: "Get TypicalBot's current statistics.",
             usage: "stats",
             dm: true,
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -16,8 +17,8 @@ module.exports = class extends Command {
             `**__TypicalBot's Statistics:__**\n`
             + `\`\`\`autohotkey\n`
             + `=> Uptime            : ${this.client.functions.convertTime(this.client.uptime)}\n`
-            + `=> Servers           : ${this.client.shardData.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})\n`
-            + `=> Voice Connections : ${this.client.shardData.voiceConnections.toLocaleString()}\n`
+            + `=> Servers           : ${this.client.shards.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})\n`
+            + `=> Voice Connections : ${this.client.shards.voiceConnections.toLocaleString()}\n`
             + `=> Library           : discord.js\n`
             + `=> Created By        : HyperCoder#2975\n\n`
             + `    This Shard:\n`
@@ -38,11 +39,11 @@ module.exports = class extends Command {
     embedExecute(message, parameters, permissionLevel) {
         message.buildEmbed()
             .setColor(0x00adff)
-            .setThumbnail("https://typicalbot.com/x/images/icon.png")
+            .setThumbnail(Constants.Links.ICON)
             .setTitle("TypicalBot Statistics")
             .addField("» Uptime", this.client.functions.convertTime(this.client.uptime), true)
-            .addField("» Servers", `${this.client.shardData.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})`, true)
-            .addField("» Voice Connections", `${this.client.shardData.voiceConnections.toLocaleString()}`, true)
+            .addField("» Servers", `${this.client.shards.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})`, true)
+            .addField("» Voice Connections", `${this.client.shards.voiceConnections.toLocaleString()}`, true)
             .addField("» Library", "discord.js", true)
             .addField("» Created By", "HyperCoder#2975", true)
             .addField("» Shard", `${this.client.shardNumber} / ${this.client.shardCount}`, true)
@@ -53,7 +54,7 @@ module.exports = class extends Command {
             .addField("» CPU Usage", `${Math.round(loadavg()[0] * 10000) / 100}%`, true)
             .addField("» RAM (Used)", `${Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100}MB`, true)
             .addField("» RAM (Total)", `${Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100}MB`, true)
-            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+            .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
     }

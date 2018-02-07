@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -6,7 +7,7 @@ module.exports = class extends Command {
             description: "Displays the song currently streaming.",
             usage: "current",
             aliases: ["np", "song"],
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 

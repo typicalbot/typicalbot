@@ -1,11 +1,12 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Displays a list of videos queued to stream.",
             usage: "queue",
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 

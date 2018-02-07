@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -6,8 +7,8 @@ module.exports = class extends Command {
             description: "Makes the bot send a message with the content used.",
             usage: "say [#channel] <content>",
             aliases: ["speak"],
-            mode: "strict",
-            permission: 2
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 

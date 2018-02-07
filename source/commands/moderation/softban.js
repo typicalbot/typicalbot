@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Softban a member from the server.",
             usage: "softban <@user> [purge-days] [reason]",
-            mode: "strict",
-            permission: 2
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -23,16 +24,14 @@ module.exports = class extends Command {
             if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return message.error(`You cannot softban a user with either the same or higher highest role.`);
             if (!member.bannable) return message.error(`In order to complete the request, I need the **BAN_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.`);
 
-            this.client.softbanCache.set(user.id || user, user.id || user);
+            this.client.caches.softbans.set(user.id || user, user.id || user);
 
             member.ban({ days, reason: `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}` }).then(actioned => {
                 setTimeout(() => {
                     message.guild.unban(actioned.id, `Softbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(async () => {
                         if (message.guild.settings.logs.moderation) {
-                            const log = { "action": "softban", "user": actioned.user, "moderator": message.author };
-                            if (reason) Object.assign(log, { reason });
-
-                            await this.client.modlogsManager.createLog(message.guild, log);
+                            const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.SOFTBAN).setModerator(message.author).setUser(member.user);
+                            if (reason) newCase.setReason(reason); newCase.send();
 
                             message.success(`Successfully softbanned user \`${actioned.user.tag}\`.`);
                         } else return message.success(`Successfully softbanned user **${member.user.tag}**.`);

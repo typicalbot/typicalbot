@@ -10,14 +10,14 @@ class New extends Event {
     }
 
     async execute() {
-        this.client.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
+        this.client.handlers.process.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
         this.client.user.setActivity(`Client Started`);
-        this.client.transmitStats();
-        this.client.transmit("transmitTesters");
+        this.client.handlers.process.transmitStats();
+        this.client.handlers.process.transmit("transmitTesters");
         this.client.functions.fetchDonors();
 
         this.intervals.push(setInterval(() => {
-            this.client.user.setActivity(`${this.client.config.prefix}help | ${this.client.shardData.guilds} Servers`);
+            this.client.user.setActivity(`${this.client.config.prefix}help | ${this.client.shards.guilds} Servers`);
 
             if (this.client.guilds.has("163038706117115906")) {
                 this.client.functions.transmitTesters();

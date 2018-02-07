@@ -78,7 +78,7 @@ class EventStore extends Store {
     async fetch(id) {
         if (this.has(id)) return this.get(id);
 
-        const row = await this.client.database.get("guilds", id);
+        const row = await this.client.handlers.database.get("guilds", id);
 
         if (!row) {
             this.create(id);
@@ -92,7 +92,7 @@ class EventStore extends Store {
     async create(id) {
         const newData = this._defaultData(id);
 
-        await this.client.database.insert("guilds", newData);
+        await this.client.handlers.database.insert("guilds", newData);
         this.set(id, newData);
 
         return newData;
@@ -111,14 +111,14 @@ class EventStore extends Store {
     }
 
     async update(id, object) {
-        await this.client.database.update("guilds", id, object);
+        await this.client.handlers.database.update("guilds", id, object);
         await this.set(id, this._update(this.get(id), object));
 
         return;
     }
 
     async delete(id) {
-        await this.client.database.delete("guilds", id);
+        await this.client.handlers.database.delete("guilds", id);
         super.delete(id);
 
         return;

@@ -1,4 +1,5 @@
 const Event = require("../structures/Event");
+const Constants = require(`../utility/Constants`);
 
 class New extends Event {
     constructor(...args) {
@@ -10,11 +11,13 @@ class New extends Event {
         
         const settings = await this.client.settings.fetch(guild.id);
 
-        if (settings.logs.moderation && !this.client.softbanCache.has(user.id)) {
-            const cachedLog = this.client.banCache.get(user.id);
+        if (settings.logs.moderation && !this.client.caches.softbans.has(user.id)) {
+            const cachedLog = this.client.caches.bans.get(user.id);
 
-            this.client.modlogsManager.createLog(guild, Object.assign({ action: "ban", user }, cachedLog));
-            this.client.banCache.delete(user.id);
+            const newCase = this.client.handlers.moderationLog.buildCase(guild).setAction(Constants.ModerationLog.Types.BAN).setUser(user);
+            if (cachedLog) { newCase.setModerator(cachedLog.moderator); if (cachedLog.reason) newCase.setReason(cachedLog.reason); } newCase.send();
+
+            this.client.caches.bans.delete(user.id);
         }
 
         if (!settings.logs.id || settings.logs.ban === "--disabled") return;

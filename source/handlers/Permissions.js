@@ -1,32 +1,34 @@
+const Constants = require("../utility/Constants");
+
 class PermissionLevel { constructor(level, title, check) { this.level = level; this.title = title; this.check = check ? check : () => { return true; }; } }
 
-module.exports = class {
+class PermissionsHandler {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
 
         this.levels = {
 
-            "-1": new PermissionLevel(-1, "Server Blacklisted", (guild, member) => {
+            [Constants.Permissions.SERVER_BLACKLISTED]: new PermissionLevel(Constants.Permissions.SERVER_BLACKLISTED, "Server Blacklisted", (guild, member) => {
                 const role = this.fetchRoles(guild, "blacklist"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole; } else { return member.roles.has(role.id); }
             }),
-            "0" : new PermissionLevel(0, "Server Member"),
-            "1" : new PermissionLevel(1, "Server DJ", (guild, member) => {
+            [Constants.Permissions.SERVER_MEMBER] : new PermissionLevel(Constants.Permissions.SERVER_MEMBER, "Server Member"),
+            [Constants.Permissions.SERVER_DJ] : new PermissionLevel(Constants.Permissions.SERVER_DJ, "Server DJ", (guild, member) => {
                 const role = this.fetchRoles(guild, "dj"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole; } else { return member.roles.has(role.id); }
             }),
-            "2" : new PermissionLevel(2, "Server Moderator", (guild, member) => {
+            [Constants.Permissions.SERVER_MODERATOR] : new PermissionLevel(Constants.Permissions.SERVER_MODERATOR, "Server Moderator", (guild, member) => {
                 const role = this.fetchRoles(guild, "moderator"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole; } else { return member.roles.has(role.id); }
             }),
-            "3" : new PermissionLevel(3, "Server Administrator", (guild, member) => {
+            [Constants.Permissions.SERVER_ADMINISTRATOR] : new PermissionLevel(Constants.Permissions.SERVER_ADMINISTRATOR, "Server Administrator", (guild, member) => {
                 const role = this.fetchRoles(guild, "administrator"); if (!role) return;
                 if (role instanceof Array) { let isRole = false; role.forEach(r => { if (member.roles.has(r.id)) isRole = true; }); return isRole; } else { return member.roles.has(role.id); }
             }),
-            "4" : new PermissionLevel(4, "Server Owner", (guild, member) => member.id === guild.ownerID),
-            "8" : new PermissionLevel(8, "TypicalBot Support", (guild, id) => this.client.config.support[id]),
-            "9" : new PermissionLevel(9, "TypicalBot Administrator", (guild, id) => this.client.config.administrators[id]),
-            "10" : new PermissionLevel(10, "TypicalBot Creator", (guild, id) => id === client.config.creator),
+            [Constants.Permissions.SERVER_OWNER] : new PermissionLevel(Constants.Permissions.SERVER_OWNER, "Server Owner", (guild, member) => member.id === guild.ownerID),
+            [Constants.Permissions.TYPICALBOT_SUPPORT] : new PermissionLevel(Constants.Permissions.TYPICALBOT_SUPPORT, "TypicalBot Support", (guild, id) => this.client.config.support[id]),
+            [Constants.Permissions.TYPICALBOT_ADMINISTRATOR] : new PermissionLevel(Constants.Permissions.TYPICALBOT_ADMINISTRATOR, "TypicalBot Administrator", (guild, id) => this.client.config.administrators[id]),
+            [Constants.Permissions.TYPICALBOT_CREATOR] : new PermissionLevel(Constants.Permissions.TYPICALBOT_CREATOR, "TypicalBot Creator", (guild, id) => id === client.config.creator),
 
         };
     }
@@ -64,4 +66,6 @@ module.exports = class {
         if (this.levels[-1].check(guild, member)) return this.define(-1);
         return this.define(0);
     }
-};
+}
+
+module.exports = PermissionsHandler;

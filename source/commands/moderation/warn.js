@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Warn a member in the server.",
             usage: "warn <@user> [reason]",
-            mode: "strict",
-            permission: 2
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -24,12 +25,10 @@ module.exports = class extends Command {
 
             if (message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return message.error(`You cannot warn a user with either the same or higher highest role.`);
 
-            const log = { "action": "warn", "user": member.user, "moderator": message.author };
-            if (reason) Object.assign(log, { reason });
+            const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.WARN).setModerator(message.author).setUser(member.user);
+            if (reason) newCase.setReason(reason); newCase.send();
 
-            const _case = await this.client.modlogsManager.createLog(message.guild, log);
-
-            const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTitle("TypicalBot Alert System").setDescription(`You have been warned in **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
+            const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", Constants.Links.ICON).setTitle("TypicalBot Alert System").setDescription(`You have been warned in **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
             if (reason) embed.addField("» Reason", reason);
             embed.send().catch(err => { return; });
 

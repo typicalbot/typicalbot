@@ -1,11 +1,12 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Removes a song from the server's queue.",
             usage: "unqueue",
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 

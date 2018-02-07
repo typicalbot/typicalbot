@@ -1,36 +1,39 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Receive a list of TypicalBot's commands.",
-            aliases: ["cmds"],
             usage: "commands",
+            aliases: ["cmds"],
             dm: true,
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 
     execute(message, parameters, permissionLevel) {
         if (message.channel.type === "text") message.reply(`Check your Direct Messages for my commands!`);
 
-        const commands = this.client.commands;
-        const list = Array.from(commands.keys());
+        const list = Array.from(this.client.commands.keys());
 
-        const level0 = list.filter(c => commands._get(c).permission === 0).map(c => `${this.client.config.prefix}${c}`);
-        const level1 = list.filter(c => commands._get(c).permission === 1).map(c => `${this.client.config.prefix}${c}`);
-        const level2 = list.filter(c => commands._get(c).permission === 2).map(c => `${this.client.config.prefix}${c}`);
-        const level3 = list.filter(c => commands._get(c).permission === 3).map(c => `${this.client.config.prefix}${c}`);
-        const level4 = list.filter(c => commands._get(c).permission === 4).map(c => `${this.client.config.prefix}${c}`);
+        const level4 = list.filter(c => this.client.commands._get(c).permission === 4).map(c => `${this.client.config.prefix}${c}`);
+        const level3 = list.filter(c => this.client.commands._get(c).permission === 3).map(c => `${this.client.config.prefix}${c}`);
+        const level2 = list.filter(c => this.client.commands._get(c).permission === 2).map(c => `${this.client.config.prefix}${c}`);
+        const level1 = list.filter(c => this.client.commands._get(c).permission === 1).map(c => `${this.client.config.prefix}${c}`);
+        const level0 = list.filter(c => this.client.commands._get(c).permission === 0).map(c => `${this.client.config.prefix}${c}`);
 
-        message.dm(
-            `**__TypicalBot's Commands:__**\nView Usage Here: ${this.client.config.urls.docs}\n\n`
-            + `__**Permission Level 4:** Server Owner__\n${level4.join(", ")}\n\n`
-            + `__**Permission Level 3:** Server Administrator__\n${level3.join(", ")}\n\n`
-            + `__**Permission Level 2:** Server Moderator__\n${level2.join(", ")}\n\n`
-            + `__**Permission Level 1:** Server DJ__\n${level1.join(", ")}\n\n`
-            + `__**Permission Level 0:** Server Member__\n${level0.join(", ")}\n\n`
-            + `__**Permission Level -1:** Server Blacklisted__\nNo commands are available to this level. This level can be given with the \`blacklistrole\` setting.`
-        );
+        message.author.buildEmbed()
+            .setColor(0x00ADFF)
+            .setTitle("TypicalBot Commands")
+            .setDescription(`Use \`${this.client.config.prefix}help <command>\` to get more information on a specific command.`)
+            .addField("» Server Owner", level4.length ? level4.join(", ") : "No commands to display.")
+            .addField("» Server Administrator", level3.length ? level3.join(", ") : "No commands to display.")
+            .addField("» Server Moderator", level2.length ? level2.join(", ") : "No commands to display.")
+            .addField("» Server DJ", level1.length ? level1.join(", ") : "No commands to display.")
+            .addField("» Server Member", level0.length ? level0.join(", ") : "No commands to display.")
+            .setFooter("TypicalBot", Constants.Links.ICON)
+            .setTimestamp()
+            .send(); 
     }
 };

@@ -17,7 +17,7 @@ class New extends Function {
                     "key": this.client.config.carbonkey
                 })
                 .end((err, res) => {
-                    if (err || res.statusCode != 200) this.client.log(`Carbinitex Stats Transfer Failed ${err.body || err}`, true);
+                    if (err || res.statusCode != 200) this.client.handlers.process.log(`Carbinitex Stats Transfer Failed ${err.body || err}`, true);
                 });
         } else if (provider === "a" || provider === "b") {
             request.post("https://bots.discord.pw/api/bots/153613756348366849/stats")
@@ -29,7 +29,7 @@ class New extends Function {
                     "server_count": this.client.guilds.size.toString()
                 })
                 .end((err, res) => {
-                    if (err || res.statusCode != 200) this.client.log("bots.discord.pw Stats Transfer Failed", true);
+                    if (err || res.statusCode != 200) this.client.handlers.process.log("bots.discord.pw Stats Transfer Failed", true);
                 });
         }
     }

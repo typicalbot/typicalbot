@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Change or clear either your nickname or another user's nickname.",
-            aliases: ["nick"],
             usage: "nickname [@user] [nickname]",
-            mode: "lite"
+            aliases: ["nick"],
+            mode: Constants.Modes.LITE
         });
     }
 
@@ -18,7 +19,7 @@ module.exports = class extends Command {
         const reset = !nickname || nickname === "reset";
 
         if (member) {
-            const actualUserPermissions = this.client.permissions.fetch(message.guild, message.author, true);
+            const actualUserPermissions = this.client.handlers.permissions.fetch(message.guild, message.author, true);
             if (actualUserPermissions.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, actualUserPermissions));
 
             member.setNickname(reset ? "" : nickname)

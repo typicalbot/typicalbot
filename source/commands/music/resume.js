@@ -1,16 +1,17 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Resume the song paused.",
             usage: "resume",
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 
     execute(message, parameters, permissionLevel) {
-        if (!this.client.audioUtility.hasPermissions(message, this)) return;
+        if (!this.client.utility.music.hasPermissions(message, this)) return;
 
         const connection = message.guild.voiceConnection;
         if (!connection) return message.send(`Nothing is currently streaming.`);

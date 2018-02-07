@@ -1,14 +1,14 @@
 const Command = require("../../structures/Command");
-const { MessageEmbed } = require("discord.js");
+const Constants = require(`../../utility/Constants`);
 const moment = require("moment");
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Displays a user's information.",
-            aliases: ["uinfo"],
             usage: "userinfo [@user|user-id|user-tag]",
-            mode: "lite"
+            aliases: ["uinfo"],
+            mode: Constants.Modes.LITE
         });
     }
 
@@ -58,7 +58,7 @@ module.exports = class extends Command {
 
         embed
             .addField("» Joined Server", moment(member.joinedAt).format("MMM DD, YYYY @ hh:mm A"), true)
-            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+            .setFooter("TypicalBot", Constants.Links.ICON)
             .send();
     }
 };

@@ -12,11 +12,11 @@ class New extends Event {
 
         const settings = message.guild.settings = await message.guild.fetchSettings();
 
-        const userPermissions = this.client.permissions.fetch(message.guild, message.author);
+        const userPermissions = this.client.handlers.permissions.fetch(message.guild, message.author);
         if (userPermissions.level >= 2) return;
         if (settings.ignored.invites.includes(message.channel.id)) return;
         
-        this.client.automod.inviteCheck(message).then(() => { return message.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
+        this.client.handlers.automoderation.inviteCheck(message).then(() => { return message.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
     }
 }
 

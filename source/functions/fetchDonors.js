@@ -6,13 +6,13 @@ class New extends Function {
     }
 
     async execute() {
-        const data = await this.client.database.db.db("data").table("donors");
+        const data = await this.client.handlers.database.connection.db("data").table("donors");
 
         data.forEach(e => {
-            if (e.id.length > 5) this.client.donors.set(e.id, e);
+            if (e.id.length > 5) this.client.caches.donors.set(e.id, e);
         });
 
-        return this.client.donors;
+        return this.client.caches.donors;
     }
 }
 

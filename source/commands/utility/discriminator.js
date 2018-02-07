@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Provides a list of all uers with a given discriminator.",
-            aliases: ["discrim"],
             usage: "discriminator [four-digit-discriminator]",
-            mode: "lite"
+            aliases: ["discrim"],
+            mode: Constants.Modes.LITE
         });
     }
 

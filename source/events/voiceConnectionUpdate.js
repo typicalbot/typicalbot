@@ -6,7 +6,7 @@ class New extends Event {
     }
 
     async execute(guild, message, user) {
-        this.client.transmitStat("voiceConnections");
+        this.client.handlers.process.transmitStat("voiceConnections");
     }
 }
 

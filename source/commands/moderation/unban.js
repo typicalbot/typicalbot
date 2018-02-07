@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Ban a member from the server.",
             usage: "unban <user-id> [reason]",
-            mode: "strict",
-            permission: 2
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -20,7 +21,7 @@ module.exports = class extends Command {
             const log = { "moderator": message.author };
             if (reason) Object.assign(log, { reason });
 
-            this.client.unbanCache.set(user, log);
+            this.client.caches.unbans.set(user, log);
 
             message.guild.unban(cachedUser.id, `Unbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(actioned => {
                 message.success(`Successfully unbanned user \`${cachedUser.tag || actioned}\`.`);
@@ -29,7 +30,7 @@ module.exports = class extends Command {
 
                 message.error(`An error occured while trying to unban the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
 
-                this.client.unbanCache.delete(cachedUser.id || cachedUser);
+                this.client.caches.unbans.delete(cachedUser.id || cachedUser);
             });
         }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
     }

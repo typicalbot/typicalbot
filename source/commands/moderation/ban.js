@@ -1,12 +1,13 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Ban a member from the server.",
             usage: "ban <@user> [purge-days] [reason]",
-            mode: "strict",
-            permission: 2
+            permission: Constants.Permissions.SERVER_MODERATOR,
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -27,10 +28,10 @@ module.exports = class extends Command {
             const log = { "moderator": message.author };
             if (reason) Object.assign(log, { reason });
 
-            this.client.banCache.set(toBan.id || toBan, log);
+            this.client.caches.bans.set(toBan.id || toBan, log);
 
             if (cachedUser) {
-                const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTitle("TypicalBot Alert System").setDescription(`You have been banned from **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
+                const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", Constants.Links.ICON).setTitle("TypicalBot Alert System").setDescription(`You have been banned from **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
                 if (reason) embed.addField("» Reason", reason);
                 embed.send().catch(err => { return; });
             }
@@ -42,7 +43,7 @@ module.exports = class extends Command {
 
                 message.error(`An error occured while trying to ban the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`);
 
-                this.client.banCache.delete(toBan.id || toBan);
+                this.client.caches.bans.delete(toBan.id || toBan);
             });
         }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
     }

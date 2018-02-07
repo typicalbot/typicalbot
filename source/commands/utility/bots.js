@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 const request = require("superagent");
 
 module.exports = class extends Command {
@@ -6,7 +7,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Gives a list of bots from Carbonitex ranked by server count.",
             usage: "bots [page-number]",
-            mode: "lite"
+            mode: Constants.Modes.LITE
         });
     }
 

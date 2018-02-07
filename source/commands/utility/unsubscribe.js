@@ -1,11 +1,12 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Remove the server's subscriber role from yourself.",
             usage: "unsubscribe",
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -28,7 +29,7 @@ module.exports = class extends Command {
             .setColor(0xFF0000)
             .setTitle("Error")
             .setDescription(`No subscriber role is set up for this server.`)
-            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+            .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
 
@@ -37,7 +38,7 @@ module.exports = class extends Command {
                 .setColor(0x00adff)
                 .setTitle("Success")
                 .setDescription("You are no longer subscribed!")
-                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                .setFooter("TypicalBot", Constants.Links.ICON)
                 .setTimestamp()
                 .send();
         });

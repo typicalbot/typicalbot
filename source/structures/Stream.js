@@ -6,6 +6,8 @@ class Stream {
 
         this.mode = null;
 
+        this.lastPlaying = null;
+
         this.current = null;
 
         this.dispatcher = null;
@@ -25,7 +27,8 @@ class Stream {
         this.dispatcher = this.connection.playStream(stream, { volume: this.volume });
         this.current = video;
 
-        video.requester.send(`🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`);
+        const content = `🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`;
+        this.lastPlaying && video.requester.channel.lastMessageID === this.lastPlaying.id ? this.lastPlaying.edit(content) : video.requester.send(content).then(msg => this.lastPlaying = msg);
 
         this.dispatcher.on("error", err => {
             video.requester.send(`An error occured playing the video. ${this.queue.length ? "Attempting to play the next video in the queue." : "Leaving the channel."}`);

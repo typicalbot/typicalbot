@@ -1,4 +1,5 @@
 const Command = require("../../structures/Command");
+const Constants = require(`../../utility/Constants`);
 
 const settingsList = {
     "embed": "Embed responses from TypicalBot.",
@@ -37,7 +38,7 @@ module.exports = class extends Command {
             description: "View or customize your servers setting and enable/disable specific features.",
             usage: "settings <'list'|'view'|'edit'> [setting] ['add'|'remove'] [value]",
             aliases: ["set"],
-            mode: "strict"
+            mode: Constants.Modes.STRICT
         });
     }
 
@@ -45,7 +46,7 @@ module.exports = class extends Command {
         const args = /(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const actualUserPermissions = this.client.permissions.fetch(message.guild, message.author, true);
+        const actualUserPermissions = this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
         const action = args[1], setting = args[2], ar = args[3], value = args[4];
 
@@ -601,7 +602,7 @@ module.exports = class extends Command {
         const args = /(?:settings|set)\s+(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const realPermissionLevel = this.client.permissions.fetch(message.guild, message.author, true);
+        const realPermissionLevel = this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
         const action = args[1], setting = args[2], ar = args[3], value = args[4];
 
@@ -618,7 +619,7 @@ module.exports = class extends Command {
             const embed = message.buildEmbed()
                 .setColor(0x00ADFF)
                 .setTitle(`TypicalBot Settings | Page ${page} / ${count}`)
-                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                .setFooter("TypicalBot", Constants.Links.ICON)
                 .setTimestamp();
 
             list.forEach(k => embed.addField(`» ${k}`, settingsList[k]));
@@ -639,7 +640,7 @@ module.exports = class extends Command {
                 const embed = message.buildEmbed()
                     .setColor(0x00ADFF)
                     .setTitle(`Currently Set Settings`)
-                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                    .setFooter("TypicalBot", Constants.Links.ICON)
                     .setTimestamp();
 
                 embed.send();
@@ -653,7 +654,7 @@ module.exports = class extends Command {
                         }).then(() => message.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                            .setFooter("TypicalBot", Constants.Links.ICON)
                             .setTimestamp()
                             .send()
                         );
@@ -663,7 +664,7 @@ module.exports = class extends Command {
                         }).then(() => message.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                            .setFooter("TypicalBot", Constants.Links.ICON)
                             .setTimestamp()
                             .send()
                         );
@@ -672,7 +673,7 @@ module.exports = class extends Command {
                             .setColor(0xFF0000)
                             .setTitle("Error")
                             .setDescription(`An invalid option was given.`)
-                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                            .setFooter("TypicalBot", Constants.Links.ICON)
                             .setTimestamp()
                             .send();
                     }
@@ -681,7 +682,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { roles: { administrator: [] }}).then(() => message.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                            .setFooter("TypicalBot", Constants.Links.ICON)
                             .setTimestamp()
                             .send()
                         );
@@ -691,10 +692,10 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 currentList.push(role.id);
 
@@ -705,7 +706,7 @@ module.exports = class extends Command {
                                 }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                    .setFooter("TypicalBot", Constants.Links.ICON)
                                     .setTimestamp()
                                     .send()
                                 );
@@ -713,10 +714,10 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
 
@@ -727,7 +728,7 @@ module.exports = class extends Command {
                                 }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                    .setFooter("TypicalBot", Constants.Links.ICON)
                                     .setTimestamp()
                                     .send()
                                 );
@@ -736,7 +737,7 @@ module.exports = class extends Command {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                            if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                            if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                             this.client.settings.update(message.guild.id, {
                                 roles: {
@@ -745,7 +746,7 @@ module.exports = class extends Command {
                             }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                 .setTitle("Success")
                                 .setDescription("Setting successfully updated.")
-                                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                .setFooter("TypicalBot", Constants.Links.ICON)
                                 .setTimestamp()
                                 .send()
                             );
@@ -756,7 +757,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { roles: { moderator: [] }}).then(() => message.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                            .setFooter("TypicalBot", Constants.Links.ICON)
                             .setTimestamp()
                             .send()
                         );
@@ -766,10 +767,10 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 currentList.push(role.id);
 
@@ -780,7 +781,7 @@ module.exports = class extends Command {
                                 }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                    .setFooter("TypicalBot", Constants.Links.ICON)
                                     .setTimestamp()
                                     .send()
                                 );
@@ -788,10 +789,10 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
 
@@ -802,7 +803,7 @@ module.exports = class extends Command {
                                 }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                    .setFooter("TypicalBot", Constants.Links.ICON)
                                     .setTimestamp()
                                     .send()
                                 );
@@ -811,7 +812,7 @@ module.exports = class extends Command {
                             const inputRole = /(?:<@&)?(\d{17,20})>?/i.exec(value);
 
                             const role = inputRole ? message.guild.roles.get(inputRole[1]) : message.guild.roles.find(r => r.name.toLowerCase() === value.toLowerCase());
-                            if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The role you specified does not exist.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                            if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The role you specified does not exist.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                             this.client.settings.update(message.guild.id, {
                                 roles: {
@@ -820,7 +821,7 @@ module.exports = class extends Command {
                             }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                 .setTitle("Success")
                                 .setDescription("Setting successfully updated.")
-                                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                .setFooter("TypicalBot", Constants.Links.ICON)
                                 .setTimestamp()
                                 .send()
                             );
@@ -831,7 +832,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { roles: { dj: [] }}).then(() => message.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                            .setFooter("TypicalBot", Constants.Links.ICON)
                             .setTimestamp()
                             .send()
                         );
@@ -841,10 +842,10 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 currentList.push(role.id);
 
@@ -855,7 +856,7 @@ module.exports = class extends Command {
                                 }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                    .setFooter("TypicalBot", Constants.Links.ICON)
                                     .setTimestamp()
                                     .send()
                                 );
@@ -863,10 +864,10 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
 
@@ -877,7 +878,7 @@ module.exports = class extends Command {
                                 }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                    .setFooter("TypicalBot", Constants.Links.ICON)
                                     .setTimestamp()
                                     .send()
                                 );
@@ -886,7 +887,7 @@ module.exports = class extends Command {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                            if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                            if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                             this.client.settings.update(message.guild.id, {
                                 roles: {
@@ -895,7 +896,7 @@ module.exports = class extends Command {
                             }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                 .setTitle("Success")
                                 .setDescription("Setting successfully updated.")
-                                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                .setFooter("TypicalBot", Constants.Links.ICON)
                                 .setTimestamp()
                                 .send()
                             );
@@ -906,7 +907,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { roles: { blacklist: [] }}).then(() => message.buildEmbed().setColor(0x00ADFF)
                             .setTitle("Success")
                             .setDescription("Setting successfully updated.")
-                            .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                            .setFooter("TypicalBot", Constants.Links.ICON)
                             .setTimestamp()
                             .send()
                         );
@@ -916,10 +917,10 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is already included in the list of roles for the administrator permission level.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 currentList.push(role.id);
 
@@ -930,7 +931,7 @@ module.exports = class extends Command {
                                 }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                    .setFooter("TypicalBot", Constants.Links.ICON)
                                     .setTimestamp()
                                     .send()
                                 );
@@ -938,10 +939,10 @@ module.exports = class extends Command {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                                 const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 const currentList = message.guild.settings.roles.administrator;
-                                if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                                if (!currentList.includes(role.id)) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription(`The specified role is not included in of list of roles for the administrator permission level.`).setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                                 currentList.splice(currentList.indexOf(role.id));
 
@@ -952,7 +953,7 @@ module.exports = class extends Command {
                                 }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                     .setTitle("Success")
                                     .setDescription("Setting successfully updated.")
-                                    .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                    .setFooter("TypicalBot", Constants.Links.ICON)
                                     .setTimestamp()
                                     .send()
                                 );
@@ -961,7 +962,7 @@ module.exports = class extends Command {
                             const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
-                            if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png").setTimestamp().send();
+                            if (!role) return message.buildEmbed().setColor(0xFF0000).setTitle("Error").setDescription("Invalid role. Please make sure your spelling is correct, and that the role actually exists.").setFooter("TypicalBot", Constants.Links.ICON).setTimestamp().send();
 
                             this.client.settings.update(message.guild.id, {
                                 roles: {
@@ -970,7 +971,7 @@ module.exports = class extends Command {
                             }).then(() => message.buildEmbed().setColor(0x00ADFF)
                                 .setTitle("Success")
                                 .setDescription("Setting successfully updated.")
-                                .setFooter("TypicalBot", "https://typicalbot.com/x/images/icon.png")
+                                .setFooter("TypicalBot", Constants.Links.ICON)
                                 .setTimestamp()
                                 .send()
                             );
