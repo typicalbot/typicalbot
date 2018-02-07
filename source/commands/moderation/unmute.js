@@ -34,7 +34,7 @@ module.exports = class extends Command {
             if (reason) embed.addField("» Reason", reason);
             embed.send().catch(err => { return; });
 
-            member.removeRole(role).then(async actioned => {
+            member.roles.remove(role).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
                     const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.UNMUTE).setModerator(message.author).setUser(member.user);
                     if (reason) newCase.setReason(reason); newCase.send();

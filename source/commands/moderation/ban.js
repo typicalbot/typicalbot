@@ -36,7 +36,7 @@ module.exports = class extends Command {
                 embed.send().catch(err => { return; });
             }
 
-            message.guild.ban(toBan, { days: purgeDays, reason: `Banned by ${message.author.tag} | Reason: ${reason || "No reason provided."}` }).then(actioned => {
+            message.guild.members.ban(toBan, { days: purgeDays, reason: `Banned by ${message.author.tag} | Reason: ${reason || "No reason provided."}` }).then(actioned => {
                 message.success(`Successfully banned user \`${actioned.tag || actioned.id || actioned}\`.`);
             }).catch(err => {
                 if (err === "Error: Couldn't resolve the user ID to ban.") return message.error(`The requested user could not be found.`);
