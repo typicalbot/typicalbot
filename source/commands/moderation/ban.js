@@ -20,7 +20,7 @@ module.exports = class extends Command {
         this.client.users.fetch(user).then(async cachedUser => {
             const member = await message.guild.members.fetch(cachedUser).catch(err => { return; });
 
-            if (member && message.member.highestRole.position <= member.highestRole.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot ban a user with either the same or higher highest role.`);
+            if (member && message.member.roles.highest.position <= member.roles.highest.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot ban a user with either the same or higher highest role.`);
             if (member && !member.bannable) return message.error(`In order to complete the request, I need the **BAN_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.`);
 
             const toBan = cachedUser || user;
