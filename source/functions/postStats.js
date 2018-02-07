@@ -30,6 +30,7 @@ class New extends Function {
                 })
                 .end((err, res) => {
                     if (err || res.statusCode != 200) this.client.handlers.process.log("discordbots.org Stats Transfer Failed", true);
+                    console.log("DiscordBots.ORG Stats Posted");
                 });
         }
     }
