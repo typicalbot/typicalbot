@@ -18,12 +18,12 @@
         ],
         "linebreak-style": [
             "error",
-            "windows"
+            "unix"
         ],
         "semi": [
-            "warn",
+            "error",
             "always"
         ],
-        "prefer-const": "warn"
+        "prefer-const": "error"
     }
 }
