@@ -73,7 +73,7 @@ class ModerationLogCase {
     get embed() {
         const embed = new MessageEmbed()
             .setColor(this._action.hex)
-            .setURL(this.client.config.urls.website)
+            .setURL(Constants.Links.BASE)
             .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason || `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
             .setFooter(this.id, Constants.Links.ICON)
             .setTimestamp(this.timestamp);

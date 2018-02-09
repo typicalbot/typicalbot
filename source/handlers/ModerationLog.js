@@ -98,7 +98,7 @@ module.exports = class {
 
                     const embed = channel.buildEmbed()
                         .setColor(action.hex || 0xC4C4C4)
-                        .setURL(this.client.config.urls.website)
+                        .setURL(Constants.Links.BASE)
                         .setDescription(`${_action}\n${_user}\n${_reason}`)
                         .setFooter(`Case ${_case}`, Constants.Links.ICON)
                         .setTimestamp();

@@ -42,7 +42,7 @@ class New extends Event {
 
         const autorole = this.client.functions.fetchAutoRole(guild, settings);
         if (autorole && autorole.editable) setTimeout(() =>
-            member.addRole(autorole).then(() => {
+            member.roles.add(autorole).then(() => {
                 if (settings.auto.role.silent === "N" && settings.logs.id && guild.channels.has(settings.logs.id)) guild.channels.get(settings.logs.id).send(`**${user.tag}** was given the autorole **${autorole.name}**.`);
             }).catch(() => console.log("Missing Permissions")), settings.auto.role.delay || 2000
         );

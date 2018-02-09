@@ -16,7 +16,7 @@ module.exports = class extends Command {
 
         if (!role) return message.error("No subscriber role is set up for this server.");
 
-        message.member.removeRole(role).then(() => {
+        message.member.roles.remove(role).then(() => {
             message.reply("You are now unsubscribed!");
         });
     }
@@ -33,7 +33,7 @@ module.exports = class extends Command {
             .setTimestamp()
             .send();
 
-        message.member.removeRole(role).then(() => {
+        message.member.roles.remove(role).then(() => {
             message.buildEmbed()
                 .setColor(0x00adff)
                 .setTitle("Success")

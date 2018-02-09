@@ -17,7 +17,7 @@ module.exports = class extends Task {
         const newCase = this.client.handlers.moderationLog.buildCase(guild).setAction(Constants.ModerationLog.Types.UNMUTE).setModerator(this.client.user).setUser(member.user).setReason("Automatic Unmute: User's mute time has passed.");
         newCase.send();
 
-        member.removeRole(settings.roles.mute, "Automatic Unmute: User's mute time has passed.");
+        member.roles.remove(settings.roles.mute, "Automatic Unmute: User's mute time has passed.");
         return this.timers.delete(this.id);
     }
 };

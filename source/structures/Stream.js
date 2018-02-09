@@ -24,7 +24,7 @@ class Stream {
 
         const stream = await video.stream().catch(err => { throw err; });
 
-        this.dispatcher = this.connection.playStream(stream, { volume: this.volume });
+        this.dispatcher = this.connection.play(stream, { volume: this.volume });
         this.current = video;
 
         const content = `🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`;
@@ -51,7 +51,7 @@ class Stream {
 
         const stream = await video.stream().catch(err => { throw err; });
 
-        this.dispatcher = this.connection.playStream(stream, { volume: .5 });
+        this.dispatcher = this.connection.play(stream, { volume: .5 });
         this.current = video;
 
         video.requester.send(`🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}**.`);
