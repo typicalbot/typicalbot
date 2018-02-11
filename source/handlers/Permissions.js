@@ -28,6 +28,10 @@ class PermissionsHandler {
         });
     }
 
+    define(level) {
+        return this.get(level);
+    }
+
     fetch(guild, member, ignoreStaff = false) {
         for (const level of this.levels) {
             const [permNumber, permLevel] = level;
