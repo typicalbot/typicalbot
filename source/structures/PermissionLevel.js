@@ -1,12 +1,14 @@
 const Constants = require("../utility/Constants");
 
 class PermissionLevel {
-    constructor(level, title, check) {
-        this.level = level;
-
+    constructor({ title, level, staff = false, check = () => true}) {
         this.title = title;
 
-        this.check = check || (() => { return true; });
+        this.level = level;
+
+        this.staff = staff;
+
+        this.check = check;
     }
 
     static fetchRoles(guild, permission) {
