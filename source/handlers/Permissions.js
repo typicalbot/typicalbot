@@ -33,6 +33,9 @@ class PermissionsHandler {
     }
 
     fetch(guild, member, ignoreStaff = false) {
+        if (!member.guild) member = guild.member(member.id);
+        if (!member) return this.levels.get(0);
+
         for (const level of this.levels.values()) {
             if (!(ignoreStaff && level.staff && !level.staffOverride)) if (level.check(guild, member)) return level;
         }
