@@ -37,6 +37,8 @@ class PermissionsHandler {
         if (!member) return this.levels.get(0);
 
         for (const level of this.levels.values()) {
+            if (level.level === 0 && this.levels.get(-1).check(guild, member)) return this.levels.get(-1);
+            
             if (!(ignoreStaff && level.staff && !level.staffOverride)) if (level.check(guild, member)) return level;
         }
 
