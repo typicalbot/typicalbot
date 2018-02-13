@@ -4,9 +4,13 @@ const Constants = require("../utility/Constants");
 class NewPermissionLevel extends PermissionLevelStr {
     constructor() {
         super({
-            "title": "Server Member",
-            "level": Constants.Permissions.Levels.SERVER_MEMBER
+            "title": "TypicalBot Support",
+            "level": Constants.Permissions.Levels.TYPICALBOT_CREATOR
         });
+    }
+
+    check(guild, member) {
+        return !!guild.client.config.support[member.id];
     }
 }
 

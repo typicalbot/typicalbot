@@ -30,7 +30,7 @@ class PermissionsHandler {
             [Constants.Permissions.Levels.SERVER_OWNER] : new PermissionLevel(Constants.Permissions.Levels.SERVER_OWNER, "Server Owner", (guild, member) => member.id === guild.ownerID),
             [Constants.Permissions.Levels.TYPICALBOT_SUPPORT] : new PermissionLevel(Constants.Permissions.Levels.TYPICALBOT_SUPPORT, "TypicalBot Support", (guild, id) => this.client.config.support[id]),
             [Constants.Permissions.Levels.TYPICALBOT_ADMINISTRATOR] : new PermissionLevel(Constants.Permissions.Levels.TYPICALBOT_ADMINISTRATOR, "TypicalBot Administrator", (guild, id) => this.client.config.administrators[id]),
-            [Constants.Permissions.Levels.TYPICALBOT_CREATOR] : new PermissionLevel(Constants.Permissions.Levels.TYPICALBOT_CREATOR, "TypicalBot Creator", (guild, id) => id === client.config.creator),
+            [Constants.Permissions.Levels.TYPICALBOT_CREATOR] : new PermissionLevel(Constants.Permissions.Levels.TYPICALBOT_CREATOR, "TypicalBot Creator", (guild, id) => id === this.client.config.creator),
 
         };
     }

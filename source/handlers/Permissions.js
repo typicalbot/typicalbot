@@ -29,7 +29,7 @@ class PermissionsHandler {
     }
 
     define(level) {
-        return this.get(level);
+        return this.levels.get(level);
     }
 
     fetch(guild, member, ignoreStaff = false) {

@@ -4,9 +4,13 @@ const Constants = require("../utility/Constants");
 class NewPermissionLevel extends PermissionLevelStr {
     constructor() {
         super({
-            "title": "Server Member",
-            "level": Constants.Permissions.Levels.SERVER_MEMBER
+            "title": "Server Owner",
+            "level": Constants.Permissions.Levels.SERVER_OWNER
         });
+    }
+
+    check(guild, member) {
+        return guild.ownerID === member.id;
     }
 }
 
