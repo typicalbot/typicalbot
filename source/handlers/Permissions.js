@@ -34,6 +34,7 @@ class PermissionsHandler {
 
     fetch(guild, member, ignoreStaff = false) {
         for (const level of this.levels) {
+            console.log(ignoreStaff, level.staff, level.staffOverride);
             if (!(ignoreStaff && level.staff && !level.staffOverride)) {
                 const [permNumber, permLevel] = level;
 
