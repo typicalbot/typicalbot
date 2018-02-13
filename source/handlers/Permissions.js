@@ -34,7 +34,7 @@ class PermissionsHandler {
 
     fetch(guild, member, ignoreStaff = false) {
         for (const level of this.levels) {
-            if (!ignoreStaff && level.staff) {
+            if (!(ignoreStaff && level.staff)) {
                 const [permNumber, permLevel] = level;
 
                 if (permLevel.check(guild, member)) return permLevel;
