@@ -14,7 +14,7 @@ class NewPermissionLevel extends PermissionLevelStr {
         if (!roles.length) return false;
 
         for (const role of roles) {
-            if (member.roles.has(role.id)) return true;
+            if (member.roles.has(role)) return true;
         }
         
         return false;
