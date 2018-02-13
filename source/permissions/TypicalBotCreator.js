@@ -5,7 +5,9 @@ class NewPermissionLevel extends PermissionLevelStr {
     constructor() {
         super({
             "title": "TypicalBot Creator",
-            "level": Constants.Permissions.Levels.TYPICALBOT_CREATOR
+            "level": Constants.Permissions.Levels.TYPICALBOT_CREATOR,
+            "staff": true,
+            "staffOverride": true
         });
     }
 

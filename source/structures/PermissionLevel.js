@@ -1,12 +1,14 @@
 const Constants = require("../utility/Constants");
 
 class PermissionLevel {
-    constructor({ title, level, staff = false}) {
+    constructor({ title, level, staff = false, staffOverride = false }) {
         this.title = title;
 
         this.level = level;
 
         this.staff = staff;
+
+        this.staffOverride = staffOverride;
         
         if (!this.check)
             this.check = () => true;
