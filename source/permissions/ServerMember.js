@@ -8,6 +8,10 @@ class NewPermissionLevel extends PermissionLevelStr {
             "level": Constants.Permissions.Levels.SERVER_MEMBER
         });
     }
+
+    check() {
+        return true;
+    }
 }
 
 module.exports = NewPermissionLevel;

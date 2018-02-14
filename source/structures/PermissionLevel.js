@@ -9,9 +9,6 @@ class PermissionLevel {
         this.staff = staff;
 
         this.staffOverride = staffOverride;
-        
-        if (!this.check)
-            this.check = () => true;
     }
 
     static fetchRoles(guild, permission) {
