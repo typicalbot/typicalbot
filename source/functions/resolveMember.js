@@ -21,7 +21,8 @@ class New extends Function {
             if (!member) return returnSelf ? message.member : null;
 
             return member;
-        } else return message.member;
+        } else if (returnSelf) return message.member;
+        else return null;
     }
 }
 

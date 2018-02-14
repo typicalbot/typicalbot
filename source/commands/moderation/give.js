@@ -17,6 +17,8 @@ module.exports = class extends Command {
         const actualUserPermissions = message.member.fetchPermissions(true);
         const member = await this.client.functions.resolveMember(message, args, false);
 
+        console.log(member);
+
         if (member) {
             console.log(message.author.username, "1");
             if (actualUserPermissions.level < Constants.Permissions.Levels.SERVER_ADMINISTRATOR)
