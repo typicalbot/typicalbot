@@ -18,7 +18,7 @@ module.exports = class extends Command {
         const member = await this.client.functions.resolveMember(message, args, false);
 
         if (member) {
-            console.log(message.author.username);
+            console.log(message.author.username, "1");
             if (actualUserPermissions.level < Constants.Permissions.Levels.SERVER_ADMINISTRATOR)
                 return message.error(this.client.functions.error("perms", { permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR }, actualUserPermissions));
 
@@ -30,7 +30,7 @@ module.exports = class extends Command {
                 .then(() => message.reply(`Success.`))
                 .catch(err => message.error(`An error occured while processing that request.`));
         } else {
-            console.log(message.author.username);
+            console.log(message.author.username, "2");
             const role = args[4] ? message.guild.roles.get(args[4]) : args[5] ? message.guild.roles.find(r => r.name.toLowerCase() === args[5].toLowerCase()) : null;
             if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
             if (!role.editable) return message.error(`Insufficient permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give and that I have the Manage Roles permission.`);
