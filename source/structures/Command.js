@@ -20,7 +20,7 @@ class Command {
 
         this.mode = mode || Constants.Modes.FREE;
 
-        this.access = access || Constants.Access.DEFAULT;
+        this.access = access || Constants.Access.Levels.DEFAULT;
     }
 }
 
