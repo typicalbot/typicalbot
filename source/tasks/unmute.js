@@ -8,16 +8,16 @@ module.exports = class extends Task {
 
     async execute() {
         const guild = this.client.guilds.get(this.guild); if (!guild) return;
-        const member = await guild.members.fetch(this.member).catch(err => this.delete(this.id)); if (!member) return;
+        const member = await guild.members.fetch(this.member).catch(err => this.tasks.delete(this.id)); if (!member) return;
 
         const settings = await guild.fetchSettings();
 
-        if (!settings.roles.mute || !member.roles.has(settings.roles.mute) || !guild.roles.get(settings.roles.mute).editable) return this.timers.delete(this.id);
+        if (!settings.roles.mute || !member.roles.has(settings.roles.mute) || !guild.roles.get(settings.roles.mute).editable) return this.tasks.delete(this.id);
 
         const newCase = this.client.handlers.moderationLog.buildCase(guild).setAction(Constants.ModerationLog.Types.UNMUTE).setModerator(this.client.user).setUser(member.user).setReason("Automatic Unmute: User's mute time has passed.");
         newCase.send();
 
         member.roles.remove(settings.roles.mute, "Automatic Unmute: User's mute time has passed.");
-        return this.timers.delete(this.id);
+        return this.tasks.delete(this.id);
     }
 };

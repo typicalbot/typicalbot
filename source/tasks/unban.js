@@ -12,6 +12,6 @@ module.exports = class extends Task {
         this.client.caches.unbans.set(this.user, { "moderator": this.client.user, "reason": "Automatic Unban: User's ban time has passed." });
 
         guild.members.unban(this.user, "Automatic Unban: User's ban time has passed.");
-        return this.timers.delete(this.id);
+        return this.tasks.delete(this.id);
     }
 };
