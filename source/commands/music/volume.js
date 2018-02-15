@@ -6,6 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Change the volume of the song currently streaming.",
             usage: "volume <percent:0-200>",
+            aliases: ["vol"],
             mode: Constants.Modes.LITE
         });
     }
