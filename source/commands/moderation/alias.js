@@ -9,7 +9,7 @@ module.exports = class extends Command {
             aliases: ["aliases"],
             permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
             mode: Constants.Modes.STRICT,
-            access: Constants.Access.DONOR
+            access: Constants.Access.Levels.DONOR
         });
     }
 
