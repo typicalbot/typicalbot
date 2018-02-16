@@ -26,8 +26,9 @@ const settingsList = {
     "customprefix": "A custom prefix to user other than `$`.",
     "defaultprefix": "The default prefix `$`.",
     "antiinvite": "Server moderation tool to delete any invites sent by users in the server.",
-    "antiinvite-warn": "A user will receive a warning if they send this exact number of invites.",
-    "antiinvite-kick": "A user will be kicked if they send this number or more invites.",
+    "antiinvite-action": "Enable warning and kicking when sending invites. AntiInvite must be enabled for this to work.",
+    "antiinvite-warn": "A user will receive a warning if they send this exact number of invites. AntiInvite and AntiInvite Action must be enabled for this to work.",
+    "antiinvite-kick": "A user will be kicked if they send this number or more invites. AntiInvite and AntiInvite Action must be enabled for this to work.",
     "modlogs": "A channel to send moderation logs in. Aka audit logs.",
     "modlogs-purge": "A modlog to log when a moderator or administrator purges messages in a channel.",
     "nonickname": "A way to disable the `nickname` command from being used.",
@@ -581,6 +582,14 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { automod: { invite: false } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "enable") {
                         this.client.settings.update(message.guild.id, { automod: { invite: true } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "antiinvite-action") {
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { automod: { inviteaction: false } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "enable") {
+                        this.client.settings.update(message.guild.id, { automod: { inviteaction: true } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         message.error("An invalid option was given.");
                     }
