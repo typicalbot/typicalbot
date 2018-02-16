@@ -8,12 +8,14 @@ class New extends Event {
     }
 
     async execute(message) {
+        message.delete().then(() => message.error("This server prohibits invites from being sent. Your message has been deleted."));
+
         const settings = await this.client.settings.fetch(message.guild.id);
         
         const cache = this.client.caches.invites;
         const uCache = cache.get(`${message.guild.id}-${message.author.id}`);
         
-        if (settings.automod.invite && settings.automod.invitewarn) {
+        if (settings.automod.invitewarn) {
             if (!uCache) {
                 cache.set(`${message.guild.id}-${message.author.id}`, new Collection());
                 cache.get(`${message.guild.id}-${message.author.id}`).set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`).delete(message.id), 30000));
