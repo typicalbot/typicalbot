@@ -12,12 +12,9 @@ class New extends Event {
         
         const cache = this.client.caches.invites;
         const uCache = cache.get(`${message.guild.id}-${message.author.id}`);
-        console.log("A");
         
         if (settings.automod.invite && settings.automod.invitewarn) {
-            console.log("B");
             if (!uCache) {
-                console.log("C");
                 cache.set(`${message.guild.id}-${message.author.id}`, new Collection());
                 cache.get(`${message.guild.id}-${message.author.id}`).set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`.delete(message.id)), 30000));
 
@@ -29,11 +26,9 @@ class New extends Event {
                         .setUser(message.author)
                         .setReason("Automatic Warning: User posted an invite.")
                         .send();
-            } else if (uCache.size > 0 && uCache.size < 3 ) {
-                console.log("D");
-                uCache.set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`.delete(message.id)), 30000));
-            } else if (uCache.size >= 3) {
-                console.log("E");
+            } else if (uCache.size > 0 && uCache.size < 2 ) {
+                uCache.set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`).delete(message.id), 30000));
+            } else if (uCache.size >= 2) {
                 message.member.kick("Automatic Kick: User posted three consecutive invites.");
 
                 if (settings.logs.moderation)
@@ -44,11 +39,8 @@ class New extends Event {
                         .setUser(message.author)
                         .setReason("Automatic Kick: User posted three consecutive invites.")
                         .send();
-            } else {
-                console.log("B2");
             }
         }
-        console.log("F");
 
         if (!settings.logs.id || !settings.logs.invite) return;
         
