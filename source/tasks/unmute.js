@@ -14,7 +14,12 @@ module.exports = class extends Task {
 
         if (!settings.roles.mute || !member.roles.has(settings.roles.mute) || !guild.roles.get(settings.roles.mute).editable) return this.tasks.delete(this.id);
 
-        const newCase = this.client.handlers.moderationLog.buildCase(guild).setAction(Constants.ModerationLog.Types.UNMUTE).setModerator(this.client.user).setUser(member.user).setReason("Automatic Unmute: User's mute time has passed.");
+        const newCase = this.client.handlers.moderationLog
+            .buildCase(guild)
+            .setAction(Constants.ModerationLog.Types.UNMUTE)
+            .setModerator(this.client.user)
+            .setUser(member.user)
+            .setReason("Automatic Unmute: User's mute time has passed.");
         newCase.send();
 
         member.roles.remove(settings.roles.mute, "Automatic Unmute: User's mute time has passed.");
