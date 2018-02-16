@@ -6,22 +6,22 @@ const build                     = process.env.CLIENT_BUILD;
 const config                    = require(`../configs/${build}`);
 
 /*          Handlers            */
-let ProcessHandler              = require("./handlers/Process");
-let DatabaseHandler             = require("./handlers/Database");
-let TaskHandler                 = require("./handlers/Tasks");
-let PermissionsHandler          = require("./handlers/Permissions");
-let AutoModerationHandler       = require("./handlers/AutoModeration");
-let ModerationLogHandler        = require("./handlers/ModerationLog");
-let MusicHandler                = require("./handlers/Music");
+const ProcessHandler              = require("./handlers/Process");
+const DatabaseHandler             = require("./handlers/Database");
+const TaskHandler                 = require("./handlers/Tasks");
+const PermissionsHandler          = require("./handlers/Permissions");
+const AutoModerationHandler       = require("./handlers/AutoModeration");
+const ModerationLogHandler        = require("./handlers/ModerationLog");
+const MusicHandler                = require("./handlers/Music");
 
 /*          Stores              */
-let SettingStore                = require("./stores/Settings");
-let FunctionStore               = require("./stores/Functions");
-let CommandStore                = require("./stores/Commands");
-let EventStore                  = require("./stores/Events");
+const SettingStore                = require("./stores/Settings");
+const FunctionStore               = require("./stores/Functions");
+const CommandStore                = require("./stores/Commands");
+const EventStore                  = require("./stores/Events");
 
 /*          Utility             */
-let MusicUtility                = require("./utility/Music");
+const MusicUtility                = require("./utility/Music");
 
 class TypicalBot extends Client {
     constructor() {
@@ -49,16 +49,17 @@ class TypicalBot extends Client {
         this.stores.commands            = new CommandStore(this);
         this.stores.events              = new EventStore(this);
 
-        this.shards = {};
+        this.utility                    = {};
+        this.utility.music              = new MusicUtility(this);
 
         this.caches                     = {};
         this.caches.donors              = new Collection();
         this.caches.bans                = new Collection();
         this.caches.unbans              = new Collection();
         this.caches.softbans            = new Collection();
+        this.caches.invites             = new Collection();
 
-        this.utility                    = {};
-        this.utility.music              = new MusicUtility(this);
+        this.shards = {};
 
         this.login(this.config.token);
     }

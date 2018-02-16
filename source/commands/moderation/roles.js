@@ -69,7 +69,7 @@ module.exports = class extends Command {
             if (!subRole.editable) return message.error(`Insignificant permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give or take and that I have the Manage Roles permission.`);
             if (message.member.roles.highest.position <= subRole.position) return message.error("You cannot give yourself or another user your highest role or any role higher.");
 
-            submember.roles.add(subRole)
+            subMember.roles.add(subRole)
                 .then(() => message.reply(`Success.`))
                 .catch(err => message.error(`An error occured while processing that request.`));
         } else if (subcommand === "take") {
@@ -86,7 +86,7 @@ module.exports = class extends Command {
             if (!subRole.editable) return message.error(`Insignificant permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give or take and that I have the Manage Roles permission.`);
             if (message.member.roles.highest.position <= subRole.position) return message.error("You cannot take a role from yourself or another user when your highest role is lower than the given role.");
 
-            submember.roles.remove(subRole)
+            subMember.roles.remove(subRole)
                 .then(() => message.reply(`Success.`))
                 .catch(err => message.error(`An error occured while processing that request.`));
         } else if (subcommand === "public") {

@@ -6,7 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Check if any members of a server have a server invite in their playing status.",
             usage: "adcheck",
-            permission: Constants.Permissions.SERVER_MODERATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }

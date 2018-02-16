@@ -19,10 +19,11 @@ class New extends Event {
         if (this.mentionRegex.test(message.content)) return message.reply(`This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
 
         const userPermissions = this.client.handlers.permissions.fetch(message.guild, message.author);
+        const actualUserPermissions = this.client.handlers.permissions.fetch(message.guild, message.author, true);
         
-        if (userPermissions.level === Constants.Permissions.SERVER_BLACKLISTED) return;
-        if (userPermissions.level < Constants.Permissions.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.client.handlers.automoderation.inviteCheck(message);
-        if (userPermissions.level < Constants.Permissions.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id)) return;
+        if (userPermissions.level === Constants.Permissions.Levels.SERVER_BLACKLISTED) return;
+        if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.client.handlers.automoderation.inviteCheck(message);
+        if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id)) return;
 
         const split = message.content.split(" ")[0];
         
@@ -33,16 +34,13 @@ class New extends Event {
 
         const param = message.content.includes(" ") ? message.content.slice(message.content.indexOf(" ") + 1) : "";
 
-        const accessLevel = this.client.functions.fetchAccess(message.guild);
+        const accessLevel = await this.client.functions.fetchAccess(message.guild);
         if (command.access && accessLevel.level < command.access) return message.error(`The server owner's access level is too low to execute that command. The command requires an access level of ${command.access}, but the owner only has a level of ${accessLevel.level} (${accessLevel.title}). The owner can raise their access level by donating $5 or more to TypicalBot.`);
 
         const mode = command.mode || Constants.Modes.FREE;
         if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID) if (settings.mode === Constants.Modes.LITE && mode === Constants.Modes.FREE || settings.mode === Constants.Modes.STRICT && (mode === Constants.Modes.FREE || mode === Constants.Modes.LITE)) return message.error(`That command is not enabled on this server.`);
 
-        if (userPermissions.level < command.permission) return message.error(this.client.functions.error("perms", command, userPermissions));
-
-        const actualUserPermissions = this.client.handlers.permissions.fetch(message.guild, message.author, true);
-        if (actualUserPermissions.level < command.permission) return message.error(this.client.functions.error("perms", command, actualUserPermissions));
+        if (userPermissions.level < command.permission || (actualUserPermissions.level < command.permission && actualUserPermissions.level !== Constants.Permissions.Levels.SERVER_BLACKLISTED && command.permission <= Constants.Permissions.Levels.SERVER_OWNER)) return message.error(this.client.functions.error("perms", command, actualUserPermissions));
 
         if (settings.embed && command.embedExecute && message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS")) return command.embedExecute(message, param, userPermissions);
         command.execute(message, param, userPermissions);
@@ -52,7 +50,7 @@ class New extends Event {
         if (!message.content.startsWith(this.client.config.prefix)) return;
 
         const command = await this.client.commands.fetch(message.content.split(" ")[0].slice(this.client.config.prefix.length));
-        if (!command || !command.dm || command.permission > Constants.Permissions.SERVER_MEMBER) return;
+        if (!command || !command.dm || command.permission > Constants.Permissions.Levels.SERVER_MEMBER) return;
 
         command.execute(message);
     }

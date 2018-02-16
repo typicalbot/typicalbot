@@ -6,13 +6,13 @@ module.exports = class extends Command {
         super(...args, {
             description: "Mute a member in the server.",
             usage: "mute <@user> [time:xd(ays) xh(ours) xm(inutes) xs(seconds)] [reason]",
-            permission: Constants.Permissions.SERVER_MODERATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }
 
     async execute(message, parameters, permissionLevel) {
-        const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)\s*d(?:ays?)?)?\s*?(?:(\d+)\s*h(?:ours?|rs?)?)?\s*?(?:(\d+)\s*m(?:inutes?|in)?)?\s*?(?:(\d+)\s*s(?:econds?|ec)?)?)?(?:\s+(.+))?/i.exec(parameters);
+        const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)\s*d(?:ays?)?)?\s?(?:(\d+)\s*h(?:ours?|rs?)?)?\s?(?:(\d+)\s*m(?:inutes?|in)?)?\s?(?:(\d+)\s*s(?:econds?|ec)?)?)?(?:\s*?(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const user = args[1], days = args[2], hours = args[3], minutes = args[4], seconds = args[5], reason = args[6];

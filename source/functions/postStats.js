@@ -20,8 +20,8 @@ class New extends Function {
                     if (err || res.statusCode != 200) this.client.handlers.process.log(`Carbinitex Stats Transfer Failed ${err.body || err}`, true);
                 });
         } else if (provider === "a" || provider === "b") {
-            request.post("https://discordbots.org/api/bots/153613756348366849/stats")
-                .set("Authorization", this.client.config.discordbots)
+            request.post("https://bots.discord.pw/api/bots/153613756348366849/stats")
+                .set("Authorization", this.client.config.discordpwkey)
                 .set("Content-Type", "application/json")
                 .send({
                     "shard_id": this.client.shardID.toString(),
@@ -29,8 +29,7 @@ class New extends Function {
                     "server_count": this.client.guilds.size.toString()
                 })
                 .end((err, res) => {
-                    if (err || res.statusCode != 200) this.client.handlers.process.log("discordbots.org Stats Transfer Failed", true);
-                    console.log("DiscordBots.ORG Stats Posted");
+                    if (err || res.statusCode != 200) this.client.handlers.process.log("bots.discord.pw Stats Transfer Failed", true);
                 });
         }
     }

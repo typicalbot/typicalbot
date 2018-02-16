@@ -7,7 +7,7 @@ module.exports = class extends Command {
             description: "Makes the bot send a message with the content used.",
             usage: "say [#channel] <content>",
             aliases: ["speak"],
-            permission: Constants.Permissions.SERVER_MODERATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }

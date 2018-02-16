@@ -6,7 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Ban a member from the server.",
             usage: "unban <user-id> [reason]",
-            permission: Constants.Permissions.SERVER_MODERATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }
@@ -24,6 +24,10 @@ module.exports = class extends Command {
             this.client.caches.unbans.set(user, log);
 
             message.guild.members.unban(cachedUser.id, `Unbanned by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(actioned => {
+                cachedUser.guild = message.guild;
+                
+                this.client.handlers.tasks.clear("unban", cachedUser);
+
                 message.success(`Successfully unbanned user \`${cachedUser.tag || actioned}\`.`);
             }).catch(err => {
                 if (err === "Error: Couldn't resolve the user ID to unban.") return message.error(`The requested user could not be found.`);

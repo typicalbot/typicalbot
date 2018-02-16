@@ -6,7 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Makes the bot unignore commands or invites in a channel.",
             usage: "unignore ['commands'|'invites']",
-            permission: Constants.Permissions.SERVER_ADMINISTRATOR,
+            permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
             mode: Constants.Modes.STRICT
         });
     }

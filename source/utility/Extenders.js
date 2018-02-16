@@ -1,6 +1,6 @@
 require.extensions['.txt'] = function (module, filename) { module.exports = require("fs").readFileSync(filename, 'utf8'); };
 
-const { Guild, MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
+const { Guild, GuildMember, MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
 const VoiceConnection = require("discord.js/src/client/voice/VoiceConnection");
 const Stream = require("../structures/Stream");
 
@@ -10,6 +10,14 @@ Guild.prototype.fetchSettings = async function() {
     }).catch(err => { 
         throw err; 
     }); 
+};
+
+Guild.prototype.fetchPermissions = async function(member, ignoreStaff = false) { 
+    return this.client.handlers.permissions.fetch(this, member, ignoreStaff);
+};
+
+GuildMember.prototype.fetchPermissions = async function(ignoreStaff = false) { 
+    return this.client.handlers.permissions.fetch(this.guild, this, ignoreStaff);
 };
 
 MessageEmbed.prototype.send = function (content) {

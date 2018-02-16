@@ -1,8 +1,8 @@
 class Task {
-    constructor(client, timers, { id, type, end, data }) {
+    constructor(client, tasks, { id, type, end, data }) {
         Object.defineProperty(this, "client", { value: client });
 
-        Object.defineProperty(this, "timers", { value: timers });
+        Object.defineProperty(this, "tasks", { value: tasks });
 
         this.id = id;
 

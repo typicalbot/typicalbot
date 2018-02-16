@@ -6,6 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Resume the song paused.",
             usage: "resume",
+            aliases: ["unpause"],
             mode: Constants.Modes.LITE
         });
     }

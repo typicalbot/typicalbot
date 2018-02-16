@@ -12,10 +12,10 @@ class AutoModerationHandler {
                 const embedMatch = this.client.functions.inviteCheck(inspect(message.embeds, { depth: 4 }));
 
                 if (contentMatch || embedMatch) {
-                    this.client.emit("guildInvitePosted", message.guild, message, message.author);
-                    message.delete().then(() => {
+                    this.client.emit("guildInvitePosted", message);
+                    /*message.delete().then(() => {
                         message.error(`This server prohibits invites from being sent. Your message has been deleted.`);
-                    });
+                    });*/
                 }
             }
         });

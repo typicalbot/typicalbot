@@ -15,13 +15,28 @@ exports.Colors = {
 };
 
 exports.Access = {
+
+};
+
+exports.Access.Levels = {
     DEFAULT: 0,
     DONOR: 1,
     PARTNER: 2,
     STAFF: 3
 };
 
+exports.Access.Titles = {
+    DEFAULT: { "level": 0, "title": "Default" },
+    DONOR: { "level": 1, "title": "TypicalBot Donor" },
+    PARTNER: { "level": 2, "title": "TypicalBot Partner" },
+    STAFF: { "level": 3, "title": "TypicalBot Staff" },
+};
+
 exports.Permissions = {
+
+};
+
+exports.Permissions.Levels = {
     SERVER_BLACKLISTED: -1,
     SERVER_MEMBER: 0,
     SERVER_DJ: 1,
@@ -31,6 +46,13 @@ exports.Permissions = {
     TYPICALBOT_SUPPORT: 8,
     TYPICALBOT_ADMINISTRATOR: 9,
     TYPICALBOT_CREATOR: 10
+};
+
+exports.Permissions.RoleTitles = {
+    ADMINISTRATOR: "TypicalBot Administrator",
+    MODERATOR: "TypicalBot Moderator",
+    DJ: "TypicalBot DJ",
+    BLACKLIST: "TypicalBot Blacklist"
 };
 
 exports.Modes = {

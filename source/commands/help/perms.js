@@ -12,7 +12,7 @@ module.exports = class extends Command {
     execute(message, parameters, permissionLevel) {
         message.buildEmbed()
             .setColor(0x00adff)
-            .setTitle("Permission Levels").setURL(this.client.config.urls.website)
+            .setTitle("Permission Levels").setURL(Constants.Links.BASE)
             .setDescription(`There are six possible permission levels to have. Commands for all levels can be seen with \`d$commands\`.`)
             .addField("» Blacklisted [-1]", "**Description:** Users with this role are unable to use the bot.\n**Inherits From:** N/A\n**Setup Command:** `$set edit blacklistrole <role-name>`\n**Default Role:** `TypicalBot Blacklisted`")
             .addField("» Server Member [0]", "**Description:** Users with this role are able to use the default commands in the bot.\n**Inherits From:** N/A\n**Setup Command:** N/A\n**Default Role:** N/A")
