@@ -10,28 +10,29 @@ class New extends Event {
     async execute(message) {
         message.delete().then(() => message.error("This server prohibits invites from being sent. Your message has been deleted."));
 
-        const settings = await this.client.settings.fetch(message.guild.id);
-        
-        const cache = this.client.caches.invites;
-        const uCache = cache.get(`${message.guild.id}-${message.author.id}`);
-        
-        if (settings.automod.invitewarn) {
-            if (!uCache) {
-                cache.set(`${message.guild.id}-${message.author.id}`, new Collection());
-                cache.get(`${message.guild.id}-${message.author.id}`).set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`).delete(message.id), 30000));
+        const settings = message.guild.settings;
 
+        if (settings.automod.inviteaction && (settings.automod.invitewarn || settings.automod.invitekick)) {
+            let cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
+            
+            if (!cache) {
+                this.client.caches.invites.set(`${message.guild.id}-${message.author.id}`, new Collection());
+                cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
+            }
+
+            cache.set(message.id, setTimeout(() => cache.delete(message.id), 60000));
+
+            if (settings.automod.invitewarn !== 0 && cache.size === settings.automod.invitewarn) {
                 if (settings.logs.moderation)
                     this.client.handlers.moderationLog
                         .buildCase(message.guild)
                         .setAction(Constants.ModerationLog.Types.WARN)
                         .setModerator(this.client.user)
                         .setUser(message.author)
-                        .setReason("Automatic Warning: User posted an invite.")
+                        .setReason(`Automatic Warn: User posted ${settings.automod.invitewarn} consecutive invite${settings.automod.invitewarn === 1 ? "" : "s"}.`)
                         .send();
-            } else if (uCache.size > 0 && uCache.size < 2 ) {
-                uCache.set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`).delete(message.id), 30000));
-            } else if (uCache.size >= 2) {
-                message.member.kick("Automatic Kick: User posted three consecutive invites.");
+            } else if (settings.automod.invitekick !== 0 && cache.size >= settings.automod.invitekick) {
+                message.member.kick(`Automatic Kick: User posted ${settings.automod.invitekick} consecutive invite${settings.automod.invitekick === 1 ? "" : "s"}.`);
 
                 if (settings.logs.moderation)
                     this.client.handlers.moderationLog
@@ -39,7 +40,7 @@ class New extends Event {
                         .setAction(Constants.ModerationLog.Types.KICK)
                         .setModerator(this.client.user)
                         .setUser(message.author)
-                        .setReason("Automatic Kick: User posted three consecutive invites.")
+                        .setReason(`Automatic Kick: User posted ${settings.automod.invitekick} consecutive invite${settings.automod.invitekick === 1 ? "" : "s"}.`)
                         .send();
             }
         }
