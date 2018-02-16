@@ -12,7 +12,7 @@ class New extends Event {
 
         const settings = message.guild.settings;
 
-        if (settings.automod.invitewarn || settings.automod.invitekick) {
+        if (settings.automod.inviteaction && (settings.automod.invitewarn || settings.automod.invitekick)) {
             let cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
             
             if (!cache) {
@@ -20,7 +20,7 @@ class New extends Event {
                 cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
             }
 
-            cache.set(message.id, setTimeout(() => cache.delete(message.id), 30000));
+            cache.set(message.id, setTimeout(() => cache.delete(message.id), 60000));
 
             if (settings.automod.invitewarn !== 0 && cache.size === settings.automod.invitewarn) {
                 if (settings.logs.moderation)
