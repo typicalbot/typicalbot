@@ -16,7 +16,7 @@ class New extends Event {
             let cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
             
             if (!cache) {
-                this.client.caches.invites.set(`${message.guild.id}-${message.author.id}`);
+                this.client.caches.invites.set(`${message.guild.id}-${message.author.id}`, new Collection());
                 cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
             }
 
