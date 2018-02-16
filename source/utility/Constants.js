@@ -26,7 +26,7 @@ exports.Access.Levels = {
 };
 
 exports.Access.Titles = {
-    DEFAULT: { "level": 0, "title": "TDefault" },
+    DEFAULT: { "level": 0, "title": "Default" },
     DONOR: { "level": 1, "title": "TypicalBot Donor" },
     PARTNER: { "level": 2, "title": "TypicalBot Partner" },
     STAFF: { "level": 3, "title": "TypicalBot Staff" },
