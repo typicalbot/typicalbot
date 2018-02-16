@@ -16,7 +16,7 @@ class New extends Event {
         if (settings.automod.invite && settings.automod.invitewarn) {
             if (!uCache) {
                 cache.set(`${message.guild.id}-${message.author.id}`, new Collection());
-                cache.get(`${message.guild.id}-${message.author.id}`).set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`.delete(message.id)), 30000));
+                cache.get(`${message.guild.id}-${message.author.id}`).set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`).delete(message.id), 30000));
 
                 if (settings.logs.moderation)
                     this.client.handlers.moderationLog
