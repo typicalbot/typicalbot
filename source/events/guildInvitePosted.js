@@ -12,7 +12,7 @@ class New extends Event {
 
         const settings = message.guild.settings;
 
-        if (settings.automod.invitewarn) {
+        if (settings.automod.invitewarn || settings.automod.invitekick) {
             let cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
             
             if (!cache) {
