@@ -12,9 +12,12 @@ class New extends Event {
         
         const cache = this.client.caches.invites;
         const uCache = cache.get(`${message.guild.id}-${message.author.id}`);
+        console.log("A");
         
         if (settings.automod.invite && settings.automod.invitewarn) {
+            console.log("B");
             if (!cache) {
+                console.log("C");
                 cache.set(`${message.guild.id}-${message.author.id}`, new Collection());
                 cache.get(`${message.guild.id}-${message.author.id}`).set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`.delete(message.id)), 30000));
 
@@ -27,8 +30,10 @@ class New extends Event {
                         .setReason("Automatic Warning: User posted an invite.")
                         .send();
             } else if (cache.length > 0 && cache.length < 3 ) {
+                console.log("D");
                 uCache.set(message.id, setTimeout(() => this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`.delete(message.id)), 30000));
             } else if (cache.length >= 3) {
+                console.log("E");
                 message.member.kick("Automatic Kick: User posted three consecutive invites.");
 
                 if (settings.logs.moderation)
@@ -41,6 +46,7 @@ class New extends Event {
                         .send();
             }
         }
+        console.log("F");
 
         if (!settings.logs.id || !settings.logs.invite) return;
         
