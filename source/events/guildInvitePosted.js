@@ -44,6 +44,8 @@ class New extends Event {
                         .setUser(message.author)
                         .setReason("Automatic Kick: User posted three consecutive invites.")
                         .send();
+            } else {
+                console.log("B2");
             }
         }
         console.log("F");
