@@ -55,7 +55,8 @@ class EventStore extends Store {
             },
             "automod": {
                 "invite": false,
-                "invitewarn": false,
+                "invitewarn": 0,
+                "invitekick": 0,
                 "link": false
             },
             "nonickname": true,
