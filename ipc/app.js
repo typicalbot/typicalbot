@@ -12,8 +12,8 @@ class IPC extends express {
         this.use(bodyParser.json());
 
         function isAuthenticated(req, res, next) {
-            if (req.get("Authentication").replace("'", "") === this.master.config.apitoken) return next();
-            return res.status(403).json({ "message": "Authentication Required" });
+            if (req.get("Authorization").replace("'", "") === this.master.config.apitoken) return next();
+            return res.status(403).json({ "message": "Authorization Required" });
         }
 
         /*
