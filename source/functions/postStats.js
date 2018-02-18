@@ -18,10 +18,11 @@ class New extends Function {
                 })
                 .end((err, res) => {
                     if (err || res.statusCode != 200) this.client.handlers.process.log(`Carbinitex Stats Transfer Failed ${err.body || err}`, true);
+                    this.client.handlers.process.log(`Carbinitex Stats Transfer Failed ${err.body || err}`, true);
                 });
         } else if (provider === "a" || provider === "b") {
             request.post("https://bots.discord.pw/api/bots/153613756348366849/stats")
-                .set("Authorization", this.client.config.discordpwkey)
+                .set("Authorization", this.client.config.discordbots)
                 .set("Content-Type", "application/json")
                 .send({
                     "shard_id": this.client.shardID.toString(),
