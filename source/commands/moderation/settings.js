@@ -38,7 +38,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "View or customize your servers setting and enable/disable specific features.",
-            usage: "settings <'list'|'view'|'edit'> [setting] ['add'|'remove'] [value]",
+            usage: "settings <'list'|'clear'|'view'|'edit'> [setting] ['add'|'remove'] [value]",
             aliases: ["set"],
             mode: Constants.Modes.STRICT
         });
@@ -52,7 +52,7 @@ module.exports = class extends Command {
 
         const action = args[1], setting = args[2], ar = args[3], value = args[4];
 
-        if (action === "edit" && actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
+        if ((action === "edit" || action === "clear") && actualUserPermissions.level < 3) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
         if (action === "list") {
             let page = setting || 1;
@@ -63,6 +63,12 @@ module.exports = class extends Command {
             const list = settings.splice((page -1) * 10, 10).map(k => ` • **${k}:** ${settingsList[k]}`);
 
             message.send(`**__Available settings to use with TypicalBot:__**\n\n**Page ${page} / ${count}**\n${list.join("\n")}`);
+        } else if (action === "clear") {
+            this.client.settings.delete(message.guild.id).then(() => {
+                message.reply("Settings cleared.");
+            }).catch(err => {
+                message.error("Something happened. Try again.");
+            });
         } else if (action === "view") {
             if (setting) {
                 if (setting === "embed") {
@@ -175,6 +181,12 @@ module.exports = class extends Command {
                     message.reply(`**__Current Value:__** ${message.guild.settings.prefix.default ? "Enabled" : "Disabled"}`);
                 } else if (setting === "antiinvite") {
                     message.reply(`**__Current Value:__** ${message.guild.settings.automod.invite ? "Enabled" : "Disabled"}`);
+                } else if (setting === "antiinvite-action") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.automod.inviteaction ? "Enabled" : "Disabled"}`);
+                } else if (setting === "antiinvite-warn") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.automod.invitewarn || "Disabled"}`);
+                } else if (setting === "antiinvite-kick") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.automod.invitekick || "Disabled"}`);
                 } else if (setting === "nonickname") {
                     message.reply(`**__Current Value:__** ${message.guild.settings.nonickname ? "Enabled" : "Disabled"}`);
                 } else {
