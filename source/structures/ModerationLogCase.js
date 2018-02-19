@@ -101,7 +101,7 @@ class ModerationLogCase {
 
         const id = embed.footer.text;
         const action = embed.description.match(Constants.ModerationLog.Regex.ACTION)[0];
-        const _action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s(.+)(?:\s+\(.+)\)?/gi.exec(action)[1])[0][1];
+        const _action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s+(\w+(?:(?:\s+\w+)+)?)(?:\s+.+)?/gi.exec(action)[1])[0][1];
         const moderator = embed.author ? { display: embed.author.name, icon: embed.author.iconURL } : null;
         const user = embed.description.match(Constants.ModerationLog.Regex.USER)[0];
         const _reason = embed.description.match(Constants.ModerationLog.Regex.REASON); 
