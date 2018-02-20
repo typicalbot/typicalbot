@@ -10,8 +10,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
-        if (!this.client.utility.music.hasPermissions(message, this)) return;
+    async execute(message, parameters, permissionLevel) {
+        if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
         const match = /(.+)/i.exec(parameters);
         if (!match) return message.error(this.client.functions.error("usage", this)); 

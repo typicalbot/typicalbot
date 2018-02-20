@@ -11,8 +11,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
-        if (!this.client.utility.music.hasPermissions(message, this)) return;
+    async execute(message, parameters, permissionLevel) {
+        if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
         const connection = message.guild.voiceConnection;
         if (!connection) return message.send(`Nothing is currently streaming.`);

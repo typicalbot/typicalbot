@@ -59,7 +59,7 @@ class ProcessHandler {
 
             guild.settings = await this.client.settings.fetch(data.guild);
 
-            const permissions = this.client.handlers.permissions.fetch(guild, data.user);
+            const permissions = await this.client.handlers.permissions.fetch(guild, data.user);
 
             this.client.handlers.process.transmit("masterrequest", {
                 id: data.id,

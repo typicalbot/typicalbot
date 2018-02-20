@@ -30,6 +30,7 @@ module.exports = class extends Command {
 
             const log = { "moderator": message.author };
             if (reason) Object.assign(log, { reason });
+            if (time) Object.assign(log, { expiration: time });
 
             this.client.caches.bans.set(toBan.id || toBan, log);
 

@@ -12,7 +12,7 @@ class New extends Event {
 
         const settings = message.guild.settings = await message.guild.fetchSettings();
 
-        const userPermissions = this.client.handlers.permissions.fetch(message.guild, message.author);
+        const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author);
         if (userPermissions.level >= 2) return;
         if (settings.ignored.invites.includes(message.channel.id)) return;
         

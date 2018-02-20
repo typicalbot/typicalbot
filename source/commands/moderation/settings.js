@@ -44,11 +44,11 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    async execute(message, parameters, permissionLevel) {
         const args = /(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const actualUserPermissions = this.client.handlers.permissions.fetch(message.guild, message.author, true);
+        const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
         const action = args[1], setting = args[2], ar = args[3], value = args[4];
 

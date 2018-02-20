@@ -17,8 +17,8 @@ module.exports = class extends Command {
         const member = await this.client.functions.resolveMember(message, args);
         const user = member.user;
 
-        const permissionsHere = this.client.handlers.permissions.fetch(message.guild, user, true);
-        const permissions = this.client.handlers.permissions.fetch(message.guild, user);
+        const permissionsHere = await this.client.handlers.permissions.fetch(message.guild, user, true);
+        const permissions = await this.client.handlers.permissions.fetch(message.guild, user);
 
         message.reply(`**__${user.tag}'s Permission Level:__** ${permissions.level} | ${permissions.title}${permissionsHere.level !== permissions.level ? ` (${permissionsHere.level} | ${permissionsHere.title})` : ""}`);
     }
@@ -29,8 +29,8 @@ module.exports = class extends Command {
         const member = await this.client.functions.resolveMember(message, args);
         const user = member.user;
         
-        const permissionsHere = this.client.handlers.permissions.fetch(message.guild, user, true);
-        const permissions = this.client.handlers.permissions.fetch(message.guild, user);
+        const permissionsHere = await this.client.handlers.permissions.fetch(message.guild, user, true);
+        const permissions = await this.client.handlers.permissions.fetch(message.guild, user);
 
         message.buildEmbed()
             .setColor(0x00adff)

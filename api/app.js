@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const build = require("../build");
 
-const port = 5000;
+const port = build === "stable" ? 5000 : build === "beta" ? 5001 : build === "development" ? 5002 : 5000;
 
 class IPC extends express {
     constructor(master) {
@@ -59,6 +60,18 @@ class IPC extends express {
             }).catch(err => {
                 return res.status(500).json({ "message": "Request Timed Out", "error": err  });
             });
+        });
+
+        /*
+                                                           - - - - - - - - - -
+
+                                                                WEBHOOK STUFF
+
+                                                           - - - - - - - - - -
+        */
+
+        this.all("/webhook", (req, res, next) => {
+            console.log(req.headers, req.body);
         });
 
         /*

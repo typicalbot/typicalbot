@@ -10,7 +10,7 @@ class NewPermissionLevel extends PermissionLevelStr {
     }
 
     check(guild, member) {
-        //if (member.permissions.has("ADMINISTRATOR")) return true;
+        if (member.permissions.has("ADMINISTRATOR")) return true;
         
         const roles = PermissionLevelStr.fetchRoles(guild, "administrator");
         if (!roles.length) return false;
