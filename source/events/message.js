@@ -18,8 +18,8 @@ class New extends Event {
 
         if (this.mentionRegex.test(message.content)) return message.reply(`This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
 
-        const userPermissions = this.client.handlers.permissions.fetch(message.guild, message.author);
-        const actualUserPermissions = this.client.handlers.permissions.fetch(message.guild, message.author, true);
+        const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author);
+        const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
         
         if (userPermissions.level === Constants.Permissions.Levels.SERVER_BLACKLISTED) return;
         if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.client.handlers.automoderation.inviteCheck(message);

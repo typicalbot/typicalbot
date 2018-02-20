@@ -1,9 +1,9 @@
-const Constants         = require("../utility/Constants");
-const path              = require("path");
-const klaw              = require("klaw");
+const Constants = require("../utility/Constants");
+const path = require("path");
+const klaw = require("klaw");
 
-const { Collection }    = require("discord.js");
-const PermissionLevel   = require("../structures/PermissionLevel");
+const { Collection } = require("discord.js");
+const PermissionLevel = require("../structures/PermissionLevel");
 
 class PermissionsHandler {
     constructor(client) {
@@ -24,7 +24,7 @@ class PermissionsHandler {
 
             this.levels.set(level.level, level);
         }).on("end", () => {
-            this.levels = this.levels.sort((a,b) => b.level - a.level);
+            this.levels = this.levels.sort((a, b) => b.level - a.level);
         });
     }
 
@@ -32,13 +32,12 @@ class PermissionsHandler {
         return this.levels.get(level);
     }
 
-    fetch(guild, member, ignoreStaff = false) {
-        if (!member.guild) member = guild.member(member.id);
-        if (!member) return this.levels.get(0);
+    async fetch(guild, user, ignoreStaff = false) {
+        const member = await guild.members.fetch(user.id);
 
         for (const level of this.levels.values()) {
             if (level.level === 0 && this.levels.get(-1).check(guild, member)) return this.levels.get(-1);
-            
+
             if (!(ignoreStaff && level.staff && !level.staffOverride)) if (level.check(guild, member)) return level;
         }
 

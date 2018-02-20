@@ -19,7 +19,7 @@ module.exports = class extends Command {
         const reset = !nickname || nickname === "reset";
 
         if (member) {
-            const actualUserPermissions = this.client.handlers.permissions.fetch(message.guild, message.author, true);
+            const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
             if (actualUserPermissions.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, actualUserPermissions));
 
             member.setNickname(reset ? "" : nickname)

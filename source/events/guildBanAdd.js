@@ -15,7 +15,11 @@ class New extends Event {
             const cachedLog = this.client.caches.bans.get(user.id);
 
             const newCase = this.client.handlers.moderationLog.buildCase(guild).setAction(Constants.ModerationLog.Types.BAN).setUser(user);
-            if (cachedLog) { newCase.setModerator(cachedLog.moderator); if (cachedLog.reason) newCase.setReason(cachedLog.reason); } newCase.send();
+            if (cachedLog) {
+                newCase.setModerator(cachedLog.moderator);
+                if (cachedLog.reason) newCase.setReason(cachedLog.reason);
+                if (cachedLog.expiration) newCase.setExpiration(cachedLog.expiration);
+            } newCase.send();
 
             this.client.caches.bans.delete(user.id);
         }

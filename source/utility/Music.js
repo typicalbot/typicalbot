@@ -71,8 +71,8 @@ class AudioUtil {
         return { has: false, req: override === "off" ? musicperms : override };
     }
 
-    hasPermissions(message, command) {
-        const userTrueLevel = this.client.handlers.permissions.fetch(message.guild, message.author, true);
+    async hasPermissions(message, command) {
+        const userTrueLevel = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
         const permissionCheck = this.permissionCheck(message, command, userTrueLevel);
         if (permissionCheck.has) { return true; } else {
