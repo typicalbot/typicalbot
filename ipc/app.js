@@ -71,8 +71,7 @@ class IPC extends express {
         */
 
         this.all("/webhook", (req, res, next) => {
-            console.log(req);
-            
+            console.log(req.headers, req.body);
         });
 
         /*
