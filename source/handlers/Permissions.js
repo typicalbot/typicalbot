@@ -34,6 +34,7 @@ class PermissionsHandler {
 
     async fetch(guild, user, ignoreStaff = false) {
         const member = await guild.members.fetch(user.id);
+        if (!member) return this.levels.get(0);
 
         for (const level of this.levels.values()) {
             if (level.level === 0 && this.levels.get(-1).check(guild, member)) return this.levels.get(-1);
