@@ -1,5 +1,4 @@
 const Store = require("../structures/Store");
-const path = require("path");
 
 class EventStore extends Store {
     constructor(client) {
