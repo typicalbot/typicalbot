@@ -26,7 +26,7 @@ class New extends Event {
 
         channel.send(
             settings.logs.nickname !== "--enabled" ?
-                this.client.functions.formatMessage("ann-nick", guild, user, settings.logs.nickname, { oldMember }) :
+                this.client.functions.formatMessage("logs-nick", guild, user, settings.logs.nickname, { oldMember }) :
                 `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
         ).catch(() => { return; });
     }
