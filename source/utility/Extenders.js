@@ -20,9 +20,9 @@ GuildMember.prototype.fetchPermissions = async function(ignoreStaff = false) {
     return this.client.handlers.permissions.fetch(this.guild, this, ignoreStaff);
 };
 
-MessageEmbed.prototype.send = function (content) {
+MessageEmbed.prototype.send = function (content, options = {}) {
     if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel");
-    return this.sendToChannel.send(content || "", { embed: this }).catch(() => {});
+    return this.sendToChannel.send(content || "", Object.assign(options, { embed: this })).catch(() => {});
 };
 
 TextChannel.prototype.buildEmbed = User.prototype.buildEmbed = DMChannel.prototype.buildEmbed = function () {
