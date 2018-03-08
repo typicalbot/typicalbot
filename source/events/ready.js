@@ -29,8 +29,8 @@ class New extends Event {
 
 
             this.client.handlers.process.transmit("stats", {
-                ram_used: process.memoryUsage().heapUsed / 1048576,
-                ram_total: process.memoryUsage().heapTotal / 1048576
+                ram_used: Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100,
+                ram_total: Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100
             });
         }, 1000 * 30));
     }
