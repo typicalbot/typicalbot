@@ -30,7 +30,7 @@ module.exports = class extends Command {
         const volume = match[1];
         if (volume < 0 || volume > 200) return message.error(`Invalid command usage. Volume must be a percent from 0% to 200%.`);
 
-        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to preform that command.");
+        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
 
         connection.guildStream.setVolume(volume * 0.01);
 

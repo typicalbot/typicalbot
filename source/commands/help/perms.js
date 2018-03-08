@@ -13,7 +13,7 @@ module.exports = class extends Command {
         message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Permission Levels").setURL(Constants.Links.BASE)
-            .setDescription(`There are six possible permission levels to have. Commands for all levels can be seen with \`d$commands\`.`)
+            .setDescription(`There are six possible permission levels to have. Commands for all levels can be seen with \`${this.client.config.prefix}commands\`.`)
             .addField("» Blacklisted [-1]", "**Description:** Users with this role are unable to use the bot.\n**Inherits From:** N/A\n**Setup Command:** `$set edit blacklistrole <role-name>`\n**Default Role:** `TypicalBot Blacklisted`")
             .addField("» Server Member [0]", "**Description:** Users with this role are able to use the default commands in the bot.\n**Inherits From:** N/A\n**Setup Command:** N/A\n**Default Role:** N/A")
             .addField("» Server DJ [1]", "**Description:** Users with this role are able to use DJ-only music commands.\n**Inherits From:** `Server Member`\n**Setup Command:** `$set edit djrole <role-name>`\n**Default Role:** N/A")

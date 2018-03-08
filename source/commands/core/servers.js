@@ -12,22 +12,26 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
+        const args = /(\d+)/.exec(message.content);
+
         const paged = this.client.functions.pagify(
             this.client.guilds
-                .sort((a,b) => b.memberCount - a.memberCount)
+                .sort((a, b) => b.memberCount - a.memberCount)
                 .map(g => `${this.client.functions.lengthen(1, `${g.name.replace(/[^a-z0-9 '"\/[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`),
-            parameters
+            args[1]
         );
 
         return message.reply(`**__Servers on shard ${this.client.shardNumber} / ${this.client.shardCount}:__**\n\`\`\`autohotkey\n${paged}\`\`\``);
     }
 
-    embedExecute(message, parameters, permissionLevel){
+    embedExecute(message, parameters, permissionLevel) {
+        const args = /(\d+)/.exec(message.content);
+
         const paged = this.client.functions.pagify(
             this.client.guilds
-                .sort((a,b) => b.memberCount - a.memberCount)
+                .sort((a, b) => b.memberCount - a.memberCount)
                 .map(g => `${this.client.functions.lengthen(1, `${g.name.replace(/[^a-z0-9 '"\/[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`),
-            parameters
+            args[1]
         );
 
         message.buildEmbed()

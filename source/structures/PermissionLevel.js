@@ -16,7 +16,7 @@ class PermissionLevel {
 
         const pool = setting.filter(r => guild.roles.has(r));
         
-        const permRole = guild.roles.find(r => r.name.toLowerCase() === Constants.Permissions.RoleTitles[permission.toUpperCase()]);
+        const permRole = guild.roles.find(r => r.name.toLowerCase() === Constants.Permissions.RoleTitles[permission.toUpperCase()].toLowerCase());
         if (permRole) pool.push(permRole.id);
 
         return pool;

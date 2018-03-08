@@ -13,7 +13,7 @@ module.exports = class extends Command {
         message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Possible logs").setURL(Constants.Links.BASE)
-            .setDescription(`You can set your server full of logs! Including activity and moderation.\n\n[Click here for more information on settings.](${Constants.Links.SETTINGS})`)
+            .setDescription(`You can set your server full of logs including activity and moderation.\n\n[Click here for more information on settings.](${Constants.Links.SETTINGS})`)
             .addField("**__Setting Up Activity Logs__**", "To set up activity logs, use the settings edit command for the logs setting. `$settings edit logs <#channel>`", false)
             .addField("**__Changing Join Logs__**", "**Enabled** By Default\n**Setting:** logs-join\n**Options:**\n- 'disable'\n- 'default'\n- 'embed'\n- desired-message", true)
             .addField("**__Changing Leave Logs__**", "**Enabled** By Default\n**Setting:** logs-leave\n**Options:**\n- 'disable'\n- 'default'\n- 'embed'\n- desired-message", true)

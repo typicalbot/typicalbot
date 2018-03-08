@@ -20,7 +20,7 @@ module.exports = class extends Command {
             return message.error("An error occured while trying to complete this action, and requires me to leave the voice channel. Sorry!");
         }
 
-        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to preform that command.");
+        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
 
         if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
         
