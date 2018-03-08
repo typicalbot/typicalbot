@@ -93,7 +93,9 @@ class ProcessHandler {
             guilds: this.client.guilds.size,
             channels: this.client.channels.size,
             voiceConnections: this.client.voiceConnections.size,
-            users: this.client.users.size
+            users: this.client.users.size,
+            ram_used: process.memoryUsage().heapUsed / 1048576,
+            ram_total: process.memoryUsage().heapTotal / 1048576
         });
     }
 }
