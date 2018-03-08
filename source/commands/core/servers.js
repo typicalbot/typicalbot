@@ -18,7 +18,7 @@ module.exports = class extends Command {
             this.client.guilds
                 .sort((a, b) => b.memberCount - a.memberCount)
                 .map(g => `${this.client.functions.lengthen(1, `${g.name.replace(/[^a-z0-9 '"\/[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`),
-            args[1]
+            args ? args[1] : 1
         );
 
         return message.reply(`**__Servers on shard ${this.client.shardNumber} / ${this.client.shardCount}:__**\n\`\`\`autohotkey\n${paged}\`\`\``);
@@ -31,7 +31,7 @@ module.exports = class extends Command {
             this.client.guilds
                 .sort((a, b) => b.memberCount - a.memberCount)
                 .map(g => `${this.client.functions.lengthen(1, `${g.name.replace(/[^a-z0-9 '"\/[\]()-_!@#$%^&*]/gmi, "")}`, 30)} : ${g.memberCount}`),
-            args[1]
+            args ? args[1] : 1
         );
 
         message.buildEmbed()
