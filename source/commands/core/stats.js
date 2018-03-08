@@ -51,7 +51,7 @@ module.exports = class extends Command {
             .addField("» Library", "discord.js", true)
             .addField("» Created By", "HyperCoder#2975", true)
             .addBlankField()
-            .addField("» Shard", `${this.client.shardNumber} / ${this.client.shardCount}`, false)
+            .addField("» Shard", `${this.client.shardNumber} / ${this.client.shardCount}`, true)
             .addField("» Servers", `${this.client.guilds.size.toLocaleString()}`, true)
             .addField("» Voice Connections", `${this.client.voiceConnections.size.toLocaleString()}`, true)
             .addField("» Channels", `${this.client.channels.size.toLocaleString()}`, true)
