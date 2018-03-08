@@ -50,6 +50,7 @@ module.exports = class extends Command {
             .addField("» RAM (Total)", `${this.client.shards.ram_total}MB`, true)
             .addField("» Library", "discord.js", true)
             .addField("» Created By", "HyperCoder#2975", true)
+            .addBlankField()
             .addField("» Shard", `${this.client.shardNumber} / ${this.client.shardCount}`, false)
             .addField("» Servers", `${this.client.guilds.size.toLocaleString()}`, true)
             .addField("» Voice Connections", `${this.client.voiceConnections.size.toLocaleString()}`, true)
