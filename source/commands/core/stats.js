@@ -19,6 +19,8 @@ module.exports = class extends Command {
             + `=> Uptime            : ${this.client.functions.convertTime(this.client.uptime)}\n`
             + `=> Servers           : ${this.client.shards.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})\n`
             + `=> Voice Connections : ${this.client.shards.voiceConnections.toLocaleString()}\n`
+            + `=> Channels          : ${this.client.shards.channels.toLocaleString()}\n`
+            + `=> Users             : ${this.client.shards.users.toLocaleString()}\n`
             + `=> CPU               : ${Math.round(loadavg()[0] * 10000) / 100}%\n`
             + `=> RAM (Used)        : ${this.client.shards.ram_used}MB\n`
             + `=> RAM (Total)       : ${this.client.shards.ram_total}MB\n`
@@ -45,6 +47,8 @@ module.exports = class extends Command {
             .addField("» Uptime", this.client.functions.convertTime(this.client.uptime), true)
             .addField("» Servers", `${this.client.shards.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})`, true)
             .addField("» Voice Connections", `${this.client.shards.voiceConnections.toLocaleString()}`, true)
+            .addField("» Channels", `${this.client.shards.channels.toLocaleString()}`, true)
+            .addField("» Users", `${this.client.shards.users.toLocaleString()}`, true)
             .addField("» CPU Usage", `${Math.round(loadavg()[0] * 10000) / 100}%`, true)
             .addField("» RAM (Used)", `${this.client.shards.ram_used}MB`, true)
             .addField("» RAM (Total)", `${this.client.shards.ram_total}MB`, true)
