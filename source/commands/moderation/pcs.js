@@ -46,7 +46,15 @@ module.exports = class extends Command {
 
             if (this.client.commands.fetch(command, message.guild.settings) || pcList.map(pc => pc.command).includes(command)) return message.error("This command already exists.");
             
-            pcList.push({ command, response, dm, addRoles, removeRoles, reqPermissions, delete: msgDelete });
+            pcList.push({
+                command,
+                response: response || null,
+                dm: dm || null,
+                addRoles: addRoles || null,
+                removeRoles: removeRoles || null,
+                reqPermissions: reqPermissions || 0,
+                delete: !!msgDelete
+            });
 
             this.client.settings.update(message.guild.id, { pcs: pcList });
         } else if (action === "remove") {
