@@ -12,10 +12,10 @@ class CommandStore extends Store {
         return super.get(name);
     }
 
-    async fetch(text, aliases) {
+    fetch(text, settings) {
         if (this.has(text)) return super.get(text);
         if (this.find(c => c.aliases.includes(text))) return super.find(c => c.aliases.includes(text));
-        if (aliases && aliases.map(x => x.alias).includes(text)) return super.get(aliases[aliases.map(x => x.alias).indexOf(text)].command);
+        if (settings.aliases && settings.aliases.map(x => x.alias).includes(text)) return super.get(settings.aliases[settings.aliases.map(x => x.alias).indexOf(text)].command);
         return null;
     }
 

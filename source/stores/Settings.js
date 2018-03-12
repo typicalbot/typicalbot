@@ -73,7 +73,8 @@ class EventStore extends Store {
                 "queuelimit": null,
                 "apikey": null
             },
-            "subscriber": null
+            "subscriber": null,
+            "pcs": []
         };
     }
 
