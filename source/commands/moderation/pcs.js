@@ -19,6 +19,8 @@ module.exports = class extends Command {
 
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
+        console.log(args);
+
         const action = args[1],
             command = args[2],
             response = args[3],
