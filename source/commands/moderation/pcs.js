@@ -35,7 +35,8 @@ module.exports = class extends Command {
 
         } else if (action === "add") {
             if (actualUserPermissions.level < Constants.Permissions.Levels.SERVER_ADMINISTRATOR) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
-            if (!command || command.length > 14) return message.error("You cannot add a custom command with a name over 14 characters long.");
+            if (!command) return message.error("You must provide a command.");
+            if (command.length > 14) return message.error("You cannot add a custom command with a name over 14 characters long.");
             if (reqPermissions && reqPermissions < Constants.Permissions.Levels.SERVER_MEMBER) return message.error("You cannot use a permission level less than Server Member.");
             if (reqPermissions && reqPermissions > Constants.Permissions.Levels.SERVER_OWNER) return message.error("You cannot use a permission level greater than Server Owner.");
 
