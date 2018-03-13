@@ -52,7 +52,7 @@ module.exports = class extends Command {
                 dm: dm || null,
                 addRoles: addRoles || null,
                 removeRoles: removeRoles || null,
-                reqPermissions: reqPermissions || 0,
+                permission: reqPermissions || 0,
                 delete: !!msgDelete
             });
 
