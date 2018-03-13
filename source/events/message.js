@@ -30,7 +30,7 @@ class New extends Event {
         const prefix = this.client.functions.matchPrefix(message.author, settings, split);
         if (!prefix || !message.content.startsWith(prefix)) return;
 
-        const command = await this.client.commands.fetch(split.slice(prefix.length).toLowerCase(), settings.aliases); if (!command) return;
+        const command = await this.client.commands.fetch(split.slice(prefix.length).toLowerCase(), settings); if (!command) return;
 
         const param = message.content.includes(" ") ? message.content.slice(message.content.indexOf(" ") + 1) : "";
 
