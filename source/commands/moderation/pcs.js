@@ -23,8 +23,8 @@ module.exports = class extends Command {
 
         const action = args[1],
             command = args[2],
-            sub = args[3],
-            response = sub ? /{{response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
+            sub = args[3];
+        const response = sub ? /{{response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
             dm = sub ? /{{dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
             addRoles = sub ? /{{\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
             removeRoles = sub ? /{{\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
