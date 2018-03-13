@@ -23,7 +23,7 @@ module.exports = class extends Command {
             command = args[2],
             sub = args[3],
             responseA = sub ? /\[\[response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
-            dmA = sub ? /{\[\[dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
+            dmA = sub ? /\[\[dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
             addRolesA = sub ? /\[\[\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
             removeRolesA = sub ? /\[\[\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
             reqPermissionsA = sub ? /(?:(?:-p|--permissions)\s+(\d+))/i.exec(sub) : null,
