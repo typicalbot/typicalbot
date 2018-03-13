@@ -13,6 +13,8 @@ module.exports = (client, pcs) => new Object({
     mode: Constants.Modes.STRICT,
     access: Constants.Access.Levels.DEFAULT,
     execute: async (message, parameters, permissionLevel) => {
+        this.client = client;
+        
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
         if (actualUserPermissions.level < pcs.permission) return message.error(this.client.functions.error("perms", { permission: pcs.permission }, actualUserPermissions));
 
