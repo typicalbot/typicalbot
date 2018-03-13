@@ -23,12 +23,13 @@ module.exports = class extends Command {
 
         const action = args[1],
             command = args[2],
-            response = args[3],
-            dm = args[4],
-            addRoles = args[5],
-            removeRoles = args[6],
-            reqPermissions = args[7],
-            msgDelete = args[8];
+            sub = args[3],
+            response = sub ? /{{response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
+            dm = sub ? /{{dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
+            addRoles = sub ? /{{\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
+            removeRoles = sub ? /{{\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/.match(sub) : null,
+            reqPermissions = sub ? /(?:(?:-p|--permissions)\s+(\d+))/.match(sub) : null,
+            msgDelete = sub ? /(-d|--delete)/.match(sub) : null;
 
         if (action === "list") {
 
