@@ -19,15 +19,13 @@ module.exports = class extends Command {
 
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
-        console.log(args);
-
         const action = args[1],
             command = args[2],
             sub = args[3],
-            responseA = sub ? /{{response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
-            dmA = sub ? /{{dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
-            addRolesA = sub ? /{{\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
-            removeRolesA = sub ? /{{\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
+            responseA = sub ? /\[\[response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
+            dmA = sub ? /{\[\[dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
+            addRolesA = sub ? /\[\[\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
+            removeRolesA = sub ? /\[\[\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)\]\]/i.exec(sub) : null,
             reqPermissionsA = sub ? /(?:(?:-p|--permissions)\s+(\d+))/i.exec(sub) : null,
             msgDeleteA = sub ? /(-d|--delete)/i.exec(sub) : null,
             response = responseA ? responseA[1] : null,
@@ -63,7 +61,11 @@ module.exports = class extends Command {
                 delete: !!msgDelete
             });
 
-            this.client.settings.update(message.guild.id, { pcs: pcList });
+            this.client.settings.update(message.guild.id, { pcs: pcList }).then(() => {
+                message.reply("Successfully created personal command.");
+            }).catch(err => {
+                message.reply("Failed to create personal command.");
+            });
         } else if (action === "remove") {
             if (actualUserPermissions.level < Constants.Permissions.Levels.SERVER_ADMINISTRATOR) return message.error(this.client.functions.error("perms", { permission: 3 }, actualUserPermissions));
 
