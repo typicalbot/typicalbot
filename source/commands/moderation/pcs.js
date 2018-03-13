@@ -14,7 +14,7 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        const args = /(list|clear|add|remove)(?:\s+(\w+)(?:\s+(?:(?:{{response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}|{{dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}|{{\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}|{{\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}|(?:(?:-p|--permissions)\s+(\d+))|(-d|--delete)|\s+)+))?)?/i.exec(parameters);
+        const args = /(list|clear|add|remove)(?:\s+(\w+)(?:\s+(.+))?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
