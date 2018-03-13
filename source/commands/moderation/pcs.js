@@ -24,12 +24,18 @@ module.exports = class extends Command {
         const action = args[1],
             command = args[2],
             sub = args[3],
-            response = sub ? /{{response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
-            dm = sub ? /{{dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
-            addRoles = sub ? /{{\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
-            removeRoles = sub ? /{{\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
-            reqPermissions = sub ? /(?:(?:-p|--permissions)\s+(\d+))/i.exec(sub) : null,
-            msgDelete = sub ? /(-d|--delete)/i.exec(sub) : null;
+            responseA = sub ? /{{response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
+            dmA = sub ? /{{dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
+            addRolesA = sub ? /{{\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
+            removeRolesA = sub ? /{{\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>\[\]]+)}}/i.exec(sub) : null,
+            reqPermissionsA = sub ? /(?:(?:-p|--permissions)\s+(\d+))/i.exec(sub) : null,
+            msgDeleteA = sub ? /(-d|--delete)/i.exec(sub) : null,
+            response = responseA ? responseA[1] : null,
+            dm = dmA ? dmA[1] : null,
+            addRoles = addRolesA ? addRolesA[1] : null,
+            removeRoles = removeRolesA ? removeRolesA[1] : null,
+            reqPermissions = reqPermissionsA ? reqPermissionsA[1] : null,
+            msgDelete = msgDeleteA ? msgDeleteA[1] : null;
 
         if (action === "list") {
 
