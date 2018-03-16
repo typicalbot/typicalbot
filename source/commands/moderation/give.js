@@ -11,7 +11,7 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        return message.reply("This error has been temporarily disabled by the TypicalBot Administration until further notice.");
+        return message.reply("This command has been temporarily disabled by the TypicalBot Administration until further notice.");
         const args = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?(?:\s+)?(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
