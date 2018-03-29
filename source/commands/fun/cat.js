@@ -11,7 +11,7 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        request.get("http://random.cat/meow")
+        request.get("http://aws.random.cat/meow")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");
 
@@ -20,7 +20,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, parameters, permissionLevel) {
-        request.get("http://random.cat/meow")
+        request.get("http://aws.random.cat/meow")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");
 
