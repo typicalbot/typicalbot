@@ -563,7 +563,7 @@ module.exports = class extends Command {
                     if (value === "free") {
                         this.client.settings.update(message.guild.id, { mode: "free" }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "lite") {
-                        this.client.settings.update(message.guild.id, { mode: "free" }).then(() => message.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { mode: "lite" }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "strict") {
                         this.client.settings.update(message.guild.id, { mode: "strict" }).then(() => message.success("Setting successfully updated."));
                     } else {
