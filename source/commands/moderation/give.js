@@ -14,7 +14,7 @@ module.exports = class extends Command {
         const args = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?(?:\s+)?(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const actualUserPermissions = message.member.fetchPermissions(true);
+        const actualUserPermissions = await message.member.fetchPermissions(true);
         const member = await this.client.functions.resolveMember(message, args, false);
 
         if (member) {
