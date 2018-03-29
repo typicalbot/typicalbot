@@ -638,7 +638,7 @@ module.exports = class extends Command {
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { nonickname: false }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "enable") {
-                        this.client.settings.update(message.guild.id, { nonickname: false }).then(() => message.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { nonickname: true }).then(() => message.success("Setting successfully updated."));
                     } else {
                         message.error("An invalid option was given.");
                     }
