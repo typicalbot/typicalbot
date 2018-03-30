@@ -69,7 +69,7 @@ class Stream {
 
     end() {
         this.queue = [];
-        this.connection.disconnect();
+        this.connection.channel.leave();
         this.client.emit("voiceConnectionUpdate");
     }
 
