@@ -39,7 +39,7 @@ class New extends Event {
 
         const mode = command.mode;
         if (message.author.id !== this.client.config.owner && message.author.id !== message.guild.ownerID)
-            if (mode < settings.mode) return message.error(`That command is not enabled on this server.`);
+            if (mode < Constants.Modes[settings.mode.toUpperCase()]) return message.error(`That command is not enabled on this server.`);
 
         if (userPermissions.level < command.permission || (actualUserPermissions.level < command.permission && actualUserPermissions.level !== Constants.Permissions.Levels.SERVER_BLACKLISTED && command.permission <= Constants.Permissions.Levels.SERVER_OWNER)) return message.error(this.client.functions.error("perms", command, actualUserPermissions));
 
