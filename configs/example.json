@@ -1,0 +1,44 @@
+{
+    "prefix": "$",
+    "shards": 1,
+
+    "id": "BOT ID HERE",
+    "token": "BOT TOKEN HERE",
+    "discordbots": "DISCORDBOTS.ORG API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
+    "apitoken": "LOCALHOST API TOKEN - FOR EXTERNAL API - NOT REQUIRED",
+    "youtubekey": "YOUTUBE API TOKEN FOR MUSIC",
+    "carbonkey": "CARBONITEX API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
+
+    "clientOptions": {
+        "messageCacheMaxSize": 150,
+        "messageCacheLifetime": 3600,
+        "messageSweepInterval": 300,
+        "disableEveryone": true
+    },
+
+    "rethinkdb": {
+        "db": "DATABASE",
+        "user": "USER",
+        "password": "PASSWORD"
+    },
+
+    "creator": "105408136285818880",
+    "administrators": {
+        "187980183569956864": "Xeno",
+        "176610059684544512": "Tyler"
+    },
+    "support": {
+        "156859037890117632": "Packer",
+        "193382030812250112": "AKSKL",
+        "245419467843174401": "Pawky",
+        "214045916246573057": "TechnicalFox",
+        "218459651098935297": "Tobias"
+    },
+
+    "partners": {
+        "117111577345392645": "Tazza - The Cat Den",
+        "198302834943459329": "entertainment - DbD",
+        "146048938242211840": "York - Idiot's Guide",
+        "76842460248023040": "Dauntless"
+    }
+}
