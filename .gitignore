@@ -3,3 +3,4 @@ configs/*
 !configs/example.json
 express/config.json
 package-lock.json
+build.txt
