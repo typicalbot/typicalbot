@@ -7,7 +7,7 @@ class New extends Function {
 
     async execute() {
         const database = this.client.handlers.database.connection;
-        const data = (await database.tableList()).includes("donors") ? await database.table("donors") : (await database.dbList()).includes("data") ? await database.db("data").table("donors") : [];
+        const data = (await this.client.handlers.database.connection.table("donors")) || [];
 
         data.forEach(e => {
             if (e.id.length > 5) this.client.caches.donors.set(e.id, e);

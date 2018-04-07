@@ -13,18 +13,9 @@ const r = redb(credentials);
     await db.tableCreate("guilds");
     await db.tableCreate("mutes");
     await db.tableCreate("tasks");
+    await db.tableCreate("donors");
+    await db.tableCreate("partners");
 
     console.log("Database 1 Built");
-
-    if ((await r.dbList()).includes("data")) process.exit();
-
-    await r.dbCreate("data");
-
-    const datadb = r.db("data");
-    
-    await datadb.tableCreate("donors");
-    await datadb.tableCreate("partners");
-
-    console.log("Database 2 Built");
     process.exit();
 })();
