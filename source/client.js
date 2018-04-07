@@ -2,10 +2,8 @@ require("./utility/Extenders");
 
 const { Client, Collection }    = require("discord.js");
 
-const build                     = process.env.CLIENT_BUILD;
-const config                    = require(`../configs/${build}`);
+const config                    = require(`../config`);
 
-/*          Handlers            */
 const ProcessHandler              = require("./handlers/Process");
 const DatabaseHandler             = require("./handlers/Database");
 const TaskHandler                 = require("./handlers/Tasks");
@@ -14,21 +12,19 @@ const AutoModerationHandler       = require("./handlers/AutoModeration");
 const ModerationLogHandler        = require("./handlers/ModerationLog");
 const MusicHandler                = require("./handlers/Music");
 
-/*          Stores              */
 const SettingStore                = require("./stores/Settings");
 const FunctionStore               = require("./stores/Functions");
 const CommandStore                = require("./stores/Commands");
 const EventStore                  = require("./stores/Events");
 
-/*          Utility             */
 const MusicUtility                = require("./utility/Music");
 
 class TypicalBot extends Client {
     constructor() {
         super(config.clientOptions);
 
-        Object.defineProperty(this, "build", { value: build });
         Object.defineProperty(this, "config", { value: config });
+        Object.defineProperty(this, "build", { value: config.build });
 
         this.shardID                    = Number(process.env.SHARD_ID);
         this.shardNumber                = Number(process.env.SHARD_ID) + 1;

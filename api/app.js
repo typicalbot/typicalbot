@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const build = require("../build");
+const build = require("../config").build;
 
 const port = build === "stable" ? 5000 : build === "beta" ? 5001 : build === "development" ? 5002 : 5000;
 
@@ -13,7 +13,7 @@ class IPC extends express {
         this.use(bodyParser.json());
 
         function isAuthenticated(req, res, next) {
-            if (req.get("Authorization") && req.get("Authorization").replace("'", "") === this.master.config.apitoken) return next();
+            if (req.get("Authorization") && req.get("Authorization").replace("'", "") === this.master.config.apis.localhost) return next();
             return res.status(403).json({ "message": "Authorization Required" });
         }
 

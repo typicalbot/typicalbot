@@ -14,14 +14,14 @@ class New extends Function {
                     "shardid": this.client.shardID.toString(),
                     "shardcount": this.client.shardCount.toString(),
                     "servercount": this.client.guilds.size.toString(),
-                    "key": this.client.config.carbonkey
+                    "key": this.client.config.apis.carbon
                 })
                 .end((err, res) => {
                     if (err || res.statusCode != 200) this.client.handlers.process.log(`Carbinitex Stats Transfer Failed ${err.body || err}`, true);
                 });
         } else if (provider === "a" || provider === "b") {
             request.post("https://bots.discord.pw/api/bots/153613756348366849/stats")
-                .set("Authorization", this.client.config.discordbots)
+                .set("Authorization", this.client.config.apis.discordbots)
                 .set("Content-Type", "application/json")
                 .send({
                     "shard_id": this.client.shardID.toString(),

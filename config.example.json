@@ -1,13 +1,12 @@
 {
+    "build": "BUILD STAGE",
+
     "prefix": "$",
     "shards": 1,
 
     "id": "BOT ID HERE",
+
     "token": "BOT TOKEN HERE",
-    "discordbots": "DISCORDBOTS.ORG API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
-    "apitoken": "LOCALHOST API TOKEN - FOR EXTERNAL API - NOT REQUIRED",
-    "youtubekey": "YOUTUBE API TOKEN FOR MUSIC",
-    "carbonkey": "CARBONITEX API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
 
     "clientOptions": {
         "messageCacheMaxSize": 150,
@@ -16,10 +15,20 @@
         "disableEveryone": true
     },
 
-    "rethinkdb": {
-        "db": "DATABASE",
-        "user": "USER",
-        "password": "PASSWORD"
+    "apis": {
+        "discordbots": "DISCORDBOTS.ORG API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
+        "carbonkey": "CARBONITEX API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
+        "youtube": "YOUTUBE API TOKEN FOR MUSIC",
+
+        "localhost": "LOCALHOST API TOKEN - FOR EXTERNAL API - NOT REQUIRED | DASHBOARD <-> BOT"
+    },
+
+    "database": {
+        "credentials": {
+            "user": "USER",
+            "password": "PASSWORD",
+            "db": "DATABASE NAME"
+        }
     },
 
     "creator": "105408136285818880",

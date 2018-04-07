@@ -1,8 +1,8 @@
 const { fork } = require("child_process");
 
 class Shard extends fork {
-    constructor(master, SHARD_ID, SHARD_COUNT, CLIENT_TOKEN, CLIENT_BUILD) {
-        super(`${process.cwd()}/source/client.js`, [], { env: { SHARD_ID, SHARD_COUNT, CLIENT_TOKEN, CLIENT_BUILD } });
+    constructor(master, SHARD_ID, SHARD_COUNT) {
+        super(`${process.cwd()}/source/client.js`, [], { env: { SHARD_ID, SHARD_COUNT } });
 
         this.master = master;
 

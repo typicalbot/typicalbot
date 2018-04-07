@@ -1,5 +1,4 @@
 node_modules/*
-configs/*
-!configs/example.json
-express/config.json
+config.json
 package-lock.json
+.vs/*
