@@ -18,7 +18,7 @@
     "apis": {
         "discordbots": "DISCORDBOTS.ORG API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
         "carbonkey": "CARBONITEX API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
-        "youtubekey": "YOUTUBE API TOKEN FOR MUSIC",
+        "youtube": "YOUTUBE API TOKEN FOR MUSIC",
 
         "localhost": "LOCALHOST API TOKEN - FOR EXTERNAL API - NOT REQUIRED | DASHBOARD <-> BOT"
     },
