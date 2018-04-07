@@ -11,6 +11,8 @@
         "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
         "superagent": "^3.5.2",
         "uws": "^0.14.5",
-        "ytdl-core": "github:fent/node-ytdl-core"
+        "ytdl-core": "github:fent/node-ytdl-core",
+        "express": "^4.16.3",
+        "body-parser": "^1.18.2"
     }
 }

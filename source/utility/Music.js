@@ -3,7 +3,7 @@ const ytdl      = require("ytdl-core");
 const SYS       = require("simple-youtube-stream");
 const sys       = new SYS();
 
-const apiKey    = require(`../../configs/${process.env.CLIENT_BUILD}`).youtubekey;
+const apiKey    = require(`../../config`).apis.youtube;
 
 const YAPI      = require("simple-youtube-api");
 const TBYT      = new YAPI(apiKey);
