@@ -1,8 +1,8 @@
 const { fork } = require("child_process");
 
 class Shard extends fork {
-    constructor(master, SHARD_ID, SHARD_COUNT, CLIENT_TOKEN, CLIENT_BUILD) {
-        super(`${process.cwd()}/source/client.js`, [], { env: { SHARD_ID, SHARD_COUNT, CLIENT_TOKEN, CLIENT_BUILD } });
+    constructor(master, SHARD_ID, SHARD_COUNT) {
+        super(`${process.cwd()}/source/client.js`, [], { env: { SHARD_ID, SHARD_COUNT } });
 
         this.master = master;
 
@@ -14,13 +14,13 @@ class Shard extends fork {
             const { type, data } = message;
 
             if (type === "stats") {
-                this.master.updateStats(this.id, message.data);
+                this.master.updateStats(this.id, data);
             } else if (type === "masterrequest") {
-                const r = this.master.pendingRequests.get(message.data.id);
+                const r = this.master.pendingRequests.get(data.id);
                 if (!r) return;
                 r.callback(message);
             } else {
-                this.master.broadcast(message.type, message.data);
+                this.master.broadcast(type, data);
             }
         });
     }
