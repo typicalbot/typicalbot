@@ -1,5 +1,5 @@
 const redb = require("rethinkdbdash");
-const credentials = require(`../../config`).database.credentials;
+const credentials = require(`../config`).database.credentials;
 
 const r = redb(credentials);
 
@@ -14,7 +14,9 @@ const r = redb(credentials);
     db.tableCreate("mutes");
     db.tableCreate("tasks");
 
-    if ((await r.dbList()).includes("data")) return;
+    console.log("Database 1 Built");
+
+    if ((await r.dbList()).includes("data")) process.exit();
 
     r.dbCreate(credentials.db);
 
@@ -22,4 +24,7 @@ const r = redb(credentials);
     
     datadb.tableCreate("donors");
     datadb.tableCreate("partners");
+
+    console.log("Database 2 Built");
+    process.exit();
 })();
