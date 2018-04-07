@@ -7,7 +7,6 @@ class New extends Function {
     }
 
     execute(type, guild, user, content, options = {}) {
-        console.log(this);
         const member = guild.member(user);
 
         content = content.replace(/@everyone/gi, `@\u200Beveryone`).replace(/@here/g, `@\u200Bhere`);
