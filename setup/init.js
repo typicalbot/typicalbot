@@ -6,24 +6,24 @@ const r = redb(credentials);
 (async function () {
     if ((await r.dbList()).includes(credentials.db)) throw "Database Exists";
     
-    r.dbCreate(credentials.db);
+    await r.dbCreate(credentials.db);
 
-    const db = r.db(credentials.db);
+    const db = await r.db(credentials.db);
     
-    db.tableCreate("guilds");
-    db.tableCreate("mutes");
-    db.tableCreate("tasks");
+    await db.tableCreate("guilds");
+    await db.tableCreate("mutes");
+    await db.tableCreate("tasks");
 
     console.log("Database 1 Built");
 
     if ((await r.dbList()).includes("data")) process.exit();
 
-    r.dbCreate(credentials.db);
+    await r.dbCreate(credentials.db);
 
-    const datadb = r.db("data");
+    const datadb = await r.db("data");
     
-    datadb.tableCreate("donors");
-    datadb.tableCreate("partners");
+    await datadb.tableCreate("donors");
+    await datadb.tableCreate("partners");
 
     console.log("Database 2 Built");
     process.exit();
