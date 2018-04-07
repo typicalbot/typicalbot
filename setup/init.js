@@ -8,7 +8,7 @@ const r = redb(credentials);
     
     await r.dbCreate(credentials.db);
 
-    const db = await r.db(credentials.db);
+    const db = r.db(credentials.db);
     
     await db.tableCreate("guilds");
     await db.tableCreate("mutes");
@@ -20,7 +20,7 @@ const r = redb(credentials);
 
     await r.dbCreate(credentials.db);
 
-    const datadb = await r.db("data");
+    const datadb = r.db("data");
     
     await datadb.tableCreate("donors");
     await datadb.tableCreate("partners");
