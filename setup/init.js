@@ -10,24 +10,25 @@ const r = redb(credentials);
     }
     
     const db = r.db(credentials.db);
+    const dbTables = await db.tableList();
     
-    if (!(await db.tableList()).includes("guilds")) {
+    if (!dbTables.includes("guilds")) {
         console.log("Table `guilds` not found. Creating...");
         await db.tableCreate("guilds");
     }
-    if (!(await db.tableList()).includes("mutes")) {
+    if (!dbTables.includes("mutes")) {
         console.log("Table `mutes` not found. Creating...");
         await db.tableCreate("mutes");
     }
-    if (!(await db.tableList()).includes("tasks")) {
+    if (!dbTables.includes("tasks")) {
         console.log("Table `tasks` not found. Creating...");
         await db.tableCreate("tasks");
     }
-    if (!(await db.tableList()).includes("donors")) {
+    if (!dbTables.includes("donors")) {
         console.log("Table `donors` not found. Creating...");
         await db.tableCreate("donors");
     }
-    if (!(await db.tableList()).includes("partners")) {
+    if (!dbTables.includes("partners")) {
         console.log("Table `partners` not found. Creating...");
         await db.tableCreate("partners");
     }
