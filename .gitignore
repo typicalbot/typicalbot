@@ -1,6 +1,4 @@
 node_modules/*
-configs/*
-!configs/example.json
 config.json
 express/config.json
 package-lock.json
