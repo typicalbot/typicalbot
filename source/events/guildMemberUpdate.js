@@ -22,7 +22,7 @@ class New extends Event {
         if (!guild.channels.has(settings.logs.id)) return;
         const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.auto.nickname && nickname === this.client.functions.formatMessage("jn", guild, user, settings.auto.nickname)) return;
+        if (settings.auto.nickname && nickname === this.client.functions.formatMessage("autonick", guild, user, settings.auto.nickname)) return;
 
         channel.send(
             settings.logs.nickname !== "--enabled" ?

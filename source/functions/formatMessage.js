@@ -24,15 +24,15 @@ class New extends Function {
             .replace(/{now}/gi, moment().format("dddd MMMM Do, YYYY, hh:mm A"))
             .replace(/{now.time}/gi, moment().format("hh:mm A"))
             .replace(/{now.date}/gi, moment().format("MMM DD, YYYY"));
-        if (type === "logs-nick") return this.execute("logs", guild, user, content)
+        if (type === "logs-nick") return this.formatMessage("logs", guild, user, content)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{user.oldnick}|{user.oldnickname}/gi, options.oldMember.nickname || user.username);
-        if (type === "logs-invite") return this.execute("logs", guild, user, content)
+        if (type === "logs-invite") return this.formatMessage("logs", guild, user, content)
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
             .replace(/{channel}/gi, options.channel.toString())
             .replace(/{channel.name}/gi, options.channel.name)
             .replace(/{channel.id}/gi, options.channel.id);
-        if (type === "logs-msgdel") return this.execute("logs", guild, user, content)
+        if (type === "logs-msgdel") return this.formatMessage("logs", guild, user, content)
             .replace(/{message.content}|{message.text}/gi, options.message.content)
             .replace(/{message.content:short}|{message.text:short}/gi, this.lengthen(-1, options.message.content, 100))
             .replace(/{user.nick}|{user.nickname}/gi, member.nickname || user.username)
