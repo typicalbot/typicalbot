@@ -16,6 +16,6 @@ const r = redb(credentials);
     await db.tableCreate("donors");
     await db.tableCreate("partners");
 
-    console.log("Database 1 Built");
+    console.log("Database Built");
     process.exit();
 })();

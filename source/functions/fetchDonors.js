@@ -6,7 +6,6 @@ class New extends Function {
     }
 
     async execute() {
-        const database = this.client.handlers.database.connection;
         const data = await this.client.handlers.database.connection.table("donors");
 
         data.forEach(e => {
