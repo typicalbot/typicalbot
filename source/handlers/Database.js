@@ -1,5 +1,5 @@
 const r             = require("rethinkdbdash");
-const credentials   = require(`../../config`).rethinkdb.credentials;
+const credentials   = require(`../../config`).database.credentials;
 
 class DatabaseHandler {
     constructor(client) {
