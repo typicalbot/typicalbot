@@ -11,27 +11,15 @@ const r = redb(credentials);
     
     const db = r.db(credentials.db);
     const dbTables = await db.tableList();
-    
-    if (!dbTables.includes("guilds")) {
-        console.log("Table `guilds` not found. Creating...");
-        await db.tableCreate("guilds");
-    }
-    if (!dbTables.includes("mutes")) {
-        console.log("Table `mutes` not found. Creating...");
-        await db.tableCreate("mutes");
-    }
-    if (!dbTables.includes("tasks")) {
-        console.log("Table `tasks` not found. Creating...");
-        await db.tableCreate("tasks");
-    }
-    if (!dbTables.includes("donors")) {
-        console.log("Table `donors` not found. Creating...");
-        await db.tableCreate("donors");
-    }
-    if (!dbTables.includes("partners")) {
-        console.log("Table `partners` not found. Creating...");
-        await db.tableCreate("partners");
-    }
+
+    const tables = ["guilds", "mutes", "tasks", "donors", "partners"];
+
+    tables.forEach(async t => {
+        if (!dbTables.includes(t)) {
+            console.log(`Table ${t} not found. Creating...`);
+            await db.tableCreate(t);
+        }
+    });
 
     console.log("The database should be good to go.");
     process.exit();
