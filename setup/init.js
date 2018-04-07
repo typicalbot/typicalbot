@@ -14,12 +14,12 @@ const r = redb(credentials);
 
     const tables = ["guilds", "mutes", "tasks", "donors", "partners"];
 
-    tables.forEach(async t => {
+    for (const t of tables) {
         if (!dbTables.includes(t)) {
             console.log(`Table ${t} not found. Creating...`);
             await db.tableCreate(t);
         }
-    });
+    }
 
     console.log("The database should be good to go.");
     process.exit();
