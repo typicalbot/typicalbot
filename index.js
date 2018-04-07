@@ -1,16 +1,8 @@
-require.extensions['.txt'] = function (module, filename) { module.exports = require("fs").readFileSync(filename, 'utf8'); };
-
 const { Collection } = require("discord.js");
-
 const API = require("./api/app");
+const config = require(`./config`);
 
-const build = require("./build");
-const config = require(`./configs/${build}`);
-
-const SHARD_COUNT   = config.shards;
-const CLIENT_TOKEN  = config.token;
-
-const Shard = require("./structures/Shard");
+const Shard = require("./Shard");
 
 class ShardingMaster extends Collection {
     constructor() {
@@ -24,8 +16,8 @@ class ShardingMaster extends Collection {
 
         this.pendingRequests = new Collection();
 
-        for (let s = 0; s < SHARD_COUNT; s++) {
-            setTimeout(() => this.set(s, new Shard(this, s, SHARD_COUNT, CLIENT_TOKEN, build)), (9000 * s));
+        for (let s = 0; s < config.shards; s++) {
+            setTimeout(() => this.set(s, new Shard(this, s, config.shards)), (9000 * s));
         }
     }
 
