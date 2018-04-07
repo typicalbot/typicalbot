@@ -18,7 +18,7 @@ const r = redb(credentials);
 
     if ((await r.dbList()).includes("data")) process.exit();
 
-    await r.dbCreate(credentials.db);
+    await r.dbCreate("data");
 
     const datadb = r.db("data");
     
