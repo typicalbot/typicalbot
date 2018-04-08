@@ -60,7 +60,7 @@ module.exports = class extends Command {
             const count = Math.ceil(settings.length / 10);
             if (page < 1 || page > count) page = 1;
 
-            const list = settings.splice((page -1) * 10, 10).map(k => ` • **${k}:** ${settingsList[k]}`);
+            const list = settings.splice((page - 1) * 10, 10).map(k => ` • **${k}:** ${settingsList[k]}`);
 
             message.send(`**__Available settings to use with TypicalBot:__**\n\n**Page ${page} / ${count}**\n${list.join("\n")}`);
         } else if (action === "clear") {
@@ -207,7 +207,7 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "adminrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settings.update(message.guild.id, { roles: { administrator: [] }}).then(() => message.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { roles: { administrator: [] } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         if (ar) {
                             if (ar === "add") {
@@ -241,12 +241,12 @@ module.exports = class extends Command {
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                             if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                            this.client.settings.update(message.guild.id, { roles: { administrator: [ role.id ] } }).then(() => message.success("Setting successfully updated."));
+                            this.client.settings.update(message.guild.id, { roles: { administrator: [role.id] } }).then(() => message.success("Setting successfully updated."));
                         }
                     }
                 } else if (setting === "modrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settings.update(message.guild.id, { roles: { moderator: [] }}).then(() => message.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { roles: { moderator: [] } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         if (ar) {
                             if (ar === "add") {
@@ -261,7 +261,8 @@ module.exports = class extends Command {
                                 currentList.push(role.id);
 
                                 this.client.settings.update(message.guild.id, {
-                                    roles: { moderator: currentList } }).then(() => message.success("Setting successfully updated."));
+                                    roles: { moderator: currentList }
+                                }).then(() => message.success("Setting successfully updated."));
                             } else if (ar === "remove") {
                                 const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
@@ -281,12 +282,12 @@ module.exports = class extends Command {
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                             if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                            this.client.settings.update(message.guild.id, { roles: { moderator: [ role.id ] } }).then(() => message.success("Setting successfully updated."));
+                            this.client.settings.update(message.guild.id, { roles: { moderator: [role.id] } }).then(() => message.success("Setting successfully updated."));
                         }
                     }
                 } else if (setting === "djrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settings.update(message.guild.id, { roles: { dj: [] }}).then(() => message.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { roles: { dj: [] } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         if (ar) {
                             if (ar === "add") {
@@ -320,7 +321,7 @@ module.exports = class extends Command {
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                             if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                            this.client.settings.update(message.guild.id, { roles: { dj: [ role.id ] } }).then(() => message.success("Setting successfully updated."));
+                            this.client.settings.update(message.guild.id, { roles: { dj: [role.id] } }).then(() => message.success("Setting successfully updated."));
                         }
                     }
                 } else if (setting === "muterole") {
@@ -336,7 +337,7 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "blacklistrole") {
                     if (value === "disable" || value === "clear") {
-                        this.client.settings.update(message.guild.id, { roles: { blacklist: [] }}).then(() => message.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { roles: { blacklist: [] } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         if (ar) {
                             if (ar === "add") {
@@ -370,12 +371,12 @@ module.exports = class extends Command {
                             const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
                             if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
-                            this.client.settings.update(message.guild.id, { roles: { blacklist: [ role.id ] } }).then(() => message.success("Setting successfully updated."));
+                            this.client.settings.update(message.guild.id, { roles: { blacklist: [role.id] } }).then(() => message.success("Setting successfully updated."));
                         }
                     }
                 } else if (setting === "autorole") {
                     if (value === "disable") {
-                        this.client.settings.update(message.guild.id, { auto: { role: { id: null } }}).then(() => message.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { role: { id: null } } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
 
@@ -386,7 +387,7 @@ module.exports = class extends Command {
                     }
                 } else if (setting === "autoroledelay") {
                     if (value === "disable" || value === "default") {
-                        this.client.settings.update(message.guild.id, { auto: { role: { delay: null } }}).then(() => message.success("Setting successfully updated."));
+                        this.client.settings.update(message.guild.id, { auto: { role: { delay: null } } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         const subArgs = /^(\d+)$/i.exec(value);
                         if (!subArgs || subArgs[1] > 600000 || subArgs[1] < 2000) return message.error("An invalid time was given. Try again with a time, in milliseconds, from 2000ms (2s) to 600000ms (10 min).");
@@ -612,7 +613,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { automod: { invitewarn: 1 } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         const n = Number(value);
-                        
+
                         if (isNaN(n)) return message.error("The given value is not a number.");
                         if (n < 0) return message.error("A negative number is not acceptable.");
                         if (n > 10) return message.error("This limit cannot exceed 10.");
@@ -626,7 +627,7 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { automod: { invitekick: 3 } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         const n = Number(value);
-                        
+
                         if (isNaN(n)) return message.error("The given value is not a number.");
                         if (message.guild.settings.automod.invitewarn > 0 && n <= message.guild.settings.automod.invitewarn) return message.error("This limit cannot be equal to or less than the antiinvite-warn limit.");
                         if (n < 0) return message.error("A negative number is not acceptable.");

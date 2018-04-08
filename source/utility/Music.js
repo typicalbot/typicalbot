@@ -1,12 +1,12 @@
-const ytdl      = require("ytdl-core");
+const ytdl = require("ytdl-core");
 
-const SYS       = require("simple-youtube-stream");
-const sys       = new SYS();
+const SYS = require("simple-youtube-stream");
+const sys = new SYS();
 
-const apiKey    = require(`../../config`).apis.youtube;
+const apiKey = require(`../../config`).apis.youtube;
 
-const YAPI      = require("simple-youtube-api");
-const TBYT      = new YAPI(apiKey);
+const YAPI = require("simple-youtube-api");
+const TBYT = new YAPI(apiKey);
 
 const Video = require("../structures/Video");
 
@@ -76,7 +76,7 @@ class AudioUtil {
 
         const permissionCheck = this.permissionCheck(message, command, userTrueLevel);
         if (permissionCheck.has) { return true; } else {
-            message.error(this.client.functions.error("elevation", this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0 ));
+            message.error(this.client.functions.error("elevation", this, userTrueLevel, permissionCheck.req === "dj" ? 1 : permissionCheck.req === "moderator" ? 2 : permissionCheck.req === "administrator" ? 3 : 0));
             return false;
         }
     }

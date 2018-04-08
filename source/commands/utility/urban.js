@@ -41,7 +41,7 @@ module.exports = class extends Command {
                 const resp = res.body.list[0];
                 if (!resp) return message.buildEmbed().setColor(0xFF0000).setDescription(`No matches for the query **${query}**.`).send();
 
-                const rating = Math.round((resp.thumbs_up/(resp.thumbs_up + resp.thumbs_down))*100);
+                const rating = Math.round((resp.thumbs_up / (resp.thumbs_up + resp.thumbs_down)) * 100);
 
                 message.buildEmbed()
                     .setColor(0x00adff)

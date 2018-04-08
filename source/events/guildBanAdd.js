@@ -8,7 +8,7 @@ class New extends Event {
 
     async execute(guild, user) {
         if (!guild.available) return;
-        
+
         const settings = await this.client.settings.fetch(guild.id);
 
         if (settings.logs.moderation && !this.client.caches.softbans.has(user.id)) {

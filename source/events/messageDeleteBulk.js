@@ -6,7 +6,7 @@ class New extends Event {
         super(...args);
     }
 
-    async execute(messages) {        
+    async execute(messages) {
         if (messages.first().channel.type !== "text") return;
         if (!messages.first().guild.available) return;
 

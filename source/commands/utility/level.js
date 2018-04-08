@@ -28,7 +28,7 @@ module.exports = class extends Command {
 
         const member = await this.client.functions.resolveMember(message, args);
         const user = member.user;
-        
+
         const permissionsHere = await this.client.handlers.permissions.fetch(message.guild, user, true);
         const permissions = await this.client.handlers.permissions.fetch(message.guild, user);
 

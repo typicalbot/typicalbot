@@ -15,7 +15,7 @@ module.exports = class extends Command {
         message.send(`You can donate to my creator at **<${Constants.Links.DONATE}>** to help support my growth, development, and stability.`);
     }
 
-    embedExecute(message, response){
+    embedExecute(message, response) {
         message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("Donate to TypicalBot's Creator")

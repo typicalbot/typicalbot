@@ -8,7 +8,7 @@ class New extends Event {
 
     async execute(member) {
         if (!member.guild.available) return;
-        
+
         const guild = member.guild;
 
         const bans = await guild.fetchBans().catch(() => { return; });
@@ -30,13 +30,13 @@ class New extends Event {
                 .setFooter("User Left")
                 .setTimestamp()
                 .send()
-                .catch(() => {});
+                .catch(() => { });
         } else {
             channel.send(
                 settings.logs.leave ?
                     this.client.functions.formatMessage("logs", guild, user, settings.logs.leave) :
                     `**${user.tag}** has left the server.`
-            ).catch(() => {});
+            ).catch(() => { });
         }
     }
 }

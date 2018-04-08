@@ -30,11 +30,11 @@ module.exports = class extends Command {
 
             if (restart) {
                 message.reply("Are you sure?");
-                
+
                 message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 10000, errors: ["time"] })
                     .then(messages => {
                         const msg = messages.first();
-        
+
                         if (msg.content.toLowerCase() !== "y" && msg.content.toLowerCase() !== "yes") return message.reply("Canceling.");
 
                         message.reply("Restarting now...");

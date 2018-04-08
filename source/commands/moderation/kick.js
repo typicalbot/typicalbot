@@ -21,13 +21,13 @@ module.exports = class extends Command {
             const member = await message.guild.members.fetch(cachedUser);
             if (!member) return message.error(`The requested user could not be found.`);
 
-            if (message.member.roles.highest.position <= member.roles.highest.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return message.error(`You cannot kick a user with either the same or higher highest role.`);
+            if (message.member.roles.highest.position <= member.roles.highest.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot kick a user with either the same or higher highest role.`);
             if (!member.kickable) return message.error(`In order to complete the request, I need the **KICK_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.`);
 
             const embed = cachedUser.buildEmbed().setColor(0xff0000).setFooter("TypicalBot", Constants.Links.ICON).setTitle("TypicalBot Alert System").setDescription(`You have been kicked from **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
             if (reason) embed.addField("» Reason", reason);
             embed.send().catch(err => { return; });
-            
+
             member.kick(`Kicked by ${message.author.tag} | Reason: ${reason || "No reason provided."}`).then(async actioned => {
                 if (message.guild.settings.logs.moderation) {
                     const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.KICK).setModerator(message.author).setUser(member.user);

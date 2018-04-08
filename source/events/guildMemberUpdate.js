@@ -7,7 +7,7 @@ class New extends Event {
 
     async execute(oldMember, member) {
         if (!oldMember.guild.available) return;
-        
+
         const guild = member.guild;
 
         const oldNickname = oldMember.nickname;

@@ -14,7 +14,7 @@ class New extends Event {
 
         if (settings.automod.inviteaction && (settings.automod.invitewarn || settings.automod.invitekick)) {
             let cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
-            
+
             if (!cache) {
                 this.client.caches.invites.set(`${message.guild.id}-${message.author.id}`, new Collection());
                 cache = this.client.caches.invites.get(`${message.guild.id}-${message.author.id}`);
@@ -46,7 +46,7 @@ class New extends Event {
         }
 
         if (!settings.logs.id || !settings.logs.invite) return;
-        
+
         const channel = message.guild.channels.get(settings.logs.id);
         if (!channel) return;
 

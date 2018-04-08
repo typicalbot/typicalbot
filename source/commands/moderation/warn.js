@@ -23,7 +23,7 @@ module.exports = class extends Command {
             const member = await message.guild.members.fetch(cachedUser);
             if (!member) return message.error(`The requested user could not be found.`);
 
-            if (message.member.roles.highest.position <= member.roles.highest.position && (permissionLevel.level !== 4 && permissionLevel.level < 9))  return message.error(`You cannot warn a user with either the same or higher highest role.`);
+            if (message.member.roles.highest.position <= member.roles.highest.position && (permissionLevel.level !== 4 && permissionLevel.level < 9)) return message.error(`You cannot warn a user with either the same or higher highest role.`);
 
             const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.WARN).setModerator(message.author).setUser(member.user);
             if (reason) newCase.setReason(reason); newCase.send();

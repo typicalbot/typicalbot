@@ -4,7 +4,7 @@ class ProcessHandler {
 
         process.on("message", message => this.message(message));
         process.on("uncaughtException", err => this.log(err.stack, true));
-        process.on("unhandledRejection", err => { if (!err) return; this.log(`Uncaught Promise Error:\n${err.stack || JSON.stringify(err)|| err}`, true); });
+        process.on("unhandledRejection", err => { if (!err) return; this.log(`Uncaught Promise Error:\n${err.stack || JSON.stringify(err) || err}`, true); });
     }
 
     async message(message) {
@@ -27,7 +27,7 @@ class ProcessHandler {
             channel.send(data.content, options).catch(err => channel.send(`An error occued while executing an external message.`));
         } else if (type === "globaleval") {
             try { this.client.handlers.process.log(eval(data.code)); }
-            catch(err) { this.client.handlers.process.log(err, true); }
+            catch (err) { this.client.handlers.process.log(err, true); }
         } else if (type === "guildData") {
             if (!this.client.guilds.has(data.guild)) return;
 

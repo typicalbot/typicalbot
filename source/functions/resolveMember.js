@@ -5,7 +5,7 @@ class New extends Function {
         super(client, name);
     }
 
-    async execute(message, [ match, id, username, discriminator ], returnSelf = true) {
+    async execute(message, [match, id, username, discriminator], returnSelf = true) {
         if (id) {
             const user = await this.client.users.fetch(id).catch(console.error);
             if (!user) return returnSelf ? message.member : null;

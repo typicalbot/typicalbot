@@ -23,6 +23,6 @@ module.exports = class extends Command {
         const newArray = message.guild.settings.ignored[commands ? "commands" : "invites"];
         newArray.splice(newArray.indexOf(message.channel.id), 1);
 
-        this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray }}).then(() => message.success(`Now listening to ${commands ? "commands" : "invites"}.`));
+        this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray } }).then(() => message.success(`Now listening to ${commands ? "commands" : "invites"}.`));
     }
 };

@@ -1,5 +1,5 @@
-const r             = require("rethinkdbdash");
-const credentials   = require(`../../config`).database.credentials;
+const r = require("rethinkdbdash");
+const credentials = require(`../../config`).database.credentials;
 
 class DatabaseHandler {
     constructor(client) {
@@ -27,7 +27,7 @@ class DatabaseHandler {
         return query;
     }
 
-    update(table, key, data){
+    update(table, key, data) {
         const query = this.connection.table(table).get(key).update(data);
 
         return query;

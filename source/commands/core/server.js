@@ -15,7 +15,7 @@ module.exports = class extends Command {
         message.reply(`You can join TypicalBot Lounge at **<${Constants.Links.SERVER}>**.`);
     }
 
-    embedExecute(message, response){
+    embedExecute(message, response) {
         message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("TypicalBot Lounge")

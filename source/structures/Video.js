@@ -18,7 +18,7 @@ class Video {
     async validate(url) {
         const id = /[a-zA-Z0-9-_]{11}$/.exec(url);
         if (id) url = id;
-        
+
         const data = sys.fetchInfo(url).catch(err => { throw err; });
         return data;
     }
@@ -27,8 +27,8 @@ class Video {
         const validated = await this.validate(this.url).catch(err => { throw err; });
 
         const options = {};
-        if (!this.live) Object.assign(options, { filter: "audioonly"});
-            
+        if (!this.live) Object.assign(options, { filter: "audioonly" });
+
         const audioStream = ytdl(this.url, options);
         return audioStream;
     }

@@ -14,10 +14,10 @@ module.exports = class extends Command {
         if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
         const match = /(.+)/i.exec(parameters);
-        if (!match) return message.error(this.client.functions.error("usage", this)); 
+        if (!match) return message.error(this.client.functions.error("usage", this));
 
         const args = /(?:(?:https?:\/\/www\.youtube\.com\/playlist\?list=(.+))|(?:https?:\/\/)?(?:(?:www|m)\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+))/i.exec(parameters);
-        
+
         if (args && args[1]) {
             this.client.handlers.music.stream(message, args[1], true).catch(err => message.error(err.stack || err));
         } else if (args && args[2]) {

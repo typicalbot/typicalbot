@@ -15,7 +15,7 @@ module.exports = class extends Command {
         message.reply(`You can add me to your server at <${Constants.Links.OAUTH}>.`);
     }
 
-    embedExecute(message, response){
+    embedExecute(message, response) {
         message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("TypicalBot Invite")
