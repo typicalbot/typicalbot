@@ -23,7 +23,7 @@ module.exports = class extends Command {
         if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
 
         if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
-        
+
         const args = /(\d+)/i.exec(parameters);
 
         if (args && args[1]) connection.guildStream.queue.splice(0, args[1] - 1);

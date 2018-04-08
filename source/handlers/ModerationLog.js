@@ -1,7 +1,7 @@
-const { MessageEmbed }      = require("discord.js");
-const ModerationLogCase     = require("../structures/ModerationLogCase");
+const { MessageEmbed } = require("discord.js");
+const ModerationLogCase = require("../structures/ModerationLogCase");
 
-const Constants             = require(`../utility/Constants`);
+const Constants = require(`../utility/Constants`);
 
 module.exports = class {
     constructor(client) {
@@ -54,8 +54,8 @@ module.exports = class {
                     if (logs.size > 0) return resolve(logs.first());
 
                     return resolve();
-                }).catch( reject );
-            }).catch( reject );
+                }).catch(reject);
+            }).catch(reject);
         });
     }
 
@@ -76,8 +76,8 @@ module.exports = class {
                     });
                     if (logs.size > 0) return resolve(logs.first());
                     return resolve();
-                }).catch( reject );
-            }).catch( reject );
+                }).catch(reject);
+            }).catch(reject);
         });
     }
 
@@ -108,8 +108,8 @@ module.exports = class {
                     embed.send();
 
                     return resolve(_case);
-                }).catch( reject );
-            }).catch( reject );
+                }).catch(reject);
+            }).catch(reject);
         });
     }
 

@@ -53,8 +53,8 @@ module.exports = class extends Command {
                 }
 
                 message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
-                    .then(msg => msg.delete({ timeout: 2500 }).catch(() => {}));
-                message.delete({ timeout: 2500 }).catch(() => {});
+                    .then(msg => msg.delete({ timeout: 2500 }).catch(() => { }));
+                message.delete({ timeout: 2500 }).catch(() => { });
             })
             .catch(err => message.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
 
@@ -64,10 +64,10 @@ module.exports = class extends Command {
                     const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.PURGE).setModerator(message.author).setChannel(message.channel);
                     if (reason) newCase.setReason(reason); newCase.send();
                 }
-                
+
                 message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
-                    .then(msg => msg.delete({ timeout: 2500 }).catch(() => {}));
-                message.delete({ timeout: 2500 }).catch(() => {});
+                    .then(msg => msg.delete({ timeout: 2500 }).catch(() => { }));
+                message.delete({ timeout: 2500 }).catch(() => { });
             })
             .catch(err => message.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
     }

@@ -9,7 +9,7 @@ class Task {
         this.type = type;
 
         this.end = end;
-        
+
         Object.keys(data).forEach(k => this[k] = data[k]);
     }
 }

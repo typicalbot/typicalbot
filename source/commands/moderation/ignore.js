@@ -23,6 +23,6 @@ module.exports = class extends Command {
         const newArray = message.guild.settings.ignored[commands ? "commands" : "invites"];
         newArray.push(message.channel.id);
 
-        this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray }}).then(() => message.success(`Now ignoring ${commands ? "commands" : "invites"}.`));
+        this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray } }).then(() => message.success(`Now ignoring ${commands ? "commands" : "invites"}.`));
     }
 };

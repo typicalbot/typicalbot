@@ -7,9 +7,9 @@ class New extends Event {
 
     async execute(guild) {
         if (!guild.available) return;
-        
+
         if (this.client.build === "stable") this.client.functions.postStats("a");
-        
+
         this.client.handlers.process.transmitStats();
     }
 }

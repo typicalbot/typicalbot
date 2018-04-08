@@ -1,6 +1,6 @@
-const { Collection }    = require("discord.js");
-const path              = require("path");
-const klaw              = require("klaw");
+const { Collection } = require("discord.js");
+const path = require("path");
+const klaw = require("klaw");
 
 class TaskHandler extends Collection {
     constructor(client) {

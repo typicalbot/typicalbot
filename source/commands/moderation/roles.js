@@ -30,7 +30,7 @@ module.exports = class extends Command {
             );
         } else if (subcommand === "list") {
             const content = this.client.functions.pagify(
-                message.guild.roles.filterArray(r => r.position !== 0).sort((a,b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`),
+                message.guild.roles.filterArray(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`),
                 args2 || 1
             );
 
@@ -42,7 +42,7 @@ module.exports = class extends Command {
             const subAction = subArgs[1];
             const subPage = subArgs[4];
 
-            const subRole = subArgs[2] || subArgs[5] ? message.guild.roles.get(subArgs[2] || subArgs[5]) : subArgs[3] || subArgs[6] ? message.guild.roles.find(r => subArgs[3] ? r.name.toLowerCase() === subArgs[3].toLowerCase() : r.name.toLowerCase() ===  subArgs[6].toLowerCase()) : null;
+            const subRole = subArgs[2] || subArgs[5] ? message.guild.roles.get(subArgs[2] || subArgs[5]) : subArgs[3] || subArgs[6] ? message.guild.roles.find(r => subArgs[3] ? r.name.toLowerCase() === subArgs[3].toLowerCase() : r.name.toLowerCase() === subArgs[6].toLowerCase()) : null;
             if (!subRole) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
 
             if (subAction === "members") {
@@ -102,7 +102,7 @@ module.exports = class extends Command {
                 if (!roleList.length) return message.reply("There are no public roles set up for this server.");
 
                 const content = this.client.functions.pagify(
-                    roleList.sort((a,b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`),
+                    roleList.sort((a, b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`),
                     subArgs[3] || 1
                 );
 

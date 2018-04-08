@@ -8,7 +8,7 @@ class New extends Event {
 
     async execute(guild, user) {
         if (!guild.available) return;
-        
+
         const settings = await this.client.settings.fetch(guild.id);
 
         if (settings.logs.moderation && !this.client.caches.softbans.has(user.id)) {
@@ -16,7 +16,7 @@ class New extends Event {
 
             const newCase = this.client.handlers.moderationLog.buildCase(guild).setAction(Constants.ModerationLog.Types.UNBAN).setUser(user);
             if (cachedLog) { newCase.setModerator(cachedLog.moderator); if (cachedLog.reason) newCase.setReason(cachedLog.reason); } newCase.send();
-            
+
             this.client.caches.unbans.delete(user.id);
         }
 

@@ -8,10 +8,10 @@ class New extends Event {
         this.mentionRegex = new RegExp(`^<@!?${this.client.config.id}>$`);
     }
 
-    async execute(message) {        
+    async execute(message) {
         if (message.author.bot) return;
         if (message.channel.type === "dm") return this.dmExecute(message);
-        if (!message.guild.available) return;    
+        if (!message.guild.available) return;
         if (!message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
 
         const settings = message.guild.settings = await message.guild.fetchSettings();
@@ -20,13 +20,13 @@ class New extends Event {
 
         const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author);
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
-        
+
         if (userPermissions.level === Constants.Permissions.Levels.SERVER_BLACKLISTED) return;
         if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.client.handlers.automoderation.inviteCheck(message);
         if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id)) return;
 
         const split = message.content.split(" ")[0];
-        
+
         const prefix = this.client.functions.matchPrefix(message.author, settings, split);
         if (!prefix || !message.content.startsWith(prefix)) return;
 

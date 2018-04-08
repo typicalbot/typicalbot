@@ -10,7 +10,7 @@ class ModerationLogCase {
         this.id = id;
 
         this._id = id ? id.match(Constants.ModerationLog.Regex.CASE)[1] : null;
-        
+
         this.action = action;
 
         this._action = _action;
@@ -86,7 +86,7 @@ class ModerationLogCase {
     async send() {
         const channel = await this.client.handlers.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
         const latest = await this.client.handlers.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
-        
+
         if (!this.id) this.setId(latest ? Number(latest.embeds[0].footer.text.match(Constants.ModerationLog.Regex.CASE)[1]) + 1 : 1);
 
         const embed = this.embed;
@@ -104,12 +104,12 @@ class ModerationLogCase {
         const _action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s+(\w+(?:(?:\s+\w+)+)?)(?:\s+.+)?/gi.exec(action)[1])[0][1];
         const moderator = embed.author ? { display: embed.author.name, icon: embed.author.iconURL } : null;
         const user = embed.description.match(Constants.ModerationLog.Regex.USER)[0];
-        const _reason = embed.description.match(Constants.ModerationLog.Regex.REASON); 
+        const _reason = embed.description.match(Constants.ModerationLog.Regex.REASON);
         const reason = _reason ? _reason[0] : null;
         const timestamp = embed.createdAt;
 
         const data = { id, action, _action, user, timestamp };
-        
+
         if (moderator) Object.assign(data, { moderator });
         if (reason) Object.assign(data, { reason });
 

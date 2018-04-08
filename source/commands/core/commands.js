@@ -34,6 +34,6 @@ module.exports = class extends Command {
             .addField("» Server Member", level0.length ? level0.join(", ") : "No commands to display.")
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
-            .send(); 
+            .send();
     }
 };
