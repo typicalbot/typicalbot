@@ -9,7 +9,9 @@ module.exports = class extends Command {
             description: "Create personalized commands.",
             usage: "pcs <add|remove> <pcs-command> [options]",
             mode: Constants.Modes.STRICT,
-            access: Constants.Access.Levels.DONOR
+            //access: Constants.Access.Levels.DONOR,
+
+            development: true
         });
     }
 

@@ -32,6 +32,8 @@ class New extends Event {
 
         const command = await this.client.commands.fetch(split.slice(prefix.length).toLowerCase(), settings); if (!command) return;
 
+        if (command.development && this.client.build !== "beta" && this.client.build !== "development") return message.error("This command in is development mode - meaning it cannot be used on TypicalBot stable.");
+
         const param = message.content.includes(" ") ? message.content.slice(message.content.indexOf(" ") + 1) : "";
 
         const accessLevel = await this.client.functions.fetchAccess(message.guild);
