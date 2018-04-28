@@ -40,10 +40,10 @@ class TypicalBot extends Client {
         this.handlers.music = new MusicHandler(this);
 
         this.stores = {};
-        this.stores.settings = new SettingStore(this);
-        this.stores.functions = new FunctionStore(this);
-        this.stores.commands = new CommandStore(this);
-        this.stores.events = new EventStore(this);
+        this.settings = this.stores.settings = new SettingStore(this);
+        this.functions = this.stores.functions = new FunctionStore(this);
+        this.functions = this.stores.commands = new CommandStore(this);
+        this.events = this.stores.events = new EventStore(this);
 
         this.utility = {};
         this.utility.music = new MusicUtility(this);
@@ -60,14 +60,77 @@ class TypicalBot extends Client {
         this.login(this.config.token);
     }
 
-    /*          this.client[store] access           */
-    get settings() { return this.stores.settings; }
-    get functions() { return this.stores.functions; }
-    get commands() { return this.stores.commands; }
-    get events() { return this.stores.events; }
-
     reload(arg) {
+        const args = /(\w+)(?::(\w+))?/i.exec(arg);
+        if (!args && arg !== "all") return;
 
+        const mod = args ? args[1] : null;
+        const all = arg === "all";
+
+        /*if (mod === "donors") {
+            this.donors = new Collection();
+            this.functions.fetchDonors();
+        } else if (mod === "process") {
+            delete require.cache[`${__dirname}/managers/Process.js`];
+            ProcessHandler = require("./managers/Process");
+            this.processHandler = new ProcessHandler();
+        } else if (mod === "database") {
+            delete require.cache[`${__dirname}/managers/Database.js`];
+            DatabaseHandler = require("./managers/Database");
+            this.database = new DatabaseHandler();
+        } else if (mod === "permissions") {
+            delete require.cache[`${__dirname}/managers/Permissions.js`];
+            PermissionsHandler = require("./managers/Permissions");
+            this.permissionsHandler = new PermissionsHandler(this);
+        } else if (mod === "modlogs") {
+            delete require.cache[`${__dirname}/managers/ModerationLogs.js`];
+            ModerationLogHandler = require("./managers/ModerationLogs");
+            this.modlogsHandler = new ModerationLogHandler(this);
+        } else if (mod === "audio") {
+            delete require.cache[`${__dirname}/managers/Audio.js`];
+            delete require.cache[`${__dirname}/Structures/Stream.js`];
+            MusicHandler = require("./managers/Audio");
+            this.audioHandler = new MusicHandler(this);
+        } else if (mod === "audioutility") {
+            delete require.cache[`${__dirname}/utility/Audio.js`];
+            MusicUtility = require("./utility/Audio");
+            this.audioUtility = new MusicUtility(this);
+        } else if (mod === "automod") {
+            delete require.cache[`${__dirname}/utility/AudoModeration.js`];
+            AutoModerationHandler = require("./utility/AutoModeration");
+            this.automod = new AutoModerationHandler(this);
+        } else if (mod === "settings") {
+            delete require.cache[`${__dirname}/stores/Settings.js`];
+            SettingStore = require("./stores/Settings");
+            this.settings = new SettingStore(this);
+        } else if (mod === "functions") {
+            delete require.cache[`${__dirname}/stores/Functions.js`];
+            FunctionStore = require("./stores/Functions");
+            this.functions = new FunctionStore(this);
+        } else if (mod === "events") {
+            this.events.forEach(e => this.removeAllListeners(e.name));
+            this.events.reload();
+
+            delete require.cache[`${__dirname}/stores/Events.js`];
+            EventStore = require("./stores/Events");
+            this.events = new EventStore(this);
+        } else if (mod === "tasks") {
+            delete require.cache[`${__dirname}/utility/AudoModeration.js`];
+            AutoModerationHandler = require("./utility/AutoModeration");
+            this.automod = new AutoModerationHandler(this);
+        } else if (mod === "commands") {
+            const command = args[2];
+
+            if (command) {
+                this.commands.get(command).then(cmd => {
+                    if (!cmd) return; this.commands.reload(cmd);
+                });
+            } else {
+                delete require.cache[`${__dirname}/stores/Commands.js`];
+                CommandStore = require("./stores/Commands");
+                this.commands = new CommandStore(this);
+            }
+        }*/
     }
 }
 
