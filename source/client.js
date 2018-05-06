@@ -40,10 +40,10 @@ class TypicalBot extends Client {
         this.handlers.music = new MusicHandler(this);
 
         this.stores = {};
-        this.settings = this.stores.settings = new SettingStore(this);
-        this.functions = this.stores.functions = new FunctionStore(this);
-        this.functions = this.stores.commands = new CommandStore(this);
-        this.events = this.stores.events = new EventStore(this);
+        this.settings = new SettingStore(this);
+        this.functions = new FunctionStore(this);
+        this.functions = new CommandStore(this);
+        this.events = new EventStore(this);
 
         this.utility = {};
         this.utility.music = new MusicUtility(this);
@@ -59,6 +59,11 @@ class TypicalBot extends Client {
 
         this.login(this.config.token);
     }
+
+    get settings() { return this.stores.settings; }
+    get functions() { return this.stores.functions; }
+    get commands() { return this.stores.commands; }
+    get events() { return this.stores.events; }
 
     reload(arg) {
         const args = /(\w+)(?::(\w+))?/i.exec(arg);
