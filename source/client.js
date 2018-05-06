@@ -40,10 +40,10 @@ class TypicalBot extends Client {
         this.handlers.music = new MusicHandler(this);
 
         this.stores = {};
-        this.settings = new SettingStore(this);
-        this.functions = new FunctionStore(this);
-        this.functions = new CommandStore(this);
-        this.events = new EventStore(this);
+        this.stores.settings = new SettingStore(this);
+        this.stores.functions = new FunctionStore(this);
+        this.stores.commands = new CommandStore(this);
+        this.stores.events = new EventStore(this);
 
         this.utility = {};
         this.utility.music = new MusicUtility(this);
