@@ -52,9 +52,14 @@ module.exports = class extends Command {
                     if (reason) newCase.setReason(reason); newCase.send();
                 }
 
-                message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
-                    .then(msg => msg.delete({ timeout: 2500 }).catch(() => { }));
-                message.delete({ timeout: 2500 }).catch(() => { });
+                if (msgs.size === 0) {
+                    message.reply(`No messages were deleted. This likely means I lack the permission to read message history or the messages are over two weeks old.`);
+                    message.delete({ timeout: 2500 }).catch(() => { });
+                } else {
+                    message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
+                        .then(msg => msg.delete({ timeout: 2500 }).catch(() => { }));
+                    message.delete({ timeout: 2500 }).catch(() => { });
+                }
             })
             .catch(err => message.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
 
@@ -65,9 +70,14 @@ module.exports = class extends Command {
                     if (reason) newCase.setReason(reason); newCase.send();
                 }
 
-                message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
-                    .then(msg => msg.delete({ timeout: 2500 }).catch(() => { }));
-                message.delete({ timeout: 2500 }).catch(() => { });
+                if (msgs.size === 0) {
+                    message.reply(`No messages were deleted. This likely means I lack the permission to read message history or the messages are over two weeks old.`);
+                    message.delete({ timeout: 2500 }).catch(() => { });
+                } else {
+                    message.reply(`Successfully deleted **${msgs.size}** message${msgs.size !== 1 ? "s" : ""}.`)
+                        .then(msg => msg.delete({ timeout: 2500 }).catch(() => { }));
+                    message.delete({ timeout: 2500 }).catch(() => { });
+                }
             })
             .catch(err => message.error(`An error occured. This most likely means I do not have permissions to manage messages.`));
     }
