@@ -9,7 +9,7 @@ class New extends Function {
     async execute(guild) {
         const owner = guild.owner ? guild.owner.user : await guild.members.fetch(guild.ownerID).user;
 
-        const permissionLevel = await this.client.handlers.permissions.fetch(guild, owner);
+        const permissionLevel = await guild.fetchPermissions(owner);
 
         if (permissionLevel.level > 5) return Constants.Access.Titles.STAFF;
 
