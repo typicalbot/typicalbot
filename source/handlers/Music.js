@@ -1,5 +1,14 @@
 const Stream = require("../structures/Stream");
 
+function shuffle(arr) {
+    for (let i = arr.length; i; i--) {
+        const j = Math.floor(Math.random() * i);
+        [arr[i - 1], arr[j]] = [arr[j], arr[i - 1]];
+    }
+
+    return arr;
+}
+
 module.exports = class {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
@@ -8,9 +17,9 @@ module.exports = class {
     async connect(message) {
         const channel = message.member.voiceChannel;
 
-        if (!channel) throw "You must be connected to a voice channel to use music features.";
-        if (!channel.joinable) throw "I require joining permissions to use music features.";
-        if (!channel.speakable) throw "I require speaking permissions to use music features.";
+        if (!channel) throw "Please join a voice channel to use this command.";
+        if (!channel.joinable) throw "I cannot join the voice channel you are in.";
+        if (!channel.speakable) throw "I cannot speak in the voice channel you are in.";
 
         const connection = await channel.join().catch(err => { throw err; });
 
@@ -19,74 +28,52 @@ module.exports = class {
         return connection;
     }
 
-    async stream(message, video, playlist = false) {
-        if (!playlist) if (!this.client.utility.music.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
-
-        const currConnection = message.guild.voiceConnection;
-
-        if (currConnection) {
-            if (currConnection.guildStream.mode !== "queue") throw "You can only add to the queue while in queue mode.";
-
-            if (!message.member.voiceChannel || message.member.voiceChannel.id !== currConnection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
-            if (currConnection.guildStream.queue.length >= (video.requester.guild.settings.music.queuelimit || 10)) return video.requester.error(`The queue limit of ${video.requester.guild.settings.music.queuelimit || 10} has been reached.`);
-
-            if (playlist) return this.queuePlaylist(message, video, currConnection.guildStream).catch(err => { throw err; });
-            return currConnection.guildStream.addQueue(video);
-        }
-
+    async initStream(message, video, playlist) {
         const connection = await this.connect(message).catch(err => { throw err; });
 
-        const playlistFirst = playlist ? await this.startPlaylist(message, video, connection.guildStream).catch(err => { throw err; }) : null;
+        if (playlist) return connection.guildStream.play(
+            await this.queuePlaylist(message, video, connection.guildStream).catch(err => { throw err; })
+        ).catch(err => { throw err; });
 
-        playlist ?
-            connection.guildStream.play(playlistFirst).catch(err => { throw err; }) :
-            connection.guildStream.play(video).catch(err => { throw err; });
+        connection.guildStream.play(video).catch(err => { throw err; });
     }
 
-    shuffle(arr) {
-        for (let i = arr.length; i; i--) {
-            const j = Math.floor(Math.random() * i);
-            [arr[i - 1], arr[j]] = [arr[j], arr[i - 1]];
-        }
-        return arr;
-    }
+    async stream(message, video, playlist = false) {
+        if (!playlist && !this.client.utility.music.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
 
-    async startPlaylist(message, id, guildStream) {
-        message.reply(`Loading the playlist into the queue. This may take a while.`);
+        const connection = message.guild.voiceConnection;
 
-        const playlist = this.shuffle(await this.client.utility.music.fetchPlaylist(message, id).catch(err => { throw err; }));
-        playlist.splice(101, Infinity);
+        if (!connection) return this.initStream(message, video, playlist);
 
-        const first = await this.client.utility.music.fetchInfo(playlist[0].url).catch(err => { return; });
-        Object.defineProperty(first, "requester", { value: message });
+        if (connection.guildStream.mode && connection.guildStream.mode !== "queue") throw "You can only add to the queue while in queue mode.";
 
-        playlist.forEach(async v => {
-            const video = await this.client.utility.music.fetchInfo(v.url, message).catch(err => { return; });
-            if (!video) return;
+        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
+        if (connection.guildStream.queue.length >= (message.guild.settings.music.queuelimit || 10)) return message.error(`The queue limit of ${message.guild.settings.music.queuelimit || 10} has been reached.`);
 
-            if (!this.client.utility.music.withinLimit(message, video)) return;
+        if (playlist) return this.queuePlaylist(message, video, connection.guildStream).catch(err => { throw err; });
 
-            guildStream.addQueue(video, true);
-        });
-
-        return first;
+        return connection.guildStream.queue(video);
     }
 
     async queuePlaylist(message, id, guildStream) {
         message.reply(`Loading the playlist into the queue. This may take a while.`);
 
-        const playlist = this.shuffle(await this.client.utility.music.fetchPlaylist(message, id).catch(err => { throw err; }));
-        playlist.splice(101, Infinity);
+        const playlist = await this.client.utility.music.fetchPlaylist(message, id).catch(err => { throw err; });
 
-        playlist.forEach(async v => {
+        const shuffledPlaylist = shuffle(playlist);
+        shuffledPlaylist.splice(101, Infinity);
+
+        const firstVideo = await this.client.utility.music.fetchInfo(shuffledPlaylist[0].url, message).catch(err => { throw err; });
+
+        shuffledPlaylist.forEach(async v => {
             const video = await this.client.utility.music.fetchInfo(v.url, message).catch(err => { return; });
             if (!video) return;
 
             if (!this.client.utility.music.withinLimit(message, video)) return;
 
-            video.setRequester(message);
-
             guildStream.addQueue(video, true);
         });
+
+        return firstVideo;
     }
 };
