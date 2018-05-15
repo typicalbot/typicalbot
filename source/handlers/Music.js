@@ -71,7 +71,7 @@ module.exports = class {
 
             if (!this.client.utility.music.withinLimit(message, video)) return;
 
-            guildStream.addQueue(video, true);
+            guildStream.queue(video, true);
         });
 
         return firstVideo;
