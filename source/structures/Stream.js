@@ -74,6 +74,8 @@ class Stream {
     }
 
     skip() {
+        if (!this.dispatcher) this.end();
+
         const song = this.current;
 
         this.dispatcher.end();
@@ -82,15 +84,21 @@ class Stream {
     }
 
     setVolume(volume) {
+        if (!this.dispatcher) this.end();
+        
         this.volume = volume;
         return this.dispatcher.setVolume(volume);
     }
 
     pause() {
+        if (!this.dispatcher) this.end();
+        
         this.dispatcher.pause();
     }
 
     resume() {
+        if (!this.dispatcher) this.end();
+        
         this.dispatcher.resume();
     }
 
