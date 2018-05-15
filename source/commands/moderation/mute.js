@@ -33,7 +33,7 @@ module.exports = class extends Command {
             const role = message.guild.roles.get(message.guild.settings.roles.mute);
             if (!role.editable) return message.error(`In order to complete the request, I need the **MANAGE ROLES** permission. Also, my highest role needs to be higher than the requested user's highest role and the mute role.`);
 
-            const embed = cachedUser.buildEmbed().setColor(0xFF9900).setFooter("TypicalBot", Constants.Links.ICON).setTitle("TypicalBot Alert System").setDescription(`You have been muted in **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
+            const embed = cachedUser.buildEmbed().setColor(Constants.ModerationLog.Types.MUTE.hex).setFooter("TypicalBot", Constants.Links.ICON).setTitle("TypicalBot Alert System").setDescription(`You have been muted in **${message.guild.name}**.`).addField("» Moderator", message.author.tag);
             if (reason) embed.addField("» Reason", reason);
             embed.send().catch(err => { return; });
 
