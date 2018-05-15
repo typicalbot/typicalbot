@@ -63,16 +63,13 @@ module.exports = class {
         const shuffledPlaylist = shuffle(playlist);
         shuffledPlaylist.splice(101, Infinity);
 
-        const firstVideo = await this.client.utility.music.fetchInfo(shuffledPlaylist[0].url).catch(err => { throw err; });
-        firstVideo.setRequester(message);
+        const firstVideo = await this.client.utility.music.fetchInfo(shuffledPlaylist[0].url, message).catch(err => { throw err; });
 
         shuffledPlaylist.forEach(async v => {
             const video = await this.client.utility.music.fetchInfo(v.url, message).catch(err => { return; });
             if (!video) return;
 
             if (!this.client.utility.music.withinLimit(message, video)) return;
-
-            video.setRequester(message);
 
             guildStream.addQueue(video, true);
         });
