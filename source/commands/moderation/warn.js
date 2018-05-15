@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        if (!message.guild.settings.logs.moderation) return message.error("You must have moderation logs enabled to use this command.");
+        if (!message.guild.settings.logs.moderation) return message.error("You must have moderation logs enabled to use this command. You can configure this setting by using `$settings edit modlogs <channel-name|channel-id|channel-mention>`.");
 
         const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));

@@ -29,10 +29,10 @@ class New extends Event {
                         .setAction(Constants.ModerationLog.Types.WARN)
                         .setModerator(this.client.user)
                         .setUser(message.author)
-                        .setReason(`Automatic Warn: User posted ${settings.automod.invitewarn} consecutive invite${settings.automod.invitewarn === 1 ? "" : "s"}.`)
+                        .setReason(`Automatic Warn: User sent ${settings.automod.invitewarn === 1 ? "an invite" : `${settings.automod.invitewarn} consecutive invites`} in #${channel.name} (${channel.id}).`)
                         .send();
             } else if (settings.automod.invitekick !== 0 && cache.size >= settings.automod.invitekick) {
-                message.member.kick(`Automatic Kick: User posted ${settings.automod.invitekick} consecutive invite${settings.automod.invitekick === 1 ? "" : "s"}.`);
+                message.member.kick(`Automatic Kick: User sent ${settings.automod.invitekick === 1 ? "an invite" : `${settings.automod.invitekick} consecutive invites`} in #${channel.name} (${channel.id}).`);
 
                 if (settings.logs.moderation)
                     this.client.handlers.moderationLog
@@ -40,7 +40,7 @@ class New extends Event {
                         .setAction(Constants.ModerationLog.Types.KICK)
                         .setModerator(this.client.user)
                         .setUser(message.author)
-                        .setReason(`Automatic Kick: User posted ${settings.automod.invitekick} consecutive invite${settings.automod.invitekick === 1 ? "" : "s"}.`)
+                        .setReason(`Automatic Kick: User sent ${settings.automod.invitekick === 1 ? "an invite" : `${settings.automod.invitekick} consecutive invites`} in #${channel.name} (${channel.id}).`)
                         .send();
             }
         }
@@ -52,7 +52,7 @@ class New extends Event {
 
         channel.send(
             settings.logs.invite === "--enabled" ?
-                `**${message.author.username}#${message.author.discriminator}** posted an invite in <#${message.channel.id}>.` :
+                `**${message.author.username}#${message.author.discriminator}** sent an invite in <#${message.channel.id}>.` :
                 this.client.functions.formatMessage("logs-invite", message.guild, message.author, settings.logs.invite, { channel: message.channel })
         );
     }

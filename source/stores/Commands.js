@@ -10,15 +10,11 @@ class CommandStore extends Store {
         this.loadAll();
     }
 
-    _get(name) {
-        return super.get(name);
-    }
-
     fetch(text, settings) {
-        if (this.has(text)) return super.get(text);
-        if (this.find(c => c.aliases.includes(text))) return super.find(c => c.aliases.includes(text));
-        if (settings && settings.pcs.length && settings.pcs.map(pc => pc.command).includes(text)) return pcs(this.client, settings.pcs.filter(pc => pc.command === text)[0]);
-        if (settings && settings.aliases && settings.aliases.map(x => x.alias).includes(text)) return super.get(settings.aliases[settings.aliases.map(x => x.alias).indexOf(text)].command);
+        if (this.has(text)) return this.get(text);
+        if (this.find(c => c.aliases.includes(text))) return this.find(c => c.aliases.includes(text));
+        if (settings && settings.pcs && settings.pcs.length && settings.pcs.map(pc => pc.command).includes(text)) return pcs(this.client, settings.pcs.filter(pc => pc.command === text)[0]);
+        if (settings && settings.aliases && settings.aliases.length && settings.aliases.map(x => x.alias).includes(text)) return this.get(settings.aliases[settings.aliases.map(x => x.alias).indexOf(text)].command);
         return null;
     }
 

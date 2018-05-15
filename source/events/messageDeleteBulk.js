@@ -7,28 +7,29 @@ class New extends Event {
     }
 
     async execute(messages) {
-        if (messages.first().channel.type !== "text") return;
-        if (!messages.first().guild.available) return;
+        const message = messages.first();
 
-        const settings = await this.client.settings.fetch(messages.first().guild.id).catch(err => { return err; });
+        if (message.channel.type !== "text") return;
+        if (!message.guild.available) return;
+
+        const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 
         if (!settings.logs.id || !settings.logs.delete) return;
 
-        const logsChannel = messages.first().guild.channels.get(settings.logs.id);
+        const logsChannel = message.guild.channels.get(settings.logs.id);
         if (!logsChannel) return;
 
-        const channel = messages.first().channel;
+        const channel = message.channel;
 
         const haste = await this.client.functions.hastebin(messages.map(m => `${moment(m.createdAt).format("dddd MMMM Do, YYYY, hh:mm A")} | ${m.author.tag} (${m.author.id}):\n${m.content}`).join("\n\n--  --  --  --  --\n\n"));
 
-        if (settings.logs.delete === "--embed") return channel.buildEmbed()
+        if (settings.logs.delete === "--embed") return logsChannel.buildEmbed()
             .setColor(0x3EA7ED)
-            .setDescription(haste)
-            .setFooter(`Messages Deleted in #${channel.name} (${channel.id})`)
+            .setDescription(`${messages.size} messages were purged: ${haste}`)
+            .setFooter(`Messages Purged in #${channel.name} (${channel.id})`)
             .setTimestamp()
             .send()
             .catch(() => { return; });
-
 
         logsChannel.send(`${messages.size} messages were purged in ${channel.toString()} (${channel.id}): ${haste}`).catch(() => { return; });
     }
