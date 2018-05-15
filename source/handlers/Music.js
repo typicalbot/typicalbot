@@ -52,7 +52,7 @@ module.exports = class {
 
         if (playlist) return this.queuePlaylist(message, video, connection.guildStream).catch(err => { throw err; });
 
-        return connection.guildStream.queue(video);
+        return connection.guildStream.queueVideo(video);
     }
 
     async queuePlaylist(message, id, guildStream) {
@@ -71,7 +71,7 @@ module.exports = class {
 
             if (!this.client.utility.music.withinLimit(message, video)) return;
 
-            guildStream.queue(video, true);
+            guildStream.queueVideo(video, true);
         });
 
         return firstVideo;
