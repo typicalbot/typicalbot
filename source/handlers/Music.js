@@ -52,7 +52,7 @@ module.exports = class {
 
         if (playlist) return this.queuePlaylist(message, video, connection.guildStream).catch(err => { throw err; });
 
-        return connection.guildStream.addQueue(video);
+        return connection.guildStream.queue(video);
     }
 
     async queuePlaylist(message, id, guildStream) {

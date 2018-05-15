@@ -102,7 +102,7 @@ class Stream {
         this.dispatcher.resume();
     }
 
-    addQueue(video, silent = false) {
+    queue(video, silent = false) {
         if (silent) {
             this.queue.push(video);
         } else {
