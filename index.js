@@ -1,3 +1,4 @@
+process.on('uncaughtException', console.error).on('unhandledRejection', console.error);
 console.log("A");
 console.log(require("discord.js"));
 const { Collection } = require("discord.js");
