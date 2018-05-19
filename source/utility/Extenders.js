@@ -1,134 +1,68 @@
-const { Structures, Guild, GuildMember, MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
+const { Guild, GuildMember, MessageEmbed, TextChannel, DMChannel, User, Message } = require("discord.js");
 const VoiceConnection = require("discord.js/src/client/voice/VoiceConnection");
 const Stream = require("../structures/Stream");
 
-/*
-    Structures.extend('Guild', Guild => {
-        class CoolGuild extends Guild {
-            constructor(client, data) {
-            super(client, data);
-            this.cool = true;
-            }
-        }
-
-        return CoolGuild;
+Guild.prototype.fetchSettings = async function() {
+    return this.client.settings.fetch(this.id).then(settings => {
+        return settings;
+    }).catch(err => {
+        throw err;
     });
-*/
+};
 
-Structures.extend("Guild", structure =>
-    class extends structure {
-        fetchSettings() {
-            return this.client.settings.fetch(this.id);
-        }
+Guild.prototype.fetchPermissions = async function(member, ignoreStaff = false) {
+    return this.client.handlers.permissions.fetch(this, member, ignoreStaff);
+};
 
-        fetchPermissions(member, ignoreStaff = false) {
-            return this.client.handlers.permissions.fetch(this, member, ignoreStaff);
-        }
-    }
-);
+GuildMember.prototype.fetchPermissions = async function(ignoreStaff = false) {
+    return this.client.handlers.permissions.fetch(this.guild, this, ignoreStaff);
+};
 
-Structures.extend("GuildMember", structure =>
-    class extends structure {
-        fetchPermissions(ignoreStaff = false) {
-            return this.client.handlers.permissions.fetch(this.guild, this, ignoreStaff);
-        }
-    }
-);
-
-/*Structures.extend("MessageEmbed", structure =>
-    class extends structure {
-        send(content, options = {}) {
-            if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel");
-            return this.sendToChannel.send(content || "", Object.assign(options, { embed: this })).catch(() => { });
-        }
-    }
-);*/
 MessageEmbed.prototype.send = function(content, options = {}) {
     if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel");
     return this.sendToChannel.send(content || "", Object.assign(options, { embed: this })).catch(() => { });
 };
 
-Structures.extend("TextChannel", structure =>
-    class extends structure {
-        buildEmbed() {
-            return Object.defineProperty(new MessageEmbed(), "sendToChannel", { value: this });
-        }
-    }
-);
+TextChannel.prototype.buildEmbed = User.prototype.buildEmbed = DMChannel.prototype.buildEmbed = function() {
+    return Object.defineProperty(new MessageEmbed(), "sendToChannel", { value: this });
+};
 
-Structures.extend("User", structure =>
-    class extends structure {
-        buildEmbed() {
-            return Object.defineProperty(new MessageEmbed(), "sendToChannel", { value: this });
-        }
-    }
-);
+Message.prototype.send = function(content, embed, options = {}) {
+    if (embed) Object.assign(options, { embed });
 
-Structures.extend("DMChannel", structure =>
-    class extends structure {
-        buildEmbed() {
-            return Object.defineProperty(new MessageEmbed(), "sendToChannel", { value: this });
-        }
-    }
-);
+    return this.channel.send(content, options).catch(() => { });
+};
 
-Structures.extend("Message", structure =>
-    class extends structure {
-        send(content, embed, options = {}) {
-            if (embed) Object.assign(options, { embed });
+Message.prototype.embed = function(embed) {
+    return this.send("", embed);
+};
 
-            return this.channel.send(content, options).catch(() => { });
-        }
+Message.prototype.reply = function(content, embed, options = {}) {
+    return this.send(`${this.author} | ${content}`, embed);
+};
 
-        embed(embed) {
-            return this.send("", embed);
-        }
+Message.prototype.success = function(content, embed, options = {}) {
+    return this.send(`${this.author} | ✓ | ${content}`, embed);
+};
 
-        reply(content, embed, options = {}) {
-            return this.send(`${this.author} | ${content}`, embed, options);
-        }
+Message.prototype.error = function(content, embed, options = {}) {
+    return this.send(`${this.author} | \\❌ | ${content}`, embed);
+};
 
-        success(content, embed, options = {}) {
-            return this.send(`${this.author} | ✓ | ${content}`, embed, options);
-        }
+Message.prototype.dm = function(content, embed, options = {}) {
+    if (embed) Object.assign(options, { embed });
 
-        error(content, embed, options = {}) {
-            return this.send(`${this.author} | \\❌ | ${content}`, embed, options);
-        }
+    this.author.send(content, options).catch(() => { });
+};
 
-        dm(content, embed, options = {}) {
-            if (embed) Object.assign(options, { embed });
-
-            this.author.send(content, options).catch(() => { });
-        }
-
-        buildEmbed() {
-            return this.channel.buildEmbed();
-        }
-    }
-);
-
-/*
-Structures.extend("VoiceConnection", structure =>
-    class extends structure {
-        constructor(...args) {
-            super(...args);
-
-            this._guildSteam = null;
-        }
-
-        get guildStream() {
-            if (!this._guildStream) this._guildStream = new Stream(this.client, this);
-
-            return this._guildStream;
-        }
-
-    }
-);*/
+Message.prototype.buildEmbed = function() {
+    return this.channel.buildEmbed();
+};
 
 Object.defineProperty(VoiceConnection.prototype, "guildStream", {
     get() {
         if (!this._guildStream) this._guildStream = new Stream(this.client, this);
+
         return this._guildStream;
     }
 });
