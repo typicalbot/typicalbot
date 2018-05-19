@@ -1,6 +1,6 @@
 console.log("A");
 
-const { Collection } = require("discord.js");
+//const { Collection } = require("discord.js");
 const API = require("./api/app");
 const config = require(`./config`);
 
