@@ -1,8 +1,12 @@
+console.log("A");
+
 const { Collection } = require("discord.js");
 const API = require("./api/app");
 const config = require(`./config`);
 
 const Shard = require("./Shard");
+
+console.log("B");
 
 class ShardingMaster extends Collection {
     constructor() {
@@ -17,6 +21,7 @@ class ShardingMaster extends Collection {
         this.pendingRequests = new Collection();
 
         for (let s = 0; s < config.shards; s++) {
+            console.log("C" + s);
             setTimeout(() => this.set(s, new Shard(this, s, config.shards)), (9000 * s));
         }
     }
