@@ -22,7 +22,6 @@ class New extends Event {
         this.intervals.push(setInterval(() => {
             this.client.voiceConnections.filter(c => c.channel.members.filter(m => !m.user.bot).size === 0).forEach(c => c.guildStream ? c.guildStream.end() : c.disconnect());
 
-
             this.client.handlers.process.transmit("stats", {
                 ram_used: Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100,
                 ram_total: Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100
