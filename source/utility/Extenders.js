@@ -35,14 +35,18 @@ Structures.extend("GuildMember", structure =>
     }
 );
 
-Structures.extend("MessageEmbed", structure =>
+/*Structures.extend("MessageEmbed", structure =>
     class extends structure {
         send(content, options = {}) {
             if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel");
             return this.sendToChannel.send(content || "", Object.assign(options, { embed: this })).catch(() => { });
         }
     }
-);
+);*/
+MessageEmbed.prototype.send = function(content, options = {}) { 
+    if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel"); 
+    return this.sendToChannel.send(content || "", Object.assign(options, { embed: this })).catch(() => { }); 
+}; 
 
 Structures.extend("TextChannel", structure =>
     class extends structure {
