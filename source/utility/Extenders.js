@@ -43,10 +43,10 @@ Structures.extend("GuildMember", structure =>
         }
     }
 );*/
-MessageEmbed.prototype.send = function(content, options = {}) { 
-    if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel"); 
-    return this.sendToChannel.send(content || "", Object.assign(options, { embed: this })).catch(() => { }); 
-}; 
+MessageEmbed.prototype.send = function(content, options = {}) {
+    if (!this.sendToChannel || !(this.sendToChannel instanceof TextChannel || this.sendToChannel instanceof User || this.sendToChannel instanceof DMChannel)) return Promise.reject("Embed not created in a channel");
+    return this.sendToChannel.send(content || "", Object.assign(options, { embed: this })).catch(() => { });
+};
 
 Structures.extend("TextChannel", structure =>
     class extends structure {
@@ -108,6 +108,7 @@ Structures.extend("Message", structure =>
     }
 );
 
+/*
 Structures.extend("VoiceConnection", structure =>
     class extends structure {
         constructor(...args) {
@@ -123,4 +124,11 @@ Structures.extend("VoiceConnection", structure =>
         }
 
     }
-);
+);*/
+
+Object.defineProperty(VoiceConnection.prototype, "guildStream", {
+    get() {
+        if (!this._guildStream) this._guildStream = new Stream(this.client, this);
+        return this._guildStream;
+    }
+});
