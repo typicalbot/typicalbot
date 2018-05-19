@@ -14,8 +14,6 @@ class ProcessHandler {
             this.client.shards = data;
         } else if (type === "reload") {
             this.client.reload(data);
-        } else if (type === "testers") {
-            this.client.testerData = data;
         } else if (type === "message") {
             if (!this.client.channels.has(data.channel)) return;
 
