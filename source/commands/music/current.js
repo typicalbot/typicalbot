@@ -13,17 +13,11 @@ module.exports = class extends Command {
 
     execute(message, parameters, permissionLevel) {
         const connection = message.guild.voiceConnection;
-        if (!connection) return message.send(`Nothing is currently streaming.`);
-        if (!connection.guildStream) {
-            connection.disconnect();
-            return message.error("An error occured while trying to complete this action, and requires me to leave the voice channel. Sorry!");
-        }
 
-        const short = text => this.client.functions.lengthen(-1, text, 45),
-            time = len => this.client.functions.convertTime(len * 1000);
+        if (!connection) return message.send(`Nothing is currently streaming.`);
 
         const remaining = connection.guildStream.mode === "queue" ? connection.guildStream.current.length - Math.floor(connection.guildStream.dispatcher.time / 1000) : null;
 
-        message.send(`**__Currently Streaming:__** **${short(connection.guildStream.current.title)}**${remaining ? ` (${time(remaining)} left)` : ""} | Requested by **${connection.guildStream.current.requester.author.username}**`);
+        message.send(`**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}**${remaining ? ` (${this.client.functions.convertTime(1000 * remaining)} remaining)` : ""} | Requested by **${connection.guildStream.current.requester.author.username}**`);
     }
 };
