@@ -24,7 +24,7 @@ class Stream {
 
         const stream = await video.stream().catch(err => { throw err; });
 
-        this.dispatcher = this.connection.play(stream, { volume: this.volume });
+        this.dispatcher = this.connection.play(stream, { volume: this.volume, passes: 4 });
         this.current = video;
 
         const content = `🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`;
