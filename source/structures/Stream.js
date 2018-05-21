@@ -35,7 +35,7 @@ class Stream {
             if (this.queue.length) setTimeout(() => this.play(this.queue.splice(0, 1)[0]), 1000);
         });
 
-        this.dispatcher.on("end", () => {
+        this.dispatcher.on("finish", () => {
             if (this.queue.length) return setTimeout(() => {
                 this.play(this.queue[0]);
                 this.queue.splice(0, 1);
@@ -61,7 +61,7 @@ class Stream {
             this.end();
         });
 
-        this.dispatcher.on("end", () => {
+        this.dispatcher.on("finish", () => {
             video.requester.send("The livestream has concluded.");
             this.end();
         });

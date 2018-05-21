@@ -29,10 +29,10 @@ class New extends Event {
                         .setAction(Constants.ModerationLog.Types.WARN)
                         .setModerator(this.client.user)
                         .setUser(message.author)
-                        .setReason(`Automatic Warn: User sent ${settings.automod.invitewarn === 1 ? "an invite" : `${settings.automod.invitewarn} consecutive invites`} in #${channel.name} (${channel.id}).`)
+                        .setReason(`Automatic Warn: User sent ${settings.automod.invitewarn === 1 ? "an invite" : `${settings.automod.invitewarn} consecutive invites`} in #${message.channel.name} (${message.channel.id}).`)
                         .send();
             } else if (settings.automod.invitekick !== 0 && cache.size >= settings.automod.invitekick) {
-                message.member.kick(`Automatic Kick: User sent ${settings.automod.invitekick === 1 ? "an invite" : `${settings.automod.invitekick} consecutive invites`} in #${channel.name} (${channel.id}).`);
+                message.member.kick(`Automatic Kick: User sent ${settings.automod.invitekick === 1 ? "an invite" : `${settings.automod.invitekick} consecutive invites`} in #${message.channel.name} (${message.channel.id}).`);
 
                 if (settings.logs.moderation)
                     this.client.handlers.moderationLog
@@ -40,7 +40,7 @@ class New extends Event {
                         .setAction(Constants.ModerationLog.Types.KICK)
                         .setModerator(this.client.user)
                         .setUser(message.author)
-                        .setReason(`Automatic Kick: User sent ${settings.automod.invitekick === 1 ? "an invite" : `${settings.automod.invitekick} consecutive invites`} in #${channel.name} (${channel.id}).`)
+                        .setReason(`Automatic Kick: User sent ${settings.automod.invitekick === 1 ? "an invite" : `${settings.automod.invitekick} consecutive invites`} in #${message.channel.name} (${message.channel.id}).`)
                         .send();
             }
         }
