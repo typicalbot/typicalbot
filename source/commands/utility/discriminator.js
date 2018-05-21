@@ -17,7 +17,7 @@ module.exports = class extends Command {
         const discriminator = args && args[1] ? args[1] : message.author.discriminator;
         const page = args && args[2] ? args[2] : 1;
 
-        const list = this.client.users.findAll("discriminator", discriminator);
+        const list = this.client.users.filter(u => u.discriminator === discriminator);
         if (!list.length) return message.reply(`There are no users with the discriminator **${discriminator}** on record.`);
 
         const content = this.client.functions.pagify(
