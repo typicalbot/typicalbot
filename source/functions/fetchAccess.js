@@ -7,7 +7,7 @@ class New extends Function {
     }
 
     async execute(guild) {
-        const owner = guild.owner ? guild.owner.user : await guild.members.fetch(guild.ownerID).user;
+        const owner = (guild.owner || await guild.members.fetch(guild.ownerID)).user;
 
         const permissionLevel = await guild.fetchPermissions(owner);
 

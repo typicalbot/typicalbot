@@ -14,6 +14,7 @@ module.exports = class extends Command {
         if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
         const match = /(.+)/i.exec(parameters);
+
         if (!match) return message.error(this.client.functions.error("usage", this));
 
         const args = /(?:(?:https?:\/\/www\.youtube\.com\/playlist\?list=(.+))|(?:https?:\/\/)?(?:(?:www|m)\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+))/i.exec(parameters);
@@ -29,6 +30,7 @@ module.exports = class extends Command {
         } else {
             this.client.utility.music.search(message.guild.settings, match[1]).then(results => {
                 if (!results.length) return message.reply(`No results were found for the query **${match[1]}**.`);
+                
                 const video = results[0];
 
                 this.client.utility.music.fetchInfo(video.url, message).then(videoInfo => {

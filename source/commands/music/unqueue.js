@@ -12,11 +12,8 @@ module.exports = class extends Command {
 
     async execute(message, parameters, permissionLevel) {
         const connection = message.guild.voiceConnection;
+
         if (!connection) return message.send(`Nothing is currently streaming.`);
-        if (!connection.guildStream) {
-            connection.disconnect();
-            return message.error("An error occured while trying to complete this action, and requires me to leave the voice channel. Sorry!");
-        }
 
         if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
 
@@ -27,6 +24,7 @@ module.exports = class extends Command {
         const query = args[1];
 
         const results = queue.filter(v => v.title.toLowerCase().includes(query.toLowerCase()));
+
         if (!results.length) return message.error(`No results were found in the queue for the query **${query}**.`);
 
         if (results.length > 1) {
@@ -35,6 +33,7 @@ module.exports = class extends Command {
             message.send(`Multiple videos were found that matched your query. Type \`cancel\` to cancel or \`all\` to remove all. Otherwise, select from the videos listed below:\n\n${videos}`);
 
             const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id, { max: 1, time: 10000, errors: ["time"] }).catch(err => { return null; });
+            
             if (!messages) return message.error("No response was given.");
 
             const m = messages.first();

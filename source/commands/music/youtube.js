@@ -13,10 +13,12 @@ module.exports = class extends Command {
 
     execute(message, parameters, permissionLevel) {
         const match = /(.+)/i.exec(parameters);
+
         if (!match) return message.error(this.client.functions.error("usage", this));
 
         this.client.utility.music.search(message.guild.settings, match[1]).then(results => {
             if (!results.length) return message.reply(`No results were found for the query **${match[1]}**.`);
+            
             const video = results[0];
 
             message.reply(`**${video.title}** by **${video.channel.title}**:\n<${video.url}>`);
