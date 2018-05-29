@@ -17,6 +17,7 @@ class New extends Function {
             .replace(/{user.id}/gi, user.id)
             .replace(/{user.avatar}/, user.avatarURL)
             .replace(/{user.discrim}|{user.discriminator}/gi, user.discriminator)
+            .replace(/{user.tag}/gi, `${user.username}#${user.discriminator}`)
             .replace(/{user.created}/, moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"))
             .replace(/{guild.name}|{server.name}/gi, guild.name)
             .replace(/{guild.id}|{server.id}/gi, guild.id)
