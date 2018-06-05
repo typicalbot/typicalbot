@@ -30,7 +30,7 @@ module.exports = class extends Command {
             );
         } else if (subcommand === "list") {
             const content = this.client.functions.pagify(
-                message.guild.roles.filterArray(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`),
+                message.guild.roles.filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`),
                 args2 || 1
             );
 

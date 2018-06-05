@@ -28,19 +28,19 @@ module.exports = class extends Command {
         let messages = await message.channel.messages.fetch({ limit: 100, before: message.id });
 
         if (userFilter) {
-            messages = messages.filterArray(m => m.author.id === userFilter).splice(0, messageCount);
+            messages = messages.filter(m => m.author.id === userFilter).array().splice(0, messageCount);
         } else if (roleFilter) {
             const members = roleFilter.members.map(m => m.id);
-            messages = messages.filterArray(m => members.includes(m.author.id)).splice(0, messageCount);
+            messages = messages.filter(m => members.includes(m.author.id)).array().splice(0, messageCount);
         } else if (channelFilter) {
             messages = await channelFilter.messages.fetch({ limit: messageCount });
         } else if (otherFilter === "me") {
-            messages = messages.filterArray(m => m.author.id === message.author.id).splice(0, messageCount);
+            messages = messages.filter(m => m.author.id === message.author.id).array().splice(0, messageCount);
         } else if (otherFilter === "you") {
-            messages = messages.filterArray(m => m.author.id === message.guild.me.id).splice(0, messageCount);
+            messages = messages.filter(m => m.author.id === message.guild.me.id).array().splice(0, messageCount);
         } else if (otherFilter === "bots") {
             const bots = message.guild.members.filter(m => m.user.bot).map(b => b.id);
-            messages = messages.filterArray(m => bots.includes(m.author.id)).splice(0, messageCount);
+            messages = messages.filter(m => bots.includes(m.author.id)).array().splice(0, messageCount);
         } else {
             messages = messages.array().splice(0, messageCount);
         }

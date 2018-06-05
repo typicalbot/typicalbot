@@ -54,7 +54,7 @@ module.exports = class extends Command {
 
         if (user.presence.game) embed.addField("» Playing", user.presence.game.name, true);
         if (member.nickname) embed.addField("» Nickname", member.nickname, true);
-        if (member.roles.size > 1) embed.addField("» Roles", `${member.roles.filterArray(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => r.name).join(", ")}\n`, true);
+        if (member.roles.size > 1) embed.addField("» Roles", `${member.roles.filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => r.name).join(", ")}\n`, true);
 
         embed
             .addField("» Joined Server", moment(member.joinedAt).format("MMM DD, YYYY @ hh:mm A"), true)
