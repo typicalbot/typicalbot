@@ -21,7 +21,7 @@ class CommandHandler extends Collection {
             const file = parse(item.path);
             if (!file.ext || file.ext !== ".js") return;
 
-            const req = require((join(file.dir, file.base), file.name));
+            const req = require(join(file.dir, file.base));
             const newReq = new req(this.client, file.name);
 
             this.set(file.name, newReq);

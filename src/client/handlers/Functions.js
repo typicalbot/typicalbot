@@ -23,7 +23,7 @@ class FunctionHandler extends Collection {
 
             count++;
 
-            const req = require((join(file.dir, file.base), file.name));
+            const req = require(join(file.dir, file.base));
             const newReq = new req(this.client, file.name);
 
             this[file.name] = newReq;
