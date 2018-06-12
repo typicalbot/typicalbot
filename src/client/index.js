@@ -2,7 +2,7 @@ require("./utility/Extenders");
 
 const { Client, Collection } = require("discord.js");
 
-const config = require(`../config`);
+const config = require(`${process.cwd()}/config`);
 
 const ProcessHandler = require("./handlers/Process");
 const DatabaseHandler = require("./handlers/Database");
