@@ -676,9 +676,6 @@ module.exports = class extends Command {
                     } else {
                         message.error("An invalid option was given.");
                     }
-
-
-
                 } else if (setting === "music-permissions") {
                     if (value === "disable" || value === "default" || value === "all") {
                         this.client.settings.update(message.guild.id, { music: { default: "all" } }).then(() => message.success("Setting successfully updated."));
@@ -694,6 +691,8 @@ module.exports = class extends Command {
                 } else if (setting === "music-play") {
                     if (value === "disable" || value === "default" || value === "off") {
                         this.client.settings.update(message.guild.id, { music: { play: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "all") {
+                        this.client.settings.update(message.guild.id, { music: { play: "all" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "dj") {
                         this.client.settings.update(message.guild.id, { music: { play: "dj" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "moderator") {
@@ -706,6 +705,8 @@ module.exports = class extends Command {
                 } else if (setting === "music-skip") {
                     if (value === "disable" || value === "default" || value === "off") {
                         this.client.settings.update(message.guild.id, { music: { skip: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "all") {
+                        this.client.settings.update(message.guild.id, { music: { skip: "all" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "dj") {
                         this.client.settings.update(message.guild.id, { music: { skip: "dj" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "moderator") {
@@ -718,6 +719,8 @@ module.exports = class extends Command {
                 } else if (setting === "music-stop") {
                     if (value === "disable" || value === "default" || value === "off") {
                         this.client.settings.update(message.guild.id, { music: { stop: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "all") {
+                        this.client.settings.update(message.guild.id, { music: { stop: "all" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "dj") {
                         this.client.settings.update(message.guild.id, { music: { stop: "dj" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "moderator") {
@@ -730,6 +733,8 @@ module.exports = class extends Command {
                 } else if (setting === "music-pause") {
                     if (value === "disable" || value === "default" || value === "off") {
                         this.client.settings.update(message.guild.id, { music: { pause: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "all") {
+                        this.client.settings.update(message.guild.id, { music: { pause: "all" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "dj") {
                         this.client.settings.update(message.guild.id, { music: { pause: "dj" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "moderator") {
@@ -742,6 +747,8 @@ module.exports = class extends Command {
                 } else if (setting === "music-resume") {
                     if (value === "disable" || value === "default" || value === "off") {
                         this.client.settings.update(message.guild.id, { music: { resume: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "all") {
+                        this.client.settings.update(message.guild.id, { music: { resume: "all" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "dj") {
                         this.client.settings.update(message.guild.id, { music: { resume: "dj" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "moderator") {
@@ -754,6 +761,8 @@ module.exports = class extends Command {
                 } else if (setting === "music-unqueue") {
                     if (value === "disable" || value === "default" || value === "off") {
                         this.client.settings.update(message.guild.id, { music: { unqueue: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "all") {
+                        this.client.settings.update(message.guild.id, { music: { unqueue: "all" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "dj") {
                         this.client.settings.update(message.guild.id, { music: { unqueue: "dj" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "moderator") {
@@ -766,6 +775,8 @@ module.exports = class extends Command {
                 } else if (setting === "music-volume") {
                     if (value === "disable" || value === "default" || value === "off") {
                         this.client.settings.update(message.guild.id, { music: { volume: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "all") {
+                        this.client.settings.update(message.guild.id, { music: { volume: "all" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "dj") {
                         this.client.settings.update(message.guild.id, { music: { volume: "dj" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "moderator") {
