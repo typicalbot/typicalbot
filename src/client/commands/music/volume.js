@@ -12,8 +12,6 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        if (!await this.client.utility.music.hasPermissions(message, this)) return;
-
         const connection = message.guild.voiceConnection;
 
         if (!connection) return message.send(`Nothing is currently streaming.`);
@@ -24,6 +22,8 @@ module.exports = class extends Command {
             const x = Math.round(connection.dispatcher.volume * 10);
             return message.reply(`Volume: ${"▰".repeat(x > 10 ? (x / 2) : x) + "▱".repeat(x > 10 ? 10 - (x / 2) : 10 - x)} ${Math.round(connection.guildStream.dispatcher.volume * 100)}%`);
         }
+
+        if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
         const volume = match[1];
 
