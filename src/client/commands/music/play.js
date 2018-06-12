@@ -17,26 +17,23 @@ module.exports = class extends Command {
 
         if (!match) return message.error(this.client.functions.error("usage", this));
 
+        const accessLevel = await this.client.functions.fetchAccess(message.guild);
+
         const args = /(?:(?:https?:\/\/www\.youtube\.com\/playlist\?list=(.+))|(?:https?:\/\/)?(?:(?:www|m)\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+))/i.exec(parameters);
 
         if (args && args[1]) {
             this.client.handlers.music.stream(message, args[1], true).catch(err => message.error(err.stack || err));
         } else if (args && args[2]) {
-            this.client.utility.music.fetchInfo(args[2], message).then(videoInfo => {
-                videoInfo.url = args[2];
-
-                this.client.handlers.music.stream(message, videoInfo).catch(err => message.error(err.stack || err));
+            this.client.utility.music.fetchInfo(args[2], message).then(video => {
+                if (video.live && accessLevel.level < 1) return message.error("This feature is only available to TypicalBot Prime members.");
+                this.client.handlers.music.stream(message, video).catch(err => message.error(err.stack || err));
             }).catch(err => message.error(`Information cannot be fetched from that song. Please try another url.`));
         } else {
             this.client.utility.music.search(message.guild.settings, match[1]).then(results => {
                 if (!results.length) return message.reply(`No results were found for the query **${match[1]}**.`);
-                
-                const video = results[0];
 
-                this.client.utility.music.fetchInfo(video.url, message).then(videoInfo => {
-                    videoInfo.url = video.url;
-
-                    this.client.handlers.music.stream(message, videoInfo).catch(err => message.error(err.stack || err));
+                this.client.utility.music.fetchInfo(results[0].url, message).then(video => {
+                    this.client.handlers.music.stream(message, video).catch(err => message.error(err.stack || err));
                 }).catch(err => message.error(`Information cannot be fetched from that song. Please try another song name.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : ""}`));
             }).catch(error => message.error(`${this.client.utility.music.searchError(error)}`));
         }
