@@ -56,10 +56,7 @@ class Shard extends Client {
 
         this.shards = {};
 
-        console.log("Logging In");
-        this.login(this.config.token)
-            .then(() => console.log("Logging In"))
-            .catch(console.error);
+        this.login(this.config.token);
     }
 
     reload(arg) {
