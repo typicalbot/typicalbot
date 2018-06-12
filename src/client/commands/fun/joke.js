@@ -1,5 +1,5 @@
 const Command = require("../../structures/Command");
-const jokes = require("../../structures/jokes");
+const jokes = require("../../utility/jokes");
 
 module.exports = class extends Command {
     constructor(...args) {
