@@ -103,13 +103,11 @@ class Stream {
     }
 
     queueVideo(video, silent = false) {
-        if (silent) {
-            this.queue.push(video);
-        } else {
-            this.queue.push(video);
+        this.queue.push(video);
 
-            return video.requester.reply(`Enqueued **${video.title}**.`);
-        }
+        if (silent) return;
+        
+        video.requester.reply(`Enqueued **${video.title}**.`);
     }
 }
 

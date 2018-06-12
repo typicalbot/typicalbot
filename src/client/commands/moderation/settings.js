@@ -11,6 +11,7 @@ const settingsList = {
     "autorole": "Users joining the server will automatically be given this role.",
     "autoroledelay": "The amount of time to wait before giving the autorole to allow for security levels to work.",
     "autorolesilent": "If not silent, a message will be sent in the logs channel stating a user was given the autorole.",
+    "subscriberrole": "A role that will be given when a user uses the `subscribe` command.",
     "announcements": "A channel for announcements to be posted, used with the `announce` command.",
     "announcements-mention": "A mention to be put in the announcement when posted, such as a Subscriber role.",
     "logs": "A channel for activity logs to be posted.",
@@ -20,6 +21,8 @@ const settingsList = {
     "logs-unban": "A custom set message to be posted when a user is unbanned from the server.",
     "logs-nickname": "A custom set message to be posted when a user changes their nickname in the server.",
     "logs-invite": "A custom set message to be posted when a user posts an invite in the server.",
+    "modlogs": "A channel to send moderation logs in. Aka audit logs.",
+    "modlogs-purge": "A modlog to log when a moderator or administrator purges messages in a channel.",
     "automessage": "A message to be sent to a user when they join the server.",
     "autonickname": "A nickname to give a user when they join the server.",
     "mode": "A mode to enable certain commands.",
@@ -29,9 +32,17 @@ const settingsList = {
     "antiinvite-action": "Enable warning and kicking when sending invites. AntiInvite must be enabled for this to work.",
     "antiinvite-warn": "A user will receive a warning if they send this exact number of invites. AntiInvite and AntiInvite Action must be enabled for this to work.",
     "antiinvite-kick": "A user will be kicked if they send this number or more invites. AntiInvite and AntiInvite Action must be enabled for this to work.",
-    "modlogs": "A channel to send moderation logs in. Aka audit logs.",
-    "modlogs-purge": "A modlog to log when a moderator or administrator purges messages in a channel.",
     "nonickname": "A way to disable the `nickname` command from being used.",
+    "music-permissions": "Change the required permission level for users to use all music commands.",
+    "music-play": "Change the required permission level for users to use the `play` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-skip": "Change the required permission level for users to use the `skip` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-stop": "Change the required permission level for users to use the `stop` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-pause": "Change the required permission level for users to use the `pause` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-resume": "Change the required permission level for users to use the `resume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-unqueue": "Change the required permission level for users to use the `unqueue` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-volume": "Change the required permission level for users to use the `volume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-timelimit": "Change the maximum time limit for a video. Set in seconds. Minimum is 120 seconds (2 minutes). Maximum is 600 seconds (10 minutes). TypicalBot Prime Member maximum is 7200 seconds (2 hours).",
+    "music-queuelimit": "Change the maximum queue limit for a video. Maximum is 10 videos. TypicalBot Prime Member maximum is 100 videos.",
 };
 
 module.exports = class extends Command {
@@ -49,6 +60,8 @@ module.exports = class extends Command {
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
+
+        const accessLevel = await this.client.functions.fetchAccess(message.guild);
 
         const action = args[1], setting = args[2], ar = args[3], value = args[4];
 
@@ -189,6 +202,26 @@ module.exports = class extends Command {
                     message.reply(`**__Current Value:__** ${message.guild.settings.automod.invitekick || "Disabled"}`);
                 } else if (setting === "nonickname") {
                     message.reply(`**__Current Value:__** ${message.guild.settings.nonickname ? "Enabled" : "Disabled"}`);
+                } else if (setting === "music-permissions") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.default}`);
+                } else if (setting === "music-play") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.play}`);
+                } else if (setting === "music-skip") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.skip}`);
+                } else if (setting === "music-stop") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.stop}`);
+                } else if (setting === "music-pause") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.pause}`);
+                } else if (setting === "music-resume") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.resume}`);
+                } else if (setting === "music-unqueue") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.unqueue}`);
+                } else if (setting === "music-volume") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.volume}`);
+                } else if (setting === "music-timelimit") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.timelimit || "Default"}`);
+                } else if (setting === "music-queuelimit") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.music.queuelimit || "Default"}`);
                 } else {
                     message.error("The requested setting doesn't exist");
                 }
@@ -642,6 +675,135 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { nonickname: true }).then(() => message.success("Setting successfully updated."));
                     } else {
                         message.error("An invalid option was given.");
+                    }
+
+
+
+                } else if (setting === "music-permissions") {
+                    if (value === "disable" || value === "default" || value === "all") {
+                        this.client.settings.update(message.guild.id, { music: { default: "all" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "dj") {
+                        this.client.settings.update(message.guild.id, { music: { default: "dj" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "moderator") {
+                        this.client.settings.update(message.guild.id, { music: { default: "moderator" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "administrator") {
+                        this.client.settings.update(message.guild.id, { music: { default: "administrator" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "music-play") {
+                    if (value === "disable" || value === "default" || value === "off") {
+                        this.client.settings.update(message.guild.id, { music: { play: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "dj") {
+                        this.client.settings.update(message.guild.id, { music: { play: "dj" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "moderator") {
+                        this.client.settings.update(message.guild.id, { music: { play: "moderator" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "administrator") {
+                        this.client.settings.update(message.guild.id, { music: { play: "administrator" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "music-skip") {
+                    if (value === "disable" || value === "default" || value === "off") {
+                        this.client.settings.update(message.guild.id, { music: { skip: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "dj") {
+                        this.client.settings.update(message.guild.id, { music: { skip: "dj" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "moderator") {
+                        this.client.settings.update(message.guild.id, { music: { skip: "moderator" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "administrator") {
+                        this.client.settings.update(message.guild.id, { music: { skip: "administrator" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "music-stop") {
+                    if (value === "disable" || value === "default" || value === "off") {
+                        this.client.settings.update(message.guild.id, { music: { stop: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "dj") {
+                        this.client.settings.update(message.guild.id, { music: { stop: "dj" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "moderator") {
+                        this.client.settings.update(message.guild.id, { music: { stop: "moderator" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "administrator") {
+                        this.client.settings.update(message.guild.id, { music: { stop: "administrator" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "music-pause") {
+                    if (value === "disable" || value === "default" || value === "off") {
+                        this.client.settings.update(message.guild.id, { music: { pause: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "dj") {
+                        this.client.settings.update(message.guild.id, { music: { pause: "dj" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "moderator") {
+                        this.client.settings.update(message.guild.id, { music: { pause: "moderator" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "administrator") {
+                        this.client.settings.update(message.guild.id, { music: { pause: "administrator" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "music-resume") {
+                    if (value === "disable" || value === "default" || value === "off") {
+                        this.client.settings.update(message.guild.id, { music: { resume: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "dj") {
+                        this.client.settings.update(message.guild.id, { music: { resume: "dj" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "moderator") {
+                        this.client.settings.update(message.guild.id, { music: { resume: "moderator" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "administrator") {
+                        this.client.settings.update(message.guild.id, { music: { resume: "administrator" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "music-unqueue") {
+                    if (value === "disable" || value === "default" || value === "off") {
+                        this.client.settings.update(message.guild.id, { music: { unqueue: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "dj") {
+                        this.client.settings.update(message.guild.id, { music: { unqueue: "dj" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "moderator") {
+                        this.client.settings.update(message.guild.id, { music: { unqueue: "moderator" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "administrator") {
+                        this.client.settings.update(message.guild.id, { music: { unqueue: "administrator" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "music-volume") {
+                    if (value === "disable" || value === "default" || value === "off") {
+                        this.client.settings.update(message.guild.id, { music: { volume: "off" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "dj") {
+                        this.client.settings.update(message.guild.id, { music: { volume: "dj" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "moderator") {
+                        this.client.settings.update(message.guild.id, { music: { volume: "moderator" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "administrator") {
+                        this.client.settings.update(message.guild.id, { music: { volume: "administrator" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        message.error("An invalid option was given.");
+                    }
+                } else if (setting === "music-timelimit") {
+                    if (value === "default") {
+                        this.client.settings.update(message.guild.id, { music: { timelimit: null } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        const n = Number(value);
+
+                        if (isNaN(n)) return message.error("The given value is not a number.");
+                        if (n < 120) return message.error("The minimum value for this setting is 120 seconds (2 minutes).");
+
+                        if (n > 600 && accessLevel.level < 1) return message.error("The maximum value for this setting is 600 seconds (10 minutes) for servers whose owner is not a TypicalBot Prime member.");
+                        if (n > 7200) return message.error("The maximum value for this setting is 7200 seconds (2 hours).");
+
+                        this.client.settings.update(message.guild.id, { music: { timelimit: n } }).then(() => message.success("Setting successfully updated."));
+                    }
+                } else if (setting === "music-queuelimit") {
+                    if (value === "disable" || value == "0") {
+                        this.client.settings.update(message.guild.id, { music: { queuelimit: 0 } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "default") {
+                        this.client.settings.update(message.guild.id, { music: { queuelimit: null } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        const n = Number(value);
+
+                        if (isNaN(n)) return message.error("The given value is not a number.");
+                        if (n < 1) return message.error("The minimum value for this setting is 0 videos (disabled).");
+
+                        if (n > 10 && accessLevel.level < 1) return message.error("The maximum value for this setting is 10 videos for servers whose owner is not a TypicalBot Prime member.");
+                        if (n > 100) return message.error("The maximum value for this setting is 100 videos.");
+
+                        this.client.settings.update(message.guild.id, { music: { queuelimit: n } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else {
                     message.error("The requested setting doesn't exist");
