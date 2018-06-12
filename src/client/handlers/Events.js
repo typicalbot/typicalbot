@@ -9,8 +9,10 @@ class EventHandler extends Collection {
         Object.defineProperty(this, "client", { value: client });
 
         this.load().then(() => {
-            console.log("Done!");
-            this.forEach(e => client[e.once ? "once" : "on"](e.name, (...args) => e.execute(...args)))
+            this.forEach(e => {
+                console.log(e);
+                client[e.once ? "once" : "on"](e.name, (...args) => e.execute(...args));
+            });
         });
     }
 
