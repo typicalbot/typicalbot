@@ -24,12 +24,13 @@ class EventHandler extends Collection {
 
         klaw(path).on("data", item => {
             const file = parse(item.path);
-            if (!file.ext || file.ext !== ".js") return;
+            
+            if (file.ext && file.ext === ".js") {
+                const req = require(join(file.dir, file.base));
+                const newReq = new req(this.client, file.name, join(file.dir, file.base));
 
-            const req = require(join(file.dir, file.base));
-            const newReq = new req(this.client, file.name, join(file.dir, file.base));
-
-            this.set(file.name, newReq);
+                this.set(file.name, newReq);
+            }
         }).on("end", () => {
             console.log(`Loaded ${this.size} Events in ${Date.now() - start}ms`);
 
