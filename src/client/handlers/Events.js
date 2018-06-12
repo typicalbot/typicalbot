@@ -10,8 +10,9 @@ class EventHandler extends Collection {
 
         this.load().then(() => {
             console.log("Aye!");
+            console.log(this.size);
             this.forEach(e => {
-                console.log(e);
+                console.log(e.name);
                 client[e.once ? "once" : "on"](e.name, (...args) => e.execute(...args));
             });
         });
