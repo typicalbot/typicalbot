@@ -6,12 +6,13 @@ class New extends Function {
     }
 
     execute(type = -1, text, length, place = "after") {
-        if (type === -1) {
-            if (text.length > length) return `${text.substring(0, length - 3)}...`;
-            return text;
-        } else if (type === 1) {
+        if (type === -1)
+            return text.length > length ? `${text.substring(0, length - 3)}...` : text;
+        else if (type === 1) {
             text = text.toString();
+
             if (text.length > length) return `${text.substring(0, length - 3)}...`;
+            
             return place === "before" ?
                 ' '.repeat(length - text.length) + text :
                 text + ' '.repeat(length - text.length);

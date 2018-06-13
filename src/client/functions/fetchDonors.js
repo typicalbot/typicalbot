@@ -6,9 +6,7 @@ class New extends Function {
     }
 
     async execute() {
-        const data = await this.client.handlers.database.connection.table("donors");
-
-        data.forEach(e => {
+        (await this.client.handlers.database.connection.table("donors")).forEach(e => {
             if (e.id.length > 5) this.client.caches.donors.set(e.id, e);
         });
 

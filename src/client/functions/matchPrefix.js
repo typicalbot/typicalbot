@@ -9,6 +9,7 @@ class New extends Function {
         if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
         if (settings.prefix.custom && command.startsWith(settings.prefix.custom)) return settings.prefix.custom;
         if (settings.prefix.default && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
+        
         return null;
     }
 }

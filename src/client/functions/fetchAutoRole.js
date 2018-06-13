@@ -6,10 +6,13 @@ class New extends Function {
     }
 
     execute(guild, settings) {
-        const roleSetting = settings.auto.role.id; if (!roleSetting) return;
+        const id = settings.auto.role.id;
 
-        if (guild.roles.has(roleSetting)) return guild.roles.get(roleSetting);
-        return;
+        return id ?
+            guild.roles.has(id) ?
+                guild.roles.get(id) :
+                null :
+            null;
     }
 }
 
