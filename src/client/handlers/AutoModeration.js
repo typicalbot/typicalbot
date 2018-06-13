@@ -5,15 +5,13 @@ class AutoModerationHandler {
         Object.defineProperty(this, "client", { value: client });
     }
 
-    inviteCheck(message) {
-        return new Promise((resolve, reject) => {
-            if (message.guild.settings.automod.invite) {
-                const contentMatch = this.client.functions.inviteCheck(message.content);
-                const embedMatch = this.client.functions.inviteCheck(inspect(message.embeds, { depth: 4 }));
-
-                if (contentMatch || embedMatch) this.client.emit("guildInvitePosted", message);
-            }
-        });
+    invite(message) {
+        if (message.guild.settings.automod.invite) {
+            if (
+                this.client.functions.inviteCheck(message.content) ||
+                this.client.functions.inviteCheck(inspect(message.embeds, { depth: 4 }))
+            ) this.client.emit("guildInvitePosted", message);
+        }
     }
 }
 

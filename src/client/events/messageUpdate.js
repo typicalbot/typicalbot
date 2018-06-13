@@ -16,7 +16,7 @@ class New extends Event {
         if (userPermissions.level >= 2) return;
         if (settings.ignored.invites.includes(message.channel.id)) return;
 
-        this.client.handlers.automoderation.inviteCheck(message).then(() => { return message.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
+        this.client.handlers.automoderation.invite(message).then(() => { return message.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
     }
 }
 

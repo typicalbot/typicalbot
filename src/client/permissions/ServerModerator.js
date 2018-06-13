@@ -13,9 +13,7 @@ class NewPermissionLevel extends PermissionLevelStr {
         const roles = PermissionLevelStr.fetchRoles(guild, "moderator");
         if (!roles.length) return false;
 
-        for (const role of roles) {
-            if (member.roles.has(role)) return true;
-        }
+        for (const role of roles) if (member.roles.has(role)) return true;
 
         return false;
     }

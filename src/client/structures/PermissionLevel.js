@@ -12,9 +12,7 @@ class PermissionLevel {
     }
 
     static fetchRoles(guild, permission) {
-        const setting = guild.settings.roles[permission];
-
-        const pool = setting.filter(r => guild.roles.has(r));
+        const pool = guild.settings.roles[permission].filter(r => guild.roles.has(r));
 
         const permRole = guild.roles.find(r => r.name.toLowerCase() === Constants.Permissions.RoleTitles[permission.toUpperCase()].toLowerCase());
         if (permRole) pool.push(permRole.id);

@@ -9,34 +9,25 @@ class DatabaseHandler {
     }
 
     get(table, key) {
-        let query = this.connection.table(table);
-        if (key) query = query.get(key);
-
-        return query;
+        return key ?
+            this.connection.table(table).get(key) :
+            this.connection.table(table);
     }
 
     async has(table, key) {
-        const query = await this.connection.table(table).get(key);
-
-        return !!query;
+        return !!(await this.connection.table(table).get(key));
     }
 
     insert(table, data) {
-        const query = this.connection.table(table).insert(data);
-
-        return query;
+        return this.connection.table(table).insert(data);
     }
 
     update(table, key, data) {
-        const query = this.connection.table(table).get(key).update(data);
-
-        return query;
+        return this.connection.table(table).get(key).update(data);
     }
 
     delete(table, key) {
-        const query = this.connection.table(table).delete(key);
-
-        return query;
+        return this.connection.table(table).delete(key);
     }
 }
 
