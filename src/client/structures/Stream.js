@@ -18,17 +18,22 @@ class Stream {
     }
 
     async play(video) {
-        if (video.live) return this.playLivestream(video);
+        if (video.live) return this.playLive(video);
 
         this.mode = "queue";
 
-        const stream = await video.stream().catch(err => { throw err; });
+        this.dispatcher = this.connection.play(
+            await video.stream().catch(err => { throw err; }),
+            { volume: this.volume, passes: 4 }
+        );
 
-        this.dispatcher = this.connection.play(stream, { volume: this.volume, passes: 4 });
         this.current = video;
 
         const content = `🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`;
-        this.lastPlaying && video.requester.channel.lastMessageID === this.lastPlaying.id ? this.lastPlaying.edit(content) : video.requester.send(content).then(msg => this.lastPlaying = msg);
+
+        this.lastPlaying && video.requester.channel.lastMessageID === this.lastPlaying.id ?
+            this.lastPlaying.edit(content) :
+            video.requester.send(content).then(msg => this.lastPlaying = msg);
 
         this.dispatcher.on("error", err => {
             video.requester.send(`An error occured playing the video. ${this.queue.length ? "Attempting to play the next video in the queue." : "Leaving the channel."}`);
@@ -46,12 +51,14 @@ class Stream {
         });
     }
 
-    async playLivestream(video) {
+    async playLive(video) {
         this.mode = "live";
 
-        const stream = await video.stream().catch(err => { throw err; });
+        this.dispatcher = this.connection.play(
+            await video.stream().catch(err => { throw err; }),
+            { volume: this.volume }
+        );
 
-        this.dispatcher = this.connection.play(stream, { volume: .5 });
         this.current = video;
 
         video.requester.send(`🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}**.`);
@@ -85,20 +92,20 @@ class Stream {
 
     setVolume(volume) {
         if (!this.dispatcher) return this.end();
-        
+
         this.volume = volume;
         return this.dispatcher.setVolume(volume);
     }
 
     pause() {
         if (!this.dispatcher) return this.end();
-        
+
         this.dispatcher.pause();
     }
 
     resume() {
         if (!this.dispatcher) return this.end();
-        
+
         this.dispatcher.resume();
     }
 
@@ -106,7 +113,7 @@ class Stream {
         this.queue.push(video);
 
         if (silent) return;
-        
+
         video.requester.reply(`Enqueued **${video.title}**.`);
     }
 }

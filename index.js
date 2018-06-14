@@ -14,11 +14,12 @@ class ShardHandler extends Collection {
     }
 
     get stats() {
-        const data = {};
-
-        this.forEach(shard => Object.keys(shard.stats).forEach(key => data[key] ? data[key] += shard.stats[key] : data[key] = shard.stats[key]));
-
-        return data;
+        return this.reduce((accumulator, shard) => {
+            for (const [key, stat] of Object.entries(shard.stats))
+                key in accumulator ?
+                    accumulator[key] += stat :
+                    accumulator[key] = stat;
+        }, {});
     }
 
     broadcast(event, data) {

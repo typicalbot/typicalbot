@@ -17,20 +17,16 @@ class Video {
 
     async validate(url) {
         const id = /[a-zA-Z0-9-_]{11}$/.exec(url);
-        if (id) url = id;
 
-        const data = sys.fetchInfo(url).catch(err => { throw err; });
-        return data;
+        return sys.fetchInfo(id ? id[0] : url);
     }
 
     async stream() {
-        const validated = await this.validate(this.url).catch(err => { throw err; });
+        await this.validate(this.url).catch(err => { throw err; });
 
-        const options = {};
-        if (!this.live) Object.assign(options, { filter: "audioonly" });
-
-        const audioStream = ytdl(this.url, options);
-        return audioStream;
+        return this.live ?
+            ytdl(this.url) :
+            ytdl(this.url, { filter: "audioonly" });
     }
 }
 

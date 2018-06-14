@@ -31,15 +31,17 @@ module.exports = class {
     async initStream(message, video, playlist) {
         const connection = await this.connect(message).catch(err => { throw err; });
 
-        if (playlist) return connection.guildStream.play(
-            await this.queuePlaylist(message, video, connection.guildStream).catch(err => { throw err; })
-        ).catch(err => { throw err; });
+        if (playlist)
+            return connection.guildStream.play(
+                await this.queuePlaylist(message, video, connection.guildStream).catch(err => { throw err; })
+            ).catch(err => { throw err; });
 
         connection.guildStream.play(video).catch(err => { throw err; });
     }
 
     async stream(message, video, playlist = false) {
-        if (!playlist && !this.client.utility.music.withinLimit(message, video)) throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
+        if (!playlist && !this.client.utility.music.withinLimit(message, video))
+            throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
 
         const connection = message.guild.voiceConnection;
 
