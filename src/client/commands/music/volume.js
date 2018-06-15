@@ -14,7 +14,7 @@ module.exports = class extends Command {
     async execute(message, parameters, permissionLevel) {
         const connection = message.guild.voiceConnection;
 
-        if (!connection) return message.send(`Nothing is currently streaming.`);
+        if (!connection || connection.dispatcher) return message.send(`Nothing is currently streaming.`);
 
         const match = /(\d+)/i.exec(message.content);
 
@@ -33,7 +33,7 @@ module.exports = class extends Command {
 
         connection.guildStream.setVolume(volume * 0.01);
 
-        const x = Math.round(connection.dispatcher.volume * 10);
+        const x = Math.round(connection.guildStream.dispatcher.volume * 10);
         
         message.reply(`Volume: ${"▰".repeat(x > 10 ? (x / 2) : x) + "▱".repeat(x > 10 ? 10 - (x / 2) : 10 - x)} ${Math.round(connection.guildStream.dispatcher.volume * 100)}%`);
     }
