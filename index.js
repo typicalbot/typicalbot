@@ -19,6 +19,8 @@ class ShardHandler extends Collection {
                 key in accumulator ?
                     accumulator[key] += stat :
                     accumulator[key] = stat;
+
+            return accumulator;
         }, {});
     }
 
