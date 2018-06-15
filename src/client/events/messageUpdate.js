@@ -1,3 +1,4 @@
+const Constants = require("../utility/Constants");
 const Event = require("../structures/Event");
 
 class New extends Event {
@@ -13,10 +14,12 @@ class New extends Event {
         const settings = message.guild.settings = await message.guild.fetchSettings();
 
         const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author);
+
         if (userPermissions.level >= 2) return;
         if (settings.ignored.invites.includes(message.channel.id)) return;
 
-        this.client.handlers.automoderation.invite(message).then(() => { return message.error(`An invite was detected in your message. Your message has been deleted.`); }).catch(console.error);
+        if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id))
+            this.client.handlers.automoderation.invite(message);
     }
 }
 
