@@ -2,7 +2,7 @@ const Event = require("../structures/Event");
 const Constants = require("../utility/Constants");
 const { Collection } = require("discord.js");
 
-class New extends Event {
+class GuildInvitePosted extends Event {
     constructor(...args) {
         super(...args);
     }
@@ -58,4 +58,4 @@ class New extends Event {
     }
 }
 
-module.exports = New;
+module.exports = GuildInvitePosted;

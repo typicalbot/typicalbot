@@ -1,7 +1,7 @@
 const Event = require("../structures/Event");
 const { Collection } = require("discord.js");
 
-class New extends Event {
+class GuildMemberRemove extends Event {
     constructor(...args) {
         super(...args);
     }
@@ -41,4 +41,4 @@ class New extends Event {
     }
 }
 
-module.exports = New;
+module.exports = GuildMemberRemove;

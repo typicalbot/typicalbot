@@ -1,7 +1,7 @@
 const Constants = require(`../utility/Constants`);
 const { MessageEmbed } = require("discord.js");
 
-class ModerationLogCase {
+class ModerationLog {
     constructor(client, guild, { id, action, _action, moderator, user, channel, reason, expiration, timestamp }) {
         Object.defineProperty(this, "client", { value: client });
 
@@ -113,8 +113,8 @@ class ModerationLogCase {
         if (moderator) Object.assign(data, { moderator });
         if (reason) Object.assign(data, { reason });
 
-        return new ModerationLogCase(message.client, message.guild, data);
+        return new ModerationLog(message.client, message.guild, data);
     }
 }
 
-module.exports = ModerationLogCase;
+module.exports = ModerationLog;

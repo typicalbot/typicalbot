@@ -1,6 +1,6 @@
 const Function = require("../structures/Function");
 
-class New extends Function {
+class ConvertTime extends Function {
     constructor(client, name) {
         super(client, name);
     }
@@ -27,4 +27,4 @@ class New extends Function {
     }
 }
 
-module.exports = New;
+module.exports = ConvertTime;
