@@ -2,16 +2,16 @@ const { Guild, GuildMember, MessageEmbed, TextChannel, DMChannel, User, Message 
 const VoiceConnection = require("discord.js/src/client/voice/VoiceConnection");
 const Stream = require("../structures/Stream");
 
-Guild.prototype.fetchSettings = async function() {
-    return this.client.settings.fetch(this.id).then(settings => {
-        return settings;
-    }).catch(err => {
-        throw err;
-    });
+Guild.prototype.fetchSettings = function() {
+    return this.client.settings.fetch(this.id);
 };
 
 Guild.prototype.fetchPermissions = async function(member, ignoreStaff = false) {
     return this.client.handlers.permissions.fetch(this, member, ignoreStaff);
+};
+
+Guild.prototype.buildModerationLog = async function() {
+    this.client.handlers.moderationLog.buildCase(this);
 };
 
 GuildMember.prototype.fetchPermissions = async function(ignoreStaff = false) {
