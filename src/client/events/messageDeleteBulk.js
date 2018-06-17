@@ -1,7 +1,7 @@
 const Event = require("../structures/Event");
 const moment = require("moment");
 
-class New extends Event {
+class MessageBulkDelete extends Event {
     constructor(...args) {
         super(...args);
     }
@@ -35,4 +35,4 @@ class New extends Event {
     }
 }
 
-module.exports = New;
+module.exports = MessageBulkDelete;

@@ -1,6 +1,6 @@
 const Event = require("../structures/Event");
 
-class New extends Event {
+class VoiceConnectionUpdate extends Event {
     constructor(...args) {
         super(...args);
     }
@@ -10,4 +10,4 @@ class New extends Event {
     }
 }
 
-module.exports = New;
+module.exports = VoiceConnectionUpdate;

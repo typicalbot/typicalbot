@@ -1,6 +1,6 @@
 const Event = require("../structures/Event");
 
-class New extends Event {
+class MessageDelete extends Event {
     constructor(...args) {
         super(...args);
     }
@@ -36,4 +36,4 @@ class New extends Event {
     }
 }
 
-module.exports = New;
+module.exports = MessageDelete;

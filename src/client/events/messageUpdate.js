@@ -1,7 +1,7 @@
 const Constants = require("../utility/Constants");
 const Event = require("../structures/Event");
 
-class New extends Event {
+class MessageUpdate extends Event {
     constructor(...args) {
         super(...args);
     }
@@ -23,4 +23,4 @@ class New extends Event {
     }
 }
 
-module.exports = New;
+module.exports = MessageUpdate;

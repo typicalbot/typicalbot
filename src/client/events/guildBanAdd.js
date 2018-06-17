@@ -1,7 +1,7 @@
 const Event = require("../structures/Event");
 const Constants = require(`../utility/Constants`);
 
-class New extends Event {
+class GuildBanAdd extends Event {
     constructor(...args) {
         super(...args);
     }
@@ -47,4 +47,4 @@ class New extends Event {
     }
 }
 
-module.exports = New;
+module.exports = GuildBanAdd;
