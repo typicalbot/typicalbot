@@ -85,7 +85,7 @@ class ModerationLog {
 
     async send() {
         const channel = await this.client.handlers.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
-        const latest = await this.client.handlers.moderationLog.fetchLatest(this.guild).catch(err => { throw err; });
+        const latest = await this.client.handlers.moderationLog.fetchCase(this.guild, "latest").catch(err => { throw err; });
 
         if (!this.id) this.setId(latest ? Number(latest.embeds[0].footer.text.match(Constants.ModerationLog.Regex.CASE)[1]) + 1 : 1);
 
