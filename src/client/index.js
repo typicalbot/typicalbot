@@ -19,8 +19,8 @@ const EventHandler = require("./handlers/Events");
 
 const MusicUtility = require("./utility/Music");
 
-const Raven = require("raven");
-Raven.config(config.raven).install();
+//const Raven = require("raven");
+//Raven.config(config.raven).install();
 
 class Shard extends Client {
     constructor() {

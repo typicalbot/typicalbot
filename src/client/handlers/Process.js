@@ -1,4 +1,4 @@
-const Raven = require("raven");
+//const Raven = require("raven");
 
 class ProcessHandler {
     constructor(client) {
@@ -10,7 +10,7 @@ class ProcessHandler {
             if (!err) return;
             
             this.log(`Uncaught Promise Error:\n${err.stack || JSON.stringify(err) || err}`, true);
-            Raven.captureException(err);
+            //Raven.captureException(err);
         });
     }
 
@@ -97,8 +97,8 @@ class ProcessHandler {
             channels: this.client.channels.size,
             voiceConnections: this.client.voiceConnections.size,
             users: this.client.users.size,
-            ram_used: Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100,
-            ram_total: Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100
+            ram_used: Math.round(process.memoryUsage().heapUsed / 1048576),
+            ram_total: Math.round(process.memoryUsage().heapTotal / 1048576)
         });
     }
 }
