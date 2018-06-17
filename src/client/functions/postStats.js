@@ -11,21 +11,21 @@ function sendCarbonitex(client) {
             "key": client.config.apis.carbon
         })
         .end((err, res) => {
-            if (err || res.statusCode != 200) client.handlers.process.log(`Carbinitex Stats Transfer Failed ${err.body || err}`, true);
+            if (err || res.statusCode != 200) throw `Carbinitex Stats Transfer Failed ${err.body || err}`;
         });
 }
 
 function sendDiscordBots(client) {
-    request.post(`https://discordbots.org/api/bots/${client.config.id}/stats`)
+    request.post(`https://discordbots.org/api/bots/${client.user.id}/stats`)
         .set("Content-Type", "application/json")
-        .set("Authentication", client.config.apis.discordbots)
+        .set("Authorization", client.config.apis.discordbots)
         .send({
             "shard_id": client.shardID.toString(),
             "shard_count": client.shardCount.toString(),
             "server_count": client.guilds.size.toString()
         })
         .end((err, res) => {
-            if (err || res.statusCode != 200) client.handlers.process.log(`DiscordBots Stats Transfer Failed ${err.body || err}`, true);
+            if (err || res.statusCode != 200) throw `DiscordBots Stats Transfer Failed ${err.body || err}`;
         });
 }
 

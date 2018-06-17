@@ -17,6 +17,8 @@ class Shard extends fork {
                 Object.keys(data).map(key => this.stats[key] = data[key]);
 
                 this.handler.broadcast("stats", this.handler.stats);
+            } else {
+                this.master.broadcast(event, data);
             }
         });
     }

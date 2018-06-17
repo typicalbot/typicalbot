@@ -27,7 +27,7 @@ module.exports = class extends Command {
                 if (video.live && (await this.client.functions.fetchAccess(message.guild)).level < 1)
                     return message.error("This feature is only available to TypicalBot Prime members.");
 
-                this.client.handlers.music.stream(message, video).catch(err => { throw err; });
+                this.client.handlers.music.stream(message, video).catch(err => message.error(err.stack || err)); 
             }).catch(err => message.error(`Information cannot be fetched from that song. Please try another url.`));
 
         else
