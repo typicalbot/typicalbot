@@ -18,7 +18,7 @@ class Shard extends fork {
 
                 this.handler.broadcast("stats", this.handler.stats);
             } else {
-                this.master.broadcast(event, data);
+                this.handler.broadcast(event, data);
             }
         });
     }
