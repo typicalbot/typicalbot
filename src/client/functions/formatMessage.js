@@ -1,7 +1,7 @@
 const Function = require("../structures/Function");
 const moment = require("moment");
 
-class New extends Function {
+class FormatMessage extends Function {
     constructor(client, name) {
         super(client, name);
     }
@@ -52,4 +52,4 @@ class New extends Function {
     }
 }
 
-module.exports = New;
+module.exports = FormatMessage;

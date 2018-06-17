@@ -1,7 +1,7 @@
 const PermissionLevelStr = require("../structures/PermissionLevel");
 const Constants = require("../utility/Constants");
 
-class NewPermissionLevel extends PermissionLevelStr {
+class ServerDJ extends PermissionLevelStr {
     constructor() {
         super({
             "title": "Server DJ",
@@ -19,4 +19,4 @@ class NewPermissionLevel extends PermissionLevelStr {
     }
 }
 
-module.exports = NewPermissionLevel;
+module.exports = ServerDJ;

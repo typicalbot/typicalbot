@@ -1,6 +1,6 @@
 const Function = require("../structures/Function");
 
-class New extends Function {
+class MatchPrefix extends Function {
     constructor(client, name) {
         super(client, name);
     }
@@ -14,4 +14,4 @@ class New extends Function {
     }
 }
 
-module.exports = New;
+module.exports = MatchPrefix;

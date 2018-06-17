@@ -1,7 +1,7 @@
 const PermissionLevelStr = require("../structures/PermissionLevel");
 const Constants = require("../utility/Constants");
 
-class NewPermissionLevel extends PermissionLevelStr {
+class TypicalBotSupport extends PermissionLevelStr {
     constructor() {
         super({
             "title": "TypicalBot Support",
@@ -15,4 +15,4 @@ class NewPermissionLevel extends PermissionLevelStr {
     }
 }
 
-module.exports = NewPermissionLevel;
+module.exports = TypicalBotSupport;

@@ -1,7 +1,7 @@
 const PermissionLevelStr = require("../structures/PermissionLevel");
 const Constants = require("../utility/Constants");
 
-class NewPermissionLevel extends PermissionLevelStr {
+class ServerAdministrator extends PermissionLevelStr {
     constructor() {
         super({
             "title": "Server Administrator",
@@ -23,4 +23,4 @@ class NewPermissionLevel extends PermissionLevelStr {
     }
 }
 
-module.exports = NewPermissionLevel;
+module.exports = ServerAdministrator;
