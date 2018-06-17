@@ -5,9 +5,14 @@ class New extends Function {
         super(client, name);
     }
 
+    exe() {
+        console.log("Aye!");
+    }
+
     execute(error, ...args) {
         console.log(this.constructor.name);
         console.log(this);
+        console.log(this.test.exe());
     }
 }
 
