@@ -18,7 +18,7 @@ module.exports = class {
     }
 
     async fetchCase(guild, id = "latest") {
-        const channel = this.fetchChannel(guild);
+        const channel = await this.fetchChannel(guild);
 
         const messages = channel.messages.fetch({ limit: 100 })
             .catch(() => { throw "Couldn't fetch messages."; });
