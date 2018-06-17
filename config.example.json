@@ -8,6 +8,8 @@
 
     "token": "BOT TOKEN HERE",
 
+    "raven": "Raven URL",
+
     "clientOptions": {
         "messageCacheMaxSize": 150,
         "messageCacheLifetime": 3600,
