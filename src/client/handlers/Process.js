@@ -20,7 +20,7 @@ class ProcessHandler {
         if (event === "stats") {
             this.client.shards = data;
         } else if (event === "fetchProperty") {
-            this.broadcast("globalrequest", {
+            this.transmit("globalrequest", {
                 id: data.id,
                 response: eval(`this.client.${data.property}`)
             });
