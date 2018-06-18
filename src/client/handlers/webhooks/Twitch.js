@@ -10,7 +10,9 @@ class TwitchWebhookHandler {
         const { body } = await snekfetch
             .get(`https://api.twitch.tv/helix/users?${id ? "id" : "login"}=${login}`)
             .set("Client-ID", config.apis.twitch.client_id)
-            .catch(() => null);
+            .catch(err => { console.error(err); return null; });
+
+        console.log(body);
 
         if (!body || !body.data.length) throw "Couldn't find user.";
 
