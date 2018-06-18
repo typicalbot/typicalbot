@@ -92,9 +92,10 @@ class IPC extends express {
             const { data } = req.body;
             
             if (!data.length) return;
-            console.log(data[0]);
 
             this.handler.broadcast("twitch_event", data[0]);
+            
+            res.status(202);
         });
 
         /*

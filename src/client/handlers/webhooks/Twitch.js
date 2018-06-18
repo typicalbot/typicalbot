@@ -12,8 +12,6 @@ class TwitchWebhookHandler {
             .set("Client-ID", config.apis.twitch.client_id)
             .catch(err => { console.error(err); return null; });
 
-        console.log(body);
-
         if (!body || !body.data.length) throw "Couldn't find user.";
 
         return body.data[0];
