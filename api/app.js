@@ -93,11 +93,11 @@ class IPC extends express {
         this.post("/webhook/twitch", async (req, res, next) => {
             const { data } = req.body;
             
-            if (!data.length) return res.status(202);
+            if (!data.length) return res.status(202).send("OKAY");
 
             this.handler.broadcast("twitch_event", data[0]);
             
-            res.status(202);
+            res.status(202).send("OKAY");
         });
 
         /*
