@@ -43,7 +43,7 @@ module.exports = class extends Command {
 
             const user = await this.client.handlers.webhooks.twitch.lookup(login);
 
-            this.client.handlers.webhooks.twitch.removeSubscription(message.guild, user.id)
+            this.client.handlers.webhooks.twitch.deleteSubscription(message.guild, user.id)
                 .then(() => {
                     message.reply("Unsubscribed!");
                 })
