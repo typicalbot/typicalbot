@@ -30,11 +30,7 @@ module.exports = class extends Command {
 
             if (!body || !body.data.length) return message.error("Couldn't find user.");
 
-            console.log(body);
-            console.log(body.data);
-            console.log(body.data[1]);
-
-            message.reply(`${body.data[1].display_name}: https://www.twitch.tv/${body.data[1].login}`);
+            message.reply(`${body.data[0].display_name}: https://www.twitch.tv/${body.data[0].login}`);
         } else if (action === "subscribe") {
 
         } else if (action === "unsubscribe") {
