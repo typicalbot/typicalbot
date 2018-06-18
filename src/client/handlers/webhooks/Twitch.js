@@ -91,8 +91,8 @@ class TwitchWebhookHandler {
     }
 
     async handle(data) {
-        console.log("A");
-        if (data) return;
+        console.log(data);
+        if (!data) return;
         console.log("B");
 
         const guilds = await this.fetchSubscriptions(data.user_id);

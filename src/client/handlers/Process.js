@@ -21,7 +21,6 @@ class ProcessHandler {
                 response: eval(`this.client.${data.property}`)
             });
         } else if (event === "twitch_event") {
-            console.log(data);
             this.client.handlers.webhooks.twitch.handle(data);
         } else if (event === "reload") {
             this.client.reload(data);
