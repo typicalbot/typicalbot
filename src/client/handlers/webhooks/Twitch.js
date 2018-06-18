@@ -84,7 +84,7 @@ class TwitchWebhookHandler {
         if (!newList.length) {
             await this.unsubscribe(id).catch(err => { throw err; });
 
-            return await this.client.handlers.database.connection.delete(id);
+            return await this.client.handlers.database.connection.table("webhooks").delete(id);
         }
 
         return await this.client.handlers.database.connection.table("webhooks").get(id).update({ guilds: newList });
