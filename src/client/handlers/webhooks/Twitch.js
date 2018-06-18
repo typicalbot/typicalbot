@@ -46,20 +46,20 @@ class TwitchWebhookHandler {
     }
 
     async fetchSubscriptions(guild) {
-        const subscriptions = await this.client.database.connection.table("webhooks").get(guild.id);
+        const subscriptions = await this.client.handlers.database.connection.table("webhooks").get(guild.id);
 
-        if (!subscriptions) await this.client.database.connection.insert({ "id": guild.id, "twitch": [] });
+        if (!subscriptions) await this.client.handlers.database.connection.insert({ "id": guild.id, "twitch": [] });
 
         return subscriptions || { "id": guild.id, "twitch": [] };
     }
 
     async addSubscription(guild, id) {
-        const subscriptions = await this.client.database.connection.table("webhooks").get(id);
+        const subscriptions = await this.client.handlers.database.connection.table("webhooks").get(id);
 
         if (!subscriptions) {
             await this.subscribe(id).catch(err => { throw err; });
 
-            return await this.client.database.connection.insert({ id, "guilds": [guild.id] });
+            return await this.client.handlers.database.connection.insert({ id, "guilds": [guild.id] });
         }
 
         if (subscriptions.guilds.includes(guild.id)) throw "Guild is already subscribed.";
@@ -67,11 +67,11 @@ class TwitchWebhookHandler {
         const newList = subscriptions.guilds;
         newList.push(guild.id);
 
-        return await this.client.database.connection.table("webhooks").get(id).update({ guilds: newList });
+        return await this.client.handlers.database.connection.table("webhooks").get(id).update({ guilds: newList });
     }
 
     async deleteSubscription(guild, id) {
-        const subscriptions = await this.client.database.connection.table("webhooks").get(id);
+        const subscriptions = await this.client.handlers.database.connection.table("webhooks").get(id);
 
         if (!subscriptions || !subscriptions.guilds.includes(guild.id)) throw "Guild is not subscribed.";
 
@@ -81,10 +81,10 @@ class TwitchWebhookHandler {
         if (!newList.length) {
             await this.unsubscribe(id).catch(err => { throw err; });
 
-            return await this.client.database.connection.delete(id);
+            return await this.client.handlers.database.connection.delete(id);
         }
 
-        return await this.client.database.connection.table("webhooks").get(id).update({ guilds: newList });
+        return await this.client.handlers.database.connection.table("webhooks").get(id).update({ guilds: newList });
     }
 }
 
