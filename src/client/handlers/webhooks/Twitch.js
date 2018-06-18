@@ -45,12 +45,15 @@ class TwitchWebhookHandler {
             .catch(err => { throw "Could not subscribe"; });
     }
 
-    async fetchSubscriptions(guild) {
-        const subscriptions = await this.client.handlers.database.connection.table("webhooks").get(guild.id);
+    async fetchSubscriptions(id) {
+        const subscriptions = await this.client.handlers.database.connection.table("webhooks").get(id);
 
-        if (!subscriptions) await this.client.handlers.database.connection.table("webhooks").insert({ "id": guild.id, "twitch": [] });
+        if (!subscriptions) {
+            this.unsubscribe(id);
+            return null;
+        }
 
-        return subscriptions || { "id": guild.id, "twitch": [] };
+        return subscriptions.guilds;
     }
 
     async addSubscription(guild, id) {
@@ -85,6 +88,39 @@ class TwitchWebhookHandler {
         }
 
         return await this.client.handlers.database.connection.table("webhooks").get(id).update({ guilds: newList });
+    }
+
+    async handle(data) {
+        if (data) return;
+
+        const guilds = await this.fetchSubscriptions(data.user_id);
+
+        if (!guilds) return;
+
+        guilds
+            .filter(g => this.client.guilds.has(g))
+            .forEach(async g => {
+                const guild = this.client.guilds.get(g);
+                const settings = await guild.fetchSettings();
+
+                if (!settings.webhooks.twitch || !settings.webhooks.twitch.id) return;
+
+                if (!guild.channels.has(settings.webhooks.twitch.id)) return;
+
+                const twitchUser = this.lookup(data.user_id);
+
+                guild.channels.get(settings.webhooks.twitch.id).send(
+                    settings.webhooks.twitch.message ?
+                        settings.webhooks.twitch.message
+                            .replace(/{url}/gi, `https://www.twitch.tv/${twitchUser.login}`)
+                            .replace(/{displayname}/gi, twitchUser.display_name)
+                            .replace(/{username}/gi, twitchUser.login)
+                            .replace(/{description}/gi, twitchUser.description)
+                            .replace(/{title}/gi, data.title)
+                        :
+                        `${twitchUser.display_name} is now live! <https://www.twitch.tv/${twitchUser.login}>`
+                );
+            });
     }
 }
 

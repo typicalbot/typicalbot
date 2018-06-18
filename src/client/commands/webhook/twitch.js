@@ -41,7 +41,15 @@ module.exports = class extends Command {
         } else if (action === "unsubscribe") {
             if (actualUserPermissions.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, actualUserPermissions));
 
-            return message.reply("This command is still being developed.");
+            const user = await this.client.handlers.webhooks.twitch.lookup(login);
+
+            this.client.handlers.webhooks.twitch.removeSubscription(message.guild, user.id)
+                .then(() => {
+                    message.reply("Unsubscribed!");
+                })
+                .catch(err => {
+                    message.error(err);
+                });
         }
     }
 };

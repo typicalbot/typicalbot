@@ -67,6 +67,12 @@ module.exports = (id) => {
             "apikey": null
         },
         "subscriber": null,
-        "pcs": []
+        "pcs": [],
+        "webhooks": {
+            "twitch": {
+                "id": null,
+                "message": null
+            }
+        }
     };
 };

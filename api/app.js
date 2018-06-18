@@ -93,7 +93,7 @@ class IPC extends express {
             
             if (!data.length) return;
 
-            this.handler.broadcast("twitch-streaming", data[0]);
+            this.handler.broadcast("twitch_event", data[0]);
         });
 
         /*
