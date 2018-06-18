@@ -25,14 +25,9 @@ module.exports = class extends Command {
         if (action === "lookup") {
             if (!login) return message.error(this.client.functions.error("usage", this));
 
-            const { body } = await snekfetch
-                .get(`https://api.twitch.tv/helix/users?login=${login}`)
-                .set("Client-ID", config.apis.twitch.client_id)
-                .catch(() => null);
+            const user = await this.client.handlers.webhooks.twitch.lookup(login);
 
-            if (!body || !body.data.length) return message.error("Couldn't find user.");
-
-            message.reply(`${body.data[0].display_name}: https://www.twitch.tv/${body.data[0].login}`);
+            message.reply(`${user.display_name}: https://www.twitch.tv/${user.login}`);
         } else if (action === "subscribe") {
             if (actualUserPermissions.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, actualUserPermissions));
 
