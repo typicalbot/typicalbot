@@ -72,7 +72,7 @@ class IPC extends express {
         const snekfetch = require("snekfetch");
 
         this.all("/webhook", async (req, res, next) => {
-            console.log(req.headers, req.body);
+            console.log(req.headers, req.method);
 
             const { body } = await snekfetch.post("https://hastebin.com/documents").send(require("util").inspect(req, { depth: 3 })).catch(e => { throw e; });
 
