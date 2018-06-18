@@ -8,8 +8,8 @@ const snekfetch = require("snekfetch");
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Gives a list of bots from Carbonitex ranked by server count.",
-            usage: "bots [page-number]",
+            description: "Interact with the Twitch API/Webhooks.",
+            usage: "twitch <lookup|subscribe|unsubscribe> <twitch-username>",
             mode: Constants.Modes.LITE
         });
     }
@@ -19,6 +19,8 @@ module.exports = class extends Command {
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const action = args[1], login = args[2];
+
+        const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
 
         if (action === "lookup") {
             if (!login) return message.error(this.client.functions.error("usage", this));
@@ -32,9 +34,13 @@ module.exports = class extends Command {
 
             message.reply(`${body.data[0].display_name}: https://www.twitch.tv/${body.data[0].login}`);
         } else if (action === "subscribe") {
+            if (actualUserPermissions.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, actualUserPermissions));
 
+            return message.reply("This command is still being developed.");
         } else if (action === "unsubscribe") {
-            
+            if (actualUserPermissions.level < 2) return message.error(this.client.functions.error("perms", { permission: 2 }, actualUserPermissions));
+
+            return message.reply("This command is still being developed.");
         }
     }
 };
