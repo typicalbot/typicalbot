@@ -90,10 +90,9 @@ class IPC extends express {
 
         this.post("/webhook/twitch", async (req, res, next) => {
             const { data } = req.body;
-            console.log("X");
             
             if (!data.length) return;
-            console.log("Y");
+            console.log(data[0]);
 
             this.handler.broadcast("twitch_event", data[0]);
         });
