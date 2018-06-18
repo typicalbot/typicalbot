@@ -12,7 +12,7 @@ class Message extends Event {
         if (message.author.bot) return;
 
         if (message.channel.type === "dm") return this.dmExecute(message);
-        
+
         if (!message.guild.available || !message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
 
         const settings = message.guild.settings = await message.guild.fetchSettings();
@@ -61,7 +61,8 @@ class Message extends Event {
         if (settings.embed && command.embedExecute && message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS"))
             return command.embedExecute(message, param, userPermissions);
 
-        await command.execute(message, param, userPermissions).catch(err => message.error(err));
+        command.execute(message, param, userPermissions)
+        //await command.execute(message, param, userPermissions).catch(err => message.error(err));
     }
 
     async dmExecute(message) {
@@ -71,7 +72,8 @@ class Message extends Event {
 
         if (!command || !command.dm || command.permission > Constants.Permissions.Levels.SERVER_MEMBER) return;
 
-        await command.execute(message).catch(err => message.error(err));
+        command.execute(message)
+        //await command.execute(message).catch(err => message.error(err));
     }
 }
 

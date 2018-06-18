@@ -22,7 +22,7 @@ class ProcessHandler {
         } else if (event === "fetchProperty") {
             this.broadcast("globalrequest", {
                 id: data.id,
-                response: eval(`this.${data.property}`)
+                response: eval(`this.client.${data.property}`)
             });
         } else if (event === "reload") {
             this.client.reload(data);
