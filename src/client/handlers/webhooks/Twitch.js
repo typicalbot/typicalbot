@@ -6,9 +6,9 @@ class TwitchWebhookHandler {
         Object.defineProperty(this, "client", { value: client });
     }
 
-    async lookup(login) {
+    async lookup(login, id) {
         const { body } = await snekfetch
-            .get(`https://api.twitch.tv/helix/users?login=${login}`)
+            .get(`https://api.twitch.tv/helix/users?${id ? "id" : "login"}=${login}`)
             .set("Client-ID", config.apis.twitch.client_id)
             .catch(() => null);
 
@@ -107,7 +107,7 @@ class TwitchWebhookHandler {
 
                 if (!guild.channels.has(settings.webhooks.twitch.id)) return;
 
-                const twitchUser = await this.lookup(data.user_id);
+                const twitchUser = await this.lookup(data.user_id, true);
 
                 guild.channels.get(settings.webhooks.twitch.id).send(
                     settings.webhooks.twitch.message ?
