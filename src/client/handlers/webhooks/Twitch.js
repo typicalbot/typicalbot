@@ -91,31 +91,23 @@ class TwitchWebhookHandler {
     }
 
     async handle(data) {
-        console.log(data);
         if (!data) return;
-        console.log("B");
 
         const guilds = await this.fetchSubscriptions(data.user_id);
-        console.log("C");
 
         if (!guilds) return;
-        console.log("D");
 
         guilds
             .filter(g => this.client.guilds.has(g))
             .forEach(async g => {
-                console.log("E");
                 const guild = this.client.guilds.get(g);
                 const settings = await guild.fetchSettings();
-                console.log("F");
 
                 if (!settings.webhooks.twitch || !settings.webhooks.twitch.id) return;
-                console.log("G");
 
                 if (!guild.channels.has(settings.webhooks.twitch.id)) return;
-                console.log("H");
 
-                const twitchUser = this.lookup(data.user_id);
+                const twitchUser = await this.lookup(data.user_id);
 
                 guild.channels.get(settings.webhooks.twitch.id).send(
                     settings.webhooks.twitch.message ?
