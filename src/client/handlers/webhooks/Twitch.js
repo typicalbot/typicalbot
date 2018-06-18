@@ -23,7 +23,7 @@ class TwitchWebhookHandler {
             .set("Content-Type", "application/json")
             .set("Client-ID", config.apis.twitch.client_id)
             .send({
-                "hub.callback": `http://webhook.typicalbot.com:${this.client.build === "stable" ? 5000 : this.client.build === "beta" ? 5001 : this.client.build === "development" ? 5002 : 5000}/webhook`,
+                "hub.callback": `http://webhook.typicalbot.com:${this.client.build === "stable" ? 5000 : this.client.build === "beta" ? 5001 : this.client.build === "development" ? 5002 : 5000}/webhook/twitch`,
                 "hub.topic": `https://api.twitch.tv/helix/streams?user_id=${id}`,
                 "hub.mode": "subscribe",
                 "hub.lease_seconds": 864000
@@ -37,7 +37,7 @@ class TwitchWebhookHandler {
             .set("Content-Type", "application/json")
             .set("Client-ID", config.apis.twitch.client_id)
             .send({
-                "hub.callback": `http://webhook.typicalbot.com:${this.client.build === "stable" ? 5000 : this.client.build === "beta" ? 5001 : this.client.build === "development" ? 5002 : 5000}/webhook`,
+                "hub.callback": `http://webhook.typicalbot.com:${this.client.build === "stable" ? 5000 : this.client.build === "beta" ? 5001 : this.client.build === "development" ? 5002 : 5000}/webhook/twitch`,
                 "hub.topic": `https://api.twitch.tv/helix/streams?user_id=${id}`,
                 "hub.mode": "unsubscribe",
                 "hub.lease_seconds": 0
