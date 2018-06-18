@@ -17,9 +17,7 @@ class ProcessHandler {
     async message(message) {
         const { event, data } = message;
 
-        if (event === "stats") {
-            this.client.shards = data;
-        } else if (event === "fetchProperty") {
+        if (event === "fetchProperty") {
             this.transmit("globalrequest", {
                 id: data.id,
                 response: eval(`this.client.${data.property}`)
@@ -90,21 +88,6 @@ class ProcessHandler {
 
     transmit(event, data = {}) {
         process.send({ event, data });
-    }
-
-    transmitStat(stat) {
-        this.transmit("stats", { [stat]: this.client[stat].size });
-    }
-
-    transmitStats() {
-        this.transmit("stats", {
-            guilds: this.client.guilds.size,
-            channels: this.client.channels.size,
-            voiceConnections: this.client.voiceConnections.size,
-            users: this.client.users.size,
-            ram_used: Math.round(process.memoryUsage().heapUsed / 1048576),
-            ram_total: Math.round(process.memoryUsage().heapTotal / 1048576)
-        });
     }
 
     fetchShardProperties(property) {

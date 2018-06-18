@@ -12,18 +12,25 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    async execute(message, parameters, permissionLevel) {
+        const guilds = await this.client.handlers.process.fetchShardProperties("guilds.size");
+        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voiceConnections.size");
+        const channels = await this.client.handlers.process.fetchShardProperties("channels.size");
+        const users = await this.client.handlers.process.fetchShardProperties("users.size");
+        const usedRAM = await this.client.handlers.process.fetchShardProperties("usedRAM");
+        const totalRAM = await this.client.handlers.process.fetchShardProperties("totalRAM");
+
         message.send(
             `**__TypicalBot's Statistics:__**\n`
             + `\`\`\`autohotkey\n`
             + `=> Uptime            : ${this.client.functions.convertTime(this.client.uptime)}\n`
-            + `=> Servers           : ${this.client.shards.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})\n`
-            + `=> Voice Connections : ${this.client.shards.voiceConnections.toLocaleString()}\n`
-            + `=> Channels          : ${this.client.shards.channels.toLocaleString()}\n`
-            + `=> Users             : ${this.client.shards.users.toLocaleString()}\n`
+            + `=> Servers           : ${guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})\n`
+            + `=> Voice Connections : ${voiceConnections.toLocaleString()}\n`
+            + `=> Channels          : ${channels.toLocaleString()}\n`
+            + `=> Users             : ${users.toLocaleString()}\n`
             + `=> CPU               : ${Math.round(loadavg()[0] * 10000) / 100}%\n`
-            + `=> RAM (Used)        : ${this.client.shards.ram_used}MB\n`
-            + `=> RAM (Total)       : ${this.client.shards.ram_total}MB\n`
+            + `=> RAM (Used)        : ${usedRAM}MB\n`
+            + `=> RAM (Total)       : ${totalRAM}MB\n`
             + `=> Library           : discord.js\n`
             + `=> Created By        : HyperCoder#2975\n\n`
             + `    This Shard:\n`
@@ -39,19 +46,26 @@ module.exports = class extends Command {
         );
     }
 
-    embedExecute(message, parameters, permissionLevel) {
+    async embedExecute(message, parameters, permissionLevel) {
+        const guilds = await this.client.handlers.process.fetchShardProperties("guilds.size");
+        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voiceConnections.size");
+        const channels = await this.client.handlers.process.fetchShardProperties("channels.size");
+        const users = await this.client.handlers.process.fetchShardProperties("users.size");
+        const usedRAM = await this.client.handlers.process.fetchShardProperties("usedRAM");
+        const totalRAM = await this.client.handlers.process.fetchShardProperties("totalRAM");
+
         message.buildEmbed()
             .setColor(0x00adff)
             .setThumbnail(Constants.Links.ICON)
             .setTitle("TypicalBot Statistics")
             .addField("» Uptime", this.client.functions.convertTime(this.client.uptime), true)
-            .addField("» Servers", `${this.client.shards.guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})`, true)
-            .addField("» Voice Connections", `${this.client.shards.voiceConnections.toLocaleString()}`, true)
-            .addField("» Channels", `${this.client.shards.channels.toLocaleString()}`, true)
-            .addField("» Users", `${this.client.shards.users.toLocaleString()}`, true)
+            .addField("» Servers", `${guilds.toLocaleString()} (${this.client.shardCount} Shard${this.client.shardCount > 1 ? "s" : ""})`, true)
+            .addField("» Voice Connections", `${voiceConnections.toLocaleString()}`, true)
+            .addField("» Channels", `${channels.toLocaleString()}`, true)
+            .addField("» Users", `${users.toLocaleString()}`, true)
             .addField("» CPU Usage", `${Math.round(loadavg()[0] * 10000) / 100}%`, true)
-            .addField("» RAM (Used)", `${this.client.shards.ram_used}MB`, true)
-            .addField("» RAM (Total)", `${this.client.shards.ram_total}MB`, true)
+            .addField("» RAM (Used)", `${usedRAM}MB`, true)
+            .addField("» RAM (Total)", `${totalRAM}MB`, true)
             .addField("» Library", "discord.js", true)
             .addField("» Created By", "HyperCoder#2975", true)
             .addBlankField()

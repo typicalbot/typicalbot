@@ -57,9 +57,15 @@ class Shard extends Client {
         this.caches.softbans = new Collection();
         this.caches.invites = new Collection();
 
-        this.shards = {};
-
         this.login(this.config.token);
+    }
+
+    get usedRAM() {
+        return Math.round(process.memoryUsage().heapUsed / 1048576);
+    }
+
+    get totalRAM() {
+        return Math.round(process.memoryUsage().heapTotal / 1048576);
     }
 
     reload(arg) {

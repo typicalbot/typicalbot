@@ -8,14 +8,8 @@ class Shard extends fork {
 
         this.id = shardID;
 
-        this.stats = {};
-
         this.on("message", async ({ event, data }) => {
-            if (event === "stats") {
-                Object.keys(data).map(key => this.stats[key] = data[key]);
-
-                this.handler.broadcast("stats", this.handler.stats);
-            } else if (event === "fetchProperty") {
+            if (event === "fetchProperty") {
                 this.send({
                     event: "returnrequest",
                     data: {

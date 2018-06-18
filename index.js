@@ -61,17 +61,6 @@ class ShardHandler extends Collection {
         });
     }
 
-    get stats() {
-        return this.reduce((accumulator, shard) => {
-            for (const [key, stat] of Object.entries(shard.stats))
-                key in accumulator ?
-                    accumulator[key] += stat :
-                    accumulator[key] = stat;
-
-            return accumulator;
-        }, {});
-    }
-
     broadcast(event, data) {
         this.forEach(shard => shard.send({ event, data }));
     }

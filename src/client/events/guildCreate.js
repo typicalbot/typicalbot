@@ -9,8 +9,6 @@ class GuildCreate extends Event {
         if (!guild.available) return;
 
         if (this.client.build === "stable") this.client.functions.postStats("a");
-
-        this.client.handlers.process.transmitStats();
     }
 }
 
