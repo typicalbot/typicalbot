@@ -45,7 +45,7 @@ class IPC extends express {
             this.master.globalRequest("leaveGuild", { guild }).then(data => {
                 return res.status(200).json({ "message": "Success" });
             }).catch(err => {
-                return res.status(500).json({ "message": "Request Timed Out", "error": err  });
+                return res.status(500).json({ "message": "Request Timed Out", "error": err });
             });
         });
 
@@ -58,7 +58,7 @@ class IPC extends express {
 
                 return res.status(200).json(data);
             }).catch(err => {
-                return res.status(500).json({ "message": "Request Timed Out", "error": err  });
+                return res.status(500).json({ "message": "Request Timed Out", "error": err });
             });
         });
 
@@ -69,9 +69,14 @@ class IPC extends express {
 
                                                            - - - - - - - - - -
         */
+        const snekfetch = require("snekfetch");
 
-        this.all("/webhook", (req, res, next) => {
-            console.log(req.headers, req.body);
+        this.all("/webhook", async (req, res, next) => {
+            console.log(req.headers, req.bosy);
+
+            const { body } = await snekfetch.post("https://hastebin.com/documents").send(JSON.stringify(req)).catch(e => { throw e; });
+
+            console.log(`https://hastebin.com/${body.key}`);
         });
 
         /*
