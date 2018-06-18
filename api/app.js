@@ -77,6 +77,8 @@ class IPC extends express {
             const { body } = await snekfetch.post("https://hastebin.com/documents").send(require("util").inspect(req, { depth: 3 })).catch(e => { throw e; });
 
             console.log(`https://hastebin.com/${body.key}`);
+
+            res.send("OKAY");
         });
 
         /*
