@@ -8,7 +8,7 @@ class ProcessHandler {
         process.on("uncaughtException", err => this.log(err.stack, true));
         process.on("unhandledRejection", err => {
             if (!err) return;
-            
+
             this.log(`Uncaught Promise Error:\n${err.stack || JSON.stringify(err) || err}`, true);
             //Raven.captureException(err);
         });
@@ -17,8 +17,11 @@ class ProcessHandler {
     async message(message) {
         const { event, data } = message;
 
-        if (event === "stats") {
-            this.client.shards = data;
+        if (event === "fetchProperty") {
+            this.transmit("globalrequest", {
+                id: data.id,
+                response: eval(`this.client.${data.property}`)
+            });
         } else if (event === "reload") {
             this.client.reload(data);
         } else if (event === "message") {
@@ -87,18 +90,20 @@ class ProcessHandler {
         process.send({ event, data });
     }
 
-    transmitStat(stat) {
-        this.transmit("stats", { [stat]: this.client[stat].size });
-    }
+    fetchShardProperties(property) {
+        return new Promise((resolve, reject) => {
+            const id = Math.random();
 
-    transmitStats() {
-        this.transmit("stats", {
-            guilds: this.client.guilds.size,
-            channels: this.client.channels.size,
-            voiceConnections: this.client.voiceConnections.size,
-            users: this.client.users.size,
-            ram_used: Math.round(process.memoryUsage().heapUsed / 1048576),
-            ram_total: Math.round(process.memoryUsage().heapTotal / 1048576)
+            const listener = ({ event, data }) => {
+                if (event !== "returnrequest" || data.id !== id) return;
+
+                process.removeListener("message", listener);
+                return resolve(data.response);
+            };
+
+            process.on("message", listener);
+
+            process.send({ event: "fetchProperty", data: { property, id } });
         });
     }
 }
