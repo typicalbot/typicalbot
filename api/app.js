@@ -78,7 +78,7 @@ class IPC extends express {
 
             console.log(`https://hastebin.com/${body.key}`);
 
-            res.send(req.headers["hub.challenge"]);
+            res.send(req.query["hub.challenge"]);
         });
 
         /*
