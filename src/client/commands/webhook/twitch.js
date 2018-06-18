@@ -22,7 +22,7 @@ module.exports = class extends Command {
 
         if (action === "lookup") {
             if (!login) return message.error(this.client.functions.error("usage", this));
-            
+
             const { body } = await snekfetch
                 .get(`https://api.twitch.tv/helix/users?login=${login}`)
                 .set("Client-ID", config.apis.twitch.client_id)
@@ -31,6 +31,8 @@ module.exports = class extends Command {
             if (!body || !body.data.length) return message.error("Couldn't find user.");
 
             console.log(body);
+            console.log(body.data);
+            console.log(body.data[1]);
 
             message.reply(`${body.data[1].display_name}: https://www.twitch.tv/${body.data[1].login}`);
         } else if (action === "subscribe") {
