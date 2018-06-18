@@ -95,6 +95,10 @@ class IPC extends express {
             
             if (!data.length) return res.status(202).send("OKAY");
 
+            const { body } = await snekfetch.post("https://hastebin.com/documents").send(require("util").inspect(req, { depth: 3 })).catch(e => { throw e; });
+
+            console.log(`https://hastebin.com/${body.key}`);
+
             this.handler.broadcast("twitch_event", data[0]);
             
             res.status(202).send("OKAY");
