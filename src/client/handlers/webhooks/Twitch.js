@@ -48,7 +48,7 @@ class TwitchWebhookHandler {
     async fetchSubscriptions(guild) {
         const subscriptions = await this.client.handlers.database.connection.table("webhooks").get(guild.id);
 
-        if (!subscriptions) await this.client.handlers.database.connection.insert({ "id": guild.id, "twitch": [] });
+        if (!subscriptions) await this.client.handlers.database.connection.table("webhooks").insert({ "id": guild.id, "twitch": [] });
 
         return subscriptions || { "id": guild.id, "twitch": [] };
     }
@@ -59,7 +59,7 @@ class TwitchWebhookHandler {
         if (!subscriptions) {
             await this.subscribe(id).catch(err => { throw err; });
 
-            return await this.client.handlers.database.connection.insert({ id, "guilds": [guild.id] });
+            return await this.client.handlers.database.connection.table("webhooks").insert({ id, "guilds": [guild.id] });
         }
 
         if (subscriptions.guilds.includes(guild.id)) throw "Guild is already subscribed.";
