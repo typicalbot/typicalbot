@@ -14,7 +14,7 @@ module.exports = class extends Command {
     async execute(message, parameters, permissionLevel) {
         const connection = message.guild.voiceConnection;
 
-        if (!connection || connection.dispatcher) return message.send(`Nothing is currently streaming.`);
+        if (!connection || connection.guildStream.dispatcher) return message.send(`Nothing is currently streaming.`);
 
         const match = /(\d+)/i.exec(message.content);
 
