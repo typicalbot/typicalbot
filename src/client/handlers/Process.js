@@ -14,14 +14,14 @@ class ProcessHandler {
         });
     }
 
-    async message(message) {
-        const { event, data } = message;
-
+    async message({ event, data }) {
         if (event === "fetchProperty") {
             this.transmit("globalrequest", {
                 id: data.id,
                 response: eval(`this.client.${data.property}`)
             });
+        } else if (event === "twitch_event") {
+            //this.client.handlers.webhooks.twitch.handle(data);
         } else if (event === "reload") {
             this.client.reload(data);
         } else if (event === "message") {

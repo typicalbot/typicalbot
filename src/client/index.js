@@ -12,6 +12,8 @@ const AutoModerationHandler = require("./handlers/AutoModeration");
 const ModerationLogHandler = require("./handlers/ModerationLog");
 const MusicHandler = require("./handlers/Music");
 
+//const TwitchWebhookHandler = require("./handlers/webhooks/Twitch");
+
 const SettingHandler = require("./handlers/Settings");
 const FunctionHandler = require("./handlers/Functions");
 const CommandHandler = require("./handlers/Commands");
@@ -41,6 +43,9 @@ class Shard extends Client {
         this.handlers.automoderation = new AutoModerationHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);
         this.handlers.music = new MusicHandler(this);
+        
+        //this.handlers.webhooks = {};
+        //this.handlers.webhooks.twitch = new TwitchWebhookHandler(this);
 
         this.settings = new SettingHandler(this);
         this.functions = new FunctionHandler(this);

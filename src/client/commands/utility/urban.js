@@ -10,7 +10,7 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        if (!message.channel.nsfw) return message.error("This command can only be used in NSFW channels.");
+        if (!message.channel.nsfw) return message.error("This command can only be used in NSFW channels."); 
 
         const args = /(.*)/gi.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
@@ -30,7 +30,7 @@ module.exports = class extends Command {
     }
 
     embedExecute(message, parameters, permissionLevel) {
-        if (!message.channel.nsfw) return message.error("This command can only be used in NSFW channels.");
+        if (!message.channel.nsfw) return message.error("This command can only be used in NSFW channels."); 
         
         const args = /urban (.*)/gi.exec(message.content);
         if (!args) return message.error(this.client.functions.error("usage", this));
