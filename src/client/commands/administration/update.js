@@ -8,7 +8,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "A command to update and restart the bot.",
             usage: "update ['-r'|'--restart']",
-            permission: Constants.Permissions.Levels.TYPICALBOT_CREATOR,
+            permission: Constants.Permissions.Levels.TYPICALBOT_ADMINISTRATOR,
             mode: Constants.Modes.STRICT
         });
     }
