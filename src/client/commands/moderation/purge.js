@@ -23,7 +23,7 @@ module.exports = class extends Command {
         const reason = args[7];
 
         let messageCount = args[6]; if (messageCount > 100) messageCount = 100;
-        if (messageCount < 1) return message.error("Please provide a number of messages to delete from 1 to 100.");
+        if (messageCount < 2) return message.error("Please provide a number of messages to delete from 2 to 100.");
 
         let messages = await message.channel.messages.fetch({ limit: 100, before: message.id });
 
