@@ -24,6 +24,7 @@ module.exports = class extends Command {
             + `\`\`\`\n`
             + `Command        : ${command.name}\n`
             + `Aliases        : ${command.aliases.length ? command.aliases.join(", ") : "None"}\n`
+            + `Permission     : ${command.permission}`
             + `Description    : ${command.description}\n`
             + `Usage          : ${command.usage}`
             + `\n\`\`\``
@@ -55,6 +56,7 @@ module.exports = class extends Command {
             .setDescription(`• [[Parameter]]() - Optional Parameter\n• [<Parameter>]() - Required Parameter`)
             .addField("» Command", command.name, true)
             .addField("» Aliases", command.aliases.length ? command.aliases.join(", ") : "None")
+            .addField("» Permission", command.permission)
             .addField("» Description", command.description)
             .addField("» Usage", command.usage)
             .setFooter("TypicalBot", Constants.Links.ICON)
