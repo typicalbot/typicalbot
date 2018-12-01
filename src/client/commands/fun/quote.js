@@ -10,11 +10,12 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        request.get("https://typicalbot.com/api/quotes/")
+        // https://typicalbot.com/api/quotes/
+        request.get("https://talaikis.com/api/quotes/random/")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");
 
-                return message.send(JSON.parse(res.text).response);
+                return message.send(`*"${JSON.parse(res.text).quote}"* - ${JSON.parse(res.text).author}`);
             });
     }
 };
