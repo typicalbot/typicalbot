@@ -12,7 +12,7 @@ module.exports = class extends Command {
 
     execute(message, parameters, permissionLevel) {
         // https://typicalbot.com/api/yomomma/
-        request.get("https://api.yomamma.info/")
+        request.get("https://api.yomomma.info/")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");
 
