@@ -32,7 +32,7 @@ module.exports = class extends Command {
             + `=> RAM (Used)        : ${usedRAM}MB\n`
             + `=> RAM (Total)       : ${totalRAM}MB\n`
             + `=> Library           : discord.js\n`
-            + `=> Created By        : HyperCoder#2975\n\n`
+            + `=> Created By        : HyperCoder#2975 & Nick#4490\n\n`
             + `    This Shard:\n`
             + `=> Shard             : ${this.client.shardNumber} / ${this.client.shardCount}\n`
             + `=> Servers           : ${this.client.guilds.size.toLocaleString()}\n`
@@ -67,7 +67,7 @@ module.exports = class extends Command {
             .addField("» RAM (Used)", `${usedRAM}MB`, true)
             .addField("» RAM (Total)", `${totalRAM}MB`, true)
             .addField("» Library", "discord.js", true)
-            .addField("» Created By", "HyperCoder#2975", true)
+            .addField("» Created By", "HyperCoder#2975\nNick#4490", true)
             .addBlankField()
             .addField("» Shard", `${this.client.shardNumber} / ${this.client.shardCount}`, true)
             .addField("» Servers", `${this.client.guilds.size.toLocaleString()}`, true)
