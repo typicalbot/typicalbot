@@ -30,7 +30,7 @@ module.exports = class extends Command {
             );
         } else if (subcommand === "list") {
             const content = this.client.functions.pagify(
-                message.guild.roles.filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`), 1
+                message.guild.roles.filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => `${this.client.functions.lengthen(1, r.name, 30)} : ${r.id}`), args[2] || 1
             );
 
             message.send(`**__${message.guild.name}'s Roles:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
