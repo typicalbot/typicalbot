@@ -15,7 +15,7 @@ module.exports = class extends Command {
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");
 
-                return message.send(res.body.data[0].message);
+                return message.send(res.body.message);
             });
     }
 
@@ -24,7 +24,7 @@ module.exports = class extends Command {
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");
 
-                return message.buildEmbed().setColor(0x00adff).setImage(res.body.data[0].message).send();
+                return message.buildEmbed().setColor(0x00adff).setImage(res.body.message).send();
             });
     }
 };
