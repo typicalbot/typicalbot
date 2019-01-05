@@ -11,20 +11,20 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        request.get("https://api.thedogapi.co.uk/v2/dog.php?limit=1")
+        request.get("https://dog.ceo/api/breeds/image/random")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");
 
-                return message.send(res.body.data[0].url);
+                return message.send(res.body.data[0].message);
             });
     }
 
     embedExecute(message, parameters, permissionLevel) {
-        request.get("https://api.thedogapi.co.uk/v2/dog.php?limit=1")
+        request.get("https://dog.ceo/api/breeds/image/random")
             .end((err, res) => {
                 if (err) return message.error("An error occured making that request.");
 
-                return message.buildEmbed().setColor(0x00adff).setImage(res.body.data[0].url).send();
+                return message.buildEmbed().setColor(0x00adff).setImage(res.body.data[0].message).send();
             });
     }
 };
