@@ -18,7 +18,7 @@ module.exports = class extends Command {
         const embed = args[1], content = args[2];
 
         const toChannel = message.guild.channels.get(message.guild.settings.announcements.id);
-        if (!toChannel) return message.error(`There is not an announcements channel set up.`);
+        if (!toChannel) return message.error("To announce, please set up an announcement channel by typing: `$set edit announcements #channel-name`");
 
         const mentionRole = message.guild.roles.get(message.guild.settings.announcements.mention);
 
