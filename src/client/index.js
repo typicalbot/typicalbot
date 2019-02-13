@@ -61,6 +61,8 @@ class Shard extends Client {
         this.caches.unbans = new Collection();
         this.caches.softbans = new Collection();
         this.caches.invites = new Collection();
+        
+        this.commandCount = 0;
 
         this.login(this.config.token);
     }
