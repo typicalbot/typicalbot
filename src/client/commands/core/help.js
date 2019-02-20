@@ -24,7 +24,7 @@ module.exports = class extends Command {
             + `\`\`\`\n`
             + `Command        : ${command.name}\n`
             + `Aliases        : ${command.aliases.length ? command.aliases.join(", ") : "None"}\n`
-            + `Permission     : ${command.permission}`
+            + `Permission     : ${command.permission}\n`
             + `Description    : ${command.description}\n`
             + `Usage          : ${command.usage}`
             + `\n\`\`\``
