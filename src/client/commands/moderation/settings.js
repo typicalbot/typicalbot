@@ -540,7 +540,7 @@ module.exports = class extends Command {
                     } else if (value === "default" || value === "enable") {
                         this.client.settings.update(message.guild.id, { logs: { nickname: "--enabled" } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "embed") {
-                        message.error("This log option does not support embeds.");
+                        this.client.settings.update(message.guild.id, { logs: { nickname: "--embed" } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         this.client.settings.update(message.guild.id, { logs: { nickname: value } }).then(() => message.success("Setting successfully updated."));
                     }
