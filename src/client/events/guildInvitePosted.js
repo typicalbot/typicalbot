@@ -50,11 +50,21 @@ class GuildInvitePosted extends Event {
         const channel = message.guild.channels.get(settings.logs.id);
         if (!channel) return;
 
-        channel.send(
-            settings.logs.invite === "--enabled" ?
-                `**${message.author.username}#${message.author.discriminator}** sent an invite in <#${message.channel.id}>.` :
-                this.client.functions.formatMessage("logs-invite", message.guild, message.author, settings.logs.invite, { channel: message.channel })
-        );
+        if (settings.logs.invite === "--embed") {
+            channel.buildEmbed()
+                .setColor(0x00FF00)
+                .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
+                .setFooter(`Invite sent in <#${message.channel.id}>.`)
+                .setTimestamp()
+                .send()
+                .catch(() => { return; });
+        } else {
+            channel.send(
+                settings.logs.invite === "--enabled" ?
+                    `**${message.author.username}#${message.author.discriminator}** sent an invite in <#${message.channel.id}>.` :
+                    this.client.functions.formatMessage("logs-invite", message.guild, message.author, settings.logs.invite, { channel: message.channel })
+            );
+        }
     }
 }
 
