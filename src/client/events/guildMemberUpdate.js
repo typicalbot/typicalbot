@@ -24,11 +24,21 @@ class GuildMemberUpdate extends Event {
 
         if (settings.auto.nickname && nickname === this.client.functions.formatMessage("autonick", guild, user, settings.auto.nickname)) return;
 
-        channel.send(
-            settings.logs.nickname !== "--enabled" ?
-                this.client.functions.formatMessage("logs-nick", guild, user, settings.logs.nickname, { oldMember }) :
-                `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
-        ).catch(() => { return; });
+        if (settings.logs.nickname === "--embed") {
+            channel.buildEmbed()
+                .setColor(0x00FF00)
+                .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
+                .setFooter("Changed nickname to ${member.nickname || user.nickname}")
+                .setTimestamp()
+                .send()
+                .catch(() => { return; });
+        } else {
+            channel.send(
+                settings.logs.nickname !== "--enabled" ?
+                    this.client.functions.formatMessage("logs-nick", guild, user, settings.logs.nickname, { oldMember }) :
+                    `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
+            ).catch(() => { return; });
+        }
     }
 }
 
