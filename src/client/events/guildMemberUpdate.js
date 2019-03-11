@@ -28,7 +28,7 @@ class GuildMemberUpdate extends Event {
             channel.buildEmbed()
                 .setColor(0x00FF00)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
-                .setFooter("Changed nickname to ${member.nickname || user.nickname}")
+                .setFooter(`Changed nickname to ${member.nickname || user.nickname}`)
                 .setTimestamp()
                 .send()
                 .catch(() => { return; });
