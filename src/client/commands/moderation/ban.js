@@ -5,7 +5,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Ban a member from the server.",
-            usage: "ban <@user> [time:xd(ays) xh(ours) xm(inutes) xs(seconds)] [purge-days] [reason]",
+            usage: "ban <@user> [time:xd(ays) xh(ours) xm(inutes) xs(econds)] [purge-days] [reason]",
             permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
