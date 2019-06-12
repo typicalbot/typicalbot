@@ -37,6 +37,7 @@ class Stream {
 
         this.dispatcher.on("error", err => {
             video.requester.send(`An error occured playing the video. ${this.queue.length ? "Attempting to play the next video in the queue." : "Leaving the channel."}`);
+            console.log(err);
             if (this.queue.length) setTimeout(() => this.play(this.queue.splice(0, 1)[0]), 1000);
         });
 
