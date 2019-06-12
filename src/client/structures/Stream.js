@@ -65,6 +65,7 @@ class Stream {
 
         this.dispatcher.on("error", err => {
             video.requester.send(`An error occured while trying to play the livestream. Leaving the channel.`);
+            console.log(err);
             this.end();
         });
 
