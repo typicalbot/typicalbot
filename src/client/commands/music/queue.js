@@ -6,6 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Displays a list of videos queued to stream.",
             usage: "queue",
+            aliases: ["q"],
             mode: Constants.Modes.LITE
         });
     }
