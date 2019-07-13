@@ -13,13 +13,25 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const args = /(?:<#(\d+)>\s+)?((?:.|[\r\n])+)?/i.exec(parameters);
+        const args = /(?:(-j(?:son)?)\s+)?(?:<#(\d+)>\s+)?((?:.|[\r\n])+)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const channel = message.guild.channels.get(args[1]) || message.channel;
-        const content = args[2];
+        const json = !!args[1];
+        const channel = message.guild.channels.get(args[2]) || message.channel;
+        const content = args[3];
 
-        channel.send(content, { disableEveryone: false }).catch(err => message.error("I am missing the SEND_MESSAGES permission in the channel requested."));
+        if (json) {
+            try {
+                const jsonParse = JSON.parse(content);
+
+                channel.send("", jsonParse).catch(err => message.error("I am missing the SEND_MESSAGES permission in the channel requested."));
+            } catch (err) {
+                message.error("Invalid JSON was provided.");
+            }
+        } else {
+            channel.send(content, { disableEveryone: false }).catch(err => message.error("I am missing the SEND_MESSAGES permission in the channel requested."));
+        }
+        
 
         if (message.deletable) message.delete({ timeout: 500 });
     }
