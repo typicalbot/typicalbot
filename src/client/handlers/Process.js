@@ -82,12 +82,20 @@ class ProcessHandler {
         } else if (event === "embed") {
             const { apiKey, channel, json } = data;
 
+            console.log(apiKey, channel, json);
+
             const guild = Buffer.from(apiKey.split(".")[0], "base64").toString("utf-8");
+
+            console.log(guild);
 
             if (!this.client.guilds.has(guild)) return;
 
+            console.log(guild + " check");
+
             const settings = await this.client.settings.fetch(guild);
             const trueApiKey = settings.apikey;
+
+            console.log(trueApiKey);
 
             if (apiKey !== trueApiKey) return this.client.handlers.process.transmit("masterrequest", {
                 id: data.id,
@@ -96,12 +104,16 @@ class ProcessHandler {
 
             const trueGuild = this.client.guilds.get(guild);
 
+            console.log(trueGuild.name);
+
             if (!trueGuild.channels.has(channel)) return this.client.handlers.process.transmit("masterrequest", {
                 id: data.id,
                 success: false
             });
 
             const trueChannel = trueGuild.channels.get(channel);
+
+            console.log(trueChannel.name);
 
             trueChannel.send("", json).then(() => {
                 if (!trueGuild.channels.has(channel)) return this.client.handlers.process.transmit("masterrequest", {
