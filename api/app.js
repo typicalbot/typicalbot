@@ -17,14 +17,6 @@ class IPC extends express {
             return res.status(403).json({ "message": "Authorization Required" });
         }
 
-        /*
-                                                           - - - - - - - - - -
-
-                                                                ENDPOINTS
-
-                                                           - - - - - - - - - -
-        */
-
         this.get("/stats", isAuthenticated.bind(this), (req, res, next) => {
             res.json(handler.stats);
         });
@@ -62,47 +54,19 @@ class IPC extends express {
             });
         });
 
-        /*
-                                                           - - - - - - - - - -
+        this.post("/channels/:channel/embed", (req, res, next) => {
+            const apiKey = req.get("Authorization");
+            const channel = req.params.channel;
+            const json = req.body;
 
-                                                                WEBHOOK STUFF
+            this.handler.globalRequest("embed", { apiKey, channel, json }).then(data => {
+                if (!data.success) return res.redirect("/access-denied");
 
-                                                           - - - - - - - - - -
-        */
-        const snekfetch = require("snekfetch");
-
-        this.all("/webhook", async (req, res, next) => {
-            console.log(req.headers, req.method);
-
-            const { body } = await snekfetch.post("https://hastebin.com/documents").send(require("util").inspect(req, { depth: 3 })).catch(e => { throw e; });
-
-            console.log(`https://hastebin.com/${body.key}`);
-
-            console.log(req.query["hub.challenge"]);
-
-            res.send(req.query["hub.challenge"]);
+                return res.status(200).json(data);
+            }).catch(err => {
+                return res.status(500).json({ "message": "Request Timed Out", "error": err });
+            });
         });
-
-        this.get("/webhook/twitch", async (req, res, next) => {
-            if (req.query["hub.challenge"]) return res.send(req.query["hub.challenge"]);
-            res.send("UNKNOWN REQUEST");
-        });
-
-        this.post("/webhook/twitch", async (req, res, next) => {
-            const { data } = req.body;
-            
-            if (!data.length) return;
-
-            this.handler.broadcast("twitch-streaming", data[0]);
-        });
-
-        /*
-                                                           - - - - - - - - - -
-
-                                                                INIT SERVER
-
-                                                           - - - - - - - - - -
-        */
 
         this.listen(port, () => console.log(`Express Server Created | Listening on Port :${port}`));
     }

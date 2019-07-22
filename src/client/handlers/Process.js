@@ -79,6 +79,41 @@ class ProcessHandler {
             this.client.handlers.process.transmit("masterrequest", {
                 id: data.id,
             });
+        } else if (event === "embed") {
+            const { apiKey, channel, json } = data;
+
+            const guild = Buffer.from(apiKey.split(".")[0], "base64").toString("utf-8");
+
+            if (!this.client.guilds.has(guild)) return;
+
+            const settings = await this.client.settings.fetch(guild);
+            const trueApiKey = settings.apikey;
+
+            if (apiKey !== trueApiKey) return this.client.handlers.process.transmit("masterrequest", {
+                id: data.id,
+                success: false
+            });
+
+            const trueGuild = this.client.guilds.get(guild);
+
+            if (!trueGuild.channels.has(channel)) return this.client.handlers.process.transmit("masterrequest", {
+                id: data.id,
+                success: false
+            });
+
+            const trueChannel = trueGuild.channels.get(channel);
+
+            trueChannel.send("", json).then(() => {
+                if (!trueGuild.channels.has(channel)) return this.client.handlers.process.transmit("masterrequest", {
+                    id: data.id,
+                    success: true
+                });
+            }).catch(err => {
+                this.client.handlers.process.transmit("masterrequest", {
+                    id: data.id,
+                    success: false
+                });
+            });
         }
     }
 
