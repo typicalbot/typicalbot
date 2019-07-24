@@ -1,5 +1,5 @@
 const { Collection } = require("discord.js");
-const path = require("path");
+const { join, parse } = require("path");
 const klaw = require("klaw");
 
 class TaskHandler extends Collection {
@@ -10,11 +10,11 @@ class TaskHandler extends Collection {
 
         this.taskTypes = new Collection();
 
-        this.init();
+        this.load();
     }
 
     init() {
-        klaw(path.join(__dirname, "..", "tasks")).on("data", item => {
+        /*klaw(path.join(__dirname, "..", "tasks")).on("data", item => {
             const file = path.parse(item.path);
             if (!file.ext || file.ext !== ".js") return;
 
@@ -24,6 +24,34 @@ class TaskHandler extends Collection {
         }).on("end", () => {
             this.taskInit();
             this.startInterval();
+        });*/
+    }
+
+    async load() {
+        const path = join(__dirname, "..", "tasks");
+        const start = Date.now();
+
+        klaw(path).on("data", item => {
+            const file = parse(item.path);
+
+            if (!file.ext || file.ext !== ".js") return; 
+            
+            const req = require(join(file.dir, file.base));
+
+            this.taskTypes.set(file.name, req);
+        }).on("end", async () => {
+            console.log(`Loaded ${this.size} Tasks in ${Date.now() - start}ms`);
+
+            const list = await this.client.handlers.database.get("tasks");
+
+            list.forEach(task => {
+                const taskType = this.taskTypes.get(task.type);
+
+                this.set(
+                    task.id,
+                    new taskType(this.client, this, task)
+                );
+            });
         });
     }
 
