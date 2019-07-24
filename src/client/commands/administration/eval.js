@@ -7,7 +7,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "An eval command for the creator.",
             usage: "eval <code>",
-            permission: Constants.Permissions.Levels.TYPICALBOT_ADMINISTRATOR,
+            permission: Constants.Permissions.Levels.TYPICALBOT_MAINTAINER,
             mode: Constants.Modes.STRICT
         });
     }
