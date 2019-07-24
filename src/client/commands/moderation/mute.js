@@ -27,6 +27,7 @@ module.exports = class extends Command {
 
             channel.overwritePermissions({
                 permissionOverwrites: [
+                    channel.permissionOverwrites,
                     {
                         id: role.id,
                         deny: [ "SEND_MESSAGES" ],
