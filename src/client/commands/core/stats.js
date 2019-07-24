@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
     async execute(message, parameters, permissionLevel) {
         const guilds = await this.client.handlers.process.fetchShardProperties("guilds.size");
-        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voiceConnections.size");
+        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voice.connections.size");
         const channels = await this.client.handlers.process.fetchShardProperties("channels.size");
         const users = await this.client.handlers.process.fetchShardProperties("users.size");
         const usedRAM = await this.client.handlers.process.fetchShardProperties("usedRAM");
@@ -48,7 +48,7 @@ module.exports = class extends Command {
 
     async embedExecute(message, parameters, permissionLevel) {
         const guilds = await this.client.handlers.process.fetchShardProperties("guilds.size");
-        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voiceConnections.size");
+        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voice.connections.size");
         const channels = await this.client.handlers.process.fetchShardProperties("channels.size");
         const users = await this.client.handlers.process.fetchShardProperties("users.size");
         const usedRAM = await this.client.handlers.process.fetchShardProperties("usedRAM");
