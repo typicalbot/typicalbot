@@ -25,15 +25,15 @@ module.exports = class extends Command {
 
             const role = message.guild.roles.get(message.guild.settings.roles.mute);
 
+            const currentOverwrites = channel.permissionOverwrites;
+            currentOverwrites.set(role.id, {
+                id: role.id,
+                deny: [ "SEND_MESSAGES" ],
+                type: "role"
+            });
+
             channel.overwritePermissions({
-                permissionOverwrites: [
-                    channel.permissionOverwrites,
-                    {
-                        id: role.id,
-                        deny: [ "SEND_MESSAGES" ],
-                        type: "role"
-                    }
-                ],
+                permissionOverwrites: currentOverwrites,
                 reason: "Denying permissions for muted users to speak."
             }).then(() => {
                 message.success("Denied permissions for muted users to speak!");
