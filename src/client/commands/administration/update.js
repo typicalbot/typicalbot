@@ -39,16 +39,11 @@ module.exports = class extends Command {
 
                         message.reply("Restarting now...");
 
-                        exec(`pm2 restart ${
-                            this.client.build === "stable" ?
-                                "TB" : this.client.build === "prime" ?
-                                    "TBP" : this.client.build === "beta" ?
-                                        "TBB" : this.client.build === "development" ?
-                                            "TBD" : null}`,
-                        { cwd: path, env: { HOME: "/home/hypercoder" } },
-                        (err, stdout, stderr) => {
-                            if (err) return console.error(err);
-                        });
+                        exec(`pm2 restart ${ this.client.build === "stable" ? "TB" : this.client.build === "ptb" ? "TBPTB" : null }`,
+                            { cwd: path, env: { HOME: "/home/hypercoder" } },
+                            (err, stdout, stderr) => {
+                                if (err) return console.error(err);
+                            });
                     }).catch(err => {
                         message.error("An answer was not given.");
                     });

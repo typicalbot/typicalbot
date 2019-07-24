@@ -39,8 +39,8 @@ class Message extends Event {
         const command = await this.client.commands.fetch(split.slice(prefix.length).toLowerCase(), settings);
         if (!command) return;
 
-        if (command.development && this.client.build !== "beta" && this.client.build !== "development")
-            return message.error("This command in is development mode - meaning it cannot be used on TypicalBot stable.");
+        if (command.ptb && this.client.build !== "ptb")
+            return message.error("This command in is PTB mode - meaning it cannot be used on TypicalBot stable.");
 
         const param = message.content.includes(" ") ? message.content.slice(message.content.indexOf(" ") + 1) : "";
 
