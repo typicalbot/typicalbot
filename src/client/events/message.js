@@ -57,8 +57,6 @@ class Message extends Event {
 
         if (userPermissions.level < command.permission || (actualUserPermissions.level < command.permission && actualUserPermissions.level !== Constants.Permissions.Levels.SERVER_BLACKLISTED && command.permission <= Constants.Permissions.Levels.SERVER_OWNER))
             return message.error(this.client.functions.error("perms", command, actualUserPermissions));
-
-        this.client.commandCount += 1;
         
         if (settings.embed && command.embedExecute && message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS"))
             return command.embedExecute(message, param, userPermissions);

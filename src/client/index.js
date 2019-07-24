@@ -43,9 +43,6 @@ class Shard extends Client {
         this.handlers.automoderation = new AutoModerationHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);
         this.handlers.music = new MusicHandler(this);
-        
-        //this.handlers.webhooks = {};
-        //this.handlers.webhooks.twitch = new TwitchWebhookHandler(this);
 
         this.settings = new SettingHandler(this);
         this.functions = new FunctionHandler(this);
