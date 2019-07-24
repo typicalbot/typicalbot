@@ -17,6 +17,10 @@ class Shard extends fork {
                         response: await this.handler.fetchShardProperties(data.property)
                     }
                 });
+            } else if (event === "masterrequest") {
+                if (!this.handler.pendingRequests.has(data.id)) return;
+
+                this.handler.pendingRequests.get(data.id).callback(data);
             } else {
                 this.handler.broadcast(event, data);
             }
