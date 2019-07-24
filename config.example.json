@@ -6,9 +6,7 @@
 
     "id": "BOT ID HERE",
 
-    "token": "BOT TOKEN HERE",
-
-    "raven": "Raven URL",
+    "token": "BOT TOKEN HERE"
 
     "clientOptions": {
         "messageCacheMaxSize": 150,

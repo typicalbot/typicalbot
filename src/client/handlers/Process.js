@@ -1,5 +1,3 @@
-//const Raven = require("raven");
-
 class ProcessHandler {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
@@ -10,7 +8,6 @@ class ProcessHandler {
             if (!err) return;
 
             this.log(`Uncaught Promise Error:\n${err.stack || JSON.stringify(err) || err}`, true);
-            //Raven.captureException(err);
         });
     }
 
