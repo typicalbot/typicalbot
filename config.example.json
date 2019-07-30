@@ -6,7 +6,7 @@
 
     "id": "BOT ID HERE",
 
-    "token": "BOT TOKEN HERE"
+    "token": "BOT TOKEN HERE",
 
     "clientOptions": {
         "messageCacheMaxSize": 150,
