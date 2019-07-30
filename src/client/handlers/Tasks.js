@@ -10,7 +10,7 @@ class TaskHandler extends Collection {
 
         this.taskTypes = new Collection();
 
-        this.load();
+        this.init();
     }
 
     init() {
