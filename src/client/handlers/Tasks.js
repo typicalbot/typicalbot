@@ -10,22 +10,22 @@ class TaskHandler extends Collection {
 
         this.taskTypes = new Collection();
 
-        this.init();
+        this.load();
     }
 
-    init() {
-        klaw(path.join(__dirname, "..", "tasks")).on("data", item => {
-            const file = path.parse(item.path);
-            if (!file.ext || file.ext !== ".js") return;
+    // init() {
+    //     klaw(path.join(__dirname, "..", "tasks")).on("data", item => {
+    //         const file = path.parse(item.path);
+    //         if (!file.ext || file.ext !== ".js") return;
 
-            const taskType = require(path.join(file.dir, file.base));
+    //         const taskType = require(path.join(file.dir, file.base));
 
-            this.taskTypes.set(file.name, taskType);
-        }).on("end", () => {
-            this.taskInit();
-            this.startInterval();
-        });
-    }
+    //         this.taskTypes.set(file.name, taskType);
+    //     }).on("end", () => {
+    //         this.taskInit();
+    //         this.startInterval();
+    //     });
+    // }
 
     async load() {
         const path = join(__dirname, "..", "tasks");
