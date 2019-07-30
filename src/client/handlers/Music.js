@@ -43,6 +43,10 @@ module.exports = class {
         if (!playlist && !this.client.utility.music.withinLimit(message, video))
             throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
 
+        const voice = message.guild.voice;
+
+        if (!voice) return this.initStream(message, video, playlist);
+
         const connection = message.guild.voice.connection;
 
         if (!connection) return this.initStream(message, video, playlist);
