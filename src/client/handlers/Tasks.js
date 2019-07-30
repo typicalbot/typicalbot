@@ -14,7 +14,7 @@ class TaskHandler extends Collection {
     }
 
     init() {
-        /*klaw(path.join(__dirname, "..", "tasks")).on("data", item => {
+        klaw(path.join(__dirname, "..", "tasks")).on("data", item => {
             const file = path.parse(item.path);
             if (!file.ext || file.ext !== ".js") return;
 
@@ -24,7 +24,7 @@ class TaskHandler extends Collection {
         }).on("end", () => {
             this.taskInit();
             this.startInterval();
-        });*/
+        });
     }
 
     async load() {
