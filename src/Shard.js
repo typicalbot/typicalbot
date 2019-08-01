@@ -2,7 +2,7 @@ const { fork } = require("child_process");
 
 class Shard extends fork {
     constructor(handler, shardID, shardCount) {
-        super(`${process.cwd()}/src/client`, [], { env: { SHARD_ID: shardID, SHARD_COUNT: shardCount } });
+        super(`${process.cwd()}/src/client`, [], { env: { SHARDS: shardID, TOTAL_SHARD_COUNT: shardCount } });
 
         this.handler = handler;
 

@@ -28,9 +28,9 @@ class Shard extends Client {
         Object.defineProperty(this, "config", { value: config });
         Object.defineProperty(this, "build", { value: config.build });
 
-        this.shardID = Number(process.env.SHARD_ID);
-        this.shardNumber = Number(process.env.SHARD_ID) + 1;
-        this.shardCount = Number(process.env.SHARD_COUNT);
+        this.shardID = Number(process.env.SHARDS);
+        this.shardNumber = Number(process.env.SHARDS) + 1;
+        this.shardCount = Number(process.env.TOTAL_SHARD_COUNT);
 
         this.handlers = {};
         this.handlers.process = new ProcessHandler(this);
