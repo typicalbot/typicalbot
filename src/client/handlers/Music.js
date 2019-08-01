@@ -15,7 +15,7 @@ module.exports = class {
     }
 
     async connect(message) {
-        const channel = message.member.voiceChannel;
+        const channel = message.member.voice.channel;
 
         if (!channel) throw "Please join a voice channel to use this command.";
         if (!channel.joinable) throw "I cannot join the voice channel you are in.";
@@ -43,13 +43,17 @@ module.exports = class {
         if (!playlist && !this.client.utility.music.withinLimit(message, video))
             throw `The video you are trying to play is too long. The maximum video length is ${this.client.functions.convertTime(message.guild.settings.music.timelimit * 1000 || 1800 * 1000)}.`;
 
-        const connection = message.guild.voiceConnection;
+        const voice = message.guild.voice;
+
+        if (!voice) return this.initStream(message, video, playlist);
+
+        const connection = message.guild.voice.connection;
 
         if (!connection) return this.initStream(message, video, playlist);
 
         if (connection.guildStream.mode && connection.guildStream.mode !== "queue") throw "You can only add to the queue while in queue mode.";
 
-        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
+        if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) throw "You must be in the same voice channel to request a video to be played.";
         if (connection.guildStream.queue.length >= (message.guild.settings.music.queuelimit || 10)) return message.error(`The queue limit of ${message.guild.settings.music.queuelimit || 10} has been reached.`);
 
         if (playlist) return this.queuePlaylist(message, video, connection.guildStream).catch(err => { throw err; });

@@ -8,8 +8,6 @@
 
     "token": "BOT TOKEN HERE",
 
-    "raven": "Raven URL",
-
     "clientOptions": {
         "messageCacheMaxSize": 150,
         "messageCacheLifetime": 3600,
@@ -20,9 +18,7 @@
     "apis": {
         "discordbots": "DISCORDBOTS.ORG API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
         "carbonkey": "CARBONITEX API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
-        "youtube": "YOUTUBE API TOKEN FOR MUSIC",
-
-        "localhost": "LOCALHOST API TOKEN - FOR EXTERNAL API - NOT REQUIRED | DASHBOARD <-> BOT"
+        "youtube": "YOUTUBE API TOKEN FOR MUSIC"
     },
 
     "database": {
@@ -33,24 +29,10 @@
         }
     },
 
-    "creator": "105408136285818880",
-    "administrators": {
-        "187980183569956864": "Xeno",
-        "176610059684544512": "Tyler",
-        "187342661060001792": "Nick"
-    },
-    "support": {
-        "156859037890117632": "Packer",
-        "193382030812250112": "AKSKL",
-        "245419467843174401": "Pawky",
-        "214045916246573057": "TechnicalFox",
-        "218459651098935297": "Tobias"
-    },
+    "maintainers": [
+        "105408136285818880",
+        "187342661060001792"
+    ],
 
-    "partners": {
-        "117111577345392645": "Tazza - The Cat Den",
-        "198302834943459329": "entertainment - DbD",
-        "146048938242211840": "York - Idiot's Guide",
-        "76842460248023040": "Dauntless"
-    }
+    "partners": {}
 }

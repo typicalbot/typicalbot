@@ -2,7 +2,7 @@ const { fork } = require("child_process");
 
 class Shard extends fork {
     constructor(handler, shardID, shardCount) {
-        super(`${process.cwd()}/src/client`, [], { env: { SHARD_ID: shardID, SHARD_COUNT: shardCount } });
+        super(`${process.cwd()}/src/client`, [], { env: { SHARDS: shardID, TOTAL_SHARD_COUNT: shardCount } });
 
         this.handler = handler;
 
@@ -17,6 +17,10 @@ class Shard extends fork {
                         response: await this.handler.fetchShardProperties(data.property)
                     }
                 });
+            } else if (event === "masterrequest") {
+                if (!this.handler.pendingRequests.has(data.id)) return;
+
+                this.handler.pendingRequests.get(data.id).callback(data);
             } else {
                 this.handler.broadcast(event, data);
             }

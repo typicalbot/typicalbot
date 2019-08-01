@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const connection = message.guild.voiceConnection;
+        const connection = message.guild.voice.connection;
 
         if (!connection) return message.send(`Nothing is currently streaming.`);
 

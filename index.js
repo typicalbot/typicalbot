@@ -45,14 +45,18 @@ class ShardHandler extends Collection {
         return new Promise((resolve, reject) => {
             const id = Math.random();
 
-            const timeout = setTimeout(() => { this.pendingRequests.delete(id); return reject("Timed Out"); }, 100);
+            const timeout = setTimeout(() => {
+                this.pendingRequests.delete(id);
+
+                return reject("Timed Out");
+            }, 500);
 
             const callback = (response) => {
                 clearTimeout(timeout);
 
                 this.pendingRequests.delete(id);
 
-                return resolve(response.data);
+                return resolve(response);
             };
 
             this.pendingRequests.set(id, { callback, timeout });

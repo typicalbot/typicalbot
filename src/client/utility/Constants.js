@@ -43,9 +43,7 @@ exports.Permissions.Levels = {
     SERVER_MODERATOR: 2,
     SERVER_ADMINISTRATOR: 3,
     SERVER_OWNER: 4,
-    TYPICALBOT_SUPPORT: 8,
-    TYPICALBOT_ADMINISTRATOR: 9,
-    TYPICALBOT_CREATOR: 10
+    TYPICALBOT_MAINTAINER: 10
 };
 
 exports.Permissions.RoleTitles = {

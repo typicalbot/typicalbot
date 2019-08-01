@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
     async execute(message, parameters, permissionLevel) {
         const guilds = await this.client.handlers.process.fetchShardProperties("guilds.size");
-        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voiceConnections.size");
+        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voice.connections.size");
         const channels = await this.client.handlers.process.fetchShardProperties("channels.size");
         const users = await this.client.handlers.process.fetchShardProperties("users.size");
         const usedRAM = await this.client.handlers.process.fetchShardProperties("usedRAM");
@@ -36,7 +36,7 @@ module.exports = class extends Command {
             + `    This Shard:\n`
             + `=> Shard             : ${this.client.shardNumber} / ${this.client.shardCount}\n`
             + `=> Servers           : ${this.client.guilds.size.toLocaleString()}\n`
-            + `=> Voice Connections : ${this.client.voiceConnections.size.toLocaleString()}\n`
+            + `=> Voice Connections : ${this.client.voice.connections.size.toLocaleString()}\n`
             + `=> Channels          : ${this.client.channels.size.toLocaleString()}\n`
             + `=> Users             : ${this.client.users.size.toLocaleString()}\n`
             + `=> RAM (Used)        : ${Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100}MB\n`
@@ -48,7 +48,7 @@ module.exports = class extends Command {
 
     async embedExecute(message, parameters, permissionLevel) {
         const guilds = await this.client.handlers.process.fetchShardProperties("guilds.size");
-        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voiceConnections.size");
+        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voice.connections.size");
         const channels = await this.client.handlers.process.fetchShardProperties("channels.size");
         const users = await this.client.handlers.process.fetchShardProperties("users.size");
         const usedRAM = await this.client.handlers.process.fetchShardProperties("usedRAM");
@@ -71,7 +71,7 @@ module.exports = class extends Command {
             .addBlankField()
             .addField("» Shard", `${this.client.shardNumber} / ${this.client.shardCount}`, true)
             .addField("» Servers", `${this.client.guilds.size.toLocaleString()}`, true)
-            .addField("» Voice Connections", `${this.client.voiceConnections.size.toLocaleString()}`, true)
+            .addField("» Voice Connections", `${this.client.voice.connections.size.toLocaleString()}`, true)
             .addField("» Channels", `${this.client.channels.size.toLocaleString()}`, true)
             .addField("» Users", `${this.client.users.size.toLocaleString()}`, true)
             .addField("» RAM (Used)", `${Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100}MB`, true)

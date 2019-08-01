@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        const connection = message.guild.voiceConnection;
+        const connection = message.guild.voice.connection;
 
         if (!connection || !connection.guildStream.dispatcher) return message.send(`Nothing is currently streaming.`);
 
@@ -29,7 +29,7 @@ module.exports = class extends Command {
 
         if (volume < 0 || volume > 200) return message.error(`Invalid command usage. Volume must be a percent from 0% to 200%.`);
 
-        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
+        if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
 
         connection.guildStream.setVolume(volume * 0.01);
 

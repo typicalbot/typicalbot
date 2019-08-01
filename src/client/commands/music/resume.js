@@ -14,11 +14,11 @@ module.exports = class extends Command {
     async execute(message, parameters, permissionLevel) {
         if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
-        const connection = message.guild.voiceConnection;
+        const connection = message.guild.voice.connection;
 
         if (!connection) return message.send(`Nothing is currently streaming.`);
 
-        if (!message.member.voiceChannel || message.member.voiceChannel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
+        if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
 
         if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
 

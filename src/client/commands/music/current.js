@@ -12,11 +12,11 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const connection = message.guild.voiceConnection;
+        const connection = message.guild.voice.connection;
 
         if (!connection) return message.send(`Nothing is currently streaming.`);
 
-        const remaining = connection.guildStream.mode === "queue" ? ((message.guild.voiceConnection.guildStream.current.length * 1000) - message.guild.voiceConnection.guildStream.dispatcher.streamTime) : null;
+        const remaining = connection.guildStream.mode === "queue" ? ((message.guild.voice.connection.guildStream.current.length * 1000) - message.guild.voice.connection.guildStream.dispatcher.streamTime) : null;
 
         message.send(`**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}**${remaining ? ` (${this.client.functions.convertTime(remaining)} remaining)` : ""} | Requested by **${connection.guildStream.current.requester.author.username}**`);
     }

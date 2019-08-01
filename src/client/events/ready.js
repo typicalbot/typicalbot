@@ -17,7 +17,7 @@ class Ready extends Event {
         }, 1000 * 60 * 5));
 
         this.intervals.push(setInterval(() => {
-            this.client.voiceConnections.filter(c => c.channel.members.filter(m => !m.user.bot).size === 0).forEach(c => c.guildStream ? c.guildStream.end() : c.disconnect());
+            this.client.voice.connections.filter(c => c.channel.members.filter(m => !m.user.bot).size === 0).forEach(c => c.guildStream ? c.guildStream.end() : c.disconnect());
         }, 1000 * 30));
     }
 }

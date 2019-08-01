@@ -1,5 +1,3 @@
-//const Raven = require("raven");
-
 class ProcessHandler {
     constructor(client) {
         Object.defineProperty(this, "client", { value: client });
@@ -10,7 +8,6 @@ class ProcessHandler {
             if (!err) return;
 
             this.log(`Uncaught Promise Error:\n${err.stack || JSON.stringify(err) || err}`, true);
-            //Raven.captureException(err);
         });
     }
 
@@ -89,14 +86,14 @@ class ProcessHandler {
             const settings = await this.client.settings.fetch(guild);
             const trueApiKey = settings.apikey;
 
-            if (apiKey !== trueApiKey) return this.client.handlers.process.transmit("masterrequest", {
+            if (apiKey !== trueApiKey) return this.transmit("masterrequest", {
                 id: data.id,
                 success: false
             });
 
             const trueGuild = this.client.guilds.get(guild);
 
-            if (!trueGuild.channels.has(channel)) return this.client.handlers.process.transmit("masterrequest", {
+            if (!trueGuild.channels.has(channel)) return this.transmit("masterrequest", {
                 id: data.id,
                 success: false
             });
@@ -104,12 +101,12 @@ class ProcessHandler {
             const trueChannel = trueGuild.channels.get(channel);
 
             trueChannel.send("", json).then(() => {
-                if (!trueGuild.channels.has(channel)) return this.client.handlers.process.transmit("masterrequest", {
+                this.transmit("masterrequest", {
                     id: data.id,
                     success: true
                 });
             }).catch(err => {
-                this.client.handlers.process.transmit("masterrequest", {
+                this.transmit("masterrequest", {
                     id: data.id,
                     success: false
                 });
