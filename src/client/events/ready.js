@@ -13,7 +13,7 @@ class Ready extends Event {
         this.client.functions.fetchDonors();
 
         this.intervals.push(setInterval(async () => {
-            this.client.user.setActivity(`${this.client.config.prefix}help — typicalbot.com`);
+            this.client.user.setActivity(`${this.client.config.prefix}help — typicalbot.com`, { type: 'WATCHING' });
         }, 1000 * 60 * 5));
 
         this.intervals.push(setInterval(() => {
