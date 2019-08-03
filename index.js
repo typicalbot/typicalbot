@@ -19,9 +19,3 @@ node.on("message", message => {
         message.reply(eval(`client.${message.data.data}`));
     }
 });
-
-/*setTimeout(() => {
-    node.sendTo("manager", "guilds", { receptive: true }).then(x => {
-        console.log(`TypicalBot is in ${x} guilds.`);
-    });
-}, 5000);*/
