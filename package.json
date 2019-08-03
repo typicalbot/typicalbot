@@ -8,7 +8,24 @@
     },
     "dependencies": {
         "discord.js": "github:discordjs/discord.js#master",
-        "veza": "^0.6.0"
+        "veza": "^0.6.0",
+        "body-parser": "^1.18.3",
+        "canvas": "^1.6.11",
+        "canvas-constructor": "^1.1.2",
+        "discord.js": "github:discordjs/discord.js#master",
+        "erlpack": "github:discordapp/erlpack",
+        "express": "^4.16.3",
+        "klaw": "^2.1.1",
+        "krypton": "github:Hackzzila/krypton",
+        "moment": "^2.22.2",
+        "node-opus": "^0.3.2",
+        "prism-media": "github:hydrabolt/prism-media",
+        "rethinkdbdash": "^2.3.31",
+        "simple-youtube-api": "github:hypercoder2975/simple-youtube-api",
+        "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
+        "superagent": "^3.8.3",
+        "uws": "^10.148.0",
+        "ytdl-core": "github:fent/node-ytdl-core"
     },
     "repository": {
         "type": "git",
