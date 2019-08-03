@@ -26,7 +26,7 @@ const MusicUtility = require("./utility/Music");
 
 module.exports = class Cluster extends Client {
     constructor(node) {
-        super(config.clientOptions));
+        super(config.clientOptions);
 
         this.node = node;
         this.config = config;
