@@ -18,7 +18,9 @@ async function generateClusters() {
             watch: false,
             env: {
                 CLUSTER: `${config.clusterServer} ${config.clusterBuild ? `${config.clusterBuild} ` : ""}${i}`,
-                SHARDS: clusterShards
+                SHARDS: clusterShards,
+                SHARD_COUNT: clusterShards.length,
+                TOTAL_SHARD_COUNT: shardCount
             }
         });
     }

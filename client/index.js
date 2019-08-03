@@ -8,6 +8,8 @@ const config = require("../../config.json");
 //const shards = Array.from({ length: last - first + 1 }, (a, b) => b + first - 1);
 const shards = process.env.SHARDS;
 
+console.log(shards);
+
 const DatabaseHandler = require("./handlers/Database");
 const TaskHandler = require("./handlers/Tasks");
 const PermissionsHandler = require("./handlers/Permissions");
@@ -24,18 +26,14 @@ const MusicUtility = require("./utility/Music");
 
 module.exports = class Cluster extends Client {
     constructor(node) {
-        super(Object.assign({
-            totalShardCount: config.shardCount,
-            shardCount: shards.length,
-            shards
-        }, config.clientOptions));
+        super(config.clientOptions));
 
         this.node = node;
         this.config = config;
         this.build = config.build;
 
         this.shards = shards;
-        this.cluster = `${process.env.CLUSTER} [${shards.join(",")}]`
+        this.cluster = `${process.env.CLUSTER} [${shards.join(",")}]`;
         this.shardCount = config.shardCount;
 
         this.handlers = {};
@@ -78,4 +76,4 @@ module.exports = class Cluster extends Client {
     get totalRAM() {
         return Math.round(process.memoryUsage().heapTotal / 1048576);
     }
-}
+};
