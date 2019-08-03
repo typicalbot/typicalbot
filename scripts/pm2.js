@@ -8,12 +8,8 @@ async function generateClusters() {
     const clusterCount = Math.ceil(shardCount / config.shardsPerCluster);
     const clusters = new Array();
 
-    console.log(shardCount, shards, clusterCount);
-
     for (let i = 1; i <= clusterCount; i++) {
         const clusterShards = shards.splice(0, config.shardsPerCluster);
-
-        console.log(clusterShards);
 
         clusters.push({
             name: `${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`,
@@ -22,7 +18,6 @@ async function generateClusters() {
             watch: false,
             env: {
                 CLUSTER: `${config.clusterServer} ${config.clusterBuild ? `${config.clusterBuild} ` : ""}${i}`,
-                //SHARDS: `${clusterShards[0]}-${clusterShards[9] || clusterShards[clusterShards.length]}`
                 SHARDS: clusterShards
             }
         });
@@ -37,13 +32,12 @@ pm2.connect(async err => {
         process.exit(2);
     }
 
-    console.log("Yay!");
-
     const clusters = await generateClusters();
 
-    console.log(clusters);
+    console.log("Generating Clusters", clusters);
     
     clusters.forEach((cluster, i) => {
+        console.log(cluster.env.SHARDS);
         pm2.start(cluster, function (err, apps) {
             if (i === (clusters.length -1)) pm2.disconnect();
 
