@@ -1,5 +1,6 @@
 const { Node } = require("veza");
 const Cluster = require("./client");
+const config = require("./config");
 
 const node = new Node(process.env.CLUSTER)
     .on('error', (error, client) => console.error(`[IPC] Error from ${client.name}:`, error))
@@ -9,7 +10,7 @@ const node = new Node(process.env.CLUSTER)
         console.log(`[IPC] Connected to: ${client.name}`);
     });
 
-node.connectTo(4000).catch(error => console.error('[IPC] Disconnected!', error));
+node.connectTo(config.nodePort).catch(error => console.error('[IPC] Disconnected!', error));
 
 const client = new Cluster(node);
 

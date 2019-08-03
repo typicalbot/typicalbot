@@ -3,6 +3,7 @@
     "prefix": "$",
     "clusterServer": "Primula",
     "clusterBuild": "",
+    "nodePort": 4000,
     "id": "Bot ID",
     "token": "Bot Token",
     "apis": {
