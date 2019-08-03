@@ -3,6 +3,10 @@
 
     "prefix": "$",
     "shardCount": 1,
+    "shardsPerCluster": 10,
+
+    "clusterServer": "Primula",
+    "clusterBuild": "",
 
     "id": "BOT ID HERE",
 

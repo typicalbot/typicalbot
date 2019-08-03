@@ -13,7 +13,6 @@ node.connectTo(4000).catch(error => console.error('[IPC] Disconnected!', error))
 
 const client = new Cluster(node);
 
-
 node.on("message", message => {
     if (message.data.event === "collectData") {
         message.reply(eval(`client.${message.data.data}`));
