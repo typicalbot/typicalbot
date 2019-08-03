@@ -21,7 +21,7 @@ module.exports = class extends Command {
             args ? args[1] : 1
         );
 
-        return message.reply(`**__Servers on shard ${this.client.shardNumber} / ${this.client.shardCount}:__**\n\`\`\`autohotkey\n${paged}\`\`\``);
+        return message.reply(`**__Servers on Cluster ${this.client.cluster} / ${this.client.shardCount}:__**\n\`\`\`autohotkey\n${paged}\`\`\``);
     }
 
     embedExecute(message, parameters, permissionLevel) {
@@ -36,7 +36,7 @@ module.exports = class extends Command {
 
         message.buildEmbed()
             .setColor(0x00adff)
-            .setTitle(`Servers on Shard ${this.client.shardNumber} / ${this.client.shardCount}`)
+            .setTitle(`Servers on Cluster ${this.client.cluster} / ${this.client.shardCount}`)
             .setDescription(`\`\`\`autohotkey\n${paged}\`\`\``)
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()

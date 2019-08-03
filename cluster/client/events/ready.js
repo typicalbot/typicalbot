@@ -13,7 +13,7 @@ class Ready extends Event {
             message: `Shards ${this.client.shards} ready.`
         });
 
-        this.client.handlers.process.log(`Client Connected | Cluster ${this.client.cluster}`);
+        console.log(`Client Connected | Cluster ${this.client.cluster}`);
         this.client.user.setActivity(`Client Started`);
         this.client.functions.fetchDonors();
 
