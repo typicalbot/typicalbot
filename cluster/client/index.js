@@ -4,13 +4,9 @@ const { Client, Collection } = require("discord.js");
 
 const config = require("../../config.json");
 
-const shards = [];
-const shardsEnv = process.env.SHARDS.split("-");
-const first = Number(shardsEnv[0]);
-const last = Number(shardsEnv[1]);
-for (let i = first; i <= last; i++) shards.push(i - 1);
+const [first, last] = process.env.SHARDS.split("-").map(Number)
+const shards = Array.from({ length: last - first + 1 }, (a, b) => b + first);
 
-const ProcessHandler = require("./handlers/Process");
 const DatabaseHandler = require("./handlers/Database");
 const TaskHandler = require("./handlers/Tasks");
 const PermissionsHandler = require("./handlers/Permissions");
@@ -38,13 +34,10 @@ module.exports = class Cluster extends Client {
         this.build = config.build;
 
         this.shards = shards;
-        this.cluster = `${process.env.CLUSTER}[${shards.join(",")}]`
-        //this.shardID = Number(process.env.SHARDS);
-        //this.shardNumber = Number(process.env.SHARDS) + 1;
+        this.cluster = `${process.env.CLUSTER} [${shards.join(",")}]`
         this.shardCount = config.shardCount;
 
         this.handlers = {};
-        this.handlers.process = new ProcessHandler(this);
         this.handlers.database = new DatabaseHandler(this);
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
