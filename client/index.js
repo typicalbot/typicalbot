@@ -20,7 +20,12 @@ const MusicUtility = require("./utility/Music");
 
 module.exports = class Cluster extends Client {
     constructor(node) {
-        super(config.clientOptions);
+        super({
+            "messageCacheMaxSize": 150,
+            "messageCacheLifetime": 3600,
+            "messageSweepInterval": 300,
+            "disableEveryone": true
+        });
 
         this.node = node;
         this.config = config;

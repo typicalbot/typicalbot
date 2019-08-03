@@ -1,38 +1,22 @@
 {
-    "build": "BUILD STAGE",
-
+    "build": "stable",
     "prefix": "$",
-    "shardCount": 1,
-    "shardsPerCluster": 10,
-
     "clusterServer": "Primula",
     "clusterBuild": "",
-
-    "id": "BOT ID HERE",
-
-    "token": "BOT TOKEN HERE",
-
-    "clientOptions": {
-        "messageCacheMaxSize": 150,
-        "messageCacheLifetime": 3600,
-        "messageSweepInterval": 300,
-        "disableEveryone": true
-    },
-
+    "id": "Bot ID",
+    "token": "Bot Token",
     "apis": {
-        "discordbots": "DISCORDBOTS.ORG API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
-        "carbonkey": "CARBONITEX API TOKEN HERE - DISABLED IF BUILD IS NOT STABLE",
-        "youtube": "YOUTUBE API TOKEN FOR MUSIC"
+        "discordbots": "",
+        "carbonkey": "",
+        "youtube": ""
     },
-
     "database": {
         "credentials": {
-            "user": "USER",
-            "password": "PASSWORD",
-            "db": "DATABASE NAME"
+            "user": "Username",
+            "password": "Password",
+            "db": "Database Name"
         }
     },
-
     "maintainers": [
         "105408136285818880",
         "187342661060001792"
