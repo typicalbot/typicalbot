@@ -6,9 +6,9 @@ const config = require("../../config.json");
 
 //const [first, last] = process.env.SHARDS.split("-").map(Number)
 //const shards = Array.from({ length: last - first + 1 }, (a, b) => b + first - 1);
-const shards = process.env.SHARDS;
+const shards = JSON.parse(process.env.SHARDS);
 
-console.log(shards);
+console.log(typeof shards);
 
 const DatabaseHandler = require("./handlers/Database");
 const TaskHandler = require("./handlers/Tasks");
