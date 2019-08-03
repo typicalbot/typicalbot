@@ -8,8 +8,12 @@ async function generateClusters() {
     const clusterCount = Math.ceil(shardCount / config.shardsPerCluster);
     const clusters = new Array();
 
+    console.log(shardCount, shards, clusterCount);
+
     for (let i = 1; i <= clusterCount; i++) {
         const clusterShards = shards.splice(0, config.shardsPerCluster);
+
+        console.log(clusterShards);
 
         clusters.push({
             name: `${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`,
