@@ -4,12 +4,6 @@ const { Client, Collection } = require("discord.js");
 
 const config = require("../../config.json");
 
-//const [first, last] = process.env.SHARDS.split("-").map(Number)
-//const shards = Array.from({ length: last - first + 1 }, (a, b) => b + first - 1);
-const shards = JSON.parse(process.env.SHARDS);
-
-console.log(typeof shards);
-
 const DatabaseHandler = require("./handlers/Database");
 const TaskHandler = require("./handlers/Tasks");
 const PermissionsHandler = require("./handlers/Permissions");
@@ -32,8 +26,8 @@ module.exports = class Cluster extends Client {
         this.config = config;
         this.build = config.build;
 
-        this.shards = shards;
-        this.cluster = `${process.env.CLUSTER} [${shards.join(",")}]`;
+        this.shards = JSON.parse(process.env.SHARDS);
+        this.cluster = `${process.env.CLUSTER} [${this.shards.join(",")}]`;
         this.shardCount = config.shardCount;
 
         this.handlers = {};
