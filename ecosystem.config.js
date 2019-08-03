@@ -11,7 +11,7 @@ Util.fetchRecommendedShards(config.token).then(shardCount => {
 
         clusters.push({
             name: `${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`,
-            script: 'cluster/index.js',
+            script: './index.js',
             autorestart: false,
             watch: false,
             env: {
