@@ -47,7 +47,7 @@ module.exports = class extends Command {
     }
 
     async embedExecute(message, parameters, permissionLevel) {
-        const guilds = await this.client.fetchData`("guilds.size");
+        const guilds = await this.client.fetchData("guilds.size");
         const voiceConnections = await this.client.fetchData("voice.connections.size");
         const channels = await this.client.fetchData("channels.size");
         const users = await this.client.fetchData("users.size");
