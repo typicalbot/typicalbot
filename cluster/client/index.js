@@ -1,8 +1,12 @@
-require("./utility/Extenders");
-
 const { Client, Collection } = require("discord.js");
 
-const config = require(`${process.cwd()}/config`);
+const config = require("../../config.json");
+
+const shards = [];
+const shardsEnv = process.env.SHARDS.split("-");
+const first = Number(shardsEnv[0]);
+const last = Number(shardsEnv[1]);
+for (let i = first; i <= last; i++) shards.push(i - 1);
 
 const ProcessHandler = require("./handlers/Process");
 const DatabaseHandler = require("./handlers/Database");
@@ -12,8 +16,6 @@ const AutoModerationHandler = require("./handlers/AutoModeration");
 const ModerationLogHandler = require("./handlers/ModerationLog");
 const MusicHandler = require("./handlers/Music");
 
-//const TwitchWebhookHandler = require("./handlers/webhooks/Twitch");
-
 const SettingHandler = require("./handlers/Settings");
 const FunctionHandler = require("./handlers/Functions");
 const CommandHandler = require("./handlers/Commands");
@@ -21,19 +23,25 @@ const EventHandler = require("./handlers/Events");
 
 const MusicUtility = require("./utility/Music");
 
-class Shard extends Client {
-    constructor() {
-        super(config.clientOptions);
+module.exports = class Cluster extends Client {
+    constructor(node) {
+        super(Object.assign({
+            totalShardCount: 4,
+            shardCount: shards.length,
+            shards
+        }, config.clientOptions));
 
-        Object.defineProperty(this, "config", { value: config });
-        Object.defineProperty(this, "build", { value: config.build });
+        this.node = node;
+        this.config = config;
+        this.build = config.build;
 
-        this.shardID = Number(process.env.SHARDS);
-        this.shardNumber = Number(process.env.SHARDS) + 1;
-        this.shardCount = Number(process.env.TOTAL_SHARD_COUNT);
+        this.shards = shards;
+        //this.shardID = Number(process.env.SHARDS);
+        //this.shardNumber = Number(process.env.SHARDS) + 1;
+        //this.shardCount = Number(process.env.TOTAL_SHARD_COUNT);
 
         this.handlers = {};
-        this.handlers.process = new ProcessHandler(this);
+        //this.handlers.process = new ProcessHandler(this);
         this.handlers.database = new DatabaseHandler(this);
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
@@ -59,13 +67,10 @@ class Shard extends Client {
         this.login(this.config.token);
     }
 
-    get usedRAM() {
-        return Math.round(process.memoryUsage().heapUsed / 1048576);
-    }
-
-    get totalRAM() {
-        return Math.round(process.memoryUsage().heapTotal / 1048576);
+    fetchData(property) {
+        return this.node.sendTo("manager", {
+            event: "collectData",
+            data: property
+        }, { receptive: true });
     }
 }
-
-new Shard();

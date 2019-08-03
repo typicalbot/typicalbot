@@ -13,12 +13,12 @@ module.exports = class extends Command {
     }
 
     async execute(message, parameters, permissionLevel) {
-        const guilds = await this.client.handlers.process.fetchShardProperties("guilds.size");
-        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voice.connections.size");
-        const channels = await this.client.handlers.process.fetchShardProperties("channels.size");
-        const users = await this.client.handlers.process.fetchShardProperties("users.size");
-        const usedRAM = await this.client.handlers.process.fetchShardProperties("usedRAM");
-        const totalRAM = await this.client.handlers.process.fetchShardProperties("totalRAM");
+        const guilds = await this.client.fetchData("guilds.size");
+        const voiceConnections = await this.client.fetchData("voice.connections.size");
+        const channels = await this.client.fetchData("channels.size");
+        const users = await this.client.fetchData("users.size");
+        const usedRAM = await this.client.fetchData("usedRAM");
+        const totalRAM = await this.client.fetchData("totalRAM");
 
         message.send(
             `**__TypicalBot's Statistics:__**\n`
@@ -47,12 +47,12 @@ module.exports = class extends Command {
     }
 
     async embedExecute(message, parameters, permissionLevel) {
-        const guilds = await this.client.handlers.process.fetchShardProperties("guilds.size");
-        const voiceConnections = await this.client.handlers.process.fetchShardProperties("voice.connections.size");
-        const channels = await this.client.handlers.process.fetchShardProperties("channels.size");
-        const users = await this.client.handlers.process.fetchShardProperties("users.size");
-        const usedRAM = await this.client.handlers.process.fetchShardProperties("usedRAM");
-        const totalRAM = await this.client.handlers.process.fetchShardProperties("totalRAM");
+        const guilds = await this.client.fetchData`("guilds.size");
+        const voiceConnections = await this.client.fetchData("voice.connections.size");
+        const channels = await this.client.fetchData("channels.size");
+        const users = await this.client.fetchData("users.size");
+        const usedRAM = await this.client.fetchData("usedRAM");
+        const totalRAM = await this.client.fetchData("totalRAM");
 
         message.buildEmbed()
             .setColor(0x00adff)

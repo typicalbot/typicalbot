@@ -8,6 +8,11 @@ class Ready extends Event {
     }
 
     async execute() {
+        this.client.node.sendTo("manager", {
+            event: "ready",
+            message: `Shards ${this.client.shards} ready.`
+        });
+
         this.client.handlers.process.log(`Client Connected | Shard ${this.client.shardNumber} / ${this.client.shardCount}`);
         this.client.user.setActivity(`Client Started`);
         this.client.functions.fetchDonors();
