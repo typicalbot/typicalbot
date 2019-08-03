@@ -1,6 +1,6 @@
 const pm2 = require("pm2");
 const { Util } = require("discord.js");
-const config = require("./config");
+const config = require("../config");
 
 async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(config.token);
@@ -40,6 +40,6 @@ pm2.connect(err => {
         max_memory_restart: '100M'   // Optional: Restarts your app if it reaches 100Mo
     }, function (err, apps) {
         pm2.disconnect();   // Disconnects from PM2
-        if (err) throw err
+        if (err) throw err;
     });
 });

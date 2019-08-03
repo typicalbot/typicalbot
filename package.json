@@ -4,7 +4,8 @@
     "description": "A JavaScript/Discord.JS bot for Discord named TypicalBot.",
     "main": "index.js",
     "scripts": {
-        "setup": "node ./setup/init.js"
+        "setup": "node ./scripts/setup.js",
+        "pm2-gen": "node ./scripts/pm2.js"
     },
     "dependencies": {
         "discord.js": "github:discordjs/discord.js#master",
