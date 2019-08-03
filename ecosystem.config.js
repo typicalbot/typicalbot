@@ -16,7 +16,8 @@ Util.fetchRecommendedShards(config.token).then(shardCount => {
             watch: false,
             env: {
                 CLUSTER: `${config.clusterServer} ${config.clusterBuild ? `${config.clusterBuild} ` : ""}${i}`,
-                SHARDS: `${clusterShards[0]}-${clusterShards[9] || clusterShards[clusterShards.length]}`
+                //SHARDS: `${clusterShards[0]}-${clusterShards[9] || clusterShards[clusterShards.length]}`
+                SHARDS: clusterShards
             }
         })
     }

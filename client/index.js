@@ -4,8 +4,9 @@ const { Client, Collection } = require("discord.js");
 
 const config = require("../../config.json");
 
-const [first, last] = process.env.SHARDS.split("-").map(Number)
-const shards = Array.from({ length: last - first + 1 }, (a, b) => b + first - 1);
+//const [first, last] = process.env.SHARDS.split("-").map(Number)
+//const shards = Array.from({ length: last - first + 1 }, (a, b) => b + first - 1);
+const shards = process.env.SHARDS;
 
 const DatabaseHandler = require("./handlers/Database");
 const TaskHandler = require("./handlers/Tasks");
