@@ -3,7 +3,7 @@ const { Util } = require("discord.js");
 const config = require("../config");
 
 async function generateClusters() {
-    const shardCount = 57;//await Util.fetchRecommendedShards(config.token);
+    const shardCount = await Util.fetchRecommendedShards(config.token);
     const shards = Array.from({ length: shardCount }, (a, b) => b);
     const clusterCount = Math.ceil(shardCount / 10);
     const clusters = new Array();
@@ -39,9 +39,11 @@ pm2.connect(async err => {
     console.log("Generating Clusters\n", clusters);
     
     clusters.forEach((cluster, i) => {
-        console.log(cluster.env.SHARDS);
         pm2.start(cluster, function (err, apps) {
-            if (i === (clusters.length -1)) pm2.disconnect();
+            if (i === (clusters.length -1)) {
+                console.log("Generation Complete.\nExiting.");
+                pm2.disconnect();
+            }
 
             if (err) throw err;
         });
