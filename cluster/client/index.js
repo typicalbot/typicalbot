@@ -41,7 +41,7 @@ module.exports = class Cluster extends Client {
         //this.shardCount = Number(process.env.TOTAL_SHARD_COUNT);
 
         this.handlers = {};
-        //this.handlers.process = new ProcessHandler(this);
+        this.handlers.process = new ProcessHandler(this);
         this.handlers.database = new DatabaseHandler(this);
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
@@ -72,5 +72,13 @@ module.exports = class Cluster extends Client {
             event: "collectData",
             data: property
         }, { receptive: true });
+    }
+
+    get usedRAM() {
+        return Math.round(process.memoryUsage().heapUsed / 1048576);
+    }
+
+    get totalRAM() {
+        return Math.round(process.memoryUsage().heapTotal / 1048576);
     }
 }
