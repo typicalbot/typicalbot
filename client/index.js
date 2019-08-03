@@ -33,7 +33,7 @@ module.exports = class Cluster extends Client {
 
         this.shards = JSON.parse(process.env.SHARDS);
         this.cluster = `${process.env.CLUSTER} [${this.shards.join(",")}]`;
-        this.shardCount = config.shardCount;
+        this.shardCount = process.env.TOTAL_SHARD_COUNT;
 
         this.handlers = {};
         this.handlers.database = new DatabaseHandler(this);

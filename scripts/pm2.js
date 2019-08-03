@@ -5,11 +5,11 @@ const config = require("../config");
 async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(config.token);
     const shards = Array.from({ length: shardCount }, (a, b) => b);
-    const clusterCount = Math.ceil(shardCount / config.shardsPerCluster);
+    const clusterCount = Math.ceil(shardCount / 10);
     const clusters = new Array();
 
     for (let i = 1; i <= clusterCount; i++) {
-        const clusterShards = shards.splice(0, config.shardsPerCluster);
+        const clusterShards = shards.splice(0, 10);
 
         clusters.push({
             name: `${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`,
