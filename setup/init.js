@@ -12,7 +12,7 @@ const r = redb(credentials);
     const db = r.db(credentials.db);
     const dbTables = await db.tableList();
 
-    const tables = ["guilds", "mutes", "tasks", "donors", "partners"];
+    const tables = ["guilds", "mutes", "tasks", "donors"];
 
     for (const t of tables) {
         if (!dbTables.includes(t)) {

@@ -11,8 +11,6 @@ class FetchAccess extends Function {
 
         if ((await guild.fetchPermissions(owner)).level > 5) return Constants.Access.Titles.STAFF;
 
-        if (this.client.config.partners[owner.id]) return Constants.Access.Titles.PARTNER;
-
         if (this.client.caches.donors.has(owner.id) && this.client.caches.donors.get(owner.id).amount >= 5) return Constants.Access.Titles.DONOR;
 
         return Constants.Access.Titles.DEFAULT;
