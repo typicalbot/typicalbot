@@ -33,7 +33,11 @@ pm2.connect(async err => {
         process.exit(2);
     }
 
+    console.log("Yay!");
+
     const clusters = await generateClusters();
+
+    console.log(clusters);
     
     clusters.forEach((cluster, i) => {
         pm2.start(cluster, function (err, apps) {
