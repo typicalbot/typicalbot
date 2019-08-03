@@ -1,7 +1,7 @@
 const { Util } = require("discord.js");
 const config = require("./config");
 
-module.exports = () => Util.fetchRecommendedShards(config.token).then(shardCount => {
+module.exports = Util.fetchRecommendedShards(config.token).then(shardCount => {
     const clusterCount = Math.ceil(shardCount / config.shardsPerCluster);
     const clusters = new Array();
     const shards = Array.from({ length: shardCount }, (a, b) => b);
