@@ -2,7 +2,7 @@
     "build": "BUILD STAGE",
 
     "prefix": "$",
-    "shards": 1,
+    "shardCount": 1,
 
     "id": "BOT ID HERE",
 

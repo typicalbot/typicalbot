@@ -28,7 +28,7 @@ const MusicUtility = require("./utility/Music");
 module.exports = class Cluster extends Client {
     constructor(node) {
         super(Object.assign({
-            totalShardCount: 4,
+            totalShardCount: config.shardCount,
             shardCount: shards.length,
             shards
         }, config.clientOptions));
@@ -38,9 +38,10 @@ module.exports = class Cluster extends Client {
         this.build = config.build;
 
         this.shards = shards;
+        this.cluster = `${process.env.CLUSTER}[${shards.join(",")}]`
         //this.shardID = Number(process.env.SHARDS);
         //this.shardNumber = Number(process.env.SHARDS) + 1;
-        //this.shardCount = Number(process.env.TOTAL_SHARD_COUNT);
+        this.shardCount = config.shardCount;
 
         this.handlers = {};
         this.handlers.process = new ProcessHandler(this);

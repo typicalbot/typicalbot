@@ -34,7 +34,7 @@ module.exports = class extends Command {
             + `=> Library           : discord.js\n`
             + `=> Created By        : HyperCoder#2975 & nsylke#4490\n\n`
             + `    This Shard:\n`
-            + `=> Shard             : ${this.client.shardNumber} / ${this.client.shardCount}\n`
+            + `=> Cluster           : ${this.client.cluster}\n`
             + `=> Servers           : ${this.client.guilds.size.toLocaleString()}\n`
             + `=> Voice Connections : ${this.client.voice.connections.size.toLocaleString()}\n`
             + `=> Channels          : ${this.client.channels.size.toLocaleString()}\n`
@@ -69,7 +69,7 @@ module.exports = class extends Command {
             .addField("» Library", "discord.js", true)
             .addField("» Created By", "HyperCoder#2975\nnsylke#4490", true)
             .addBlankField()
-            .addField("» Shard", `${this.client.shardNumber} / ${this.client.shardCount}`, true)
+            .addField("» Cluster", `${this.client.cluster}`, true)
             .addField("» Servers", `${this.client.guilds.size.toLocaleString()}`, true)
             .addField("» Voice Connections", `${this.client.voice.connections.size.toLocaleString()}`, true)
             .addField("» Channels", `${this.client.channels.size.toLocaleString()}`, true)

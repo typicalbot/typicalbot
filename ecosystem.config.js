@@ -6,7 +6,7 @@ module.exports = {
         autorestart: false,
         watch: false,
         env: {
-            CLUSTER: "TypicalBot PTB - Cluster t1",
+            CLUSTER: "ptb.typicalbot.cluster.1",
             SHARDS: '1-2'
         }
     },
@@ -17,7 +17,7 @@ module.exports = {
         autorestart: false,
         watch: false,
         env: {
-            CLUSTER: "TypicalBot PTB - Cluster t2",
+            CLUSTER: "ptb.typicalbot.cluster.2",
             SHARDS: '3-4'
         }
     }]
