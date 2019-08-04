@@ -18,11 +18,12 @@ module.exports = class extends Command {
         pm2.connect(function(err) {
             if (err) console.error(err);
             
-            pm2.restart(parameters, function(err, apps) {
-                if (err) {
+            pm2.restart(parameters || "all", function(err, apps) {
+                if (err === "process name not found") return message.error("Process not found.");
+                else {
                     message.error("An error occured while trying to restart, check the console.");
                     console.error(err);
-                } else message.reply("Successfully restarted.");
+                }
 
                 pm2.disconnect();
             });
