@@ -8,7 +8,6 @@ const config = require("../../config.json");
 const DatabaseHandler = require("./handlers/Database");
 const TaskHandler = require("./handlers/Tasks");
 const PermissionsHandler = require("./handlers/Permissions");
-const AutoModerationHandler = require("./handlers/AutoModeration");
 const ModerationLogHandler = require("./handlers/ModerationLog");
 const MusicHandler = require("./handlers/Music");
 
@@ -40,7 +39,6 @@ module.exports = class Cluster extends Client {
         this.handlers.database = new DatabaseHandler(this);
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
-        this.handlers.automoderation = new AutoModerationHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);
         this.handlers.music = new MusicHandler(this);
 

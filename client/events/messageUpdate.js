@@ -1,5 +1,15 @@
 const Constants = require("../utility/Constants");
 const Event = require("../structures/Event");
+const { inspect } = require("util");
+
+function inviteCheck(message) {
+    if (message.guild.settings.automod.invite) {
+        if (
+            /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content) ||
+            /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(inspect(message.embeds, { depth: 4 }))
+        ) this.client.emit("guildInvitePosted", message);
+    }
+}
 
 class MessageUpdate extends Event {
     constructor(...args) {
@@ -7,9 +17,7 @@ class MessageUpdate extends Event {
     }
 
     async execute(oldMessage, message) {
-        if (message.author.bot) return;
-        if (message.channel.type !== "text") return;
-        if (!message.guild.available) return;
+        if (message.author.bot || !message.guild.available) return;
 
         const settings = message.guild.settings = await message.guild.fetchSettings();
 
@@ -19,7 +27,7 @@ class MessageUpdate extends Event {
         if (settings.ignored.invites.includes(message.channel.id)) return;
 
         if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id))
-            this.client.handlers.automoderation.invite(message);
+            inviteCheck(message).bind(this);
     }
 }
 
