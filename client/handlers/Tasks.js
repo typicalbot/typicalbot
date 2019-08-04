@@ -52,6 +52,8 @@ class TaskHandler extends Collection {
                     new taskType(this.client, this, task)
                 );
             });
+
+            this.startInterval();
         });
     }
 
