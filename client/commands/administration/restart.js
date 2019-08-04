@@ -22,13 +22,12 @@ module.exports = class extends Command {
             const list = [];
 
             for (let i = 1; i <= Number(process.env.CLUSTER_COUNT); i++) {
-                console.log(list);
                 list.push(`${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`); 
             }
 
             processes = list.join(" ");
         } else processes = parameters;
-        /*
+
         pm2.connect(function(err) {
             if (err) console.error(err);
             
@@ -41,6 +40,6 @@ module.exports = class extends Command {
 
                 pm2.disconnect();
             });
-        });*/
+        });
     }
 };
