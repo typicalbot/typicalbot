@@ -29,7 +29,7 @@ module.exports = class extends Command {
         } else processes = parameters;
 
         console.log(processes);
-
+/*
         pm2.connect(function(err) {
             if (err) console.error(err);
             
@@ -42,6 +42,6 @@ module.exports = class extends Command {
 
                 pm2.disconnect();
             });
-        });
+        });*/
     }
 };
