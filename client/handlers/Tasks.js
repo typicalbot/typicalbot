@@ -21,7 +21,7 @@ class TaskHandler extends Collection {
             const req = require(join(file.dir, file.base));
 
             this.taskTypes.set(file.name, req);
-        }).on("end", async function() {
+        }).on("end", async () => {
             console.log(`Loaded ${this.size} Tasks in ${Date.now() - start}ms`);
 
             const list = await this.client.handlers.database.get("tasks");
