@@ -53,7 +53,7 @@ class TaskHandler extends Collection {
                 );
             });
 
-            this.startInterval();
+            //this.startInterval();
         });
     }
 
