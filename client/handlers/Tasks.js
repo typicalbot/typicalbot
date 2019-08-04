@@ -37,8 +37,7 @@ class TaskHandler {
         });
 
         setInterval(() => {
-            this
-                .filter(task => Date.now() >= task.end)
+            this.collection.filter(task => Date.now() >= task.end)
                 .forEach(task => task.execute());
         }, 1000);
     }
