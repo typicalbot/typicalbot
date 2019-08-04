@@ -1,8 +1,7 @@
 const Command = require("../../structures/Command");
 const Constants = require(`../../utility/Constants`);
-const { exec } = require("child_process");
-const { join } = require("path");
 const pm2 = require("pm2");
+
 const config = require("../../../config");
 
 module.exports = class extends Command {
