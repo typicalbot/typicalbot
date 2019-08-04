@@ -72,11 +72,11 @@ module.exports = class Cluster extends Client {
     }
 
     async fetchDonors() {
-        (await this.client.handlers.database.connection.table("donors")).forEach(e => {
-            if (e.id.length > 5) this.client.caches.donors.set(e.id, e);
+        (await this.handlers.database.connection.table("donors")).forEach(e => {
+            if (e.id.length > 5) this.caches.donors.set(e.id, e);
         });
 
-        return this.client.caches.donors;
+        return this.caches.donors;
     }
 
     get usedRAM() {
