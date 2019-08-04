@@ -19,7 +19,7 @@ module.exports = class extends Command {
             if (err) console.error(err);
             
             pm2.restart(parameters || "all", function(err, apps) {
-                if (err.includes("process name not found")) return message.error("Process not found.");
+                if (err.message.includes("process name not found")) return message.error("Process not found.");
                 else {
                     message.error("An error occured while trying to restart, check the console.");
                     console.error(err);
