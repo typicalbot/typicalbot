@@ -1,6 +1,7 @@
 require("./utility/Extenders");
 
 const { Client, Collection } = require("discord.js");
+const request = require("superagent");
 
 const config = require("../../config.json");
 
@@ -58,6 +59,8 @@ module.exports = class Cluster extends Client {
         this.caches.softbans = new Collection();
         this.caches.invites = new Collection();
 
+        this.fetchDonors();
+
         this.login(this.config.token);
     }
 
@@ -68,11 +71,45 @@ module.exports = class Cluster extends Client {
         }, { receptive: true });
     }
 
+    async fetchDonors() {
+        (await this.client.handlers.database.connection.table("donors")).forEach(e => {
+            if (e.id.length > 5) this.client.caches.donors.set(e.id, e);
+        });
+
+        return this.client.caches.donors;
+    }
+
     get usedRAM() {
         return Math.round(process.memoryUsage().heapUsed / 1048576);
     }
 
     get totalRAM() {
         return Math.round(process.memoryUsage().heapTotal / 1048576);
+    }
+
+    async sendStatistics() {
+        request.post("https://www.carbonitex.net/discord/data/botdata.php")
+            .set("Content-Type", "application/json")
+            .send({
+                "shardid": this.shardID.toString(),
+                "shardcount": this.shardCount.toString(),
+                "servercount": this.guilds.size.toString(),
+                "key": this.config.apis.carbon
+            })
+            .end((err, res) => {
+                if (err || res.statusCode != 200) throw `Carbinitex Stats Transfer Failed ${err.body || err}`;
+            });
+
+        request.post(`https://discordbots.org/api/bots/${this.user.id}/stats`)
+            .set("Content-Type", "application/json")
+            .set("Authorization", this.config.apis.discordbots)
+            .send({
+                "shard_id": this.shardID.toString(),
+                "shard_count": this.shardCount.toString(),
+                "server_count": this.guilds.size.toString()
+            })
+            .end((err, res) => {
+                if (err || res.statusCode != 200) throw `DiscordBots Stats Transfer Failed ${err.body || err}`;
+            });
     }
 };

@@ -3,8 +3,6 @@ class Event {
         Object.defineProperty(this, "client", { value: client });
 
         this.name = name;
-
-        this.intervals = new Array();
     }
 }
 

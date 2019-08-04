@@ -9,16 +9,15 @@ class Ready extends Event {
 
     async execute() {
         console.log(`Client Connected | Cluster ${this.client.cluster}`);
-        this.client.user.setActivity(`Client Started`);
-        this.client.functions.fetchDonors();
+        this.client.user.setActivity(`Client is Loading`);
 
-        this.intervals.push(setInterval(async () => {
+        setInterval(async () => {
             this.client.user.setActivity(`${this.client.config.prefix}help — typicalbot.com`, { type: 'WATCHING' });
-        }, 1000 * 60 * 5));
+        }, 1000 * 60 * 5);
 
-        this.intervals.push(setInterval(() => {
+        setInterval(() => {
             this.client.voice.connections.filter(c => c.channel.members.filter(m => !m.user.bot).size === 0).forEach(c => c.guildStream ? c.guildStream.end() : c.disconnect());
-        }, 1000 * 30));
+        }, 1000 * 30);
     }
 }
 

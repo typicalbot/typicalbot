@@ -8,7 +8,7 @@ class GuildCreate extends Event {
     async execute(guild) {
         if (!guild.available) return;
 
-        if (this.client.build === "stable") this.client.functions.postStats("a");
+        if (this.client.build === "stable") this.client.sendStatistics("a");
     }
 }
 

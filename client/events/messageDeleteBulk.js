@@ -1,5 +1,12 @@
 const Event = require("../structures/Event");
 const moment = require("moment");
+const snekfetch = require("snekfetch");
+
+async function hastebin(content) {
+    const { body } = await snekfetch.post("https://hastebin.com/documents").send(content).catch(e => { throw e; });
+
+    return `https://hastebin.com/${body.key}`;
+}
 
 class MessageBulkDelete extends Event {
     constructor(...args) {
@@ -21,7 +28,7 @@ class MessageBulkDelete extends Event {
 
         const channel = message.channel;
 
-        const haste = await this.client.functions.hastebin(messages.map(m => `${moment(m.createdAt).format("dddd MMMM Do, YYYY, hh:mm A")} | ${m.author.tag} (${m.author.id}):\n${m.content}`).join("\n\n--  --  --  --  --\n\n"));
+        const haste = await hastebin(messages.map(m => `${moment(m.createdAt).format("dddd MMMM Do, YYYY, hh:mm A")} | ${m.author.tag} (${m.author.id}):\n${m.content}`).join("\n\n--  --  --  --  --\n\n"));
 
         if (settings.logs.delete === "--embed") return logsChannel.buildEmbed()
             .setColor(0x3EA7ED)
