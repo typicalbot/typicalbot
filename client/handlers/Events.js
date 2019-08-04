@@ -30,10 +30,6 @@ class EventHandler extends Collection {
             console.log(`Loaded ${this.size} Events in ${Date.now() - start}ms`);
         });
     }
-
-    reload() {
-        this.forEach(e => delete require.cache[e.path]);
-    }
 }
 
 module.exports = EventHandler;

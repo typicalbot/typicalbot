@@ -1,9 +1,7 @@
-const Constants = require("../utility/Constants");
 const path = require("path");
 const klaw = require("klaw");
 
 const { Collection } = require("discord.js");
-const PermissionLevel = require("../structures/PermissionLevel");
 
 class PermissionsHandler {
     constructor(client) {
@@ -26,10 +24,6 @@ class PermissionsHandler {
         }).on("end", () => {
             this.levels = this.levels.sort((a, b) => b.level - a.level);
         });
-    }
-
-    define(level) {
-        return this.levels.get(level);
     }
 
     async fetch(guild, user, ignoreStaff = false) {
