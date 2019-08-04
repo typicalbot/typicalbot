@@ -35,7 +35,7 @@ class TaskHandler extends Collection {
                 );
             });
 
-            this.interval = setInterval(function() {
+            setInterval(() => {
                 this
                     .filter(task => Date.now() >= task.end)
                     .forEach(task => task.execute());
