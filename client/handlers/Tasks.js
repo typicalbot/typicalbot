@@ -21,7 +21,7 @@ class TaskHandler extends Collection {
             const req = require(join(file.dir, file.base));
 
             this.taskTypes.set(file.name, req);
-        }).on("end", async () => {
+        }).on("end", async function() {
             console.log(`Loaded ${this.size} Tasks in ${Date.now() - start}ms`);
 
             const list = await this.client.handlers.database.get("tasks");
@@ -35,7 +35,7 @@ class TaskHandler extends Collection {
                 );
             });
 
-            this.interval = setInterval(() => {
+            this.interval = setInterval(function() {
                 this
                     .filter(task => Date.now() >= task.end)
                     .forEach(task => task.execute());
