@@ -10,10 +10,6 @@ class TaskHandler extends Collection {
 
         this.taskTypes = new Collection();
 
-        this.load();
-    }
-
-    async load() {
         const path = join(__dirname, "..", "tasks");
         const start = Date.now();
 
