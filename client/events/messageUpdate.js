@@ -2,15 +2,6 @@ const Constants = require("../utility/Constants");
 const Event = require("../structures/Event");
 const { inspect } = require("util");
 
-function inviteCheck(message) {
-    if (message.guild.settings.automod.invite) {
-        if (
-            /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content) ||
-            /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(inspect(message.embeds, { depth: 4 }))
-        ) this.client.emit("guildInvitePosted", message);
-    }
-}
-
 class MessageUpdate extends Event {
     constructor(...args) {
         super(...args);
@@ -27,7 +18,16 @@ class MessageUpdate extends Event {
         if (settings.ignored.invites.includes(message.channel.id)) return;
 
         if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id))
-            inviteCheck(message).bind(this);
+            this.inviteCheck(message);
+    }
+    
+    inviteCheck(message) {
+        if (message.guild.settings.automod.invite) {
+            if (
+                /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content) ||
+                /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(inspect(message.embeds, { depth: 4 }))
+            ) this.client.emit("guildInvitePosted", message);
+        }
     }
 }
 

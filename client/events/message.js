@@ -2,23 +2,6 @@ const Constants = require("../utility/Constants");
 const Event = require("../structures/Event");
 const { inspect } = require("util");
 
-function matchPrefix(user, settings, command) {
-    if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
-    if (settings.prefix.custom && command.startsWith(settings.prefix.custom)) return settings.prefix.custom;
-    if (settings.prefix.default && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
-        
-    return null;
-}
-
-function inviteCheck(message) {
-    if (message.guild.settings.automod.invite) {
-        if (
-            /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content) ||
-            /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(inspect(message.embeds, { depth: 4 }))
-        ) this.client.emit("guildInvitePosted", message);
-    }
-}
-
 class Message extends Event {
     constructor(...args) {
         super(...args);
@@ -46,13 +29,13 @@ class Message extends Event {
             const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author);
             const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
     
-            if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) inviteCheck(message).bind(this);
+            if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) this.inviteCheck(message);
             if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id)) return;
             if (userPermissions.level === Constants.Permissions.Levels.SERVER_BLACKLISTED) return;
     
             const split = message.content.split(" ")[0];
     
-            const prefix = matchPrefix(message.author, settings, split).bind(this);
+            const prefix = this.matchPrefix(message.author, settings, split);
             if (!prefix || !message.content.startsWith(prefix)) return;
     
             const command = await this.client.commands.fetch(split.slice(prefix.length).toLowerCase(), settings);
@@ -77,6 +60,23 @@ class Message extends Event {
                 return command.embedExecute(message, param, userPermissions);
     
             command.execute(message, param, userPermissions);
+        }
+    }
+
+    matchPrefix(user, settings, command) {
+        if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
+        if (settings.prefix.custom && command.startsWith(settings.prefix.custom)) return settings.prefix.custom;
+        if (settings.prefix.default && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
+            
+        return null;
+    }
+
+    inviteCheck(message) {
+        if (message.guild.settings.automod.invite) {
+            if (
+                /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content) ||
+                /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(inspect(message.embeds, { depth: 4 }))
+            ) this.client.emit("guildInvitePosted", message);
         }
     }
 }
