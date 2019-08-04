@@ -13,20 +13,6 @@ class TaskHandler extends Collection {
         this.load();
     }
 
-    // init() {
-    //     klaw(path.join(__dirname, "..", "tasks")).on("data", item => {
-    //         const file = path.parse(item.path);
-    //         if (!file.ext || file.ext !== ".js") return;
-
-    //         const taskType = require(path.join(file.dir, file.base));
-
-    //         this.taskTypes.set(file.name, taskType);
-    //     }).on("end", () => {
-    //         this.taskInit();
-    //         this.startInterval();
-    //     });
-    // }
-
     async load() {
         const path = join(__dirname, "..", "tasks");
         const start = Date.now();
@@ -53,7 +39,11 @@ class TaskHandler extends Collection {
                 );
             });
 
-            //this.startInterval();
+            this.interval = setInterval(function() {
+                this
+                    .filter(task => Date.now() >= task.end)
+                    .forEach(task => task.execute());
+            }, 1000);
         });
     }
 
@@ -68,14 +58,6 @@ class TaskHandler extends Collection {
                 );
             });
         });
-    }
-
-    startInterval() {
-        this.interval = setInterval(() => {
-            this
-                .filter(task => Date.now() >= task.end)
-                .forEach(task => task.execute());
-        }, 1000);
     }
 
     idGenerate() {
