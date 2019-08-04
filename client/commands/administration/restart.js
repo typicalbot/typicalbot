@@ -21,7 +21,7 @@ module.exports = class extends Command {
         if (!parameters || parameters === "all") {
             const list = [];
 
-            for (let i = 1; i < Number(process.env.CLUSTER_COUNT); i++) {
+            for (let i = 1; i <= Number(process.env.CLUSTER_COUNT); i++) {
                 console.log(list);
                 list.push(`${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`); 
             }
