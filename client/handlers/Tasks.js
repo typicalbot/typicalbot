@@ -75,7 +75,7 @@ class TaskHandler {
 
     async delete(id) {
         await this.client.handlers.database.delete("tasks", id);
-        super.delete(id);
+        this.collection.delete(id);
 
         return;
     }
