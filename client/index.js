@@ -3,7 +3,7 @@ require("./utility/Extenders");
 const { Client, Collection } = require("discord.js");
 const request = require("superagent");
 
-const config = require("../../config.json");
+const config = require("../config.json");
 
 const DatabaseHandler = require("./handlers/Database");
 const TaskHandler = require("./handlers/Tasks");
