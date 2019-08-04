@@ -8,6 +8,7 @@
         "pm2-gen": "node ./scripts/pm2.js"
     },
     "dependencies": {
+        "@discordjs/uws": "^11.149.1",
         "bignum": "^0.13.0",
         "canvas": "^1.6.11",
         "canvas-constructor": "^1.1.2",
@@ -24,9 +25,10 @@
         "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
         "snekfetch": "^4.0.4",
         "superagent": "^3.8.3",
-        "uws": "^10.148.0",
         "veza": "^0.6.0",
-        "ytdl-core": "github:fent/node-ytdl-core"
+        "vm2": "^3.8.3",
+        "ytdl-core": "github:fent/node-ytdl-core",
+        "zlib-sync": "^0.1.5"
     },
     "repository": {
         "type": "git",
