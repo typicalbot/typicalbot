@@ -1,7 +1,7 @@
 require("./utility/Extenders");
 
 const { Client, Collection } = require("discord.js");
-const request = require("superagent");
+const fetch = require("node-fetch");
 
 const config = require("../config.json");
 
@@ -86,28 +86,35 @@ module.exports = class Cluster extends Client {
     }
 
     async sendStatistics() {
-        request.post("https://www.carbonitex.net/discord/data/botdata.php")
-            .set("Content-Type", "application/json")
-            .send({
-                "shardid": this.shardID.toString(),
-                "shardcount": this.shardCount.toString(),
-                "servercount": this.guilds.size.toString(),
-                "key": this.config.apis.carbon
-            })
-            .end((err, res) => {
-                if (err || res.statusCode != 200) throw `Carbinitex Stats Transfer Failed ${err.body || err}`;
+        for(const shard in this.shards) {
+            fetch("https://www.carbonitex.net/discord/data/botdata.php", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "shardid": shard,
+                    "shardcount": this.shardCount.toString(),
+                    "servercount": this.guilds.size.toString(),
+                    "key": this.config.apis.carbon
+                })
+            }).catch(err => {
+                if (err) console.error(`Carbonitex Stats Transfer Failed ${err}`);
             });
 
-        request.post(`https://discordbots.org/api/bots/${this.user.id}/stats`)
-            .set("Content-Type", "application/json")
-            .set("Authorization", this.config.apis.discordbots)
-            .send({
-                "shard_id": this.shardID.toString(),
-                "shard_count": this.shardCount.toString(),
-                "server_count": this.guilds.size.toString()
-            })
-            .end((err, res) => {
-                if (err || res.statusCode != 200) throw `DiscordBots Stats Transfer Failed ${err.body || err}`;
+            fetch(`https://discordbots.org/api/bots/${this.user.id}/stats`, {
+                method: "post",
+                headers: {
+                    "Authorization": this.config.apis.discordbots
+                },
+                body: JSON.stringify({
+                    "shard_id": shard,
+                    "shard_count": this.shardCount.toString(),
+                    "server_count": this.guilds.size.toString()
+                })
+            }).catch(err => {
+                if (err) console.error(`DiscordBots Stats Transfer Failed ${err}`);
             });
+        }
     }
 };

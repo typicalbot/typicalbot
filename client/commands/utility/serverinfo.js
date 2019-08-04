@@ -1,6 +1,5 @@
 const Command = require("../../structures/Command");
 const Constants = require(`../../utility/Constants`);
-const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
 module.exports = class extends Command {

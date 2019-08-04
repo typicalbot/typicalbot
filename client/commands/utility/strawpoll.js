@@ -1,5 +1,5 @@
 const Command = require("../../structures/Command");
-const request = require("superagent");
+const fetch = require("node-fetch");
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -20,12 +20,16 @@ module.exports = class extends Command {
         const list = answers.split(/\s*;\s*/i);
         if (list.length < 2 || list.length > 30) return message.error("There must be between 2 and 30 choices for the strawpoll to be created.");
 
-        request.post("https://www.strawpoll.me/api/v2/polls")
-            .send({ "title": question, "options": list, "multi": multi })
-            .end((err, res) => {
-                if (err || res.statusCode !== 200) return message.error(`An error occured making that request.`);
-
-                message.reply(`Your strawpoll has been created! <https://strawpoll.me/${res.body.id}>`);
-            });
+        fetch("https://www.strawpoll.me/api/v2/polls", {
+            method: "post",
+            body: JSON.stringify({
+                "title": question,
+                "options": list,
+                "multi": multi
+            })
+        })
+            .then(res => res.json())
+            .then(json => message.reply(`Your strawpoll has been created! <https://strawpoll.me/${json.id}>`))
+            .catch(err => message.error("An error has occurred making that request."));
     }
 };

@@ -1,11 +1,24 @@
 const Event = require("../structures/Event");
 const moment = require("moment");
-const snekfetch = require("snekfetch");
+const fetch = require("node-fetch");
 
-async function hastebin(content) {
-    const { body } = await snekfetch.post("https://hastebin.com/documents").send(content).catch(e => { throw e; });
+async function hastebin(input, options = {}) {
+    if (typeof options === "string") options = { url: "https://www.hastebin.com", extension: options };
 
-    return `https://hastebin.com/${body.key}`;
+    const url = "url" in options ? options.url : "https://www.hastebin.com";
+    const extension = "extension" in options ? options.extension : "js";
+
+    const res = await fetch(`${url}/documents`, {
+        method: "post",
+        body: input,
+        headers: { "Content-Type": "text/plain" }
+    });
+
+    if (!res.ok) console.error(res.statusText);
+
+    const { key } = await res.json();
+
+    return `${url}/${key}.${extension}`;
 }
 
 class MessageBulkDelete extends Event {

@@ -9,7 +9,7 @@ class Ready extends Event {
 
     async execute() {
         console.log(`Client Connected | Cluster ${this.client.cluster}`);
-        this.client.user.setActivity(`Client is Loading`);
+        this.client.user.setActivity(`Client is loading`);
 
         setInterval(async () => {
             this.client.user.setActivity(`${this.client.config.prefix}help — typicalbot.com`, { type: 'WATCHING' });

@@ -1,5 +1,5 @@
 const Command = require("../../structures/Command");
-const request = require("superagent");
+const fetch = require("node-fetch");
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -17,16 +17,15 @@ module.exports = class extends Command {
 
         const query = args[1];
 
-        request
-            .get(`http://api.urbandictionary.com/v0/define?term=${query}`)
-            .end((err, res) => {
-                if (err) return message.error("An error occured while trying to complete this request.");
-
-                const resp = res.body.list[0];
+        fetch(`http://api.urbandictionary.com/v0/define?term=${query}`)
+            .then(res => res.json())
+            .then(json => {
+                const resp = json.list[0];
                 if (!resp) return message.error(`No matches for the query **${query}**.`);
 
                 message.reply(`**__${query}:__** ${resp.definition}`);
-            });
+            })
+            .catch(err => message.error("An error occurred making that request."));
     }
 
     embedExecute(message, parameters, permissionLevel) {
@@ -37,13 +36,11 @@ module.exports = class extends Command {
 
         const query = args[1];
 
-        request
-            .get(`http://api.urbandictionary.com/v0/define?term=${query}`)
-            .end((err, res) => {
-                if (err) return message.buildEmbed().setColor(0xFF0000).setDescription("An error occured while trying to complete this request.").send();
-
-                const resp = res.body.list[0];
-                if (!resp) return message.buildEmbed().setColor(0xFF0000).setDescription(`No matches for the query **${query}**.`).send();
+        fetch(`http://api.urbandictionary.com/v0/define?term=${query}`)
+            .then(res => res.json())
+            .then(json => {
+                const resp = json.list[0];
+                if (!resp) return message.error(`No matches for the query **${query}**.`);
 
                 const rating = Math.round((resp.thumbs_up / (resp.thumbs_up + resp.thumbs_down)) * 100);
 
@@ -51,11 +48,12 @@ module.exports = class extends Command {
                     .setColor(0x00adff)
                     .setTitle(query)
                     .setURL(resp.permalink)
-                    .addField(`Definition 1 out of ${res.body.list.length}`, `\n\u200B    ${resp.definition}`)
+                    .addField(`Definition 1 out of ${json.length}`, `\n\u200B    ${resp.definition}`)
                     .addField("Rating", `\u200B    \\👍  ${resp.thumbs_up}    |    \\👎  ${resp.thumbs_down}${!isNaN(rating) ? `    |    ${rating}% of ${resp.thumbs_up + resp.thumbs_down} like this definition.` : ""}`)
                     .setThumbnail("http://i.imgur.com/CcIZZsa.png")
                     .setFooter("Urban Dictionary Defintion")
                     .send();
-            });
+            })
+            .catch(err => message.error("An error occurred making that request."));
     }
 };

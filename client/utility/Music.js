@@ -1,8 +1,5 @@
 const ytdl = require("ytdl-core");
 
-const SYS = require("simple-youtube-stream");
-const sys = new SYS();
-
 const apiKey = require(`${process.cwd()}/config`).apis.youtube;
 
 const YAPI = require("simple-youtube-api");

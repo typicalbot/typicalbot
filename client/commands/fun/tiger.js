@@ -1,5 +1,4 @@
 const Command = require("../../structures/Command");
-const request = require("superagent");
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -10,20 +9,22 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        request.get("https://typicalbot.com/api/tiger/")
-            .end((err, res) => {
-                if (err) return message.error("An error occured making that request.");
+        return message.error("An error occurred making that request.");
+        // request.get("https://typicalbot.com/api/tiger/")
+        //     .end((err, res) => {
+        //         if (err) return message.error("An error occured making that request.");
 
-                return message.send(JSON.parse(res.text).response);
-            });
+        //         return message.send(JSON.parse(res.text).response);
+        //     });
     }
 
     embedExecute(message, parameters, permissionLevel) {
-        request.get("https://typicalbot.com/api/tiger/")
-            .end((err, res) => {
-                if (err) return message.error("An error occured making that request.");
+        return message.error("An error occurred making that request.");
+        // request.get("https://typicalbot.com/api/tiger/")
+        //     .end((err, res) => {
+        //         if (err) return message.error("An error occured making that request.");
 
-                return message.buildEmbed().setColor(0x00adff).setImage(JSON.parse(res.text).response).send();
-            });
+        //         return message.buildEmbed().setColor(0x00adff).setImage(JSON.parse(res.text).response).send();
+        //     });
     }
 };

@@ -1,5 +1,5 @@
 const Command = require("../../structures/Command");
-const request = require("superagent");
+const fetch = require("node-fetch");
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -11,20 +11,16 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        request.get("http://aws.random.cat/meow")
-            .end((err, res) => {
-                if (err) return message.error("An error occured making that request.");
-
-                return message.send(res.body.file);
-            });
+        fetch("https://aws.random.cat/meow")
+            .then(res => res.json())
+            .then(json => message.send(json.file))
+            .catch(err => message.error("An error occurred making that request."));
     }
 
     embedExecute(message, parameters, permissionLevel) {
-        request.get("http://aws.random.cat/meow")
-            .end((err, res) => {
-                if (err) return message.error("An error occured making that request.");
-
-                return message.buildEmbed().setColor(0x00adff).setImage(res.body.file).send();
-            });
+        fetch("https://aws.random.cat/meow")
+            .then(res => res.json())
+            .then(json => message.buildEmbed().setColor(0x00adff).setImage(json.file).send())
+            .catch(err => message.error("An error occurred making that request."));
     }
 };
