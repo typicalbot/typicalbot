@@ -34,13 +34,13 @@ class TaskHandler extends Collection {
                     new taskType(this.client, this, task)
                 );
             });
-
-            setInterval(() => {
-                this
-                    .filter(task => Date.now() >= task.end)
-                    .forEach(task => task.execute());
-            }, 1000);
         });
+
+        setInterval(() => {
+            this
+                .filter(task => Date.now() >= task.end)
+                .forEach(task => task.execute());
+        }, 1000);
     }
 
     taskInit() {
