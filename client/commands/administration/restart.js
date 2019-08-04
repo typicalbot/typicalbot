@@ -17,11 +17,16 @@ module.exports = class extends Command {
 
     execute(message, parameters, permissionLevel) {
         let processes;
+
+        console.log(processes);
         
         if (!parameters || parameters === "all") {
             const list = [];
 
+            console.log(list);
+
             for (let i = 1; i < process.env.CLUSTER_COUNT; i++) {
+                console.log(list);
                 list.push(`${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`); 
             }
 
@@ -29,7 +34,7 @@ module.exports = class extends Command {
         } else processes = parameters;
 
         console.log(processes);
-/*
+        /*
         pm2.connect(function(err) {
             if (err) console.error(err);
             
