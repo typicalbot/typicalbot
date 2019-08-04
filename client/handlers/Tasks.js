@@ -2,9 +2,9 @@ const { Collection } = require("discord.js");
 const { join, parse } = require("path");
 const klaw = require("klaw");
 
-class TaskHandler extends Collection {
+class TaskHandler {
     constructor(client) {
-        super();
+        this.collection = new Collection();
 
         Object.defineProperty(this, "client", { value: client });
 
@@ -22,14 +22,14 @@ class TaskHandler extends Collection {
 
             this.taskTypes.set(file.name, req);
         }).on("end", async () => {
-            console.log(`Loaded ${this.size} Tasks in ${Date.now() - start}ms`);
+            console.log(`Loaded ${this.collection.size} Tasks in ${Date.now() - start}ms`);
 
             const list = await this.client.handlers.database.get("tasks");
 
             list.forEach(task => {
                 const taskType = this.taskTypes.get(task.type);
 
-                this.set(
+                this.collection.set(
                     task.id,
                     new taskType(this.client, this, task)
                 );
@@ -48,7 +48,7 @@ class TaskHandler extends Collection {
             list.forEach(task => {
                 const taskType = this.taskTypes.get(task.type);
 
-                this.set(
+                this.collection.set(
                     task.id,
                     new taskType(this.client, this, task)
                 );
@@ -69,7 +69,7 @@ class TaskHandler extends Collection {
         const taskType = this.taskTypes.get(type);
         const task = new taskType(this.client, this, newData);
 
-        this.set(id, task);
+        this.collection.set(id, task);
 
         return task;
     }
@@ -82,10 +82,10 @@ class TaskHandler extends Collection {
     }
 
     async clear(type, member) {
-        const task = this.filter(t => t.guild === member.guild.id && t.member === member.id);
+        const task = this.collection.filter(t => t.guild === member.guild.id && t.member === member.id);
         if (!task.size) return;
 
-        task.forEach(t => this.delete(t.id));
+        task.forEach(t => this.collection.delete(t.id));
 
         return;
     }
