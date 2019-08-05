@@ -85,36 +85,34 @@ module.exports = class Cluster extends Client {
         return Math.round(process.memoryUsage().heapTotal / 1048576);
     }
 
-    async sendStatistics() {
-        for(const shard in this.shards) {
-            fetch("https://www.carbonitex.net/discord/data/botdata.php", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    "shardid": shard,
-                    "shardcount": this.shardCount.toString(),
-                    "servercount": this.guilds.size.toString(),
-                    "key": this.config.apis.carbon
-                })
-            }).catch(err => {
-                if (err) console.error(`Carbonitex Stats Transfer Failed ${err}`);
-            });
+    async sendStatistics(shardID) {
+        fetch("https://www.carbonitex.net/discord/data/botdata.php", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "shardid": shardID,
+                "shardcount": this.shardCount.toString(),
+                "servercount": this.guilds.filter(g => g.shardID === shardID).size.toString(),
+                "key": this.config.apis.carbon
+            })
+        }).catch(err => {
+            if (err) console.error(`Carbonitex Stats Transfer Failed ${err}`);
+        });
 
-            fetch(`https://discordbots.org/api/bots/${this.user.id}/stats`, {
-                method: "post",
-                headers: {
-                    "Authorization": this.config.apis.discordbots
-                },
-                body: JSON.stringify({
-                    "shard_id": shard,
-                    "shard_count": this.shardCount.toString(),
-                    "server_count": this.guilds.size.toString()
-                })
-            }).catch(err => {
-                if (err) console.error(`DiscordBots Stats Transfer Failed ${err}`);
-            });
-        }
+        fetch(`https://discordbots.org/api/bots/${this.user.id}/stats`, {
+            method: "post",
+            headers: {
+                "Authorization": this.config.apis.discordbots
+            },
+            body: JSON.stringify({
+                "shard_id": shardID,
+                "shard_count": this.shardCount.toString(),
+                "server_count": this.guilds.filter(g => g.shardID === shardID).size.toString()
+            })
+        }).catch(err => {
+            if (err) console.error(`DiscordBots Stats Transfer Failed ${err}`);
+        });
     }
 };
