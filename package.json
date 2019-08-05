@@ -1,11 +1,15 @@
 {
     "name": "typicalbot",
-    "version": "2.1.0",
-    "description": "A JavaScript/Discord.JS bot for Discord named TypicalBot.",
+    "description": "TypicalBot is open-source discord bot written in JavaScript, using the Discord.JS library.",
+    "version": "2.2.0",
     "main": "index.js",
     "scripts": {
         "setup": "node ./scripts/setup.js",
         "pm2-gen": "node ./scripts/pm2.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/typicalbot/typicalbot.git"
     },
     "dependencies": {
         "@discordjs/uws": "^11.149.1",
@@ -29,13 +33,11 @@
         "ytdl-core": "github:fent/node-ytdl-core",
         "zlib-sync": "^0.1.5"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/HyperCoder2975/TypicalBot.git"
-    },
-    "author": "HyperCoder2975",
+    "keywords": ["discordjs", "javascript", "bot", "discord", "typicalbot", "discord-bot", "discordapp"],
+    "author": "TypicalBot",
+    "license": "Apache 2.0",
     "bugs": {
-        "url": "https://github.com/HyperCoder2975/TypicalBot/issues"
+        "url": "https://github.com/typicalbot/typicalbot/issues"
     },
-    "homepage": "https://github.com/HyperCoder2975/TypicalBot#readme"
+    "homepage": "https://github.com/typicalbot/typicalbot#readme"
 }
