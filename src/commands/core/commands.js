@@ -32,7 +32,6 @@ module.exports = class extends Command {
             .addField("» Server Moderator (Level 2)", level2.length ? level2.join(", ") : "No commands to display.")
             .addField("» Server DJ (Level 1)", level1.length ? level1.join(", ") : "No commands to display.")
             .addField("» Server Member (Level 0)", level0.length ? level0.join(", ") : "No commands to display.")
-            .addField("» TypicalBot V3 (Soon!)", "The TypicalBot team is currently working on a new version of TypicalBot, which includes a lot of big changes. It includes a lot of technical changes improving stability and quality of TypicalBot. Join our [lounge](https://typicalbot.com/join-us) for the latest updates!")
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
