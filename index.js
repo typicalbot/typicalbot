@@ -1,5 +1,5 @@
 const { Node } = require("veza");
-const Cluster = require("./client");
+const Cluster = require("./src");
 const config = require("./config");
 
 const node = new Node(process.env.CLUSTER)
