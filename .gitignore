@@ -1,5 +1,4 @@
 # Logs
-config.json
 logs
 *.log
 npm-debug.log*
@@ -13,10 +12,9 @@ pids
 *.pid.lock
 
 # Dependency directories
-node_modules/
+node_modules
 
 # Custom
 package-lock.json
-package-lock.json
-.vs/*
+.vscode
 config.json
