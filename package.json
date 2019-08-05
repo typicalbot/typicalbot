@@ -35,7 +35,7 @@
     },
     "keywords": ["discordjs", "javascript", "bot", "discord", "typicalbot", "discord-bot", "discordapp"],
     "author": "typicalbot",
-    "license": "Apache 2.0",
+    "license": "Apache-2.0",
     "bugs": {
         "url": "https://github.com/typicalbot/typicalbot/issues"
     },
