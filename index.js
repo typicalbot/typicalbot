@@ -1,73 +1,46 @@
+const { Node } = require("veza");
+const Cluster = require("./client");
 const config = require("./config");
 
-const API = require("./api/app");
-
-const { Collection } = require("discord.js");
-const Shard = require("./src/Shard");
-
-function fetchShardProperties(shard, property) {
-    return new Promise((resolve, reject) => {
-        const id = Math.random();
-
-        const listener = ({ event, data }) => {
-            if (event !== "globalrequest" || data.id !== id) return;
-
-            shard.removeListener("message", listener);
-            return resolve(data.response);
-        };
-
-        shard.on("message", listener);
-        shard.send({ event: "fetchProperty", data: { property: property, id } });
+const node = new Node(process.env.CLUSTER)
+    .on('error', (error, client) => console.error(`[IPC] Error from ${client.name}:`, error))
+    .on('socket.disconnect', client => console.error(`[IPC] Disconnected from ${client.name}`))
+    .on('socket.destroy', client => console.error(`[IPC] Client Destroyed: ${client.name}`))
+    .on('socket.ready', async client => {
+        console.log(`[IPC] Connected to: ${client.name}`);
     });
-}
 
-class ShardHandler extends Collection {
-    constructor() {
-        super();
+node.connectTo(config.nodePort).catch(error => console.error('[IPC] Disconnected!', error));
 
-        this.config = config;
+const client = new Cluster(node);
 
-        this.api = new API(this);
+node.on("message", async message => {
+    if (message.data.event === "collectData") {
+        message.reply(eval(`client.${message.data.data}`));
+    } else if (message.data.event === "shardCount") {
+        message.reply(client.shardCount);
+    } else if (message.data.event === "channelEmbed") {
+        const { apiKey, channel, json } = message.data;
 
-        this.pendingRequests = new Collection();
+        const guild = Buffer.from(apiKey.split(".")[0], "base64").toString("utf-8");
 
-        for (let s = 0; s < config.shards; s++)
-            setTimeout(() => this.set(s, new Shard(this, s, config.shards)), (8000 * s));
-    }
+        if (!client.guilds.has(guild)) return message.reply({ response: "Guild doesn't exist."});
 
-    fetchShardProperties(property) {
-        return Promise
-            .all(this.map(s => fetchShardProperties(s, property)))
-            .then(results => results.reduce((a, c) => a + c));
-    }
+        const settings = await client.settings.fetch(guild);
+        const trueApiKey = settings.apikey;
 
-    globalRequest(request, data) {
-        return new Promise((resolve, reject) => {
-            const id = Math.random();
+        if (apiKey !== trueApiKey) return message.reply({ response: "Invalid API key."});
 
-            const timeout = setTimeout(() => {
-                this.pendingRequests.delete(id);
+        const trueGuild = client.guilds.get(guild);
 
-                return reject("Timed Out");
-            }, 500);
+        if (!trueGuild.channels.has(channel)) return message.reply({ response: "Channel doesn't exist."});
 
-            const callback = (response) => {
-                clearTimeout(timeout);
+        const trueChannel = trueGuild.channels.get(channel);
 
-                this.pendingRequests.delete(id);
-
-                return resolve(response);
-            };
-
-            this.pendingRequests.set(id, { callback, timeout });
-
-            this.broadcast(request, Object.assign(data, { id }));
+        trueChannel.send("", json).then(() => {
+            return message.reply({ response: "Success"});
+        }).catch(err => {
+            return message.reply({ response: "An error occured."});
         });
     }
-
-    broadcast(event, data) {
-        this.forEach(shard => shard.send({ event, data }));
-    }
-}
-
-new ShardHandler();
+});
