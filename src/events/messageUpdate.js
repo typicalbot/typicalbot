@@ -8,7 +8,7 @@ class MessageUpdate extends Event {
     }
 
     async execute(oldMessage, message) {
-        if (message.author.bot || !message.guild.available) return;
+        if (message.channel.type !== "text" || message.author.bot || !message.guild || !message.guild.available) return;
 
         const settings = message.guild.settings = await message.guild.fetchSettings();
 
