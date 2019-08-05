@@ -24,7 +24,8 @@ module.exports = class Cluster extends Client {
             "messageCacheMaxSize": 150,
             "messageCacheLifetime": 3600,
             "messageSweepInterval": 300,
-            "disableEveryone": true
+            "disableEveryone": true,
+            "disabledEvents": ["TYPING_START", "CHANNEL_PINS_UPDATE"]
         });
 
         this.node = node;
