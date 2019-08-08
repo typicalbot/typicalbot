@@ -31,6 +31,7 @@ module.exports = class extends Command {
             + `Members             : ${message.guild.memberCount}\n`
             + `Roles               : ${message.guild.roles.size}\n`
             + `Emojis              : ${message.guild.emojis.size}\n`
+            + `Boosted Tier        : Level ${message.guild.premiumTier} (${message.guild.premiumSubscriptionCount} Boosters)`
             + `\`\`\``
         );
     }
@@ -54,6 +55,7 @@ module.exports = class extends Command {
             .addField("» Members", message.guild.memberCount, true)
             .addField("» Roles", message.guild.roles.size, true)
             .addField("» Emojis", message.guild.emojis.size, true)
+            .addField("» Boosted Tier", `Level ${message.guild.premiumTier} (${message.guild.premiumSubscriptionCount} Boosters)`)
             .setThumbnail(message.guild.iconURL({ "format": "png", "size": 2048 }) || null)
             .setFooter("TypicalBot", Constants.Links.ICON)
             .send();
