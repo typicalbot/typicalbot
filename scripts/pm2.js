@@ -14,7 +14,7 @@ async function generateClusters() {
         clusters.push({
             name: `${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`,
             script: './index.js',
-            autorestart: false,
+            autorestart: true,
             watch: false,
             env: {
                 CLUSTER: `${config.clusterServer} ${config.clusterBuild ? `${config.clusterBuild} ` : ""}${i}`,
