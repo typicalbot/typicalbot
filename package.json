@@ -12,7 +12,15 @@
         "type": "git",
         "url": "git+https://github.com/typicalbot/typicalbot.git"
     },
-    "keywords": ["discordjs", "javascript", "bot", "discord", "typicalbot", "discord-bot", "discordapp"],
+    "keywords": [
+        "discordjs",
+        "javascript",
+        "bot",
+        "discord",
+        "typicalbot",
+        "discord-bot",
+        "discordapp"
+    ],
     "bugs": {
         "url": "https://github.com/typicalbot/typicalbot/issues"
     },
