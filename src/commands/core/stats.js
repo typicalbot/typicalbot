@@ -20,6 +20,10 @@ module.exports = class extends Command {
         const usedRAM = await this.client.fetchData("usedRAM");
         const totalRAM = await this.client.fetchData("totalRAM");
 
+        const clusterParts = this.client.cluster.match(/^(\S+? \S+?) ([\s\S]+?)$/);
+        let [clusterName, clusterShards] = clusterParts.slice(1, 3);
+        clusterShards = clusterShards.replace(/[\[\]]/g, '').split(',').join(', ');
+
         message.send(
             `**__TypicalBot's Statistics:__**\n`
             + `\`\`\`autohotkey\n`
@@ -34,7 +38,7 @@ module.exports = class extends Command {
             + `=> Library           : discord.js\n`
             + `=> Created By        : HyperCoder#2975 & nsylke#4490\n\n`
             + `    This Shard:\n`
-            + `=> Cluster           : ${this.client.cluster}\n`
+            + `=> Cluster           : ${clusterName} (Shards: ${clusterShards})\n`
             + `=> Servers           : ${this.client.guilds.size.toLocaleString()}\n`
             + `=> Voice Connections : ${this.client.voice.connections.size.toLocaleString()}\n`
             + `=> Channels          : ${this.client.channels.size.toLocaleString()}\n`
@@ -54,6 +58,10 @@ module.exports = class extends Command {
         const usedRAM = await this.client.fetchData("usedRAM");
         const totalRAM = await this.client.fetchData("totalRAM");
 
+        const clusterParts = this.client.cluster.match(/^(\S+? \S+?) ([\s\S]+?)$/);
+        let [clusterName, clusterShards] = clusterParts.slice(1, 3);
+        clusterShards = clusterShards.replace(/[\[\]]/g, '').split(',').join(', ');
+
         message.buildEmbed()
             .setColor(0x00adff)
             .setThumbnail(Constants.Links.ICON)
@@ -69,7 +77,7 @@ module.exports = class extends Command {
             .addField("» Library", "discord.js", true)
             .addField("» Created By", "HyperCoder#2975\nnsylke#4490", true)
             .addBlankField()
-            .addField("» Cluster", `${this.client.cluster}`, true)
+            .addField("» Cluster", `${clusterName}\n${clusterShards}`, true)
             .addField("» Servers", `${this.client.guilds.size.toLocaleString()}`, true)
             .addField("» Voice Connections", `${this.client.voice.connections.size.toLocaleString()}`, true)
             .addField("» Channels", `${this.client.channels.size.toLocaleString()}`, true)
