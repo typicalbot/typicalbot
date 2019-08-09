@@ -22,7 +22,7 @@ module.exports = class Cluster extends Client {
     constructor(node) {
         super({
             "messageCacheMaxSize": 150,
-            "messageCacheLifetime": 3600,
+            "messageCacheLifetime": 1800,
             "messageSweepInterval": 300,
             "disableEveryone": true,
             "disabledEvents": ["TYPING_START", "CHANNEL_PINS_UPDATE"]
