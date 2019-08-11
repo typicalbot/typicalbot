@@ -9,7 +9,8 @@
     "apis": {
         "discordbots": "",
         "carbonkey": "",
-        "youtube": ""
+        "youtube": "",
+        "twitch": ""
     },
     "database": {
         "credentials": {
