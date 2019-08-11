@@ -14,7 +14,7 @@ module.exports = class extends Command {
     async execute(message, parameters, permissionLevel) {
         if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
-        if (!message.guild.voice) return message.send(`Noting is currently streaming.`);
+        if (!message.guild.voice) return message.send(`Nothing is currently streaming.`);
 
         const connection = message.guild.voice.connection;
 
