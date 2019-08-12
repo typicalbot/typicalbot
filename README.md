@@ -22,11 +22,13 @@ This section provides a quick-start guide.
 
 ### Prerequisites
 
- - [Node.js](https://nodejs.org/en/): Node.js 10.0.0 or newer is required.
- - [Windows Build Tools](https://github.com/felixrieseberg/windows-build-tools): (WINDOWS ONLY!) Python 2.7 and VisualStudio is required to compile dependencies. 
- - [OpenSSL](http://slproweb.com/products/Win32OpenSSL.html): (WINDOWS ONLY!) OpenSSL is required for bignum, use version 1.0.X (Do not use version 1.1.X or the Light version).
- - [GTK+](http://ftp.gnome.org/pub/GNOME/binaries/win64/gtk+/) (WINDOWS ONLY!) GTK 2 is required for canvas, use version 2.X.X (Do not use version 3.X.X) 
- - [RethinkDB](https://rethinkdb.com/): RethinkDB is required. 
+- [Node.js](https://nodejs.org/en/): Node.js 10.0.0 or newer is required.
+- [RethinkDB](https://rethinkdb.com/): RethinkDB is required. 
+
+**Windows Only**
+- [Windows Build Tools](https://github.com/felixrieseberg/windows-build-tools): Python 2.7 and VisualStudio is required to compile dependencies. 
+- [OpenSSL](http://slproweb.com/products/Win32OpenSSL.html): OpenSSL is required for bignum, use version 1.0.X (Do not use version 1.1.X or the Light version).
+- [GTK+](http://ftp.gnome.org/pub/GNOME/binaries/win64/gtk+/): GTK 2 is required for canvas, use version 2.X.X (Do not use version 3.X.X) 
 
 ## License
 
