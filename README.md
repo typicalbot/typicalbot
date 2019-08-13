@@ -1,6 +1,6 @@
 ## Introduction
 
-TypicalBot is an ironically named bot that is far from typical. TypicalBot is a multipurpose Discord bot developed in [discord.js](https://github.com/discordjs/discord.js). 
+TypicalBot is an ironically named multipurpose Discord bot that is far from typical, developed in [discord.js](https://github.com/discordjs/discord.js). 
 
 ## Table of Contents
 
