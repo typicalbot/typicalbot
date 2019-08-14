@@ -14,18 +14,20 @@ module.exports = class extends Command {
     async execute(message, parameters, permissionLevel) {
         if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
-        if (!message.guild.voice) return message.send(`Nothing is currently streaming.`);
+        try {
+            const connection = message.guild.voice.connection;
 
-        const connection = message.guild.voice.connection;
+            if (!connection) return message.send(`Nothing is currently streaming.`);
 
-        if (!connection) return message.send(`Nothing is currently streaming.`);
+            if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
 
-        if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
+            if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
 
-        if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
+            connection.guildStream.resume();
 
-        connection.guildStream.resume();
-
-        message.reply(`Streaming is now resuming.`);
+            message.reply(`Streaming is now resuming.`);
+        } catch (e) {
+            message.send(`Nothing is currently streaming.`);
+        }
     }
 };

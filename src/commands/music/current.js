@@ -12,14 +12,15 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        if (!message.guild.voice) return message.send(`Nothing is currently streaming.`);
+        try {
+            const connection = message.guild.voice.connection;
+            if (!connection) return message.send("Nothing is currently streaming.");
 
-        const connection = message.guild.voice.connection;
+            const remaining = connection.guildStream.mode === "queue" ? ((message.guild.voice.connection.guildStream.current.length * 1000) - message.guild.voice.connection.guildStream.dispatcher.streamTime) : null;
 
-        if (!connection) return message.send(`Nothing is currently streaming.`);
-
-        const remaining = connection.guildStream.mode === "queue" ? ((message.guild.voice.connection.guildStream.current.length * 1000) - message.guild.voice.connection.guildStream.dispatcher.streamTime) : null;
-
-        message.send(`**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}**${remaining ? ` (${this.client.functions.convertTime(remaining)} remaining)` : ""} | Requested by **${connection.guildStream.current.requester.author.username}**`);
+            message.send(`**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}**${remaining ? ` (${this.client.functions.convertTime(remaining)} remaining)` : ""} | Requested by **${connection.guildStream.current.requester.author.username}**`);
+        } catch (e) {
+            message.send("Nothing is currently streaming.")
+        }
     }
 };

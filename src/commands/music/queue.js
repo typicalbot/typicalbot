@@ -12,24 +12,24 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        if (!message.guild.voice) return message.send(`Nothing is currently streaming.`);
+        try {
+            const connection = message.guild.voice.connection;
 
-        const connection = message.guild.voice.connection;
+            if (!connection) return message.send(`Nothing is currently streaming.`);
+            if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
 
-        if (!connection) return message.send(`Nothing is currently streaming.`);
+            const queue = connection.guildStream.queue;
 
-        if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
+            if (!queue.length) return message.send(`**__Queue:__** There are no videos in the queue.\n\n**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}** (${this.client.functions.convertTime(1000 * connection.guildStream.current.length)}) | Requested by **${connection.guildStream.current.requester.author.username}**`);
 
-        const queue = connection.guildStream.queue;
+            const list = queue.slice(0, 10);
+            const content = list.map(s => `● **${this.client.functions.lengthen(-1, s.title, 45)}** (${this.client.functions.convertTime(1000 * s.length)}) | Requested by **${s.requester.author.username}**`).join("\n");
 
-        if (!queue.length) return message.send(`**__Queue:__** There are no videos in the queue.\n\n**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}** (${this.client.functions.convertTime(1000 * connection.guildStream.current.length)}) | Requested by **${connection.guildStream.current.requester.author.username}**`);
+            let length = 0; queue.forEach(s => length += Number(s.length));
 
-        const list = queue.slice(0, 10);
-
-        const content = list.map(s => `● **${this.client.functions.lengthen(-1, s.title, 45)}** (${this.client.functions.convertTime(1000 * s.length)}) | Requested by **${s.requester.author.username}**`).join("\n");
-        
-        let length = 0; queue.forEach(s => length += Number(s.length));
-
-        message.send(`**__Queue:__** There are **${queue.length}** videos in the queue. The queue will last for **${this.client.functions.convertTime(1000 * length)}.**\n\n${content}${queue.length > 10 ? `\n*...and ${queue.length - 10} more.*` : ""}\n\n**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}** (${this.client.functions.convertTime(1000 * connection.guildStream.current.length)}) | Requested by **${connection.guildStream.current.requester.author.username}**`);
+            message.send(`**__Queue:__** There are **${queue.length}** videos in the queue. The queue will last for **${this.client.functions.convertTime(1000 * length)}.**\n\n${content}${queue.length > 10 ? `\n*...and ${queue.length - 10} more.*` : ""}\n\n**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}** (${this.client.functions.convertTime(1000 * connection.guildStream.current.length)}) | Requested by **${connection.guildStream.current.requester.author.username}**`);
+        } catch (e) {
+            message.send(`Nothing is currently streaming.`);
+        }
     }
 };
