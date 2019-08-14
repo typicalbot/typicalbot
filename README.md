@@ -1,6 +1,6 @@
 ## Introduction
 
-TypicalBot is a multipurpose Discord bot developed in [discord.js](https://github.com/discordjs/discord.js). TypicalBot is the ironically named bot that is far from typical. 
+TypicalBot is an ironically named multipurpose Discord bot that is far from typical, developed in [discord.js](https://github.com/discordjs/discord.js). 
 
 ## Table of Contents
 
@@ -9,6 +9,7 @@ TypicalBot is a multipurpose Discord bot developed in [discord.js](https://githu
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
 - [Maintainers](#maintainers)
+- [Contributors](#contributors)
 - [License](#license)
 
 ## Ecosystem
@@ -36,18 +37,25 @@ This section provides a quick-start guide.
 
 ### Installation
 
-1. Make sure all prerequisites are installed.
+1. Make sure all prerequisites are installed, ie. `npm install`
 2. Fork the TypicalBot repository: https://github.com/typicalbot/typicalbot/fork
 3. Clone your forked repository, ie. `git clone git@github.com/<YOUR-USERNAME>/typicalbot.git`
-4. Start Rethink database. 
-5. Start TypicalBot Cluster Manager.
-6. Open command prompt and run `npm run pm2-gen`.
-7. You're done!
+4. Start RethinkDB database
+5. Start TypicalBot Cluster Manager
+6. Run `npm run pm2-gen`
+7. Profit!
 
 ## Maintainers
 
-- Nicholas Sylke ([@nsylke](https://github.com/nsylke))
 - Bryan Pikaard ([@HyperCoder2975](https://github.com/HyperCoder2975))
+- Nicholas Sylke ([@nsylke](https://github.com/nsylke))
+
+## Contributors
+
+- Braxton ([@SirPacker](https://github.com/SirPacker))
+- Tyler Richards ([@tjrgg](https://github.com/tjrgg))
+- Tobias Feld ([@TobiasFeld22](https://github.com/TobiasFeld22))
+- Gigakek Vermin ([@AKSKL](https://github.com/AKSKL))
 
 ## License
 
