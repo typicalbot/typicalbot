@@ -34,6 +34,7 @@
         "erlpack": "github:discordapp/erlpack",
         "klaw": "^2.1.1",
         "krypton": "github:Hackzzila/krypton",
+        "mathjs": "^6.0.4",
         "moment": "^2.22.2",
         "node-fetch": "^2.6.0",
         "node-opus": "^0.3.2",
