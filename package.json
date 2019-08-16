@@ -34,7 +34,6 @@
         "canvas-constructor": "^1.1.2",
         "discord.js": "github:discordjs/discord.js#master",
         "erlpack": "github:discordapp/erlpack",
-        "eslint": "^6.1.0",
         "klaw": "^2.1.1",
         "krypton": "github:Hackzzila/krypton",
         "mathjs": "^6.0.4",
@@ -50,5 +49,8 @@
         "vm2": "^3.8.3",
         "ytdl-core": "github:fent/node-ytdl-core",
         "zlib-sync": "^0.1.5"
+    },
+    "devDependencies": {
+        "eslint": "^6.1.0"
     }
 }
