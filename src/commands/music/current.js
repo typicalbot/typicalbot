@@ -20,7 +20,7 @@ module.exports = class extends Command {
 
             message.send(`**__Currently Streaming:__** **${this.client.functions.lengthen(-1, connection.guildStream.current.title, 45)}**${remaining ? ` (${this.client.functions.convertTime(remaining)} remaining)` : ""} | Requested by **${connection.guildStream.current.requester.author.username}**`);
         } catch (e) {
-            message.send("Nothing is currently streaming.")
+            message.send("Nothing is currently streaming.");
         }
     }
 };

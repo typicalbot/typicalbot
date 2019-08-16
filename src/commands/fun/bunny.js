@@ -16,7 +16,7 @@ module.exports = class extends Command {
         fetch(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
             .then(res => res.json())
             .then(json => message.send(json.media[type]))
-            .catch(err => message.error("An error occurred making that request."))
+            .catch(err => message.error("An error occurred making that request."));
     }
 
     embedExecute(message, parameters, permissionLevel) {
@@ -25,6 +25,6 @@ module.exports = class extends Command {
         fetch(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
             .then(res => res.json())
             .then(json => message.buildEmbed().setColor(0x00adff).setImage(json.media[type]).send())
-            .catch(err => message.error("An error occurred making that request."))
+            .catch(err => message.error("An error occurred making that request."));
     }
 };

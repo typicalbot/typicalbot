@@ -25,12 +25,12 @@ module.exports = class extends Command {
                     .filter(bot => bot.name = bot.name.replace(/[^a-z0-9]/gmi, "").replace(/\s+/g, ""))
                     .filter(bot => bot.servercount = Number(bot.servercount).toLocaleString());
 
-                    const content = this.client.functions.pagify(
-                        bots.map(bot => `${this.client.functions.lengthen(1, `${bot.name}`, 20)}: ${bot.servercount}${bot.compliant ? ` | Carbon Compliant` : ""}`),
-                        page
-                    );
+                const content = this.client.functions.pagify(
+                    bots.map(bot => `${this.client.functions.lengthen(1, `${bot.name}`, 20)}: ${bot.servercount}${bot.compliant ? ` | Carbon Compliant` : ""}`),
+                    page
+                );
         
-                    message.send(`**__Ranked Bot List - Provided by Carbonitex:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
+                message.send(`**__Ranked Bot List - Provided by Carbonitex:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
             })
             .catch(err => message.error("An error occurred making that request."));
     }

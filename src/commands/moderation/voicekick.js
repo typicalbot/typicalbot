@@ -31,6 +31,6 @@ module.exports = class extends Command {
                     message.success(`Successfully voice kicked user \`${member.user.tag}\`.`);
                 } else return message.success(`Successfully voice kicked user **${member.user.tag}**.`);
             });
-        }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : `\n\n\`\`\`${err}\`\`\``}`));;
+        }).catch(err => message.error(`An error occured while trying to fetch the requested user.${message.author.id === "105408136285818880" ? `\n\n\`\`\`${err}\`\`\`` : `\n\n\`\`\`${err}\`\`\``}`));
     }
-}
+};

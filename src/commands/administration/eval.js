@@ -26,7 +26,7 @@ module.exports = class extends Command {
             }
 
             result instanceof Promise ?
-            result.then(a => {
+                result.then(a => {
                     message.embed({
                         "color": 0x00FF00,
                         "description": `\n\n\`\`\`js\n${inspect(a, { depth: 0 })}\n\`\`\``,
