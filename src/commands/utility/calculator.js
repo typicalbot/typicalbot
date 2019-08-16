@@ -16,7 +16,7 @@ module.exports = class extends Command {
         if (!parameters) return message.error(this.client.functions.error("usage", this));
 
         try {
-            const result = math.eval(parameters);
+            const result = math.evaluate(parameters);
 
             message.send(
                 "**INPUT:**"
