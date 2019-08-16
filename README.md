@@ -1,4 +1,7 @@
-# TypicalBot
+TypicalBot
+=============
+
+[![Discord](https://discordapp.com/api/guilds/163038706117115906/embed.png?style=shield)](https://discord.gg/typicalbot)
 
 ## Introduction
 
