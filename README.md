@@ -1,3 +1,5 @@
+# TypicalBot
+
 ## Introduction
 
 TypicalBot is an ironically named multipurpose Discord bot that is far from typical, developed in [discord.js](https://github.com/discordjs/discord.js). 
@@ -10,6 +12,7 @@ TypicalBot is an ironically named multipurpose Discord bot that is far from typi
     - [Installation](#installation)
 - [Maintainers](#maintainers)
 - [Contributors](#contributors)
+- [Show Your Support](#show-your-support)
 - [License](#license)
 
 ## Ecosystem
@@ -57,6 +60,10 @@ This section provides a quick-start guide.
 - Tyler Richards ([@tjrgg](https://github.com/tjrgg))
 - Tobias Feld ([@TobiasFeld22](https://github.com/TobiasFeld22))
 - Gigakek Vermin ([@AKSKL](https://github.com/AKSKL))
+
+## Show Your Support
+
+If you like what we do, consider supporting us on [Patreon](https://patreon.com/typicalbot) or donate to us via [PayPal](https://paypal.me/typicalbot).
 
 ## License
 
