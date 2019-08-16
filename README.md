@@ -42,8 +42,9 @@ This section provides a quick-start guide.
 3. Clone your forked repository, ie. `git clone git@github.com/<YOUR-USERNAME>/typicalbot.git`
 4. Start RethinkDB database
 5. Start TypicalBot Cluster Manager
-6. Run `npm run pm2-gen`
-7. Profit!
+6. Run `npm run build:database`
+7. Run `npm run build:instance`
+8. Profit!
 
 ## Maintainers
 

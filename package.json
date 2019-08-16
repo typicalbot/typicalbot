@@ -5,8 +5,10 @@
     "license": "Apache-2.0",
     "main": "index.js",
     "scripts": {
-        "setup": "node ./scripts/setup.js",
-        "pm2-gen": "node ./scripts/pm2.js"
+        "lint": "eslint src scripts",
+        "lint:fix": "eslint src scripts --fix",
+        "build:database": "node ./scripts/setup.js",
+        "build:instance": "node ./scripts/pm2.js"
     },
     "repository": {
         "type": "git",
@@ -32,6 +34,7 @@
         "canvas-constructor": "^1.1.2",
         "discord.js": "github:discordjs/discord.js#master",
         "erlpack": "github:discordapp/erlpack",
+        "eslint": "^6.1.0",
         "klaw": "^2.1.1",
         "krypton": "github:Hackzzila/krypton",
         "mathjs": "^6.0.4",
