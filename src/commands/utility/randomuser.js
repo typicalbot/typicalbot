@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const args = /(?:(-o(?:nline)?))/i.exec(parameters);
+        const args = /(-o(?:nline)?\s)?/i.exec(parameters);
 
         const members = args ? message.guild.members.filter(m => m.presence.status !== "offline") : message.guild.members;
         const user = members.random().user;
