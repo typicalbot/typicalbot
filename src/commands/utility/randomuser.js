@@ -4,14 +4,18 @@ const Constants = require(`../../utility/Constants`);
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Selects a random member in the server..",
-            usage: "randomuser",
+            description: "Selects a random member in the server.",
+            usage: "randomuser [-o]",
+            aliases: ["ruser"],
             mode: Constants.Modes.LITE
         });
     }
 
     execute(message, parameters, permissionLevel) {
-        const user = message.guild.members.random().user;
+        const args = /(-o(?:nline)?\s)?/i.exec(parameters);
+
+        const members = args ? message.guild.members.filter(m => m.presence.status !== "offline") : message.guild.members;
+        const user = members.random().user;
 
         message.send(`Your random pick is: **${user.username}#${user.discriminator}** (${user.id}).`);
     }
