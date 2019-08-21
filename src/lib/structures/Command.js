@@ -19,7 +19,7 @@ export default class Command {
      * @param {external:Message} message
      * @abstract
      */
-    async run() {
+    async run(message) {
         throw new Error('This command has not been implemented yet.');
     }
 }

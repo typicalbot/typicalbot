@@ -8,7 +8,8 @@
         "lint": "eslint src scripts",
         "lint:fix": "eslint src scripts --fix",
         "build:database": "node ./scripts/setup.js",
-        "build:instance": "node ./scripts/pm2.js"
+        "build:instance": "node ./scripts/pm2.js",
+        "build:docs": "esdoc"
     },
     "repository": {
         "type": "git",
@@ -51,6 +52,9 @@
         "zlib-sync": "^0.1.5"
     },
     "devDependencies": {
+        "esdoc": "^1.1.0",
+        "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+        "esdoc-standard-plugin": "^1.0.0",
         "eslint": "^6.1.0"
     }
 }
