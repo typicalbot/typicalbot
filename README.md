@@ -2,6 +2,7 @@ TypicalBot
 =============
 
 [![Discord](https://discordapp.com/api/guilds/163038706117115906/embed.png?style=shield)](https://discord.gg/typicalbot)
+[![Documentation](./docs/badge.svg)](https://typicalbot.com)
 
 ## Introduction
 
