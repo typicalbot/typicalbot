@@ -10,7 +10,7 @@ exports.Colors = {
  * @property {string} docs The URL to the documentation
  * @property {string} oauth The invite URL for the bot
  * @property {string} server The invite URL for the server
- * @property {string} donate The invite URL for the bot
+ * @property {string} donate The URL to the donate page on the website
  * @property {string} settings The URL to the settings section of the documentation
  * @property {string} icon The URL to the image of the bot's icon
  */
