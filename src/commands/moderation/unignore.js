@@ -12,7 +12,7 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const args = /(commands|invites)/i.exec(parameters);
+        const args = /(commands|invites|stars)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const commands = args[1] === "commands", invites = args[1] === "invites", stars = args[1] === "stars";
