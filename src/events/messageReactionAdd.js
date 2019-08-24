@@ -23,27 +23,41 @@ class MessageReactionAdd extends Event {
 
         if (board) {
             const msg = await channel.messages.fetch(board.id);
+            const image = msg.embeds[0] ? msg.embeds[0].image.url : null;
 
             const embed = new MessageEmbed()
                 .setColor(0xFFA500)
                 .addField("Author", `<@!${messageReaction.message.author.id}>`, true)
                 .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
-                .addField("Message", messageReaction.message.content, false)
                 .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
                 .setTimestamp(messageReaction.message.createdAt)
                 .setFooter(`⭐ ${messageReaction.count} | ${messageReaction.message.id}`);
 
+            if (image) {
+                embed.setImage(image);
+            } else {
+                embed.addField("Message", messageReaction.message.content, false);
+            }
+
             await msg.edit({ embed });
         } else {
-            channel.buildEmbed()
+            const image = messageReaction.message.attachments.size > 0 ? messageReaction.message.attachments.array()[0].url : null;
+
+            const embed = new MessageEmbed()
                 .setColor(0xFFA500)
                 .addField("Author", `<@!${messageReaction.message.author.id}>`, true)
                 .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
-                .addField("Message", messageReaction.message.content, false)
                 .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
                 .setTimestamp(messageReaction.message.createdAt)
-                .setFooter(`⭐ ${messageReaction.count} | ${messageReaction.message.id}`)
-                .send();
+                .setFooter(`⭐ ${messageReaction.count} | ${messageReaction.message.id}`);
+
+            if (image) {
+                embed.setImage(image);
+            } else {
+                embed.addField("Message", messageReaction.message.content, false);
+            }
+
+            channel.send({ embed });
         }
     }
 }
