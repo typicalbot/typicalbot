@@ -19,6 +19,10 @@ module.exports = class extends Command {
 
         if (commands && !message.guild.settings.ignored.commands.includes(message.channel.id)) return message.error("This channel isn't ignoring commands.");
         if (invites && !message.guild.settings.ignored.invites.includes(message.channel.id)) return message.error("This channel isn't ignoring invites.");
+        if (stars && !message.guild.settings.ignored.stars.includes(message.channel.id)) {
+            if (!message.guild.settings.starboard.id) return message.error("The starboard is not enabled.");
+            return message.error("This channel isn't ignoring stars.");
+        }
 
         const newArray = message.guild.settings.ignored[args[1]];
         newArray.splice(newArray.indexOf(message.channel.id), 1);
