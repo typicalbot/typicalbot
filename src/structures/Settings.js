@@ -33,6 +33,7 @@ module.exports = (id) => {
         },
         "auto": {
             "role": {
+                "bots": null,
                 "id": null,
                 "delay": null,
                 "silent": true
