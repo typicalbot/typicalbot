@@ -40,7 +40,12 @@ class GuildMemberAdd extends Event {
 
         if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage("autonick", guild, user, settings.auto.nickname)).catch(() => { return; });
 
-        const autorole = settings.auto.role.id ? guild.roles.has(settings.auto.role.id) ? guild.roles.get(settings.auto.role.id) : null : null;
+        let autorole;
+        if (settings.auto.role.bots && member.user.bot)
+            autorole = settings.auto.role.bots ? guild.roles.has(settings.auto.role.bots) ? guild.roles.get(settings.auto.role.bots) : null : null;
+        else if (settings.auto.role.id)
+            autorole = settings.auto.role.id ? guild.roles.has(settings.auto.role.id) ? guild.roles.get(settings.auto.role.id) : null : null;
+
         if (autorole && autorole.editable) setTimeout(() =>
             member.roles.add(autorole).then(() => {
                 if (settings.auto.role.silent === "N" && settings.logs.id && guild.channels.has(settings.logs.id)) guild.channels.get(settings.logs.id).send(`**${user.tag}** was given the autorole **${autorole.name}**.`);
