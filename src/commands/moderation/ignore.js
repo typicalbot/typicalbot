@@ -5,7 +5,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Makes the bot ignore commands or invites in a channel.",
-            usage: "ignore ['commands'|'invites']",
+            usage: "ignore ['commands'|'invites'|'stars']",
             permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
             mode: Constants.Modes.STRICT
         });
