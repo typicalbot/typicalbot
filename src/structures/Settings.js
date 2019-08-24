@@ -12,7 +12,8 @@ module.exports = (id) => {
         },
         "ignored": {
             "commands": [],
-            "invites": []
+            "invites": [],
+            "stars": []
         },
         "announcements": {
             "id": null,
@@ -33,6 +34,7 @@ module.exports = (id) => {
         },
         "auto": {
             "role": {
+                "bots": null,
                 "id": null,
                 "delay": null,
                 "silent": true

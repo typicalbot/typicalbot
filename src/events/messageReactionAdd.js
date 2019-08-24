@@ -13,17 +13,18 @@ class MessageReactionAdd extends Event {
         const settings = messageReaction.message.guild.settings = await messageReaction.message.guild.fetchSettings();
 
         if (!settings.starboard.id) return;
+        if (settings.ignored.stars.includes(messageReaction.message.channel.id)) return;
         if (messageReaction.count < settings.starboard.count) return;
         if (!messageReaction.message.guild.channels.has(settings.starboard.id)) return;
 
         const channel = messageReaction.message.guild.channels.get(settings.starboard.id);
 
         const messages = await channel.messages.fetch({ limit: 100 });
-        const board = messages.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(messageReaction.message.id));
+        const board = messages.find(m => m.embeds.length > 0 && m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(messageReaction.message.id));
 
         if (board) {
             const msg = await channel.messages.fetch(board.id);
-            const image = msg.embeds[0] ? msg.embeds[0].image.url : null;
+            const image = msg.embeds[0] ? msg.embeds[0].image ? msg.embeds[0].image.proxyURL ? msg.embeds[0].image.proxyURL : null : null : null;
 
             const embed = new MessageEmbed()
                 .setColor(0xFFA500)

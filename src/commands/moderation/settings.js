@@ -9,8 +9,9 @@ const settingsList = {
     "muterole": "A role the bot will give users when muted.",
     "blacklistrole": "Users with this role will be denied access to any of TypicalBot's commands.",
     "autorole": "Users joining the server will automatically be given this role.",
-    "autoroledelay": "The amount of time to wait before giving the autorole to allow for security levels to work.",
-    "autorolesilent": "If not silent, a message will be sent in the logs channel stating a user was given the autorole.",
+    "autorole-bots": "Bots joining the server will automatically be given this role.",
+    "autorole-delay": "The amount of time to wait before giving the autorole to allow for security levels to work.",
+    "autorole-silent": "If not silent, a message will be sent in the logs channel stating a member was given the autorole.",
     "subscriberrole": "A role that will be given when a user uses the `subscribe` command.",
     "announcements": "A channel for announcements to be posted, used with the `announce` command.",
     "announcements-mention": "A mention to be put in the announcement when posted, such as a Subscriber role.",
@@ -43,7 +44,7 @@ const settingsList = {
     "music-volume": "Change the required permission level for users to use the `volume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
     "music-timelimit": "Change the maximum time limit for a video. Set in seconds. Minimum is 120 seconds (2 minutes). Maximum is 600 seconds (10 minutes). TypicalBot Prime Member maximum is 7200 seconds (2 hours).",
     "music-queuelimit": "Change the maximum queue limit for a video. Maximum is 10 videos. TypicalBot Prime Member maximum is 100 videos.",
-    "starboard": "A channel to send starred messages in. Aka starboard.",
+    "starboard": "A channel to send starred messages in, i.e. a starboard.",
     "starboard-stars": "Change the required stars count for messages to appear in the starboard."
 };
 
@@ -122,9 +123,14 @@ module.exports = class extends Command {
 
                     if (!role) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${role.name}`);
-                } else if (setting === "autoroledelay") {
+                } else if (setting === "autorole-bots") {
+                    const role = message.guild.roles.get(message.guild.settings.auto.role.bots);
+
+                    if (!role) return message.reply(`**__Current Value:__** None`);
+                    message.reply(`**__Current Value:__** ${role.name}`);
+                } else if (setting === "autorole-delay") {
                     message.reply(`**__Current Value:__** ${message.guild.settings.auto.role.delay ? `${message.guild.settings.auto.role.delay}ms` : "Default"}`);
-                } else if (setting === "autorolesilent") {
+                } else if (setting === "autorole-silent") {
                     message.reply(`**__Current Value:__** ${message.guild.settings.auto.role.silent ? "Enabled" : "Disabled"}`);
                 } else if (setting === "announcements") {
                     const channel = message.guild.channels.get(message.guild.settings.announcements.id);
@@ -427,7 +433,18 @@ module.exports = class extends Command {
 
                         this.client.settings.update(message.guild.id, { auto: { role: { id: role.id } } }).then(() => message.success("Setting successfully updated."));
                     }
-                } else if (setting === "autoroledelay") {
+                } else if (setting === "autorole-bots") {
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { auto: { role: { bots: null } } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        const subArgs = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i.exec(value);
+
+                        const role = subArgs[1] ? message.guild.roles.get(subArgs[1]) : message.guild.roles.find(r => r.name.toLowerCase() === subArgs[2].toLowerCase());
+                        if (!role) return message.error("Invalid role. Please make sure your spelling is correct, and that the role actually exists.");
+
+                        this.client.settings.update(message.guild.id, { auto: { role: { bots: role.id } } }).then(() => message.success("Setting successfully updated."));
+                    }
+                } else if (setting === "autorole-delay") {
                     if (value === "disable" || value === "default") {
                         this.client.settings.update(message.guild.id, { auto: { role: { delay: null } } }).then(() => message.success("Setting successfully updated."));
                     } else {
@@ -436,7 +453,7 @@ module.exports = class extends Command {
 
                         this.client.settings.update(message.guild.id, { auto: { role: { delay: subArgs[1] } } }).then(() => message.success("Setting successfully updated."));
                     }
-                } else if (setting === "autorolesilent") {
+                } else if (setting === "autorole-silent") {
                     if (value === "disable") {
                         this.client.settings.update(message.guild.id, { auto: { role: { silent: false } } }).then(() => message.success("Setting successfully updated."));
                     } else if (value === "enable") {
@@ -846,7 +863,7 @@ module.exports = class extends Command {
                         const n = Number(value);
 
                         if (isNaN(n)) return message.error("The given value is not a number.");
-                        if (n < 3) return message.error("The minimum value for this setting is 3 stars.");
+                        if (n < 1) return message.error("You can't star a message without at least one star.");
                         if (n > 10) return message.error("The maximum value for this setting is 10 stars.");
 
                         this.client.settings.update(message.guild.id, { starboard: { count: n } }).then(() => message.success("Setting successfully updated."));
