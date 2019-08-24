@@ -67,6 +67,10 @@ module.exports = (id) => {
             "apikey": null
         },
         "subscriber": null,
+        "starboard": {
+            "id": null,
+            "count": 5
+        },
         "pcs": [],
         "webhooks": {
             "twitch": {
