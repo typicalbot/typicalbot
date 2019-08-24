@@ -5,7 +5,7 @@ module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Makes the bot unignore commands or invites in a channel.",
-            usage: "unignore ['commands'|'invites']",
+            usage: "unignore ['commands'|'invites'|'stars']",
             permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
             mode: Constants.Modes.STRICT
         });
@@ -15,14 +15,14 @@ module.exports = class extends Command {
         const args = /(commands|invites)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const commands = args[1] === "commands", invites = args[1] === "invites";
+        const commands = args[1] === "commands", invites = args[1] === "invites", stars = args[1] === "stars";
 
         if (commands && !message.guild.settings.ignored.commands.includes(message.channel.id)) return message.error("This channel isn't ignoring commands.");
         if (invites && !message.guild.settings.ignored.invites.includes(message.channel.id)) return message.error("This channel isn't ignoring invites.");
 
-        const newArray = message.guild.settings.ignored[commands ? "commands" : "invites"];
+        const newArray = message.guild.settings.ignored[args[1]];
         newArray.splice(newArray.indexOf(message.channel.id), 1);
 
-        this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray } }).then(() => message.success(`Now listening to ${commands ? "commands" : "invites"}.`));
+        this.client.settings.update(message.guild.id, { ignored: { [args[1]]: newArray } }).then(() => message.success(`Now listening to ${args[1]}.`));
     }
 };
