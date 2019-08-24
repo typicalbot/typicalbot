@@ -19,7 +19,7 @@ class MessageReactionAdd extends Event {
         const channel = messageReaction.message.guild.channels.get(settings.starboard.id);
 
         const messages = await channel.messages.fetch({ limit: 100 });
-        const board = messages.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(messageReaction.message.id));
+        const board = messages.find(m => m.embeds.length > 0 && m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(messageReaction.message.id));
 
         if (board) {
             const msg = await channel.messages.fetch(board.id);
