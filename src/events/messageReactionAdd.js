@@ -13,6 +13,7 @@ class MessageReactionAdd extends Event {
         const settings = messageReaction.message.guild.settings = await messageReaction.message.guild.fetchSettings();
 
         if (!settings.starboard.id) return;
+        if (settings.ignored.stars.includes(messageReaction.message.channel.id)) return;
         if (messageReaction.count < settings.starboard.count) return;
         if (!messageReaction.message.guild.channels.has(settings.starboard.id)) return;
 

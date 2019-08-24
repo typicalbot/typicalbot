@@ -12,7 +12,8 @@ module.exports = (id) => {
         },
         "ignored": {
             "commands": [],
-            "invites": []
+            "invites": [],
+            "stars": []
         },
         "announcements": {
             "id": null,

@@ -12,17 +12,21 @@ module.exports = class extends Command {
     }
 
     execute(message, parameters, permissionLevel) {
-        const args = /(commands|invites)/i.exec(parameters);
+        const args = /(commands|invites|stars)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
-        const commands = args[1] === "commands", invites = args[1] === "invites";
+        const commands = args[1] === "commands", invites = args[1] === "invites", stars = args[1] === "stars";
 
         if (commands && message.guild.settings.ignored.commands.includes(message.channel.id)) return message.error("This channel is already ignoring commands.");
         if (invites && message.guild.settings.ignored.invites.includes(message.channel.id)) return message.error("This channel is already ignoring invites.");
+        if (stars && message.guild.settings.ignored.stars.includes(message.channel.id)) {
+            if (!message.guild.settings.starboard.id) return message.error("The starboard is not enabled.");
+            return message.error("This channel is already ignoring stars.");
+        }
 
-        const newArray = message.guild.settings.ignored[commands ? "commands" : "invites"];
+        const newArray = message.guild.settings.ignored[args[1]];
         newArray.push(message.channel.id);
 
-        this.client.settings.update(message.guild.id, { ignored: { [commands ? "commands" : "invites"]: newArray } }).then(() => message.success(`Now ignoring ${commands ? "commands" : "invites"}.`));
+        this.client.settings.update(message.guild.id, { ignored: { [args[1]]: newArray } }).then(() => message.success(`Now ignoring ${args[1]}.`));
     }
 };
