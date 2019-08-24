@@ -41,7 +41,7 @@ class GuildMemberAdd extends Event {
         if (settings.auto.nickname) member.setNickname(this.client.functions.formatMessage("autonick", guild, user, settings.auto.nickname)).catch(() => { return; });
 
         let autorole;
-        if (settings.auto.role.bots && member.author.bot) {
+        if (settings.auto.role.bots && member.user.bot) {
             autorole = settings.auto.role.bots ? guild.roles.has(settings.auto.role.bots) ? guild.roles.get(settings.auto.role.bots) : null : null;
         }
         else if (settings.auto.role.id) {
