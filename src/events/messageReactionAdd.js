@@ -23,7 +23,7 @@ class MessageReactionAdd extends Event {
 
         if (board) {
             const msg = await channel.messages.fetch(board.id);
-            const image = msg.embeds[0] ? msg.embeds[0].image.url : null;
+            const image = msg.embeds[0] ? msg.embeds[0].image ? msg.embeds[0].image.proxyURL ? msg.embeds[0].image.proxyURL : null : null : null;
 
             const embed = new MessageEmbed()
                 .setColor(0xFFA500)
