@@ -43,7 +43,7 @@ const settingsList = {
     "music-volume": "Change the required permission level for users to use the `volume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
     "music-timelimit": "Change the maximum time limit for a video. Set in seconds. Minimum is 120 seconds (2 minutes). Maximum is 600 seconds (10 minutes). TypicalBot Prime Member maximum is 7200 seconds (2 hours).",
     "music-queuelimit": "Change the maximum queue limit for a video. Maximum is 10 videos. TypicalBot Prime Member maximum is 100 videos.",
-    "starboard": "A channel to send starred messages in. Aka starboard.",
+    "starboard": "A channel to send starred messages in, i.e. a starboard.",
     "starboard-stars": "Change the required stars count for messages to appear in the starboard."
 };
 
@@ -846,7 +846,7 @@ module.exports = class extends Command {
                         const n = Number(value);
 
                         if (isNaN(n)) return message.error("The given value is not a number.");
-                        if (n < 3) return message.error("The minimum value for this setting is 3 stars.");
+                        if (n < 1) return message.error("You can't star a message without at least one star.");
                         if (n > 10) return message.error("The maximum value for this setting is 10 stars.");
 
                         this.client.settings.update(message.guild.id, { starboard: { count: n } }).then(() => message.success("Setting successfully updated."));
