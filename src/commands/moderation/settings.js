@@ -43,6 +43,8 @@ const settingsList = {
     "music-volume": "Change the required permission level for users to use the `volume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
     "music-timelimit": "Change the maximum time limit for a video. Set in seconds. Minimum is 120 seconds (2 minutes). Maximum is 600 seconds (10 minutes). TypicalBot Prime Member maximum is 7200 seconds (2 hours).",
     "music-queuelimit": "Change the maximum queue limit for a video. Maximum is 10 videos. TypicalBot Prime Member maximum is 100 videos.",
+    "starboard": "A channel to send starred messages in. Aka starboard.",
+    "starboard-stars": "Change the required stars count for messages to appear in the starboard."
 };
 
 module.exports = class extends Command {
@@ -222,6 +224,13 @@ module.exports = class extends Command {
                     message.reply(`**__Current Value:__** ${message.guild.settings.music.timelimit || "Default"}`);
                 } else if (setting === "music-queuelimit") {
                     message.reply(`**__Current Value:__** ${message.guild.settings.music.queuelimit || "Default"}`);
+                } else if (setting === "starboard") {
+                    const channel = message.guild.channels.get(message.guild.settings.starboard.id);
+
+                    if (!channel) return message.reply(`**__Current Value:__** None`);
+                    message.reply(`**__Current Value:__** ${channel.toString()}`);
+                } else if (setting === "starboard-stars") {
+                    message.reply(`**__Current Value:__** ${message.guild.settings.starboard.count}`);
                 } else {
                     message.error("The requested setting doesn't exist");
                 }
@@ -815,6 +824,32 @@ module.exports = class extends Command {
                         if (n > 100) return message.error("The maximum value for this setting is 100 videos.");
 
                         this.client.settings.update(message.guild.id, { music: { queuelimit: n } }).then(() => message.success("Setting successfully updated."));
+                    }
+                } else if (setting === "starboard") {
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { starboard: { id: null } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "here") {
+                        this.client.settings.update(message.guild.id, { starboard: { id: message.channel.id } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        const subArgs = /(?:(?:<#)?(\d{17,20})>?|(.+))/i.exec(value);
+
+                        const channel = subArgs[1] ? message.guild.channels.get(subArgs[1]) : message.guild.channels.find(c => c.name.toLowerCase() === subArgs[2].toLowerCase());
+                        if (!channel) return message.error("Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.");
+                        if (channel.type !== "text") return message.error("The channel must be a text channel.");
+
+                        this.client.settings.update(message.guild.id, { starboard: { id: channel.id } }).then(() => message.success("Setting successfully updated."));
+                    }
+                } else if (setting === "starboard-stars") {
+                    if (value === "default") {
+                        this.client.settings.update(message.guild.id, { starboard: { count: 5 } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        const n = Number(value);
+
+                        if (isNaN(n)) return message.error("The given value is not a number.");
+                        if (n < 3) return message.error("The minimum value for this setting is 3 stars.");
+                        if (n > 10) return message.error("The maximum value for this setting is 10 stars.");
+
+                        this.client.settings.update(message.guild.id, { starboard: { count: n } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else {
                     message.error("The requested setting doesn't exist");
