@@ -1,4 +1,5 @@
 const Event = require("../structures/Event");
+const { MessageEmbed } = require("discord.js");
 
 class MessageReactionAdd extends Event {
     constructor(...args) {
@@ -17,15 +18,33 @@ class MessageReactionAdd extends Event {
 
         const channel = messageReaction.message.guild.channels.get(settings.starboard.id);
 
-        channel.buildEmbed()
-            .setColor(0xFFA500)
-            .addField("Author", `<@!${messageReaction.message.author.id}>`, true)
-            .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
-            .addField("Message", messageReaction.message.content, false)
-            .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
-            .setTimestamp()
-            .setFooter(`⭐ ${messageReaction.count}`)
-            .send();
+        const messages = await channel.messages.fetch({ limit: 100 });
+        const board = messages.find(m => m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(messageReaction.message.id));
+
+        if (board) {
+            const msg = await channel.messages.fetch(board.id);
+
+            const embed = new MessageEmbed()
+                .setColor(0xFFA500)
+                .addField("Author", `<@!${messageReaction.message.author.id}>`, true)
+                .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
+                .addField("Message", messageReaction.message.content, false)
+                .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
+                .setTimestamp(messageReaction.message.createdAt)
+                .setFooter(`⭐ ${messageReaction.count} | ${messageReaction.message.id}`);
+
+            await msg.edit({ embed });
+        } else {
+            channel.buildEmbed()
+                .setColor(0xFFA500)
+                .addField("Author", `<@!${messageReaction.message.author.id}>`, true)
+                .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
+                .addField("Message", messageReaction.message.content, false)
+                .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
+                .setTimestamp(messageReaction.message.createdAt)
+                .setFooter(`⭐ ${messageReaction.count} | ${messageReaction.message.id}`)
+                .send();
+        }
     }
 }
 
