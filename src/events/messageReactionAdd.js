@@ -14,7 +14,11 @@ class MessageReactionAdd extends Event {
 
         if (!settings.starboard.id) return;
         if (settings.ignored.stars.includes(messageReaction.message.channel.id)) return;
-        if (messageReaction.count < settings.starboard.count) return;
+
+        let count = messageReaction.count;
+        if (messageReaction.users.get(messageReaction.message.author.id)) count--;
+
+        if (count < settings.starboard.count) return;
         if (!messageReaction.message.guild.channels.has(settings.starboard.id)) return;
 
         const channel = messageReaction.message.guild.channels.get(settings.starboard.id);
@@ -32,7 +36,7 @@ class MessageReactionAdd extends Event {
                 .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
                 .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
                 .setTimestamp(messageReaction.message.createdAt)
-                .setFooter(`⭐ ${messageReaction.count} | ${messageReaction.message.id}`);
+                .setFooter(`⭐ ${count} | ${messageReaction.message.id}`);
 
             if (image) {
                 embed.setImage(image);
@@ -50,7 +54,7 @@ class MessageReactionAdd extends Event {
                 .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
                 .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
                 .setTimestamp(messageReaction.message.createdAt)
-                .setFooter(`⭐ ${messageReaction.count} | ${messageReaction.message.id}`);
+                .setFooter(`⭐ ${count} | ${messageReaction.message.id}`);
 
             if (image) {
                 embed.setImage(image);
