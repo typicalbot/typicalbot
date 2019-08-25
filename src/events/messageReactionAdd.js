@@ -24,11 +24,10 @@ class MessageReactionAdd extends Event {
         const channel = messageReaction.message.guild.channels.get(settings.starboard.id);
 
         const messages = await channel.messages.fetch({ limit: 100 });
-        const board = messages.find(m => m.embeds.length > 0 && m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(messageReaction.message.id));
+        const boardMsg = messages.find(m => m.embeds.length > 0 && m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(messageReaction.message.id));
 
-        if (board) {
-            const msg = await channel.messages.fetch(board.id);
-            const image = msg.embeds[0] ? msg.embeds[0].image ? msg.embeds[0].image.proxyURL ? msg.embeds[0].image.proxyURL : null : null : null;
+        if (boardMsg) {
+            const image = boardMsg.embeds[0] ? boardMsg.embeds[0].image ? boardMsg.embeds[0].image.proxyURL ? boardMsg.embeds[0].image.proxyURL : null : null : null;
 
             const embed = new MessageEmbed()
                 .setColor(0xFFA500)
@@ -44,7 +43,7 @@ class MessageReactionAdd extends Event {
                 embed.addField("Message", messageReaction.message.content, false);
             }
 
-            await msg.edit({ embed });
+            await boardMsg.edit({ embed });
         } else {
             const image = messageReaction.message.attachments.size > 0 ? messageReaction.message.attachments.array()[0].url : null;
 
