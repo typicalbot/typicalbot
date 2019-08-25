@@ -1,7 +1,7 @@
 const Event = require("../structures/Event");
 const { MessageEmbed } = require("discord.js");
 
-class MessageReactionAdd extends Event {
+class MessageReactionRemove extends Event {
     constructor(...args) {
         super(...args);
     }
@@ -18,7 +18,6 @@ class MessageReactionAdd extends Event {
         let count = messageReaction.count;
         if (messageReaction.users.get(messageReaction.message.author.id)) count--;
 
-        if (count < settings.starboard.count) return;
         if (!messageReaction.message.guild.channels.has(settings.starboard.id)) return;
 
         const channel = messageReaction.message.guild.channels.get(settings.starboard.id);
@@ -27,6 +26,8 @@ class MessageReactionAdd extends Event {
         const boardMsg = messages.find(m => m.embeds.length > 0 && m.embeds[0].footer.text.startsWith("⭐") && m.embeds[0].footer.text.endsWith(messageReaction.message.id));
 
         if (boardMsg) {
+            if (count < 1) return boardMsg.delete();
+
             const image = boardMsg.embeds[0] ? boardMsg.embeds[0].image ? boardMsg.embeds[0].image.proxyURL ? boardMsg.embeds[0].image.proxyURL : null : null : null;
 
             const embed = new MessageEmbed()
@@ -44,26 +45,8 @@ class MessageReactionAdd extends Event {
             }
 
             await boardMsg.edit({ embed });
-        } else {
-            const image = messageReaction.message.attachments.size > 0 ? messageReaction.message.attachments.array()[0].url : null;
-
-            const embed = new MessageEmbed()
-                .setColor(0xFFA500)
-                .addField("Author", `<@!${messageReaction.message.author.id}>`, true)
-                .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
-                .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
-                .setTimestamp(messageReaction.message.createdAt)
-                .setFooter(`⭐ ${count} | ${messageReaction.message.id}`);
-
-            if (image) {
-                embed.setImage(image);
-            } else {
-                embed.addField("Message", messageReaction.message.content, false);
-            }
-
-            channel.send({ embed });
         }
     }
 }
 
-module.exports = MessageReactionAdd;
+module.exports = MessageReactionRemove;

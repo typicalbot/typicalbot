@@ -42,11 +42,11 @@ Message.prototype.reply = function(content, embed, options = {}) {
 };
 
 Message.prototype.success = function(content, embed, options = {}) {
-    return this.send(`${this.author} | <:typicalbotsuccesstoon:607569949900275721> | ${content}`, embed);
+    return this.send(`${this.author} | ✔️ | ${content}`, embed);
 };
 
 Message.prototype.error = function(content, embed, options = {}) {
-    return this.send(`${this.author} | <:typicalboterrortoon:607569993768501268> | ${content}`, embed);
+    return this.send(`${this.author} | ❌ | ${content}`, embed);
 };
 
 Message.prototype.dm = function(content, embed, options = {}) {
