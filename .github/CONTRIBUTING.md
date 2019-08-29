@@ -1,52 +1,91 @@
 # Contributing to TypicalBot
 
-Thank you for considering making a contribution to TypicalBot! This guide explains how to setup your environment for TypicalBot development and where to get help if you encounter trouble.
+Thank you for taking the time to consider making a contribution to TypicalBot!
 
-## Follow the Code of Conduct
+What follows is a set of guidelines for contributing to TypicalBot and its repositories. These are mostly guidelines, not rules. Use your best judgment.
 
-In order to foster a more inclusive community, TypicalBot has adopted the [Contributor Covenant](CODE_OF_CONDUCT.md).
+#### Table of Contents
 
-## Making Chanes
+- [Code of Conduct](#code-of-conduct)
+- [Making Contributions](#making-contributions)
+    - [Reporting Bugs](#reporting-bugs)
+    - [Suggesting Enhancements and Features](#suggesting-enhancements-and-features)
+    - [Pull Requests](#pull-requests)
+- [Style](#style)
+    - [Git Commit Messages](#git-commit-messages)
+    - [JavaScript Style Guide](#javascript-style-guide)
+    - [Documentation](#documentation)
+- [Additional Notes](#additional-notes)
 
-### Development Setup
+## Code of Conduct
 
-In order to make changes to TypicalBot, you'll need:
+This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [support@typicalbot.com](mailto:support@typicalbot.com).
 
-* A text editor or IDE. We use and recommend [Visual Studio Code](https://code.visualstudio.com).
-* [Node.js](https://nodejs.org/en/) version 10 or higher. 
-* [RethinkDB](https://rethinkdb.com/) version 2.3 or higher.
-* [PM2] version 3.4.X or higher.
-* [TypicalBot Cluster Manager](https://github.com/typicalbot/typicalbot-cluster-manager) version 1.0 or higher.
-* [git](https://git-scm.com) and a [GitHub account](https://github.com/join).
+## Making Contributions
 
-TypicalBot uses a pull request model for contributions. Fork [typicalbot/typicalbot](https://github.com/typicalbot/typicalbot) and clone your fork.
+### Reporting Bugs
 
-Configure your Git username and email with
-```
-git config user.name 'First Last'
-git config user.email user@example.com
-```
+Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, [please include as many details as possible](#submitting-a-bug-report). Please fill out the template completely, since doing so helps the maintainers and other contributors resolve issues faster.
 
-Before importing the project into IntelliJ make sure to run `./gradlew check` at least once so all required files are generated.
+#### Before Submitting A Bug Report
 
-### Creating Commits and Writing Commit Messages
+- Search [previous issues](https://github.com/search?q=+is%3Aissue+user%3Atypicalbot) to see if the problem you are experiencing has already been reported. If it has and the issue is still open, comment on that issue instead of opening a new one.
+- Try reproducing the problem on the latest commit in the [master](https://github.com/typicalbot/typicalbot/tree/master) branch.
 
-The commit messages that accompany your code changes are an important piece of documentation, and help make your contribution easier to review. Please consider reading [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit). Minimally, follow these guidelines when writing commit messages.
+#### Submitting A Bug Report
 
-* Keep commits discrete: avoid including multiple unrelated changes in a single commit.
-* Keep commits self-contained: avoid spreading a single change across multiple commits. A single commit should make sense in isolation.
-* If your commit pertains to a GitHub issue, include (`See #123`) in the commit message on a separate line.
+When submitting a bug report issue, keep these guidelines in mind so that the problem can be resolved as swifly as possible.
 
-## Submitting Your Change
+- Use a clear and descriptive title for the issue to identify the problem.
+- Describe the exact steps that reproduce the problem in as many details as possible. When listing steps, explain how you did each step.
+- Describe the behavior you observed after following the steps and point out exactly what the problem is with that behavior. Explain what behavior you expected.
+- Provide specific examples to demonstrate the steps.
+- If possible, include screenshots and animated GIFs which demonstrate the problem.
 
-All code contributions should be submitted via a [pull request](https://help.github.com/articles/using-pull-requests) from a [forked GitHub repository](https://help.github.com/articles/fork-a-repo).
+### Suggesting Enhancements and Features
 
-Once received, the pull request will be reviewed by a TypicalBot maintainer.
+Before creating enhancement suggestions, please check [this list](#before-submitting-a-suggestion) as you might find out that you don't need to create one. When you are creating an enhancement suggestion, [please include as many details as possible](#submitting-an-enhancement-suggestion).
+
+#### Before Submitting A Suggestion
+
+- Check to see if the enhancement or feature you're thinking of has already been completed for an upcoming release.
+- Search [previous suggestions](https://github.com/search?q=+is%3Aissue+user%3Atypicalbot) to see if your enhancement or feature has already been suggested. If it has and the issue is still open, comment on that issue instead of opening a new one.
+
+#### Submitting A Suggestion
+
+- Use a clear and descriptive title for the issue to identify the enhancement or feature you are suggesting.
+- Provide a step-by-step description of the suggested enhancement or feature in as many details as possible.
+- Provide specific examples to demonstrate the steps.
+- Explain why this enhancement would be useful to most TypicalBot users.
+
+### Pull Requests
+
+In order to have your pull request considered for review, it must meet the following requirements:
+
+- A completed [pull request template](https://github.com/typicalbot/typicalbot/blob/master/.github/PULL_REQUEST_TEMPLATE.md). If the pull request template is not completed, you'll be asked to complete it before your pull request will be reviewed by a maintainer.
+- Compliance with the [style guides](#style-guides). If your pull request doesn't comply with one or more of styleguides, you'll be asked to bring it to complaince before your pull request will be reviewed by a maintainer.
+- Completed documentation and tests, if applicable.
+
+> Note: The reviewer(s) of your pull request may request changes or ask you to complete additional tasks, tests, or other changes before your pull request will be accepted and merged by a maintainer.
+
+## Style Guides
+
+### Git Commit Messages
+
+- Use the imperative mood (i.e. "Move command to..." not "Moves command to...").
+- Use the present tense (i.e. "Add feature" not "Added feature").
+- Keep commits discrete. Avoid including multiple unrelated changes in a single commit.
+- Keep commits self-contained: avoid spreading a single change across multiple commits.
+- Reference issues and pull requests liberally after the first line.
+
+### JavaScript Style Guide
+
+All JavaScript code must adhere to the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript), with the exception of [indents (19.1)](https://github.com/airbnb/javascript#whitespace--spaces). Use soft tabs (space character) set to 4 spaces.
+
+### Documentation
+
+All code must be documented using [ESDoc tags](https://esdoc.org/manual/tags.html).
 
 ## Getting Help
 
-If you run into any trouble, please reach out to us in the #support channel of the [TypicalBot Lounge](https://discord.gg/typicalbot) Discord guild.
-
-## Thank You
-
-We deeply appreciate your effort toward improving TypicalBot.
+If you have any questions or run into any trouble, please reach out to us in the [TypicalBot Lounge](https://discord.gg/typicalbot) Discord server.
