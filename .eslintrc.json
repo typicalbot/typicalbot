@@ -1,29 +1,11 @@
 {
-    "env": {
-        "es6": true,
-        "node": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": 2017,
-        "sourceType": "module"
-    },
+    "extends": "airbnb-base",
+    "parser": "babel-eslint",
     "rules": {
-        "no-console": "off",
-        "no-unused-vars": "off",
-        "no-empty": "off",
+        "no-prototype-builtins": "off",
         "indent": [
             "error",
             4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "prefer-const": "error"
+        ]
     }
 }
