@@ -11,7 +11,7 @@ What follows is a set of guidelines for contributing to TypicalBot and its repos
     - [Reporting Bugs](#reporting-bugs)
     - [Suggesting Enhancements and Features](#suggesting-enhancements-and-features)
     - [Pull Requests](#pull-requests)
-- [Style](#style)
+- [Style Guides](#style-guides)
     - [Git Commit Messages](#git-commit-messages)
     - [JavaScript Style Guide](#javascript-style-guide)
     - [Documentation](#documentation)
