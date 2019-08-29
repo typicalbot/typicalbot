@@ -8,8 +8,6 @@ class GuildDelete extends Event {
     async execute(guild) {
         if (!guild.available) return;
 
-        if (this.client.build === "stable") this.client.sendStatistics(guild.shardID);
-
         this.client.handlers.tasks.create('deleteSettings', Date.now() + 604800000, { guild: guild.id });
     }
 }
