@@ -12,9 +12,11 @@ In order to foster a more inclusive community, TypicalBot has adopted the [Contr
 
 In order to make changes to TypicalBot, you'll need:
 
-* A text editor or IDE. We use and recommend [IntelliJ](https://www.jetbrains.com/?from=typicalbot).
-* A [Java Development Kit](https://www.oracle.com/technetwork/java/javase/downloads/index.html) version 1.8 or higher. 
-* [MongoDB](https://www.mongodb.com/download-center) version 4.0 or higher.
+* A text editor or IDE. We use and recommend [Visual Studio Code](https://code.visualstudio.com).
+* [Node.js](https://nodejs.org/en/) version 10 or higher. 
+* [RethinkDB](https://rethinkdb.com/) version 2.3 or higher.
+* [PM2] version 3.4.X or higher.
+* [TypicalBot Cluster Manager](https://github.com/typicalbot/typicalbot-cluster-manager) version 1.0 or higher.
 * [git](https://git-scm.com) and a [GitHub account](https://github.com/join).
 
 TypicalBot uses a pull request model for contributions. Fork [typicalbot/typicalbot](https://github.com/typicalbot/typicalbot) and clone your fork.
