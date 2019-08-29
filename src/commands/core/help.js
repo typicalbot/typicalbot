@@ -6,6 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Get general information about TypicalBot or help with a specific command.",
             usage: "help [command]",
+            aliases: ["info"],
             dm: true,
             mode: Constants.Modes.STRICT
         });
