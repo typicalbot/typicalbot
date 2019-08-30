@@ -1,5 +1,5 @@
 <p align="center">
-    <b>TypicalBot</b>
+    <h1 align="center">TypicalBot</h1>
 </p>
 <p align="center">
     <i>A stable, lightning fast, easy to use, <a href="https://discordapp.com">Discord</a> bot built using <a href="https://discord.js.org">Discord.js</a> and <a href="https://nodejs.org">Node.js</a>.<br>Try out TypicalBot using our hosted version at <a href="https://typicalbot.com/invite">typicalbot.com/invite</a>.</i>
