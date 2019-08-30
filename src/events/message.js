@@ -8,7 +8,7 @@ class Message extends Event {
     }
 
     async execute(message) {
-        if (message.author.bot || message.partial) return;
+        if (message.partial || message.author.bot) return;
 
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
