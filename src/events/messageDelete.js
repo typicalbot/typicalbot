@@ -6,7 +6,7 @@ class MessageDelete extends Event {
     }
 
     async execute(message) {
-        if (message.channel.type !== "text" || !message.gulld || !message.guild.available) return;
+        if (message.channel.type !== "text" || !message.gulld || !message.guild.available || message.partial) return;
 
         const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 

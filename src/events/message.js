@@ -8,7 +8,7 @@ class Message extends Event {
     }
 
     async execute(message) {
-        if (message.author.bot) return;
+        if (message.author.bot || message.partial) return;
 
         if (message.channel.type === "dm") {
             if (!message.content.startsWith(this.client.config.prefix)) return;
@@ -22,7 +22,7 @@ class Message extends Event {
             if (!message.guild.available || !message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
 
             const settings = message.guild.settings = await message.guild.fetchSettings();
-    
+
             if ((new RegExp(`^<@!?${this.client.user.id}>$`)).test(message.content))
                 return message.reply(`This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`);
 
