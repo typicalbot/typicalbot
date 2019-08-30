@@ -4,7 +4,7 @@ const Constants = require(`../../utility/Constants`);
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Makes the bot ignore commands or invites in a channel.",
+            description: "Makes the bot ignore commands, invites and stars in a channel.",
             usage: "ignore ['view'|'commands'|'invites'|'stars']",
             permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
             mode: Constants.Modes.STRICT
