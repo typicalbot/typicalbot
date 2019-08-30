@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Update `$adcheck` command description.
 
 ### Removed
- - `$informaiton` command (duplicate of `$help` command). ([#36](https://github.com/typicalbot/typicalbot/pull/36))
+ - `$information` command (duplicate of `$help` command). ([#36](https://github.com/typicalbot/typicalbot/pull/36))
 
 ### Fixed
 - Correct URL to settings documentation. 
