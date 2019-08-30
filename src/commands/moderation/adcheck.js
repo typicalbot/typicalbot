@@ -4,7 +4,7 @@ const Constants = require(`../../utility/Constants`);
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Check if any members of a server have a server invite in their playing status.",
+            description: "Check if any members of the server have a server invite in their playing status.",
             usage: "adcheck",
             permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
