@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.1]
+### Fixed
+ - Removes undefinied variable in `guildCreate` event (statistics). 
+
 ## [2.4.0]
 ### Added
  - Starboard, star messages to a board (channel). ([#30](https://github.com/typicalbot/typicalbot/pull/30), [#32](https://github.com/typicalbot/typicalbot/pull/32), [#39](https://github.com/typicalbot/typicalbot/pull/39))
@@ -54,7 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.4.0...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.4.1...HEAD
+[2.4.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.4.1
 [2.4.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.4.0
 [2.3.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.3.0
 [2.2.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.2.0
