@@ -36,7 +36,7 @@
         "erlpack": "github:discordapp/erlpack",
         "klaw": "^2.1.1",
         "krypton": "github:Hackzzila/krypton",
-        "mathjs": "^6.0.4",
+        "mathjs": "^6.2.1",
         "moment": "^2.22.2",
         "node-fetch": "^2.6.0",
         "node-opus": "^0.3.2",
@@ -51,6 +51,6 @@
         "zlib-sync": "^0.1.5"
     },
     "devDependencies": {
-        "eslint": "^6.1.0"
+        "eslint": "^6.3.0"
     }
 }
