@@ -7,7 +7,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Displays a user's information.",
             usage: "userinfo [@user|user-id|user-tag]",
-            aliases: ["uinfo"],
+            aliases: ["uinfo", "whois"],
             mode: Constants.Modes.LITE
         });
     }
