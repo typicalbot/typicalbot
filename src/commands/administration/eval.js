@@ -1,15 +1,15 @@
-const Command = require("../../structures/Command");
-const Constants = require("../../utility/Constants");
-const { VM } = require("vm2");
-const { inspect } = require("util");
+const { VM } = require('vm2');
+const { inspect } = require('util');
+const Command = require('../../structures/Command');
+const Constants = require('../../utility/Constants');
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "An eval command for the creator.",
-            usage: "eval <code>",
+            description: 'An eval command for the creator.',
+            usage: 'eval <code>',
             permission: Constants.Permissions.Levels.TYPICALBOT_MAINTAINER,
-            mode: Constants.Modes.STRICT
+            mode: Constants.Modes.STRICT,
         });
     }
 
@@ -25,62 +25,62 @@ module.exports = class extends Command {
                 result = vm.run(`(async () => { ${code} })()`);
             }
 
-            result instanceof Promise ?
-                result.then(a => {
+            result instanceof Promise
+                ? result.then((a) => {
                     message.embed({
-                        "color": 0x00FF00,
-                        "description": `\n\n\`\`\`js\n${inspect(a, { depth: 0 })}\n\`\`\``,
-                        "footer": {
-                            "text": "TypicalBot Eval",
-                            "icon_url": Constants.Links.ICON
-                        }
-                    }).catch(err => {
+                        color: 0x00FF00,
+                        description: `\n\n\`\`\`js\n${inspect(a, { depth: 0 })}\n\`\`\``,
+                        footer: {
+                            text: 'TypicalBot Eval',
+                            icon_url: Constants.Links.ICON,
+                        },
+                    }).catch((err) => {
                         message.embed({
-                            "color": 0xFF0000,
-                            "description": `\`\`\`\n${err.stack}\n\`\`\``,
-                            "footer": {
-                                "text": "TypicalBot Eval",
-                                "icon_url": Constants.Links.ICON
-                            }
+                            color: 0xFF0000,
+                            description: `\`\`\`\n${err.stack}\n\`\`\``,
+                            footer: {
+                                text: 'TypicalBot Eval',
+                                icon_url: Constants.Links.ICON,
+                            },
                         });
                     });
-                }).catch(err => {
+                }).catch((err) => {
                     message.embed({
-                        "color": 0xFF0000,
-                        "description": `\n\n\`\`\`\n${err ? err.stack : `Unknown Error`}\n\`\`\``,
-                        "footer": {
-                            "text": "TypicalBot Eval",
-                            "icon_url": Constants.Links.ICON
-                        }
+                        color: 0xFF0000,
+                        description: `\n\n\`\`\`\n${err ? err.stack : 'Unknown Error'}\n\`\`\``,
+                        footer: {
+                            text: 'TypicalBot Eval',
+                            icon_url: Constants.Links.ICON,
+                        },
                     });
-                }) :
-                result instanceof Object ?
-                    message.embed({
-                        "color": 0x00FF00,
-                        "description": `\`\`\`js\n${inspect(result, { depth: 0 })}\n\`\`\``,
-                        "footer": {
-                            "text": "TypicalBot Eval",
-                            "icon_url": Constants.Links.ICON
-                        }
-                    }) :
-                    message.embed({
-                        "color": 0x00FF00,
-                        "description": `\`\`\`\n${result}\n\`\`\``,
-                        "footer": {
-                            "text": "TypicalBot Eval",
-                            "icon_url": Constants.Links.ICON
-                        }
+                })
+                : result instanceof Object
+                    ? message.embed({
+                        color: 0x00FF00,
+                        description: `\`\`\`js\n${inspect(result, { depth: 0 })}\n\`\`\``,
+                        footer: {
+                            text: 'TypicalBot Eval',
+                            icon_url: Constants.Links.ICON,
+                        },
+                    })
+                    : message.embed({
+                        color: 0x00FF00,
+                        description: `\`\`\`\n${result}\n\`\`\``,
+                        footer: {
+                            text: 'TypicalBot Eval',
+                            icon_url: Constants.Links.ICON,
+                        },
                     });
         } catch (err) {
             message.embed({
-                "color": 0xFF0000,
-                "description": `\`\`\`\n${err.stack}\n\`\`\``,
-                "footer": {
-                    "text": "TypicalBot Eval",
-                    "icon_url": Constants.Links.ICON
-                }
-            }).catch(err => {
-                message.reply("Cannot send embeds.");
+                color: 0xFF0000,
+                description: `\`\`\`\n${err.stack}\n\`\`\``,
+                footer: {
+                    text: 'TypicalBot Eval',
+                    icon_url: Constants.Links.ICON,
+                },
+            }).catch((err) => {
+                message.reply('Cannot send embeds.');
             });
         }
     }

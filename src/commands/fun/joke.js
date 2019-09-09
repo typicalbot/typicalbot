@@ -1,11 +1,11 @@
-const Command = require("../../structures/Command");
-const jokes = require("../../utility/jokes");
+const Command = require('../../structures/Command');
+const jokes = require('../../utility/jokes');
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Gives you a random joke.",
-            usage: "joke"
+            description: 'Gives you a random joke.',
+            usage: 'joke',
         });
     }
 

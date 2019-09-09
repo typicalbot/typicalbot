@@ -1,5 +1,6 @@
-const ytdl = require("ytdl-core");
-const SYS = require("simple-youtube-stream");
+const ytdl = require('ytdl-core');
+const SYS = require('simple-youtube-stream');
+
 const sys = new SYS();
 
 class Video {
@@ -22,11 +23,11 @@ class Video {
     }
 
     async stream() {
-        await this.validate(this.url).catch(err => { throw err; });
+        await this.validate(this.url).catch((err) => { throw err; });
 
-        return this.live ?
-            ytdl(this.url) :
-            ytdl(this.url, { filter: "audioonly" });
+        return this.live
+            ? ytdl(this.url)
+            : ytdl(this.url, { filter: 'audioonly' });
     }
 }
 

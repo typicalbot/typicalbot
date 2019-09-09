@@ -1,4 +1,4 @@
-const Event = require("../structures/Event");
+const Event = require('../structures/Event');
 
 class GuildMemberUpdate extends Event {
     constructor(...args) {
@@ -8,36 +8,36 @@ class GuildMemberUpdate extends Event {
     async execute(oldMember, member) {
         if (!oldMember.guild.available) return;
 
-        const guild = member.guild;
+        const { guild } = member;
 
         const oldNickname = oldMember.nickname;
-        const nickname = member.nickname;
+        const { nickname } = member;
         if (oldNickname === nickname) return;
 
         const settings = await this.client.settings.fetch(guild.id);
         if (!settings.logs.id || !settings.logs.nickname) return;
 
-        const user = member.user;
+        const { user } = member;
 
         if (!guild.channels.has(settings.logs.id)) return;
         const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.auto.nickname && nickname === this.client.functions.formatMessage("autonick", guild, user, settings.auto.nickname)) return;
+        if (settings.auto.nickname && nickname === this.client.functions.formatMessage('autonick', guild, user, settings.auto.nickname)) return;
 
-        if (settings.logs.nickname === "--embed") {
+        if (settings.logs.nickname === '--embed') {
             channel.buildEmbed()
                 .setColor(0x00FF00)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
                 .setFooter(`Changed nickname to ${member.nickname || user.nickname}`)
                 .setTimestamp()
                 .send()
-                .catch(() => { return; });
+                .catch(() => { });
         } else {
             channel.send(
-                settings.logs.nickname !== "--enabled" ?
-                    this.client.functions.formatMessage("logs-nick", guild, user, settings.logs.nickname, { oldMember }) :
-                    `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`
-            ).catch(() => { return; });
+                settings.logs.nickname !== '--enabled'
+                    ? this.client.functions.formatMessage('logs-nick', guild, user, settings.logs.nickname, { oldMember })
+                    : `**${user.tag}** changed their nickname to **${member.nickname || user.username}**.`,
+            ).catch(() => { });
         }
     }
 }

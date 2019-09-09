@@ -1,12 +1,13 @@
-const Command = require("../../structures/Command");
-const Constants = require(`../../utility/Constants`);
+const Command = require('../../structures/Command');
+
+const Constants = require('../../utility/Constants');
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Skip what is currently playing.",
-            usage: "skip [amount]",
-            mode: Constants.Modes.LITE
+            description: 'Skip what is currently playing.',
+            usage: 'skip [amount]',
+            mode: Constants.Modes.LITE,
         });
     }
 
@@ -14,11 +15,11 @@ module.exports = class extends Command {
         if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
         try {
-            const connection = message.guild.voice.connection;
+            const { connection } = message.guild.voice;
 
-            if (!connection) return message.send(`Nothing is currently streaming.`);
-            if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error("You must be in the same voice channel to perform that command.");
-            if (connection.guildStream.mode !== "queue") return message.error("This command only works while in queue mode.");
+            if (!connection) return message.send('Nothing is currently streaming.');
+            if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error('You must be in the same voice channel to perform that command.');
+            if (connection.guildStream.mode !== 'queue') return message.error('This command only works while in queue mode.');
 
             const args = /(\d+)/i.exec(parameters);
 
@@ -26,11 +27,11 @@ module.exports = class extends Command {
 
             const song = connection.guildStream.skip();
 
-            if (!song) return message.reply("Skipping.");
+            if (!song) return message.reply('Skipping.');
 
-            message.reply(`Skipping **${song.title}** requested by **${song.requester.author.username}**${args ? ` and ${args[1] - 1} of the following songs` : ""}.`);
+            message.reply(`Skipping **${song.title}** requested by **${song.requester.author.username}**${args ? ` and ${args[1] - 1} of the following songs` : ''}.`);
         } catch (e) {
-            message.send(`Nothing is currently streaming.`);
+            message.send('Nothing is currently streaming.');
         }
     }
 };

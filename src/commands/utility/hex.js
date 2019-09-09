@@ -1,22 +1,22 @@
-const Command = require("../../structures/Command");
-const Constants = require(`../../utility/Constants`);
-const { Canvas } = require("canvas-constructor");
-const { MessageAttachment } = require("discord.js");
+const { Canvas } = require('canvas-constructor');
+const { MessageAttachment } = require('discord.js');
+const Constants = require('../../utility/Constants');
+const Command = require('../../structures/Command');
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Sends a preview of a hex color.",
-            usage: "hex <hex-color:0-9a-fA-F>",
-            mode: Constants.Modes.LITE
+            description: 'Sends a preview of a hex color.',
+            usage: 'hex <hex-color:0-9a-fA-F>',
+            mode: Constants.Modes.LITE,
         });
     }
 
     execute(message, parameters) {
         const args = /#?([0-9a-fA-F]{6}|random)/i.exec(parameters);
-        if (!args) return message.error(this.client.functions.error("usage", this));
+        if (!args) return message.error(this.client.functions.error('usage', this));
 
-        const hex = args[1] === "random" ? Math.floor(Math.random() * 16777215).toString(16) : args[1];
+        const hex = args[1] === 'random' ? Math.floor(Math.random() * 16777215).toString(16) : args[1];
 
         message.channel.send(
             new MessageAttachment(
@@ -27,16 +27,16 @@ module.exports = class extends Command {
                     .setTextFont('20px Impact')
                     .setTextAlign('left')
                     .addText(`#${hex}`.toUpperCase(), 5, 95)
-                    .toBuffer()
-            )
+                    .toBuffer(),
+            ),
         );
     }
 
     embedExecute(message, parameters) {
         const args = /#?([0-9a-fA-F]{6}|random)/i.exec(parameters);
-        if (!args) return message.error(this.client.functions.error("usage", this));
+        if (!args) return message.error(this.client.functions.error('usage', this));
 
-        const hex = args[1] === "random" ? Math.floor(Math.random() * 16777215).toString(16) : args[1];
+        const hex = args[1] === 'random' ? Math.floor(Math.random() * 16777215).toString(16) : args[1];
 
         message.channel.buildEmbed()
             .attachFiles([{
@@ -48,7 +48,8 @@ module.exports = class extends Command {
                         .setTextFont('20px Impact')
                         .setTextAlign('left')
                         .addText(`#${hex}`.toUpperCase(), 5, 95)
-                        .toBuffer(), name: 'color.png'
+                        .toBuffer(),
+                name: 'color.png',
             }])
             .setColor(parseInt(hex, 16))
             .setImage('attachment://color.png')

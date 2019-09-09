@@ -1,6 +1,6 @@
-const Constants = require("../utility/Constants");
-const Event = require("../structures/Event");
-const { inspect } = require("util");
+const { inspect } = require('util');
+const Constants = require('../utility/Constants');
+const Event = require('../structures/Event');
 
 class MessageUpdate extends Event {
     constructor(...args) {
@@ -8,7 +8,7 @@ class MessageUpdate extends Event {
     }
 
     async execute(oldMessage, message) {
-        if (message.partial || message.channel.type !== "text" || message.author.bot || !message.guild || !message.guild.available) return;
+        if (message.partial || message.channel.type !== 'text' || message.author.bot || !message.guild || !message.guild.available) return;
 
         const settings = message.guild.settings = await message.guild.fetchSettings();
 
@@ -17,16 +17,15 @@ class MessageUpdate extends Event {
         if (userPermissions.level >= 2) return;
         if (settings.ignored.invites.includes(message.channel.id)) return;
 
-        if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id))
-            this.inviteCheck(message);
+        if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id)) { this.inviteCheck(message); }
     }
 
     inviteCheck(message) {
         if (message.guild.settings.automod.invite) {
             if (
-                /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content) ||
-                /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(inspect(message.embeds, { depth: 4 }))
-            ) this.client.emit("guildInvitePosted", message);
+                /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(message.content)
+                || /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i.test(inspect(message.embeds, { depth: 4 }))
+            ) this.client.emit('guildInvitePosted', message);
         }
     }
 }

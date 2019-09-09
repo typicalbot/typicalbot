@@ -1,5 +1,6 @@
-const redb = require("rethinkdbdash");
-const credentials = require(`../config`).database.credentials;
+const redb = require('rethinkdbdash');
+
+const { credentials } = require('../config').database;
 
 const r = redb(credentials);
 
@@ -8,11 +9,11 @@ const r = redb(credentials);
         console.log(`Database \`${credentials.db}\` not found. Creating...`);
         await r.dbCreate(credentials.db);
     }
-    
+
     const db = r.db(credentials.db);
     const dbTables = await db.tableList();
 
-    const tables = ["guilds", "mutes", "tasks", "donors"];
+    const tables = ['guilds', 'mutes', 'tasks', 'donors'];
 
     for (const t of tables) {
         if (!dbTables.includes(t)) {
@@ -21,6 +22,6 @@ const r = redb(credentials);
         }
     }
 
-    console.log("The database should be good to go.");
+    console.log('The database should be good to go.');
     process.exit();
-})();
+}());

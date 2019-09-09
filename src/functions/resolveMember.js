@@ -1,4 +1,4 @@
-const Function = require("../structures/Function");
+const Function = require('../structures/Function');
 
 class ResolveMember extends Function {
     constructor(client, name) {
@@ -14,15 +14,15 @@ class ResolveMember extends Function {
             if (!member) return returnSelf ? message.member : null;
 
             return member;
-        } else if (username && discriminator) {
-            await message.guild.members.fetch({ "query": username }).catch(console.error);
+        } if (username && discriminator) {
+            await message.guild.members.fetch({ query: username }).catch(console.error);
 
-            const member = message.guild.members.find(m => m.user.tag === `${username}#${discriminator}`);
+            const member = message.guild.members.find((m) => m.user.tag === `${username}#${discriminator}`);
             if (!member) return returnSelf ? message.member : null;
 
             return member;
-        } else if (returnSelf) return message.member;
-        else return null;
+        } if (returnSelf) return message.member;
+        return null;
     }
 }
 

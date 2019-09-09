@@ -1,4 +1,4 @@
-const Function = require("../structures/Function");
+const Function = require('../structures/Function');
 
 class Pagify extends Function {
     constructor(client, name) {
@@ -13,7 +13,7 @@ class Pagify extends Function {
 
         const currentPage = list.splice((page) * 10, 10);
 
-        const pageContent = currentPage.map((item, index) => `• ${this.lengthen(1, (index + 1) + 10 * page, String(10 + (10 * page)).length, "before")}: ${item}`).join("\n");
+        const pageContent = currentPage.map((item, index) => `• ${this.lengthen(1, (index + 1) + 10 * page, String(10 + (10 * page)).length, 'before')}: ${item}`).join('\n');
 
         return `Page ${page + 1} / ${pageCount} | ${listSize.toLocaleString()} Total\n\n${pageContent}`;
     }

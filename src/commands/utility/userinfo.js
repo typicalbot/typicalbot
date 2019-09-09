@@ -1,14 +1,15 @@
-const Command = require("../../structures/Command");
-const Constants = require(`../../utility/Constants`);
-const moment = require("moment");
+const moment = require('moment');
+const Command = require('../../structures/Command');
+
+const Constants = require('../../utility/Constants');
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Displays a user's information.",
-            usage: "userinfo [@user|user-id|user-tag]",
-            aliases: ["uinfo"],
-            mode: Constants.Modes.LITE
+            usage: 'userinfo [@user|user-id|user-tag]',
+            aliases: ['uinfo'],
+            mode: Constants.Modes.LITE,
         });
     }
 
@@ -16,21 +17,22 @@ module.exports = class extends Command {
         const args = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i.exec(parameters);
 
         const member = await this.client.functions.resolveMember(message, args);
-        const user = member.user;
+        const { user } = member;
 
         message.reply(
-            `**__User Information:__** ${message.guild.name}\n`
-            + `\`\`\`\n`
+            `${`**__User Information:__** ${message.guild.name}\n`
+            + '```\n'
             + `Tag                 : ${user.tag}\n`
-            + `ID                  : ${user.id}\n`
-            + (user.avatarURL() ? `Avatar              : ${user.avatarURL("png", 2048)}\n` : "")
-            + `Joined Discord      : ${moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A")}\n`
-            + `Status              : ${user.presence.status}\n`
-            + (user.presence.game ? `Playing             : ${user.presence.game.name}\n` : "")
-            + (member.nickname ? `Nickname            : ${member.nickname}\n` : "")
-            + (member.roles.size > 1 ? `Roles               : ${member.roles.array().filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => r.name).join(", ")}\n` : "")
-            + `Joined Server       : ${member.joinedAt}\n`
-            + `\`\`\``
+            + `ID                  : ${user.id}\n`}${
+                user.avatarURL() ? `Avatar              : ${user.avatarURL('png', 2048)}\n` : ''
+            }Joined Discord      : ${moment(user.createdAt).format('MMM DD, YYYY @ hh:mm A')}\n`
+            + `Status              : ${user.presence.status}\n${
+                user.presence.game ? `Playing             : ${user.presence.game.name}\n` : ''
+            }${member.nickname ? `Nickname            : ${member.nickname}\n` : ''
+            }${member.roles.size > 1 ? `Roles               : ${member.roles.array().filter((r) => r.position !== 0).sort((a, b) => b.position - a.position).map((r) => r.name)
+                .join(', ')}\n` : ''
+            }Joined Server       : ${member.joinedAt}\n`
+            + '```',
         );
     }
 
@@ -38,31 +40,30 @@ module.exports = class extends Command {
         const args = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i.exec(parameters);
 
         const member = await this.client.functions.resolveMember(message, args);
-        const user = member.user;
+        const { user } = member;
 
         const embed = message.buildEmbed()
             .setColor(0x00ADFF)
-            .setTitle("User Information")
-            .addField("» Tag", user.tag, true)
-            .addField("» ID", user.id, true);
+            .setTitle('User Information')
+            .addField('» Tag', user.tag, true)
+            .addField('» ID', user.id, true);
 
-        if (user.avatarURL()) embed.setThumbnail(user.avatarURL("png", 2048));
-
-        embed
-            .addField("» Joined Discord", moment(user.createdAt).format("MMM DD, YYYY @ hh:mm A"), true)
-            .addField("» Status", user.presence.status, true);
-
-        if (user.presence.game) embed.addField("» Playing", user.presence.game.name, true);
-        if (member.nickname) embed.addField("» Nickname", member.nickname, true);
-        if (member.roles.size > 1) embed.addField("» Roles", `${member.roles.filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => r.name).join(", ")}\n`, true);
+        if (user.avatarURL()) embed.setThumbnail(user.avatarURL('png', 2048));
 
         embed
-            .addField("» Joined Server", moment(member.joinedAt).format("MMM DD, YYYY @ hh:mm A"), true)
-            .setFooter("TypicalBot", Constants.Links.ICON)
+            .addField('» Joined Discord', moment(user.createdAt).format('MMM DD, YYYY @ hh:mm A'), true)
+            .addField('» Status', user.presence.status, true);
+
+        if (user.presence.game) embed.addField('» Playing', user.presence.game.name, true);
+        if (member.nickname) embed.addField('» Nickname', member.nickname, true);
+        if (member.roles.size > 1) embed.addField('» Roles', `${member.roles.filter((r) => r.position !== 0).sort((a, b) => b.position - a.position).map((r) => r.name).join(', ')}\n`, true);
+
+        embed
+            .addField('» Joined Server', moment(member.joinedAt).format('MMM DD, YYYY @ hh:mm A'), true)
+            .setFooter('TypicalBot', Constants.Links.ICON)
             .send();
     }
 };
-
 
 
 /*
@@ -149,4 +150,4 @@ let transmit = settingslist ?
     { channel: message.channel.id, guild: message.content.split(" ")[2], settings: true } :
     { channel: message.channel.id, guild: after };
 
-client.transmit("serverinfo", transmit);*/
+client.transmit("serverinfo", transmit); */
