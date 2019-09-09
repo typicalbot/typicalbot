@@ -45,7 +45,6 @@ module.exports = class extends Command {
             + `=> Users             : ${this.client.users.size.toLocaleString()}\n`
             + `=> RAM (Used)        : ${Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100}MB\n`
             + `=> RAM (Total)       : ${Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100}MB\n`
-            + `=> Users             : ${this.client.users.size.toLocaleString()}\n`
             + `\`\`\``
         );
     }
