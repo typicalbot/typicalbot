@@ -4,7 +4,7 @@ exports.Links = {
     SERVER: "https://www.typicalbot.com/join-us/",
     DONATE: "https://www.typicalbot.com/donate/",
     DOCUMENTATION: "https://www.typicalbot.com/documentation/",
-    SETTINGS: "https://www.typicalbot.com/documentation/#!settings",
+    SETTINGS: "https://www.typicalbot.com/documentation/#settings",
     ICON: "https://www.typicalbot.com/x/images/icon.png"
 };
 

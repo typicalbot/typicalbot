@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         const type = Math.random() <= 0.25 ? "gif" : "poster";
 
         fetch(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
@@ -19,7 +19,7 @@ module.exports = class extends Command {
             .catch(err => message.error("An error occurred making that request."));
     }
 
-    embedExecute(message, parameters, permissionLevel) {
+    embedExecute(message) {
         const type = Math.random() <= 0.25 ? "gif" : "poster";
 
         fetch(`https://api.bunnies.io/v2/loop/random/?media=${type}`)

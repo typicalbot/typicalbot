@@ -11,11 +11,11 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         message.reply(`You can add me to your server at <${Constants.Links.OAUTH}>.`);
     }
 
-    embedExecute(message, response) {
+    embedExecute(message) {
         message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("TypicalBot Invite")

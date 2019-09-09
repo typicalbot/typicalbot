@@ -7,6 +7,8 @@ class MessageReactionAdd extends Event {
     }
 
     async execute(messageReaction, user) {
+        if (messageReaction.message.partial) await messageReaction.message.fetch();
+
         if (messageReaction.message.channel.type !== "text" || !messageReaction.message.guild || !messageReaction.message.guild.available) return;
         if (messageReaction.emoji.name !== "⭐") return;
 

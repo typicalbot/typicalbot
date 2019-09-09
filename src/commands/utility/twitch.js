@@ -8,7 +8,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /(.*)/gi.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
@@ -33,7 +33,7 @@ module.exports = class extends Command {
             .catch(err => message.error("An error occurred making that request."));
     }
 
-    embedExecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters) {
         const args = /(.*)/gi.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 

@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /(?:(-e)\s+)?((?:.|[\r\n])+)/i.exec(parameters);
         if (!args) return message.error(`No announcement content was supplied.`);
 

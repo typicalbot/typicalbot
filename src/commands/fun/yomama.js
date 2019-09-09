@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         fetch("https://api.yomomma.info")
             .then(res => res.json())
             .then(json => message.send(json.joke))
