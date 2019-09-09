@@ -6,6 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Receive an invite to the TypicalBot Lounge.",
             usage: "server",
+            aliases: ["support"],
             dm: true,
             mode: Constants.Modes.STRICT
         });
