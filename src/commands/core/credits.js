@@ -11,11 +11,11 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         message.send(`The TypicalBot Team would like to give thanks to the following people for making contributions to me:\n\n» Aklixio#0588 (84430408447426560) - Designer of TypicalBot's icon.`);
     }
 
-    embedExecute(message, response) {
+    embedExecute(message) {
         message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("Credits")

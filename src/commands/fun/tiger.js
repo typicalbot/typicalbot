@@ -8,7 +8,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         return message.error("An error occurred making that request.");
         // request.get("https://typicalbot.com/api/tiger/")
         //     .end((err, res) => {
@@ -18,7 +18,7 @@ module.exports = class extends Command {
         //     });
     }
 
-    embedExecute(message, parameters, permissionLevel) {
+    embedExecute(message) {
         return message.error("An error occurred making that request.");
         // request.get("https://typicalbot.com/api/tiger/")
         //     .end((err, res) => {

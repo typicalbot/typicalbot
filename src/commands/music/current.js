@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         try {
             const connection = message.guild.voice.connection;
             if (!connection) return message.send("Nothing is currently streaming.");

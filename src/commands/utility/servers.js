@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         const args = /(\d+)/.exec(message.content);
 
         const paged = this.client.functions.pagify(
@@ -24,7 +24,7 @@ module.exports = class extends Command {
         return message.reply(`**__Servers on Cluster ${this.client.cluster} / ${this.client.shardCount}:__**\n\`\`\`autohotkey\n${paged}\`\`\``);
     }
 
-    embedExecute(message, parameters, permissionLevel) {
+    embedExecute(message) {
         const args = /(\d+)/.exec(message.content);
 
         const paged = this.client.functions.pagify(

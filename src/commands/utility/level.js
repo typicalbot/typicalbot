@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, parameters, permissionLevel) {
+    async execute(message, parameters) {
         const args = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i.exec(parameters);
 
         const member = await this.client.functions.resolveMember(message, args);
@@ -23,7 +23,7 @@ module.exports = class extends Command {
         message.reply(`**__${user.tag}'s Permission Level:__** ${permissions.level} | ${permissions.title}${permissionsHere.level !== permissions.level ? ` (${permissionsHere.level} | ${permissionsHere.title})` : ""}`);
     }
 
-    async embedExecute(message, parameters, permissionLevel) {
+    async embedExecute(message, parameters) {
         const args = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i.exec(parameters);
 
         const member = await this.client.functions.resolveMember(message, args);

@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         message.buildEmbed()
             .setColor(0x00adff)
             .setTitle("Permission Levels").setURL(Constants.Links.BASE)

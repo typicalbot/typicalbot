@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, parameters, permissionLevel) {
+    async execute(message) {
         if (!await this.client.utility.music.hasPermissions(message, this)) return;
 
         try {

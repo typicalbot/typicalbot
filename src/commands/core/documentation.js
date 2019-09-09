@@ -12,11 +12,11 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         message.send(`Documentation for all commands and settings can be found at **<${Constants.Links.DOCUMENTATION}>**.`);
     }
 
-    embedExecute(message, response) {
+    embedExecute(message) {
         message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Documentation")

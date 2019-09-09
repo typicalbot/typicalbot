@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /(-o(?:nline)?\s)?/i.exec(parameters);
 
         const members = args ? message.guild.members.filter(m => m.presence.status !== "offline") : message.guild.members;
