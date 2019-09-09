@@ -12,7 +12,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         if (message.channel.type === "text") message.reply(`A list of commands should have arrived in your Direct Messages.`);
 
         const list = Array.from(this.client.commands.keys());

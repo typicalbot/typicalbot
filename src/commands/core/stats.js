@@ -12,7 +12,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, parameters, permissionLevel) {
+    async execute(message) {
         const guilds = await this.client.fetchData("guilds.size");
         const voiceConnections = await this.client.fetchData("voice.connections.size");
         const channels = await this.client.fetchData("channels.size");
@@ -49,7 +49,7 @@ module.exports = class extends Command {
         );
     }
 
-    async embedExecute(message, parameters, permissionLevel) {
+    async embedExecute(message) {
         const guilds = await this.client.fetchData("guilds.size");
         const voiceConnections = await this.client.fetchData("voice.connections.size");
         const channels = await this.client.fetchData("channels.size");

@@ -12,7 +12,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /(?:(-j(?:son)?)\s+)?(?:<#(\d+)>\s+)?((?:.|[\r\n])+)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
@@ -31,7 +31,7 @@ module.exports = class extends Command {
         } else {
             channel.send(content, { disableEveryone: false }).catch(err => message.error("I am missing the SEND_MESSAGES permission in the channel requested."));
         }
-        
+
 
         if (message.deletable) message.delete({ timeout: 500 });
     }

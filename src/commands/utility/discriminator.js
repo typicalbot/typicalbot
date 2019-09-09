@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /#?(\d{4})(?:\s+(\d+))?/i.exec(parameters);
 
         const discriminator = args && args[1] ? args[1] : message.author.discriminator;

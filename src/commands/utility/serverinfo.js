@@ -12,7 +12,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /(.+)/i.exec(parameters);
         const option = args ? args[1] : null;
 
@@ -36,7 +36,7 @@ module.exports = class extends Command {
         );
     }
 
-    embedExecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters) {
         const match = /(.+)/i.exec(parameters);
         const option = match ? match[1] : null;
 

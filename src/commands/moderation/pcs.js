@@ -13,7 +13,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, parameters, permissionLevel) {
+    async execute(message, parameters) {
         const args = /(list|clear|add|remove)(?:\s+(\w+)(?:\s+(.+))?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 

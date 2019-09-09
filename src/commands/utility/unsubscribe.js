@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         let role = message.guild.settings.subscriber ? message.guild.roles.get(message.guild.settings.subscriber) : null;
         if (message.guild.id === "163038706117115906") role = message.guild.roles.find(r => r.name === "Subscriber");
 
@@ -21,7 +21,7 @@ module.exports = class extends Command {
         });
     }
 
-    embedExecute(message, response) {
+    embedExecute(message) {
         let role = message.guild.settings.subscriber ? message.guild.roles.get(message.guild.settings.subscriber) : null;
         if (message.guild.id === "163038706117115906") role = message.guild.roles.find(r => r.name === "Subscriber");
 

@@ -12,7 +12,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /#?([0-9a-fA-F]{6}|random)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
@@ -32,7 +32,7 @@ module.exports = class extends Command {
         );
     }
 
-    embedExecute(message, parameters, permissionLevel) {
+    embedExecute(message, parameters) {
         const args = /#?([0-9a-fA-F]{6}|random)/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 

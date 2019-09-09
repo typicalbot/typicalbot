@@ -8,7 +8,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         return message.error("An error occurred making that request.");
         // request.get("https://talaikis.com/api/quotes/random/")
         //     .end((err, res) => {
