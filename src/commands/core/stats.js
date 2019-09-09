@@ -81,8 +81,8 @@ module.exports = class extends Command {
             .addField("» Voice Connections", `${this.client.voice.connections.size.toLocaleString()}`, true)
             .addField("» Channels", `${this.client.channels.size.toLocaleString()}`, true)
             .addField("» Users", `${this.client.users.size.toLocaleString()}`, true)
-            .addField("» RAM (Used)", `${Math.round(100 * (process.memoryUsage().heapUsed / 1048576)) / 100}MB`, true)
-            .addField("» RAM (Total)", `${Math.round(100 * (process.memoryUsage().heapTotal / 1048576)) / 100}MB`, true)
+            .addField("» RAM (Used)", `${this.client.usedRAM}MB`, true)
+            .addField("» RAM (Total)", `${this.client.totalRAM}MB`, true)
             .setFooter("TypicalBot", Constants.Links.ICON)
             .setTimestamp()
             .send();
