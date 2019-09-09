@@ -1,5 +1,3 @@
-const Command = require('../structures/Command');
-
 const Constants = require('./Constants');
 
 module.exports = (client, pcs) => new Object({

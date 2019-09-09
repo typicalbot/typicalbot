@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const pm2 = require('pm2');
 const { Util } = require('discord.js');
 const config = require('../config');
@@ -6,9 +7,9 @@ async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(config.token);
     const shards = Array.from({ length: shardCount }, (a, b) => b);
     const clusterCount = Math.ceil(shardCount / 10);
-    const clusters = new Array();
+    const clusters = [];
 
-    for (let i = 1; i <= clusterCount; i++) {
+    for (let i = 1; i <= clusterCount; i + 1) {
         const clusterShards = shards.splice(0, 10);
 
         clusters.push({
@@ -40,13 +41,13 @@ pm2.connect(async (err) => {
     console.log('Generating Clusters\n', clusters);
 
     clusters.forEach((cluster, i) => {
-        pm2.start(cluster, (err, apps) => {
+        pm2.start(cluster, (e) => {
             if (i === (clusters.length - 1)) {
                 console.log('Generation Complete.\nExiting.');
                 pm2.disconnect();
             }
 
-            if (err) throw err;
+            if (e) throw err;
         });
     });
 });

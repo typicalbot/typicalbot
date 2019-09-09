@@ -31,12 +31,13 @@ class Stream {
 
         const content = `🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`;
 
-        this.lastPlaying && video.requester.channel.lastMessageID === this.lastPlaying.id
-            ? this.lastPlaying.edit(content)
-            : video.requester.send(content).then((msg) => this.lastPlaying = msg);
+        if (this.lastPlaying && video.requester.channel.lastMessageID === this.lastPlaying.id) this.lastPlaying.edit(content);
+        // eslint-disable-next-line no-return-assign
+        else video.requester.send(content).then((msg) => this.lastPlaying = msg);
 
         this.dispatcher.on('error', (err) => {
             video.requester.send(`An error occured playing the video. ${this.queue.length ? 'Attempting to play the next video in the queue.' : 'Leaving the channel.'}`);
+            // eslint-disable-next-line no-console
             console.log(err);
             if (this.queue.length) setTimeout(() => this.play(this.queue.splice(0, 1)[0]), 1000);
         });
@@ -68,6 +69,7 @@ class Stream {
 
         this.dispatcher.on('error', (err) => {
             video.requester.send('An error occured while trying to play the livestream. Leaving the channel.');
+            // eslint-disable-next-line no-console
             console.log(err);
             this.end();
         });
@@ -103,13 +105,11 @@ class Stream {
 
     pause() {
         if (!this.dispatcher) return this.end();
-
         this.dispatcher.pause();
     }
 
     resume() {
         if (!this.dispatcher) return this.end();
-
         this.dispatcher.resume();
     }
 

@@ -14,7 +14,7 @@ class Command {
 
         this.usage = usage || 'Usage Not Provided';
 
-        this.aliases = aliases || new Array();
+        this.aliases = aliases || [];
 
         this.dm = dm || false;
 

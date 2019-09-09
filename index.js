@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { Node } = require('veza');
 const Cluster = require('./src');
 const config = require('./config');
@@ -14,8 +15,10 @@ node.connectTo(config.nodePort).catch((error) => console.error('[IPC] Disconnect
 
 const client = new Cluster(node);
 
+// eslint-disable-next-line consistent-return
 node.on('message', async (message) => {
     if (message.data.event === 'collectData') {
+        // eslint-disable-next-line no-eval
         message.reply(eval(`client.${message.data.data}`));
     } else if (message.data.event === 'shardCount') {
         message.reply(client.shardCount);
@@ -37,6 +40,6 @@ node.on('message', async (message) => {
 
         const trueChannel = trueGuild.channels.get(channel);
 
-        trueChannel.send('', json).then(() => message.reply({ response: 'Success' })).catch((err) => message.reply({ response: 'An error occured.' }));
+        trueChannel.send('', json).then(() => message.reply({ response: 'Success' })).catch(() => message.reply({ response: 'An error occured.' }));
     }
 });

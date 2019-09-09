@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const ytdl = require('ytdl-core');
 const SYS = require('simple-youtube-stream');
 
