@@ -5,16 +5,30 @@ about: Report a bug or issue with the bot.
 
 ## Bug Report
 
-### Details
+### Description
+
+<!-- Briefly describe the problem. -->
+
+### Reproduction Steps
+
+<!-- Describe the exact steps that reproduce the problem in as many details as possible. Explain how you did each step. -->
+
+### Observed Behavior
+
+<!-- Describe the behavior you observed after following the steps and point out exactly what the problem is with that behavior. -->
+
+### Expected Behavior
+
+<!-- Explain what behavior you expected. -->
+
+### Additional Details
 
 - Operating System: 
 - TypicalBot Version: 
 
-### Description
-
-<!-- Please describe the bug in as much detail as possible. -->
+<!-- Provide any additional details about the problem that you think might help resolve the issue (examples, screenshots, etc.). -->
 
 ### Have You...?
-- [ ] I have checked for related issues.
-- [ ] I have reproduced this bug on the latest `master` commit.
-- [ ] I have reproduced this bug on an official bot operated by TypicalBot.
+- [ ] I have checked for previous issues reporting this problem.
+- [ ] I have tried to reproduce this problem on the latest `master` commit.
+- [ ] I have tried to reproduce this problem on the official bot operated by TypicalBot.
