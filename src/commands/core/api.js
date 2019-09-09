@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         if (parameters === "view") {
             message.dm(`${message.guild.name}'s API Key:\n${message.guild.settings.apikey ? `\`${message.guild.settings.apikey}\``: "No API key exists. Use `$api generate` to generate one."}`);
         } else if (parameters === "generate") {

@@ -13,7 +13,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         try {
             const [arr, unsafe, code] = /^(-(?:u|unsafe)\s+)?([\W\w]+)/.exec(parameters);
             const vm = new VM();
@@ -70,7 +70,7 @@ module.exports = class extends Command {
                             "text": "TypicalBot Eval",
                             "icon_url": Constants.Links.ICON
                         }
-                    });   
+                    });
         } catch (err) {
             message.embed({
                 "color": 0xFF0000,

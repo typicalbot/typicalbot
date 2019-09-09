@@ -58,7 +58,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, parameters, permissionLevel) {
+    async execute(message, parameters) {
         const args = /(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
@@ -118,6 +118,11 @@ module.exports = class extends Command {
 
                     if (!list.length) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${list.join(", ")}`);
+                } else if (setting === "subscriberrole") {
+                    const role = message.guild.roles.get(message.guild.settings.subscriber);
+
+                    if (!role) return message.reply(`**__Current Value:__** None`);
+                    message.reply(`**__Current Value:__** ${role.name}`);
                 } else if (setting === "autorole") {
                     const role = message.guild.roles.get(message.guild.settings.auto.role.id);
 

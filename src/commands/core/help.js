@@ -6,12 +6,13 @@ module.exports = class extends Command {
         super(...args, {
             description: "Get general information about TypicalBot or help with a specific command.",
             usage: "help [command]",
+            aliases: ["info", "support"],
             dm: true,
             mode: Constants.Modes.STRICT
         });
     }
 
-    async execute(message, parameters, permissionLevel) {
+    async execute(message, parameters) {
         if (!parameters) return message.send(`\u200B\t\tHello there, I'm TypicalBot! I was created by HyperCoder#2975 and nsylke#4490. If you would like to access my list of commands, try using \`${this.client.config.prefix}commands\`. If you need any help with commands or settings, you can find documentation at **<${Constants.Links.DOCUMENTATION}>**. If you cannot figure out how to use a command or setting, or would like to chat, you can join us in the TypicalBot Lounge at **<${Constants.Links.SERVER}>**.\n\n\t\t*Built upon over a year of experience, TypicalBot is the ironically-named bot that is far from typical. Stable, lightning fast, and easy to use, TypicalBot is there for you and will seamlessly help you moderate your server and offer some entertaining features for your users, every step of the way.*`);
 
         const command = await this.client.commands.fetch(parameters, message.guild.settings.aliases);
@@ -31,7 +32,7 @@ module.exports = class extends Command {
         );
     }
 
-    async embedExecute(message, parameters, permissionLevel) {
+    async embedExecute(message, parameters) {
         if (!parameters) return message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("TypicalBot Info")

@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         fetch("https://api.adviceslip.com/advice")
             .then(res => res.json())
             .then(json => message.send(json.slip.advice))

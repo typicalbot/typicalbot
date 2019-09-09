@@ -12,7 +12,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         if (!parameters) return message.error(this.client.functions.error("usage", this));
 
         try {

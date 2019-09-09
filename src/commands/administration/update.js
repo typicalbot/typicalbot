@@ -12,7 +12,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         const path = process.cwd();
 
         exec("git pull", { cwd: path }, (err, stdout, stderr) => {

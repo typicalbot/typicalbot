@@ -9,7 +9,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /(\d+)?/i.exec(parameters);
         const sides = args[1] || 6;
 

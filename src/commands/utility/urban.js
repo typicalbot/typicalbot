@@ -9,8 +9,8 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
-        if (!message.channel.nsfw) return message.error("This command can only be used in NSFW channels."); 
+    execute(message, parameters) {
+        if (!message.channel.nsfw) return message.error("This command can only be used in NSFW channels.");
 
         const args = /(.*)/gi.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
@@ -28,10 +28,10 @@ module.exports = class extends Command {
             .catch(err => message.error("An error occurred making that request."));
     }
 
-    embedExecute(message, parameters, permissionLevel) {
-        if (!message.channel.nsfw) return message.error("This command can only be used in NSFW channels."); 
-        
-        const args = /urban (.*)/gi.exec(message.content);
+    embedExecute(message, parameters) {
+        if (!message.channel.nsfw) return message.error("This command can only be used in NSFW channels.");
+
+        const args = /(.*)/gi.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 
         const query = args[1];

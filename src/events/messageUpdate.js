@@ -8,7 +8,7 @@ class MessageUpdate extends Event {
     }
 
     async execute(oldMessage, message) {
-        if (message.channel.type !== "text" || message.author.bot || !message.guild || !message.guild.available) return;
+        if (message.partial || message.channel.type !== "text" || message.author.bot || !message.guild || !message.guild.available) return;
 
         const settings = message.guild.settings = await message.guild.fetchSettings();
 
@@ -20,7 +20,7 @@ class MessageUpdate extends Event {
         if (userPermissions.level < Constants.Permissions.Levels.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id))
             this.inviteCheck(message);
     }
-    
+
     inviteCheck(message) {
         if (message.guild.settings.automod.invite) {
             if (

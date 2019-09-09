@@ -11,11 +11,11 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         message.send(`You can donate to support the continued development of TypicalBot at **<${Constants.Links.DONATE}>** to help support my growth, development, and stability.`);
     }
 
-    embedExecute(message, response) {
+    embedExecute(message) {
         message.buildEmbed()
             .setColor(0x00ADFF)
             .setTitle("Support the TypicalBot Project")
