@@ -10,7 +10,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /(\S+)(?:\s+(\d+))?/i.exec(parameters);
         if (!args) return message.error(this.client.functions.error("usage", this));
 

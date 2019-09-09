@@ -8,7 +8,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         const mention = message.mentions.users.first();
 
         const randomAddonNum = Math.random();

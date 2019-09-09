@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         const args = /(\d+)?/i.exec(parameters);
 
         fetch("https://www.carbonitex.net/discord/api/listedbots")
@@ -29,7 +29,7 @@ module.exports = class extends Command {
                     bots.map(bot => `${this.client.functions.lengthen(1, `${bot.name}`, 20)}: ${bot.servercount}${bot.compliant ? ` | Carbon Compliant` : ""}`),
                     page
                 );
-        
+
                 message.send(`**__Ranked Bot List - Provided by Carbonitex:__**\n\n\`\`\`autohotkey\n${content}\n\`\`\``);
             })
             .catch(err => message.error("An error occurred making that request."));

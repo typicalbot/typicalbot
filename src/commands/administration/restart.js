@@ -14,14 +14,14 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message, parameters) {
         let processes;
-        
+
         if (!parameters || parameters === "all") {
             const list = [];
 
             for (let i = 1; i <= Number(process.env.CLUSTER_COUNT); i++) {
-                list.push(`${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`); 
+                list.push(`${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ""}${i}`);
             }
 
             processes = list.join(" ");
@@ -29,7 +29,7 @@ module.exports = class extends Command {
 
         pm2.connect(function(err) {
             if (err) console.error(err);
-            
+
             pm2.restart(processes, function(err, apps) {
                 if (err && err.message.includes("process name not found")) return message.error("Process not found.");
                 else if (err) {

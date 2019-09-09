@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    async execute(message, parameters, permissionLevel) {
+    async execute(message, parameters) {
         const args = /(?:<@!?(\d{17,20})>\s+)?(?:(.{1,32}))?/i.exec(parameters);
 
         const member = args[1] ? await message.guild.members.fetch(args[1]) : null;
