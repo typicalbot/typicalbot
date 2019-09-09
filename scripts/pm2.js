@@ -47,7 +47,7 @@ pm2.connect(async (err) => {
                 pm2.disconnect();
             }
 
-            if (e) throw err;
+            if (e) throw e;
         });
     });
 });
