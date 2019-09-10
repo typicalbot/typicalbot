@@ -15,18 +15,19 @@ module.exports = class extends Command {
 
     execute(message, parameters) {
         try {
-            const [arr, unsafe, code] = /^(-(?:u|unsafe)\s+)?([\W\w]+)/.exec(parameters);
+            const [unsafe, code] = /^(-(?:u|unsafe)\s+)?([\W\w]+)/.exec(parameters);
             const vm = new VM();
             let result;
 
             if (unsafe) {
+                // eslint-disable-next-line no-eval
                 result = eval(`(async () => { ${code} })()`);
             } else {
                 result = vm.run(`(async () => { ${code} })()`);
             }
 
-            result instanceof Promise
-                ? result.then((a) => {
+            if (result instanceof Promise) {
+                result.then((a) => {
                     message.embed({
                         color: 0x00FF00,
                         description: `\n\n\`\`\`js\n${inspect(a, { depth: 0 })}\n\`\`\``,
@@ -53,24 +54,26 @@ module.exports = class extends Command {
                             icon_url: Constants.Links.ICON,
                         },
                     });
-                })
-                : result instanceof Object
-                    ? message.embed({
-                        color: 0x00FF00,
-                        description: `\`\`\`js\n${inspect(result, { depth: 0 })}\n\`\`\``,
-                        footer: {
-                            text: 'TypicalBot Eval',
-                            icon_url: Constants.Links.ICON,
-                        },
-                    })
-                    : message.embed({
-                        color: 0x00FF00,
-                        description: `\`\`\`\n${result}\n\`\`\``,
-                        footer: {
-                            text: 'TypicalBot Eval',
-                            icon_url: Constants.Links.ICON,
-                        },
-                    });
+                });
+            } else if (result instanceof Object) {
+                message.embed({
+                    color: 0x00FF00,
+                    description: `\`\`\`js\n${inspect(result, { depth: 0 })}\n\`\`\``,
+                    footer: {
+                        text: 'TypicalBot Eval',
+                        icon_url: Constants.Links.ICON,
+                    },
+                });
+            } else {
+                message.embed({
+                    color: 0x00FF00,
+                    description: `\`\`\`\n${result}\n\`\`\``,
+                    footer: {
+                        text: 'TypicalBot Eval',
+                        icon_url: Constants.Links.ICON,
+                    },
+                });
+            }
         } catch (err) {
             message.embed({
                 color: 0xFF0000,
@@ -79,7 +82,7 @@ module.exports = class extends Command {
                     text: 'TypicalBot Eval',
                     icon_url: Constants.Links.ICON,
                 },
-            }).catch((err) => {
+            }).catch(() => {
                 message.reply('Cannot send embeds.');
             });
         }
