@@ -48,6 +48,9 @@
         "ytdl-core": "github:fent/node-ytdl-core",
         "zlib-sync": "^0.1.5"
     },
+    "optionalDependencies": {
+        "bignum": "^0.13.0"
+    },
     "devDependencies": {
         "eslint": "^6.3.0"
     }
