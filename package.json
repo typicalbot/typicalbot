@@ -28,9 +28,8 @@
     },
     "homepage": "https://github.com/typicalbot/typicalbot#readme",
     "dependencies": {
-        "bignum": "^0.13.0",
         "bufferutil": "^4.0.1",
-        "canvas": "^1.6.11",
+        "canvas": "github:Automattic/node-canvas",
         "canvas-constructor": "^1.1.2",
         "discord.js": "github:discordjs/discord.js#master",
         "erlpack": "github:discordapp/erlpack",
