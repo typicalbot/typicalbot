@@ -35,16 +35,16 @@ module.exports = class extends Command {
         const settings = message.guild.settings;
         if (settings.logs.id && message.guild.channels.has(settings.logs.id) && settings.logs.say) {
             if (settings.logs.say === "--embed") {
-                channel.buildEmbed()
+                message.guild.channels.get(settings.logs.id).buildEmbed()
                     .setColor(0x00FF00)
                     .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL() || null)
-                    .setDescription(message.content)
+                    .setDescription(content)
                     .setFooter(`Sent using \`$say\` command.`)
                     .setTimestamp()
                     .send()
                     .catch(() => { return; });
             } else {
-                channel.send(`**${message.author.tag}** sent a message using \`$say\`.\n\`\`\`${message.content}\`\`\``).catch(() => { return; });
+                message.guild.channels.get(settings.logs.id).send(`**${message.author.tag}** sent a message using \`$say\`.\n\`\`\`${content}\`\`\``).catch(() => { return; });
             }
         }
 
