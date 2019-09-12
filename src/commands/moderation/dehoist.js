@@ -4,7 +4,7 @@ const Constants = require(`../../utility/Constants`);
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
-            description: "Check if any members of the server has special characters in their username.",
+            description: "Check if any members of the server have any special characters in their username.",
             usage: "dehoist",
             permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
             mode: Constants.Modes.STRICT
