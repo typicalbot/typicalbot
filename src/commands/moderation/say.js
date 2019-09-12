@@ -32,6 +32,21 @@ module.exports = class extends Command {
             channel.send(content, { disableEveryone: false }).catch(err => message.error("I am missing the SEND_MESSAGES permission in the channel requested."));
         }
 
+        const settings = message.guild.settings;
+        if (settings.logs.id && message.guild.channels.has(settings.logs.id) && settings.logs.say) {
+            if (settings.logs.say === "--embed") {
+                channel.buildEmbed()
+                    .setColor(0x00FF00)
+                    .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL() || null)
+                    .setDescription(message.content)
+                    .setFooter(`Sent using \`$say\` command.`)
+                    .setTimestamp()
+                    .send()
+                    .catch(() => { return; });
+            } else {
+                channel.send(`**${message.author.tag}** sent a message using \`$say\`.\n\`\`\`${message.content}\`\`\``).catch(() => { return; });
+            }
+        }
 
         if (message.deletable) message.delete({ timeout: 500 });
     }
