@@ -22,6 +22,7 @@ const settingsList = {
     "logs-unban": "A custom set message to be posted when a user is unbanned from the server.",
     "logs-nickname": "A custom set message to be posted when a user changes their nickname in the server.",
     "logs-invite": "A custom set message to be posted when a user posts an invite in the server.",
+    "logs-say": "Whether to log uses of the \`$say\` command.",
     "modlogs": "A channel to send moderation logs in. Aka audit logs.",
     "modlogs-purge": "A modlog to log when a moderator or administrator purges messages in a channel.",
     "automessage": "A message to be sent to a user when they join the server.",
@@ -184,6 +185,12 @@ module.exports = class extends Command {
                     message.reply(`**__Current Value:__** ${logText}`);
                 } else if (setting === "logs-invite") {
                     const log = message.guild.settings.logs.invite;
+                    const enabled = log === "--enabled";
+                    const logText = enabled ? "Default" : !log ? "Disabled" : `\`\`\`txt\n${log}\n\`\`\``;
+
+                    message.reply(`**__Current Value:__** ${logText}`);
+                } else if (setting === "logs-say") {
+                    const log = message.guild.settings.logs.say;
                     const enabled = log === "--enabled";
                     const logText = enabled ? "Default" : !log ? "Disabled" : `\`\`\`txt\n${log}\n\`\`\``;
 
@@ -586,6 +593,18 @@ module.exports = class extends Command {
                         this.client.settings.update(message.guild.id, { logs: { invite: "--embed" } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         this.client.settings.update(message.guild.id, { logs: { invite: value } }).then(() => message.success("Setting successfully updated."));
+                    }
+                } else if (setting === "logs-say") {
+                    if (!message.guild.settings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
+
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { logs: { say: null } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "default" || value === "enable") {
+                        this.client.settings.update(message.guild.id, { logs: { say: "--enabled" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "embed") {
+                        this.client.settings.update(message.guild.id, { logs: { say: "--embed" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        this.client.settings.update(message.guild.id, { logs: { say: value } }).then(() => message.success("Setting successfully updated."));
                     }
                 } else if (setting === "modlogs" || setting === "logs-moderation") {
                     if (value === "disable") {
