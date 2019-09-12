@@ -39,7 +39,7 @@ module.exports = class extends Command {
                     .setColor(0xFF33CC)
                     .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL() || null)
                     .addField("Channel", channel)
-                    .addField("Message", content)
+                    .setDescription(content)
                     .setFooter("Message Echoed")
                     .setTimestamp()
                     .send()
