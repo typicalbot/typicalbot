@@ -40,7 +40,7 @@ module.exports = class extends Command {
                     .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL() || null)
                     .addField("Channel", channel)
                     .addField("Message", content)
-                    .setFooter("Sent using TypicalBot.")
+                    .setFooter("Message Echoed")
                     .setTimestamp()
                     .send()
                     .catch(() => { return; });
