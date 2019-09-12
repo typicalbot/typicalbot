@@ -38,8 +38,9 @@ module.exports = class extends Command {
                 message.guild.channels.get(settings.logs.id).buildEmbed()
                     .setColor(0xFF33CC)
                     .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL() || null)
+                    .addField("Channel", channel.toString())
                     .setDescription(content)
-                    .setFooter(channel.toString())
+                    .setFooter("Sent using TypicalBot.")
                     .setTimestamp()
                     .send()
                     .catch(() => { return; });
