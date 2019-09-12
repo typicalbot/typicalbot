@@ -39,12 +39,12 @@ module.exports = class extends Command {
                     .setColor(0x00FF00)
                     .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL() || null)
                     .setDescription(content)
-                    .setFooter(`Sent using \`$say\` command.`)
+                    .setFooter(channel)
                     .setTimestamp()
                     .send()
                     .catch(() => { return; });
             } else {
-                message.guild.channels.get(settings.logs.id).send(`**${message.author.tag}** sent a message using \`$say\`.\n\`\`\`${content}\`\`\``).catch(() => { return; });
+                message.guild.channels.get(settings.logs.id).send(`**${message.author.tag}** sent a message in ${channel} using TypicalBot.\n\`\`\`${content}\`\`\``).catch(() => { return; });
             }
         }
 
