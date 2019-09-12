@@ -36,10 +36,10 @@ module.exports = class extends Command {
         if (settings.logs.id && message.guild.channels.has(settings.logs.id) && settings.logs.say) {
             if (settings.logs.say === "--embed") {
                 message.guild.channels.get(settings.logs.id).buildEmbed()
-                    .setColor(0xCC0099)
+                    .setColor(0xFF33CC)
                     .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL() || null)
                     .setDescription(content)
-                    .setFooter(channel)
+                    .setFooter(channel.toString())
                     .setTimestamp()
                     .send()
                     .catch(() => { return; });
