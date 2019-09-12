@@ -29,9 +29,8 @@
     },
     "homepage": "https://github.com/typicalbot/typicalbot#readme",
     "dependencies": {
-        "bignum": "^0.13.0",
         "bufferutil": "^4.0.1",
-        "canvas": "^1.6.11",
+        "canvas": "github:Automattic/node-canvas",
         "canvas-constructor": "^1.1.2",
         "discord.js": "github:discordjs/discord.js#master",
         "erlpack": "github:discordapp/erlpack",
@@ -49,6 +48,9 @@
         "vm2": "^3.8.3",
         "ytdl-core": "github:fent/node-ytdl-core",
         "zlib-sync": "^0.1.5"
+    },
+    "optionalDependencies": {
+        "bignum": "^0.13.0"
     },
     "devDependencies": {
         "babel-eslint": "^10.0.3",
