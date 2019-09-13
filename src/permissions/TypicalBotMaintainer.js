@@ -12,7 +12,7 @@ class TypicalBotCreator extends PermissionLevelStr {
     }
 
     check(guild, member) {
-        return guild.client.config.maintainers.includes(member.id);
+        return process.env.MAINTAINERS.includes(member.id);
     }
 }
 

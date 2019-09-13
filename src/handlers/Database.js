@@ -1,6 +1,10 @@
 const r = require('rethinkdbdash');
 
-const { credentials } = require(`${process.cwd()}/config`).database;
+const credentials = {
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    db: process.env.DATABASE_DATABASE,
+};
 
 class DatabaseHandler {
     constructor(client) {

@@ -1,7 +1,11 @@
-/* eslint-disable no-console */
-const redb = require('rethinkdbdash');
+require('dotenv').config();
+const redb = require("rethinkdbdash");
 
-const { credentials } = require('../config').database;
+const credentials = {
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    db: provess.env.DATABASE_DATABASE
+}
 
 const r = redb(credentials);
 

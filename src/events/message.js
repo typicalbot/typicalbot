@@ -11,9 +11,9 @@ class Message extends Event {
         if (message.partial || message.author.bot) return;
 
         if (message.channel.type === 'dm') {
-            if (!message.content.startsWith(this.client.config.prefix)) return;
+            if (!message.content.startsWith(process.env.PREFIX)) return;
 
-            const command = await this.client.commands.fetch(message.content.split(' ')[0].slice(this.client.config.prefix.length));
+            const command = await this.client.commands.fetch(message.content.split(' ')[0].slice(process.env.PREFIX.length));
 
             if (!command || !command.dm || command.permission > Constants.Permissions.Levels.SERVER_MEMBER) return;
 
@@ -23,7 +23,7 @@ class Message extends Event {
 
             const settings = message.guild.settings = await message.guild.fetchSettings();
 
-            if ((new RegExp(`^<@!?${this.client.user.id}>$`)).test(message.content)) { return message.reply(`This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${this.client.config.prefix}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${this.client.config.prefix}\``}.`); }
+            if ((new RegExp(`^<@!?${this.client.user.id}>$`)).test(message.content)) {return message.reply(`This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${process.env.PREFIX}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${process.env.PREFIX}\``}.`);}
 
             const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author);
             const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
@@ -58,9 +58,9 @@ class Message extends Event {
     }
 
     matchPrefix(user, settings, command) {
-        if (command.startsWith(this.client.config.prefix) && user.id === this.client.config.owner) return this.client.config.prefix;
+        if (command.startsWith(process.env.PREFIX) && user.id === 'this.client.config.owner') return process.env.PREFIX;
         if (settings.prefix.custom && command.startsWith(settings.prefix.custom)) return settings.prefix.custom;
-        if (settings.prefix.default && command.startsWith(this.client.config.prefix)) return this.client.config.prefix;
+        if (settings.prefix.default && command.startsWith(process.env.PREFIX)) return process.env.PREFIX;
 
         return null;
     }
