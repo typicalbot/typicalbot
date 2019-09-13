@@ -12,7 +12,7 @@ class Ready extends Event {
         this.client.user.setActivity('Client is loading');
 
         setInterval(async () => {
-            this.client.user.setActivity(`${this.client.config.prefix}help — typicalbot.com`, { type: 'WATCHING' });
+            this.client.user.setActivity(`${process.env.PREFIX}help — typicalbot.com`, { type: 'WATCHING' });
         }, 1000 * 60 * 5);
 
         setInterval(() => {

@@ -3,8 +3,6 @@ const Command = require('../../structures/Command');
 
 const Constants = require('../../utility/Constants');
 
-const config = require('../../../config');
-
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
@@ -22,7 +20,7 @@ module.exports = class extends Command {
             const list = [];
 
             for (let i = 1; i <= Number(process.env.CLUSTER_COUNT); i++) {
-                list.push(`${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ''}${i}`);
+                list.push(`${process.env.CLUSTER_NAME}-${process.env.CLUSTER_BUILD ? `${process.env.CLUSTER_BUILD}-` : ''}${i}`);
             }
 
             processes = list.join(' ');

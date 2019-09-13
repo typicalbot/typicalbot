@@ -14,7 +14,7 @@ module.exports = class extends Command {
 
         const name = args[1];
 
-        fetch(`https://api.twitch.tv/helix/users?login=${name}`, { method: 'get', headers: { 'Client-ID': this.client.config.apis.twitch } })
+        fetch(`https://api.twitch.tv/helix/users?login=${name}`, { method: 'get', headers: { 'Client-ID': process.env.API_TWITCH } })
             .then((res) => res.json())
             .then((json) => {
                 const data = json.data[0];
@@ -39,7 +39,7 @@ module.exports = class extends Command {
 
         const name = args[1];
 
-        fetch(`https://api.twitch.tv/helix/users?login=${name}`, { method: 'get', headers: { 'Client-ID': this.client.config.apis.twitch } })
+        fetch(`https://api.twitch.tv/helix/users?login=${name}`, { method: 'get', headers: { 'Client-ID': process.env.API_TWITCH } })
             .then((res) => res.json())
             .then((json) => {
                 const data = json.data[0];
