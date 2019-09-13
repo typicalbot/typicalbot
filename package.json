@@ -33,6 +33,7 @@
         "canvas": "github:Automattic/node-canvas",
         "canvas-constructor": "^1.1.2",
         "discord.js": "github:discordjs/discord.js#master",
+        "dotenv": "^8.1.0",
         "erlpack": "github:discordapp/erlpack",
         "klaw": "^2.1.1",
         "mathjs": "^6.2.1",
@@ -53,6 +54,7 @@
         "bignum": "^0.13.0"
     },
     "devDependencies": {
+        "babel-cli": "^6.26.0",
         "babel-eslint": "^10.0.3",
         "esdoc": "^1.1.0",
         "esdoc-ecmascript-proposal-plugin": "^1.0.0",
