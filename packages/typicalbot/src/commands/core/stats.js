@@ -14,12 +14,12 @@ module.exports = class extends Command {
     }
 
     async execute(message) {
-        const guilds = await this.client.fetchData('guilds.size');
-        const voiceConnections = await this.client.fetchData('voice.connections.size');
-        const channels = await this.client.fetchData('channels.size');
-        const users = await this.client.fetchData('users.size');
-        const usedRAM = await this.client.fetchData('usedRAM');
-        const totalRAM = await this.client.fetchData('totalRAM');
+        const guilds = await this.client.clusterUtil.fetchData('guilds.size');
+        const voiceConnections = await this.client.clusterUtil.fetchData('voice.connections.size');
+        const channels = await this.client.clusterUtil.fetchData('channels.size');
+        const users = await this.client.clusterUtil.fetchData('users.size');
+        const usedRAM = await this.client.clusterUtil.fetchData('usedRAM');
+        const totalRAM = await this.client.clusterUtil.fetchData('totalRAM');
 
         const clusterParts = this.client.cluster.match(/^(\S+? \S+?) ([\s\S]+?)$/);
         let [clusterName, clusterShards] = clusterParts.slice(1, 3);
@@ -51,12 +51,12 @@ module.exports = class extends Command {
     }
 
     async embedExecute(message) {
-        const guilds = await this.client.fetchData('guilds.size');
-        const voiceConnections = await this.client.fetchData('voice.connections.size');
-        const channels = await this.client.fetchData('channels.size');
-        const users = await this.client.fetchData('users.size');
-        const usedRAM = await this.client.fetchData('usedRAM');
-        const totalRAM = await this.client.fetchData('totalRAM');
+        const guilds = await this.client.clusterUtil.fetchData('guilds.size');
+        const voiceConnections = await this.client.clusterUtil.fetchData('voice.connections.size');
+        const channels = await this.client.clusterUtil.fetchData('channels.size');
+        const users = await this.client.clusterUtil.fetchData('users.size');
+        const usedRAM = await this.client.clusterUtil.fetchData('usedRAM');
+        const totalRAM = await this.client.clusterUtil.fetchData('totalRAM');
 
         const clusterParts = this.client.cluster.match(/^(\S+? \S+?) ([\s\S]+?)$/);
         let [clusterName, clusterShards] = clusterParts.slice(1, 3);
