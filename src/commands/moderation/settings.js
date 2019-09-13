@@ -3,50 +3,51 @@ const Command = require('../../structures/Command');
 const Constants = require('../../utility/Constants');
 
 const settingsList = {
-    embed: 'Embed responses from TypicalBot.',
-    adminrole: 'Administrator role that will grant users with this role permission level 3.',
-    modrole: 'Moderator role that will grant users with this role permission level 2.',
-    djrole: 'DJ role that will grant users with this role permission level 1.',
-    muterole: 'A role the bot will give users when muted.',
-    blacklistrole: "Users with this role will be denied access to any of TypicalBot's commands.",
-    autorole: 'Users joining the server will automatically be given this role.',
-    'autorole-bots': 'Bots joining the server will automatically be given this role.',
-    'autorole-delay': 'The amount of time to wait before giving the autorole to allow for security levels to work.',
-    'autorole-silent': 'If not silent, a message will be sent in the logs channel stating a member was given the autorole.',
-    subscriberrole: 'A role that will be given when a user uses the `subscribe` command.',
-    announcements: 'A channel for announcements to be posted, used with the `announce` command.',
-    'announcements-mention': 'A mention to be put in the announcement when posted, such as a Subscriber role.',
-    logs: 'A channel for activity logs to be posted.',
-    'logs-join': 'A custom set message to be posted when a user joins the server.',
-    'logs-leave': 'A custom set message to be posted when a user leaves the server.',
-    'logs-ban': 'A custom set message to be posted when a user is banned from the server.',
-    'logs-unban': 'A custom set message to be posted when a user is unbanned from the server.',
-    'logs-nickname': 'A custom set message to be posted when a user changes their nickname in the server.',
-    'logs-invite': 'A custom set message to be posted when a user posts an invite in the server.',
-    modlogs: 'A channel to send moderation logs in. Aka audit logs.',
-    'modlogs-purge': 'A modlog to log when a moderator or administrator purges messages in a channel.',
-    automessage: 'A message to be sent to a user when they join the server.',
-    autonickname: 'A nickname to give a user when they join the server.',
-    mode: 'A mode to enable certain commands.',
-    customprefix: 'A custom prefix to user other than `$`.',
-    defaultprefix: 'The default prefix `$`.',
-    antiinvite: 'Server moderation tool to delete any invites sent by users in the server.',
-    'antiinvite-action': 'Enable warning and kicking when sending invites. AntiInvite must be enabled for this to work.',
-    'antiinvite-warn': 'A user will receive a warning if they send this exact number of invites. AntiInvite and AntiInvite Action must be enabled for this to work.',
-    'antiinvite-kick': 'A user will be kicked if they send this number or more invites. AntiInvite and AntiInvite Action must be enabled for this to work.',
-    nonickname: 'A way to disable the `nickname` command from being used.',
-    'music-permissions': 'Change the required permission level for users to use all music commands.',
-    'music-play': 'Change the required permission level for users to use the `play` music command. Unless set to `off`, this overwrites the `music-permissions` setting.',
-    'music-skip': 'Change the required permission level for users to use the `skip` music command. Unless set to `off`, this overwrites the `music-permissions` setting.',
-    'music-stop': 'Change the required permission level for users to use the `stop` music command. Unless set to `off`, this overwrites the `music-permissions` setting.',
-    'music-pause': 'Change the required permission level for users to use the `pause` music command. Unless set to `off`, this overwrites the `music-permissions` setting.',
-    'music-resume': 'Change the required permission level for users to use the `resume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.',
-    'music-unqueue': 'Change the required permission level for users to use the `unqueue` music command. Unless set to `off`, this overwrites the `music-permissions` setting.',
-    'music-volume': 'Change the required permission level for users to use the `volume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.',
-    'music-timelimit': 'Change the maximum time limit for a video. Set in seconds. Minimum is 120 seconds (2 minutes). Maximum is 600 seconds (10 minutes). TypicalBot Prime Member maximum is 7200 seconds (2 hours).',
-    'music-queuelimit': 'Change the maximum queue limit for a video. Maximum is 10 videos. TypicalBot Prime Member maximum is 100 videos.',
-    starboard: 'A channel to send starred messages in, i.e. a starboard.',
-    'starboard-stars': 'Change the required stars count for messages to appear in the starboard.',
+    "embed": "Embed responses from TypicalBot.",
+    "adminrole": "Administrator role that will grant users with this role permission level 3.",
+    "modrole": "Moderator role that will grant users with this role permission level 2.",
+    "djrole": "DJ role that will grant users with this role permission level 1.",
+    "muterole": "A role the bot will give users when muted.",
+    "blacklistrole": "Users with this role will be denied access to any of TypicalBot's commands.",
+    "autorole": "Users joining the server will automatically be given this role.",
+    "autorole-bots": "Bots joining the server will automatically be given this role.",
+    "autorole-delay": "The amount of time to wait before giving the autorole to allow for security levels to work.",
+    "autorole-silent": "If not silent, a message will be sent in the logs channel stating a member was given the autorole.",
+    "subscriberrole": "A role that will be given when a user uses the `subscribe` command.",
+    "announcements": "A channel for announcements to be posted, used with the `announce` command.",
+    "announcements-mention": "A mention to be put in the announcement when posted, such as a Subscriber role.",
+    "logs": "A channel for activity logs to be posted.",
+    "logs-join": "A custom set message to be posted when a user joins the server.",
+    "logs-leave": "A custom set message to be posted when a user leaves the server.",
+    "logs-ban": "A custom set message to be posted when a user is banned from the server.",
+    "logs-unban": "A custom set message to be posted when a user is unbanned from the server.",
+    "logs-nickname": "A custom set message to be posted when a user changes their nickname in the server.",
+    "logs-invite": "A custom set message to be posted when a user posts an invite in the server.",
+    "logs-say": "Whether to log uses of the \`$say\` command.",
+    "modlogs": "A channel to send moderation logs in. Aka audit logs.",
+    "modlogs-purge": "A modlog to log when a moderator or administrator purges messages in a channel.",
+    "automessage": "A message to be sent to a user when they join the server.",
+    "autonickname": "A nickname to give a user when they join the server.",
+    "mode": "A mode to enable certain commands.",
+    "customprefix": "A custom prefix to user other than `$`.",
+    "defaultprefix": "The default prefix `$`.",
+    "antiinvite": "Server moderation tool to delete any invites sent by users in the server.",
+    "antiinvite-action": "Enable warning and kicking when sending invites. AntiInvite must be enabled for this to work.",
+    "antiinvite-warn": "A user will receive a warning if they send this exact number of invites. AntiInvite and AntiInvite Action must be enabled for this to work.",
+    "antiinvite-kick": "A user will be kicked if they send this number or more invites. AntiInvite and AntiInvite Action must be enabled for this to work.",
+    "nonickname": "A way to disable the `nickname` command from being used.",
+    "music-permissions": "Change the required permission level for users to use all music commands.",
+    "music-play": "Change the required permission level for users to use the `play` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-skip": "Change the required permission level for users to use the `skip` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-stop": "Change the required permission level for users to use the `stop` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-pause": "Change the required permission level for users to use the `pause` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-resume": "Change the required permission level for users to use the `resume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-unqueue": "Change the required permission level for users to use the `unqueue` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-volume": "Change the required permission level for users to use the `volume` music command. Unless set to `off`, this overwrites the `music-permissions` setting.",
+    "music-timelimit": "Change the maximum time limit for a video. Set in seconds. Minimum is 120 seconds (2 minutes). Maximum is 600 seconds (10 minutes). TypicalBot Prime Member maximum is 7200 seconds (2 hours).",
+    "music-queuelimit": "Change the maximum queue limit for a video. Maximum is 10 videos. TypicalBot Prime Member maximum is 100 videos.",
+    "starboard": "A channel to send starred messages in, i.e. a starboard.",
+    "starboard-stars": "Change the required stars count for messages to appear in the starboard."
 };
 
 module.exports = class extends Command {
@@ -194,7 +195,13 @@ module.exports = class extends Command {
                     const logText = enabled ? 'Default' : !log ? 'Disabled' : `\`\`\`txt\n${log}\n\`\`\``;
 
                     message.reply(`**__Current Value:__** ${logText}`);
-                } else if (setting === 'modlogs' || setting === 'logs-moderation') {
+                } else if (setting === "logs-say") {
+                    const log = message.guild.settings.logs.say;
+                    const enabled = log === "--enabled";
+                    const logText = enabled ? "Default" : !log ? "Disabled" : `\`\`\`txt\n${log}\n\`\`\``;
+
+                    message.reply(`**__Current Value:__** ${logText}`);
+                } else if (setting === "modlogs" || setting === "logs-moderation") {
                     const channel = message.guild.channels.get(message.guild.settings.logs.moderation);
 
                     if (!channel) return message.reply('**__Current Value:__** None');
@@ -585,11 +592,23 @@ module.exports = class extends Command {
                     } else {
                         this.client.settings.update(message.guild.id, { logs: { invite: value } }).then(() => message.success('Setting successfully updated.'));
                     }
-                } else if (setting === 'modlogs' || setting === 'logs-moderation') {
-                    if (value === 'disable') {
-                        this.client.settings.update(message.guild.id, { logs: { moderation: null } }).then(() => message.success('Setting successfully updated.'));
-                    } else if (value === 'here') {
-                        this.client.settings.update(message.guild.id, { logs: { moderation: message.channel.id } }).then(() => message.success('Setting successfully updated.'));
+                } else if (setting === "logs-say") {
+                    if (!message.guild.settings.logs.id) return message.error("You must have a logs channel set up before changing this setting.");
+
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { logs: { say: null } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "default" || value === "enable") {
+                        this.client.settings.update(message.guild.id, { logs: { say: "--enabled" } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "embed") {
+                        this.client.settings.update(message.guild.id, { logs: { say: "--embed" } }).then(() => message.success("Setting successfully updated."));
+                    } else {
+                        this.client.settings.update(message.guild.id, { logs: { say: value } }).then(() => message.success("Setting successfully updated."));
+                    }
+                } else if (setting === "modlogs" || setting === "logs-moderation") {
+                    if (value === "disable") {
+                        this.client.settings.update(message.guild.id, { logs: { moderation: null } }).then(() => message.success("Setting successfully updated."));
+                    } else if (value === "here") {
+                        this.client.settings.update(message.guild.id, { logs: { moderation: message.channel.id } }).then(() => message.success("Setting successfully updated."));
                     } else {
                         const subArgs = /(?:(?:<#)?(\d{17,20})>?|(.+))/i.exec(value);
 

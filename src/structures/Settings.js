@@ -30,6 +30,7 @@ module.exports = (id) => ({
         invite: null,
         moderation: null,
         purge: null,
+        say: null
     },
     auto: {
         role: {
