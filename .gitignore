@@ -17,4 +17,5 @@ node_modules
 # Custom
 package-lock.json
 .vscode
+*.env
 config.json
