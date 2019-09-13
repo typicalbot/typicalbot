@@ -33,20 +33,20 @@ module.exports = class extends Command {
             channel.send(content, { disableEveryone: false }).catch((err) => message.error('I am missing the SEND_MESSAGES permission in the channel requested.'));
         }
 
-        const settings = message.guild.settings;
+        const { settings } = message.guild;
         if (settings.logs.id && message.guild.channels.has(settings.logs.id) && settings.logs.say) {
-            if (settings.logs.say === "--embed") {
+            if (settings.logs.say === '--embed') {
                 message.guild.channels.get(settings.logs.id).buildEmbed()
                     .setColor(0xFF33CC)
                     .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.avatarURL() || null)
-                    .addField("Channel", channel)
+                    .addField('Channel', channel)
                     .setDescription(content)
-                    .setFooter("Message Echoed")
+                    .setFooter('Message Echoed')
                     .setTimestamp()
                     .send()
-                    .catch(() => { return; });
+                    .catch(() => { });
             } else {
-                message.guild.channels.get(settings.logs.id).send(`**${message.author.tag}** sent a message in ${channel} using TypicalBot.\n\`\`\`${content}\`\`\``).catch(() => { return; });
+                message.guild.channels.get(settings.logs.id).send(`**${message.author.tag}** sent a message in ${channel} using TypicalBot.\n\`\`\`${content}\`\`\``).catch(() => { });
             }
         }
 
