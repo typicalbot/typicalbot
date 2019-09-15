@@ -1,5 +1,6 @@
-const Event = require("../structures/Event");
-const Constants = require(`../utility/Constants`);
+const Event = require('../structures/Event');
+
+const Constants = require('../utility/Constants');
 
 class GuildBanAdd extends Event {
     constructor(...args) {
@@ -24,25 +25,25 @@ class GuildBanAdd extends Event {
             this.client.caches.bans.delete(user.id);
         }
 
-        if (!settings.logs.id || settings.logs.ban === "--disabled") return;
+        if (!settings.logs.id || settings.logs.ban === '--disabled') return;
 
         if (!guild.channels.has(settings.logs.id)) return;
         const channel = guild.channels.get(settings.logs.id);
 
-        if (settings.logs.ban === "--embed") {
+        if (settings.logs.ban === '--embed') {
             channel.buildEmbed()
                 .setColor(0xFF0000)
                 .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
-                .setFooter("User Banned")
+                .setFooter('User Banned')
                 .setTimestamp()
                 .send()
-                .catch(() => { return; });
+                .catch(() => { });
         } else {
             channel.send(
-                settings.logs.ban ?
-                    this.client.functions.formatMessage("logs", guild, user, settings.logs.ban) :
-                    `**${user.tag}** has been banned from the server.`
-            ).catch(() => { return; });
+                settings.logs.ban
+                    ? this.client.functions.formatMessage('logs', guild, user, settings.logs.ban)
+                    : `**${user.tag}** has been banned from the server.`,
+            ).catch(() => { });
         }
     }
 }

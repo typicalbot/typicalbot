@@ -1,5 +1,5 @@
-const Function = require("../structures/Function");
-const Constants = require("../utility/Constants");
+const Function = require('../structures/Function');
+const Constants = require('../utility/Constants');
 
 class FetchAccess extends Function {
     constructor(client, name) {

@@ -1,18 +1,20 @@
-const Constants = require("../utility/Constants");
+const Constants = require('../utility/Constants');
 
 class Command {
-    constructor(client, name, path, { description, usage, aliases, dm, permission, mode, access }) {
-        Object.defineProperty(this, "client", { value: client });
+    constructor(client, name, path, {
+        description, usage, aliases, dm, permission, mode, access,
+    }) {
+        Object.defineProperty(this, 'client', { value: client });
 
         this.name = name;
 
         this.path = path;
 
-        this.description = description || "Description Not Provided";
+        this.description = description || 'Description Not Provided';
 
-        this.usage = usage || "Usage Not Provided";
+        this.usage = usage || 'Usage Not Provided';
 
-        this.aliases = aliases || new Array();
+        this.aliases = aliases || [];
 
         this.dm = dm || false;
 

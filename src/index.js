@@ -1,32 +1,32 @@
-require("./utility/Extenders");
+require('./utility/Extenders');
 
-const { Client, Collection } = require("discord.js");
-const fetch = require("node-fetch");
+const { Client, Collection } = require('discord.js');
+const fetch = require('node-fetch');
 
-const config = require("../config.json");
+const config = require('../config.json');
 
-const DatabaseHandler = require("./handlers/Database");
-const TaskHandler = require("./handlers/Tasks");
-const PermissionsHandler = require("./handlers/Permissions");
-const ModerationLogHandler = require("./handlers/ModerationLog");
-const MusicHandler = require("./handlers/Music");
+const DatabaseHandler = require('./handlers/Database');
+const TaskHandler = require('./handlers/Tasks');
+const PermissionsHandler = require('./handlers/Permissions');
+const ModerationLogHandler = require('./handlers/ModerationLog');
+const MusicHandler = require('./handlers/Music');
 
-const SettingHandler = require("./handlers/Settings");
-const FunctionHandler = require("./handlers/Functions");
-const CommandHandler = require("./handlers/Commands");
-const EventHandler = require("./handlers/Events");
+const SettingHandler = require('./handlers/Settings');
+const FunctionHandler = require('./handlers/Functions');
+const CommandHandler = require('./handlers/Commands');
+const EventHandler = require('./handlers/Events');
 
-const MusicUtility = require("./utility/Music");
+const MusicUtility = require('./utility/Music');
 
 module.exports = class Cluster extends Client {
     constructor(node) {
         super({
-            "messageCacheMaxSize": 150,
-            "messageCacheLifetime": 1800,
-            "messageSweepInterval": 300,
-            "disableEveryone": true,
-            "disabledEvents": ["TYPING_START", "CHANNEL_PINS_UPDATE"],
-            "partials": ["MESSAGE"]
+            messageCacheMaxSize: 150,
+            messageCacheLifetime: 1800,
+            messageSweepInterval: 300,
+            disableEveryone: true,
+            disabledEvents: ['TYPING_START', 'CHANNEL_PINS_UPDATE'],
+            partials: ['MESSAGE'],
         });
 
         this.node = node;
@@ -34,7 +34,7 @@ module.exports = class Cluster extends Client {
         this.build = config.build;
 
         this.shards = JSON.parse(process.env.SHARDS);
-        this.cluster = `${process.env.CLUSTER} [${this.shards.join(",")}]`;
+        this.cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
         this.shardCount = process.env.TOTAL_SHARD_COUNT;
 
         this.handlers = {};
@@ -65,14 +65,14 @@ module.exports = class Cluster extends Client {
     }
 
     fetchData(property) {
-        return this.node.sendTo("manager", {
-            event: "collectData",
-            data: property
+        return this.node.sendTo('manager', {
+            event: 'collectData',
+            data: property,
         }, { receptive: true });
     }
 
     async fetchDonors() {
-        (await this.handlers.database.connection.table("donors")).forEach(e => {
+        (await this.handlers.database.connection.table('donors')).forEach((e) => {
             if (e.id.length > 5) this.caches.donors.set(e.id, e);
         });
 
@@ -88,32 +88,32 @@ module.exports = class Cluster extends Client {
     }
 
     async sendStatistics(shardID) {
-        fetch("https://www.carbonitex.net/discord/data/botdata.php", {
-            method: "post",
+        fetch('https://www.carbonitex.net/discord/data/botdata.php', {
+            method: 'post',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "shardid": shardID,
-                "shardcount": this.shardCount.toString(),
-                "servercount": this.guilds.filter(g => g.shardID === shardID).size.toString(),
-                "key": this.config.apis.carbon
-            })
-        }).catch(err => {
+                shardid: shardID,
+                shardcount: this.shardCount.toString(),
+                servercount: this.guilds.filter((g) => g.shardID === shardID).size.toString(),
+                key: this.config.apis.carbon,
+            }),
+        }).catch((err) => {
             if (err) console.error(`Carbonitex Stats Transfer Failed ${err}`);
         });
 
         fetch(`https://discordbots.org/api/bots/${this.user.id}/stats`, {
-            method: "post",
+            method: 'post',
             headers: {
-                "Authorization": this.config.apis.discordbots
+                Authorization: this.config.apis.discordbots,
             },
             body: JSON.stringify({
-                "shard_id": shardID,
-                "shard_count": this.shardCount.toString(),
-                "server_count": this.guilds.filter(g => g.shardID === shardID).size.toString()
-            })
-        }).catch(err => {
+                shard_id: shardID,
+                shard_count: this.shardCount.toString(),
+                server_count: this.guilds.filter((g) => g.shardID === shardID).size.toString(),
+            }),
+        }).catch((err) => {
             if (err) console.error(`DiscordBots Stats Transfer Failed ${err}`);
         });
     }

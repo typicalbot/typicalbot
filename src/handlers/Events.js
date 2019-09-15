@@ -1,32 +1,32 @@
-const { Collection } = require("discord.js");
-const { join, parse } = require("path");
-const klaw = require("klaw");
+const { Collection } = require('discord.js');
+const { join, parse } = require('path');
+const klaw = require('klaw');
 
 class EventHandler extends Collection {
     constructor(client) {
         super();
 
-        Object.defineProperty(this, "client", { value: client });
+        Object.defineProperty(this, 'client', { value: client });
 
         this.load();
     }
 
     async load() {
-        const path = join(__dirname, "..", "events");
+        const path = join(__dirname, '..', 'events');
         const start = Date.now();
 
-        klaw(path).on("data", item => {
+        klaw(path).on('data', (item) => {
             const file = parse(item.path);
 
-            if (file.ext && file.ext === ".js") {
+            if (file.ext && file.ext === '.js') {
                 const req = require(join(file.dir, file.base));
                 const newReq = new req(this.client, file.name, join(file.dir, file.base));
 
                 this.set(file.name, newReq);
 
-                this.client[newReq.once ? "once" : "on"](newReq.name, (...args) => newReq.execute(...args));
+                this.client[newReq.once ? 'once' : 'on'](newReq.name, (...args) => newReq.execute(...args));
             }
-        }).on("end", () => {
+        }).on('end', () => {
             console.log(`Loaded ${this.size} Events in ${Date.now() - start}ms`);
         });
     }

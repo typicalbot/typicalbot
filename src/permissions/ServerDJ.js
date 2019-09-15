@@ -1,16 +1,16 @@
-const PermissionLevelStr = require("../structures/PermissionLevel");
-const Constants = require("../utility/Constants");
+const PermissionLevelStr = require('../structures/PermissionLevel');
+const Constants = require('../utility/Constants');
 
 class ServerDJ extends PermissionLevelStr {
     constructor() {
         super({
-            "title": "Server DJ",
-            "level": Constants.Permissions.Levels.SERVER_DJ
+            title: 'Server DJ',
+            level: Constants.Permissions.Levels.SERVER_DJ,
         });
     }
 
     check(guild, member) {
-        const roles = PermissionLevelStr.fetchRoles(guild, "dj");
+        const roles = PermissionLevelStr.fetchRoles(guild, 'dj');
         if (!roles.length) return false;
 
         for (const role of roles) if (member.roles.has(role)) return true;

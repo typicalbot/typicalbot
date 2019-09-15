@@ -1,7 +1,9 @@
-const Constants = require("../utility/Constants");
+const Constants = require('../utility/Constants');
 
 class PermissionLevel {
-    constructor({ title, level, staff = false, staffOverride = false }) {
+    constructor({
+        title, level, staff = false, staffOverride = false,
+    }) {
         this.title = title;
 
         this.level = level;
@@ -12,9 +14,9 @@ class PermissionLevel {
     }
 
     static fetchRoles(guild, permission) {
-        const pool = guild.settings.roles[permission].filter(r => guild.roles.has(r));
+        const pool = guild.settings.roles[permission].filter((r) => guild.roles.has(r));
 
-        const permRole = guild.roles.find(r => r.name.toLowerCase() === Constants.Permissions.RoleTitles[permission.toUpperCase()].toLowerCase());
+        const permRole = guild.roles.find((r) => r.name.toLowerCase() === Constants.Permissions.RoleTitles[permission.toUpperCase()].toLowerCase());
         if (permRole) pool.push(permRole.id);
 
         return pool;
