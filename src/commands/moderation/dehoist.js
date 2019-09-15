@@ -11,7 +11,7 @@ module.exports = class extends Command {
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         const members = message.guild.members.filter(m => /^(!|"|#|\$|%|&|'|\(|\)|\*|\+|,|-|\.|\/|\[|\])$/.test(m.displayName.substring(0, 1)));
 
         const list = members.map(m => `» ${m.displayName} (${m.id})`);
