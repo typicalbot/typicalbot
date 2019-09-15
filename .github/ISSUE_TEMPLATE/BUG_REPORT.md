@@ -1,7 +1,7 @@
 ---
 name: Bug Report
-labels: bug
 about: Report a bug or issue with the bot.
+labels: bug
 ---
 
 ## Bug Report
