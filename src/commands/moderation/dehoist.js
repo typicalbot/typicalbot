@@ -6,7 +6,7 @@ module.exports = class extends Command {
         super(...args, {
             description: "Check if any members of the server have any special characters in their username.",
             usage: "dehoist",
-            permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }
