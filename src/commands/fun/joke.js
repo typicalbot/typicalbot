@@ -1,5 +1,5 @@
 const Command = require("../../structures/Command");
-const jokes = require("../../utility/jokes");
+const fetch = require("node-fetch");
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -10,6 +10,9 @@ module.exports = class extends Command {
     }
 
     execute(message) {
-        message.send(jokes[Math.floor(Math.random() * jokes.length)]);
+        fetch("https://icanhazdadjoke.com/", { headers: { 'Accept': 'application/json' } })
+            .then(res => res.json())
+            .then(json => message.send(json.joke))
+            .catch(message.error("An error occurred making that request."));
     }
 };
