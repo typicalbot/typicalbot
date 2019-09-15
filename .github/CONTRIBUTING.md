@@ -66,7 +66,6 @@ In order to have your pull request considered for review, it must meet the follo
 - A completed [pull request template](https://github.com/typicalbot/typicalbot/blob/master/.github/PULL_REQUEST_TEMPLATE.md). If the pull request template is not completed, you'll be asked to complete it before your pull request will be considered for merging.
 - Compliance with the [style guides](#style-guides). If your pull request doesn't comply with one or more of styleguides, you'll be asked to bring it to complaince before your pull request will be considered for merging.
 - Completed documentation and tests, if applicable.
-- Updated [CHANGELOG](https://github.com/typicalbot/typicalbot/blob/master/CHANGELOG.md). If the CHANGELOG is not updated to reflect the changes in your pull request, you'll be asked to update it before your pull request will be considered for merging.
 
 > Note: The reviewer(s) of your pull request may request changes or ask you to complete additional tasks, tests, or other changes before your pull request will be accepted and merged.
 
