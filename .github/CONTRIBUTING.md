@@ -73,7 +73,7 @@ In order to have your pull request considered for review, it must meet the follo
 
 ### CHANGELOG
 
-All changes must be tracked in the [CHANGELOG](https://github.com/typicalbot/typicalbot/blob/master/CHANGELOG.md). Use [Keepachangelog.org](https://keepachangelog.com/en/1.0.0/) as a guide for adding changes to the CHANGELOG.
+Use [Keepachangelog.org](https://keepachangelog.com/en/1.0.0/) as a guide for adding changes to the CHANGELOG.
 
 ### Git Commit Messages
 
