@@ -30,7 +30,7 @@ module.exports = class extends Command {
                     + `\`\`\``
                 );
             })
-            .catch(message.error(this.client.functions.error("usage", this)));
+            .catch(err => message.error("An error occurred making that request."));
     }
 
     embedExecute(message, parameters) {
@@ -55,6 +55,6 @@ module.exports = class extends Command {
                     .setThumbnail(data.profile_image_url)
                     .send();
             })
-            .catch(message.error(this.client.functions.error("usage", this)));
+            .catch(err => message.error("An error occurred making that request."));
     }
 };
