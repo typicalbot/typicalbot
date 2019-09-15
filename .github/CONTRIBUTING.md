@@ -26,7 +26,7 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 ### Reporting Bugs
 
-Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, [please include as many details as possible](#submitting-a-bug-report). Please fill out the template completely, since doing so helps the maintainers and other contributors resolve issues faster.
+Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, [please include as many details as possible](#submitting-a-bug-report). Please fill out the template completely, since doing so helps contributors resolve issues faster.
 
 #### Before Submitting A Bug Report
 
@@ -68,7 +68,7 @@ In order to have your pull request considered for review, it must meet the follo
 - Completed documentation and tests, if applicable.
 - Updated [CHANGELOG](https://github.com/typicalbot/typicalbot/blob/master/CHANGELOG.md). If the CHANGELOG is not updated to reflect the changes in your pull request, you'll be asked to update it before your pull request will be considered for merging.
 
-> Note: The reviewer(s) of your pull request may request changes or ask you to complete additional tasks, tests, or other changes before your pull request will be accepted and merged by a maintainer.
+> Note: The reviewer(s) of your pull request may request changes or ask you to complete additional tasks, tests, or other changes before your pull request will be accepted and merged.
 
 ## Style Guides
 
