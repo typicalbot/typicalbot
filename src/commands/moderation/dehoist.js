@@ -6,12 +6,12 @@ module.exports = class extends Command {
         super(...args, {
             description: "Check if any members of the server have any special characters in their username.",
             usage: "dehoist",
-            permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
+            permission: Constants.Permissions.Levels.SERVER_MODERATOR,
             mode: Constants.Modes.STRICT
         });
     }
 
-    execute(message, parameters, permissionLevel) {
+    execute(message) {
         const members = message.guild.members.filter(m => /^(!|"|#|\$|%|&|'|\(|\)|\*|\+|,|-|\.|\/|\[|\])$/.test(m.displayName.substring(0, 1)));
 
         const list = members.map(m => `» ${m.displayName} (${m.id})`);
