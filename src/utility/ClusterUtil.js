@@ -4,12 +4,12 @@ exports.NodeClusterUtil = class NodeClusterUtil {
     }
 
     fetchData(stat) {
-        return this.client.node.sendTo("manager", {
-            event: "collectData",
-            data: property
+        return this.client.node.sendTo('manager', {
+            event: 'collectData',
+            data: property,
         }, { receptive: true });
     }
-}
+};
 
 exports.StandaloneClusterUtil = class StandaloneClusterUtil {
     constructor(client) {
@@ -19,4 +19,4 @@ exports.StandaloneClusterUtil = class StandaloneClusterUtil {
     fetchData(stat) {
         return eval(`this.client.${stat}`);
     }
-}
+};

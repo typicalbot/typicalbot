@@ -1,6 +1,6 @@
 require('dotenv').config();
-const pm2 = require("pm2");
-const { Util } = require("discord.js");
+const pm2 = require('pm2');
+const { Util } = require('discord.js');
 
 async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(process.env.TOKEN);
@@ -12,12 +12,12 @@ async function generateClusters() {
         const clusterShards = shards.splice(0, 10);
 
         clusters.push({
-            name: `${process.env.CLUSTER_NAME}-${process.env.CLUSTER_BUILD ? `${process.env.CLUSTER_BUILD}-` : ""}${i}`,
+            name: `${process.env.CLUSTER_NAME}-${process.env.CLUSTER_BUILD ? `${process.env.CLUSTER_BUILD}-` : ''}${i}`,
             script: './index.js',
             autorestart: true,
             watch: false,
             env: {
-                CLUSTER: `${process.env.CLUSTER_NAME} ${process.env.CLUSTER_BUILD ? `${process.env.CLUSTER_BUILD} ` : ""}${i}`,
+                CLUSTER: `${process.env.CLUSTER_NAME} ${process.env.CLUSTER_BUILD ? `${process.env.CLUSTER_BUILD} ` : ''}${i}`,
                 CLUSTER_COUNT: clusterCount,
                 SHARDS: clusterShards,
                 SHARD_COUNT: clusterShards.length,

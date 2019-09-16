@@ -3,11 +3,11 @@ require('./utility/Extenders');
 const { Client, Collection } = require('discord.js');
 const fetch = require('node-fetch');
 
-const DatabaseHandler = require("./handlers/Database");
-const TaskHandler = require("./handlers/Tasks");
-const PermissionsHandler = require("./handlers/Permissions");
-const ModerationLogHandler = require("./handlers/ModerationLog");
-const MusicHandler = require("./handlers/Music");
+const DatabaseHandler = require('./handlers/Database');
+const TaskHandler = require('./handlers/Tasks');
+const PermissionsHandler = require('./handlers/Permissions');
+const ModerationLogHandler = require('./handlers/ModerationLog');
+const MusicHandler = require('./handlers/Music');
 
 const SettingHandler = require('./handlers/Settings');
 const FunctionHandler = require('./handlers/Functions');
@@ -16,7 +16,7 @@ const EventHandler = require('./handlers/Events');
 
 const MusicUtility = require('./utility/Music');
 
-const ClusterUtil = require("./utility/ClusterUtil");
+const ClusterUtil = require('./utility/ClusterUtil');
 
 module.exports = class Cluster extends Client {
     constructor(node) {
@@ -36,7 +36,7 @@ module.exports = class Cluster extends Client {
         else this.clusterUtil = new ClusterUtil.StandaloneClusterUtil(this);
 
         this.shards = JSON.parse(process.env.SHARDS);
-        this.cluster = `${process.env.CLUSTER} [${this.shards.join ? this.shards.join(",") : 0}]`;
+        this.cluster = `${process.env.CLUSTER} [${this.shards.join ? this.shards.join(',') : 0}]`;
         this.shardCount = process.env.TOTAL_SHARD_COUNT;
 
         this.handlers = {};
@@ -89,19 +89,20 @@ module.exports = class Cluster extends Client {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "shardid": shardID,
-                "shardcount": this.shardCount.toString(),
-                "servercount": this.guilds.filter(g => g.shardID === shardID).size.toString(),
-                "key": process.env.API_CARBON
-            })
-        }).catch(err => {
+                shardid: shardID,
+                shardcount: this.shardCount.toString(),
+                servercount: this.guilds.filter((g) => g.shardID === shardID).size.toString(),
+                key: process.env.API_CARBON,
+            }),
+        }).catch((err) => {
             if (err) console.error(`Carbonitex Stats Transfer Failed ${err}`);
         });
 
         fetch(`https://discordbots.org/api/bots/${this.user.id}/stats`, {
             method: 'post',
             headers: {
-                "Authorization": process.env.API_DISCORDBOTS,
+                Authorization: process.env.API_DISCORDBOTS,
+            },
             body: JSON.stringify({
                 shard_id: shardID,
                 shard_count: this.shardCount.toString(),
