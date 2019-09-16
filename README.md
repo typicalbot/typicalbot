@@ -62,17 +62,16 @@ This section provides a quick-start guide.
 7. Run `npm run build:instance`
 8. Profit!
 
-## Maintainers
+## Team
 
-- Bryan Pikaard ([@HyperCoder2975](https://github.com/HyperCoder2975))
-- Nicholas Sylke ([@nsylke](https://github.com/nsylke))
-
-## Contributors
-
-- Braxton ([@SirPacker](https://github.com/SirPacker))
-- Tyler Richards ([@tjrgg](https://github.com/tjrgg))
-- Tobias Feld ([@TobiasFeld22](https://github.com/TobiasFeld22))
-- Gigakek Vermin ([@AKSKL](https://github.com/AKSKL))
+| Name | Role |
+|--|--|
+| [Bryan Pikaard](https://github.com/HyperCoder2975) | Maintainer, Core Contributor |
+| [Nicholas Sylke](https://github.com/nsylke) | Maintainer, Core Contributor |
+| [Braxton Mahr](https://github.com/SirPacker) | Core Contributor |
+| [Tyler Richards](https://github.com/tjrgg) | Core Contributor |
+| [Tobias Feld](https://github.com/TobiasFeld22)| Web Contributor |
+| [Gigakek Vermin](https://github.com/AKSKL) | Docs Contributor |
 
 ## Show Your Support
 
