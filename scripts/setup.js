@@ -7,6 +7,7 @@ const credentials = {
     db: provess.env.DATABASE_DATABASE,
 };
 
+const { credentials } = database;
 const r = redb(credentials);
 
 (async () => {
