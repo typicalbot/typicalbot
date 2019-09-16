@@ -77,6 +77,7 @@ Use [Keepachangelog.org](https://keepachangelog.com/en/1.0.0/) as a guide for ad
 
 ### Git Commit Messages
 
+- Follow [Conventional Commits v1.0.0-beta.4](https://www.conventionalcommits.org/en/v1.0.0-beta.4/). Allowed commit types are: `chore:`, `ci:`, `docs:`, `enhancement:`, `feat:` `fix:`, `pref:`, `style:`, `refactor:`, and `test:`. Commit types should be in lowercase. If a commit fits into multiple commit types, go back and make multiple commits whenever possible.
 - Use the imperative mood (i.e. "Move command to..." not "Moves command to...").
 - Use the present tense (i.e. "Add feature" not "Added feature").
 - Keep commits discrete. Avoid including multiple unrelated changes in a single commit.
