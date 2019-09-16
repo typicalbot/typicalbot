@@ -4,7 +4,7 @@ const redb = require('rethinkdbdash');
 const credentials = {
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
-    db: provess.env.DATABASE_DATABASE,
+    db: process.env.DATABASE_DATABASE,
 };
 
 const r = redb(credentials);
