@@ -23,7 +23,7 @@ class Message extends Event {
 
             const settings = message.guild.settings = await message.guild.fetchSettings();
 
-            if ((new RegExp(`^<@!?${this.client.user.id}>$`)).test(message.content)) {return message.reply(`This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${process.env.PREFIX}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${process.env.PREFIX}\``}.`);}
+            if ((new RegExp(`^<@!?${this.client.user.id}>$`)).test(message.content)) { return message.reply(`This server's prefix is ${settings.prefix.custom ? settings.prefix.default ? `\`${process.env.PREFIX}\` or \`${settings.prefix.custom}\`` : `\`${settings.prefix.custom}\`` : `\`${process.env.PREFIX}\``}.`); }
 
             const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author);
             const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author, true);
