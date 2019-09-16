@@ -1,6 +1,7 @@
+import { connect, start, disconnect } from 'pm2';
+import { Util } from 'discord.js';
+
 require('dotenv').config();
-const pm2 = require('pm2');
-const { Util } = require('discord.js');
 
 async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(process.env.TOKEN);
