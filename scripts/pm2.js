@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import { connect, start, disconnect } from 'pm2';
-import { Util } from 'discord.js';
-import { token, clusterServer, clusterBuild } from '../config';
+const pm2 = require('pm2');
+const { Util } = require('discord.js');
+const config = require('../config');
 
 async function generateClusters() {
-    const shardCount = await Util.fetchRecommendedShards(token);
+    const shardCount = await Util.fetchRecommendedShards(config.token);
     const shards = Array.from({ length: shardCount }, (a, b) => b);
     const clusterCount = Math.ceil(shardCount / 10);
     const clusters = [];
@@ -13,12 +13,12 @@ async function generateClusters() {
         const clusterShards = shards.splice(0, 10);
 
         clusters.push({
-            name: `${clusterServer}-${clusterBuild ? `${clusterBuild}-` : ''}${i}`,
+            name: `${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ''}${i}`,
             script: './index.js',
             autorestart: true,
             watch: false,
             env: {
-                CLUSTER: `${clusterServer} ${clusterBuild ? `${clusterBuild} ` : ''}${i}`,
+                CLUSTER: `${config.clusterServer} ${config.clusterBuild ? `${config.clusterBuild} ` : ''}${i}`,
                 CLUSTER_COUNT: clusterCount,
                 SHARDS: clusterShards,
                 SHARD_COUNT: clusterShards.length,
@@ -30,7 +30,7 @@ async function generateClusters() {
     return clusters;
 }
 
-connect(async (err) => {
+pm2.connect(async (err) => {
     if (err) {
         console.error(err);
         process.exit(2);
@@ -41,10 +41,10 @@ connect(async (err) => {
     console.log('Generating Clusters\n', clusters);
 
     clusters.forEach((cluster, i) => {
-        start(cluster, (e) => {
+        pm2.start(cluster, (e) => {
             if (i === (clusters.length - 1)) {
                 console.log('Generation Complete.\nExiting.');
-                disconnect();
+                pm2.disconnect();
             }
 
             if (e) throw e;

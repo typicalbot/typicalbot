@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import redb from 'rethinkdbdash';
-import { database } from '../config';
+const redb = require('rethinkdbdash');
 
-const { credentials } = database;
+const { credentials } = require('../config').database;
+
 const r = redb(credentials);
 
 (async () => {
