@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.1]
+### Changed
+ - `twitch` command to change error response
+ - Rename administration command category to system
+ - Update contributor guidelines
+
 ## [2.5.0]
 ### Added
  - `dehoist` command ([#42](https://github.com/typicalbot/typicalbot/pull/42))
@@ -88,7 +94,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.5.0...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.5.1...HEAD
+[2.5.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.1
 [2.5.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.0
 [2.4.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.4.1
 [2.4.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.4.0
