@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.2]
+### Fixed
+ - Update error message in AudioUtil#searchError ([#72](https://github.com/typicalbot/typicalbot/pull/72)) ([f668b30](https://github.com/typicalbot/typicalbot/pull/72/commits/f668b3065639ba5f4677875d4d17a7dd326e623c)), closes [#71](https://github.com/typicalbot/typicalbot/issues/71)
+
 ## [2.5.1]
 ### Changed
  - `twitch` command to change error response
@@ -94,7 +98,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.5.1...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.5.2...HEAD
+[2.5.2]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.2
 [2.5.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.1
 [2.5.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.0
 [2.4.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.4.1
