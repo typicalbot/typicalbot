@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.5.2]
 ### Fixed
- - Update error message in AudioUtil#searchError ([#72](https://github.com/typicalbot/typicalbot/pull/72)) ([f668b30](https://github.com/typicalbot/typicalbot/pull/72/commits/f668b3065639ba5f4677875d4d17a7dd326e623c)), closes [#71](https://github.com/typicalbot/typicalbot/issues/71)
+ - Update error message in AudioUtil#searchError ([#72](https://github.com/typicalbot/typicalbot/pull/72)) ([f668b30](https://github.com/typicalbot/typicalbot/commit/f668b3065639ba5f4677875d4d17a7dd326e623c)), closes [#71](https://github.com/typicalbot/typicalbot/issues/71)
 
 ## [2.5.1]
 ### Changed
