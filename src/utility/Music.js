@@ -53,7 +53,7 @@ class AudioUtil {
         const err = error.errors[0].reason;
         if (!err) return `An unknown error occured while requesting that video:\n${error}`;
         if (err === 'keyInvalid') return '**__An unknown error occured while requesting that video:__**\n\nThis server entered an invalid YouTube API Key.';
-        if (err === 'quotaExceeded') return "**__An error occured while requesting that video:__**\n\nOur Global YouTube API Quota limit exceeded, meaning no more searches can be made until it is reset at 3 AM EST.\n\n**__How to Resolve the Issue:__**\n```md\n# You can resolve the issue by creating your own YouTube Data API v3 Key.\n\n< Join TypicalBot's server and use the command '/tag apikeyhowto' for more information on how to do so.```\n**Link:** <https://typicalbot.com/join-our-server/>";
+        if (err === 'quotaExceeded') return "**__An error occured while requesting that video:__**\n\nOur Global YouTube API Quota limit exceeded, meaning no more searches can be made until it is reset at 3 AM EST.\n\n**__How to Resolve the Issue:__**\n```md\n# You can resolve the issue by creating your own YouTube Data API v3 Key.\n\nJoin TypicalBot's server and ask for more information on how to do so.```\n**Link:** <https://typicalbot.com/join-us/>";
         return `An unknown error occured while requesting that video:\n${err}`;
     }
 
