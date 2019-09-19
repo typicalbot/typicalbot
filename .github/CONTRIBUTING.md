@@ -67,7 +67,9 @@ In order to have your pull request considered for review, it must meet the follo
 - Compliance with the [style guides](#style-guides). If your pull request doesn't comply with one or more of the style guides, you'll be asked to bring it to complaince before your pull request will be considered for merging.
 - Completed documentation and tests, if applicable.
 
-> Note: The reviewer(s) of your pull request may request changes or ask you to complete additional tasks, tests, or other changes before your pull request will be accepted and merged.
+> If your pull request closes an issue, state so under the Issues section in your pull request like so: `Closes #<issue>`. This helps ensure that GitHub automatically closes the issue when your pull request is merged.
+
+> The reviewer(s) of your pull request may request changes or ask you to complete additional tasks, tests, or other changes before your pull request will be accepted and merged.
 
 ## Style Guides
 
