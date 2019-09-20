@@ -1,7 +1,7 @@
 exports.Colors = {
     DEFAULT: 0x00ADFF,
     SUCCESS: 0x00FF00,
-    ERROR: 0xFF0000
+    ERROR: 0xFF0000,
 };
 
 /**
@@ -15,13 +15,13 @@ exports.Colors = {
  * @property {string} icon The URL to the image of the bot's icon
  */
 exports.URL = {
-    base: "https://typicalbot.com/",
+    base: 'https://typicalbot.com/',
     docs: `${this.base}/documentation/`,
     oauth: `${this.base}/invite/`,
     server: `${this.base}/join-us/`,
     donate: `${this.base}/donate/`,
     settings: `${this.base}/documentation/#!settings`,
-    icon: `${this.base}/x/images/icon.png`
+    icon: `${this.base}/x/images/icon.png`,
 };
 
 /**
@@ -34,30 +34,30 @@ exports.URL = {
 exports.Mode = {
     FREE: 0,
     LITE: 1,
-    STRICT: 2
+    STRICT: 2,
 };
 
 exports.ModLogRegex = {
     CASE: /Case\s(\d+)/i,
     ACTION: /\*\*Action:\*\*\s.+/i,
     USER: /\*\*(?:User|Channel):\*\*\s.+/i,
-    REASON: /\*\*Reason:\*\*\s.+/i
+    REASON: /\*\*Reason:\*\*\s.+/i,
 };
 
 exports.ModLogTypes = {
-    WARN: { hex: 0xFFFF00, display: "Warn" },
-    MUTE: { hex: 0xFF9900, display: "Mute" },
-    KICK: { hex: 0xFF3300, display: "Kick" },
-    BAN: { hex: 0xFF0000, display: "Ban" },
-    UNBAN: { hex: 0x006699, display: "Unban" },
-    UNMUTE: { hex: 0x006699, display: "Unmute" },
-    PURGE: { hex: 0xFFFF00, display: "Message Purge" },
-    SOFTBAN: { hex: 0xFF2F00, display: "Softban" },
-    TEMP_BAN: { hex: 0xFF0000, display: "Temporary Ban" },
-    TEMP_MUTE: { hex: 0xFF9900, display: "Temporary Mute" },
-    TEMP_VOICE_MUTE: { hex: 0xFF9900, display: "Temporary Voice Mute" },
-    VOICE_KICK: { hex: 0xFF3300, display: "Voice Kick" },
-    VOICE_MUTE: { hex: 0xFF9900, display: "Voice Mute" },
+    WARN: { hex: 0xFFFF00, display: 'Warn' },
+    MUTE: { hex: 0xFF9900, display: 'Mute' },
+    KICK: { hex: 0xFF3300, display: 'Kick' },
+    BAN: { hex: 0xFF0000, display: 'Ban' },
+    UNBAN: { hex: 0x006699, display: 'Unban' },
+    UNMUTE: { hex: 0x006699, display: 'Unmute' },
+    PURGE: { hex: 0xFFFF00, display: 'Message Purge' },
+    SOFTBAN: { hex: 0xFF2F00, display: 'Softban' },
+    TEMP_BAN: { hex: 0xFF0000, display: 'Temporary Ban' },
+    TEMP_MUTE: { hex: 0xFF9900, display: 'Temporary Mute' },
+    TEMP_VOICE_MUTE: { hex: 0xFF9900, display: 'Temporary Voice Mute' },
+    VOICE_KICK: { hex: 0xFF3300, display: 'Voice Kick' },
+    VOICE_MUTE: { hex: 0xFF9900, display: 'Voice Mute' },
 };
 
 /**
@@ -76,7 +76,7 @@ exports.PermissionLevels = {
     DJ: 2,
     MODERATOR: 3,
     ADMINISTRATOR: 4,
-    OWNER: 5
+    OWNER: 5,
 };
 
 /**
@@ -90,11 +90,10 @@ exports.PermissionLevels = {
  * @typedef {string} PermissionTitle
  */
 exports.PermissionTitles = [
-    "Blacklisted",
-    "Member",
-    "DJ",
-    "Moderator",
-    "Administrator",
-    "OWNER"
+    'Blacklisted',
+    'Member',
+    'DJ',
+    'Moderator',
+    'Administrator',
+    'OWNER',
 ];
-
