@@ -1,14 +1,15 @@
-const Command = require("../../structures/Command");
-const Constants = require(`../../utility/Constants`);
-const moment = require("moment");
+const moment = require('moment');
+const Command = require('../../structures/Command');
+
+const Constants = require('../../utility/Constants');
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "Displays the server's information.",
-            usage: "serverinfo",
-            aliases: ["sinfo"],
-            mode: Constants.Modes.STRICT
+            usage: 'serverinfo',
+            aliases: ['sinfo'],
+            mode: Constants.Modes.STRICT,
         });
     }
 
@@ -18,21 +19,21 @@ module.exports = class extends Command {
 
         const guildOwner = message.guild.member(message.guild.ownerID);
 
-        /*if (!option) return*/ message.reply(
+        /* if (!option) return */ message.reply(
             `**__Server Information For:__** ${message.guild.name}\n`
-            + `\`\`\`\n`
+            + '```\n'
             + `Name                : ${message.guild.name} (${message.guild.id})\n`
             + `Owner               : ${guildOwner.user.username}#${guildOwner.user.discriminator} (${guildOwner.user.id})\n`
-            + `Created             : ${moment(message.guild.createdAt).format("dddd MMMM Do, YYYY, hh:mm A")}\n`
+            + `Created             : ${moment(message.guild.createdAt).format('dddd MMMM Do, YYYY, hh:mm A')}\n`
             + `Region              : ${message.guild.region}\n`
             + `Verification Level  : ${message.guild.verificationLevel}\n`
-            + `Icon                : ${message.guild.iconURL({ "format": "png", "size": 2048 }) || "None"}\n`
+            + `Icon                : ${message.guild.iconURL({ format: 'png', size: 2048 }) || 'None'}\n`
             + `Channels            : ${message.guild.channels.size}\n`
             + `Members             : ${message.guild.memberCount}\n`
             + `Roles               : ${message.guild.roles.size}\n`
             + `Emojis              : ${message.guild.emojis.size}\n`
             + `Boosted Tier        : Level ${message.guild.premiumTier} (${message.guild.premiumSubscriptionCount} Boosters)`
-            + `\`\`\``
+            + '```',
         );
     }
 
@@ -42,26 +43,25 @@ module.exports = class extends Command {
 
         const guildOwner = message.guild.member(message.guild.ownerID).user;
 
-        /*if (!option) return*/ message.buildEmbed()
+        /* if (!option) return */ message.buildEmbed()
             .setColor(0x00ADFF)
-            .setTitle(`Server Information`)
-            .addField("» Name", message.guild.name, true)
-            .addField("» ID", message.guild.id, true)
-            .addField("» Owner", `${guildOwner.tag}\n${guildOwner.id}`, true)
-            .addField("» Created", `${moment(message.guild.createdAt).format("dddd MMMM Do, YYYY")}\n${moment(message.guild.createdAt).format("hh:mm A")}`, true)
-            .addField("» Region", message.guild.region.toUpperCase(), true)
-            .addField("» Verification Level", message.guild.verificationLevel, true)
-            .addField("» Channels", message.guild.channels.size, true)
-            .addField("» Members", message.guild.memberCount, true)
-            .addField("» Roles", message.guild.roles.size, true)
-            .addField("» Emojis", message.guild.emojis.size, true)
-            .addField("» Boosted Tier", `Level ${message.guild.premiumTier} (${message.guild.premiumSubscriptionCount} Boosters)`)
-            .setThumbnail(message.guild.iconURL({ "format": "png", "size": 2048 }) || null)
-            .setFooter("TypicalBot", Constants.Links.ICON)
+            .setTitle('Server Information')
+            .addField('» Name', message.guild.name, true)
+            .addField('» ID', message.guild.id, true)
+            .addField('» Owner', `${guildOwner.tag}\n${guildOwner.id}`, true)
+            .addField('» Created', `${moment(message.guild.createdAt).format('dddd MMMM Do, YYYY')}\n${moment(message.guild.createdAt).format('hh:mm A')}`, true)
+            .addField('» Region', message.guild.region.toUpperCase(), true)
+            .addField('» Verification Level', message.guild.verificationLevel, true)
+            .addField('» Channels', message.guild.channels.size, true)
+            .addField('» Members', message.guild.memberCount, true)
+            .addField('» Roles', message.guild.roles.size, true)
+            .addField('» Emojis', message.guild.emojis.size, true)
+            .addField('» Boosted Tier', `Level ${message.guild.premiumTier} (${message.guild.premiumSubscriptionCount} Boosters)`)
+            .setThumbnail(message.guild.iconURL({ format: 'png', size: 2048 }) || null)
+            .setFooter('TypicalBot', Constants.Links.ICON)
             .send();
     }
 };
-
 
 
 /*
@@ -148,4 +148,4 @@ let transmit = settingslist ?
     { channel: message.channel.id, guild: message.content.split(" ")[2], settings: true } :
     { channel: message.channel.id, guild: after };
 
-client.transmit("serverinfo", transmit);*/
+client.transmit("serverinfo", transmit); */

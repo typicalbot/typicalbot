@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">Home | typicalbot</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="TypicalBot is open-source discord bot written in JavaScript, using the Discord.JS library."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="typicalbot"><meta property="twitter:description" content="TypicalBot is open-source discord bot written in JavaScript, using the Discord.JS library."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/typicalbot/typicalbot"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/TypicalBot.js~TypicalBot.html">TypicalBot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TypicalBotOptions">TypicalBotOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#structures">structures</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/structures/Command.js~Command.html">Command</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-CommandOptions">CommandOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#util">util</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/util/Markdown.js~Markdown.html">Markdown</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="typicalbot">TypicalBot</h1><p><a href="https://discord.gg/typicalbot"><img src="https://discordapp.com/api/guilds/163038706117115906/embed.png?style=shield" alt="Discord"></a></p>
+<h2 id="introduction">Introduction</h2><p>TypicalBot is an ironically named multipurpose Discord bot that is far from typical, developed in <a href="https://github.com/discordjs/discord.js">discord.js</a>. </p>
+<h2 id="table-of-contents">Table of Contents</h2><ul>
+<li><a href="#ecosystem">Ecosystem</a></li>
+<li><a href="#getting-started">Getting Started</a><ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+</ul>
+</li>
+<li><a href="#maintainers">Maintainers</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#show-your-support">Show Your Support</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id="ecosystem">Ecosystem</h2><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/typicalbot/typicalbot-cluster-manager">typicalbot-cluster-manager</a></td>
+<td>Inter-process communication manager</td>
+</tr>
+<tr>
+<td><a href="https://github.com/typicalbot/typicalbot-api">typicalbot-api</a></td>
+<td>Internal API</td>
+</tr>
+</tbody>
+</table>
+<h2 id="getting-started">Getting Started</h2><p>This section provides a quick-start guide.</p>
+<h3 id="prerequisites">Prerequisites</h3><ul>
+<li><a href="https://nodejs.org/en/">Node.js</a>: Node.js 10.0.0 or newer is required.</li>
+<li><a href="https://rethinkdb.com/">RethinkDB</a>: RethinkDB is required. </li>
+<li><a href="http://pm2.keymetrics.io/">PM2</a>: PM2 is required.</li>
+<li><a href="https://github.com/typicalbot/typicalbot-cluster-manager">TypicalBot Cluster Manager</a>: TypicalBot Cluster Manager is required. </li>
+</ul>
+<p><strong>Windows Only</strong></p>
+<ul>
+<li><a href="https://github.com/felixrieseberg/windows-build-tools">Windows Build Tools</a>: Python 2.7 and VisualStudio is required to compile dependencies. </li>
+<li><a href="http://slproweb.com/products/Win32OpenSSL.html">OpenSSL</a>: OpenSSL is required for bignum, use version 1.0.X (Do not use version 1.1.X or the Light version).</li>
+<li><a href="http://ftp.gnome.org/pub/GNOME/binaries/win64/gtk+/">GTK+</a>: GTK 2 is required for canvas, use version 2.X.X (Do not use version 3.X.X) </li>
+</ul>
+<h3 id="installation">Installation</h3><ol>
+<li>Make sure all prerequisites are installed, ie. <code>npm install</code></li>
+<li>Fork the TypicalBot repository: <a href="https://github.com/typicalbot/typicalbot/fork">https://github.com/typicalbot/typicalbot/fork</a></li>
+<li>Clone your forked repository, ie. <code>git clone git@github.com/&lt;YOUR-USERNAME&gt;/typicalbot.git</code></li>
+<li>Start RethinkDB database</li>
+<li>Start TypicalBot Cluster Manager</li>
+<li>Run <code>npm run build:database</code></li>
+<li>Run <code>npm run build:instance</code></li>
+<li>Profit!</li>
+</ol>
+<h2 id="maintainers">Maintainers</h2><ul>
+<li>Bryan Pikaard (<a href="https://github.com/HyperCoder2975">@HyperCoder2975</a>)</li>
+<li>Nicholas Sylke (<a href="https://github.com/nsylke">@nsylke</a>)</li>
+</ul>
+<h2 id="contributors">Contributors</h2><ul>
+<li>Braxton (<a href="https://github.com/SirPacker">@SirPacker</a>)</li>
+<li>Tyler Richards (<a href="https://github.com/tjrgg">@tjrgg</a>)</li>
+<li>Tobias Feld (<a href="https://github.com/TobiasFeld22">@TobiasFeld22</a>)</li>
+<li>Gigakek Vermin (<a href="https://github.com/AKSKL">@AKSKL</a>)</li>
+</ul>
+<h2 id="show-your-support">Show Your Support</h2><p>If you like what we do, consider supporting us on <a href="https://patreon.com/typicalbot">Patreon</a> or donate to us via <a href="https://paypal.me/typicalbot">PayPal</a>.</p>
+<h2 id="license">License</h2><p>TypicalBot is an open source software licensed under the <a href="LICENSE">Apache 2.0 license</a>.</p>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

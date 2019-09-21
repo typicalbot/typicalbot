@@ -1,9 +1,11 @@
-const Constants = require(`../utility/Constants`);
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed } = require('discord.js');
+const Constants = require('../utility/Constants');
 
 class ModerationLog {
-    constructor(client, guild, { id, action, _action, moderator, user, channel, reason, expiration, timestamp }) {
-        Object.defineProperty(this, "client", { value: client });
+    constructor(client, guild, {
+        id, action, _action, moderator, user, channel, reason, expiration, timestamp,
+    }) {
+        Object.defineProperty(this, 'client', { value: client });
 
         this.guild = guild;
 
@@ -36,7 +38,7 @@ class ModerationLog {
 
     setAction(data) {
         this._action = data;
-        this.action = `**Action:** ${data.display}${this.expiration ? ` (${this.client.functions.convertTime(this.expiration)})` : ""}`;
+        this.action = `**Action:** ${data.display}${this.expiration ? ` (${this.client.functions.convertTime(this.expiration)})` : ''}`;
         return this;
     }
 
@@ -84,14 +86,14 @@ class ModerationLog {
     }
 
     async send() {
-        const channel = await this.client.handlers.moderationLog.fetchChannel(this.guild).catch(err => { throw err; });
-        const latest = await this.client.handlers.moderationLog.fetchCase(this.guild, "latest").catch(err => { throw err; });
+        const channel = await this.client.handlers.moderationLog.fetchChannel(this.guild).catch((err) => { throw err; });
+        const latest = await this.client.handlers.moderationLog.fetchCase(this.guild, 'latest').catch((err) => { throw err; });
 
         if (!this.id) this.setId(latest ? Number(latest.embeds[0].footer.text.match(Constants.ModerationLog.Regex.CASE)[1]) + 1 : 1);
 
-        const embed = this.embed;
+        const { embed } = this;
 
-        channel.send("", { embed });
+        channel.send('', { embed });
 
         return this.id;
     }
@@ -101,14 +103,16 @@ class ModerationLog {
 
         const id = embed.footer.text;
         const action = embed.description.match(Constants.ModerationLog.Regex.ACTION)[0];
-        const _action = Object.entries(Constants.ModerationLog.Types).filter(e => e[1].display === /\*\*Action:\*\*\s+(\w+(?:(?:\s+\w+)+)?)(?:\s+.+)?/gi.exec(action)[1])[0][1];
+        const _action = Object.entries(Constants.ModerationLog.Types).filter((e) => e[1].display === /\*\*Action:\*\*\s+(\w+(?:(?:\s+\w+)+)?)(?:\s+.+)?/gi.exec(action)[1])[0][1];
         const moderator = embed.author ? { display: embed.author.name, icon: embed.author.iconURL } : null;
         const user = embed.description.match(Constants.ModerationLog.Regex.USER)[0];
         const _reason = embed.description.match(Constants.ModerationLog.Regex.REASON);
         const reason = _reason ? _reason[0] : null;
         const timestamp = embed.createdAt;
 
-        const data = { id, action, _action, user, timestamp };
+        const data = {
+            id, action, _action, user, timestamp,
+        };
 
         if (moderator) Object.assign(data, { moderator });
         if (reason) Object.assign(data, { reason });

@@ -1,6 +1,6 @@
 {
     "name": "typicalbot",
-    "version": "2.5.2",
+    "version": "3.0.0-beta",
     "description": "TypicalBot is open-source discord bot written in JavaScript, using the Discord.JS library.",
     "license": "Apache-2.0",
     "main": "index.js",
@@ -9,6 +9,7 @@
         "lint:fix": "eslint src scripts --fix",
         "build:database": "tsc && node ./production/scripts/setup.js",
         "build:instance": "tsc && node ./production/scripts/pm2.js",
+        "build:docs": "esdoc",
         "dev": "tsc --watch"
     },
     "repository": {
@@ -53,6 +54,10 @@
         "bignum": "^0.13.0"
     },
     "devDependencies": {
+        "esdoc": "^1.1.0",
+        "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+        "esdoc-standard-plugin": "^1.0.0",
+        "eslint-config-typicalbot": "^1.0.0",
         "@types/node": "^12.7.5",
         "@types/node-fetch": "^2.5.1",
         "@types/ws": "^6.0.3",
@@ -61,5 +66,8 @@
         "eslint": "^6.1.0",
         "eslint-config-airbnb-base": "^14.0.0",
         "eslint-config-airbnb-typescript": "^5.0.0"
+    },
+    "eslintConfig": {
+        "extends": "eslint-config-typicalbot"
     }
 }

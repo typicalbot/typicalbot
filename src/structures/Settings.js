@@ -1,85 +1,83 @@
-module.exports = (id) => {
-    return {
-        id,
-        "embed": false,
-        "roles": {
-            "administrator": [],
-            "moderator": [],
-            "dj": [],
-            "blacklist": [],
-            "public": [],
-            "mute": null
+module.exports = (id) => ({
+    id,
+    embed: false,
+    roles: {
+        administrator: [],
+        moderator: [],
+        dj: [],
+        blacklist: [],
+        public: [],
+        mute: null,
+    },
+    ignored: {
+        commands: [],
+        invites: [],
+        stars: [],
+    },
+    announcements: {
+        id: null,
+        mention: null,
+    },
+    aliases: [],
+    logs: {
+        id: null,
+        join: null,
+        leave: null,
+        ban: null,
+        unban: null,
+        delete: null,
+        nickname: null,
+        invite: null,
+        moderation: null,
+        purge: null,
+        say: null,
+    },
+    auto: {
+        role: {
+            bots: null,
+            id: null,
+            delay: null,
+            silent: true,
         },
-        "ignored": {
-            "commands": [],
-            "invites": [],
-            "stars": []
+        message: null,
+        nickname: null,
+    },
+    mode: 'free',
+    prefix: {
+        custom: null,
+        default: true,
+    },
+    automod: {
+        invite: false,
+        inviteaction: false,
+        invitewarn: 1,
+        invitekick: 3,
+        link: false,
+    },
+    nonickname: true,
+    music: {
+        default: 'all',
+        play: 'off',
+        skip: 'off',
+        stop: 'off',
+        pause: 'off',
+        resume: 'off',
+        unqueue: 'off',
+        volume: 'off',
+        timelimit: null,
+        queuelimit: null,
+        apikey: null,
+    },
+    subscriber: null,
+    starboard: {
+        id: null,
+        count: 5,
+    },
+    pcs: [],
+    webhooks: {
+        twitch: {
+            id: null,
+            message: null,
         },
-        "announcements": {
-            "id": null,
-            "mention": null
-        },
-        "aliases": [],
-        "logs": {
-            "id": null,
-            "join": null,
-            "leave": null,
-            "ban": null,
-            "unban": null,
-            "delete": null,
-            "nickname": null,
-            "invite": null,
-            "moderation": null,
-            "purge": null,
-            "say": null
-        },
-        "auto": {
-            "role": {
-                "bots": null,
-                "id": null,
-                "delay": null,
-                "silent": true
-            },
-            "message": null,
-            "nickname": null
-        },
-        "mode": "free",
-        "prefix": {
-            "custom": null,
-            "default": true
-        },
-        "automod": {
-            "invite": false,
-            "inviteaction": false,
-            "invitewarn": 1,
-            "invitekick": 3,
-            "link": false
-        },
-        "nonickname": true,
-        "music": {
-            "default": "all",
-            "play": "off",
-            "skip": "off",
-            "stop": "off",
-            "pause": "off",
-            "resume": "off",
-            "unqueue": "off",
-            "volume": "off",
-            "timelimit": null,
-            "queuelimit": null,
-            "apikey": null
-        },
-        "subscriber": null,
-        "starboard": {
-            "id": null,
-            "count": 5
-        },
-        "pcs": [],
-        "webhooks": {
-            "twitch": {
-                "id": null,
-                "message": null
-            }
-        }
-    };
-};
+    },
+});

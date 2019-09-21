@@ -1,10 +1,10 @@
-const Command = require("../../structures/Command");
+const Command = require('../../structures/Command');
 
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             description: "'Stab' another user in the server.",
-            usage: "stab [@user]"
+            usage: 'stab [@user]',
         });
     }
 
@@ -13,7 +13,7 @@ module.exports = class extends Command {
 
         const randomAddon = Math.random() <= 0.25;
 
-        if (!mention || mention.id === message.author.id) return message.send(`${message.author} just stabbed themselves! :dagger::scream:${randomAddon ? ` Someone call the police!` : ""}`);
-        message.send(`${message.author} just stabbed ${mention}! :dagger::scream:${randomAddon ? ` Someone call the police!` : ""}`);
+        if (!mention || mention.id === message.author.id) return message.send(`${message.author} just stabbed themselves! :dagger::scream:${randomAddon ? ' Someone call the police!' : ''}`);
+        message.send(`${message.author} just stabbed ${mention}! :dagger::scream:${randomAddon ? ' Someone call the police!' : ''}`);
     }
 };

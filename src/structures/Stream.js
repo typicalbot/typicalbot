@@ -1,6 +1,6 @@
 class Stream {
     constructor(client, connection) {
-        Object.defineProperty(this, "client", { value: client });
+        Object.defineProperty(this, 'client', { value: client });
 
         this.connection = connection;
 
@@ -12,7 +12,7 @@ class Stream {
 
         this.dispatcher = null;
 
-        this.volume = .5;
+        this.volume = 0.5;
 
         this.queue = [];
     }
@@ -20,58 +20,62 @@ class Stream {
     async play(video) {
         if (video.live) return this.playLive(video);
 
-        this.mode = "queue";
+        this.mode = 'queue';
 
         this.dispatcher = this.connection.play(
-            await video.stream().catch(err => { throw err; }),
-            { volume: this.volume, passes: 4 }
+            await video.stream().catch((err) => { throw err; }),
+            { volume: this.volume, passes: 4 },
         );
 
         this.current = video;
 
         const content = `🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}** for **${this.client.functions.convertTime(video.length * 1000)}**.`;
 
-        this.lastPlaying && video.requester.channel.lastMessageID === this.lastPlaying.id ?
-            this.lastPlaying.edit(content) :
-            video.requester.send(content).then(msg => this.lastPlaying = msg);
+        if (this.lastPlaying && video.requester.channel.lastMessageID === this.lastPlaying.id) this.lastPlaying.edit(content);
+        // eslint-disable-next-line no-return-assign
+        else video.requester.send(content).then((msg) => this.lastPlaying = msg);
 
-        this.dispatcher.on("error", err => {
-            video.requester.send(`An error occured playing the video. ${this.queue.length ? "Attempting to play the next video in the queue." : "Leaving the channel."}`);
+        this.dispatcher.on('error', (err) => {
+            video.requester.send(`An error occured playing the video. ${this.queue.length ? 'Attempting to play the next video in the queue.' : 'Leaving the channel.'}`);
+            // eslint-disable-next-line no-console
             console.log(err);
             if (this.queue.length) setTimeout(() => this.play(this.queue.splice(0, 1)[0]), 1000);
         });
 
-        this.dispatcher.on("finish", () => {
-            if (this.queue.length) return setTimeout(() => {
-                this.play(this.queue[0]);
-                this.queue.splice(0, 1);
-            }, 1000);
+        this.dispatcher.on('finish', () => {
+            if (this.queue.length) {
+                return setTimeout(() => {
+                    this.play(this.queue[0]);
+                    this.queue.splice(0, 1);
+                }, 1000);
+            }
 
-            video.requester.send("The queue has concluded.");
+            video.requester.send('The queue has concluded.');
             this.end();
         });
     }
 
     async playLive(video) {
-        this.mode = "live";
+        this.mode = 'live';
 
         this.dispatcher = this.connection.play(
-            await video.stream().catch(err => { throw err; }),
-            { volume: this.volume }
+            await video.stream().catch((err) => { throw err; }),
+            { volume: this.volume },
         );
 
         this.current = video;
 
         video.requester.send(`🎵 Now streaming **${video.title}** requested by **${video.requester.author.username}**.`);
 
-        this.dispatcher.on("error", err => {
-            video.requester.send(`An error occured while trying to play the livestream. Leaving the channel.`);
+        this.dispatcher.on('error', (err) => {
+            video.requester.send('An error occured while trying to play the livestream. Leaving the channel.');
+            // eslint-disable-next-line no-console
             console.log(err);
             this.end();
         });
 
-        this.dispatcher.on("finish", () => {
-            video.requester.send("The livestream has concluded.");
+        this.dispatcher.on('finish', () => {
+            video.requester.send('The livestream has concluded.');
             this.end();
         });
     }
@@ -79,7 +83,7 @@ class Stream {
     end() {
         this.queue = [];
         this.connection.channel.leave();
-        this.client.emit("voiceConnectionUpdate");
+        this.client.emit('voiceConnectionUpdate');
     }
 
     skip() {
@@ -101,13 +105,11 @@ class Stream {
 
     pause() {
         if (!this.dispatcher) return this.end();
-
         this.dispatcher.pause();
     }
 
     resume() {
         if (!this.dispatcher) return this.end();
-
         this.dispatcher.resume();
     }
 

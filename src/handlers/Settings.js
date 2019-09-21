@@ -1,18 +1,18 @@
-const { Collection } = require("discord.js");
+const { Collection } = require('discord.js');
 
-const DefaultSettings = require("../structures/Settings.js");
+const DefaultSettings = require('../structures/Settings.js');
 
 class SettingHandler extends Collection {
     constructor(client) {
         super();
 
-        Object.defineProperty(this, "client", { value: client });
+        Object.defineProperty(this, 'client', { value: client });
     }
 
     async fetch(id) {
         if (this.has(id)) return this.get(id);
 
-        const row = await this.client.handlers.database.get("guilds", id);
+        const row = await this.client.handlers.database.get('guilds', id);
 
         if (!row) {
             this.create(id);
@@ -26,7 +26,7 @@ class SettingHandler extends Collection {
     async create(id) {
         const newData = DefaultSettings(id);
 
-        await this.client.handlers.database.insert("guilds", newData);
+        await this.client.handlers.database.insert('guilds', newData);
         this.set(id, newData);
 
         return newData;
@@ -45,17 +45,13 @@ class SettingHandler extends Collection {
     }
 
     async update(id, object) {
-        await this.client.handlers.database.update("guilds", id, object);
+        await this.client.handlers.database.update('guilds', id, object);
         await this.set(id, this._update(this.get(id), object));
-
-        return;
     }
 
     async delete(id) {
-        await this.client.handlers.database.delete("guilds", id);
+        await this.client.handlers.database.delete('guilds', id);
         super.delete(id);
-
-        return;
     }
 }
 

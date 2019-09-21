@@ -1,4 +1,4 @@
-const Function = require("../structures/Function");
+const Function = require('../structures/Function');
 
 class Error extends Function {
     constructor(client, name) {
@@ -6,16 +6,16 @@ class Error extends Function {
     }
 
     execute(error, ...args) {
-        if (error === "usage") {
+        if (error === 'usage') {
             const [command] = args;
 
             return `Invalid command usage. Check \`${this.client.config.prefix}help ${command.name}\` for more information.`;
-        } else if (error === "perms") {
+        } if (error === 'perms') {
             const [command, uLevel] = args;
             const rLevel = this.client.handlers.permissions.levels.get(command.permission);
 
             return `Your permission level is too low to execute that command. The command requires permission level ${rLevel.level} (${rLevel.title}) and you are level ${uLevel.level} (${uLevel.title}).`;
-        } else if (error === "elevation") {
+        } if (error === 'elevation') {
             const [command, uLevel, rLevel] = args;
             const rrLevel = this.client.handlers.permissions.levels.get(rLevel);
 

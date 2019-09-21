@@ -1,4 +1,4 @@
-const Function = require("../structures/Function");
+const Function = require('../structures/Function');
 
 class ConvertTime extends Function {
     constructor(client, name) {
@@ -12,10 +12,10 @@ class ConvertTime extends Function {
         const absoluteHours = parseInt((t / (1000 * 60 * 60)) % 24);
         const absoluteDays = parseInt((t / (1000 * 60 * 60 * 24)));
 
-        const d = absoluteDays > 0 ? absoluteDays === 1 ? "1 day" : `${absoluteDays} days` : null;
-        const h = absoluteHours > 0 ? absoluteHours === 1 ? "1 hour" : `${absoluteHours} hours` : null;
-        const m = absoluteMinutes > 0 ? absoluteMinutes === 1 ? "1 minute" : `${absoluteMinutes} minutes` : null;
-        const s = absoluteSeconds > 0 ? absoluteSeconds === 1 ? "1 second" : `${absoluteSeconds} seconds` : null;
+        const d = absoluteDays > 0 ? absoluteDays === 1 ? '1 day' : `${absoluteDays} days` : null;
+        const h = absoluteHours > 0 ? absoluteHours === 1 ? '1 hour' : `${absoluteHours} hours` : null;
+        const m = absoluteMinutes > 0 ? absoluteMinutes === 1 ? '1 minute' : `${absoluteMinutes} minutes` : null;
+        const s = absoluteSeconds > 0 ? absoluteSeconds === 1 ? '1 second' : `${absoluteSeconds} seconds` : null;
 
         const absoluteTime = [];
         if (d) absoluteTime.push(d);
@@ -23,7 +23,7 @@ class ConvertTime extends Function {
         if (m) absoluteTime.push(m);
         if (s) absoluteTime.push(s);
 
-        return absoluteTime.join(", ");
+        return absoluteTime.join(', ');
     }
 }
 

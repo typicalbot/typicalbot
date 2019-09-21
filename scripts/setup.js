@@ -1,26 +1,28 @@
-const redb = require("rethinkdbdash");
-const credentials = require(`../config`).database.credentials;
+/* eslint-disable no-console */
+const redb = require('rethinkdbdash');
+
+const { credentials } = require('../config').database;
 
 const r = redb(credentials);
 
-(async function () {
+(async () => {
     if (!(await r.dbList()).includes(credentials.db)) {
         console.log(`Database \`${credentials.db}\` not found. Creating...`);
         await r.dbCreate(credentials.db);
     }
-    
+
     const db = r.db(credentials.db);
     const dbTables = await db.tableList();
 
-    const tables = ["guilds", "mutes", "tasks", "donors"];
+    const tables = ['guilds', 'mutes', 'tasks', 'donors'];
 
-    for (const t of tables) {
-        if (!dbTables.includes(t)) {
-            console.log(`Table ${t} not found. Creating...`);
-            await db.tableCreate(t);
+    for (let i = 0; i <= tables.length; i + 1) {
+        if (!dbTables.includes(tables[i])) {
+            console.log(`Table ${tables[i]} not found. Creating...`);
+            db.tableCreate(tables[i]);
         }
     }
 
-    console.log("The database should be good to go.");
+    console.log('The database should be good to go.');
     process.exit();
 })();

@@ -1,13 +1,13 @@
-const PermissionLevelStr = require("../structures/PermissionLevel");
-const Constants = require("../utility/Constants");
+const PermissionLevelStr = require('../structures/PermissionLevel');
+const Constants = require('../utility/Constants');
 
 class TypicalBotCreator extends PermissionLevelStr {
     constructor() {
         super({
-            "title": "TypicalBot Maintainer",
-            "level": Constants.Permissions.Levels.TYPICALBOT_MAINTAINER,
-            "staff": true,
-            "staffOverride": true
+            title: 'TypicalBot Maintainer',
+            level: Constants.Permissions.Levels.TYPICALBOT_MAINTAINER,
+            staff: true,
+            staffOverride: true,
         });
     }
 

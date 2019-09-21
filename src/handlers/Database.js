@@ -1,17 +1,18 @@
-const r = require("rethinkdbdash");
-const credentials = require(`${process.cwd()}/config`).database.credentials;
+const r = require('rethinkdbdash');
+
+const { credentials } = require(`${process.cwd()}/config`).database;
 
 class DatabaseHandler {
     constructor(client) {
-        Object.defineProperty(this, "client", { value: client });
+        Object.defineProperty(this, 'client', { value: client });
 
         this.connection = r(credentials);
     }
 
     get(table, key) {
-        return key ?
-            this.connection.table(table).get(key) :
-            this.connection.table(table);
+        return key
+            ? this.connection.table(table).get(key)
+            : this.connection.table(table);
     }
 
     async has(table, key) {
