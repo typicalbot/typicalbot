@@ -3,11 +3,14 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["airbnb/base"],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 2017,
+        "ecmaVersion": 2019,
+        "project": "./tsconfig.json",
         "sourceType": "module"
     },
+    "plugins": ["@typescript-eslint"],
     "rules": {
         "no-console": "off",
         "no-unused-vars": "off",
