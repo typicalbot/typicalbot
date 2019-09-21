@@ -1,3 +1,7 @@
+# Editors
+.idea
+.vscode
+
 # Logs
 logs
 *.log
@@ -16,6 +20,6 @@ node_modules
 
 # Custom
 package-lock.json
-.vscode
 config.json
+.env
 lib
