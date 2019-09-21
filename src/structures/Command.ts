@@ -15,11 +15,11 @@ export default class Command {
 
   dm: boolean;
 
-  permission: number;
+  permission: -1 | 0 | 1 | 2 | 3 | 4 | 10;
 
-  mode: number;
+  mode: 0 | 1 | 2;
 
-  access: number;
+  access: 0 | 1 | 3;
 
   constructor(client: Client, name: string, path: string, options: CommandOptions) {
       Object.defineProperty(this, 'client', { value: client });

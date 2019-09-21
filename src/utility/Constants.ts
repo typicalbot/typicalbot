@@ -16,10 +16,10 @@ export const Colors = {
 
 export const Access = {};
 
-export const AccessLevels = {
-    DEFAULT: 0,
-    DONOR: 1,
-    STAFF: 3,
+export enum AccessLevels {
+    DEFAULT = 0,
+    DONOR = 1,
+    STAFF = 3,
 };
 
 export const AccessTitles = {
@@ -30,14 +30,14 @@ export const AccessTitles = {
 
 export const Permissions = {};
 
-export const PermissionsLevels = {
-    SERVER_BLACKLISTED: -1,
-    SERVER_MEMBER: 0,
-    SERVER_DJ: 1,
-    SERVER_MODERATOR: 2,
-    SERVER_ADMINISTRATOR: 3,
-    SERVER_OWNER: 4,
-    TYPICALBOT_MAINTAINER: 10,
+export enum PermissionsLevels {
+    SERVER_BLACKLISTED = -1,
+    SERVER_MEMBER = 0,
+    SERVER_DJ = 1,
+    SERVER_MODERATOR = 2,
+    SERVER_ADMINISTRATOR = 3,
+    SERVER_OWNER = 4,
+    TYPICALBOT_MAINTAINER = 10,
 };
 
 export const PermissionsRoleTitles = {
@@ -47,10 +47,10 @@ export const PermissionsRoleTitles = {
     BLACKLIST: 'TypicalBot Blacklist',
 };
 
-export const Modes = {
-    FREE: 0,
-    LITE: 1,
-    STRICT: 2,
+export enum Modes {
+    FREE = 0,
+    LITE = 1,
+    STRICT = 2,
 };
 
 export const ModerationLog = {};
