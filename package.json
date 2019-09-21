@@ -32,7 +32,6 @@
         "canvas": "github:Automattic/node-canvas",
         "canvas-constructor": "^1.1.2",
         "discord.js": "github:discordjs/discord.js#master",
-        "erlpack": "github:discordapp/erlpack",
         "klaw": "^2.1.1",
         "mathjs": "^6.2.1",
         "moment": "^2.22.2",
@@ -42,6 +41,7 @@
         "rethinkdbdash": "^2.3.31",
         "simple-youtube-api": "github:hypercoder2975/simple-youtube-api",
         "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
+        "typescript": "^3.6.3",
         "utf-8-validate": "^5.0.2",
         "veza": "^0.6.0",
         "vm2": "^3.8.3",
@@ -52,6 +52,13 @@
         "bignum": "^0.13.0"
     },
     "devDependencies": {
-        "eslint": "^6.3.0"
+        "@types/node": "^12.7.5",
+        "@types/node-fetch": "^2.5.1",
+        "@types/ws": "^6.0.3",
+        "@typescript-eslint/eslint-plugin": "^2.3.0",
+        "@typescript-eslint/parser": "^2.3.0",
+        "eslint": "^6.1.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-config-airbnb-typescript": "^5.0.0"
     }
 }
