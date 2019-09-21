@@ -7,8 +7,9 @@
     "scripts": {
         "lint": "eslint src scripts",
         "lint:fix": "eslint src scripts --fix",
-        "build:database": "node ./scripts/setup.js",
-        "build:instance": "node ./scripts/pm2.js"
+        "build:database": "tsc && node ./production/scripts/setup.js",
+        "build:instance": "tsc && node ./production/scripts/pm2.js",
+        "dev": "tsc --watch"
     },
     "repository": {
         "type": "git",
