@@ -28,5 +28,12 @@
             "always"
         ],
         "prefer-const": "error"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".ts"]
+            }
+        }
     }
 }
