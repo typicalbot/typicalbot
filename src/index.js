@@ -61,6 +61,9 @@ module.exports = class Cluster extends Client {
 
         this.fetchDonors();
 
+        // i18n translation method
+        this.translate = await i18n();
+
         this.login(this.config.token);
     }
 

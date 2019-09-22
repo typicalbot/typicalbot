@@ -27,8 +27,8 @@ module.exports = class extends Command {
             + `Command        : ${command.name}\n`
             + `Aliases        : ${command.aliases.length ? command.aliases.join(', ') : 'None'}\n`
             + `Permission     : ${command.permission}\n`
-            + `Description    : ${command.description}\n`
-            + `Usage          : ${command.usage}`
+            + `Description    : ${this.client.translate(`${command.name}:DESCRIPTION`)}\n`
+            + `Usage          : ${this.client.translate(`${command.name}:USAGE`)}`
             + '\n```',
         );
     }
