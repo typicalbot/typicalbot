@@ -1,5 +1,6 @@
-production/
-rethinkdb_data/
+# Editors
+.idea
+.vscode
 
 # Logs
 logs
@@ -19,6 +20,7 @@ node_modules
 
 # Custom
 package-lock.json
-.vscode
 config.json
-lib
+.env
+production/
+rethinkdb_data/

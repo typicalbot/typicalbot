@@ -32,5 +32,5 @@
     "allowJs": false
 },
   "compileOnSave": true,
-  "include": ["./src/**/*", "./scripts/*"]
+  "include": ["./src/**/*", "./scripts/*", "packages/typicalbot/src/commands/fun/bunny.ts", "packages/typicalbot/src/commands/fun/8ball.ts", "packages/typicalbot/src/commands/fun/advice.ts", "packages/typicalbot/src/utility/Constants.ts", "packages/typicalbot/src/lib/i18n.ts", "packages/typicalbot/src/lib/types"]
 }

@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import fetch from 'node-fetch';
-import Command from '../../structures/Command';
+import Command from '../../../../../src/structures/Command';
 
 export default class extends Command {
     execute(message: Message) {
