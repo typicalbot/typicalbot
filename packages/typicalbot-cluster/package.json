@@ -1,0 +1,28 @@
+{
+    "name": "typicalbot-cluster-manager",
+    "version": "1.0.0",
+    "description": "",
+    "license": "Apache-2.0",
+    "main": "src/index.js",
+    "scripts": {
+        "lint": "eslint src",
+        "lint:fix": "eslint src --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/typicalbot/typicalbot-cluster-manager.git"
+    },
+    "bugs": {
+        "url": "https://github.com/typicalbot/typicalbot-cluster-manager/issues"
+    },
+    "homepage": "https://github.com/typicalbot/typicalbot-cluster-manager#readme",
+    "dependencies": {
+        "veza": "^1.1.0"
+    },
+    "devDependencies": {
+        "eslint-config-typicalbot": "github:typicalbot/typicalbot-eslint"
+    },
+    "eslintConfig": {
+        "extends": "eslint-config-typicalbot"
+    }
+}
