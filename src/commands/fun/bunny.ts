@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import Command from '../../structures/Command';
 
 export default class extends Command {
-    aliases =['rabbit'];
+    aliases = ['rabbit'];
 
     async execute(message: Message) {
         const type = Math.random() <= 0.25 ? 'gif' : 'poster';
@@ -12,7 +12,10 @@ export default class extends Command {
             .then((res) => res.json())
             .catch(() => message.error(this.client.translate('common:REQUEST_ERROR')));
 
-        const canSendEmbed = message.guild && message.guild.me && message.guild.settings.embed && (message.channel as TextChannel).permissionsFor(message.guild.me);
+        const canSendEmbed = message.guild
+            && message.guild.me
+            && message.guild.settings.embed
+            && (message.channel as TextChannel).permissionsFor(message.guild.me);
         if (!canSendEmbed) return message.send(data.media[type]);
 
         return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.media[type]));
