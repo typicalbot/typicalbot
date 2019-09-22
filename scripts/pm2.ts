@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
-const pm2 = require('pm2');
-const { Util } = require('discord.js');
-const config = require('../config');
+import { Util } from 'discord.js';
+import * as pm2 from 'pm2';
+import * as config from '../config.json';
+
 
 async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(config.token);
-    const shards = Array.from({ length: shardCount }, (a, b) => b);
+    const shards = Array.from({ length: shardCount }, (_a, b) => b);
     const clusterCount = Math.ceil(shardCount / 10);
     const clusters = [];
 
@@ -15,14 +16,14 @@ async function generateClusters() {
         clusters.push({
             name: `${config.clusterServer}-${config.clusterBuild ? `${config.clusterBuild}-` : ''}${i}`,
             script: './index.js',
-            autorestart: true,
+            // autorestart: true,
             watch: false,
             env: {
                 CLUSTER: `${config.clusterServer} ${config.clusterBuild ? `${config.clusterBuild} ` : ''}${i}`,
-                CLUSTER_COUNT: clusterCount,
-                SHARDS: clusterShards,
-                SHARD_COUNT: clusterShards.length,
-                TOTAL_SHARD_COUNT: shardCount,
+                CLUSTER_COUNT: clusterCount.toString(),
+                SHARDS: `[${clusterShards.join(',')}]`,
+                SHARD_COUNT: clusterShards.length.toString(),
+                TOTAL_SHARD_COUNT: shardCount.toString(),
             },
         });
     }
@@ -30,7 +31,7 @@ async function generateClusters() {
     return clusters;
 }
 
-pm2.connect(async (err) => {
+pm2.connect(async (err: Error) => {
     if (err) {
         console.error(err);
         process.exit(2);
@@ -41,7 +42,7 @@ pm2.connect(async (err) => {
     console.log('Generating Clusters\n', clusters);
 
     clusters.forEach((cluster, i) => {
-        pm2.start(cluster, (e) => {
+        pm2.start(cluster, (e: Error) => {
             if (i === (clusters.length - 1)) {
                 console.log('Generation Complete.\nExiting.');
                 pm2.disconnect();
