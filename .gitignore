@@ -1,4 +1,5 @@
 production/
+rethinkdb_data/
 
 # Logs
 logs
