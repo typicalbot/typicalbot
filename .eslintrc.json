@@ -1,39 +1,42 @@
 {
 	"env": {
-			"es6": true,
-			"node": true
+		"es6": true,
+		"node": true
 	},
-	"extends": ["airbnb/base"],
+	"extends": [
+		"airbnb/base"
+	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
-			"ecmaVersion": 2019,
-			"project": "./tsconfig.json",
-			"sourceType": "module"
+		"ecmaVersion": 2019,
+		"sourceType": "module"
 	},
-	"plugins": ["@typescript-eslint"],
+	"plugins": [
+		"@typescript-eslint"
+	],
 	"rules": {
-			"no-console": "off",
-			"no-unused-vars": "off",
-			"no-empty": "off",
-			"indent": [
-					"error",
-					4
-			],
-			"linebreak-style": [
-					"error",
-					"unix"
-			],
-			"semi": [
-					"error",
-					"always"
-			],
-			"prefer-const": "error"
+		"no-console": "off",
+		"no-unused-vars": "off",
+		"no-empty": "off",
+		"indent": [
+			"error",
+			4
+		],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"prefer-const": "error"
 	},
 	"settings": {
-			"import/resolver": {
-					"node": {
-							"extensions": [".js", ".ts"]
-					}
+		"import/resolver": {
+			"node": {
+				"extensions": [".js", ".ts"]
 			}
+		}
 	}
 }
