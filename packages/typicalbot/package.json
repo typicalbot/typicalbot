@@ -60,7 +60,6 @@
         "zlib-sync": "^0.1.5"
     },
     "devDependencies": {
-        "types/rethinkdbdash": "github:types:rethinkdbdash",
         "@types/i18next-node-fs-backend": "^2.1.0",
         "@types/node": "^12.7.5",
         "@types/node-fetch": "^2.5.1",
@@ -74,6 +73,7 @@
         "eslint-config-airbnb-base": "^14.0.0",
         "eslint-config-airbnb-typescript": "^5.0.0",
         "eslint-config-typicalbot": "^1.0.0",
+        "eslint-plugin-import": "^2.18.2",
         "lerna": "^3.16.4"
     },
     "eslintConfig": {
