@@ -1,6 +1,6 @@
 import { Message, TextChannel, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
-import Command from '../../../../../src/structures/Command';
+import Command from '../../structures/Command';
 
 export default class extends Command {
     aliases = ['rabbit'];

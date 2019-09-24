@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { r } from 'rethinkdb-ts';
-import * as configs from '../config.json';
+import * as configs from '../../../config.json';
 
 const { credentials } = configs.database;
 

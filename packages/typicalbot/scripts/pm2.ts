@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Util } from 'discord.js';
 import * as pm2 from 'pm2';
-import * as config from '../config.json';
+import * as config from '../../../config.json';
 
 
 async function generateClusters() {
