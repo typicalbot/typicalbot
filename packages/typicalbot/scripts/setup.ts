@@ -13,13 +13,13 @@ const { credentials } = configs.database;
 
     const tables = ['guilds', 'mutes', 'tasks', 'donors'];
 
-    tables.forEach(
-        (table) => r.branch(
+    for (const table of tables) {
+        r.branch(
             dbTables.contains(table),
             null,
             db.tableCreate(table),
-        ).run(),
-    );
+        ).run()
+    }
 
     console.log('The database should be good to go.');
     process.exit();
