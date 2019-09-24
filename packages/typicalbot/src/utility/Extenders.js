@@ -17,6 +17,10 @@ Guild.prototype.buildModerationLog = async function () {
     this.client.handlers.moderationLog.buildCase(this);
 };
 
+Guild.prototype.translate = function (key, args) {
+    return this.client.translate.get(this.settings.language)(key, args)
+};
+
 GuildMember.prototype.fetchPermissions = async function (ignoreStaff = false) {
     return this.client.handlers.permissions.fetch(this.guild, this, ignoreStaff);
 };
@@ -64,6 +68,16 @@ Message.prototype.dm = function (content, embed, options = {}) {
 
 Message.prototype.buildEmbed = function () {
     return this.channel.buildEmbed();
+};
+
+Object.defineProperty(Message.prototype, 'embedable', {
+    get() {
+        return this.guild && this.guild.me && this.guild.settings && this.guild.settings.embed && this.channel.permissionsFor(this.guild.me).has('EMBED_LINKS')
+    },
+});
+
+Message.prototype.translate = function (key, args) {
+    return this.client.translate.get(this.guild.settings.language)(key, args)
 };
 
 Object.defineProperty(VoiceConnection.prototype, 'guildStream', {

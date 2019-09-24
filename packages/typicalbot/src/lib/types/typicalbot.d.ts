@@ -10,6 +10,7 @@ export interface CommandOptions {
 
 export interface GuildSettings {
   id: string;
+  language: string;
   embed: boolean;
   roles: {
       administrator: string[];

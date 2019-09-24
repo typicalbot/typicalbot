@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 import { GuildSettings } from './typicalbot';
+import * as i18next from 'i18next';
 
 declare module 'discord.js' {
   interface Message {
@@ -13,13 +14,16 @@ declare module 'discord.js' {
       embed?: MessageEmbed,
       options?: MessageOptions
     ): Promise<Message>;
+    translate(key: string, args?: object): string;
+    embedable: boolean;
   }
 
   interface Client {
-    translate(key: string, options?: Object): string;
+    translate: Map<string, i18next.TFunction>
   }
 
   interface Guild {
     settings: GuildSettings;
+    translate(key: string, args?: object): string;
   }
 }
