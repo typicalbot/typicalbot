@@ -55,12 +55,12 @@ module.exports = class extends Command {
 
             const options = /(--?[\w]+)\s+([^-]+)/g.exec(optionsSet);
 
-            const responseA = sub ? /\[\[response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>]+)\]\]/i.exec(sub) : null,
-                dmA = sub ? /\[\[dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>]+)\]\]/i.exec(sub) : null,
-                addRolesA = sub ? /\[\[\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>]+)\]\]/i.exec(sub) : null,
-                removeRolesA = sub ? /\[\[\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>]+)\]\]/i.exec(sub) : null,
-                reqPermissionsA = sub ? /(?:(?:-p|--permissions)\s+(\d+))/i.exec(sub) : null,
-                msgDeleteA = sub ? /(-d|--delete)/i.exec(sub) : null,
+            const responseA = options ? /\[\[response:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>]+)\]\]/i.exec(options) : null,
+                dmA = options ? /\[\[dm:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>]+)\]\]/i.exec(options) : null,
+                addRolesA = options ? /\[\[\+role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>]+)\]\]/i.exec(options) : null,
+                removeRolesA = options ? /\[\[\-role:\s*([A-Za-z0-9\s!@#$%^&*().,?:;\-_=+"\\'\/<>]+)\]\]/i.exec(options) : null,
+                reqPermissionsA = options ? /(?:(?:-p|--permissions)\s+(\d+))/i.exec(options) : null,
+                msgDeleteA = options ? /(-d|--delete)/i.exec(options) : null,
                 response = responseA ? responseA[1] : null,
                 dm = dmA ? dmA[1] : null,
                 addRoles = addRolesA ? addRolesA[1] : null,
