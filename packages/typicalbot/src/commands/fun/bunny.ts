@@ -5,7 +5,7 @@ import Command from '../../structures/Command';
 export default class extends Command {
     aliases = ['rabbit'];
 
-    async execute(message: Message) {
+    static async execute(message: Message) {
         const type = Math.random() <= 0.25 ? 'gif' : 'poster';
 
         const data = await fetch(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
