@@ -5,8 +5,8 @@
     "license": "Apache-2.0",
     "main": "index.js",
     "scripts": {
-        "lint": "eslint src scripts",
-        "lint:fix": "eslint src scripts --fix",
+        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}'",
+        "lint:fix": "tsc --noEmit && eslint '*/**/*.{js,ts}' --fix",
         "build:database": "tsc && node ./production/scripts/setup.js",
         "build:instance": "tsc && node ./production/scripts/pm2.js",
         "dev": "tsc --watch",
