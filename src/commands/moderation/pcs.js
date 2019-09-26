@@ -43,7 +43,7 @@ module.exports = class extends Command {
                     message.reply("Successfully cleared personal commands.");
                 }).catch(err => {
                     throw err;
-                })
+                });
             }).catch(err => {
                 message.reply("Failed to create personal command.");
             });
@@ -66,7 +66,7 @@ module.exports = class extends Command {
                 addRoles = addRolesA ? addRolesA[1] : null,
                 removeRoles = removeRolesA ? removeRolesA[1] : null,
                 reqPermissions = reqPermissionsA ? reqPermissionsA[1] : null,
-                msgDelete = msgDeleteA ? msgDeleteA[1] : null,
+                msgDelete = msgDeleteA ? msgDeleteA[1] : null;
 
             if (reqPermissions && reqPermissions < Constants.Permissions.Levels.SERVER_MEMBER) return message.error("You cannot use a permission level less than Server Member.");
             if (reqPermissions && reqPermissions > Constants.Permissions.Levels.SERVER_OWNER) return message.error("You cannot use a permission level greater than Server Owner.");
