@@ -1,0 +1,9 @@
+{
+	"DESCRIPTION": "'Shoot' another user in the server.",
+	"USAGE": "shoot [@user]",
+	"SELF": "just shot at themselves! :scream:",
+	"POLICE": "Someone call the police!",
+	"MISSED": "Wait! They missed!",
+	"HEADSHOT": "Bam! Headshot!",
+	"RESPONSE": "just shot at {{user}}! :scream:"
+}
