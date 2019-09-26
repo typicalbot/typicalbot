@@ -1,12 +1,11 @@
-const { Node } = require("veza");
+const { Client } = require("veza");
 const Cluster = require("./src");
 const config = require("./config");
 
-const node = new Node(process.env.CLUSTER)
+const node = new Client(process.env.CLUSTER)
     .on('error', (error, client) => console.error(`[IPC] Error from ${client.name}:`, error))
-    .on('socket.disconnect', client => console.error(`[IPC] Disconnected from ${client.name}`))
-    .on('socket.destroy', client => console.error(`[IPC] Client Destroyed: ${client.name}`))
-    .on('socket.ready', async client => {
+    .on('disconnect', client => console.error(`[IPC] Disconnected from ${client.name}`))
+    .on('ready', async client => {
         console.log(`[IPC] Connected to: ${client.name}`);
     });
 

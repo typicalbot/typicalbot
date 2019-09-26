@@ -44,7 +44,7 @@ module.exports = class extends Command {
             .addField('Status', user.presence.status, true)
             .addField('Joined', moment(member.joinedAt).format('MMM DD, YYYY hh:mm A'), true)
             .addField('Registered', moment(user.createdAt).format('MMM DD, YYYY hh:mm A'), true)
-            .addField(`Roles (${member.roles.size - 1})`, `${member.roles.size > 1 ? member.roles.filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => `<@&${r.id}>`).join(', ') : "'None"}`, false)
+            .addField(`Roles (${member.roles.size - 1})`, `${member.roles.size > 1 ? member.roles.filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => r.toString()).join(', ') : 'None'}`, false)
             .send();
     }
 };
