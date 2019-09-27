@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Receive the OAuth2 authorization link for TypicalBot.",
+	"USAGE": "invite",
+	"TEXT": "You can add me to your server at <{{link}}>.",
+	"TYPICAL_INVITE": "TypicalBot Invite"
+}
