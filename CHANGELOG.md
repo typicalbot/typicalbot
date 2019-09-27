@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - `userinfo` command to use toString method ([#79](https://github.com/typicalbot/typicalbot/pull/79)) ([eb69c0a](https://github.com/typicalbot/typicalbot/commit/eb69c0a6515f3531e5df272718f7ddff39b36eb7))
  - Update to use updated veza methods ([#74](https://github.com/typicalbot/typicalbot/pull/74)) ([17d7ee7](https://github.com/typicalbot/typicalbot/commit/17d7ee7e15451f9da542cd069a4b1ffdff36e2cd))
 
+### Removed
+ - `quote` command because of dead API ([#62](https://github.com/typicalbot/typicalbot/pull/62)) ([5db93ce](https://github.com/typicalbot/typicalbot/commit/5db93cee5222b8902ab02cab34664b02ed7d3a08))
+ - `tiger` command because of dead API ([#62](https://github.com/typicalbot/typicalbot/pull/62)) ([5db93ce](https://github.com/typicalbot/typicalbot/commit/5db93cee5222b8902ab02cab34664b02ed7d3a08))
+
 ## [2.5.2]
 ### Fixed
  - Update error message in AudioUtil#searchError ([#72](https://github.com/typicalbot/typicalbot/pull/72)) ([f668b30](https://github.com/typicalbot/typicalbot/commit/f668b3065639ba5f4677875d4d17a7dd326e623c)), closes [#71](https://github.com/typicalbot/typicalbot/issues/71)
