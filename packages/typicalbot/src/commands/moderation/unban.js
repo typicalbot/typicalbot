@@ -27,7 +27,7 @@ module.exports = class extends Command {
 
             message.guild.members.unban(cachedUser.id, `Unbanned by ${message.author.tag} | Reason: ${reason || 'No reason provided.'}`).then((actioned) => {
                 cachedUser.guild = message.guild;
-
+                // TODO: change this to .delete() with an id instead
                 this.client.handlers.tasks.clear('unban', cachedUser);
 
                 message.success(`Successfully unbanned user \`${cachedUser.tag || actioned}\`.`);

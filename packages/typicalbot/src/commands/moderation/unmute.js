@@ -43,6 +43,7 @@ module.exports = class extends Command {
                     const newCase = this.client.handlers.moderationLog.buildCase(message.guild).setAction(Constants.ModerationLog.Types.UNMUTE).setModerator(message.author).setUser(member.user);
                     if (reason) newCase.setReason(reason); newCase.send();
 
+                    // TODO: change this to .delete() with an id instead
                     this.client.handlers.tasks.clear('unmute', member);
 
                     message.success(`Successfully unmuted user \`${member.user.tag}\`.`);

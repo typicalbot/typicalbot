@@ -47,7 +47,7 @@
         "simple-youtube-api": "github:hypercoder2975/simple-youtube-api",
         "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
         "typescript": "^3.6.3",
-        "veza": "^0.6.0",
+        "veza": "^1.1.0",
         "vm2": "^3.8.3",
         "ytdl-core": "github:fent/node-ytdl-core",
         "utf-8-validate": "^5.0.2"
@@ -61,6 +61,7 @@
     },
     "devDependencies": {
         "@types/i18next-node-fs-backend": "^2.1.0",
+        "@types/klaw": "^3.0.0",
         "@types/node": "^12.7.5",
         "@types/node-fetch": "^2.5.1",
         "@types/ws": "^6.0.3",
@@ -75,8 +76,5 @@
         "eslint-config-typicalbot": "^1.0.0",
         "eslint-plugin-import": "^2.18.2",
         "lerna": "^3.16.4"
-    },
-    "eslintConfig": {
-        "extends": "eslint-config-typicalbot"
     }
 }
