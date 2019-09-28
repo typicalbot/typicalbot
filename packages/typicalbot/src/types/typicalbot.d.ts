@@ -50,7 +50,7 @@ export interface GuildSettings {
             bots: string | null;
             id: string | null;
             delay: string | null;
-            silent: true;
+            silent: boolean;
         };
         message: string | null;
         nickname: string | null;
@@ -58,14 +58,14 @@ export interface GuildSettings {
     mode: string;
     prefix: {
         custom: string | null;
-        default: true;
+        default: boolean;
     };
     automod: {
-        invite: false;
-        inviteaction: false;
-        invitewarn: 1;
-        invitekick: 3;
-        link: false;
+        invite: boolean;
+        inviteaction: boolean;
+        invitewarn: number;
+        invitekick: number;
+        link: boolean;
     };
     nonickname: boolean;
     music: {
@@ -115,4 +115,9 @@ export interface PermissionLevel {
     staff?: boolean;
     staffOverride?: boolean;
     check(guild: Guild, member: GuildMember): boolean;
+}
+
+export interface ModlogAction {
+    hex: number;
+    display: string;
 }

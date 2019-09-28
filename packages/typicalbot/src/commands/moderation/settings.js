@@ -83,6 +83,7 @@ module.exports = class extends Command {
 
             message.send(`**__Available settings to use with TypicalBot:__**\n\n**Page ${page} / ${count}**\n${list.join('\n')}`);
         } else if (action === 'clear') {
+            // TODO: make sure to this.client.handlers.database.delete('guilds', message.guild.id) first
             this.client.settings.delete(message.guild.id).then(() => {
                 message.reply('Settings cleared.');
             }).catch((err) => {

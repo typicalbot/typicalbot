@@ -1,5 +1,6 @@
-module.exports = (id) => ({
+export default (id: string) => ({
     id,
+    language: 'en-US',
     embed: false,
     roles: {
         administrator: [],
@@ -7,16 +8,16 @@ module.exports = (id) => ({
         dj: [],
         blacklist: [],
         public: [],
-        mute: null,
+        mute: null
     },
     ignored: {
         commands: [],
         invites: [],
-        stars: [],
+        stars: []
     },
     announcements: {
         id: null,
-        mention: null,
+        mention: null
     },
     aliases: [],
     logs: {
@@ -30,29 +31,29 @@ module.exports = (id) => ({
         invite: null,
         moderation: null,
         purge: null,
-        say: null,
+        say: null
     },
     auto: {
         role: {
             bots: null,
             id: null,
             delay: null,
-            silent: true,
+            silent: true
         },
         message: null,
-        nickname: null,
+        nickname: null
     },
     mode: 'free',
     prefix: {
         custom: null,
-        default: true,
+        default: true
     },
     automod: {
         invite: false,
         inviteaction: false,
         invitewarn: 1,
         invitekick: 3,
-        link: false,
+        link: false
     },
     nonickname: true,
     music: {
@@ -66,18 +67,18 @@ module.exports = (id) => ({
         volume: 'off',
         timelimit: null,
         queuelimit: null,
-        apikey: null,
+        apikey: null
     },
     subscriber: null,
     starboard: {
         id: null,
-        count: 5,
+        count: 5
     },
     pcs: [],
     webhooks: {
         twitch: {
             id: null,
-            message: null,
-        },
-    },
+            message: null
+        }
+    }
 });
