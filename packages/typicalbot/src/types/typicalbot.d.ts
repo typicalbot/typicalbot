@@ -1,3 +1,5 @@
+import { Guild, GuildMember } from 'discord.js';
+
 export interface CommandOptions {
     description?: string;
     usage?: string;
@@ -19,16 +21,16 @@ export interface GuildSettings {
         blacklist: string[];
         public: string[];
         mute: string | string | null;
-    },
+    };
     ignored: {
         commands: string[];
         invites: string[];
         stars: string[];
-    },
+    };
     announcements: {
         id: string | null;
         mention: string | null;
-    },
+    };
     aliases: string[];
     logs: {
         id: string | null;
@@ -42,30 +44,30 @@ export interface GuildSettings {
         moderation: string | null;
         purge: string | null;
         say: string | null;
-    },
+    };
     auto: {
         role: {
             bots: string | null;
             id: string | null;
             delay: string | null;
-            silent: true,
-        },
+            silent: true;
+        };
         message: string | null;
         nickname: string | null;
-    },
-    mode: string,
+    };
+    mode: string;
     prefix: {
         custom: string | null;
-        default: true,
-    },
+        default: true;
+    };
     automod: {
-        invite: false,
-        inviteaction: false,
-        invitewarn: 1,
-        invitekick: 3,
-        link: false,
-    },
-    nonickname: boolean,
+        invite: false;
+        inviteaction: false;
+        invitewarn: 1;
+        invitekick: 3;
+        link: false;
+    };
+    nonickname: boolean;
     music: {
         default: string;
         play: string;
@@ -78,19 +80,19 @@ export interface GuildSettings {
         timelimit: string | null;
         queuelimit: string | null;
         apikey: string | null;
-    },
+    };
     subscriber: string | null;
     starboard: {
         id: string | null;
-        count: number,
-    },
+        count: number;
+    };
     pcs: string[];
     webhooks: {
         twitch: {
             id: string | null;
             message: string | null;
-        },
-    },
+        };
+    };
 }
 
 export interface TaskOptions {
@@ -98,4 +100,19 @@ export interface TaskOptions {
     id: number;
     end: number;
     type: string;
+}
+
+export interface PermissionLevelOptions {
+    title: string;
+    level: -1 | 0 | 1 | 2 | 3 | 4 | 10;
+    staff?: boolean;
+    staffOverride?: boolean;
+}
+
+export interface PermissionLevel {
+    title: string;
+    level: -1 | 0 | 1 | 2 | 3 | 4 | 10;
+    staff?: boolean;
+    staffOverride?: boolean;
+    check(guild: Guild, member: GuildMember): boolean;
 }

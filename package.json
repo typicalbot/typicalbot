@@ -7,11 +7,8 @@
         "esdoc-ecmascript-proposal-plugin": "^1.0.0",
         "esdoc-standard-plugin": "^1.0.0",
         "eslint": "^6.1.0",
-        "eslint-config-typicalbot": "^1.0.0",
+        "eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
         "lerna": "^3.16.4"
-    },
-    "eslintConfig": {
-        "extends": "eslint-config-typicalbot"
     },
     "workspaces": [
         "packages/*"

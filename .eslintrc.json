@@ -1,13 +1,3 @@
 {
-	"extends": "eslint-config-typicalbot",
-	"settings": {
-		"import/resolver": {
-			"node": {
-				"extensions": [
-					".js",
-					".ts"
-				]
-			}
-		}
-	}
+	"extends": "eslint-config-typicalbot"
 }

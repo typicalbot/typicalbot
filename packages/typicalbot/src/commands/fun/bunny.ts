@@ -5,15 +5,21 @@ import Command from '../../structures/Command';
 export default class extends Command {
     aliases = ['rabbit'];
 
-    static async execute(message: Message) {
+    async execute(message: Message) {
         const type = Math.random() <= 0.25 ? 'gif' : 'poster';
 
-        const data = await fetch(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
-            .then((res) => res.json())
-            .catch(() => message.error(message.translate('common:REQUEST_ERROR')));
+        const data = await fetch(
+            `https://api.bunnies.io/v2/loop/random/?media=${type}`
+        )
+            .then(res => res.json())
+            .catch(() =>
+                message.error(message.translate('common:REQUEST_ERROR'))
+            );
 
         if (!message.embedable) return message.send(data.media[type]);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.media[type]));
+        return message.send(
+            new MessageEmbed().setColor(0x00adff).setImage(data.media[type])
+        );
     }
 }

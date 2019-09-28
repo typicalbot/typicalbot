@@ -2,7 +2,7 @@ import { Collection } from 'discord.js';
 import { join, parse } from 'path';
 import * as klaw from 'klaw';
 import Cluster from '../index';
-import { TaskOptions } from '../lib/types/typicalbot';
+import { TaskOptions } from '../types/typicalbot';
 import Task from '../structures/Task';
 
 export default class TaskHandler {
@@ -19,35 +19,52 @@ export default class TaskHandler {
         const start = Date.now();
 
         klaw(path)
-            .on('data', (item) => {
+            .on('data', item => {
                 const file = parse(item.path);
 
                 if (!file.ext || file.ext !== '.js') return;
 
-                // eslint-disable-next-line global-require, import/no-dynamic-require
-                const req: Task = (r => r.default || r)(require(join(file.dir, file.base)));
+                const req: Task = (r => r.default || r)(
+                    // eslint-disable-next-line @typescript-eslint/no-var-requires
+                    require(join(file.dir, file.base))
+                );
 
                 this.taskTypes.set(file.name, req);
             })
             .on('end', async () => {
                 // eslint-disable-next-line no-console
-                console.log(`Loaded ${this.collection.size} Tasks in ${Date.now() - start}ms`);
+                console.log(
+                    `Loaded ${this.collection.size} Tasks in ${Date.now() -
+                        start}ms`
+                );
 
-                const list: TaskOptions[] = await this.client.handlers.database.get('tasks');
+                const list: TaskOptions[] = await this.client.handlers.database.get(
+                    'tasks'
+                );
 
-                list.forEach((taskOptions) => this.collection.set(taskOptions.id, new Task(this.client, taskOptions)));
+                list.forEach(taskOptions =>
+                    this.collection.set(
+                        taskOptions.id,
+                        new Task(this.client, taskOptions)
+                    )
+                );
             });
 
         setInterval(() => {
-            this.collection.filter((task) => Date.now() >= task.end)
-                .forEach((task) => task.execute());
+            this.collection
+                .filter(task => Date.now() >= task.end)
+                .forEach(task => task.execute());
         }, 1000);
     }
 
     async taskInit() {
-        const tasks: TaskOptions[] = await this.client.handlers.database.get('tasks')
+        const tasks: TaskOptions[] = await this.client.handlers.database.get(
+            'tasks'
+        );
 
-        tasks.forEach((task) => this.collection.set(task.id, new Task(this.client, task)));
+        tasks.forEach(task =>
+            this.collection.set(task.id, new Task(this.client, task))
+        );
     }
 
     async create(type: string, end: number, data: unknown) {
@@ -56,7 +73,7 @@ export default class TaskHandler {
             id,
             type,
             end,
-            data,
+            data
         };
 
         await this.client.handlers.database.insert('tasks', payload);
@@ -72,5 +89,4 @@ export default class TaskHandler {
         await this.client.handlers.database.delete('tasks', id.toString());
         this.collection.delete(id);
     }
-
 }
