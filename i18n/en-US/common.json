@@ -1,3 +1,5 @@
 {
-	"REQUEST_ERROR": "An error occurred making that request."
+	"REQUEST_ERROR": "An error occurred making that request.",
+	"INVALID_OPTION": "Invalid option given.",
+	"NONE": "None"
 }
