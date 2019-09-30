@@ -1,9 +1,9 @@
-import { Client } from 'discord.js';
 import Constants from '../utility/Constants';
 import { CommandOptions } from '../types/typicalbot';
+import Cluster from '..';
 
 export default class Command {
-    client: Client;
+    client: Cluster;
     name: string;
     path: string;
     description: string;
@@ -15,21 +15,24 @@ export default class Command {
     access: 0 | 1 | 3;
 
     constructor(
-        client: Client,
+        client: Cluster,
         name: string,
         path: string,
-        options: CommandOptions
+        options?: CommandOptions
     ) {
         this.client = client;
         this.name = name;
         this.path = path;
-        this.description = options.description || 'Description Not Provided';
-        this.usage = options.usage || 'Usage Not Provided';
-        this.aliases = options.aliases || [];
-        this.dm = options.dm || false;
+        this.description =
+            (options && options.description) || 'Description Not Provided';
+        this.usage = (options && options.usage) || 'Usage Not Provided';
+        this.aliases = (options && options.aliases) || [];
+        this.dm = (options && options.dm) || false;
         this.permission =
-            options.permission || Constants.PermissionsLevels.SERVER_MEMBER;
-        this.mode = options.mode || Constants.Modes.FREE;
-        this.access = options.access || Constants.AccessLevels.DEFAULT;
+            (options && options.permission) ||
+            Constants.PermissionsLevels.SERVER_MEMBER;
+        this.mode = (options && options.mode) || Constants.Modes.FREE;
+        this.access =
+            (options && options.access) || Constants.AccessLevels.DEFAULT;
     }
 }
