@@ -11,6 +11,7 @@ export interface CommandOptions {
 }
 
 export interface GuildSettings {
+    apikey?: string | null;
     id: string;
     language: string;
     embed: boolean;
@@ -31,7 +32,7 @@ export interface GuildSettings {
         id: string | null;
         mention: string | null;
     };
-    aliases: string[];
+    aliases: TypicalCommandAlias[];
     logs: {
         id: string | null;
         join: string | null;
@@ -120,4 +121,9 @@ export interface PermissionLevel {
 export interface ModlogAction {
     hex: number;
     display: string;
+}
+
+export interface TypicalCommandAlias {
+    alias: string;
+    command: string;
 }
