@@ -11,23 +11,33 @@ export default class extends Command {
         if (message.channel.type === 'text')
             message.reply(message.translate('commands:CHECK_DM'));
 
-        const list = Array.from(this.client.commands.keys());
+        const level0 = [];
+        const level1 = [];
+        const level2 = [];
+        const level3 = [];
+        const level4 = [];
 
-        const level4 = list
-            .filter(c => this.client.commands.get(c).permission === 4)
-            .map(c => `${this.client.config.prefix}${c}`);
-        const level3 = list
-            .filter(c => this.client.commands.get(c).permission === 3)
-            .map(c => `${this.client.config.prefix}${c}`);
-        const level2 = list
-            .filter(c => this.client.commands.get(c).permission === 2)
-            .map(c => `${this.client.config.prefix}${c}`);
-        const level1 = list
-            .filter(c => this.client.commands.get(c).permission === 1)
-            .map(c => `${this.client.config.prefix}${c}`);
-        const level0 = list
-            .filter(c => this.client.commands.get(c).permission === 0)
-            .map(c => `${this.client.config.prefix}${c}`);
+        for (const [name, command] of this.client.commands.entries()) {
+            const commandName = `${this.client.config.prefix}${name}`;
+
+            switch (command.permission) {
+                case 0:
+                    level0.push(commandName);
+                    break;
+                case 1:
+                    level1.push(commandName);
+                    break;
+                case 2:
+                    level2.push(commandName);
+                    break;
+                case 3:
+                    level3.push(commandName);
+                    break;
+                case 4:
+                    level4.push(commandName);
+                    break;
+            }
+        }
 
         const NONE = message.translate('commands:NONE');
 
