@@ -1,6 +1,6 @@
 import { join, parse } from 'path';
 import * as klaw from 'klaw';
-import { Collection, Guild } from 'discord.js';
+import { Collection } from 'discord.js';
 import Cluster from '..';
 import TypicalFunction from '../structures/Function';
 
@@ -29,8 +29,10 @@ export default class FunctionHandler extends Collection<
 
                 count++;
 
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
-                const Function = require(join(file.dir, file.base));
+                const Function = (r => r.default || r)(
+                    // eslint-disable-next-line @typescript-eslint/no-var-requires
+                    require(join(file.dir, file.base))
+                );
                 const newReq = new Function(this.client, file.name);
 
                 this.set(file.name, newReq);
