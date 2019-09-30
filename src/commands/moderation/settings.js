@@ -845,7 +845,7 @@ module.exports = class extends Command {
                         if (isNaN(n)) return message.error("The given value is not a number.");
                         if (n < 120) return message.error("The minimum value for this setting is 120 seconds (2 minutes).");
 
-                        if (n > 600 && accessLevel.level < 1) return message.error("The maximum value for this setting is 600 seconds (10 minutes) for servers whose owner is not a TypicalBot Prime member.");
+                        // if (n > 600 && accessLevel.level < 1) return message.error("The maximum value for this setting is 600 seconds (10 minutes) for servers whose owner is not a TypicalBot Prime member.");
                         if (n > 7200) return message.error("The maximum value for this setting is 7200 seconds (2 hours).");
 
                         this.client.settings.update(message.guild.id, { music: { timelimit: n } }).then(() => message.success("Setting successfully updated."));
@@ -861,7 +861,7 @@ module.exports = class extends Command {
                         if (isNaN(n)) return message.error("The given value is not a number.");
                         if (n < 1) return message.error("The minimum value for this setting is 0 videos (disabled).");
 
-                        if (n > 10 && accessLevel.level < 1) return message.error("The maximum value for this setting is 10 videos for servers whose owner is not a TypicalBot Prime member.");
+                        // if (n > 10 && accessLevel.level < 1) return message.error("The maximum value for this setting is 10 videos for servers whose owner is not a TypicalBot Prime member.");
                         if (n > 100) return message.error("The maximum value for this setting is 100 videos.");
 
                         this.client.settings.update(message.guild.id, { music: { queuelimit: n } }).then(() => message.success("Setting successfully updated."));

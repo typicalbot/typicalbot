@@ -8,8 +8,8 @@ module.exports = class extends Command {
             usage: "alias <'list'|'add'|'remove'|'clear'> <add/remove:command> <add:new-alias>",
             aliases: ["aliases"],
             permission: Constants.Permissions.Levels.SERVER_ADMINISTRATOR,
-            mode: Constants.Modes.STRICT,
-            access: Constants.Access.Levels.DONOR
+            mode: Constants.Modes.STRICT//,
+            // access: Constants.Access.Levels.DONOR
         });
     }
 
