@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.0]
+### Changed
+ - `alias` command is available to everyone
+ - YouTube live streams is available to everyone via `play` command
+ - `music-timelimit` max limit has been changed from 600 to 7200.
+ - `music-queuelimit` max limit has been changed from 10 to 100. 
+
 ## [2.6.0]
 ### Changed
  - Update veza dependency ([#74](https://github.com/typicalbot/typicalbot/pull/74)) ([94035f8](https://github.com/typicalbot/typicalbot/commit/94035f839395ab7c7eb6e7873c2b6d9349f51969))
