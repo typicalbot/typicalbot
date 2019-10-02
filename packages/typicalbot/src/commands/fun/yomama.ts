@@ -1,11 +1,11 @@
-import { Message } from 'discord.js';
 import fetch from 'node-fetch';
 import Command from '../../structures/Command';
+import { GuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = ['yomomma'];
 
-    execute(message: Message) {
+    execute(message: GuildMessage) {
         fetch('https://api.yomomma.info')
             .then(res => res.json())
             .then(json => message.send(json.joke))

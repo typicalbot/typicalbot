@@ -23,9 +23,6 @@ export default class {
     }
 
     async connect(message: GuildMessage) {
-        // TODO: fix this if discord.js fixes partials behavior
-        if (!message.member) return null;
-
         const { channel } = message.member.voice;
 
         if (!channel) throw message.translate('music:NEED_CHANNEL');

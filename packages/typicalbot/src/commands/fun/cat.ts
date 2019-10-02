@@ -1,11 +1,12 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import Command from '../../structures/Command';
+import { GuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = ['kitty', 'kitten'];
 
-    async execute(message: Message) {
+    async execute(message: GuildMessage) {
         const data = await fetch('https://aws.random.cat/meow')
             .then(res => res.json())
             .catch(() =>

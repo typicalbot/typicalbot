@@ -1,8 +1,8 @@
-import { Message } from 'discord.js';
 import Command from '../../structures/Command';
+import { GuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
-    execute(message: Message) {
+    execute(message: GuildMessage) {
         const mention = message.mentions.users.first();
         const randomAddonNum = Math.random();
         let randomAddon = '';
@@ -13,8 +13,7 @@ export default class extends Command {
         else if (randomAddonNum <= 0.3 && randomAddonNum > 0.2)
             randomAddon = message.translate('shoot:HEADSHOT');
 
-        // TODO: fix this if discord.js fixes partials behavior
-        if (!mention || mention.id === (message.author && message.author.id))
+        if (!mention || mention.id === message.author.id)
             return message.reply(
                 `${message.translate('shoot:SELF')} ${randomAddon}`
             );

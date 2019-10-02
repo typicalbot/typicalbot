@@ -1,20 +1,18 @@
-import { Message, MessageEmbed, Guild, User, TextChannel } from 'discord.js';
+import { MessageEmbed, Guild, User, TextChannel } from 'discord.js';
 import Constants from '../utility/Constants';
 import Cluster from '../index';
-import { ModlogAction } from '../types/typicalbot';
+import { ModlogAction, GuildMessage } from '../types/typicalbot';
 
 export default class ModerationLog {
     client: Cluster;
     guild: Guild;
-    message: Message;
+    message: GuildMessage;
     id = '';
     _id = '';
     action = '';
     _action: ModlogAction = Constants.ModerationLogTypes.WARN;
-    // TODO: fix this if discord.js fixes partials behavior
     moderator = {
-        display: `${this.message.author && this.message.author.tag} (${this
-            .message.author && this.message.author.id})`,
+        display: `${this.message.author.tag} (${this.message.author.id})`,
         icon: this.message.author ? this.message.author.displayAvatarURL() : ''
     };
     user = '';
@@ -22,7 +20,7 @@ export default class ModerationLog {
     reason = '';
     expiration = 0;
 
-    constructor(client: Cluster, message: Message, guild: Guild) {
+    constructor(client: Cluster, message: GuildMessage, guild: Guild) {
         this.client = client;
         this.guild = guild;
         this.message = message;
@@ -36,10 +34,11 @@ export default class ModerationLog {
 
     setAction(data: ModlogAction) {
         this._action = data;
+        const convertTime = this.client.functions.get('convertTime');
         this.action = this.message.translate('modlog:ACTION', {
             display: data.display,
             expiration: this.expiration
-                ? ` (${this.client.functions.convertTime(this.expiration)})`
+                ? ` (${convertTime && convertTime.execute(this.expiration)})`
                 : ''
         });
         return this;
