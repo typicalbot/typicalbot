@@ -36,13 +36,13 @@ export default class PermissionsHandler {
 
     async fetch(guild: Guild, userID: string, ignoreStaff = false) {
         const member = await guild.members.fetch(userID);
-        if (!member) return this.levels.get(0);
+        if (!member) return this.levels.get(0) as PermissionLevel;
 
         for (const permLevel of this.levels.values()) {
             if (permLevel.level === 0) {
                 const blacklistLevel = this.levels.get(-1);
                 if (blacklistLevel && blacklistLevel.check(guild, member))
-                    return this.levels.get(-1);
+                    return this.levels.get(-1) as PermissionLevel;
             }
 
             if (ignoreStaff && permLevel.staff && !permLevel.staffOverride)
@@ -51,6 +51,6 @@ export default class PermissionsHandler {
             if (permLevel.check(guild, member)) return permLevel;
         }
 
-        return this.levels.get(0);
+        return this.levels.get(0) as PermissionLevel;
     }
 }

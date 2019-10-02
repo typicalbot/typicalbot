@@ -1,6 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import { GuildSettings } from './typicalbot';
 import * as i18next from 'i18next';
+import Stream from '../structures/Stream';
 
 declare module 'discord.js' {
     interface Message {
@@ -36,5 +37,9 @@ declare module 'discord.js' {
     interface Guild {
         settings: GuildSettings;
         translate(key: string, args?: object): string;
+    }
+
+    interface VoiceConnection {
+        guildStream: Stream;
     }
 }

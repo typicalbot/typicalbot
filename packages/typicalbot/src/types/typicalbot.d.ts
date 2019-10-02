@@ -1,4 +1,4 @@
-import { Guild, GuildMember } from 'discord.js';
+import { Guild, GuildMember, Message, TextChannel, User } from 'discord.js';
 
 export interface CommandOptions {
     description?: string;
@@ -78,8 +78,8 @@ export interface GuildSettings {
         resume: string;
         unqueue: string;
         volume: string;
-        timelimit: string | null;
-        queuelimit: string | null;
+        timelimit: number | null;
+        queuelimit: number | null;
         apikey: string | null;
     };
     subscriber: string | null;
@@ -126,4 +126,11 @@ export interface ModlogAction {
 export interface TypicalCommandAlias {
     alias: string;
     command: string;
+}
+
+export interface GuildMessage extends Message {
+    author: User;
+    guild: Guild;
+    member: GuildMember;
+    channel: TextChannel;
 }
