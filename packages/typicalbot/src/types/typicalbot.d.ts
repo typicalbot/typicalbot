@@ -134,3 +134,7 @@ export interface GuildMessage extends Message {
     member: GuildMember;
     channel: TextChannel;
 }
+
+export interface TypicalDonor {
+    id: string;
+}
