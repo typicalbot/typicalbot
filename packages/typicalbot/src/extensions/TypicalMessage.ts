@@ -32,7 +32,9 @@ export class TypicalMessage extends Message {
         embed?: MessageEmbed,
         options?: MessageOptions
     ) {
-        return this.channel.send(content, { ...options, embed });
+        if (typeof content === 'string')
+            return this.channel.send(content, { ...options, embed });
+        return this.channel.send(content);
     }
 
     embed(embed: MessageEmbed) {
