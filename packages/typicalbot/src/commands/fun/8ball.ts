@@ -1,8 +1,8 @@
 import Command from '../../structures/Command';
-import { GuildMessage } from '../../types/typicalbot';
+import { TypicalGuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
-    execute(message: GuildMessage, parameters?: string) {
+    execute(message: TypicalGuildMessage, parameters?: string) {
         if (!parameters)
             return message.error(message.translate('8ball:INVALID'));
 

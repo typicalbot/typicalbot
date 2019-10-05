@@ -5,6 +5,7 @@ export default class Task {
     id: number;
     type: string;
     end: number;
+    data: unknown;
     client: Cluster;
 
     constructor(client: Cluster, options: TaskOptions) {
@@ -12,9 +13,11 @@ export default class Task {
         this.id = options.id;
         this.type = options.type;
         this.end = options.end;
+        this.data = options.data;
     }
 
-    execute() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    execute(_data?: unknown) {
         throw new Error(
             'Silly you, how did you forget to create an execute method in a task file hehehehe. Tsk Tsk Tsk!'
         );

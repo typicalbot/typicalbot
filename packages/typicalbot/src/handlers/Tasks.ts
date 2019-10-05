@@ -53,7 +53,10 @@ export default class TaskHandler {
         setInterval(() => {
             this.collection
                 .filter(task => Date.now() >= task.end)
-                .forEach(task => task.execute());
+                .forEach(async task => {
+                    task.execute(task.data);
+                    this.collection.delete(task.id);
+                });
         }, 1000);
     }
 

@@ -1,4 +1,7 @@
-import './utility/Extenders';
+import './extensions/TypicalGuild';
+import './extensions/TypicalGuildMember';
+import './extensions/TypicalMessage';
+// import './extensions/TypicalVoiceConnection';
 
 import { Client, Collection } from 'discord.js';
 import fetch from 'node-fetch';
@@ -16,10 +19,17 @@ import CommandHandler from './handlers/Commands';
 import EventHandler from './handlers/Events';
 
 import MusicUtility from './utility/Music';
-import { TypicalDonor } from './types/typicalbot';
+import { TypicalDonor, HelperFunctions } from './types/typicalbot';
 import i18n from '../src/i18n';
 import i18next = require('i18next');
 
+interface TypicalHandlers {
+    database: DatabaseHandler;
+    tasks: TaskHandler;
+    permissions: PermissionsHandler;
+    moderationLog: ModerationLogHandler;
+    music: MusicHandler;
+}
 export default class Cluster extends Client {
     node: VezaClient;
     config = config;
@@ -27,15 +37,10 @@ export default class Cluster extends Client {
     shards: number[] = JSON.parse(process.env.SHARDS || '[1]');
     shardCount = process.env.TOTAL_SHARD_COUNT || '1';
     cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
-    handlers = {
-        database: new DatabaseHandler(this),
-        tasks: new TaskHandler(this),
-        permissions: new PermissionsHandler(this),
-        moderationLog: new ModerationLogHandler(this),
-        music: new MusicHandler(this)
-    };
+    handlers = {} as TypicalHandlers;
     settings = new SettingsHandler(this);
     functions = new FunctionHandler(this);
+    helpers = {} as HelperFunctions;
     commands = new CommandHandler(this);
     utility = {
         music: new MusicUtility(this)
@@ -65,6 +70,15 @@ export default class Cluster extends Client {
     }
 
     async login(token: string) {
+        this.handlers.database = new DatabaseHandler(this);
+        await this.handlers.database.init();
+        console.log('init done');
+        this.handlers.tasks = new TaskHandler(this);
+        this.handlers.permissions = new PermissionsHandler(this);
+        this.handlers.moderationLog = new ModerationLogHandler(this);
+        this.handlers.music = new MusicHandler(this);
+
+        console.log('Logging in skiski');
         // Fetch donors
         this.fetchDonors();
         // Setup translation i18n before login to client

@@ -1,12 +1,22 @@
-import { r } from 'rethinkdb-ts';
+import { r, MasterPool } from 'rethinkdb-ts';
 import { Client } from 'discord.js';
+import * as config from '../../../../config.json';
 
 export default class DatabaseHandler {
     connection = r;
     client: Client;
+    pool: MasterPool | null = null;
 
     constructor(client: Client) {
         this.client = client;
+
+        this.init();
+    }
+
+    async init() {
+        console.log('db init');
+        this.pool = await r.connectPool(config.database.credentials);
+        console.log('after db init');
     }
 
     get(table: string, key?: string) {

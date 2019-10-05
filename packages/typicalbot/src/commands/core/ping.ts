@@ -1,12 +1,12 @@
-import { Message } from 'discord.js';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
+import { TypicalMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     dm = true;
     mode = Constants.Modes.STRICT;
 
-    async execute(message: Message) {
+    async execute(message: TypicalMessage) {
         const ping = await message.send('ping:CALCULATING');
 
         return ping.edit(

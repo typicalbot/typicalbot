@@ -1,12 +1,13 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
+import { TypicalMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     dm = true;
     mode = Constants.Modes.STRICT;
 
-    execute(message: Message) {
+    execute(message: TypicalMessage) {
         if (!message.embedable)
             return message.reply(
                 message.translate('invite:TEXT', {

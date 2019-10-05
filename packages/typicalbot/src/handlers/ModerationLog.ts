@@ -1,8 +1,7 @@
-import { Guild, Message, TextChannel, User } from 'discord.js';
+import { Guild, TextChannel, User } from 'discord.js';
 import ModerationLog from '../structures/ModerationLog';
 import Cluster from '..';
-import Collection from '@discordjs/collection';
-import { GuildMessage } from '../types/typicalbot';
+import { TypicalGuildMessage } from '../types/typicalbot';
 
 export default class ModerationLogHandler {
     client: Cluster;
@@ -25,13 +24,16 @@ export default class ModerationLogHandler {
     async fetchCase(guild: Guild, id = 'latest') {
         const channel = await this.fetchChannel(guild);
 
-        const messages = (await channel.messages
+        const messages = await channel.messages
             .fetch({ limit: 100 })
             .catch(() => {
                 throw "Couldn't fetch messages.";
-            })) as Collection<string, GuildMessage>;
+            });
 
         for (const message of messages.values()) {
+            // TODO: fix this if discord.js fixes partials
+            if (!message.author) continue;
+
             if (
                 message.author.id !==
                     (this.client.user && this.client.user.id) ||
@@ -53,11 +55,11 @@ export default class ModerationLogHandler {
         return null;
     }
 
-    buildCase(message: GuildMessage, guild: Guild) {
+    buildCase(message: TypicalGuildMessage, guild: Guild) {
         return new ModerationLog(this.client, message, guild);
     }
 
-    edit(message: Message, moderator: User, reason: string) {
+    edit(message: TypicalGuildMessage, moderator: User, reason: string) {
         const [embed] = message.embeds;
 
         const start = embed.description.substring(

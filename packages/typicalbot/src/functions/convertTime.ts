@@ -1,8 +1,8 @@
 import TypicalFunction from '../structures/Function';
-import { Message } from 'discord.js';
+import { TypicalMessage } from '../types/typicalbot';
 
 export default class ConvertTime extends TypicalFunction {
-    execute(message: Message, time: number) {
+    execute(message: TypicalMessage, time: number) {
         const absoluteSeconds = (time / 1000) % 60;
         const absoluteMinutes = (time / (1000 * 60)) % 60;
         const absoluteHours = (time / (1000 * 60 * 60)) % 24;

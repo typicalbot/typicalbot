@@ -14,7 +14,7 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "./production",
+    "outDir": "./packages/typicalbot/production",
     "pretty": true,
     "removeComments": true,
     "resolveJsonModule": true,
@@ -30,5 +30,5 @@
     "allowJs": false
 },
   "compileOnSave": true,
-  "include": ["./packages/**/*"]
+  "include": ["./packages/**/*", "index.ts", "config.ts"]
 }

@@ -1,10 +1,10 @@
 import Stream from '../structures/Stream';
-import { VoiceConnection } from 'discord.js';
 import Cluster from '..';
-import { GuildMessage } from '../types/typicalbot';
+import { TypicalGuildMessage } from '../types/typicalbot';
 import TypicalFunction from '../structures/Function';
 import Video from '../structures/Video';
 import { YoutubeVideo } from 'simple-youtube-api';
+import { TypicalVoiceConnection } from '../extensions/TypicalVoiceConnection';
 
 function shuffle(arr: YoutubeVideo[], maximum?: number) {
     for (let i = arr.length; i; i--) {
@@ -22,7 +22,7 @@ export default class {
         this.client = client;
     }
 
-    async connect(message: GuildMessage) {
+    async connect(message: TypicalGuildMessage) {
         const { channel } = message.member.voice;
 
         if (!channel) throw message.translate('music:NEED_CHANNEL');
@@ -37,11 +37,13 @@ export default class {
     }
 
     async initStream(
-        message: GuildMessage,
+        message: TypicalGuildMessage,
         video: string | Video,
         playlist: boolean
     ) {
-        const connection = (await this.connect(message)) as VoiceConnection;
+        const connection = (await this.connect(
+            message
+        )) as TypicalVoiceConnection;
 
         return playlist
             ? connection.guildStream.play(
@@ -56,7 +58,7 @@ export default class {
     }
 
     async stream(
-        message: GuildMessage,
+        message: TypicalGuildMessage,
         video: string | Video,
         playlist = false
     ) {
@@ -80,7 +82,8 @@ export default class {
         if (!message.guild.voice)
             return this.initStream(message, video, playlist);
 
-        const { connection } = message.guild.voice;
+        const connection = message.guild.voice
+            .connection as TypicalVoiceConnection;
 
         if (!connection) return this.initStream(message, video, playlist);
 
@@ -116,7 +119,7 @@ export default class {
     }
 
     async queuePlaylist(
-        message: GuildMessage,
+        message: TypicalGuildMessage,
         id: string,
         guildStream: Stream
     ) {

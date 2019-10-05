@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 const { Server } = require('veza');
-const config = require('../config');
+const config = require('../config.json');
 
 const node = new Server("manager")
     .on('error', (error, client) => console.error(`[IPC] Error from ${client.name}`, error)) // eslint-disable-line no-console

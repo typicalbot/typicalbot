@@ -5,10 +5,10 @@
     "license": "Apache-2.0",
     "main": "index.js",
     "scripts": {
-        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}'",
-        "lint:fix": "tsc --noEmit && eslint '*/**/*.{js,ts}' --fix",
-        "build:database": "tsc && node ./production/scripts/setup.js",
-        "build:instance": "tsc && node ./production/scripts/pm2.js",
+        "lint": "tsc --noEmit && eslint '*/**/*.ts'",
+        "lint:fix": "tsc --noEmit && eslint '*/**/*.ts' --fix",
+        "build:database": "tsc && node ./production/packages/typicalbot/scripts/setup.js",
+        "build:instance": "tsc && node ./production/packages/typicalbot/scripts/pm2.js",
         "dev": "tsc --watch",
         "build:docs": "esdoc"
     },

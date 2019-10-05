@@ -1,15 +1,16 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
+import { TypicalMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = ['cmds'];
     dm = true;
     mode = Constants.Modes.STRICT;
 
-    execute(message: Message) {
+    execute(message: TypicalMessage) {
         if (message.channel.type === 'text')
-            message.reply(message.translate('commands:CHECK_DM'));
+            message.respond(message.translate('commands:CHECK_DM'));
 
         const level0 = [];
         const level1 = [];
@@ -42,9 +43,9 @@ export default class extends Command {
         const NONE = message.translate('commands:NONE');
 
         // TODO: fix this if discord.js fixes partials behavior
-        return (
-            message.author &&
-            message.author.send(
+        if (!message.author) return;
+        return message.author
+            .send(
                 new MessageEmbed()
                     .setColor(0x00adff)
                     .setTitle('TypicalBot Commands')
@@ -76,6 +77,6 @@ export default class extends Command {
                     .setFooter('TypicalBot', Constants.Links.ICON)
                     .setTimestamp()
             )
-        );
+            .catch(() => null);
     }
 }

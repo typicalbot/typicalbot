@@ -19,12 +19,13 @@ export default class PermissionsHandler {
                 const file = parse(item.path);
                 if (!file.ext || file.ext !== '.js') return;
 
-                const Permission: PermissionLevel = (r => r.default || r)(
+                const Permission = (r => r.default || r)(
                     // eslint-disable-next-line @typescript-eslint/no-var-requires
                     require(join(file.dir, file.base))
                 );
+                const perm = new Permission(this.client, {});
 
-                this.levels.set(Permission.level, Permission);
+                this.levels.set(perm.level, perm);
             })
             .on('end', () => {
                 this.levels = this.levels.sort(

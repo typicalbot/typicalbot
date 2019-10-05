@@ -1,12 +1,12 @@
 import { MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import Command from '../../structures/Command';
-import { GuildMessage } from '../../types/typicalbot';
+import { TypicalGuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = ['puppy', 'doggy'];
 
-    async execute(message: GuildMessage) {
+    async execute(message: TypicalGuildMessage) {
         const data = await fetch('https://dog.ceo/api/breeds/image/random')
             .then(res => res.json())
             .catch(() =>

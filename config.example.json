@@ -5,6 +5,7 @@
     "clusterBuild": "",
     "nodePort": 4000,
     "id": "Bot ID",
+    "ownerID": "Bot Owner ID",
     "token": "Bot Token",
     "apis": {
         "discordbots": "",

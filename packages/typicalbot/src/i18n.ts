@@ -7,7 +7,7 @@ async function walkDirectory(dir: string, namespaces: string[] = []) {
     const files = await fs.readdir(dir);
 
     const languages: string[] = [];
-    files.forEach(async file => {
+    for (const file of files) {
         const stat = await fs.stat(path.join(dir, file));
         if (stat.isDirectory()) {
             languages.push(file);
@@ -20,19 +20,23 @@ async function walkDirectory(dir: string, namespaces: string[] = []) {
         } else {
             namespaces.push(file.substr(0, file.length - 5));
         }
-    });
+    }
 
     return { namespaces: [...new Set(namespaces)], languages };
 }
 
 export default async (): Promise<Map<string, i18next.TFunction>> => {
+    console.log('i18n ran');
     const options = {
         jsonIndent: 2,
-        loadPath: path.resolve(__dirname, '../../i18n/{{lng}}/{{ns}}.json')
+        loadPath: path.resolve(
+            __dirname,
+            '../../../../../../i18n/{{lng}}/{{ns}}.json'
+        )
     };
 
     const { namespaces, languages } = await walkDirectory(
-        path.resolve(__dirname, '../../i18n/')
+        path.resolve(__dirname, '../../../../../../i18n/')
     );
     i18next.use(Backend);
 
@@ -46,6 +50,6 @@ export default async (): Promise<Map<string, i18next.TFunction>> => {
         ns: namespaces,
         preload: languages
     });
-
+    console.log(languages);
     return new Map(languages.map(item => [item, i18next.getFixedT(item)]));
 };

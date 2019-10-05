@@ -1,6 +1,6 @@
 import * as ytdl from 'ytdl-core';
 import * as SYS from 'simple-youtube-stream';
-import { GuildMessage } from '../types/typicalbot';
+import { TypicalGuildMessage } from '../types/typicalbot';
 
 const sys = new SYS();
 
@@ -9,9 +9,13 @@ export default class Video {
     title: string;
     length: string;
     live = false;
-    requester: GuildMessage;
+    requester: TypicalGuildMessage;
 
-    constructor(url: string, info: ytdl.videoInfo, message: GuildMessage) {
+    constructor(
+        url: string,
+        info: ytdl.videoInfo,
+        message: TypicalGuildMessage
+    ) {
         this.url = url;
         this.title = info.title;
         this.length = info.length_seconds;

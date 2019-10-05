@@ -1,4 +1,15 @@
-import { Guild, GuildMember, Message, TextChannel, User } from 'discord.js';
+import {
+    Guild,
+    GuildMember,
+    Message,
+    MessageEmbed,
+    MessageOptions,
+    TextChannel,
+    User
+} from 'discord.js';
+import Command from '../structures/Command';
+import Cluster from '..';
+import Stream from '../structures/Stream';
 
 export interface CommandOptions {
     description?: string;
@@ -8,6 +19,7 @@ export interface CommandOptions {
     permission?: -1 | 0 | 1 | 2 | 3 | 4 | 10;
     mode?: 0 | 1 | 2;
     access?: 0 | 1 | 3;
+    ptb?: boolean;
 }
 
 export interface GuildSettings {
@@ -56,7 +68,7 @@ export interface GuildSettings {
         message: string | null;
         nickname: string | null;
     };
-    mode: string;
+    mode: 'free' | 'lite' | 'strict';
     prefix: {
         custom: string | null;
         default: boolean;
@@ -103,6 +115,11 @@ export interface TaskOptions {
     type: string;
 }
 
+export interface UnbanTaskData {
+    guildID: string;
+    userID: string;
+}
+
 export interface PermissionLevelOptions {
     title: string;
     level: -1 | 0 | 1 | 2 | 3 | 4 | 10;
@@ -128,13 +145,80 @@ export interface TypicalCommandAlias {
     command: string;
 }
 
-export interface GuildMessage extends Message {
+export interface TypicalDonor {
+    id: string;
+    amount: number;
+}
+
+export interface HelperFunctions {
+    convertTime: {
+        execute(message: Message, time: number): string;
+    };
+    permissionError: {
+        execute(
+            message: TypicalGuildMessage,
+            command: Command,
+            userLevel: PermissionLevel
+        ): string;
+    };
+    fetchAccess: {
+        execute(guild: Guild): Promise<AccessLevel>;
+    };
+}
+
+export interface AccessLevel {
+    level: 0 | 1 | 3;
+    title: 'Default' | 'TypicalBot Staff' | 'TypicalBot Donor';
+}
+
+export interface TypicalMessage extends Message {
+    embedable: boolean;
+
+    dm(
+        content: string | MessageEmbed,
+        embed?: MessageEmbed,
+        options?: MessageOptions
+    ): Promise<Message>;
+    error(
+        content: string | MessageEmbed,
+        embed?: MessageEmbed,
+        options?: MessageOptions
+    ): Promise<Message>;
+    send(
+        content: string | MessageEmbed,
+        embed?: MessageEmbed,
+        options?: MessageOptions
+    ): Promise<Message>;
+    success(
+        content: string | MessageEmbed,
+        embed?: MessageEmbed,
+        options?: MessageOptions
+    ): Promise<Message>;
+    respond(
+        content: string | MessageEmbed,
+        embed?: MessageEmbed,
+        options?: MessageOptions
+    ): Promise<Message>;
+    translate(key: string, args?: object): string;
+}
+
+export interface TypicalGuildMessage extends TypicalMessage {
     author: User;
-    guild: Guild;
+    guild: TypicalGuild;
     member: GuildMember;
     channel: TextChannel;
 }
 
-export interface TypicalDonor {
-    id: string;
+export interface TypicalGuild extends Guild {
+    client: Cluster;
+    settings: GuildSettings;
+    buildModerationLog(message: TypicalGuildMessage): Promise<void>;
+    translate(key: string, args?: object): string;
+    fetchPermissions(
+        userID: string,
+        ignoreStaff?: boolean
+    ): Promise<PermissionLevel>;
+    fetchSettings(): Promise<GuildSettings>;
+    guildStream: Stream;
+    _guildStream: Stream;
 }

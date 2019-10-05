@@ -1,14 +1,14 @@
 import Cluster from '..';
 import { VoiceConnection, StreamDispatcher } from 'discord.js';
 import Video from './Video';
-import { GuildMessage } from '../types/typicalbot';
+import { TypicalGuildMessage } from '../types/typicalbot';
 
 export default class Stream {
     client: Cluster;
     connection: VoiceConnection;
     mode: 'queue' | 'live' | null = null;
     queue: Video[] = [];
-    lastPlaying: GuildMessage | null = null;
+    lastPlaying: TypicalGuildMessage | null = null;
     current: Video | null = null;
     dispatcher: StreamDispatcher | null = null;
     volume = 0.5;
@@ -18,7 +18,7 @@ export default class Stream {
         this.connection = connection;
     }
 
-    async play(message: GuildMessage, video: Video) {
+    async play(message: TypicalGuildMessage, video: Video) {
         if (video.live) return this.playLive(message, video);
 
         this.mode = 'queue';
@@ -50,7 +50,7 @@ export default class Stream {
         else {
             const response = (await video.requester.send(
                 content
-            )) as GuildMessage;
+            )) as TypicalGuildMessage;
             this.lastPlaying = response;
         }
 
@@ -84,7 +84,7 @@ export default class Stream {
         });
     }
 
-    async playLive(message: GuildMessage, video: Video) {
+    async playLive(message: TypicalGuildMessage, video: Video) {
         this.mode = 'live';
 
         this.dispatcher = this.connection.play(
@@ -149,7 +149,7 @@ export default class Stream {
         this.dispatcher.resume();
     }
 
-    queueVideo(message: GuildMessage, video: Video, silent = false) {
+    queueVideo(message: TypicalGuildMessage, video: Video, silent = false) {
         this.queue.push(video);
 
         if (silent) return;

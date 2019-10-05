@@ -36,6 +36,10 @@ export default class FunctionHandler extends Collection<
                 const newReq = new Function(this.client, file.name);
 
                 this.set(file.name, newReq);
+
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
+                this.client.helpers[file.name] = newReq;
             })
             .on('end', () => {
                 console.log(

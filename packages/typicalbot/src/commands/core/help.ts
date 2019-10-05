@@ -1,13 +1,14 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
+import { TypicalMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = ['info', 'support'];
     dm = true;
     mode = Constants.Modes.STRICT;
 
-    async execute(message: Message, parameters: string) {
+    async execute(message: TypicalMessage, parameters: string) {
         if (!message.guild || !parameters) {
             const response = message.translate('help:NONE', {
                 prefix: this.client.config.prefix,

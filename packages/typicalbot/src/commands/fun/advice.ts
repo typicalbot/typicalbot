@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 import Command from '../../structures/Command';
-import { GuildMessage } from '../../types/typicalbot';
+import { TypicalGuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
-    execute(message: GuildMessage) {
+    execute(message: TypicalGuildMessage) {
         fetch('https://api.adviceslip.com/advice')
             .then(res => res.json())
             .then(json => message.send(json.slip.advice))

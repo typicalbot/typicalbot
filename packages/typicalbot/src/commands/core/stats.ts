@@ -1,14 +1,14 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import { loadavg } from 'os';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
-import TypicalFunction from '../../structures/Function';
+import { TypicalMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     dm = true;
     mode = Constants.Modes.STRICT;
 
-    async execute(message: Message) {
+    async execute(message: TypicalMessage) {
         const paths = [
             'guilds.size',
             'voice.connections.size',
@@ -35,10 +35,10 @@ export default class extends Command {
             .split(',')
             .join(', ');
 
-        const convertTime = this.client.functions.get(
-            'converTime'
-        ) as TypicalFunction;
-        const uptime = convertTime.execute(message, this.client.uptime);
+        const uptime = this.client.helpers.convertTime.execute(
+            message,
+            this.client.uptime || 0
+        );
         if (!message.embedable)
             return message.send(
                 message.translate('stats:TEXT', {

@@ -5,13 +5,13 @@ export const Links = {
     DONATE: 'https://www.typicalbot.com/donate/',
     DOCUMENTATION: 'https://www.typicalbot.com/documentation/',
     SETTINGS: 'https://www.typicalbot.com/documentation/#settings',
-    ICON: 'https://www.typicalbot.com/x/images/icon.png',
+    ICON: 'https://www.typicalbot.com/x/images/icon.png'
 };
 
 export const Colors = {
     DEFAULT: 0x00adff,
     SUCCESS: 0x00ff00,
-    ERROR: 0xff0000,
+    ERROR: 0xff0000
 };
 
 export const Access = {};
@@ -19,13 +19,13 @@ export const Access = {};
 export enum AccessLevels {
     DEFAULT = 0,
     DONOR = 1,
-    STAFF = 3,
-};
+    STAFF = 3
+}
 
 export const AccessTitles = {
     DEFAULT: { level: 0, title: 'Default' },
     DONOR: { level: 1, title: 'TypicalBot Donor' },
-    STAFF: { level: 3, title: 'TypicalBot Staff' },
+    STAFF: { level: 3, title: 'TypicalBot Staff' }
 };
 
 export const Permissions = {};
@@ -37,21 +37,21 @@ export enum PermissionsLevels {
     SERVER_MODERATOR = 2,
     SERVER_ADMINISTRATOR = 3,
     SERVER_OWNER = 4,
-    TYPICALBOT_MAINTAINER = 10,
-};
+    TYPICALBOT_MAINTAINER = 10
+}
 
 export const PermissionsRoleTitles = {
     ADMINISTRATOR: 'TypicalBot Administrator',
     MODERATOR: 'TypicalBot Moderator',
     DJ: 'TypicalBot DJ',
-    BLACKLIST: 'TypicalBot Blacklist',
+    BLACKLIST: 'TypicalBot Blacklist'
 };
 
 export enum Modes {
     FREE = 0,
     LITE = 1,
-    STRICT = 2,
-};
+    STRICT = 2
+}
 
 export const ModerationLog = {};
 
@@ -68,14 +68,14 @@ export const ModerationLogTypes = {
     TEMP_BAN: { hex: 0xff0000, display: 'Temporary Ban' },
     BAN: { hex: 0xff0000, display: 'Ban' },
     UNMUTE: { hex: 0x006699, display: 'Unmute' },
-    UNBAN: { hex: 0x006699, display: 'Unban' },
+    UNBAN: { hex: 0x006699, display: 'Unban' }
 };
 
 export const ModerationLogRegex = {
     CASE: /Case\s(\d+)/i,
     ACTION: /\*\*Action:\*\*\s.+/i,
     USER: /\*\*(?:User|Channel):\*\*\s.+/i,
-    REASON: /\*\*Reason:\*\*\s.+/i,
+    REASON: /\*\*Reason:\*\*\s.+/i
 };
 
 export default {
@@ -90,5 +90,5 @@ export default {
     Modes,
     ModerationLog,
     ModerationLogTypes,
-    ModerationLogRegex,
+    ModerationLogRegex
 };

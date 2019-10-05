@@ -1,12 +1,12 @@
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
-import { GuildMessage } from '../../types/typicalbot';
+import { TypicalGuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_ADMINISTRATOR;
     mode = Constants.Modes.STRICT;
 
-    execute(message: GuildMessage, parameters: string) {
+    execute(message: TypicalGuildMessage, parameters: string) {
         if (parameters === 'view') {
             return message.dm(
                 message.guild.settings.apikey
