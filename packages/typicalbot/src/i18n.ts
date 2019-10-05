@@ -26,7 +26,6 @@ async function walkDirectory(dir: string, namespaces: string[] = []) {
 }
 
 export default async (): Promise<Map<string, i18next.TFunction>> => {
-    console.log('i18n ran');
     const options = {
         jsonIndent: 2,
         loadPath: path.resolve(
@@ -50,6 +49,6 @@ export default async (): Promise<Map<string, i18next.TFunction>> => {
         ns: namespaces,
         preload: languages
     });
-    console.log(languages);
+
     return new Map(languages.map(item => [item, i18next.getFixedT(item)]));
 };

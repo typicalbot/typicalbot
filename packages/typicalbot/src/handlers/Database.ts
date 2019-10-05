@@ -14,9 +14,7 @@ export default class DatabaseHandler {
     }
 
     async init() {
-        console.log('db init');
         this.pool = await r.connectPool(config.database.credentials);
-        console.log('after db init');
     }
 
     get(table: string, key?: string) {

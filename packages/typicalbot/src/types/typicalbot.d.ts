@@ -120,6 +120,11 @@ export interface UnbanTaskData {
     userID: string;
 }
 
+export interface UnmuteTaskData {
+    guildID: string;
+    memberID: string;
+}
+
 export interface PermissionLevelOptions {
     title: string;
     level: -1 | 0 | 1 | 2 | 3 | 4 | 10;

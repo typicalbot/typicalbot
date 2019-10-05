@@ -72,17 +72,16 @@ export default class Cluster extends Client {
     async login(token: string) {
         this.handlers.database = new DatabaseHandler(this);
         await this.handlers.database.init();
-        console.log('init done');
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);
         this.handlers.music = new MusicHandler(this);
 
-        console.log('Logging in skiski');
         // Fetch donors
         this.fetchDonors();
         // Setup translation i18n before login to client
         this.translate = await i18n();
+        console.log('Loaded i18n Languages');
 
         return super.login(token);
     }

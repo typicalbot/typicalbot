@@ -2,6 +2,7 @@ import { Guild, TextChannel, User } from 'discord.js';
 import ModerationLog from '../structures/ModerationLog';
 import Cluster from '..';
 import { TypicalGuildMessage } from '../types/typicalbot';
+import { TypicalGuild } from '../extensions/TypicalGuild';
 
 export default class ModerationLogHandler {
     client: Cluster;
@@ -55,8 +56,8 @@ export default class ModerationLogHandler {
         return null;
     }
 
-    buildCase(message: TypicalGuildMessage, guild: Guild) {
-        return new ModerationLog(this.client, message, guild);
+    buildCase(guild: TypicalGuild) {
+        return new ModerationLog(this.client, guild);
     }
 
     edit(message: TypicalGuildMessage, moderator: User, reason: string) {

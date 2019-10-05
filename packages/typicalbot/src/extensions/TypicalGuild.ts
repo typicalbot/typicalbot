@@ -1,5 +1,4 @@
 import { Structures, Guild } from 'discord.js';
-import { TypicalGuildMessage } from '../types/typicalbot';
 
 export class TypicalGuild extends Guild {
     fetchSettings() {
@@ -14,11 +13,11 @@ export class TypicalGuild extends Guild {
         );
     }
 
-    async buildModerationLog(message: TypicalGuildMessage) {
-        this.client.handlers.moderationLog.buildCase(message, this);
+    async buildModerationLog() {
+        this.client.handlers.moderationLog.buildCase(this);
     }
 
-    translate(key: string, args: object) {
+    translate(key: string, args?: object) {
         const language = this.client.translate.get(this.settings.language);
 
         if (!language) throw 'Guild: Invalid language set in settings.';
