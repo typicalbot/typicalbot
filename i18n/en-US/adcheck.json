@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Check if any members of the server have a server invite in their playing status.",
+    "USAGE": "adcheck",
+    "NONE": "There are no users with an invite in their status.",
+    "FOUND": "There {{amount}} with an invite in their status:\n\n",
+    "ONE": "is 1 user",
+    "MULTIPLE": "are {{amount}} users",
+    "TITLE": "Users with Invite in Playing Status"
+}
