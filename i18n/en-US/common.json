@@ -1,5 +1,11 @@
 {
 	"REQUEST_ERROR": "An error occurred making that request.",
 	"INVALID_OPTION": "Invalid option given.",
-	"NONE": "None"
+	"NONE": "None",
+	"USER_FETCH_ERROR": "An error occured while trying to fetch the requested user.",
+	"ALERT_SYSTEM": "TypicalBot Alert System",
+	"MODERATOR_FIELD": "» Moderator",
+	"REASON_FIELD": "» Reason",
+	"NO_REASON": "No reason provided.",
+	"USER_NOT_FOUND": "The requested user could not be found."
 }
