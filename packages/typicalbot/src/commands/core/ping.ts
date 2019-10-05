@@ -7,7 +7,7 @@ export default class extends Command {
     mode = Constants.Modes.STRICT;
 
     async execute(message: TypicalMessage) {
-        const ping = await message.send('ping:CALCULATING');
+        const ping = await message.send(message.translate('ping:CALCULATING'));
 
         return ping.edit(
             message.translate('ping:RESPONSE', {
