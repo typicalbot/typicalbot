@@ -14,7 +14,7 @@ export class TypicalGuild extends Guild {
     }
 
     async buildModerationLog() {
-        this.client.handlers.moderationLog.buildCase(this);
+        return this.client.handlers.moderationLog.buildCase(this);
     }
 
     translate(key: string, args?: object) {

@@ -10,6 +10,7 @@ import {
 import Command from '../structures/Command';
 import Cluster from '..';
 import Stream from '../structures/Stream';
+import ModerationLog from '../structures/ModerationLog';
 
 export interface CommandOptions {
     description?: string;
@@ -231,7 +232,7 @@ export interface TypicalGuildMember extends GuildMember {
 export interface TypicalGuild extends Guild {
     client: Cluster;
     settings: GuildSettings;
-    buildModerationLog(message: TypicalGuildMessage): Promise<void>;
+    buildModerationLog(message: TypicalGuildMessage): Promise<ModerationLog>;
     translate(key: string, args?: object): string;
     fetchPermissions(
         userID: string,
