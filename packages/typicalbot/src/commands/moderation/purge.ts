@@ -46,6 +46,8 @@ export default class extends Command {
         });
 
         messages = messages.filter(msg => {
+            // TODO: fix this if discord.js fixes partials behavior
+            if (!msg.member || !msg.author) return false;
             if ([userMention, userID].includes(msg.author.id)) return true;
             if (msg.member.roles.has(roleID)) return true;
             if (filter === 'me' && msg.author.id === message.author.id)
