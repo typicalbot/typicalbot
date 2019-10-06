@@ -12,5 +12,6 @@
     "COMMANDS": "Commands",
     "INVITES": "Invites",
     "STARS": "Stars",
-    "NA": "n/a"
+    "NA": "n/a",
+    "CHANNEL": "Channel"
 }
