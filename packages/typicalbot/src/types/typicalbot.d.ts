@@ -163,6 +163,17 @@ export interface HelperFunctions {
     fetchAccess: {
         execute(guild: Guild): Promise<AccessLevel>;
     };
+    lengthen: {
+        execute(
+            text: string,
+            length: number,
+            place?: 'before' | 'after'
+        ): string;
+        shorten(text: string, length: number): string;
+    };
+    pagify: {
+        execute(list: string[], page?: number): string;
+    };
     permissionError: {
         execute(
             message: TypicalGuildMessage,
