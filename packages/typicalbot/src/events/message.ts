@@ -18,6 +18,8 @@ export default class extends Event {
         if (!message.guild.available) return;
         if (!message.guild.me)
             await message.guild.members.fetch(this.client.config.id);
+        if (!message.member)
+            await message.guild.members.fetch(message.author.id);
 
         const botMember = message.guild.me as GuildMember;
         const botSendPerms = message.channel.permissionsFor(botMember);

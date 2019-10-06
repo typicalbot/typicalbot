@@ -7,10 +7,11 @@ export default class PermissionError extends TypicalFunction {
     execute(
         message: TypicalGuildMessage,
         command: Command,
-        userLevel: PermissionLevel
+        userLevel: PermissionLevel,
+        permission?: 0 | 1 | -1 | 2 | 3 | 4 | 10
     ) {
         const requiredLevel = this.client.handlers.permissions.levels.get(
-            command.permission
+            permission ? permission : command.permission
         ) as PermissionLevel;
 
         return message.translate('misc:MISSING_PERMS', {

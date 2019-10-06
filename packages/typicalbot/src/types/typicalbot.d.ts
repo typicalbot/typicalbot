@@ -159,15 +159,25 @@ export interface HelperFunctions {
     convertTime: {
         execute(message: Message, time: number): string;
     };
+    fetchAccess: {
+        execute(guild: Guild): Promise<AccessLevel>;
+    };
     permissionError: {
         execute(
             message: TypicalGuildMessage,
             command: Command,
-            userLevel: PermissionLevel
+            userLevel: PermissionLevel,
+            permission?: 0 | 1 | -1 | 2 | 3 | 4 | 10
         ): string;
     };
-    fetchAccess: {
-        execute(guild: Guild): Promise<AccessLevel>;
+    resolveMember: {
+        execute(
+            message: TypicalGuildMessage,
+            id?: string,
+            username?: string,
+            discriminator?: string,
+            returnSelf?: boolean
+        ): Promise<GuildMember | null>;
     };
 }
 
@@ -210,8 +220,12 @@ export interface TypicalMessage extends Message {
 export interface TypicalGuildMessage extends TypicalMessage {
     author: User;
     guild: TypicalGuild;
-    member: GuildMember;
+    member: TypicalGuildMember;
     channel: TextChannel;
+}
+
+export interface TypicalGuildMember extends GuildMember {
+    fetchPermissions(ignoreStaff?: boolean): Promise<PermissionLevel>;
 }
 
 export interface TypicalGuild extends Guild {
