@@ -60,5 +60,6 @@
     "MUSIC-TIMELIMIT": "Change the maximum time limit for a video. Set in seconds. Minimum is 120 seconds (2 minutes). Maximum is 600 seconds (10 minutes). TypicalBot Prime Member maximum is 7200 seconds (2 hours).",
     "MUSIC-QUEUELIMIT": "Change the maximum queue limit for a video. Maximum is 10 videos. TypicalBot Prime Member maximum is 100 videos.",
     "STARBOARD": "A channel to send starred messages in, i.e. a starboard.",
-    "STARBOARD-STARS": "Change the required stars count for messages to appear in the starboard."
+    "STARBOARD-STARS": "Change the required stars count for messages to appear in the starboard.",
+    "LANGUAGE": "Change the language of the bot in your server."
 }

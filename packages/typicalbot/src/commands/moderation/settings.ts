@@ -320,6 +320,12 @@ export default class extends Command {
                         value: settings.starboard.count,
                         type: 'default',
                         path: 'starboard.count'
+                    },
+                    language: {
+                        description: 'settings:LANGUAGE',
+                        value: settings.language,
+                        type: 'default',
+                        path: 'language'
                     }
                 };
 
