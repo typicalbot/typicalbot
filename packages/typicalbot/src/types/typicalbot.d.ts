@@ -253,3 +253,10 @@ export interface TypicalGuild extends Guild {
     guildStream: Stream;
     _guildStream: Stream;
 }
+
+export interface SettingsData {
+    description: string;
+    value: unknown;
+    type: 'boolean' | 'roles' | 'role' | 'channel' | 'log' | 'ms' | 'default';
+    path: string;
+}

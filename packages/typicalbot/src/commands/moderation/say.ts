@@ -46,7 +46,8 @@ export default class extends Command {
         }
 
         const { settings } = message.guild;
-        const logChannel = message.guild.channels.get(settings.logs.id);
+        const logChannel =
+            settings.logs.id && message.guild.channels.get(settings.logs.id);
         if (
             logChannel &&
             logChannel instanceof TextChannel &&
@@ -59,7 +60,7 @@ export default class extends Command {
                             .setColor(0xff33cc)
                             .setAuthor(
                                 `${message.author.tag} (${message.author.id})`,
-                                message.author.avatarURL() || null
+                                message.author.displayAvatarURL()
                             )
                             .addField(
                                 message.translate('common:CHANNEL'),
@@ -88,5 +89,7 @@ export default class extends Command {
         }
 
         if (message.deletable) message.delete({ timeout: 500 });
+
+        return null;
     }
 }

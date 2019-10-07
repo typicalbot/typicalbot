@@ -41,5 +41,7 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
             const target = { ...settings, ...payload };
             this.set(id, target);
         } else this.create(id);
+
+        return true;
     }
 }

@@ -13,5 +13,15 @@
     "INVITES": "Invites",
     "STARS": "Stars",
     "NA": "n/a",
-    "CHANNEL": "Channel"
+    "CHANNEL": "Channel",
+    "ENABLE": "Enable",
+    "ENABLED": "Enabled",
+    "DISABLE": "Disable",
+    "DISABLED": "Disabled",
+    "CLEAR": "Clear",
+    "ADD": "Add",
+    "REMOVE": "Remove",
+    "HERE": "Here",
+    "DEFAULT": "Default",
+    "EMBED": "Embed"
 }
