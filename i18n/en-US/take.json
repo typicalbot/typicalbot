@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Take a role from you a role off of the public roles list.",
+    "USAGE": "take <role-name>",
+    "UNEDITABLE": "Insufficient permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to take and that I have the Manage Roles permission."
+}
