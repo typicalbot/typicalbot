@@ -68,7 +68,8 @@ export default class extends Command {
         const relevantTask = tasks.find(
             task =>
                 task.type === 'unban' &&
-                (task.data as UnbanTaskData).userID === userID
+                (task.data as UnbanTaskData).userID === userID &&
+                (task.data as UnbanTaskData).guildID === message.guild.id
         );
         if (!relevantTask) return null;
 
