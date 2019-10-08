@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Kick a member from a voice channel.",
+    "USAGE": "voicekick <@user> [reason]",
+    "NO_VOICE": "The requested user is not in a voice channel.",
+    "SUCCESS": "Successfully voice kicked user **{{user}}**."
+}
