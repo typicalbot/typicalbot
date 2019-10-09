@@ -1,24 +1,26 @@
-const { Canvas } = require('canvas-constructor');
-const { MessageAttachment } = require('discord.js');
-const Constants = require('../../utility/Constants');
-const Command = require('../../structures/Command');
+import { Canvas } from 'canvas-constructor';
+import { MessageAttachment, MessageEmbed } from 'discord.js';
+import Constants from '../../utility/Constants';
+import Command from '../../structures/Command';
+import { TypicalGuildMessage } from '../../types/typicalbot';
 
-module.exports = class extends Command {
-    constructor(...args) {
-        super(...args, {
-            description: 'Sends a preview of a hex color.',
-            usage: 'hex <hex-color:0-9a-fA-F>',
-            mode: Constants.Modes.LITE,
-        });
-    }
+const regex = /#?([0-9a-fA-F]{6}|random)/i;
 
-    execute(message, parameters) {
-        const args = /#?([0-9a-fA-F]{6}|random)/i.exec(parameters);
-        if (!args) return message.error(this.client.functions.error('usage', this));
+export default class extends Command {
+    mode = Constants.Modes.LITE;
 
-        const hex = args[1] === 'random' ? Math.floor(Math.random() * 16777215).toString(16) : args[1];
+    execute(message: TypicalGuildMessage, parameters: string) {
+        const args = regex.exec(parameters);
+        if (!args) return message.error(message.translate('misc:USAGE_ERROR', {
+            name: this.name,
+            prefix: this.client.config.prefix
+        }));
+        args.shift();
 
-        message.channel.send(
+        const [color] = args;
+        const hex = color === 'random' ? Math.floor(Math.random() * 16777215).toString(16) : color;
+
+        if (message.embedable) return message.channel.send(
             new MessageAttachment(
                 new Canvas(200, 100)
                     .setColor(`#${hex}`)
@@ -30,15 +32,8 @@ module.exports = class extends Command {
                     .toBuffer(),
             ),
         );
-    }
 
-    embedExecute(message, parameters) {
-        const args = /#?([0-9a-fA-F]{6}|random)/i.exec(parameters);
-        if (!args) return message.error(this.client.functions.error('usage', this));
-
-        const hex = args[1] === 'random' ? Math.floor(Math.random() * 16777215).toString(16) : args[1];
-
-        message.channel.buildEmbed()
+        return message.send(new MessageEmbed()
             .attachFiles([{
                 attachment:
                     new Canvas(200, 100)
@@ -54,10 +49,11 @@ module.exports = class extends Command {
             .setColor(parseInt(hex, 16))
             .setImage('attachment://color.png')
             .setFooter(`#${hex}`)
-            .send();
+        )
+
     }
 
-    bw(hexcolor) {
+    bw(hexcolor: string) {
         const r = parseInt(hexcolor.substr(0, 2), 16);
         const g = parseInt(hexcolor.substr(2, 2), 16);
         const b = parseInt(hexcolor.substr(4, 2), 16);
