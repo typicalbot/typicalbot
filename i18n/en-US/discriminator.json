@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Provides a list of all uers with a given discriminator.",
+  "USAGE": "discriminator [four-digit-discriminator]",
+  "NONE": "There are no users with the discriminator **{{discriminator}}** on record.",
+  "USERS": "**__Users with Discriminator:__** {{discriminator}}"
+}
