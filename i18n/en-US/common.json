@@ -29,5 +29,16 @@
     "EMBED": "Embed",
     "CANCELLED": "Canceled.",
     "RESET": "Reset",
-    "CHANGED": "Changed"
+    "CHANGED": "Changed",
+    "NAME_FIELD": "» Name",
+    "ID_FIELD": "» ID",
+    "OWNER_FIELD": "» Owner",
+    "CREATED_FIELD": "» Created",
+    "REGION_FIELD": "» Region",
+    "VERIFICATION_FIELD": "» » Verification Level",
+    "CHANNELS_FIELD": "» Channels",
+    "MEMBERS_FIELD": "» Members",
+    "ROLES_FIELD": "» Roles",
+    "EMOJIS_FIELD": "» Emojis",
+    "BOOSTED_FIELD": "» Boosted Tier"
 }
