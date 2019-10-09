@@ -70,8 +70,10 @@ export default class Cluster extends Client {
     }
 
     async login(token: string) {
+        // MUST SETUP DATABASE BEFORE ANYTHING ELSE
         this.handlers.database = new DatabaseHandler(this);
         await this.handlers.database.init();
+        
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);
