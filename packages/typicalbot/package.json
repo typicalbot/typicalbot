@@ -1,0 +1,64 @@
+{
+    "name": "typicalbot",
+    "version": "3.0.0-beta",
+    "description": "TypicalBot is open-source discord bot written in JavaScript, using the Discord.JS library.",
+    "license": "Apache-2.0",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint src scripts",
+        "lint:fix": "eslint src scripts --fix",
+        "build:database": "node ./scripts/setup.js",
+        "build:instance": "node ./scripts/pm2.js",
+        "build:docs": "esdoc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/typicalbot/typicalbot.git"
+    },
+    "keywords": [
+        "discordjs",
+        "javascript",
+        "bot",
+        "discord",
+        "typicalbot",
+        "discord-bot",
+        "discordapp"
+    ],
+    "bugs": {
+        "url": "https://github.com/typicalbot/typicalbot/issues"
+    },
+    "homepage": "https://github.com/typicalbot/typicalbot#readme",
+    "dependencies": {
+        "canvas": "github:Automattic/node-canvas",
+        "canvas-constructor": "^1.1.2",
+        "discord.js": "github:discordjs/discord.js#master",
+        "klaw": "^2.1.1",
+        "mathjs": "^6.2.1",
+        "moment": "^2.22.2",
+        "node-fetch": "^2.6.0",
+        "node-opus": "^0.3.2",
+        "pm2": "^3.5.1",
+        "rethinkdbdash": "^2.3.31",
+        "simple-youtube-api": "github:hypercoder2975/simple-youtube-api",
+        "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
+        "veza": "^0.6.0",
+        "vm2": "^3.8.3",
+        "ytdl-core": "github:fent/node-ytdl-core"
+    },
+    "optionalDependencies": {
+        "bignum": "^0.13.0",
+        "bufferutil": "^4.0.1",
+        "erlpack": "github:discordapp/erlpack",
+        "utf-8-validate": "^5.0.2",
+        "zlib-sync": "^0.1.5"
+    },
+    "devDependencies": {
+        "esdoc": "^1.1.0",
+        "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+        "esdoc-standard-plugin": "^1.0.0",
+        "eslint-config-typicalbot": "^1.0.0"
+    },
+    "eslintConfig": {
+        "extends": "eslint-config-typicalbot"
+    }
+}
