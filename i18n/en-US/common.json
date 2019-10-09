@@ -8,6 +8,9 @@
     "REASON_FIELD": "» Reason",
     "NO_REASON": "No reason provided.",
     "USER_NOT_FOUND": "The requested user could not be found.",
+    "WRONG_VOICE": "You must be in the same voice channel to perform that command.",
+    "NEED_QUEUE": "This command only works while in queue mode.",
+    "NO_RESPONSE": "No response was given.",
     "SUCCESS": "Success.",
     "COMMANDS": "Commands",
     "INVITES": "Invites",
@@ -23,5 +26,6 @@
     "REMOVE": "Remove",
     "HERE": "Here",
     "DEFAULT": "Default",
-    "EMBED": "Embed"
+    "EMBED": "Embed",
+    "CANCELLED": "Canceled."
 }

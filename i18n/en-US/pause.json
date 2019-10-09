@@ -1,0 +1,5 @@
+{
+  "DESCRIPTION": "Pause the song currently streaming.",
+  "USAGE": "pause",
+  "PAUSED": "Streaming is now paused."
+}
