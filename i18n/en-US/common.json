@@ -40,5 +40,8 @@
     "MEMBERS_FIELD": "» Members",
     "ROLES_FIELD": "» Roles",
     "EMOJIS_FIELD": "» Emojis",
-    "BOOSTED_FIELD": "» Boosted Tier"
+    "BOOSTED_FIELD": "» Boosted Tier",
+    "DISPLAYNAME_FIELD": "» Display Name",
+    "STATUS_FIELD": "» Status",
+    "TOTALVIEWS": "» Total Views"
 }
