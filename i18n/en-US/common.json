@@ -27,5 +27,7 @@
     "HERE": "Here",
     "DEFAULT": "Default",
     "EMBED": "Embed",
-    "CANCELLED": "Canceled."
+    "CANCELLED": "Canceled.",
+    "RESET": "Reset",
+    "CHANGED": "Changed"
 }
