@@ -1,22 +1,15 @@
-const pm2 = require('pm2');
-const Command = require('../../structures/Command');
+import * as pm2 from 'pm2';
+import Command from '../../structures/Command';
+import Constants from '../../utility/Constants';
+import * as config from '../../../../../config.json';
+import { TypicalGuildMessage } from '../../types/typicalbot';
 
-const Constants = require('../../utility/Constants');
+export default class extends Command {
+            permission = Constants.PermissionsLevels.TYPICALBOT_MAINTAINER;
+            mode = Constants.Modes.STRICT;
 
-const config = require('../../../config');
-
-module.exports = class extends Command {
-    constructor(...args) {
-        super(...args, {
-            description: 'A command to restart the bot or a cluster.',
-            usage: 'restart <cluster-name>',
-            permission: Constants.Permissions.Levels.TYPICALBOT_MAINTAINER,
-            mode: Constants.Modes.STRICT,
-        });
-    }
-
-    execute(message, parameters) {
-        let processes;
+    execute(message: TypicalGuildMessage, parameters: string) {
+        let processes: string;
 
         if (!parameters || parameters === 'all') {
             const list = [];
@@ -31,14 +24,14 @@ module.exports = class extends Command {
         pm2.connect((err) => {
             if (err) console.error(err);
 
-            pm2.restart(processes, (err, apps) => {
+            pm2.restart(processes, (err) => {
                 if (err && err.message.includes('process name not found')) return message.error('Process not found.');
                 if (err) {
                     message.error('An error occured while trying to restart, check the console.');
                     console.error(err);
                 } else message.success('Restarted process.');
 
-                pm2.disconnect();
+                return pm2.disconnect();
             });
         });
     }
