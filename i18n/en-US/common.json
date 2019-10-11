@@ -23,5 +23,6 @@
     "REMOVE": "Remove",
     "HERE": "Here",
     "DEFAULT": "Default",
-    "EMBED": "Embed"
+    "EMBED": "Embed",
+    "NOTHING_STREAMING": "Nothing is currently streaming."
 }
