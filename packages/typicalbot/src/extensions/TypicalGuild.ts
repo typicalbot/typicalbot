@@ -1,6 +1,6 @@
-import { Structures, Guild } from 'discord.js';
+import { Structures } from 'discord.js';
 
-export class TypicalGuild extends Guild {
+export class TypicalGuild extends Structures.get('Guild') {
     fetchSettings() {
         return this.client.settings.fetch(this.id);
     }

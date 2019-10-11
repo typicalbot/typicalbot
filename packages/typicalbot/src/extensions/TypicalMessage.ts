@@ -1,12 +1,11 @@
 import {
-    Message,
     Structures,
     MessageEmbed,
     MessageOptions,
     DMChannel
 } from 'discord.js';
 
-export class TypicalMessage extends Message {
+export class TypicalMessage extends Structures.get('Message') {
     get embedable() {
         if (
             !this.guild ||

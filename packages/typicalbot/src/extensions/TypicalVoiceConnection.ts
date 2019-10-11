@@ -1,7 +1,7 @@
-import { Structures, VoiceConnection } from 'discord.js';
+import { Structures } from 'discord.js';
 import Stream from '../structures/Stream';
 
-export class TypicalVoiceConnection extends VoiceConnection {
+export class TypicalVoiceConnection extends Structures.get('VoiceConnection') {
     _guildStream: Stream | null = null;
 
     get guildStream() {
