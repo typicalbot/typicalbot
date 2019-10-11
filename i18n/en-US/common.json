@@ -44,5 +44,8 @@
     "BOOSTED_FIELD": "» Boosted Tier",
     "DISPLAYNAME_FIELD": "» Display Name",
     "STATUS_FIELD": "» Status",
-    "TOTALVIEWS": "» Total Views"
+    "JOINED_FIELD": "» Joined",
+    "REGISTERED_FIELD": "» Registered"
+    "TOTALVIEWS": "» Total Views",
+    "NSFW": "This command can only be used in NSFW channels."
 }
