@@ -1,0 +1,5 @@
+{
+  "DESCRIPTION": "Stop what is currently playing.",
+  "USAGE": "stop",
+  "STOPPING": "Stopping all streaming audio." 
+}

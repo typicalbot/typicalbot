@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Provides either your permission level or another user's level.",
+  "USAGE": "level [@user|user-id|user-tag]",
+  "TEXT": "**__{{user}}'s Permission Level:__** {{level}}",
+  "TITLE": "{{user}}'s Permission Level",
+  "EMBED": "Level {{level}}"
+}

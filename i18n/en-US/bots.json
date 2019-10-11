@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Gives a list of bots from Carbonitex ranked by server count.",
+  "USAGE": "bots [page-number]",
+  "COMPLIANT": " | Carbon Compliant",
+  "RANKED": "**__Ranked Bot List - Provided by Carbonitex:__**"
+}
