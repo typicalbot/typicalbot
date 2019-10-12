@@ -82,7 +82,7 @@ export default class extends Event {
         if (!command) return;
         if (!message.member)
         await message.guild.members.fetch(message.author.id);
-        
+
         if (command.ptb && this.client.build !== 'ptb')
             return message.error(message.translate('misc:PTB_ONLY'));
 
@@ -100,7 +100,7 @@ export default class extends Event {
         }
 
         if (
-            message.author.id !== this.client.config.ownerID &&
+            !this.client.config.maintainers.includes(message.author.id) &&
             message.author.id !== message.guild.ownerID &&
             command.mode > 0 &&
             command.mode <
@@ -132,7 +132,7 @@ export default class extends Event {
     matchPrefix(user: User, settings: GuildSettings, command: string) {
         if (
             command.startsWith(this.client.config.prefix) &&
-            user.id === this.client.config.ownerID
+            this.client.config.maintainers.includes(user.id)
         )
             return this.client.config.prefix;
         if (
