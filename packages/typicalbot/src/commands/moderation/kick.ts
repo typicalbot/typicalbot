@@ -67,7 +67,7 @@ export default class extends Command {
         if (!kicked) return message.error(message.translate('kick:ERROR'));
 
         if (message.guild.settings.logs.moderation) {
-            const newCase = await message.guild.buildModerationLog(message);
+            const newCase = await message.guild.buildModerationLog();
 
             newCase
                 .setAction(Constants.ModerationLogTypes.KICK)

@@ -60,7 +60,7 @@ export default class extends Command {
             await message.guild.members.unban(userID, banReason);
 
             if (!message.guild.settings.logs.moderation) {
-                const newCase = await message.guild.buildModerationLog(message);
+                const newCase = await message.guild.buildModerationLog();
                 newCase
                     .setAction(Constants.ModerationLogTypes.SOFTBAN)
                     .setModerator(message.author)

@@ -19,7 +19,7 @@ import CommandHandler from './handlers/Commands';
 import EventHandler from './handlers/Events';
 
 import MusicUtility from './utility/Music';
-import { TypicalDonor, HelperFunctions } from './types/typicalbot';
+import { TypicalDonor, HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
 import i18n from '../src/i18n';
 import i18next = require('i18next');
 
@@ -48,10 +48,10 @@ export default class Cluster extends Client {
     events = new EventHandler(this);
     caches = {
         donors: new Collection<string, TypicalDonor>(),
-        bans: new Collection(),
-        unbans: new Collection(),
+        bans: new Collection<string, BanLog>(),
+        unbans: new Collection<string, UnbanLog>(),
         softbans: new Collection(),
-        invites: new Collection()
+        invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
     translate: Map<string, i18next.TFunction> = new Map();
     constructor(node: VezaClient) {
@@ -73,7 +73,7 @@ export default class Cluster extends Client {
         // MUST SETUP DATABASE BEFORE ANYTHING ELSE
         this.handlers.database = new DatabaseHandler(this);
         await this.handlers.database.init();
-        
+
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);

@@ -1,16 +1,18 @@
 import {
     Guild,
     GuildMember,
+    GuildChannel,
     Message,
     MessageEmbed,
     MessageOptions,
     TextChannel,
-    User
+    User,
 } from 'discord.js';
 import Command from '../structures/Command';
 import Cluster from '..';
 import Stream from '../structures/Stream';
 import ModerationLog from '../structures/ModerationLog';
+import PermLevel from '../structures/PermissionLevel';
 
 export interface CommandOptions {
     description?: string;
@@ -163,6 +165,9 @@ export interface HelperFunctions {
     fetchAccess: {
         execute(guild: Guild): Promise<AccessLevel>;
     };
+    formatMessage: {
+        execute(type: string, guild: TypicalGuild, user: User, content: string, options?: FormatMessageOptions): string;
+    }
     lengthen: {
         execute(
             text: string,
@@ -243,12 +248,12 @@ export interface TypicalGuildMember extends GuildMember {
 export interface TypicalGuild extends Guild {
     client: Cluster;
     settings: GuildSettings;
-    buildModerationLog(message: TypicalGuildMessage): Promise<ModerationLog>;
+    buildModerationLog(): Promise<ModerationLog>;
     translate(key: string, args?: object): string;
     fetchPermissions(
         userID: string,
         ignoreStaff?: boolean
-    ): Promise<PermissionLevel>;
+    ): Promise<PermLevel>;
     fetchSettings(): Promise<GuildSettings>;
     guildStream: Stream;
     _guildStream: Stream;
@@ -260,3 +265,20 @@ export interface SettingsData {
     type: 'boolean' | 'roles' | 'role' | 'channel' | 'log' | 'ms' | 'default';
     path: string;
 }
+
+export interface BanLog {
+    expiration: number;
+    moderator: User;
+    reason: string;
+}
+
+export interface UnbanLog {
+    moderator: User;
+    reason?: string;
+}
+export interface FormatMessageOptions {
+    oldMember?: TypicalGuildMember;
+    channel?: GuildChannel;
+    message?: TypicalGuildMessage;
+}
+

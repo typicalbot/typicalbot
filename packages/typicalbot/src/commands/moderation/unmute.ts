@@ -77,7 +77,7 @@ export default class extends Command {
         if (!unmuted) return message.error('unmute:ERROR');
 
         if (message.guild.settings.logs.moderation) {
-            const newCase = await message.guild.buildModerationLog(message);
+            const newCase = await message.guild.buildModerationLog();
             newCase
                 .setAction(Constants.ModerationLogTypes.UNMUTE)
                 .setModerator(message.author)

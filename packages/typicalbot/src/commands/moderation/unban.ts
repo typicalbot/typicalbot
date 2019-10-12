@@ -33,7 +33,7 @@ export default class extends Command {
         const log = { moderator: message.author };
         if (reason) Object.assign(log, { reason });
 
-        this.client.caches.unbans.set(user, log);
+        this.client.caches.unbans.set(user.id, log);
 
         const unbanned = await message.guild.members
             .unban(

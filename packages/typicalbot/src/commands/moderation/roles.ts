@@ -108,11 +108,19 @@ export default class extends Command {
         const role =
             roleMention || roleID
                 ? message.guild.roles.get(roleMention || roleID)
-                : subArgs[3] || subArgs[6]
+                : // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
+                subArgs[3] || subArgs[6]
                 ? message.guild.roles.find(r =>
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                      // @ts-ignore
                       subArgs[3]
-                          ? r.name.toLowerCase() === subArgs[3].toLowerCase()
-                          : r.name.toLowerCase() === subArgs[6].toLowerCase()
+                          ? // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                            // @ts-ignore
+                            r.name.toLowerCase() === subArgs[3].toLowerCase()
+                          : // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                            // @ts-ignore
+                            r.name.toLowerCase() === subArgs[6].toLowerCase()
                   )
                 : null;
         if (!role) return message.error(message.translate('give:INVALID'));

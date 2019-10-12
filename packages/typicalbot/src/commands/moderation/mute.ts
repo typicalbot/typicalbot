@@ -127,7 +127,7 @@ export default class extends Command {
         if (!muted) return message.error(message.translate('mute:ERROR'));
 
         if (message.guild.settings.logs.moderation) {
-            const newCase = await message.guild.buildModerationLog(message);
+            const newCase = await message.guild.buildModerationLog();
             newCase
                 .setExpiration(time)
                 .setAction(Constants.ModerationLogTypes.MUTE)

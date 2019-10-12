@@ -72,7 +72,7 @@ export default class extends Command {
             message.guild.settings.logs.moderation &&
             message.guild.settings.logs.purge
         ) {
-            const newCase = await message.guild.buildModerationLog(message);
+            const newCase = await message.guild.buildModerationLog();
             newCase
                 .setAction(Constants.ModerationLogTypes.PURGE)
                 .setModerator(message.author)

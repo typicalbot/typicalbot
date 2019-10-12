@@ -36,7 +36,7 @@ export default class extends Command {
         if (!removed) return null;
 
         if (message.guild.settings.logs.moderation) {
-            const newCase = await message.guild.buildModerationLog(message);
+            const newCase = await message.guild.buildModerationLog();
             newCase
                 .setAction(Constants.ModerationLogTypes.VOICE_KICK)
                 .setModerator(message.author)

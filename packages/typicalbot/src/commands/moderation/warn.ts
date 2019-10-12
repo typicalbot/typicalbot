@@ -42,7 +42,7 @@ export default class extends Command {
         )
             return message.error(message.translate('warn:TOO_LOW'));
 
-        const newCase = await message.guild.buildModerationLog(message);
+        const newCase = await message.guild.buildModerationLog();
         newCase
             .setAction(Constants.ModerationLogTypes.WARN)
             .setModerator(message.author)

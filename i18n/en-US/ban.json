@@ -7,5 +7,6 @@
 	"BANNED": "You have been banned from **{{name}}**.",
 	"REASON": "Banned by {{mod}} | Reason: {{reason}}",
 	"ERROR": "An error occured while trying to ban the requested user.",
-	"BAN_SUCCESS": "Successfully banned user {{user}}."
+	"BAN_SUCCESS": "Successfully banned user {{user}}.",
+	"USER_BANNED": "User Banned."
 }
