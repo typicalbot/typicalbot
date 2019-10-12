@@ -1,6 +1,6 @@
 {
 	"DESCRIPTION": "Makes the bot ignore commands, invites and stars in a channel.",
-	"USAGE": "ignore ['view'|'commands'|'invites'|'stars']",
+	"USAGE": "ignore [view|commands|invites|stars]",
 	"IGNORING": "The following channels are ignoring **{{type}}**:",
 	"ALREADY_IGNORING": "This channel is already ignoring {{type}}.",
 	"STARBOARD": "The starboard is not enabled.",

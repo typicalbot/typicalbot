@@ -9,8 +9,8 @@
     "TOO_LONG": "You cannot mute a user for more than a week.",
     "ALREADY_MUTED": "The requested user is already muted.",
     "TOO_LOW": "You cannot mute a user with either the same or higher highest role.",
-		"UNEDITABLE": "In order to complete the request, I need the **MANAGE ROLES** permission. Also, my highest role needs to be higher than the requested user's highest role and the mute role.",
-		"MUTED": "You have been muted in **{{name}}**.",
-		"SUCCESS": "Successfully muted user {{user}}.",
-		"ERROR": "An error occured while trying to mute the requested user."
+    "UNEDITABLE": "In order to complete the request, I need the **MANAGE ROLES** permission. Also, my highest role needs to be higher than the requested user's highest role and the mute role.",
+    "MUTED": "You have been muted in **{{name}}**.",
+    "SUCCESS": "Successfully muted user {{user}}.",
+    "ERROR": "An error occured while trying to mute the requested user."
 }

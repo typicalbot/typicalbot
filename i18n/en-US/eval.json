@@ -1,4 +1,4 @@
 {
   "DESCRIPTION": "An eval command for the creator.",
-  "USAGE": "eva; <code>"
+  "USAGE": "eval <code>"
 }

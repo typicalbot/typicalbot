@@ -1,6 +1,6 @@
 {
 	"DESCRIPTION": "Create an alias for commands.",
-	"USAGE": "alias <'list'|'add'|'remove'|'clear'> <add/remove:command> <add:new-alias>",
+	"USAGE": "alias <list|add|remove|clear> <add/remove:command> <add:new-alias>",
 	"CURRENT": "Current Aliases:",
 	"INVALID_COMMAND": "The provided command doesn't exist.",
 	"ALIAS_EXISTS": "The given alias already points to the `{{name}}` command.",
