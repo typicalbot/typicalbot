@@ -8,7 +8,10 @@ class GuildCreate extends Event {
     async execute(guild) {
         if (!guild.available) return;
 
-        if (this.client.build === "stable") this.client.sendStatistics(guild.shardID);
+        if (this.client.build === "stable") {
+            this.client.datadog.increment("typicalbot.guildcreate");
+            this.client.sendStatistics(guild.shardID);
+        }
     }
 }
 

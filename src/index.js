@@ -2,6 +2,7 @@ require("./utility/Extenders");
 
 const { Client, Collection } = require("discord.js");
 const fetch = require("node-fetch");
+const { StatsD } = require("hot-shots");
 
 const config = require("../config.json");
 
@@ -32,6 +33,10 @@ module.exports = class Cluster extends Client {
         this.node = node;
         this.config = config;
         this.build = config.build;
+
+        if (this.build === "stable") {
+            this.datadog = new StatsD("localhost", 8125);
+        }
 
         this.shards = JSON.parse(process.env.SHARDS);
         this.cluster = `${process.env.CLUSTER} [${this.shards.join(",")}]`;
