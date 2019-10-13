@@ -12,24 +12,24 @@ export default class extends Command {
                 message.guild.voice && message.guild.voice.connection;
             if (
                 !connection ||
-                !connection.guildStream.dispatcher ||
-                !connection.guildStream.current
+                !message.guild.guildStream.dispatcher ||
+                !message.guild.guildStream.current
             )
                 return message.send(
                     message.translate('common:NOTHING_STREAMING')
                 );
 
             const remaining =
-                connection.guildStream.mode === 'queue'
-                    ? parseInt(connection.guildStream.current.length, 10) *
+                message.guild.guildStream.mode === 'queue'
+                    ? parseInt(message.guild.guildStream.current.length, 10) *
                           1000 -
-                      connection.guildStream.dispatcher.streamTime
+                      message.guild.guildStream.dispatcher.streamTime
                     : null;
 
             return message.send(
                 message.translate('current:CURRENT', {
                     title: this.client.helpers.lengthen.shorten(
-                        connection.guildStream.current.title,
+                        message.guild.guildStream.current.title,
                         45
                     ),
                     remaining: remaining
@@ -41,7 +41,7 @@ export default class extends Command {
                           })
                         : '',
                     requester:
-                        connection.guildStream.current.requester.author.username
+                        message.guild.guildStream.current.requester.author.username
                 })
             );
         } catch (e) {

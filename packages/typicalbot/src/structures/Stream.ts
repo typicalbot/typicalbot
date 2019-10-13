@@ -1,21 +1,22 @@
 import Cluster from '..';
-import { VoiceConnection, StreamDispatcher } from 'discord.js';
+import { StreamDispatcher } from 'discord.js';
 import Video from './Video';
 import { TypicalGuildMessage } from '../types/typicalbot';
+import { TypicalGuild } from '../extensions/TypicalGuild';
 
 export default class Stream {
     client: Cluster;
-    connection: VoiceConnection;
     mode: 'queue' | 'live' | null = null;
     queue: Video[] = [];
     lastPlaying: TypicalGuildMessage | null = null;
     current: Video | null = null;
     dispatcher: StreamDispatcher | null = null;
     volume = 0.5;
+    guild: TypicalGuild;
 
-    constructor(client: Cluster, connection: VoiceConnection) {
+    constructor(client: Cluster, guild: TypicalGuild) {
         this.client = client;
-        this.connection = connection;
+        this.guild = guild;
     }
 
     async play(message: TypicalGuildMessage, video: Video) {
@@ -23,12 +24,12 @@ export default class Stream {
 
         this.mode = 'queue';
 
-        this.dispatcher = this.connection.play(
-            await video.stream().catch(err => {
-                throw err;
-            }),
-            { volume: this.volume }
-        );
+        this.dispatcher = this.guild.voice && this.guild.voice.connection
+            ? this.guild.voice.connection.play(
+                  await video.stream(),
+                  { volume: this.volume }
+              )
+            : null;
 
         this.current = video;
 
@@ -54,7 +55,7 @@ export default class Stream {
             this.lastPlaying = response;
         }
 
-        this.dispatcher.on('error', err => {
+        this.dispatcher && this.dispatcher.on('error', err => {
             video.requester.send(
                 message.translate(
                     this.queue.length
@@ -71,7 +72,7 @@ export default class Stream {
                 );
         });
 
-        this.dispatcher.on('finish', () => {
+        this.dispatcher && this.dispatcher.on('finish', () => {
             if (this.queue.length) {
                 return setTimeout(() => {
                     this.play(message, this.queue[0]);
@@ -87,10 +88,8 @@ export default class Stream {
     async playLive(message: TypicalGuildMessage, video: Video) {
         this.mode = 'live';
 
-        this.dispatcher = this.connection.play(
-            await video.stream().catch(err => {
-                throw err;
-            }),
+        this.dispatcher = this.guild.voice && this.guild.voice.connection && this.guild.voice.connection.play(
+            await video.stream(),
             { volume: this.volume }
         );
 
@@ -103,14 +102,14 @@ export default class Stream {
             })
         );
 
-        this.dispatcher.on('error', err => {
+        this.dispatcher && this.dispatcher.on('error', err => {
             video.requester.send(message.translate('music:ERROR_LIVESTREAM'));
             // eslint-disable-next-line no-console
             console.log(err);
             this.end();
         });
 
-        this.dispatcher.on('finish', () => {
+        this.dispatcher && this.dispatcher.on('finish', () => {
             video.requester.send(message.translate('music:LIVE_CONCLUDED'));
             this.end();
         });
@@ -118,7 +117,8 @@ export default class Stream {
 
     end() {
         this.queue = [];
-        this.connection.channel.leave();
+        if (!this.guild.voice || !this.guild.voice.connection) return;
+        this.guild.voice.connection.channel.leave();
         this.client.emit('voiceConnectionUpdate');
     }
 

@@ -15,7 +15,7 @@ export default class extends Command {
             const connection = message.guild.voice && message.guild.voice.connection;
 
             if (!connection) return message.send(message.translate('common:NOTHING_STREAMING'));
-            if (connection.guildStream.mode !== 'queue') return message.error(message.translate('common:NEED_QUEUE'));
+            if (message.guild.guildStream.mode !== 'queue') return message.error(message.translate('common:NEED_QUEUE'));
 
             const args = regex.exec(parameters);
             if (!args) return message.error(message.translate('misc:USAGE_ERROR', {
@@ -24,7 +24,7 @@ export default class extends Command {
             }));
             args.shift();
 
-            const { queue } = connection.guildStream;
+            const { queue } = message.guild.guildStream;
             const [query] = args;
 
             const results = queue.filter((v) => v.title.toLowerCase().includes(query.toLowerCase()));
@@ -37,7 +37,7 @@ export default class extends Command {
 
                 return message.reply(`Removed **${results[0].title}** from the queue.`);
             }
-                
+
             const videos = results.map((v, i) => `**${i + 1}:** ${v.title}`).join('\n');
 
             message.send([
@@ -53,7 +53,7 @@ export default class extends Command {
             const first = messages.first() as TypicalGuildMessage;
 
             if (first.content === 'cancel') return message.reply(message.translate('common:CANCELLED'));
-            
+
             if (first.content === 'all') {
                 results.forEach((v) => {
                     queue.splice(queue.indexOf(v), 1);
@@ -66,7 +66,7 @@ export default class extends Command {
 
                 return message.reply(message.translate('unqueue:ONE', { title: results[0].title }));
             }
-                
+
             return message.error(message.translate('unqueue:INVALID'));
         } catch (e) {
             return message.send(message.translate('common:NOTHING_STREAMING'));

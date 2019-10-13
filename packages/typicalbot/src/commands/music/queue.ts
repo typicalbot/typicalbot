@@ -10,12 +10,12 @@ export default class extends Command {
         try {
             const connection = message.guild.voice && message.guild.voice.connection;
 
-            if (!connection) return message.send(message.translate('common:NOTHING_STREAMING'));
-            if (connection.guildStream.mode !== 'queue') return message.error(message.translate('common:NEED_QUEUE'));
+            if (!connection || !message.guild.guildStream.current) return message.send(message.translate('common:NOTHING_STREAMING'));
+            if (message.guild.guildStream.mode !== 'queue') return message.error(message.translate('common:NEED_QUEUE'));
 
-            const { queue } = connection.guildStream;
+            const { queue } = message.guild.guildStream;
 
-            const CURRENT = message.translate('queue:CURRENT', { title: this.client.helpers.lengthen.shorten(connection.guildStream.current.title, 45), time: this.client.helpers.convertTime.execute(message, 1000 * parseInt(connection.guildStream.current.length, 10)), user: connection.guildStream.current.requester.author.username });
+            const CURRENT = message.translate('queue:CURRENT', { title: this.client.helpers.lengthen.shorten(message.guild.guildStream.current.title, 45), time: this.client.helpers.convertTime.execute(message, 1000 * parseInt(message.guild.guildStream.current.length, 10)), user: message.guild.guildStream.current.requester.author.username });
 
             if (!queue.length) return message.send([
                 message.translate('queue:NONE'),
@@ -31,7 +31,7 @@ export default class extends Command {
                 user: s.requester.author.username
             })).join('\n');
 
-            let length = 0; 
+            let length = 0;
             queue.forEach((s) => length += Number(s.length));
 
             return message.send([

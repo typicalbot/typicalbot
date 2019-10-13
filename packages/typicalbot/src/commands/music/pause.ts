@@ -13,10 +13,10 @@ export default class extends Command {
             if (!connection) return message.send(message.translate('common:NOTHING_STREAMING'));
 
             if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error(message.translate('common:WRONG_VOICE'));
-            
-            if (connection.guildStream.mode !== 'queue') return message.error(message.translate('common:NEED_QUEUE'));
 
-            connection.guildStream.pause();
+            if (message.guild.guildStream.mode !== 'queue') return message.error(message.translate('common:NEED_QUEUE'));
+
+            message.guild.guildStream.pause();
 
             return message.reply(message.translate('pause:PAUSED'));
         } catch (e) {

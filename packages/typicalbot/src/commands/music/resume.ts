@@ -15,9 +15,9 @@ export default class extends Command {
 
             if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error(message.translate('common:WRONG_VOICE'));
 
-            if (connection.guildStream.mode !== 'queue') return message.error(message.translate('common:NEED_QUEUE'));
+            if (message.guild.guildStream.mode !== 'queue') return message.error(message.translate('common:NEED_QUEUE'));
 
-            connection.guildStream.resume();
+            message.guild.guildStream.resume();
 
             return message.reply(message.translate('resume:RESUMING'));
         } catch (e) {

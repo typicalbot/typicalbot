@@ -37,5 +37,18 @@
     "INVITE_VALUE_1": "**Enabled** By Default",
     "INVITE_VALUE_2": "**Setting:** logs-invite",
     "MODERATION": "**__Setting Up Moderation Logs__**",
-    "MODERATION_VALUE": "To set up moderation logs, use the settings edit command for the modlogs setting. `$settings edit modlogs <#channel>`"
+    "MODERATION_VALUE": "To set up moderation logs, use the settings edit command for the modlogs setting. `$settings edit modlogs <#channel>`",
+    "USER_JOINED": "User Joined",
+    "JOINED_SERVER": "**{{user}}** has joined the server.",
+    "WELCOME_ALERT": "**{{name}}'s Join Message:**",
+    "AUTOROLE": "**{{user}}** was given the **{{role}}**.",
+    "USER_LEFT": "User Left.",
+    "LEFT": "**{{user}} has left the server.",
+    "NICKNAMED": "**{{user}}** changed their nickname to **{{nickname}}**.",
+    "CHANGED_NICK": "Changed nickname to {{nickname}}.",
+    "DELETED": "**{{user}}**'s message was deleted.",
+    "MESSAGE_DELETED": "Message Deleted in {{channel}} ({{id}})",
+    "BULK_DELETED": "{{amount}} messages were purged in {{channel}} ({{id}}): {{url}}",
+    "PURGED": "{{amount}} messages were purged: {{url}}",
+    "MESSAGE_PURGED": "Messages Purged in #{{channel}} ({{id}})"
 }

@@ -1,7 +1,6 @@
 import './extensions/TypicalGuild';
 import './extensions/TypicalGuildMember';
 import './extensions/TypicalMessage';
-// import './extensions/TypicalVoiceConnection';
 
 import { Client, Collection } from 'discord.js';
 import fetch from 'node-fetch';

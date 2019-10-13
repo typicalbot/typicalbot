@@ -22,19 +22,19 @@ export default class FormatMessage extends Function {
             return this.logs(content, guild, user)
                 .replace(
                     /{user.nick}|{user.nickname}/gi,
-                    member ? member.nickname : user.username
+                    member ? member.displayName : user.username
                 )
                 .replace(
                     /{user.oldnick}|{user.oldnickname}/gi,
                     options.oldMember
-                        ? options.oldMember.nickname
+                        ? options.oldMember.displayName
                         : user.username
                 );
         }
         if (type === 'logs-invite') {
             const formatted = this.logs(content, guild, user).replace(
                 /{user.nick}|{user.nickname}/gi,
-                member ? member.nickname : user.username
+                member ? member.displayName : user.username
             );
             if (!options.channel) return formatted;
 
@@ -46,7 +46,7 @@ export default class FormatMessage extends Function {
         if (type === 'logs-msgdel') {
             let formatted = this.logs(content, guild, user).replace(
                 /{user.nick}|{user.nickname}/gi,
-                member ? member.nickname : user.username
+                member ? member.displayName : user.username
             );
             if (options.channel) {
                 formatted

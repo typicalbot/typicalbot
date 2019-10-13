@@ -14,7 +14,7 @@ export default class extends Command {
 
             if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error(message.translate('common:WRONG_VOICE'));
 
-            connection.guildStream.end();
+            message.guild.guildStream.end();
 
             return message.reply(message.translate('stop:STOPPING'));
         } catch (e) {

@@ -1,5 +1,6 @@
 import Task from '../structures/Task';
 import { UnbanTaskData } from '../types/typicalbot';
+import { User } from 'discord.js';
 
 export default class extends Task {
     async execute(data: UnbanTaskData) {
@@ -7,7 +8,7 @@ export default class extends Task {
         if (!guild) return;
 
         this.client.caches.unbans.set(data.userID, {
-            moderator: this.client.user,
+            moderator: this.client.user as User,
             reason: "Automatic Unban: User's ban time has passed."
         });
 

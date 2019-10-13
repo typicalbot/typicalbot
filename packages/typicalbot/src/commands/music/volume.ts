@@ -12,18 +12,18 @@ export default class extends Command {
         try {
             const connection = message.guild.voice && message.guild.voice.connection;
 
-            if (!connection || !connection.guildStream.dispatcher) return message.send(message.translate('common:NOTHING_STREAMING'));
+            if (!connection || !message.guild.guildStream.dispatcher) return message.send(message.translate('common:NOTHING_STREAMING'));
 
             const args = regex.exec(message.content);
 
-            const x = Math.round(args ? connection.guildStream.dispatcher.volume : connection.dispatcher.volume * 10);
-            const response = `${'▰'.repeat(x > 10 ? (x / 2) : x)} ${'▱'.repeat(x > 10 ? 10 - (x / 2) : 10 - x)} ${Math.round(connection.guildStream.dispatcher.volume * 100)}`;
+            const x = Math.round(args ? message.guild.guildStream.dispatcher.volume : connection.dispatcher.volume * 10);
+            const response = `${'▰'.repeat(x > 10 ? (x / 2) : x)} ${'▱'.repeat(x > 10 ? 10 - (x / 2) : 10 - x)} ${Math.round(message.guild.guildStream.dispatcher.volume * 100)}`;
 
             if (!args) return message.reply(message.translate('volume:CHANGED', {
                     amount: response
                 }));
             args.shift();
-            
+
             const [number] = args;
             const volume = parseInt(number, 10);
 
@@ -32,7 +32,7 @@ export default class extends Command {
             if (volume < 0 || volume > 200) return message.error(message.translate('volume:INVALID'));
             if (!message.member.voice.channel || message.member.voice.channel.id !== connection.channel.id) return message.error(message.translate('common:WRONG_VOICE'));
 
-            connection.guildStream.setVolume(volume * 0.01);
+            message.guild.guildStream.setVolume(volume * 0.01);
 
             return message.reply(message.translate('volume:CHANGED', { amount: response }));
         } catch (e) {

@@ -65,7 +65,7 @@ export interface GuildSettings {
         role: {
             bots: string | null;
             id: string | null;
-            delay: string | null;
+            delay: number | null;
             silent: boolean;
         };
         message: string | null;
@@ -256,7 +256,7 @@ export interface TypicalGuild extends Guild {
     ): Promise<PermLevel>;
     fetchSettings(): Promise<GuildSettings>;
     guildStream: Stream;
-    _guildStream: Stream;
+    _guildStream: Stream | null;
 }
 
 export interface SettingsData {

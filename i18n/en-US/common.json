@@ -49,5 +49,7 @@
     "TOTALVIEWS": "» Total Views",
     "NSFW": "This command can only be used in NSFW channels.",
     "WARN": "Warn",
-    "KICK": "Kick"
+    "KICK": "Kick",
+    "AUTHOR": "Author",
+    "MESSAGE": "Message"
 }

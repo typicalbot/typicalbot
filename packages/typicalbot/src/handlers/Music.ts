@@ -4,7 +4,6 @@ import { TypicalGuildMessage } from '../types/typicalbot';
 import TypicalFunction from '../structures/Function';
 import Video from '../structures/Video';
 import { YoutubeVideo } from 'simple-youtube-api';
-import { TypicalVoiceConnection } from '../extensions/TypicalVoiceConnection';
 
 function shuffle(arr: YoutubeVideo[], maximum?: number) {
     for (let i = arr.length; i; i--) {
@@ -41,20 +40,18 @@ export default class {
         video: string | Video,
         playlist: boolean
     ) {
-        const connection = (await this.connect(
-            message
-        )) as TypicalVoiceConnection;
+        await this.connect(message);
 
         return playlist
-            ? connection.guildStream.play(
+            ? message.guild.guildStream.play(
                   message,
                   await this.queuePlaylist(
                       message,
                       video as string,
-                      connection.guildStream
+                      message.guild.guildStream
                   )
               )
-            : connection.guildStream.play(message, video as Video);
+            : message.guild.guildStream.play(message, video as Video);
     }
 
     async stream(
@@ -82,14 +79,13 @@ export default class {
         if (!message.guild.voice)
             return this.initStream(message, video, playlist);
 
-        const connection = message.guild.voice
-            .connection as TypicalVoiceConnection;
+        const connection = message.guild.voice.connection;
 
         if (!connection) return this.initStream(message, video, playlist);
 
         if (
-            connection.guildStream.mode &&
-            connection.guildStream.mode !== 'queue'
+            message.guild.guildStream.mode &&
+            message.guild.guildStream.mode !== 'queue'
         )
             throw message.translate('music:NOT_IN_QUEUE');
 
@@ -99,7 +95,7 @@ export default class {
         )
             throw message.translate('music:INVALID_CHANNEL');
         if (
-            connection.guildStream.queue.length >=
+            message.guild.guildStream.queue.length >=
             (message.guild.settings.music.queuelimit || 10)
         )
             return message.error(
@@ -112,10 +108,10 @@ export default class {
             return this.queuePlaylist(
                 message,
                 video as string,
-                connection.guildStream
+                message.guild.guildStream
             );
 
-        return connection.guildStream.queueVideo(message, video as Video);
+        return message.guild.guildStream.queueVideo(message, video as Video);
     }
 
     async queuePlaylist(

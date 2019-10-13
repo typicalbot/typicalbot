@@ -16,7 +16,11 @@ export default class extends Command {
                 .setColor(0x00FF00)
                 .setFooter('TypicalBot Eval', Constants.Links.ICON);
         try {
-            const [unsafe, code] = regex.exec(parameters) || [];
+            const args = regex.exec(parameters);
+            if (!args) return;
+            args.shift();
+
+            const [unsafe, code] = args;
             const vm = new VM();
             const result = unsafe ? eval(`(async () => { ${code} })()`) : vm.run(`(async () => { ${code} })()`);
 
@@ -45,10 +49,10 @@ export default class extends Command {
                         '```'
                     ].join('\n')))
                 });
-                
+
                 return null;
-            } 
-            
+            }
+
             if (result instanceof Object) {
                 return message.send(embed.setDescription([
                     '```ts',
@@ -56,7 +60,7 @@ export default class extends Command {
                     '```'
                 ].join('\n')));
             }
-            
+
             return message.send(embed.setDescription([
                 '```',
                 result,

@@ -16,8 +16,4 @@ declare module 'discord.js' {
     interface GuildMember {
         client: Cluster;
     }
-
-    interface VoiceConnection {
-        guildStream: Stream;
-    }
 }
