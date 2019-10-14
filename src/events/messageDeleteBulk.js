@@ -1,6 +1,4 @@
 const Event = require("../structures/Event");
-const moment = require("moment");
-const fetch = require("node-fetch");
 
 class MessageBulkDelete extends Event {
     constructor(...args) {
