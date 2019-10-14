@@ -15,14 +15,14 @@ class MessageBulkDelete extends Event {
 
         const settings = await this.client.settings.fetch(message.guild.id).catch(err => { return err; });
 
-        if (!settings.logs.id || !settings.logs.delete) return;
+        if (!settings.logs.id || !settings.logs.purge) return;
 
         const logsChannel = message.guild.channels.get(settings.logs.id);
         if (!logsChannel) return;
 
         const channel = message.channel;
         
-        if (settings.logs.delete === "--embed") return logsChannel.buildEmbed()
+        if (settings.embed) return logsChannel.buildEmbed()
             .setColor(0x3EA7ED)
             .setDescription(`${messages.size} messages were purged.`)
             .setFooter(`Messages Purged in #${channel.name} (${channel.id})`)
