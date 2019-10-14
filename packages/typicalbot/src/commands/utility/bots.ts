@@ -37,7 +37,7 @@ export default class extends Command {
             )
             .map(bot => ({
                 ...bot,
-                name: this.name
+                name: bot.name
                     .replace(replaceFirstRegex, '')
                     .replace(replaceSecondRegex, ''),
                 servercount: Number(bot.servercount).toLocaleString()
