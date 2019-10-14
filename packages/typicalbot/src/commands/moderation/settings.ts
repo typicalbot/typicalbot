@@ -34,7 +34,7 @@ export default class extends Command {
         // );
 
         const [action, setting, type, value] = args;
-        console.log('type', type);
+
         if (['edit', 'clear'].includes(action) && permission.level < 3)
             return message.error(
                 this.client.helpers.permissionError.execute(

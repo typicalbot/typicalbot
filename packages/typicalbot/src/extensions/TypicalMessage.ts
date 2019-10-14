@@ -61,10 +61,8 @@ export class TypicalMessage extends Structures.get('Message') {
             this.guild ? this.guild.settings.language : 'en-US'
         );
 
-        console.log(language);
-
         if (!language) throw 'Message: Invalid language set in settings.';
-        console.log(key, args, language(key, args));
+
         return language(key, args);
     }
 }
