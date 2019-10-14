@@ -57,7 +57,10 @@ export default class MessageDelete extends Event {
                         )
                     )
                     .setFooter(
-                        message.translate('logs:MESSAGE_DELETED', { channel: message.channel.toString(), id: message.channel.id })
+                        message.translate('logs:MESSAGE_DELETED', {
+                            channel: message.channel.toString(),
+                            id: message.channel.id
+                        })
                     )
                     .setTimestamp()
             )

@@ -9,31 +9,51 @@ export default class extends Command {
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
-        if (!args) return message.error(message.translate('misc:USAGE_ERROR', {
-            name: this.name,
-            prefix: this.client.config.prefix
-        }));
+        if (!args)
+            return message.error(
+                message.translate('misc:USAGE_ERROR', {
+                    name: this.name,
+                    prefix: this.client.config.prefix
+                })
+            );
         args.shift();
 
         const [query, number] = args;
         const page = number ? parseInt(number, 10) : 1;
         const lowerQuery = query.toLowerCase();
 
-        const list = message.guild.members.filter((m) => [m.user.username.toLowerCase(), m.nickname ? m.nickname.toLowerCase() : ''].includes(lowerQuery));
-
-        if (!list.size) return message.reply(message.translate('search:NONE', { query }));
-
-        const content = this.client.helpers.pagify.execute(
-            list.map((m) => `${this.client.helpers.lengthen.execute(`${m.user.username}${m.nickname ? ` (${m.nickname})` : ''}`, 40)}: ${m.id}`),
-            page,
+        const list = message.guild.members.filter(m =>
+            [
+                m.user.username.toLowerCase(),
+                m.nickname ? m.nickname.toLowerCase() : ''
+            ].includes(lowerQuery)
         );
 
-        return message.send([
-            message.translate('search:RESULTS', { query }),
-            '',
-            '```autohotkey',
-            content,
-            '```'
-        ].join('\n'));
+        if (!list.size)
+            return message.reply(message.translate('search:NONE', { query }));
+
+        const content = this.client.helpers.pagify.execute(
+            message,
+            list.map(
+                m =>
+                    `${this.client.helpers.lengthen.execute(
+                        `${m.user.username}${
+                            m.nickname ? ` (${m.nickname})` : ''
+                        }`,
+                        40
+                    )}: ${m.id}`
+            ),
+            page
+        );
+
+        return message.send(
+            [
+                message.translate('search:RESULTS', { query }),
+                '',
+                '```autohotkey',
+                content,
+                '```'
+            ].join('\n')
+        );
     }
-};
+}

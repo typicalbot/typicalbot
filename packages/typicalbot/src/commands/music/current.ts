@@ -41,7 +41,8 @@ export default class extends Command {
                           })
                         : '',
                     requester:
-                        message.guild.guildStream.current.requester.author.username
+                        message.guild.guildStream.current.requester.author
+                            .username
                 })
             );
         } catch (e) {

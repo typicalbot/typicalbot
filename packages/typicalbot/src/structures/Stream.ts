@@ -24,12 +24,12 @@ export default class Stream {
 
         this.mode = 'queue';
 
-        this.dispatcher = this.guild.voice && this.guild.voice.connection
-            ? this.guild.voice.connection.play(
-                  await video.stream(),
-                  { volume: this.volume }
-              )
-            : null;
+        this.dispatcher =
+            this.guild.voice && this.guild.voice.connection
+                ? this.guild.voice.connection.play(await video.stream(), {
+                      volume: this.volume
+                  })
+                : null;
 
         this.current = video;
 
@@ -55,43 +55,47 @@ export default class Stream {
             this.lastPlaying = response;
         }
 
-        this.dispatcher && this.dispatcher.on('error', err => {
-            video.requester.send(
-                message.translate(
-                    this.queue.length
-                        ? 'music:ERROR_PLAYING'
-                        : 'music:ERROR_LEAVING'
-                )
-            );
-            // eslint-disable-next-line no-console
-            console.log(err);
-            if (this.queue.length)
-                setTimeout(
-                    () => this.play(message, this.queue.splice(0, 1)[0]),
-                    1000
+        this.dispatcher &&
+            this.dispatcher.on('error', err => {
+                video.requester.send(
+                    message.translate(
+                        this.queue.length
+                            ? 'music:ERROR_PLAYING'
+                            : 'music:ERROR_LEAVING'
+                    )
                 );
-        });
+                // eslint-disable-next-line no-console
+                console.log(err);
+                if (this.queue.length)
+                    setTimeout(
+                        () => this.play(message, this.queue.splice(0, 1)[0]),
+                        1000
+                    );
+            });
 
-        this.dispatcher && this.dispatcher.on('finish', () => {
-            if (this.queue.length) {
-                return setTimeout(() => {
-                    this.play(message, this.queue[0]);
-                    this.queue.splice(0, 1);
-                }, 1000);
-            }
+        this.dispatcher &&
+            this.dispatcher.on('finish', () => {
+                if (this.queue.length) {
+                    return setTimeout(() => {
+                        this.play(message, this.queue[0]);
+                        this.queue.splice(0, 1);
+                    }, 1000);
+                }
 
-            video.requester.send(message.translate('music:CONCLUDED'));
-            return this.end();
-        });
+                video.requester.send(message.translate('music:CONCLUDED'));
+                return this.end();
+            });
     }
 
     async playLive(message: TypicalGuildMessage, video: Video) {
         this.mode = 'live';
 
-        this.dispatcher = this.guild.voice && this.guild.voice.connection && this.guild.voice.connection.play(
-            await video.stream(),
-            { volume: this.volume }
-        );
+        this.dispatcher =
+            this.guild.voice &&
+            this.guild.voice.connection &&
+            this.guild.voice.connection.play(await video.stream(), {
+                volume: this.volume
+            });
 
         this.current = video;
 
@@ -102,17 +106,21 @@ export default class Stream {
             })
         );
 
-        this.dispatcher && this.dispatcher.on('error', err => {
-            video.requester.send(message.translate('music:ERROR_LIVESTREAM'));
-            // eslint-disable-next-line no-console
-            console.log(err);
-            this.end();
-        });
+        this.dispatcher &&
+            this.dispatcher.on('error', err => {
+                video.requester.send(
+                    message.translate('music:ERROR_LIVESTREAM')
+                );
+                // eslint-disable-next-line no-console
+                console.log(err);
+                this.end();
+            });
 
-        this.dispatcher && this.dispatcher.on('finish', () => {
-            video.requester.send(message.translate('music:LIVE_CONCLUDED'));
-            this.end();
-        });
+        this.dispatcher &&
+            this.dispatcher.on('finish', () => {
+                video.requester.send(message.translate('music:LIVE_CONCLUDED'));
+                this.end();
+            });
     }
 
     end() {

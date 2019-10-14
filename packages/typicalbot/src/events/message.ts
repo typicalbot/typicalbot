@@ -81,7 +81,7 @@ export default class extends Event {
         );
         if (!command) return;
         if (!message.member)
-        await message.guild.members.fetch(message.author.id);
+            await message.guild.members.fetch(message.author.id);
 
         if (command.ptb && this.client.build !== 'ptb')
             return message.error(message.translate('misc:PTB_ONLY'));

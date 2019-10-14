@@ -41,7 +41,9 @@ export default class GuildBanRemove extends Event {
                               user,
                               settings.logs.unban
                           )
-                        : guild.translate('unban:USER_UNBAN', { user: user.tag })
+                        : guild.translate('unban:USER_UNBAN', {
+                              user: user.tag
+                          })
                 )
                 .catch(() => null);
         }

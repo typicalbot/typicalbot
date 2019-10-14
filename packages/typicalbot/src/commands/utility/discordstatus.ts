@@ -8,27 +8,34 @@ export default class extends Command {
     mode = Constants.Modes.LITE;
 
     async execute(message: TypicalGuildMessage) {
-        const data = await fetch('https://status.discordapp.com/api/v2/summary.json')
-        .then((res) => res.json())
-        .catch(() => null);
-        if (!data) return message.error(message.translate('common:REQUEST_ERROR'));
+        const data = await fetch(
+            'https://status.discordapp.com/api/v2/summary.json'
+        )
+            .then(res => res.json())
+            .catch(() => null);
+        if (!data)
+            return message.error(message.translate('common:REQUEST_ERROR'));
 
-
-        if (!data.incidents.length) return message.send([
-            message.translate('discordstatus:OPERATIONAL'),
-            '',
-            '<https://status.discordapp.com>'
-        ].join('\n'));
+        if (!data.incidents.length)
+            return message.send(
+                [
+                    message.translate('discordstatus:OPERATIONAL'),
+                    '',
+                    '<https://status.discordapp.com>'
+                ].join('\n')
+            );
 
         const [incident] = data.incidents;
 
-        return message.send([
-            message.translate('discordstatus:INCIDENT', { 
-                time: new Date(incident.created_at),
-            }),
-            incident.incident_updates[0].body,
-            '',
-            `<https://status.discordapp.com/incidents/${incident.incident_id}>`
-        ].join('\n'));
+        return message.send(
+            [
+                message.translate('discordstatus:INCIDENT', {
+                    time: new Date(incident.created_at)
+                }),
+                incident.incident_updates[0].body,
+                '',
+                `<https://status.discordapp.com/incidents/${incident.incident_id}>`
+            ].join('\n')
+        );
     }
-};
+}

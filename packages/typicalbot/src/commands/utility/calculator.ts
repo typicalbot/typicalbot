@@ -8,10 +8,13 @@ export default class extends Command {
     mode = Constants.Modes.LITE;
 
     execute(message: TypicalGuildMessage, parameters: string) {
-        if (!parameters) return message.error(message.translate('misc:USAGE_ERROR', {
-            name: this.name,
-            prefix: this.client.config.prefix
-        }));
+        if (!parameters)
+            return message.error(
+                message.translate('misc:USAGE_ERROR', {
+                    name: this.name,
+                    prefix: this.client.config.prefix
+                })
+            );
 
         try {
             const result = math.evaluate(parameters);
@@ -25,11 +28,11 @@ export default class extends Command {
                     message.translate('calculator:OUTPUT'),
                     '```',
                     result,
-                    '```',
+                    '```'
                 ].join('\n')
             );
         } catch (e) {
             return message.error(message.translate('calculator:FAILED'));
         }
     }
-};
+}

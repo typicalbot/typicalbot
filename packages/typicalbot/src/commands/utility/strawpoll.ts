@@ -8,28 +8,33 @@ const splitRegex = /\s*;\s*/i;
 export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
-        if (!args) return message.error(message.translate('misc:USAGE_ERROR', {
-            name: this.name,
-            prefix: this.client.config.prefix
-        }));
+        if (!args)
+            return message.error(
+                message.translate('misc:USAGE_ERROR', {
+                    name: this.name,
+                    prefix: this.client.config.prefix
+                })
+            );
         args.shift();
         const [multi, question, answers] = args;
 
         const list = answers.split(splitRegex);
-        if (list.length < 2 || list.length > 30) return message.error(message.translate('strawpoll:INVALID'));
+        if (list.length < 2 || list.length > 30)
+            return message.error(message.translate('strawpoll:INVALID'));
 
         const data = await fetch('https://www.strawpoll.me/api/v2/polls', {
             method: 'post',
             body: JSON.stringify({
                 title: question,
                 options: list,
-                multi: !!multi,
-            }),
+                multi: !!multi
+            })
         })
-            .then((res) => res.json())
+            .then(res => res.json())
             .catch(() => null);
-        if (!data) return message.error(message.translate('common:REQUEST_ERROR'))
+        if (!data)
+            return message.error(message.translate('common:REQUEST_ERROR'));
 
         return message.reply(message.translate('strawpoll:CREATED'));
     }
-};
+}

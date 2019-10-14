@@ -15,6 +15,7 @@ export default class extends Command {
         const [number] = args;
         const page = parseInt(number, 10);
         const paged = this.client.helpers.pagify.execute(
+            message,
             this.client.guilds
                 .array()
                 .sort((a, b) => b.memberCount - a.memberCount)

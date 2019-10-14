@@ -23,7 +23,9 @@ export default class Ready extends Event {
                 this.client.voice.connections
                     .filter(c => c.channel.members.size === 1)
                     .forEach(c =>
-                        (c.voice.guild as TypicalGuild).guildStream ? (c.voice.guild as TypicalGuild).guildStream.end() : c.disconnect()
+                        (c.voice.guild as TypicalGuild).guildStream
+                            ? (c.voice.guild as TypicalGuild).guildStream.end()
+                            : c.disconnect()
                     );
         }, 1000 * 30);
     }

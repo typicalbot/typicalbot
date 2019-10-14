@@ -6,7 +6,7 @@ import {
     MessageEmbed,
     MessageOptions,
     TextChannel,
-    User,
+    User
 } from 'discord.js';
 import Command from '../structures/Command';
 import Cluster from '..';
@@ -166,8 +166,14 @@ export interface HelperFunctions {
         execute(guild: Guild): Promise<AccessLevel>;
     };
     formatMessage: {
-        execute(type: string, guild: TypicalGuild, user: User, content: string, options?: FormatMessageOptions): string;
-    }
+        execute(
+            type: string,
+            guild: TypicalGuild,
+            user: User,
+            content: string,
+            options?: FormatMessageOptions
+        ): string;
+    };
     lengthen: {
         execute(
             text: string,
@@ -177,7 +183,11 @@ export interface HelperFunctions {
         shorten(text: string, length: number): string;
     };
     pagify: {
-        execute(list: string[], page?: number): string;
+        execute(
+            message: TypicalGuildMessage,
+            list: string[],
+            page?: number
+        ): string;
     };
     permissionError: {
         execute(
@@ -250,10 +260,7 @@ export interface TypicalGuild extends Guild {
     settings: GuildSettings;
     buildModerationLog(): Promise<ModerationLog>;
     translate(key: string, args?: object): string;
-    fetchPermissions(
-        userID: string,
-        ignoreStaff?: boolean
-    ): Promise<PermLevel>;
+    fetchPermissions(userID: string, ignoreStaff?: boolean): Promise<PermLevel>;
     fetchSettings(): Promise<GuildSettings>;
     guildStream: Stream;
     _guildStream: Stream | null;
@@ -281,4 +288,3 @@ export interface FormatMessageOptions {
     channel?: GuildChannel;
     message?: TypicalGuildMessage;
 }
-

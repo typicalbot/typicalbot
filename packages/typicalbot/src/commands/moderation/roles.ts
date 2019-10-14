@@ -67,6 +67,7 @@ export default class extends Command {
 
     list(message: TypicalGuildMessage, page: string) {
         const content = this.client.helpers.pagify.execute(
+            message,
             message.guild.roles
                 .sort((a, b) => b.position - a.position)
                 .map(
@@ -130,6 +131,7 @@ export default class extends Command {
         await message.guild.members.fetch().catch(console.error);
 
         const content = this.client.helpers.pagify.execute(
+            message,
             role.members.map(
                 member =>
                     `${this.client.helpers.lengthen.execute(
@@ -273,6 +275,7 @@ export default class extends Command {
             return message.reply(message.translate('roles:NONE_PUBLIC'));
 
         const content = this.client.helpers.pagify.execute(
+            message,
             roles
                 .sort((a, b) => b.position - a.position)
                 .map(

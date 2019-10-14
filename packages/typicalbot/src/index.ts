@@ -18,7 +18,12 @@ import CommandHandler from './handlers/Commands';
 import EventHandler from './handlers/Events';
 
 import MusicUtility from './utility/Music';
-import { TypicalDonor, HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
+import {
+    TypicalDonor,
+    HelperFunctions,
+    BanLog,
+    UnbanLog
+} from './types/typicalbot';
 import i18n from '../src/i18n';
 import i18next = require('i18next');
 

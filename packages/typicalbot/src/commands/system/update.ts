@@ -14,12 +14,23 @@ export default class extends Command {
         exec('git pull', { cwd: path }, (err, stdout, stderr) => {
             if (err) return console.error(err);
 
-            const embed = new MessageEmbed().setTitle('TypicalBot Updater').setFooter('TypicalBot', Constants.Links.ICON).setColor(0x00adff);
+            const embed = new MessageEmbed()
+                .setTitle('TypicalBot Updater')
+                .setFooter('TypicalBot', Constants.Links.ICON)
+                .setColor(0x00adff);
 
-            if (stdout) embed.addField('» STDOUT', stdout.toString().substring(0, 1024));
-            if (stderr) embed.addField('» STDERR', stderr.toString().substring(0, 1024));
+            if (stdout)
+                embed.addField(
+                    '» STDOUT',
+                    stdout.toString().substring(0, 1024)
+                );
+            if (stderr)
+                embed.addField(
+                    '» STDERR',
+                    stderr.toString().substring(0, 1024)
+                );
 
             message.send(embed);
         });
     }
-};
+}

@@ -44,7 +44,7 @@ export default class FormatMessage extends Function {
                 .replace(/{channel.id}/gi, options.channel.id);
         }
         if (type === 'logs-msgdel') {
-            let formatted = this.logs(content, guild, user).replace(
+            const formatted = this.logs(content, guild, user).replace(
                 /{user.nick}|{user.nickname}/gi,
                 member ? member.displayName : user.username
             );

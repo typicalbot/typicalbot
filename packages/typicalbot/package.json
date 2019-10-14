@@ -77,5 +77,8 @@
         "eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
         "eslint-plugin-import": "^2.18.2",
         "lerna": "^3.16.4"
+    },
+    "eslintConfig": {
+        "extends": "eslint-config-typicalbot"
     }
 }

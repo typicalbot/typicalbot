@@ -68,10 +68,16 @@ export default class MessageBulkDelete extends Event {
                 new MessageEmbed()
                     .setColor(0x3ea7ed)
                     .setDescription(
-                        message.translate('logs:PURGED', { amount: messages.size, url: haste })
+                        message.translate('logs:PURGED', {
+                            amount: messages.size,
+                            url: haste
+                        })
                     )
                     .setFooter(
-                        message.translate('logs:MESSAGES_PURGED', { channel: message.channel.toString(), id: message.channel.id })
+                        message.translate('logs:MESSAGES_PURGED', {
+                            channel: message.channel.toString(),
+                            id: message.channel.id
+                        })
                     )
                     .setTimestamp()
             )
