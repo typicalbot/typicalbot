@@ -3,24 +3,30 @@ import * as Backend from 'i18next-node-fs-backend';
 import * as path from 'path';
 import { promises as fs } from 'fs';
 
-async function walkDirectory(dir: string, namespaces: string[] = []) {
+async function walkDirectory(
+    dir: string,
+    namespaces: string[] = [],
+    folderName = ''
+) {
     const files = await fs.readdir(dir);
 
     const languages: string[] = [];
     for (const file of files) {
         const stat = await fs.stat(path.join(dir, file));
         if (stat.isDirectory()) {
-            languages.push(file);
+            const isLanguage = file.includes('-');
+            if (isLanguage) languages.push(file);
 
             const folder = await walkDirectory(
                 path.join(dir, file),
-                namespaces
+                namespaces,
+                isLanguage ? '' : `${file}/`
             );
 
             // eslint-disable-next-line no-param-reassign
             namespaces = folder.namespaces;
         } else {
-            namespaces.push(file.substr(0, file.length - 5));
+            namespaces.push(`${folderName}${file.substr(0, file.length - 5)}`);
         }
     }
 
@@ -39,7 +45,8 @@ export default async (): Promise<Map<string, i18next.TFunction>> => {
     const { namespaces, languages } = await walkDirectory(
         path.resolve(__dirname, '../../../../../../i18n/')
     );
-
+    console.log('languages', languages);
+    console.log('namespaces', namespaces);
     i18next.use(Backend);
 
     await i18next.init({

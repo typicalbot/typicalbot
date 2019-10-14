@@ -33,7 +33,7 @@ export default class extends Command {
 
             if (!args)
                 return message.reply(
-                    message.translate('volume:CHANGED', {
+                    message.translate('music/volume:CHANGED', {
                         amount: response
                     })
                 );
@@ -51,7 +51,7 @@ export default class extends Command {
                 return;
 
             if (volume < 0 || volume > 200)
-                return message.error(message.translate('volume:INVALID'));
+                return message.error(message.translate('music/volume:INVALID'));
             if (
                 !message.member.voice.channel ||
                 message.member.voice.channel.id !== connection.channel.id
@@ -61,7 +61,7 @@ export default class extends Command {
             message.guild.guildStream.setVolume(volume * 0.01);
 
             return message.reply(
-                message.translate('volume:CHANGED', { amount: response })
+                message.translate('music/volume:CHANGED', { amount: response })
             );
         } catch (e) {
             return message.send(message.translate('common:NOTHING_STREAMING'));

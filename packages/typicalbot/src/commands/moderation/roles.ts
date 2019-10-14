@@ -52,13 +52,13 @@ export default class extends Command {
     help(message: TypicalGuildMessage) {
         return message.send(
             [
-                message.translate('help:TEXT_1', { name: this.name }),
-                message.translate('help:TEXT_2'),
-                message.translate('help:TEXT_3'),
+                message.translate('core/help:TEXT_1', { name: this.name }),
+                message.translate('core/help:TEXT_2'),
+                message.translate('core/help:TEXT_3'),
                 '```',
-                message.translate('roles:HELP_LIST'),
-                message.translate('roles:HELP_FIRST'),
-                message.translate('roles:HELP_SECOND'),
+                message.translate('moderation/roles:HELP_LIST'),
+                message.translate('moderation/roles:HELP_FIRST'),
+                message.translate('moderation/roles:HELP_SECOND'),
                 '',
                 '```'
             ].join('\n')
@@ -76,7 +76,9 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('roles:LIST', { name: message.guild.name }),
+                message.translate('moderation/roles:LIST', {
+                    name: message.guild.name
+                }),
                 '',
                 '',
                 '```autohotkey',
@@ -118,7 +120,8 @@ export default class extends Command {
                             r.name.toLowerCase() === subArgs[6].toLowerCase()
                   )
                 : null;
-        if (!role) return message.error(message.translate('give:INVALID'));
+        if (!role)
+            return message.error(message.translate('moderation/give:INVALID'));
 
         if (action !== 'members') return null;
 
@@ -134,7 +137,7 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('roles:MEMBERS', {
+                message.translate('moderation/roles:MEMBERS', {
                     name: message.guild.name
                 }),
                 '',
@@ -192,15 +195,20 @@ export default class extends Command {
               )
             : null;
 
-        if (!role) return message.error(message.translate('give:INVALID'));
+        if (!role)
+            return message.error(message.translate('moderation/give:INVALID'));
 
         if (!role.editable)
-            return message.error(message.translate('give:UNEDITABLE'));
+            return message.error(
+                message.translate('moderation/give:UNEDITABLE')
+            );
 
         if (message.member.roles.highest.position <= role.position)
             return message.error(
                 message.translate(
-                    subcommand === 'give' ? 'roles:GIVE' : 'roles:TAKE'
+                    subcommand === 'give'
+                        ? 'moderation/roles:GIVE'
+                        : 'moderation/roles:TAKE'
                 )
             );
 
@@ -262,7 +270,9 @@ export default class extends Command {
         }
 
         if (!roles.length)
-            return message.reply(message.translate('roles:NONE_PUBLIC'));
+            return message.reply(
+                message.translate('moderation/roles:NONE_PUBLIC')
+            );
 
         const content = this.client.helpers.pagify.execute(
             message,
@@ -274,7 +284,7 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('roles:PUBLIC'),
+                message.translate('moderation/roles:PUBLIC'),
                 '',
                 '',
                 '```autohotkey',
@@ -300,19 +310,24 @@ export default class extends Command {
                 )
             );
 
-        if (!role) return message.error(message.translate('give:INVALID'));
+        if (!role)
+            return message.error(message.translate('moderation/give:INVALID'));
 
         const roleIDs = message.guild.settings.roles.public.filter(r =>
             message.guild.roles.has(r)
         );
         if (subcommand === 'add') {
             if (roleIDs.includes(role.id))
-                return message.error(message.translate('roles:ALREADY_PUBLIC'));
+                return message.error(
+                    message.translate('moderation/roles:ALREADY_PUBLIC')
+                );
 
             roleIDs.push(role.id);
         } else {
             if (!roleIDs.includes(role.id))
-                return message.error(message.translate('roles:NOT_PUBLIC'));
+                return message.error(
+                    message.translate('moderation/roles:NOT_PUBLIC')
+                );
 
             roleIDs.splice(roleIDs.indexOf(role.id), 1);
         }

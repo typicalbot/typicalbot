@@ -28,7 +28,9 @@ export default class GuildMemberAdd extends Event {
                                     `${user.tag} (${user.id})`,
                                     user.displayAvatarURL()
                                 )
-                                .setFooter(guild.translate('logs:USER_JOINED'))
+                                .setFooter(
+                                    guild.translate('help/logs:USER_JOINED')
+                                )
                                 .setTimestamp()
                         )
                         .catch(() => null);
@@ -42,7 +44,7 @@ export default class GuildMemberAdd extends Event {
                                       user,
                                       settings.logs.join
                                   )
-                                : guild.translate('logs:JOINED_SERVER', {
+                                : guild.translate('help/logs:JOINED_SERVER', {
                                       user: user.tag
                                   })
                         )
@@ -54,7 +56,7 @@ export default class GuildMemberAdd extends Event {
         if (settings.auto.message && !user.bot)
             user.send(
                 [
-                    guild.translate('logs:WELCOME_ALERT', {
+                    guild.translate('help/logs:WELCOME_ALERT', {
                         name: guild.name
                     }),
                     '',
@@ -98,7 +100,7 @@ export default class GuildMemberAdd extends Event {
             if (!channel || channel.type !== 'text') return null;
 
             return channel.send(
-                guild.translate('logs:AUTOROLE', {
+                guild.translate('help/logs:AUTOROLE', {
                     user: user.tag,
                     role: roles.name
                 })

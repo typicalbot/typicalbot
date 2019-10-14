@@ -38,7 +38,7 @@ export default class extends Command {
         const unbanned = await message.guild.members
             .unban(
                 userID,
-                message.translate('unban:REASON', {
+                message.translate('moderation/unban:REASON', {
                     mod: message.author.tag,
                     reason: reason || message.translate('common:NO_REASON')
                 })
@@ -58,7 +58,7 @@ export default class extends Command {
         if (unbanned instanceof Message) return null;
 
         message.success(
-            message.translate('unban:UNBANNED', { user: user.tag })
+            message.translate('moderation/unban:UNBANNED', { user: user.tag })
         );
 
         const tasks = (await this.client.handlers.database

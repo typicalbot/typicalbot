@@ -10,50 +10,50 @@ export default class extends Command {
         message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('logs:POSSIBLE'))
+                .setTitle(message.translate('help/logs:POSSIBLE'))
                 .setURL(Constants.Links.BASE)
                 .setDescription(
-                    message.translate('logs:VIEW_ALL', {
+                    message.translate('help/logs:VIEW_ALL', {
                         link: Constants.Links.SETTINGS
                     })
                 )
                 .addField(
-                    message.translate('logs:ACTIVITY'),
-                    message.translate('logs:ACTIVITY_VALUE')
+                    message.translate('help/logs:ACTIVITY'),
+                    message.translate('help/logs:ACTIVITY_VALUE')
                 )
                 .addField(
-                    message.translate('logs:JOIN'),
-                    message.translate('logs:JOIN_VALUE'),
+                    message.translate('help/logs:JOIN'),
+                    message.translate('help/logs:JOIN_VALUE'),
                     true
                 )
                 .addField(
-                    message.translate('logs:LEAVE'),
-                    message.translate('logs:LEAVE_VALUE'),
+                    message.translate('help/logs:LEAVE'),
+                    message.translate('help/logs:LEAVE_VALUE'),
                     true
                 )
                 .addField(
-                    message.translate('logs:BAN'),
-                    message.translate('logs:BAN_VALUE'),
+                    message.translate('help/logs:BAN'),
+                    message.translate('help/logs:BAN_VALUE'),
                     true
                 )
                 .addField(
-                    message.translate('logs:UNBAN'),
-                    message.translate('logs:UNBAN_VALUE'),
+                    message.translate('help/logs:UNBAN'),
+                    message.translate('help/logs:UNBAN_VALUE'),
                     true
                 )
                 .addField(
-                    message.translate('logs:NICKNAME'),
-                    message.translate('logs:NICKNAME_VALUE'),
+                    message.translate('help/logs:NICKNAME'),
+                    message.translate('help/logs:NICKNAME_VALUE'),
                     true
                 )
                 .addField(
-                    message.translate('logs:INVITE'),
-                    message.translate('logs:INVITE_VALUE'),
+                    message.translate('help/logs:INVITE'),
+                    message.translate('help/logs:INVITE_VALUE'),
                     true
                 )
                 .addField(
-                    message.translate('logs:MODERATION'),
-                    message.translate('logs:MODERATION_VALUE'),
+                    message.translate('help/logs:MODERATION'),
+                    message.translate('help/logs:MODERATION_VALUE'),
                     false
                 )
                 .setFooter('TypicalBot', Constants.Links.ICON)

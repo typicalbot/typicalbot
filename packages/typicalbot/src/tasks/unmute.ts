@@ -22,7 +22,7 @@ export default class extends Task {
         const editable = guild.roles.get(settings.roles.mute);
         if (!editable) return;
 
-        const reason = guild.translate('unmute:TASK_REASON');
+        const reason = guild.translate('moderation/unmute:TASK_REASON');
 
         const newCase = this.client.handlers.moderationLog
             .buildCase(guild)

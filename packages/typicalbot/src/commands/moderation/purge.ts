@@ -34,7 +34,9 @@ export default class extends Command {
         let messageCount = parseInt(amount, 10);
         if (messageCount > 100) messageCount = 100;
         if (messageCount < 2)
-            return message.error(message.translate('purge:TOO_LITTLE'));
+            return message.error(
+                message.translate('moderation/purge:TOO_LITTLE')
+            );
 
         let channelToUse = message.guild.channels.get(channelID) as TextChannel;
         if (!channelToUse || channelToUse.type !== 'text')
@@ -65,7 +67,9 @@ export default class extends Command {
             .catch(() => null);
 
         if (!purged)
-            return message.error(message.translate('purge:MISSING_PERMS'));
+            return message.error(
+                message.translate('moderation/purge:MISSING_PERMS')
+            );
 
         if (
             message.guild.settings.logs.moderation &&
@@ -80,13 +84,14 @@ export default class extends Command {
             newCase.send();
         }
 
-        if (!purged.size) message.reply(message.translate('purge:NONE'));
+        if (!purged.size)
+            message.reply(message.translate('moderation/purge:NONE'));
         else {
             const response = await message.reply(
                 message.translate(
                     purged.size === 1
-                        ? 'purge:PURGED'
-                        : 'purge:PURGED_MULTIPLE',
+                        ? 'moderation/purge:PURGED'
+                        : 'moderation/purge:PURGED_MULTIPLE',
                     { amount: purged.size }
                 )
             );

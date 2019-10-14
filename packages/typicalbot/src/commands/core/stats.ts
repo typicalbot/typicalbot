@@ -41,7 +41,7 @@ export default class extends Command {
         );
         if (!message.embedable)
             return message.send(
-                message.translate('stats:TEXT', {
+                message.translate('core/stats:TEXT', {
                     uptime,
                     guilds: guilds.toLocaleString(),
                     count: this.client.shardCount,
@@ -76,82 +76,86 @@ export default class extends Command {
             new MessageEmbed()
                 .setColor(0x00adff)
                 .setThumbnail(Constants.Links.ICON)
-                .setTitle(message.translate('stats:TYPICAL_STATS'))
-                .addField(message.translate('stats:UPTIME'), uptime, true)
+                .setTitle(message.translate('core/stats:TYPICAL_STATS'))
+                .addField(message.translate('core/stats:UPTIME'), uptime, true)
                 .addField(
-                    message.translate('stats:SERVERS'),
-                    message.translate('stats:SERVERS_VALUE', {
+                    message.translate('core/stats:SERVERS'),
+                    message.translate('core/stats:SERVERS_VALUE', {
                         guilds: guilds.toLocaleString(),
                         count: this.client.shardCount
                     }),
                     true
                 )
                 .addField(
-                    message.translate('stats:VOICE'),
+                    message.translate('core/stats:VOICE'),
                     voiceConnections.toLocaleString(),
                     true
                 )
                 .addField(
-                    message.translate('stats:CHANNELS'),
+                    message.translate('core/stats:CHANNELS'),
                     channels.toLocaleString(),
                     true
                 )
                 .addField(
-                    message.translate('stats:USERS'),
+                    message.translate('core/stats:USERS'),
                     users.toLocaleString(),
                     true
                 )
                 .addField(
-                    message.translate('stats:CPU'),
+                    message.translate('core/stats:CPU'),
                     `${Math.round(loadavg()[0] * 10000) / 100}%`,
                     true
                 )
-                .addField(message.translate('stats:RAM'), `${usedRAM}MB`, true)
                 .addField(
-                    message.translate('stats:RAM_TOTAL'),
+                    message.translate('core/stats:RAM'),
+                    `${usedRAM}MB`,
+                    true
+                )
+                .addField(
+                    message.translate('core/stats:RAM_TOTAL'),
                     `${totalRAM}MB`,
                     true
                 )
                 .addField(
-                    message.translate('stats:LIBRARY'),
+                    message.translate('core/stats:LIBRARY'),
                     'discord.js',
                     true
                 )
                 .addField(
-                    message.translate('stats:CREATED_BY'),
+                    message.translate('core/stats:CREATED_BY'),
                     'HyperCoder#2975\nnsylke#4490',
                     true
                 )
                 .addBlankField()
                 .addField('» Cluster', `${clusterName}\n${clusterShards}`, true)
                 .addField(
-                    message.translate('stats:SERVERS'),
+                    message.translate('core/stats:SERVERS'),
                     this.client.guilds.size.toLocaleString(),
                     true
                 )
                 .addField(
-                    message.translate('stats:VOICE'),
+                    message.translate('core/stats:VOICE'),
                     this.client.voice &&
                         this.client.voice.connections.size.toLocaleString(),
                     true
                 )
                 .addField(
-                    message.translate('stats:CHANNELS'),
+                    message.translate('core/stats:CHANNELS'),
                     this.client.channels.size.toLocaleString(),
                     true
                 )
                 .addField(
-                    message.translate('stats:USERS'),
+                    message.translate('core/stats:USERS'),
                     this.client.users.size.toLocaleString(),
                     true
                 )
                 .addField(
-                    message.translate('stats:RAM'),
+                    message.translate('core/stats:RAM'),
                     `${this.client.usedRAM}MB`,
                     true
                 )
                 .addField(
-                    message.translate('stats:RAM_TOTAL'),
+                    message.translate('core/stats:RAM_TOTAL'),
                     `${this.client.totalRAM}MB`,
                     true
                 )

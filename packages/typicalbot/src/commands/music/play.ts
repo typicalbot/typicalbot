@@ -42,13 +42,16 @@ export default class extends Command {
             const info = await this.client.utility.music
                 .fetchInfo(url, message)
                 .catch(() => null);
-            if (!info) return message.error(message.translate('play:NO_INFO'));
+            if (!info)
+                return message.error(message.translate('music/play:NO_INFO'));
 
             const access = await this.client.helpers.fetchAccess.execute(
                 message.guild
             );
             if (info.live && access.level < 1) {
-                return message.error(message.translate('play:PRIME_ONLY'));
+                return message.error(
+                    message.translate('music/play:PRIME_ONLY')
+                );
             }
 
             return this.client.handlers.music
@@ -66,7 +69,8 @@ export default class extends Command {
             });
         if (!data) return null;
 
-        if (!data.length) return message.reply(message.translate('play:NONE'));
+        if (!data.length)
+            return message.reply(message.translate('music/play:NONE'));
         const [first] = data;
 
         const info = await this.client.utility.music

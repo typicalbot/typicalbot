@@ -35,17 +35,19 @@ export default class extends Command {
                 member.roles.highest.position &&
             (permissionLevel.level !== 4 && permissionLevel.level < 9)
         )
-            return message.error(message.translate('kick:TOO_LOW'));
+            return message.error(message.translate('moderation/kick:TOO_LOW'));
 
         if (!member.kickable)
-            return message.error(message.translate('kick:KICKABLE'));
+            return message.error(message.translate('moderation/kick:KICKABLE'));
 
         const embed = new MessageEmbed()
             .setColor(0xff0000)
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(
-                message.translate('kick:KICKED', { name: message.guild.name })
+                message.translate('moderation/kick:KICKED', {
+                    name: message.guild.name
+                })
             )
             .addField(
                 message.translate('common:MODERATOR_FIELD'),
@@ -58,13 +60,14 @@ export default class extends Command {
 
         const kicked = await member
             .kick(
-                message.translate('kick:REASON', {
+                message.translate('moderation/kick:REASON', {
                     mod: message.author.tag,
                     reason: reason || message.translate('common:NO_REASON')
                 })
             )
             .catch(() => null);
-        if (!kicked) return message.error(message.translate('kick:ERROR'));
+        if (!kicked)
+            return message.error(message.translate('moderation/kick:ERROR'));
 
         if (message.guild.settings.logs.moderation) {
             const newCase = await message.guild.buildModerationLog();
@@ -78,7 +81,7 @@ export default class extends Command {
         }
 
         return message.success(
-            message.translate('kick:KICK_SUCCESS', {
+            message.translate('moderation/kick:KICK_SUCCESS', {
                 user: member.user.tag
             })
         );

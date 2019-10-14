@@ -10,7 +10,7 @@ export default class extends Command {
 
     execute(message: TypicalMessage) {
         if (message.channel.type === 'text')
-            message.respond(message.translate('commands:CHECK_DM'));
+            message.respond(message.translate('core/commands:CHECK_DM'));
 
         const level0 = [];
         const level1 = [];
@@ -40,7 +40,7 @@ export default class extends Command {
             }
         }
 
-        const NONE = message.translate('commands:NONE');
+        const NONE = message.translate('core/commands:NONE');
 
         return message.author
             .send(
@@ -48,28 +48,28 @@ export default class extends Command {
                     .setColor(0x00adff)
                     .setTitle('TypicalBot Commands')
                     .setDescription(
-                        message.translate('commands:TEXT', {
+                        message.translate('core/commands:TEXT', {
                             prefix: this.client.config.prefix
                         })
                     )
                     .addField(
-                        message.translate('commands:OWNER'),
+                        message.translate('core/commands:OWNER'),
                         level4.length ? level4.join(', ') : NONE
                     )
                     .addField(
-                        message.translate('commands:ADMIN'),
+                        message.translate('core/commands:ADMIN'),
                         level3.length ? level3.join(', ') : NONE
                     )
                     .addField(
-                        message.translate('commands:MOD'),
+                        message.translate('core/commands:MOD'),
                         level2.length ? level2.join(', ') : NONE
                     )
                     .addField(
-                        message.translate('commands:DJ'),
+                        message.translate('core/commands:DJ'),
                         level1.length ? level1.join(', ') : NONE
                     )
                     .addField(
-                        message.translate('commands:MEMBER'),
+                        message.translate('core/commands:MEMBER'),
                         level0.length ? level0.join(', ') : NONE
                     )
                     .setFooter('TypicalBot', Constants.Links.ICON)

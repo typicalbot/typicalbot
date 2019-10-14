@@ -17,49 +17,49 @@ export default class extends Command {
         if (!message.embedable)
             return message.reply(
                 [
-                    message.translate('serverinfo:SERVER', {
+                    message.translate('utility/serverinfo:SERVER', {
                         name: message.guild.name
                     }),
                     '```',
-                    message.translate('serverinfo:NAME', {
+                    message.translate('utility/serverinfo:NAME', {
                         name: message.guild.id,
                         id: message.guild.id
                     }),
-                    message.translate('serverinfo:OWNER', {
+                    message.translate('utility/serverinfo:OWNER', {
                         users: guildOwner ? guildOwner.tag : UNKNOWN,
                         id: message.guild.ownerID
                     }),
-                    message.translate('serverinfo:CREATED', {
+                    message.translate('utility/serverinfo:CREATED', {
                         time: moment(message.guild.createdAt).format(
                             'dddd MMMM Do, YYYY, hh:mm A'
                         )
                     }),
-                    message.translate('serverinfo:REGION', {
+                    message.translate('utility/serverinfo:REGION', {
                         region: message.guild.region
                     }),
-                    message.translate('serverinfo:VERIFICATION', {
+                    message.translate('utility/serverinfo:VERIFICATION', {
                         level: message.guild.verificationLevel
                     }),
-                    message.translate('serverinfo:ICON', {
+                    message.translate('utility/serverinfo:ICON', {
                         url:
                             message.guild.iconURL({
                                 format: 'png',
                                 size: 2048
                             }) || message.translate('common:NONE')
                     }),
-                    message.translate('serverinfo:CHANNELS', {
+                    message.translate('utility/serverinfo:CHANNELS', {
                         amount: message.guild.channels.size
                     }),
-                    message.translate('serverinfo:MEMBERS', {
+                    message.translate('utility/serverinfo:MEMBERS', {
                         amount: message.guild.memberCount
                     }),
-                    message.translate('serverinfo:ROLES', {
+                    message.translate('utility/serverinfo:ROLES', {
                         amount: message.guild.roles.size
                     }),
-                    message.translate('serverinfo:EMOJIS', {
+                    message.translate('utility/serverinfo:EMOJIS', {
                         amount: message.guild.emojis.size
                     }),
-                    message.translate('serverinfo:BOOSTED', {
+                    message.translate('utility/serverinfo:BOOSTED', {
                         level: message.guild.premiumTier,
                         amount: message.guild.premiumSubscriptionCount
                     }) + '```'
@@ -69,7 +69,7 @@ export default class extends Command {
         return message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('serverinfo:INFO'))
+                .setTitle(message.translate('utility/serverinfo:INFO'))
                 .addField(
                     message.translate('common:NAME_FIELD'),
                     message.guild.name,
@@ -126,7 +126,7 @@ export default class extends Command {
                 )
                 .addField(
                     message.translate('common:BOOSTED_FIELD'),
-                    message.translate('serverinfo:BOOSTERS', {
+                    message.translate('utility/serverinfo:BOOSTERS', {
                         level: message.guild.premiumTier,
                         amount: message.guild.premiumSubscriptionCount
                     })

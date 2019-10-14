@@ -37,13 +37,15 @@ export default class extends Command {
                 member.roles.highest.position &&
             (permissionLevel.level !== 4 && permissionLevel.level < 9)
         )
-            return message.error(message.translate('ban:TOO_LOW'));
+            return message.error(message.translate('moderation/ban:TOO_LOW'));
         if (!member.bannable)
-            return message.error(message.translate('ban:UNBANNABLEs'));
+            return message.error(
+                message.translate('moderation/ban:UNBANNABLEs')
+            );
 
         this.client.caches.softbans.set(userID, userID);
 
-        const banReason = message.translate('softban:REASON', {
+        const banReason = message.translate('moderation/softban:REASON', {
             mod: message.author.tag,
             reason: reason || message.translate('common:NO_REASON')
         });
@@ -70,7 +72,9 @@ export default class extends Command {
             }
 
             return message.success(
-                message.translate('softban:BANNED', { user: member.user.tag })
+                message.translate('moderation/softban:BANNED', {
+                    user: member.user.tag
+                })
             );
         }, 1000);
     }

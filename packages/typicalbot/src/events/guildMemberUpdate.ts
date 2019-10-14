@@ -44,7 +44,7 @@ export default class GuildMemberUpdate extends Event {
                               settings.logs.nickname,
                               { oldMember }
                           )
-                        : guild.translate('logs:NICKNAMED', {
+                        : guild.translate('help/logs:NICKNAMED', {
                               user: user.tag,
                               nickname: member.displayName
                           })
@@ -60,7 +60,7 @@ export default class GuildMemberUpdate extends Event {
                         user.displayAvatarURL()
                     )
                     .setFooter(
-                        guild.translate('logs:CHANGED_NICK', {
+                        guild.translate('help/logs:CHANGED_NICK', {
                             nickname: member.displayName
                         })
                     )

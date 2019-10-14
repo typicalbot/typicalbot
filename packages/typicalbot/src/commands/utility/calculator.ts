@@ -21,18 +21,20 @@ export default class extends Command {
 
             return message.send(
                 [
-                    message.translate('calculator:INPUT'),
+                    message.translate('utility/calculator:INPUT'),
                     '```',
                     parameters,
                     '```',
-                    message.translate('calculator:OUTPUT'),
+                    message.translate('utility/calculator:OUTPUT'),
                     '```',
                     result,
                     '```'
                 ].join('\n')
             );
         } catch (e) {
-            return message.error(message.translate('calculator:FAILED'));
+            return message.error(
+                message.translate('utility/calculator:FAILED')
+            );
         }
     }
 }

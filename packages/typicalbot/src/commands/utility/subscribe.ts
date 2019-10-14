@@ -11,18 +11,22 @@ export default class extends Command {
             ? message.guild.roles.get(message.guild.settings.subscriber)
             : null;
 
-        if (!role) return message.error(message.translate('subscribe:NONE'));
+        if (!role)
+            return message.error(message.translate('utility/subscribe:NONE'));
 
         const subbed = await message.member.roles.add(role).catch(() => null);
         if (!subbed) return null;
 
-        if (!message.embedable) return message.success('subscribe:SUBSCRIBED');
+        if (!message.embedable)
+            return message.success('utility/subscribe:SUBSCRIBED');
 
         return message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('common:SUCCESS'))
-                .setDescription(message.translate('subscribe:SUBSCRIBED'))
+                .setDescription(
+                    message.translate('utility/subscribe:SUBSCRIBED')
+                )
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );

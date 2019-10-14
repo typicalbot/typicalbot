@@ -27,13 +27,13 @@ export default class extends Command {
                     : null;
 
             return message.send(
-                message.translate('current:CURRENT', {
+                message.translate('music/current:CURRENT', {
                     title: this.client.helpers.lengthen.execute(
                         message.guild.guildStream.current.title,
                         45
                     ),
                     remaining: remaining
-                        ? message.translate('current:REMAINING', {
+                        ? message.translate('music/current:REMAINING', {
                               amount: this.client.helpers.convertTime.execute(
                                   message,
                                   remaining

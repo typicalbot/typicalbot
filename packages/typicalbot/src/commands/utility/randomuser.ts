@@ -19,7 +19,7 @@ export default class extends Command {
         const member = members.random();
 
         return message.send(
-            message.translate('randomuser:RANDOM', {
+            message.translate('utility/randomuser:RANDOM', {
                 tag: member.user.tag,
                 id: member.id
             })

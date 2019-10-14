@@ -42,7 +42,9 @@ export default class GuildBanAdd extends Event {
                             `${user.tag} (${user.id})`,
                             user.displayAvatarURL()
                         )
-                        .setFooter(guild.translate('ban:USER_BANNED'))
+                        .setFooter(
+                            guild.translate('moderation/ban:USER_BANNED')
+                        )
                         .setTimestamp()
                 )
                 .catch(() => null);

@@ -27,7 +27,9 @@ export default class extends Command {
         if (!member)
             return message.error(message.translate('common:USER_NOT_FOUND'));
         if (!member.voice.channel)
-            return message.error(message.translate('voicekick:NO_VOICE'));
+            return message.error(
+                message.translate('moderation/voicekick:NO_VOICE')
+            );
 
         const removed = await member.voice
             .setChannel(null, reason || 'No reason provided.')
@@ -46,7 +48,9 @@ export default class extends Command {
         }
 
         return message.success(
-            message.translate('voicekick:SUCCESS', { user: member.user.tag })
+            message.translate('moderation/voicekick:SUCCESS', {
+                user: member.user.tag
+            })
         );
     }
 }

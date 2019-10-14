@@ -29,7 +29,7 @@ export default class GuildMemberRemove extends Event {
                               user,
                               settings.logs.leave
                           )
-                        : guild.translate('logs:LEFT', { user: user.tag })
+                        : guild.translate('help/logs:LEFT', { user: user.tag })
                 )
                 .catch(() => null);
 
@@ -41,7 +41,7 @@ export default class GuildMemberRemove extends Event {
                         `${user.tag} (${user.id})`,
                         user.displayAvatarURL()
                     )
-                    .setFooter(guild.translate('logs:USER_LEFT'))
+                    .setFooter(guild.translate('help/logs:USER_LEFT'))
                     .setTimestamp()
             )
             .catch(() => null);

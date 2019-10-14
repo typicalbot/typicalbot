@@ -27,26 +27,26 @@ export default class extends Command {
         if (!message.embedable)
             return message.send(
                 list.length
-                    ? message.translate('adcheck:FOUND', {
+                    ? message.translate('moderation/adcheck:FOUND', {
                           amount: message.translate(
                               list.length === 1
-                                  ? 'adcheck:ONE'
-                                  : 'adcheck:MULTIPLE',
+                                  ? 'moderation/adcheck:ONE'
+                                  : 'moderation/adcheck:MULTIPLE',
                               { amount: list.length }
                           ),
                           list: list.join('\n\n').substring(0, 2000)
                       })
-                    : message.translate('adcheck:NONE')
+                    : message.translate('moderation/adcheck:NONE')
             );
 
         return message.send(
             new MessageEmbed()
                 .setColor(0xff0000)
-                .setTitle(message.translate('adcheck:TITLE'))
+                .setTitle(message.translate('moderation/adcheck:TITLE'))
                 .setDescription(
                     list.length
                         ? list.join('\n\n').substring(0, 2000)
-                        : message.translate('adcheck:NONE')
+                        : message.translate('moderation/adcheck:NONE')
                 )
         );
     }

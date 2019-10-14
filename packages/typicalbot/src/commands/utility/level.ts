@@ -33,7 +33,7 @@ export default class extends Command {
 
         if (!message.embedable)
             return message.reply(
-                message.translate('level:TEXT', {
+                message.translate('utility/level:TEXT', {
                     level: `${permissions.level} | ${permissions.title}${
                         permissionsHere.level !== permissions.level
                             ? ` (${permissionsHere.level} | ${permissionsHere.title})`
@@ -46,10 +46,12 @@ export default class extends Command {
             new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(
-                    message.translate('level:TITLE', { user: member.user.tag })
+                    message.translate('utility/level:TITLE', {
+                        user: member.user.tag
+                    })
                 )
                 .setDescription(
-                    message.translate('level:EMBED', {
+                    message.translate('utility/level:EMBED', {
                         level: `${permissions.level} | ${permissions.title}${
                             permissionsHere.level !== permissions.level
                                 ? ` (${permissionsHere.level} | ${permissionsHere.title})`

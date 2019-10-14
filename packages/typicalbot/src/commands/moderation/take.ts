@@ -34,9 +34,12 @@ export default class extends Command {
             : roleName
             ? message.guild.roles.find(r => r.name.toLowerCase() === roleName)
             : null;
-        if (!role) return message.error(message.translate('give:INVALID'));
+        if (!role)
+            return message.error(message.translate('moderation/give:INVALID'));
         if (!role.editable)
-            return message.error(message.translate('take:UNEDITABLE'));
+            return message.error(
+                message.translate('moderation/take:UNEDITABLE')
+            );
 
         if (member) {
             if (
@@ -60,7 +63,9 @@ export default class extends Command {
         } else {
             const publicList = message.guild.settings.roles.public;
             if (!publicList.includes(role.id))
-                return message.error(message.translate('give:NOT_PUBLIC'));
+                return message.error(
+                    message.translate('moderation/give:NOT_PUBLIC')
+                );
 
             const removed = await message.member.roles
                 .remove(role)

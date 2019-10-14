@@ -47,7 +47,7 @@ export default class extends Command {
 
             if (!results.length)
                 return message.error(
-                    message.translate('unqueue:NONE', { query })
+                    message.translate('music/unqueue:NONE', { query })
                 );
 
             if (results.length < 1) {
@@ -66,9 +66,11 @@ export default class extends Command {
                 .join('\n');
 
             message.send(
-                [message.translate('unqueue:FOUND_MULTIPLE'), '', videos].join(
-                    '\n'
-                )
+                [
+                    message.translate('music/unqueue:FOUND_MULTIPLE'),
+                    '',
+                    videos
+                ].join('\n')
             );
 
             const messages = await message.channel
@@ -93,7 +95,9 @@ export default class extends Command {
                 });
 
                 return message.reply(
-                    message.translate('unqueue:ALL', { amount: results.length })
+                    message.translate('music/unqueue:ALL', {
+                        amount: results.length
+                    })
                 );
             }
             if (indexRegex.test(first.content)) {
@@ -103,13 +107,13 @@ export default class extends Command {
                 );
 
                 return message.reply(
-                    message.translate('unqueue:ONE', {
+                    message.translate('music/unqueue:ONE', {
                         title: results[0].title
                     })
                 );
             }
 
-            return message.error(message.translate('unqueue:INVALID'));
+            return message.error(message.translate('music/unqueue:INVALID'));
         } catch (e) {
             return message.send(message.translate('common:NOTHING_STREAMING'));
         }

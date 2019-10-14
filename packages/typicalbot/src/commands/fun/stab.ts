@@ -9,12 +9,12 @@ export default class extends Command {
         if (!mention || mention.id === message.author.id)
             return message.reply(
                 message.translate(
-                    randomAddon ? 'stab:SELF_POLICE' : 'stab:SELF'
+                    randomAddon ? 'fun/stab:SELF_POLICE' : 'fun/stab:SELF'
                 )
             );
         return message.reply(
             message.translate(
-                randomAddon ? 'stab:RESPONSE_POLICE' : 'stab:RESPONSE',
+                randomAddon ? 'fun/stab:RESPONSE_POLICE' : 'fun/stab:RESPONSE',
                 { user: mention.toString() }
             )
         );

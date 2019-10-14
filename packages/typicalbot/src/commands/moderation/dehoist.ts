@@ -35,16 +35,16 @@ export default class extends Command {
 
         message.send(
             list.length
-                ? message.translate('dehoist:FOUND', {
+                ? message.translate('moderation/dehoist:FOUND', {
                       amount: message.translate(
                           list.length === 1
-                              ? 'dehoist:ONE'
-                              : 'dehoist:MULTIPLE',
+                              ? 'moderation/dehoist:ONE'
+                              : 'moderation/dehoist:MULTIPLE',
                           { amount: list.length }
                       ),
                       list: list.join('\n\n').substring(0, 2000)
                   })
-                : message.translate('dehoist:NONE')
+                : message.translate('moderation/dehoist:NONE')
         );
     }
 }

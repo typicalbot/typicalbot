@@ -53,276 +53,277 @@ export default class extends Command {
                 const settings = message.guild.settings;
                 const settingsData = {
                     embed: {
-                        description: 'settings:EMBED',
+                        description: 'moderation/settings:EMBED',
                         value: settings.embed,
                         type: 'boolean',
                         path: 'embed'
                     },
                     adminrole: {
-                        description: 'settings:ADMINROLE',
+                        description: 'moderation/settings:ADMINROLE',
                         value: settings.roles.administrator,
                         type: 'roles',
                         path: 'roles.administrator'
                     },
                     modrole: {
-                        description: 'settings:MODROLE',
+                        description: 'moderation/settings:MODROLE',
                         value: settings.roles.moderator,
                         type: 'roles',
                         path: 'roles.moderator'
                     },
                     djrole: {
-                        description: 'settings:DJROLE',
+                        description: 'moderation/settings:DJROLE',
                         value: settings.roles.dj,
                         type: 'roles',
                         path: 'roles.dj'
                     },
                     muterole: {
-                        description: 'settings:MUTEROLE',
+                        description: 'moderation/settings:MUTEROLE',
                         value: settings.roles.mute,
                         type: 'role',
                         path: 'roles.mute'
                     },
                     blacklistrole: {
-                        description: 'settings:BLACKLISTROLE',
+                        description: 'moderation/settings:BLACKLISTROLE',
                         value: settings.roles.blacklist,
                         type: 'roles',
                         path: 'roles.blacklist'
                     },
                     subscriberrole: {
-                        description: 'settings:SUBSCRIBERROLE',
+                        description: 'moderation/settings:SUBSCRIBERROLE',
                         value: settings.subscriber,
                         type: 'role',
                         path: 'subscriber'
                     },
                     autorole: {
-                        description: 'settings:AUTOROLE',
+                        description: 'moderation/settings:AUTOROLE',
                         value: settings.auto.role.id,
                         type: 'role',
                         path: 'auto.role.id'
                     },
                     'autorole-bots': {
-                        description: 'settings:AUTOROLE-BOTS',
+                        description: 'moderation/settings:AUTOROLE-BOTS',
                         value: settings.auto.role.bots,
                         type: 'role',
                         path: 'auto.role.bots'
                     },
                     'autorole-delay': {
-                        description: 'settings:AUTOROLE-DELAY',
+                        description: 'moderation/settings:AUTOROLE-DELAY',
                         value: settings.auto.role.delay,
                         type: 'ms'
                     },
                     'autorole-silent': {
-                        description: 'settings:AUTOROLE-SILENT',
+                        description: 'moderation/settings:AUTOROLE-SILENT',
                         value: settings.auto.role.silent,
                         type: 'boolean',
                         path: 'auto.role.silent'
                     },
                     announcements: {
-                        description: 'settings:ANNOUNCEMENTS',
+                        description: 'moderation/settings:ANNOUNCEMENTS',
                         value: settings.announcements.id,
                         type: 'channel',
                         path: 'announcements.id'
                     },
                     'announcements-mention': {
-                        description: 'settings:ANNOUNCEMENTS-MENTION',
+                        description:
+                            'moderation/settings:ANNOUNCEMENTS-MENTION',
                         value: settings.announcements.mention,
                         type: 'role',
                         path: 'announcements.mention'
                     },
                     logs: {
-                        description: 'settings:LOGS',
+                        description: 'moderation/settings:LOGS',
                         value: settings.logs.id,
                         type: 'channel',
                         path: 'logs.id'
                     },
                     'logs-join': {
-                        description: 'settings:LOGS-JOIN',
+                        description: 'moderation/settings:LOGS-JOIN',
                         value: settings.logs.join,
                         type: 'log',
                         path: 'logs.join'
                     },
                     'logs-leave': {
-                        description: 'settings:LOGS-LEAVE',
+                        description: 'moderation/settings:LOGS-LEAVE',
                         value: settings.logs.leave,
                         type: 'log',
                         path: 'logs.leave'
                     },
                     'logs-ban': {
-                        description: 'settings:LOGS-BAN',
+                        description: 'moderation/settings:LOGS-BAN',
                         value: settings.logs.ban,
                         type: 'log',
                         path: 'logs.ban'
                     },
                     'logs-unban': {
-                        description: 'settings:LOGS-UNBAN',
+                        description: 'moderation/settings:LOGS-UNBAN',
                         value: settings.logs.unban,
                         type: 'log',
                         path: 'logs.unban'
                     },
                     'logs-nickname': {
-                        description: 'settings:LOGS-NICKNAME',
+                        description: 'moderation/settings:LOGS-NICKNAME',
                         value: settings.logs.nickname,
                         type: 'log',
                         path: 'logs.nickname'
                     },
                     'logs-invite': {
-                        description: 'settings:LOGS-INVITE',
+                        description: 'moderation/settings:LOGS-INVITE',
                         value: settings.logs.invite,
                         type: 'log',
                         path: 'logs.invite'
                     },
                     'logs-say': {
-                        description: 'settings:LOGS-SAY',
+                        description: 'moderation/settings:LOGS-SAY',
                         value: settings.logs.say,
                         type: 'log',
                         path: 'logs.say'
                     },
                     modlogs: {
-                        description: 'settings:MODLOGS',
+                        description: 'moderation/settings:MODLOGS',
                         value: settings.logs.moderation,
                         type: 'channel',
                         path: 'logs.moderation'
                     },
                     'modlogs-purge': {
-                        description: 'settings:MODLOGS-PURGE',
+                        description: 'moderation/settings:MODLOGS-PURGE',
                         value: settings.logs.purge,
                         type: 'boolean',
                         path: 'logs.purge'
                     },
                     automessage: {
-                        description: 'settings:AUTOMESSAGE',
+                        description: 'moderation/settings:AUTOMESSAGE',
                         value: settings.auto.message,
                         type: 'default',
                         path: 'auto.message'
                     },
                     autonickname: {
-                        description: 'settings:AUTONICKNAME',
+                        description: 'moderation/settings:AUTONICKNAME',
                         value: settings.auto.nickname,
                         type: 'default',
                         path: 'auto.nickname'
                     },
                     mode: {
-                        description: 'settings:MODE',
+                        description: 'moderation/settings:MODE',
                         value: settings.mode,
                         type: 'default',
                         path: 'mode'
                     },
                     customprefix: {
-                        description: 'settings:CUSTOMPREFIX',
+                        description: 'moderation/settings:CUSTOMPREFIX',
                         value: settings.prefix.custom,
                         type: 'default',
                         path: 'prefix.custom'
                     },
                     defaultprefix: {
-                        description: 'settings:DEFAULTPREFIX',
+                        description: 'moderation/settings:DEFAULTPREFIX',
                         value: settings.prefix.default,
                         type: 'default',
                         path: 'prefix.default'
                     },
                     antiinvite: {
-                        description: 'settings:ANTIINVITE',
+                        description: 'moderation/settings:ANTIINVITE',
                         value: settings.automod.invite,
                         type: 'boolean',
                         path: 'automod.invite'
                     },
                     'antiinvite-action': {
-                        description: 'settings:ANTIINVITE-ACTION',
+                        description: 'moderation/settings:ANTIINVITE-ACTION',
                         value: settings.automod.inviteaction,
                         type: 'boolean',
                         path: 'automod.inviteaction'
                     },
                     'antiinvite-warn': {
-                        description: 'settings:ANTIINVITE-WARN',
+                        description: 'moderation/settings:ANTIINVITE-WARN',
                         value: settings.automod.invitewarn,
                         type: 'default',
                         path: 'automod.invitewarn'
                     },
                     'antiinvite-kick': {
-                        description: 'settings:ANTIINVITE-KICK',
+                        description: 'moderation/settings:ANTIINVITE-KICK',
                         value: settings.automod.invitekick,
                         type: 'default',
                         path: 'automod.invitekick'
                     },
                     nonickname: {
-                        description: 'settings:NONICKNAME',
+                        description: 'moderation/settings:NONICKNAME',
                         value: settings.nonickname,
                         type: 'boolean',
                         path: 'nonickname'
                     },
                     'music-permissions': {
-                        description: 'settings:MUSIC-PERMISSIONS',
+                        description: 'moderation/settings:MUSIC-PERMISSIONS',
                         value: settings.music.default,
                         type: 'default',
                         path: 'music.default'
                     },
                     'music-play': {
-                        description: 'settings:MUSIC-PLAY',
+                        description: 'moderation/settings:MUSIC-PLAY',
                         value: settings.music.play,
                         type: 'default',
                         path: 'music.play'
                     },
                     'music-skip': {
-                        description: 'settings:MUSIC-SKIP',
+                        description: 'moderation/settings:MUSIC-SKIP',
                         value: settings.music.skip,
                         type: 'default',
                         path: 'music.skip'
                     },
                     'music-stop': {
-                        description: 'settings:MUSIC-STOP',
+                        description: 'moderation/settings:MUSIC-STOP',
                         value: settings.music.stop,
                         type: 'default',
                         path: 'music.stop'
                     },
                     'music-pause': {
-                        description: 'settings:MUSIC-PAUSE',
+                        description: 'moderation/settings:MUSIC-PAUSE',
                         value: settings.music.pause,
                         type: 'default',
                         path: 'music.pause'
                     },
                     'music-resume': {
-                        description: 'settings:MUSIC-RESUME',
+                        description: 'moderation/settings:MUSIC-RESUME',
                         value: settings.music.resume,
                         type: 'default',
                         path: 'music.resume'
                     },
                     'music-unqueue': {
-                        description: 'settings:MUSIC-UNQUEUE',
+                        description: 'moderation/settings:MUSIC-UNQUEUE',
                         value: settings.music.unqueue,
                         type: 'default',
                         path: 'music.unqueue'
                     },
                     'music-volume': {
-                        description: 'settings:MUSIC-VOLUME',
+                        description: 'moderation/settings:MUSIC-VOLUME',
                         value: settings.music.volume,
                         type: 'default',
                         path: 'music.volume'
                     },
                     'music-timelimit': {
-                        description: 'settings:MUSIC-TIMELIMIT',
+                        description: 'moderation/settings:MUSIC-TIMELIMIT',
                         value: settings.music.timelimit,
                         type: 'default',
                         path: 'music.timelimit'
                     },
                     'music-queuelimit': {
-                        description: 'settings:MUSIC-QUEUELIMIT',
+                        description: 'moderation/settings:MUSIC-QUEUELIMIT',
                         value: settings.music.queuelimit,
                         type: 'default',
                         path: 'music.queuelimit'
                     },
                     starboard: {
-                        description: 'settings:STARBOARD',
+                        description: 'moderation/settings:STARBOARD',
                         value: settings.starboard.id,
                         type: 'channel',
                         path: 'starboard.id'
                     },
                     'starboard-stars': {
-                        description: 'settings: STARBOARD-STARS',
+                        description: 'moderation/settings: STARBOARD-STARS',
                         value: settings.starboard.count,
                         type: 'default',
                         path: 'starboard.count'
                     },
                     language: {
-                        description: 'settings:LANGUAGE',
+                        description: 'moderation/settings:LANGUAGE',
                         value: settings.language,
                         type: 'default',
                         path: 'language'
@@ -335,7 +336,7 @@ export default class extends Command {
                 // @ts-ignore
                 const selectedSetting = settingsData[setting];
                 if (!selectedSetting)
-                    return message.translate('settings:INVALID');
+                    return message.translate('moderation/settings:INVALID');
 
                 if (action === 'view')
                     return this.view(message, selectedSetting);
@@ -361,10 +362,10 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('settings:AVAILABLE'),
+                message.translate('moderation/settings:AVAILABLE'),
                 '',
                 '',
-                message.translate('settings:PAGE', { page, count }),
+                message.translate('moderation/settings:PAGE', { page, count }),
                 list.join('\n')
             ].join('\n')
         );
@@ -378,8 +379,10 @@ export default class extends Command {
         this.client.settings.delete(message.guild.id);
 
         return deleted
-            ? message.reply(message.translate('settings:CLEARED'))
-            : message.error(message.translate('settings:CLEAR_ERROR'));
+            ? message.reply(message.translate('moderation/settings:CLEARED'))
+            : message.error(
+                  message.translate('moderation/settings:CLEAR_ERROR')
+              );
     }
 
     view(message: TypicalGuildMessage, setting: SettingsData) {
@@ -387,7 +390,7 @@ export default class extends Command {
 
         if (setting.type === 'boolean') {
             return message.reply(
-                message.translate('settings:CURRENT_VALUE', {
+                message.translate('moderation/settings:CURRENT_VALUE', {
                     value: message.translate(
                         setting.value ? 'common:ENABLED' : 'common:DISABLED'
                     )
@@ -410,7 +413,7 @@ export default class extends Command {
                 );
             }
             return message.reply(
-                message.translate('settings:CURRENT_VALUE', {
+                message.translate('moderation/settings:CURRENT_VALUE', {
                     value: list.length ? list.join(', ') : NONE
                 })
             );
@@ -419,7 +422,7 @@ export default class extends Command {
         if (setting.type === 'role') {
             const role = message.guild.roles.get(setting.value as string);
             return message.reply(
-                message.translate('settings:CURRENT_VALUE', {
+                message.translate('moderation/settings:CURRENT_VALUE', {
                     value: role ? role.name : NONE
                 })
             );
@@ -427,7 +430,7 @@ export default class extends Command {
 
         if (setting.type === 'ms') {
             return message.reply(
-                message.translate('settings:CURRENT_VALUE', {
+                message.translate('moderation/settings:CURRENT_VALUE', {
                     value: setting.value
                         ? `${setting.value}ms`
                         : message.translate('common:DEFAULT')
@@ -438,7 +441,7 @@ export default class extends Command {
         if (setting.type === 'channel') {
             const channel = message.guild.channels.get(setting.value as string);
             return message.reply(
-                message.translate('settings:CURRENT_VALUE', {
+                message.translate('moderation/settings:CURRENT_VALUE', {
                     value: channel ? channel.toString() : NONE
                 })
             );
@@ -456,12 +459,14 @@ export default class extends Command {
                 : ['```txt', '', setting.value, '```'].join('\n');
 
             return message.reply(
-                message.translate('settings:CURRENT_VALUE', { value: logText })
+                message.translate('moderation/settings:CURRENT_VALUE', {
+                    value: logText
+                })
             );
         }
 
         return message.reply(
-            message.translate('settings:CURRENT_VALUE', {
+            message.translate('moderation/settings:CURRENT_VALUE', {
                 value: setting.value || NONE
             })
         );
@@ -489,7 +494,7 @@ export default class extends Command {
                     value.toLowerCase()
                 )
             )
-                return message.translate('settings:INVALID_OPTION');
+                return message.translate('moderation/settings:INVALID_OPTION');
 
             const enableSetting = ['enable', ENABLE].includes(
                 value.toLowerCase()
@@ -527,17 +532,19 @@ export default class extends Command {
                       );
 
                 if (!role)
-                    return message.error(message.translate('give:INVALID'));
+                    return message.error(
+                        message.translate('moderation/give:INVALID')
+                    );
 
                 const isAdd = [ADD, 'add'].includes(type.toLowerCase());
 
                 if (isAdd && (setting.value as string[]).includes(role.id))
                     return message.error(
-                        message.translate('settings:ROLE_EXISTS')
+                        message.translate('moderation/settings:ROLE_EXISTS')
                     );
                 if (!isAdd && !(setting.value as string[]).includes(role.id))
                     return message.error(
-                        message.translate('settings:ROLE_NOT_SET')
+                        message.translate('moderation/settings:ROLE_NOT_SET')
                     );
 
                 const newValue = isAdd
@@ -571,7 +578,9 @@ export default class extends Command {
                       );
 
                 if (!role)
-                    return message.error(message.translate('give:INVALID'));
+                    return message.error(
+                        message.translate('moderation/give:INVALID')
+                    );
 
                 payload = this.stringToObject(setting.path, role.id);
             }
@@ -588,7 +597,7 @@ export default class extends Command {
                 const args = msRegex.exec(value);
                 if (!args)
                     return message.error(
-                        message.translate('settings:INVALID_MS')
+                        message.translate('moderation/settings:INVALID_MS')
                     );
                 args.shift();
 
@@ -597,7 +606,7 @@ export default class extends Command {
 
                 if (amount > 600000 || amount < 2000)
                     return message.error(
-                        message.translate('settings:INVALID_MS')
+                        message.translate('moderation/settings:INVALID_MS')
                     );
 
                 payload = this.stringToObject(setting.path, amount);
@@ -631,11 +640,13 @@ export default class extends Command {
 
                 if (!channel)
                     return message.error(
-                        message.translate('settings:INVALID_CHANNEL')
+                        message.translate('moderation/settings:INVALID_CHANNEL')
                     );
                 if (channel.type !== 'text')
                     return message.error(
-                        message.translate('settings:NOT_TEXT_CHANNEL')
+                        message.translate(
+                            'moderation/settings:NOT_TEXT_CHANNEL'
+                        )
                     );
 
                 payload = this.stringToObject(setting.path, channel.id);
@@ -644,7 +655,9 @@ export default class extends Command {
 
         if (setting.type === 'log') {
             if (!message.guild.settings.logs.id)
-                return message.error(message.translate('settings:NEED_LOG'));
+                return message.error(
+                    message.translate('moderation/settings:NEED_LOG')
+                );
 
             if ([DISABLE, 'disable'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, '--disabled');
@@ -672,7 +685,9 @@ export default class extends Command {
 
         await this.client.settings.update(message.guild.id, payload);
 
-        return message.success(message.translate('settings:UPDATED'));
+        return message.success(
+            message.translate('moderation/settings:UPDATED')
+        );
     }
 
     stringToObject(path: string, value: unknown) {

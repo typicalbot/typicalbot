@@ -28,7 +28,9 @@ export default class MessageDelete extends Event {
             return channel
                 .send(
                     settings.logs.delete === '--enabled'
-                        ? message.translate('logs:DELETED', { user: user.tag })
+                        ? message.translate('help/logs:DELETED', {
+                              user: user.tag
+                          })
                         : this.client.helpers.formatMessage.execute(
                               'logs-msgdel',
                               message.guild as TypicalGuild,
@@ -57,7 +59,7 @@ export default class MessageDelete extends Event {
                         )
                     )
                     .setFooter(
-                        message.translate('logs:MESSAGE_DELETED', {
+                        message.translate('help/logs:MESSAGE_DELETED', {
                             channel: message.channel.toString(),
                             id: message.channel.id
                         })

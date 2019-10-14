@@ -37,23 +37,28 @@ export default class extends Command {
         ] = args;
 
         if (!message.guild.settings.roles.mute)
-            return message.error(message.translate('mute:NO_ROLE'));
+            return message.error(message.translate('moderation/mute:NO_ROLE'));
         const role = message.guild.roles.get(message.guild.settings.roles.mute);
-        if (!role) return message.error(message.translate('mute:NO_ROLE'));
+        if (!role)
+            return message.error(message.translate('moderation/mute:NO_ROLE'));
 
         if (deny) {
             const channel = useCurrentChannel
                 ? message.channel
                 : message.guild.channels.get(channelID);
             if (!channel)
-                return message.error(message.translate('mute:INVALID_CHANNEL'));
+                return message.error(
+                    message.translate('moderation/mute:INVALID_CHANNEL')
+                );
 
             const permissions = channel.permissionsFor(
                 message.guild.me || this.client.config.id
             );
 
             if (permissions && !permissions.has('MANAGE_ROLES'))
-                return message.error(message.translate('mute:MISSING_PERMS'));
+                return message.error(
+                    message.translate('moderation/mute:MISSING_PERMS')
+                );
 
             const currentOverwrites = channel.permissionOverwrites;
             currentOverwrites.set(
@@ -69,13 +74,15 @@ export default class extends Command {
             const edited = await channel
                 .overwritePermissions({
                     permissionOverwrites: currentOverwrites,
-                    reason: message.translate('mute:DENYING')
+                    reason: message.translate('moderation/mute:DENYING')
                 })
                 .catch(() => null);
 
             return edited
-                ? message.success(message.translate('mute:DENYING'))
-                : message.error(message.translate('mute:DENY_ERROR'));
+                ? message.success(message.translate('moderation/mute:DENYING'))
+                : message.error(
+                      message.translate('moderation/mute:DENY_ERROR')
+                  );
         }
 
         // Mute a member
@@ -87,7 +94,7 @@ export default class extends Command {
             1000;
 
         if (time > 1000 * 60 * 60 * 24 * 7)
-            return message.error(message.translate('mute:TOO_LONG'));
+            return message.error(message.translate('moderation/mute:TOO_LONG'));
 
         const member = await message.guild.members
             .fetch(userID)
@@ -96,24 +103,30 @@ export default class extends Command {
             return message.error(message.translate('common:USER_NOT_FOUND'));
 
         if (member.roles.has(message.guild.settings.roles.mute))
-            return message.error(message.translate('mute:ALREADY_MUTED'));
+            return message.error(
+                message.translate('moderation/mute:ALREADY_MUTED')
+            );
 
         if (
             message.member.roles.highest.position <=
                 member.roles.highest.position &&
             (permissionLevel.level !== 4 && permissionLevel.level < 9)
         )
-            return message.error(message.translate('mute:TOO_LOW'));
+            return message.error(message.translate('moderation/mute:TOO_LOW'));
 
         if (!role.editable)
-            return message.error(message.translate('mute:UNEDITABLE'));
+            return message.error(
+                message.translate('moderation/mute:UNEDITABLE')
+            );
 
         const embed = new MessageEmbed()
             .setColor(Constants.ModerationLogTypes.MUTE.hex)
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(
-                message.translate('mute:MUTED', { name: message.guild.name })
+                message.translate('moderation/mute:MUTED', {
+                    name: message.guild.name
+                })
             )
             .addField(
                 message.translate('common:MODERATOR_FIELD'),
@@ -124,7 +137,8 @@ export default class extends Command {
         member.send().catch(() => null);
 
         const muted = await member.roles.add(role).catch(() => null);
-        if (!muted) return message.error(message.translate('mute:ERROR'));
+        if (!muted)
+            return message.error(message.translate('moderation/mute:ERROR'));
 
         if (message.guild.settings.logs.moderation) {
             const newCase = await message.guild.buildModerationLog();
@@ -144,7 +158,9 @@ export default class extends Command {
             });
 
         return message.success(
-            message.translate('mute:SUCCESS', { user: message.author.tag })
+            message.translate('moderation/mute:SUCCESS', {
+                user: message.author.tag
+            })
         );
     }
 }

@@ -7,7 +7,7 @@ import { MessageEmbed, TextChannel, User } from 'discord.js';
 export default class GuildInvitePosted extends Event {
     async execute(message: TypicalGuildMessage) {
         await message.delete();
-        message.error(message.translate('invite:PROHIBITED'));
+        message.error(message.translate('core/invite:PROHIBITED'));
 
         const { settings } = message.guild;
 
@@ -42,13 +42,15 @@ export default class GuildInvitePosted extends Event {
                         .setModerator(this.client.user as User)
                         .setUser(message.author)
                         .setReason(
-                            message.translate('invite:REASON', {
+                            message.translate('core/invite:REASON', {
                                 action: message.translate('common:WARN'),
                                 type:
                                     settings.automod.invitewarn === 1
-                                        ? message.translate('invite:INVITE')
+                                        ? message.translate(
+                                              'core/invite:INVITE'
+                                          )
                                         : message.translate(
-                                              'invite:CONSECUTIVE',
+                                              'core/invite:CONSECUTIVE',
                                               {
                                                   amount:
                                                       settings.automod
@@ -64,12 +66,12 @@ export default class GuildInvitePosted extends Event {
                 settings.automod.invitekick !== 0 &&
                 cache.size >= settings.automod.invitekick
             ) {
-                const reason = message.translate('invite:REASON', {
+                const reason = message.translate('core/invite:REASON', {
                     action: message.translate('common:KICK'),
                     type:
                         settings.automod.invitekick === 1
-                            ? message.translate('invite:INVITE')
-                            : message.translate('invite:CONSECUTIVE', {
+                            ? message.translate('core/invite:INVITE')
+                            : message.translate('core/invite:CONSECUTIVE', {
                                   amount: settings.automod.invitewarn
                               }),
                     channel: message.channel.toString()
@@ -98,7 +100,7 @@ export default class GuildInvitePosted extends Event {
         if (settings.logs.invite !== '--embed') {
             return channel.send(
                 settings.logs.invite === '--enabled'
-                    ? message.translate('invite:SENT', {
+                    ? message.translate('core/invite:SENT', {
                           user: message.author.tag,
                           channel: message.channel.toString()
                       })
@@ -121,7 +123,7 @@ export default class GuildInvitePosted extends Event {
                         message.author.displayAvatarURL()
                     )
                     .setFooter(
-                        message.translate('invite:SENT_IN', {
+                        message.translate('core/invite:SENT_IN', {
                             channel: message.channel.toString()
                         })
                     )

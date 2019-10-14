@@ -17,27 +17,34 @@ export default class extends Command {
         if (!parameters) return message.error(usageError);
 
         const args = regex.exec(parameters);
-        if (!args) return message.error(message.translate('announce:INVALID'));
+        if (!args)
+            return message.error(
+                message.translate('moderation/announce:INVALID')
+            );
         args.shift();
 
         const [embed, content] = args;
 
         const channelID = message.guild.settings.announcements.id;
         if (!channelID)
-            return message.error(message.translate('announce:INVALID_CHANNEL'));
+            return message.error(
+                message.translate('moderation/announce:INVALID_CHANNEL')
+            );
 
         const channel = message.guild.channels.get(channelID) as
             | TextChannel
             | undefined;
         if (!channel || channel.type !== 'text')
-            return message.error(message.translate('announce:INVALID_CHANNEL'));
+            return message.error(
+                message.translate('moderation/announce:INVALID_CHANNEL')
+            );
 
         const roleID = message.guild.settings.announcements.mention;
         const mentionRole = roleID ? message.guild.roles.get(roleID) : null;
 
         if (!embed) {
             return channel.send(
-                `${message.translate('announce:TEXT', {
+                `${message.translate('moderation/announce:TEXT', {
                     usertag: message.author.tag,
                     role: mentionRole ? mentionRole.toString() : ''
                 })}\n\n${content}`,
@@ -48,7 +55,7 @@ export default class extends Command {
         return channel.send(mentionRole ? mentionRole.toString() : '', {
             embed: new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('announce:TITLE'))
+                .setTitle(message.translate('moderation/announce:TITLE'))
                 .setDescription(content)
                 .setFooter(
                     message.author.tag,

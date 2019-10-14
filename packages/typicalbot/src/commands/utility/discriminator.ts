@@ -20,7 +20,9 @@ export default class extends Command {
         );
         if (!list.size)
             return message.reply(
-                message.translate('discriminator:NONE', { discriminator })
+                message.translate('utility/discriminator:NONE', {
+                    discriminator
+                })
             );
 
         const content = this.client.helpers.pagify.execute(
@@ -31,7 +33,9 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('discriminator:USERS', { discriminator }),
+                message.translate('utility/discriminator:USERS', {
+                    discriminator
+                }),
                 '',
                 '```autohotkey',
                 content,

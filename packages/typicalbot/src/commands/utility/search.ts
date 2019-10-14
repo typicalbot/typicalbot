@@ -30,7 +30,9 @@ export default class extends Command {
         );
 
         if (!list.size)
-            return message.reply(message.translate('search:NONE', { query }));
+            return message.reply(
+                message.translate('utility/search:NONE', { query })
+            );
 
         const content = this.client.helpers.pagify.execute(
             message,
@@ -45,7 +47,7 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('search:RESULTS', { query }),
+                message.translate('utility/search:RESULTS', { query }),
                 '',
                 '```autohotkey',
                 content,

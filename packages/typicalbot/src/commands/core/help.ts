@@ -10,7 +10,7 @@ export default class extends Command {
 
     async execute(message: TypicalMessage, parameters: string) {
         if (!message.guild || !parameters) {
-            const response = message.translate('help:NONE', {
+            const response = message.translate('core/help:NONE', {
                 prefix: this.client.config.prefix,
                 docs: Constants.Links.DOCUMENTATION,
                 server: Constants.Links.SERVER
@@ -21,7 +21,7 @@ export default class extends Command {
             return message.send(
                 new MessageEmbed()
                     .setColor(0x00adff)
-                    .setTitle(message.translate('help:TYPICAL_INFO'))
+                    .setTitle(message.translate('core/help:TYPICAL_INFO'))
                     .setDescription(response)
                     .setFooter('TypicalBot', Constants.Links.ICON)
                     .setTimestamp()
@@ -33,7 +33,7 @@ export default class extends Command {
             message.guild.settings
         );
         if (!command) {
-            const response = message.translate('help:INVALID', {
+            const response = message.translate('core/help:INVALID', {
                 name: parameters
             });
             if (!message.embedable) return message.error(response);
@@ -41,7 +41,7 @@ export default class extends Command {
             return message.send(
                 new MessageEmbed()
                     .setColor(0x00adff)
-                    .setTitle(message.translate('help:INVALID_INFO'))
+                    .setTitle(message.translate('core/help:INVALID_INFO'))
                     .setDescription(response)
                     .setFooter('TypicalBot', Constants.Links.ICON)
                     .setTimestamp()
@@ -50,7 +50,7 @@ export default class extends Command {
 
         if (!message.embedable)
             return message.send(
-                message.translate('help:TEXT', {
+                message.translate('core/help:TEXT', {
                     name: parameters,
                     commandName: command.name,
                     aliases: command.aliases.length
@@ -68,21 +68,28 @@ export default class extends Command {
             new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(
-                    message.translate('help:COMMAND_USAGE', {
+                    message.translate('core/help:COMMAND_USAGE', {
                         name: command.name
                     })
                 )
-                .setDescription(message.translate('help:PARAMETERS'))
-                .addField(message.translate('help:COMMAND'), command.name, true)
+                .setDescription(message.translate('core/help:PARAMETERS'))
                 .addField(
-                    message.translate('help:ALIASES'),
+                    message.translate('core/help:COMMAND'),
+                    command.name,
+                    true
+                )
+                .addField(
+                    message.translate('core/help:ALIASES'),
                     command.aliases.length ? command.aliases.join(', ') : 'None'
                 )
-                .addField(message.translate('help:PERMISSION'), {
+                .addField(message.translate('core/help:PERMISSION'), {
                     permission: command.permission
                 })
-                .addField(message.translate('help:DESC'), command.description)
-                .addField(message.translate('help:USE'), command.usage)
+                .addField(
+                    message.translate('core/help:DESC'),
+                    command.description
+                )
+                .addField(message.translate('core/help:USE'), command.usage)
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );

@@ -7,10 +7,12 @@ export default class extends Command {
     mode = Constants.Modes.STRICT;
 
     async execute(message: TypicalMessage) {
-        const ping = await message.send(message.translate('ping:CALCULATING'));
+        const ping = await message.send(
+            message.translate('core/ping:CALCULATING')
+        );
 
         return ping.edit(
-            message.translate('ping:RESPONSE', {
+            message.translate('core/ping:RESPONSE', {
                 command: ping.createdTimestamp - message.createdTimestamp,
                 api: Math.floor(this.client.ws.ping)
             })

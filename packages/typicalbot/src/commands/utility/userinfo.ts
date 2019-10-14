@@ -29,25 +29,25 @@ export default class extends Command {
                 [
                     `**__${user.tag}__**`,
                     '```',
-                    message.translate('userinfo:ID', { id: member.id }),
-                    message.translate('userinfo:STATUS', {
+                    message.translate('utility/userinfo:ID', { id: member.id }),
+                    message.translate('utility/userinfo:STATUS', {
                         status: member.user.presence.status
                     }),
-                    message.translate('userinfo:AVATAR', {
+                    message.translate('utility/userinfo:AVATAR', {
                         avatar: member.user.displayAvatarURL({
                             format: 'png',
                             size: 2048
                         })
                     }),
-                    message.translate('userinfo:JOINED', {
+                    message.translate('utility/userinfo:JOINED', {
                         time: moment(member.joinedAt as Date).format(
                             'MMM DD, YYYY hh:mm A'
                         )
                     }),
-                    message.translate('userinfo:REGISTERED', {
+                    message.translate('utility/userinfo:REGISTERED', {
                         time: moment(member.user.createdAt).format('')
                     }),
-                    message.translate('userinfo:ROLES', {
+                    message.translate('utility/userinfo:ROLES', {
                         roles:
                             member.roles.size > 1
                                 ? member.roles
@@ -88,7 +88,7 @@ export default class extends Command {
                     true
                 )
                 .addField(
-                    message.translate('userinfo:ROLE_FIELD', {
+                    message.translate('utility/userinfo:ROLE_FIELD', {
                         amount: member.roles.size - 1
                     }),
                     member.roles.size > 1

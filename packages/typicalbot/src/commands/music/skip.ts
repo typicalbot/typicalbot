@@ -41,11 +41,14 @@ export default class extends Command {
 
             const song = message.guild.guildStream.skip();
 
-            if (!song) return message.reply(message.translate('skip:SKIPPING'));
+            if (!song)
+                return message.reply(message.translate('music/skip:SKIPPING'));
 
             return message.reply(
                 message.translate(
-                    amount ? 'skip:DETAILS_MULTIPLE' : 'skip:DETAILS',
+                    amount
+                        ? 'music/skip:DETAILS_MULTIPLE'
+                        : 'music/skip:DETAILS',
                     {
                         title: song.title,
                         user: song.requester.author.username,

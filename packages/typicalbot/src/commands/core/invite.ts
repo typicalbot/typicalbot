@@ -10,7 +10,7 @@ export default class extends Command {
     execute(message: TypicalMessage) {
         if (!message.embedable)
             return message.reply(
-                message.translate('invite:TEXT', {
+                message.translate('core/invite:TEXT', {
                     link: Constants.Links.OAUTH
                 })
             );
@@ -18,9 +18,9 @@ export default class extends Command {
         return message.reply(
             new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('invite:TYPICAL_INVITE'))
+                .setTitle(message.translate('core/invite:TYPICAL_INVITE'))
                 .setDescription(
-                    message.translate('invite:TEXT', {
+                    message.translate('core/invite:TEXT', {
                         link: Constants.Links.OAUTH
                     })
                 )

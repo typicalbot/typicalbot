@@ -34,7 +34,7 @@ export default class extends Command {
             1000;
 
         if (time > 1000 * 60 * 60 * 24 * 7)
-            return message.error(message.translate('ban:WEEK'));
+            return message.error(message.translate('moderation/ban:WEEK'));
 
         const user = await this.client.users.fetch(userID).catch(() => null);
         if (!user)
@@ -49,10 +49,12 @@ export default class extends Command {
                 member.roles.highest.position &&
             (permissionLevel.level !== 4 && permissionLevel.level < 9)
         )
-            return message.error(message.translate('ban:TOO_LOW'));
+            return message.error(message.translate('moderation/ban:TOO_LOW'));
 
         if (member && !member.bannable)
-            return message.error(message.translate('ban:UNBANNABLE'));
+            return message.error(
+                message.translate('moderation/ban:UNBANNABLE')
+            );
 
         const log = {
             expiration: time,
@@ -67,7 +69,9 @@ export default class extends Command {
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(
-                message.translate('ban:BANNED', { name: message.guild.name })
+                message.translate('moderation/ban:BANNED', {
+                    name: message.guild.name
+                })
             )
             .addField(
                 message.translate('common:MODERATOR_FIELD'),
@@ -81,7 +85,7 @@ export default class extends Command {
         await message.guild.members
             .ban(user, {
                 days: parseInt(purgeDays, 10) || 0,
-                reason: message.translate('ban:BAN_REASON', {
+                reason: message.translate('moderation/ban:BAN_REASON', {
                     mod: message.author.tag,
                     reason: reason || message.translate('common:NO_REASON')
                 })
@@ -94,7 +98,7 @@ export default class extends Command {
 
                 this.client.caches.bans.delete(user.id);
 
-                return message.error(message.translate('ban:ERROR'));
+                return message.error(message.translate('moderation/ban:ERROR'));
             });
 
         if (time)
@@ -104,7 +108,7 @@ export default class extends Command {
             });
 
         return message.success(
-            message.translate('ban:BAN_SUCCESS', { user: user.tag })
+            message.translate('moderation/ban:BAN_SUCCESS', { user: user.tag })
         );
     }
 }

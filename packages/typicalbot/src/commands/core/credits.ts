@@ -9,16 +9,16 @@ export default class extends Command {
 
     execute(message: TypicalMessage) {
         if (!message.embedable)
-            return message.send(message.translate('credits:TEXT'));
+            return message.send(message.translate('core/credits:TEXT'));
 
         return message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('credits:CREDITS'))
-                .setDescription(message.translate('credits:TEXT'))
+                .setTitle(message.translate('core/credits:CREDITS'))
+                .setDescription(message.translate('core/credits:TEXT'))
                 .addField(
                     '» Aklixio#0588 (84430408447426560)',
-                    message.translate('credits:DESIGNER')
+                    message.translate('core/credits:DESIGNER')
                 )
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()

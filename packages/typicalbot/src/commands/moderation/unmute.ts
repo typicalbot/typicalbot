@@ -40,27 +40,33 @@ export default class extends Command {
             message.guild.settings.roles.mute &&
             message.guild.roles.get(message.guild.settings.roles.mute);
         if (!message.guild.settings.roles.mute || !role)
-            return message.error(message.translate('mute:NO_ROLE'));
+            return message.error(message.translate('moderation/mute:NO_ROLE'));
 
         if (!member.roles.has(message.guild.settings.roles.mute))
-            return message.error(message.translate('unmute:NOT_MUTED'));
+            return message.error(
+                message.translate('moderation/unmute:NOT_MUTED')
+            );
 
         if (
             message.member.roles.highest.position <=
                 member.roles.highest.position &&
             (permissionLevel.level !== 4 && permissionLevel.level < 9)
         )
-            return message.error(message.translate('unmute:TOO_LOW'));
+            return message.error(
+                message.translate('moderation/unmute:TOO_LOW')
+            );
 
         if (!role.editable)
-            return message.error(message.translate('mute:UNEDITABLE'));
+            return message.error(
+                message.translate('moderation/mute:UNEDITABLE')
+            );
 
         const embed = new MessageEmbed()
             .setColor(0xff9900)
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(
-                message.translate('unmute:UNMUTED', {
+                message.translate('moderation/unmute:UNMUTED', {
                     name: message.guild.name
                 })
             )
@@ -74,7 +80,7 @@ export default class extends Command {
         member.send().catch(() => null);
 
         const unmuted = await member.roles.remove(role).catch(() => null);
-        if (!unmuted) return message.error('unmute:ERROR');
+        if (!unmuted) return message.error('moderation/unmute:ERROR');
 
         if (message.guild.settings.logs.moderation) {
             const newCase = await message.guild.buildModerationLog();
@@ -100,7 +106,9 @@ export default class extends Command {
         }
 
         return message.success(
-            message.translate('unmute:SUCCESS', { user: member.user.tag })
+            message.translate('moderation/unmute:SUCCESS', {
+                user: member.user.tag
+            })
         );
     }
 }

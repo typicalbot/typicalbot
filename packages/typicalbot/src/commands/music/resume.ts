@@ -34,7 +34,7 @@ export default class extends Command {
 
             message.guild.guildStream.resume();
 
-            return message.reply(message.translate('resume:RESUMING'));
+            return message.reply(message.translate('music/resume:RESUMING'));
         } catch (e) {
             return message.send(message.translate('common:NOTHING_STREAMING'));
         }

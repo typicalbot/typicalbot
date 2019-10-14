@@ -16,7 +16,9 @@ export default class extends Command {
         permissionLevel: PermissionLevel
     ) {
         if (!message.guild.settings.logs.moderation)
-            return message.error(message.translate('reason:DISABLED'));
+            return message.error(
+                message.translate('moderation/reason:DISABLED')
+            );
 
         const args = regex.exec(parameters);
         if (!args)
@@ -40,7 +42,7 @@ export default class extends Command {
                 member.roles.highest.position &&
             (permissionLevel.level !== 4 && permissionLevel.level < 9)
         )
-            return message.error(message.translate('warn:TOO_LOW'));
+            return message.error(message.translate('moderation/warn:TOO_LOW'));
 
         const newCase = await message.guild.buildModerationLog();
         newCase
@@ -55,7 +57,9 @@ export default class extends Command {
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(
-                message.translate('warn:WARNED', { name: message.guild.name })
+                message.translate('moderation/warn:WARNED', {
+                    name: message.guild.name
+                })
             )
             .addField(
                 message.translate('common:MODERATOR_FIELD'),
@@ -65,6 +69,6 @@ export default class extends Command {
             embed.addField(message.translate('common:REASON_FIELD'), reason);
         member.send().catch(() => null);
 
-        return message.success(message.translate('warn:SUCCESS'));
+        return message.success(message.translate('moderation/warn:SUCCESS'));
     }
 }

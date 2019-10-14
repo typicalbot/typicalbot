@@ -20,7 +20,7 @@ export default class extends Command {
 
             const { queue } = message.guild.guildStream;
 
-            const CURRENT = message.translate('queue:CURRENT', {
+            const CURRENT = message.translate('music/queue:CURRENT', {
                 title: this.client.helpers.lengthen.execute(
                     message.guild.guildStream.current.title,
                     45
@@ -36,15 +36,18 @@ export default class extends Command {
 
             if (!queue.length)
                 return message.send(
-                    [message.translate('queue:NONE'), '', '', CURRENT].join(
-                        '\n'
-                    )
+                    [
+                        message.translate('music/queue:NONE'),
+                        '',
+                        '',
+                        CURRENT
+                    ].join('\n')
                 );
 
             const list = queue.slice(0, 10);
             const content = list
                 .map(s =>
-                    message.translate('queue:LIST', {
+                    message.translate('music/queue:LIST', {
                         title: this.client.helpers.lengthen.execute(
                             s.title,
                             45
@@ -63,7 +66,7 @@ export default class extends Command {
 
             return message.send(
                 [
-                    message.translate('queue:LEFT', {
+                    message.translate('music/queue:LEFT', {
                         amount: queue.length,
                         time: this.client.helpers.convertTime.execute(
                             message,
@@ -72,7 +75,9 @@ export default class extends Command {
                     }),
                     '',
                     content,
-                    queue.length > 10 ? message.translate('queue:MORE') : '',
+                    queue.length > 10
+                        ? message.translate('music/queue:MORE')
+                        : '',
                     '',
                     CURRENT
                 ].join('\n')

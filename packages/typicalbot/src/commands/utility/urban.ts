@@ -31,11 +31,13 @@ export default class extends Command {
 
         const [resp] = data.list;
         if (!resp)
-            return message.error(message.translate('urban:NONE', { query }));
+            return message.error(
+                message.translate('utility/urban:NONE', { query })
+            );
 
         if (!message.embedable)
             return message.reply(
-                message.translate('urban:TEXT', {
+                message.translate('utility/urban:TEXT', {
                     query,
                     definition: resp.definition
                 })
@@ -51,24 +53,29 @@ export default class extends Command {
                 .setTitle(query)
                 .setURL(resp.permalink)
                 .addField(
-                    message.translate('urban:AMOUNT', { amount: data.length }),
+                    message.translate('utility/urban:AMOUNT', {
+                        amount: data.length
+                    }),
                     `\n\u200B    ${resp.definition}`
                 )
                 .addField(
-                    message.translate('urban:RATING'),
-                    message.translate('urban:RATING_VALUE', {
+                    message.translate('utility/urban:RATING'),
+                    message.translate('utility/urban:RATING_VALUE', {
                         up: resp.thumbs_up,
                         down: resp.thumbs_down,
                         rating: !isNaN(rating)
-                            ? message.translate('urban:RATING_PERCENT', {
-                                  amount: rating,
-                                  total: resp.thumbs_up + resp.thumbs_down
-                              })
+                            ? message.translate(
+                                  'utility/urban:RATING_PERCENT',
+                                  {
+                                      amount: rating,
+                                      total: resp.thumbs_up + resp.thumbs_down
+                                  }
+                              )
                             : ''
                     })
                 )
                 .setThumbnail('http://i.imgur.com/CcIZZsa.png')
-                .setFooter(message.translate('urban:DICTIONARY'))
+                .setFooter(message.translate('utility/urban:DICTIONARY'))
         );
     }
 }

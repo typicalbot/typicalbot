@@ -10,36 +10,36 @@ export default class extends Command {
         message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('perms:LEVELS'))
+                .setTitle(message.translate('help/perms:LEVELS'))
                 .setURL(Constants.Links.BASE)
                 .setDescription(
-                    message.translate('perms:VIEW_ALL', {
+                    message.translate('help/perms:VIEW_ALL', {
                         prefix: this.client.config.prefix
                     })
                 )
                 .addField(
-                    message.translate('perms:BLACKLISTED'),
-                    message.translate('perms:BLACKLISTED_VALUE')
+                    message.translate('help/perms:BLACKLISTED'),
+                    message.translate('help/perms:BLACKLISTED_VALUE')
                 )
                 .addField(
-                    message.translate('perms:MEMBER'),
-                    message.translate('perms:MEMBER_VALUE')
+                    message.translate('help/perms:MEMBER'),
+                    message.translate('help/perms:MEMBER_VALUE')
                 )
                 .addField(
-                    message.translate('perms:DJ'),
-                    message.translate('perms:DJ_VALUE')
+                    message.translate('help/perms:DJ'),
+                    message.translate('help/perms:DJ_VALUE')
                 )
                 .addField(
-                    message.translate('perms:MODERATOR'),
-                    message.translate('perms:MODERATOR_VALUE')
+                    message.translate('help/perms:MODERATOR'),
+                    message.translate('help/perms:MODERATOR_VALUE')
                 )
                 .addField(
-                    message.translate('perms:ADMIN'),
-                    message.translate('perms:ADMIN_VALUE')
+                    message.translate('help/perms:ADMIN'),
+                    message.translate('help/perms:ADMIN_VALUE')
                 )
                 .addField(
-                    message.translate('perms:OWNER'),
-                    message.translate('perms:OWNER_VALUE')
+                    message.translate('help/perms:OWNER'),
+                    message.translate('help/perms:OWNER_VALUE')
                 )
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()

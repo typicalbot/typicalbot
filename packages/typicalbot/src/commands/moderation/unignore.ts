@@ -29,19 +29,27 @@ export default class extends Command {
                 message.channel.id
             )
         )
-            return message.error(message.translate('unignore:COMMANDS'));
+            return message.error(
+                message.translate('moderation/unignore:COMMANDS')
+            );
         if (
             invites &&
             !message.guild.settings.ignored.invites.includes(message.channel.id)
         )
-            return message.error(message.translate('unignore:INVITES'));
+            return message.error(
+                message.translate('moderation/unignore:INVITES')
+            );
         if (
             stars &&
             !message.guild.settings.ignored.stars.includes(message.channel.id)
         ) {
             if (!message.guild.settings.starboard.id)
-                return message.error(message.translate('unignore:DISABLED'));
-            return message.error(message.translate('unignore:STARBOARD'));
+                return message.error(
+                    message.translate('moderation/unignore:DISABLED')
+                );
+            return message.error(
+                message.translate('moderation/unignore:STARBOARD')
+            );
         }
 
         const ignoredIDs = message.guild.settings.ignored;
@@ -62,7 +70,7 @@ export default class extends Command {
 
         if (ignored)
             return message.success(
-                message.translate('unignore:SUCCESS', { type })
+                message.translate('moderation/unignore:SUCCESS', { type })
             );
 
         return null;

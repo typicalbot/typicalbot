@@ -57,14 +57,14 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     translate(key: string, args: object) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
         const language = this.client.translate.get(
             this.guild ? this.guild.settings.language : 'en-US'
         );
 
-        if (!language) throw 'Message: Invalid language set in settings.';
+        console.log(language);
 
+        if (!language) throw 'Message: Invalid language set in settings.';
+        console.log(key, args, language(key, args));
         return language(key, args);
     }
 }

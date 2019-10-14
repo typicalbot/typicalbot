@@ -41,7 +41,7 @@ export default class GuildBanRemove extends Event {
                               user,
                               settings.logs.unban
                           )
-                        : guild.translate('unban:USER_UNBAN', {
+                        : guild.translate('moderation/unban:USER_UNBAN', {
                               user: user.tag
                           })
                 )
@@ -56,7 +56,9 @@ export default class GuildBanRemove extends Event {
                         `${user.tag} (${user.id})`,
                         user.displayAvatarURL()
                     )
-                    .setFooter(guild.translate('unban:USER_UNBANNED'))
+                    .setFooter(
+                        guild.translate('moderation/unban:USER_UNBANNED')
+                    )
                     .setTimestamp()
             )
             .catch(() => null);

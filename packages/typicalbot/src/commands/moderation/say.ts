@@ -32,16 +32,20 @@ export default class extends Command {
                 channel
                     .send('', jsonParse)
                     .catch(() =>
-                        message.error(message.translate('say:MISSING_SEND'))
+                        message.error(
+                            message.translate('moderation/say:MISSING_SEND')
+                        )
                     );
             } catch (err) {
-                message.error(message.translate('say:INVALID'));
+                message.error(message.translate('moderation/say:INVALID'));
             }
         } else {
             channel
                 .send(content, { disableEveryone: false })
                 .catch(() =>
-                    message.error(message.translate('say:MISSING_SEND'))
+                    message.error(
+                        message.translate('moderation/say:MISSING_SEND')
+                    )
                 );
         }
 
@@ -67,7 +71,7 @@ export default class extends Command {
                                 channel
                             )
                             .setDescription(content)
-                            .setFooter(message.translate('say:SENT'))
+                            .setFooter(message.translate('moderation/say:SENT'))
                             .setTimestamp()
                     )
                     .catch(() => null);
@@ -75,7 +79,7 @@ export default class extends Command {
                 logChannel
                     .send(
                         [
-                            message.translate('say:TEXT', {
+                            message.translate('moderation/say:TEXT', {
                                 user: message.author.tag,
                                 channel
                             }),

@@ -9,11 +9,13 @@ export default class extends Command {
         if (!mention || mention.id === message.author.id)
             return message.reply(
                 message.translate(
-                    randomAddon ? 'cookie:SELF_LAUGH' : 'cookie:SELF_KEPT'
+                    randomAddon
+                        ? 'fun/cookie:SELF_LAUGH'
+                        : 'fun/cookie:SELF_KEPT'
                 )
             );
         return message.reply(
-            message.translate('cookie:GIVEN', { user: mention.toString() })
+            message.translate('fun/cookie:GIVEN', { user: mention.toString() })
         );
     }
 }

@@ -30,7 +30,7 @@ export default class extends Command {
 
             message.guild.guildStream.end();
 
-            return message.reply(message.translate('stop:STOPPING'));
+            return message.reply(message.translate('music/stop:STOPPING'));
         } catch (e) {
             return message.send(message.translate('common:NOTHING_STREAMING'));
         }

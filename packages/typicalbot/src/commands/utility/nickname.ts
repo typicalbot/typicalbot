@@ -26,15 +26,17 @@ export default class extends Command {
         // A user id was not found and so edit the authors nickname
         if (!member) {
             if (message.guild.settings.nonickname)
-                return message.error('nickname:DISABLED');
+                return message.error('utility/nickname:DISABLED');
 
             const changed = await message.member
                 .setNickname(reset ? '' : nickname)
                 .catch(() => null);
             if (!changed)
-                return message.error(message.translate('nickname:SELF_ERROR'));
+                return message.error(
+                    message.translate('utility/nickname:SELF_ERROR')
+                );
             return message.reply(
-                message.translate('nickname:SELF_SUCCESS', { type })
+                message.translate('utility/nickname:SELF_SUCCESS', { type })
             );
         }
         // Edit another members nickname
@@ -55,8 +57,11 @@ export default class extends Command {
         const changed = await member
             .setNickname(reset ? '' : nickname)
             .catch(() => null);
-        if (!changed) return message.error(message.translate('nickname:ERROR'));
+        if (!changed)
+            return message.error(message.translate('utility/nickname:ERROR'));
 
-        return message.reply(message.translate('nickname:SUCCESS', { type }));
+        return message.reply(
+            message.translate('utility/nickname:SUCCESS', { type })
+        );
     }
 }

@@ -10,7 +10,7 @@ export default class extends Command {
     execute(message: TypicalMessage) {
         if (!message.embedable)
             return message.send(
-                message.translate('donate:TEXT', {
+                message.translate('core/donate:TEXT', {
                     link: Constants.Links.DONATE
                 })
             );
@@ -18,7 +18,7 @@ export default class extends Command {
         return message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle('donate:SUPPORT')
+                .setTitle('core/donate:SUPPORT')
                 .setDescription(
                     message.translate(`donate:TEXT`, {
                         link: Constants.Links.DONATE

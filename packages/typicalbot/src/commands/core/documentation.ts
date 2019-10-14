@@ -11,7 +11,7 @@ export default class extends Command {
     execute(message: TypicalMessage) {
         if (!message.embedable)
             return message.send(
-                message.translate('documentation:TEXT', {
+                message.translate('core/documentation:TEXT', {
                     link: Constants.Links.DOCUMENTATION
                 })
             );
@@ -19,9 +19,9 @@ export default class extends Command {
         return message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('documentation:TYPICAL_DOCS'))
+                .setTitle(message.translate('core/documentation:TYPICAL_DOCS'))
                 .setDescription(
-                    message.translate('documentation:TEXT', {
+                    message.translate('core/documentation:TEXT', {
                         link: Constants.Links.DOCUMENTATION
                     })
                 )

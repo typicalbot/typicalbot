@@ -35,24 +35,24 @@ export default class extends Command {
         if (!message.embedable)
             return message.reply(
                 [
-                    message.translate('twitch:STATS', {
+                    message.translate('utility/twitch:STATS', {
                         name: data.display_name
                     }),
                     '```',
-                    message.translate('twitch:ID', { id: data.id }),
-                    message.translate('twitch:DISPLAY', {
+                    message.translate('utility/twitch:ID', { id: data.id }),
+                    message.translate('utility/twitch:DISPLAY', {
                         name: data.display_name
                     }),
-                    message.translate('twitch: DESC', {
+                    message.translate('utility/twitch: DESC', {
                         description: data.description
                     }),
-                    message.translate('twitch:STATUS', {
+                    message.translate('utility/twitch:STATUS', {
                         type: data.broadcaster_type
                     }),
-                    message.translate('twitch:PROFILE', {
+                    message.translate('utility/twitch:PROFILE', {
                         url: data.profile_image_url
                     }),
-                    message.translate('twitch:VIEWS', {
+                    message.translate('utility/twitch:VIEWS', {
                         amount: data.view_count
                     }),
                     '```'

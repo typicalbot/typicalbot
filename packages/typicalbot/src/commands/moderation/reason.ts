@@ -10,7 +10,9 @@ export default class extends Command {
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         if (!message.guild.settings.logs.moderation)
-            return message.error(message.translate('reason:DISABLED'));
+            return message.error(
+                message.translate('moderation/reason:DISABLED')
+            );
 
         const args = regex.exec(parameters);
         if (!args)
@@ -29,15 +31,19 @@ export default class extends Command {
             id
         )) as TypicalGuildMessage;
 
-        if (!log) return message.error(message.translate('reason:NONE'));
+        if (!log)
+            return message.error(message.translate('moderation/reason:NONE'));
 
         const edited = await this.client.handlers.moderationLog
             .edit(log, message.author, reason)
             .catch(() => null);
 
-        if (!edited) return message.error(message.translate('reason:ERROR'));
+        if (!edited)
+            return message.error(message.translate('moderation/reason:ERROR'));
 
-        const response = await message.reply('reason:EDITED').catch(() => null);
+        const response = await message
+            .reply('moderation/reason:EDITED')
+            .catch(() => null);
         if (!response) return null;
 
         if (message.deletable) message.delete({ timeout: 2500 });

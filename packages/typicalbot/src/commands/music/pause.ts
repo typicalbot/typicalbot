@@ -33,7 +33,7 @@ export default class extends Command {
 
             message.guild.guildStream.pause();
 
-            return message.reply(message.translate('pause:PAUSED'));
+            return message.reply(message.translate('music/pause:PAUSED'));
         } catch (e) {
             return message.send(message.translate('common:NOTHING_STREAMING'));
         }

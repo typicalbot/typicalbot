@@ -7,11 +7,11 @@ export default class extends Command {
         const randomAddon = Math.random() <= 0.25;
 
         if (!mention || mention.id === message.author.id)
-            return message.reply(message.translate('slap:SELF'));
+            return message.reply(message.translate('fun/slap:SELF'));
 
         return message.reply(
             message.translate(
-                randomAddon ? 'slap:RESPONSE_HURT' : 'slap:RESPONSE',
+                randomAddon ? 'fun/slap:RESPONSE_HURT' : 'fun/slap:RESPONSE',
                 {
                     user: mention.toString()
                 }

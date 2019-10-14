@@ -8,11 +8,11 @@ export default class extends Command {
         const randomAddon = Math.random() <= 0.25;
 
         if (!mention || mention.id === message.author.id)
-            return message.reply(message.translate('punch:SELF'));
+            return message.reply(message.translate('fun/punch:SELF'));
 
         return message.reply(
             message.translate(
-                randomAddon ? 'punch:RESPONSE_JAW' : 'punch:RESPONSE',
+                randomAddon ? 'fun/punch:RESPONSE_JAW' : 'fun/punch:RESPONSE',
                 {
                     user: mention.toString()
                 }

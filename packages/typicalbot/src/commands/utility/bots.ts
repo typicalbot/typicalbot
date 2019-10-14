@@ -48,7 +48,9 @@ export default class extends Command {
             bots.map(
                 bot =>
                     `${bot.name.padEnd(20)}: ${bot.servercount}${
-                        bot.compliant ? message.translate('bots:COMPLIANT') : ''
+                        bot.compliant
+                            ? message.translate('utility/bots:COMPLIANT')
+                            : ''
                     }`
             ),
             page
@@ -56,7 +58,7 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('bots:RANKED'),
+                message.translate('utility/bots:RANKED'),
                 '```autohotkey',
                 content,
                 '```'

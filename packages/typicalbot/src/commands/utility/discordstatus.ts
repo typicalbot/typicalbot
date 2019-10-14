@@ -19,7 +19,7 @@ export default class extends Command {
         if (!data.incidents.length)
             return message.send(
                 [
-                    message.translate('discordstatus:OPERATIONAL'),
+                    message.translate('utility/discordstatus:OPERATIONAL'),
                     '',
                     '<https://status.discordapp.com>'
                 ].join('\n')
@@ -29,7 +29,7 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('discordstatus:INCIDENT', {
+                message.translate('utility/discordstatus:INCIDENT', {
                     time: new Date(incident.created_at)
                 }),
                 incident.incident_updates[0].body,

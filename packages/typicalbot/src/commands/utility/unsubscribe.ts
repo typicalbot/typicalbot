@@ -23,13 +23,17 @@ export default class extends Command {
         if (!removed) return null;
 
         if (!message.embedable)
-            return message.reply(message.translate('unsubscribe:UNSUBBED'));
+            return message.reply(
+                message.translate('utility/unsubscribe:UNSUBBED')
+            );
 
         return message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('common:SUCCESS'))
-                .setDescription(message.translate('unsubscribe:UNSUBBED'))
+                .setDescription(
+                    message.translate('utility/unsubscribe:UNSUBBED')
+                )
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );

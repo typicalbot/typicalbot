@@ -10,11 +10,11 @@ export default class extends Command {
         if (parameters === 'view') {
             return message.dm(
                 message.guild.settings.apikey
-                    ? message.translate('api:KEY', {
+                    ? message.translate('core/api:KEY', {
                           guild: message.guild.name,
                           key: message.guild.settings.apikey
                       })
-                    : message.translate('api:NONE')
+                    : message.translate('core/api:NONE')
             );
         }
 
@@ -29,10 +29,12 @@ export default class extends Command {
                 .update(message.guild.id, {
                     apikey: newApiKey
                 })
-                .then(() => message.success(message.translate('api:SUCCESS')));
+                .then(() =>
+                    message.success(message.translate('core/api:SUCCESS'))
+                );
 
             return message.dm(
-                message.translate('api:KEY', {
+                message.translate('core/api:KEY', {
                     guild: message.guild.name,
                     key: newApiKey
                 })

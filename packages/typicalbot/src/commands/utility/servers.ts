@@ -29,7 +29,7 @@ export default class extends Command {
             page
         );
 
-        const CLUSTER = message.translate('servers:CLUSTER', {
+        const CLUSTER = message.translate('utility/servers:CLUSTER', {
             cluster: this.client.cluster,
             count: this.client.shardCount
         });

@@ -54,7 +54,7 @@ export default class MessageBulkDelete extends Event {
         if (settings.logs.delete !== '--embed')
             return logsChannel
                 .send(
-                    message.translate('logs:BULK_DELETED', {
+                    message.translate('help/logs:BULK_DELETED', {
                         amount: messages.size,
                         channel: message.channel.toString(),
                         id: message.channel.id,
@@ -68,13 +68,13 @@ export default class MessageBulkDelete extends Event {
                 new MessageEmbed()
                     .setColor(0x3ea7ed)
                     .setDescription(
-                        message.translate('logs:PURGED', {
+                        message.translate('help/logs:PURGED', {
                             amount: messages.size,
                             url: haste
                         })
                     )
                     .setFooter(
-                        message.translate('logs:MESSAGES_PURGED', {
+                        message.translate('help/logs:MESSAGES_PURGED', {
                             channel: message.channel.toString(),
                             id: message.channel.id
                         })
