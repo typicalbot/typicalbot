@@ -70,7 +70,9 @@ export default class extends Command {
         if (!data) return null;
 
         if (!data.length)
-            return message.reply(message.translate('music/play:NONE'));
+            return message.reply(
+                message.translate('music/play:NONE', { query: searchString })
+            );
         const [first] = data;
 
         const info = await this.client.utility.music

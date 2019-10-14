@@ -27,14 +27,16 @@ export default class ModerationLog {
 
     setId(data: number) {
         this._id = data.toString();
-        this.id = this.guild.translate('modlog:CASE_ID', { id: data });
+        this.id = this.guild.translate('moderation/modlog:CASE_ID', {
+            id: data
+        });
         return this;
     }
 
     setAction(data: ModlogAction) {
         this._action = data;
         const convertTime = this.client.functions.get('convertTime');
-        this.action = this.guild.translate('modlog:ACTION', {
+        this.action = this.guild.translate('moderation/modlog:ACTION', {
             display: data.display,
             expiration: this.expiration
                 ? ` (${convertTime && convertTime.execute(this.expiration)})`
@@ -55,7 +57,7 @@ export default class ModerationLog {
     }
 
     setUser(data: User) {
-        this.user = this.guild.translate('modlog:USER', {
+        this.user = this.guild.translate('moderation/modlog:USER', {
             tag: data.tag,
             id: data.id
         });
@@ -63,7 +65,7 @@ export default class ModerationLog {
     }
 
     setChannel(data: TextChannel) {
-        this.channel = this.guild.translate('modlog:CHANNEL', {
+        this.channel = this.guild.translate('moderation/modlog:CHANNEL', {
             name: data.name,
             channel: data.toString()
         });
@@ -71,7 +73,9 @@ export default class ModerationLog {
     }
 
     setReason(data: string) {
-        this.reason = this.guild.translate('modlog:REASON', { reason: data });
+        this.reason = this.guild.translate('moderation/modlog:REASON', {
+            reason: data
+        });
         return this;
     }
 
@@ -119,7 +123,7 @@ export default class ModerationLog {
                   )
                 : 1;
 
-            this.setId(id);
+            this.setId(id || 1);
         }
 
         channel.send(this.embed);

@@ -36,9 +36,12 @@ export default class extends Command {
               )
             : null;
 
-        if (!role) return message.error(message.translate('moderation/give:INVALID'));
+        if (!role)
+            return message.error(message.translate('moderation/give:INVALID'));
         if (!role.editable)
-            return message.error(message.translate('moderation/give:UNEDITABLE'));
+            return message.error(
+                message.translate('moderation/give:UNEDITABLE')
+            );
 
         if (member) {
             if (
@@ -66,7 +69,9 @@ export default class extends Command {
 
         const publicList = message.guild.settings.roles.public;
         if (!publicList.includes(role.id))
-            return message.error(message.translate('moderation/give:NOT_PUBLIC'));
+            return message.error(
+                message.translate('moderation/give:NOT_PUBLIC')
+            );
 
         const added = await message.member.roles.add(role).catch(() => null);
 

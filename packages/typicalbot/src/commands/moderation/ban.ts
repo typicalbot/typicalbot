@@ -85,7 +85,7 @@ export default class extends Command {
         await message.guild.members
             .ban(user, {
                 days: parseInt(purgeDays, 10) || 0,
-                reason: message.translate('moderation/ban:BAN_REASON', {
+                reason: message.translate('moderation/ban:REASON', {
                     mod: message.author.tag,
                     reason: reason || message.translate('common:NO_REASON')
                 })

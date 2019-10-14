@@ -70,7 +70,7 @@ export default class ModerationLogHandler {
                 .setAuthor(moderator.tag, moderator.displayAvatarURL())
                 .setDescription([
                     start,
-                    message.translate('modlog:REASON', {
+                    message.translate('moderation/modlog:REASON', {
                         reason
                     })
                 ])
