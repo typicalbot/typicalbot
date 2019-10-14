@@ -25,8 +25,10 @@ export default class {
         const { channel } = message.member.voice;
 
         if (!channel) throw message.translate('music/music:NEED_CHANNEL');
-        if (!channel.joinable) throw message.translate('music/music:NOT_JOINABLE');
-        if (!channel.speakable) throw message.translate('music/music:NOT_SPEAKABLE');
+        if (!channel.joinable)
+            throw message.translate('music/music:NOT_JOINABLE');
+        if (!channel.speakable)
+            throw message.translate('music/music:NOT_SPEAKABLE');
 
         const connection = await channel.join();
 

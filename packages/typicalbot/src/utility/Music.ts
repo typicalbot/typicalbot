@@ -63,7 +63,8 @@ export default class AudioUtil {
         const err = error.errors[0].reason;
         if (!err) return message.translate('music/music:UNKNOWN', { error });
 
-        if (err === 'keyInvalid') return message.translate('music/music:INVALID_KEY');
+        if (err === 'keyInvalid')
+            return message.translate('music/music:INVALID_KEY');
         if (err === 'quotaExceeded')
             return message.translate('music/music:QUOTA_EXCEEDED');
 

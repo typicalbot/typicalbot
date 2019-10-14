@@ -82,7 +82,9 @@ export default class Stream {
                     }, 1000);
                 }
 
-                video.requester.send(message.translate('music/music:CONCLUDED'));
+                video.requester.send(
+                    message.translate('music/music:CONCLUDED')
+                );
                 return this.end();
             });
     }
@@ -118,7 +120,9 @@ export default class Stream {
 
         this.dispatcher &&
             this.dispatcher.on('finish', () => {
-                video.requester.send(message.translate('music/music:LIVE_CONCLUDED'));
+                video.requester.send(
+                    message.translate('music/music:LIVE_CONCLUDED')
+                );
                 this.end();
             });
     }
