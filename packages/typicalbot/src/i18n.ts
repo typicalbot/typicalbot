@@ -39,9 +39,7 @@ export default async (): Promise<Map<string, i18next.TFunction>> => {
     const { namespaces, languages } = await walkDirectory(
         path.resolve(__dirname, '../../../../../../i18n/')
     );
-    console.log(languages);
-    console.log('--');
-    console.log(namespaces);
+
     i18next.use(Backend);
 
     await i18next.init({
