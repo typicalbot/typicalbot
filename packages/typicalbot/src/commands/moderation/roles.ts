@@ -70,13 +70,7 @@ export default class extends Command {
             message,
             message.guild.roles
                 .sort((a, b) => b.position - a.position)
-                .map(
-                    role =>
-                        `${this.client.helpers.lengthen.execute(
-                            role.name,
-                            30
-                        )} : ${role.id}`
-                ),
+                .map(role => `${role.name.padEnd(30)} : ${role.id}`),
             parseInt(page, 10) || 1
         );
 
@@ -133,11 +127,7 @@ export default class extends Command {
         const content = this.client.helpers.pagify.execute(
             message,
             role.members.map(
-                member =>
-                    `${this.client.helpers.lengthen.execute(
-                        member.user.username,
-                        30
-                    )} : ${member.id}`
+                member => `${member.user.username.padEnd(30)} : ${member.id}`
             ),
             parseInt(page, 10) || 1
         );
@@ -278,13 +268,7 @@ export default class extends Command {
             message,
             roles
                 .sort((a, b) => b.position - a.position)
-                .map(
-                    role =>
-                        `${this.client.helpers.lengthen.execute(
-                            role.name,
-                            30
-                        )} : ${role.id}`
-                ),
+                .map(role => `${role.name.padEnd(30)} : ${role.id}`),
             parseInt(page, 10) || 1
         );
 

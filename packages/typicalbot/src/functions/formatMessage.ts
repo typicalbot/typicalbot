@@ -63,7 +63,7 @@ export default class FormatMessage extends Function {
                 )
                 .replace(
                     /{message.content:short}|{message.text:short}/gi,
-                    this.client.helpers.lengthen.shorten(
+                    this.client.helpers.lengthen.execute(
                         options.message.content,
                         100
                     )

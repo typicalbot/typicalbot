@@ -32,9 +32,6 @@ export default class ModerationLogHandler {
             });
 
         for (const message of messages.values()) {
-            // TODO: fix this if discord.js fixes partials
-            if (!message.author) continue;
-
             if (
                 message.author.id !==
                     (this.client.user && this.client.user.id) ||

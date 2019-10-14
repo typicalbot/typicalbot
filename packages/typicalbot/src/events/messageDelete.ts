@@ -51,7 +51,7 @@ export default class MessageDelete extends Event {
                         user.displayAvatarURL()
                     )
                     .setDescription(
-                        this.client.helpers.lengthen.shorten(
+                        this.client.helpers.lengthen.execute(
                             message.content,
                             100
                         )

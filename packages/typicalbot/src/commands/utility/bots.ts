@@ -47,9 +47,7 @@ export default class extends Command {
             message,
             bots.map(
                 bot =>
-                    `${this.client.helpers.lengthen.execute(bot.name, 20)}: ${
-                        bot.servercount
-                    }${
+                    `${bot.name.padEnd(20)}: ${bot.servercount}${
                         bot.compliant ? message.translate('bots:COMPLIANT') : ''
                     }`
             ),

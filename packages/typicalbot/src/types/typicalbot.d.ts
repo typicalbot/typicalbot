@@ -175,12 +175,7 @@ export interface HelperFunctions {
         ): string;
     };
     lengthen: {
-        execute(
-            text: string,
-            length: number,
-            place?: 'before' | 'after'
-        ): string;
-        shorten(text: string, length: number): string;
+        execute(text: string, length: number): string;
     };
     pagify: {
         execute(

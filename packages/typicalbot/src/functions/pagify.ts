@@ -13,10 +13,8 @@ export default class Pagify extends Function {
         const pageContent = currentPage
             .map(
                 (item, index) =>
-                    `• ${this.client.helpers.lengthen.execute(
-                        String(index + 1 + 10 * page),
-                        String(10 + 10 * page).length,
-                        'before'
+                    `• ${String(index + 1 + 10 * page).padStart(
+                        String(10 + 10 * page).length
                     )}: ${item}`
             )
             .join('\n');

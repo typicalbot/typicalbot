@@ -25,10 +25,7 @@ export default class extends Command {
 
         const content = this.client.helpers.pagify.execute(
             message,
-            list.map(
-                u =>
-                    `${this.client.helpers.lengthen.execute(u.tag, 30)} ${u.id}`
-            ),
+            list.map(u => `${u.tag.padEnd(30)} ${u.id}`),
             page
         );
 

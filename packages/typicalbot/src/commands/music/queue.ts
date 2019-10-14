@@ -21,7 +21,7 @@ export default class extends Command {
             const { queue } = message.guild.guildStream;
 
             const CURRENT = message.translate('queue:CURRENT', {
-                title: this.client.helpers.lengthen.shorten(
+                title: this.client.helpers.lengthen.execute(
                     message.guild.guildStream.current.title,
                     45
                 ),
@@ -45,7 +45,7 @@ export default class extends Command {
             const content = list
                 .map(s =>
                     message.translate('queue:LIST', {
-                        title: this.client.helpers.lengthen.shorten(
+                        title: this.client.helpers.lengthen.execute(
                             s.title,
                             45
                         ),

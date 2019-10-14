@@ -36,12 +36,9 @@ export default class extends Command {
             message,
             list.map(
                 m =>
-                    `${this.client.helpers.lengthen.execute(
-                        `${m.user.username}${
-                            m.nickname ? ` (${m.nickname})` : ''
-                        }`,
-                        40
-                    )}: ${m.id}`
+                    `${`${m.user.username}${
+                        m.nickname ? ` (${m.nickname})` : ''
+                    }`.padEnd(40)}: ${m.id}`
             ),
             page
         );

@@ -28,7 +28,7 @@ export default class extends Command {
 
             return message.send(
                 message.translate('current:CURRENT', {
-                    title: this.client.helpers.lengthen.shorten(
+                    title: this.client.helpers.lengthen.execute(
                         message.guild.guildStream.current.title,
                         45
                     ),
