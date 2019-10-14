@@ -5,7 +5,7 @@
     "TYPICAL_INFO": "TypicalBot Info",
     "INVALID": "There is not a command named `{{name}}`. Try searching something else.",
     "INVALID_INFO": "Invalid Command Input",
-    "TEXT": "$t(help:TEXT_1)\n$t(help:TEXT_2)\n$t(help:TEXT_3)\n\n$t(help:TEXT_4)\n$t(help:TEXT_5)\n$t(help:TEXT_6)\n$t(help:TEXT_7)\n$t(help:TEXT_8)\n$t(help:TEXT_9)\n$t(help:TEXT_10)",
+    "TEXT": "$t(core/help:TEXT_1)\n$t(core/help:TEXT_2)\n$t(core/help:TEXT_3)\n\n$t(core/help:TEXT_4)\n$t(core/help:TEXT_5)\n$t(core/help:TEXT_6)\n$t(core/help:TEXT_7)\n$t(core/help:TEXT_8)\n$t(core/help:TEXT_9)\n$t(core/help:TEXT_10)",
     "TEXT_1": "**__Usage For:__** {{name}}",
     "TEXT_2": "**[Param]** means a parameter is optional.",
     "TEXT_3": "**<Param>** means a parameter is required.",
