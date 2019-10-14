@@ -48,6 +48,10 @@ export default class extends Command {
             );
         }
 
+        const path = command.path.substring(
+            command.path.indexOf('commands/') + 8
+        );
+
         if (!message.embedable)
             return message.send(
                 message.translate('core/help:TEXT', {
@@ -57,10 +61,8 @@ export default class extends Command {
                         ? command.aliases.join(', ')
                         : message.translate('common:NONE'),
                     permission: command.permission,
-                    description: message.translate(
-                        `${command.name}:DESCRIPTION`
-                    ),
-                    usage: message.translate(`${command.name}:USAGE`)
+                    description: message.translate(`${path}:DESCRIPTION`),
+                    usage: message.translate(`${path}:USAGE`)
                 })
             );
 
@@ -87,9 +89,12 @@ export default class extends Command {
                 })
                 .addField(
                     message.translate('core/help:DESC'),
-                    command.description
+                    message.translate(`${path}:DESCRIPTION`)
                 )
-                .addField(message.translate('core/help:USE'), command.usage)
+                .addField(
+                    message.translate('core/help:USE'),
+                    message.translate(`${path}:USAGE`)
+                )
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );
