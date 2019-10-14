@@ -42,8 +42,6 @@ export default class extends Command {
 
         const NONE = message.translate('commands:NONE');
 
-        // TODO: fix this if discord.js fixes partials behavior
-        if (!message.author) return;
         return message.author
             .send(
                 new MessageEmbed()
