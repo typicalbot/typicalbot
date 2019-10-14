@@ -10,11 +10,11 @@ export default class extends Command {
         if (parameters === 'view') {
             return message.dm(
                 message.guild.settings.apikey
-                    ? message.translate('api:NONE')
-                    : message.translate('api:KEY', {
+                    ? message.translate('api:KEY', {
                           guild: message.guild.name,
                           key: message.guild.settings.apikey
                       })
+                    : message.translate('api:NONE')
             );
         }
 
