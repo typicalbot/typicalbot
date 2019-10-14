@@ -11,10 +11,12 @@ async function walkDirectory(dir: string, namespaces: string[] = []) {
         const stat = await fs.stat(path.join(dir, file));
         if (stat.isDirectory()) {
             languages.push(file);
+
             const folder = await walkDirectory(
                 path.join(dir, file),
                 namespaces
             );
+
             // eslint-disable-next-line no-param-reassign
             namespaces = folder.namespaces;
         } else {
@@ -37,6 +39,9 @@ export default async (): Promise<Map<string, i18next.TFunction>> => {
     const { namespaces, languages } = await walkDirectory(
         path.resolve(__dirname, '../../../../../../i18n/')
     );
+    console.log(languages);
+    console.log('--');
+    console.log(namespaces);
     i18next.use(Backend);
 
     await i18next.init({
