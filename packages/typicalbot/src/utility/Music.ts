@@ -57,17 +57,17 @@ export default class AudioUtil {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     searchError(message: TypicalGuildMessage, error: any) {
         if (!error.errors)
-            return message.translate('music:UNKNOWN', {
+            return message.translate('music/music:UNKNOWN', {
                 error: error.stack
             });
         const err = error.errors[0].reason;
-        if (!err) return message.translate('music:UNKNOWN', { error });
+        if (!err) return message.translate('music/music:UNKNOWN', { error });
 
-        if (err === 'keyInvalid') return message.translate('music:INVALID_KEY');
+        if (err === 'keyInvalid') return message.translate('music/music:INVALID_KEY');
         if (err === 'quotaExceeded')
-            return message.translate('music:QUOTA_EXCEEDED');
+            return message.translate('music/music:QUOTA_EXCEEDED');
 
-        return message.translate('music:UNKNOWN', { error: err });
+        return message.translate('music/music:UNKNOWN', { error: err });
     }
 
     permissionCheck(
@@ -120,7 +120,7 @@ export default class AudioUtil {
                 : 0
         );
 
-        const error = message.translate('music:MISSING_PERM', {
+        const error = message.translate('music/music:MISSING_PERM', {
             requiredLevel: rrLevel && rrLevel.level,
             requiredTitle: rrLevel && rrLevel.title,
             userLevel: userTrueLevel && userTrueLevel.level,

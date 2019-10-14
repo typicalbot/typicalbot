@@ -24,9 +24,9 @@ export default class {
     async connect(message: TypicalGuildMessage) {
         const { channel } = message.member.voice;
 
-        if (!channel) throw message.translate('music:NEED_CHANNEL');
-        if (!channel.joinable) throw message.translate('music:NOT_JOINABLE');
-        if (!channel.speakable) throw message.translate('music:NOT_SPEAKABLE');
+        if (!channel) throw message.translate('music/music:NEED_CHANNEL');
+        if (!channel.joinable) throw message.translate('music/music:NOT_JOINABLE');
+        if (!channel.speakable) throw message.translate('music/music:NOT_SPEAKABLE');
 
         const connection = await channel.join();
 
@@ -66,7 +66,7 @@ export default class {
             const convertTime = this.client.functions.get(
                 'convertTime'
             ) as TypicalFunction;
-            throw message.translate('music:TOO_LONG', {
+            throw message.translate('music/music:TOO_LONG', {
                 time: convertTime.execute(
                     message,
                     message.guild.settings.music.timelimit
@@ -87,19 +87,19 @@ export default class {
             message.guild.guildStream.mode &&
             message.guild.guildStream.mode !== 'queue'
         )
-            throw message.translate('music:NOT_IN_QUEUE');
+            throw message.translate('music/music:NOT_IN_QUEUE');
 
         if (
             !message.member.voice.channel ||
             message.member.voice.channel.id !== connection.channel.id
         )
-            throw message.translate('music:INVALID_CHANNEL');
+            throw message.translate('music/music:INVALID_CHANNEL');
         if (
             message.guild.guildStream.queue.length >=
             (message.guild.settings.music.queuelimit || 10)
         )
             return message.error(
-                message.translate('music:QUEUE_MAXED', {
+                message.translate('music/music:QUEUE_MAXED', {
                     amount: message.guild.settings.music.queuelimit || 10
                 })
             );
@@ -119,7 +119,7 @@ export default class {
         id: string,
         guildStream: Stream
     ) {
-        message.reply(message.translate('music:LOADING'));
+        message.reply(message.translate('music/music:LOADING'));
 
         const playlist = await this.client.utility.music.fetchPlaylist(
             message,

@@ -35,7 +35,7 @@ export default class Stream {
 
         const convertTime = this.client.functions.get('covertTime');
 
-        const content = message.translate('music:STREAMING', {
+        const content = message.translate('music/music:STREAMING', {
             title: video.title,
             user: video.requester.author.username,
             time:
@@ -60,8 +60,8 @@ export default class Stream {
                 video.requester.send(
                     message.translate(
                         this.queue.length
-                            ? 'music:ERROR_PLAYING'
-                            : 'music:ERROR_LEAVING'
+                            ? 'music/music:ERROR_PLAYING'
+                            : 'music/music:ERROR_LEAVING'
                     )
                 );
                 // eslint-disable-next-line no-console
@@ -82,7 +82,7 @@ export default class Stream {
                     }, 1000);
                 }
 
-                video.requester.send(message.translate('music:CONCLUDED'));
+                video.requester.send(message.translate('music/music:CONCLUDED'));
                 return this.end();
             });
     }
@@ -100,7 +100,7 @@ export default class Stream {
         this.current = video;
 
         video.requester.send(
-            message.translate('music:LIVE_STREAMING', {
+            message.translate('music/music:LIVE_STREAMING', {
                 title: video.title,
                 user: video.requester.author.username
             })
@@ -109,7 +109,7 @@ export default class Stream {
         this.dispatcher &&
             this.dispatcher.on('error', err => {
                 video.requester.send(
-                    message.translate('music:ERROR_LIVESTREAM')
+                    message.translate('music/music:ERROR_LIVESTREAM')
                 );
                 // eslint-disable-next-line no-console
                 console.log(err);
@@ -118,7 +118,7 @@ export default class Stream {
 
         this.dispatcher &&
             this.dispatcher.on('finish', () => {
-                video.requester.send(message.translate('music:LIVE_CONCLUDED'));
+                video.requester.send(message.translate('music/music:LIVE_CONCLUDED'));
                 this.end();
             });
     }
@@ -163,7 +163,7 @@ export default class Stream {
         if (silent) return;
 
         video.requester.reply(
-            message.translate('mustic:ENQUEUED', { title: video.title })
+            message.translate('music/music:ENQUEUED', { title: video.title })
         );
     }
 }
