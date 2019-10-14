@@ -3,10 +3,10 @@ import { TypicalMessage } from '../types/typicalbot';
 
 export default class ConvertTime extends TypicalFunction {
     execute(message: TypicalMessage, time: number) {
-        const absoluteSeconds = (time / 1000) % 60;
-        const absoluteMinutes = (time / (1000 * 60)) % 60;
-        const absoluteHours = (time / (1000 * 60 * 60)) % 24;
-        const absoluteDays = time / (1000 * 60 * 60 * 24);
+        const absoluteSeconds = Math.floor((time / 1000) % 60);
+        const absoluteMinutes = Math.floor((time / (1000 * 60)) % 60);
+        const absoluteHours = Math.floor((time / (1000 * 60 * 60)) % 24);
+        const absoluteDays = Math.floor(time / (1000 * 60 * 60 * 24));
 
         const d = absoluteDays
             ? absoluteDays === 1
