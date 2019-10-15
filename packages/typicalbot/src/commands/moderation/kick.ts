@@ -3,6 +3,7 @@ import Constants from '../../utility/Constants';
 import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
 import { MessageEmbed } from 'discord.js';
 
+const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_MODERATOR;
     mode = Constants.Modes.STRICT;
@@ -12,7 +13,7 @@ export default class extends Command {
         parameters: string,
         permissionLevel: PermissionLevel
     ) {
-        const args = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i.exec(parameters);
+        const args = regex.exec(parameters);
         if (!args)
             return message.error(
                 message.translate('misc:USAGE_ERROR', {
