@@ -88,7 +88,9 @@ export default class extends Command {
         array.push(message.channel.id);
 
         return this.client.settings
-            .update(message.guild.id, { ignored: { [key]: array } })
+            .update(message.guild.id, {
+                ignored: { ...message.guild.settings.ignored, [key]: array }
+            })
             .then(() =>
                 message.success(
                     message.translate('moderation/ignore:ADDED', { type: key })
@@ -102,21 +104,19 @@ export default class extends Command {
         const NA = message.translate('common:NA');
         const response = [
             message.translate('moderation/ignore:IGNORING', {
-                type: message.translate('common:COMMANDS'),
-                values: commands.length ? commands.map(id => `<#${id}>`) : NA
+                type: message.translate('common:COMMANDS')
             }),
-            '',
+            commands.length ? commands.map(id => `<#${id}>`) : NA,
             '',
             message.translate('moderation/ignore:IGNORING', {
-                type: message.translate('common:INVITES'),
-                values: invites.length ? invites.map(id => `<#${id}>`) : NA
+                type: message.translate('common:INVITES')
             }),
-            '',
+            invites.length ? invites.map(id => `<#${id}>`) : NA,
             '',
             message.translate('moderation/ignore:IGNORING', {
-                type: message.translate('common:STARS'),
-                values: stars.length ? stars.map(id => `<#${id}>`) : NA
-            })
+                type: message.translate('common:STARS')
+            }),
+            stars.length ? stars.map(id => `<#${id}>`) : NA
         ];
 
         return message.send(response.join('\n'));
