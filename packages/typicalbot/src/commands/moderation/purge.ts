@@ -56,7 +56,15 @@ export default class extends Command {
             if (filter === 'you' && msg.author.id === this.client.config.id)
                 return true;
             if (filter === 'bots' && msg.author.bot) return true;
-
+            if (
+                !userMention &&
+                !userID &&
+                !roleID &&
+                !channelID &&
+                !filter &&
+                !reason
+            )
+                return true;
             return false;
         });
 
