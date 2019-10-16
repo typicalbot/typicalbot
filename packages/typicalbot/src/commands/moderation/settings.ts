@@ -9,6 +9,16 @@ const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 const msRegex = /^(\d+)$/i;
 const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
 
+const possibleLanguages = [
+    {
+        name: 'en-US',
+        aliases: ['english']
+    },
+    {
+        name: 'es-ES',
+        aliases: ['español', 'espanol']
+    }
+];
 export default class extends Command {
     aliases = ['set'];
     mode = Constants.Modes.STRICT;
@@ -487,6 +497,18 @@ export default class extends Command {
         const DEFAULT = message.translate('common:DEFAULT');
         const HERE = message.translate('common:HERE');
         const EMBED = message.translate('common:EMBED');
+
+        if (setting.path.endsWith('language')) {
+            const selectedLanguage = possibleLanguages.find(
+                data =>
+                    data.name === value.toLowerCase() ||
+                    data.aliases.includes(value.toLowerCase())
+            );
+            if (!selectedLanguage)
+                return message.error(
+                    message.translate('settings:INVALID_OPTION')
+                );
+        }
 
         if (setting.type === 'boolean') {
             if (
