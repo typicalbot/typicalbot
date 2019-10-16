@@ -26,7 +26,9 @@ export default class extends Command {
         // A user id was not found and so edit the authors nickname
         if (!member) {
             if (message.guild.settings.nonickname)
-                return message.error('utility/nickname:DISABLED');
+                return message.error(
+                    message.translate('utility/nickname:DISABLED')
+                );
 
             const changed = await message.member
                 .setNickname(reset ? '' : nickname)
