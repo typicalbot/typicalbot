@@ -6,12 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.1]
+### Fixed
+ - Update check of autorole-silent setting ([#83](https://github.com/typicalbot/typicalbot/pull/83))
+ - Incorrect setting being displayed for `modlogs-purge` ([#85](https://github.com/typicalbot/typicalbot/pull/85))
+
+### Removed
+ - Purged messages sent to hastebin ([#84](https://github.com/typicalbot/typicalbot/pull/84))
+
 ## [2.7.0]
 ### Changed
  - `alias` command is available to everyone
  - YouTube live streams is available to everyone via `play` command
- - `music-timelimit` max limit has been changed from 600 to 7200.
- - `music-queuelimit` max limit has been changed from 10 to 100. 
+ - `music-timelimit` max limit has been changed from 600 to 7200
+ - `music-queuelimit` max limit has been changed from 10 to 100
 
 ## [2.6.0]
 ### Changed
@@ -118,7 +126,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.6.0...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.7.1...HEAD
+[2.7.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.1
+[2.7.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.0
 [2.6.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.6.0
 [2.5.2]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.2
 [2.5.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.1
