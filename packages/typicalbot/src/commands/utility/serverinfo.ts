@@ -22,11 +22,11 @@ export default class extends Command {
                     }),
                     '```',
                     message.translate('utility/serverinfo:NAME', {
-                        name: message.guild.id,
+                        name: message.guild.name,
                         id: message.guild.id
                     }),
                     message.translate('utility/serverinfo:OWNER', {
-                        users: guildOwner ? guildOwner.tag : UNKNOWN,
+                        user: guildOwner ? guildOwner.tag : UNKNOWN,
                         id: message.guild.ownerID
                     }),
                     message.translate('utility/serverinfo:CREATED', {
@@ -61,8 +61,9 @@ export default class extends Command {
                     }),
                     message.translate('utility/serverinfo:BOOSTED', {
                         level: message.guild.premiumTier,
-                        amount: message.guild.premiumSubscriptionCount
-                    }) + '```'
+                        amount: message.guild.premiumSubscriptionCount || 0
+                    }),
+                    '```'
                 ].join('\n')
             );
 
@@ -128,7 +129,7 @@ export default class extends Command {
                     message.translate('common:BOOSTED_FIELD'),
                     message.translate('utility/serverinfo:BOOSTERS', {
                         level: message.guild.premiumTier,
-                        amount: message.guild.premiumSubscriptionCount
+                        amount: message.guild.premiumSubscriptionCount || 0
                     })
                 )
                 .setThumbnail(
