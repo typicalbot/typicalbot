@@ -56,7 +56,7 @@ export class TypicalMessage extends Structures.get('Message') {
         return this.author && this.author.send(content, { ...options, embed });
     }
 
-    translate(key: string, args: object) {
+    translate(key: string, args?: object) {
         const language = this.client.translate.get(
             this.guild ? this.guild.settings.language : 'en-US'
         );

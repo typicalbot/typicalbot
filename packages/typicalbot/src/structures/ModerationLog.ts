@@ -35,11 +35,13 @@ export default class ModerationLog {
 
     setAction(data: ModlogAction) {
         this._action = data;
-        const convertTime = this.client.functions.get('convertTime');
         this.action = this.guild.translate('moderation/modlog:ACTION', {
             display: data.display,
             expiration: this.expiration
-                ? ` (${convertTime && convertTime.execute(this.expiration)})`
+                ? ` (${this.client.helpers.convertTime.execute(
+                      this.guild,
+                      this.expiration
+                  )})`
                 : ''
         });
         return this;

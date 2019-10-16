@@ -160,7 +160,7 @@ export interface TypicalDonor {
 
 export interface HelperFunctions {
     convertTime: {
-        execute(message: Message, time: number): string;
+        execute(guild: TypicalGuild | TypicalMessage, time: number): string;
     };
     fetchAccess: {
         execute(guild: Guild): Promise<AccessLevel>;

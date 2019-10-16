@@ -10,7 +10,8 @@ export default class TaskHandler {
 
     collection: Collection<number, Task> = new Collection();
 
-    taskTypes: Collection<string, Task> = new Collection();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    taskTypes: Collection<string, any> = new Collection();
 
     constructor(client: Cluster) {
         this.client = client;
@@ -24,7 +25,7 @@ export default class TaskHandler {
 
                 if (!file.ext || file.ext !== '.js') return;
 
-                const req: Task = (r => r.default || r)(
+                const req = (r => r.default || r)(
                     // eslint-disable-next-line @typescript-eslint/no-var-requires
                     require(join(file.dir, file.base))
                 );
@@ -41,13 +42,15 @@ export default class TaskHandler {
                 const list: TaskOptions[] = await this.client.handlers.database.get(
                     'tasks'
                 );
+                for (const task of list) {
+                    const taskType = this.taskTypes.get(task.type);
+                    if (!taskType) continue;
 
-                list.forEach(taskOptions =>
                     this.collection.set(
-                        taskOptions.id,
-                        new Task(this.client, taskOptions)
-                    )
-                );
+                        task.id,
+                        new taskType(this.client, task)
+                    );
+                }
             });
 
         setInterval(() => {

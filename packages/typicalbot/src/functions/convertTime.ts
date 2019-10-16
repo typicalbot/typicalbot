@@ -1,8 +1,9 @@
 import TypicalFunction from '../structures/Function';
-import { TypicalMessage } from '../types/typicalbot';
+import { TypicalGuild } from '../extensions/TypicalGuild';
+import { TypicalMessage } from '../extensions/TypicalMessage';
 
 export default class ConvertTime extends TypicalFunction {
-    execute(message: TypicalMessage, time: number) {
+    execute(guild: TypicalMessage | TypicalGuild, time: number) {
         const absoluteSeconds = Math.floor((time / 1000) % 60);
         const absoluteMinutes = Math.floor((time / (1000 * 60)) % 60);
         const absoluteHours = Math.floor((time / (1000 * 60 * 60)) % 24);
@@ -10,23 +11,23 @@ export default class ConvertTime extends TypicalFunction {
 
         const d = absoluteDays
             ? absoluteDays === 1
-                ? message.translate('time:ONE_DAY')
-                : message.translate('time:DAYS', { amount: absoluteDays })
+                ? guild.translate('time:ONE_DAY')
+                : guild.translate('time:DAYS', { amount: absoluteDays })
             : null;
         const h = absoluteHours
             ? absoluteHours === 1
-                ? message.translate('time:ONE_HOUR')
-                : message.translate('time:HOURS', { amount: absoluteHours })
+                ? guild.translate('time:ONE_HOUR')
+                : guild.translate('time:HOURS', { amount: absoluteHours })
             : null;
         const m = absoluteMinutes
             ? absoluteMinutes === 1
-                ? message.translate('time:ONE_MINUTE')
-                : message.translate('time:MINUTES', { amount: absoluteMinutes })
+                ? guild.translate('time:ONE_MINUTE')
+                : guild.translate('time:MINUTES', { amount: absoluteMinutes })
             : null;
         const s = absoluteSeconds
             ? absoluteSeconds === 1
-                ? message.translate('time:ONE_SECOND')
-                : message.translate('time:SECONDS', { amount: absoluteSeconds })
+                ? guild.translate('time:ONE_SECOND')
+                : guild.translate('time:SECONDS', { amount: absoluteSeconds })
             : null;
 
         const absoluteTime = [];

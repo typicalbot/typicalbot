@@ -33,14 +33,13 @@ export default class Stream {
 
         this.current = video;
 
-        const convertTime = this.client.functions.get('covertTime');
-
         const content = message.translate('music/music:STREAMING', {
             title: video.title,
             user: video.requester.author.username,
-            time:
-                convertTime &&
-                convertTime.execute(parseInt(video.length, 10) * 1000)
+            time: this.client.helpers.convertTime.execute(
+                this.guild,
+                parseInt(video.length, 10) * 1000
+            )
         });
 
         if (
