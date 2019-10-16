@@ -100,24 +100,14 @@ export default class extends Command {
             );
         args.shift();
 
-        const [action, roleMention, , page, roleID] = args;
+        const [action, roleMention, roleName, page, roleID] = args;
 
         const role =
             roleMention || roleID
                 ? message.guild.roles.get(roleMention || roleID)
-                : // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                // @ts-ignore
-                subArgs[3] || subArgs[6]
-                ? message.guild.roles.find(r =>
-                      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                      // @ts-ignore
-                      subArgs[3]
-                          ? // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                            // @ts-ignore
-                            r.name.toLowerCase() === subArgs[3].toLowerCase()
-                          : // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                            // @ts-ignore
-                            r.name.toLowerCase() === subArgs[6].toLowerCase()
+                : roleName
+                ? message.guild.roles.find(
+                      r => r.name.toLowerCase() === roleName.toLowerCase()
                   )
                 : null;
         if (!role)
@@ -284,7 +274,9 @@ export default class extends Command {
 
         return message.send(
             [
-                message.translate('moderation/roles:PUBLIC'),
+                message.translate('moderation/roles:PUBLIC', {
+                    name: message.guild.name
+                }),
                 '',
                 '',
                 '```autohotkey',
