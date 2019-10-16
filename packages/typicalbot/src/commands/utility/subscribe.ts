@@ -18,7 +18,9 @@ export default class extends Command {
         if (!subbed) return null;
 
         if (!message.embedable)
-            return message.success('utility/subscribe:SUBSCRIBED');
+            return message.success(
+                message.translate('utility/subscribe:SUBSCRIBED')
+            );
 
         return message.send(
             new MessageEmbed()
