@@ -26,32 +26,23 @@ export default class extends Command {
                 ? Math.floor(Math.random() * 16777215).toString(16)
                 : color;
 
-        if (message.embedable)
-            return message.channel.send(
-                new MessageAttachment(
-                    new Canvas(200, 100)
-                        .setColor(`#${hex}`)
-                        .addRect(0, 0, 200, 100)
-                        .setColor(`${this.bw(hex)}`)
-                        .setTextFont('20px Impact')
-                        .setTextAlign('left')
-                        .addText(`#${hex}`.toUpperCase(), 5, 95)
-                        .toBuffer()
-                )
-            );
+        const buffer = new Canvas(200, 100)
+            .setColor(`#${hex}`)
+            .addRect(0, 0, 200, 100)
+            .setColor(this.bw(hex))
+            .setTextFont('20px Impact')
+            .setTextAlign('left')
+            .addText(`#${hex}`.toUpperCase(), 5, 95)
+            .toBuffer();
+
+        if (!message.embedable)
+            return message.channel.send(new MessageAttachment(buffer));
 
         return message.send(
             new MessageEmbed()
                 .attachFiles([
                     {
-                        attachment: new Canvas(200, 100)
-                            .setColor(`#${hex}`)
-                            .addRect(0, 0, 200, 100)
-                            .setColor(`${this.bw(hex)}`)
-                            .setTextFont('20px Impact')
-                            .setTextAlign('left')
-                            .addText(`#${hex}`.toUpperCase(), 5, 95)
-                            .toBuffer(),
+                        attachment: buffer,
                         name: 'color.png'
                     }
                 ])
