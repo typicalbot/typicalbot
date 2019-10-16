@@ -201,7 +201,7 @@ module.exports = class extends Command {
                     if (!channel) return message.reply(`**__Current Value:__** None`);
                     message.reply(`**__Current Value:__** ${channel.toString()}`);
                 } else if (setting === "modlogs-purge") {
-                    message.reply(`**__Current Value:__** ${message.guild.settings.prefix.default ? "Enabled" : "Disabled"}`);
+                    message.reply(`**__Current Value:__** ${message.guild.settings.logs.purge ? "Enabled" : "Disabled"}`);
                 } else if (setting === "automessage") {
                     message.reply(`**__Current Value:__** ${message.guild.settings.auto.message ? `\`\`\`txt\n${message.guild.settings.auto.message}\n\`\`\`` : "None"}`);
                 } else if (setting === "autonickname") {
