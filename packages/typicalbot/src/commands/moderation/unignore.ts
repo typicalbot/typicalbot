@@ -64,7 +64,10 @@ export default class extends Command {
 
         const ignored = await this.client.settings
             .update(message.guild.id, {
-                ignored: { [type]: channelIDs }
+                ignored: {
+                    ...message.guild.settings.ignored,
+                    [type]: channelIDs
+                }
             })
             .catch(() => null);
 
