@@ -30,7 +30,8 @@
     },
     "homepage": "https://github.com/typicalbot/typicalbot#readme",
     "dependencies": {
-        "canvas": "github:Automattic/node-canvas",
+        "@typicalbot/eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
+        "canvas": "^1.6.11",
         "canvas-constructor": "^3.1.0",
         "discord.js": "github:discordjs/discord.js#master",
         "fs": "0.0.1-security",
@@ -40,7 +41,7 @@
         "mathjs": "^6.2.1",
         "moment": "^2.22.2",
         "node-fetch": "^2.6.0",
-        "node-opus": "^0.3.2",
+        "node-opus": "^0.3.3",
         "pm2": "^3.5.1",
         "rethinkdb-ts": "^2.4.0-rc.16",
         "rethinkdbdash": "^2.3.31",
@@ -49,8 +50,7 @@
         "typescript": "^3.6.3",
         "veza": "^1.1.0",
         "vm2": "^3.8.3",
-        "ytdl-core": "github:fent/node-ytdl-core",
-        "utf-8-validate": "^5.0.2"
+        "ytdl-core": "github:fent/node-ytdl-core"
     },
     "optionalDependencies": {
         "bignum": "^0.13.0",
@@ -63,7 +63,7 @@
         "@types/i18next-node-fs-backend": "^2.1.0",
         "@types/klaw": "^3.0.0",
         "@types/mathjs": "^6.0.2",
-        "@types/node": "^12.7.5",
+        "@types/node": "^12.11.1",
         "@types/node-fetch": "^2.5.1",
         "@types/ws": "^6.0.3",
         "@typescript-eslint/eslint-plugin": "^2.3.0",
@@ -76,7 +76,7 @@
         "eslint-config-airbnb-typescript": "^5.0.0",
         "eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
         "eslint-plugin-import": "^2.18.2",
-        "lerna": "^3.16.4"
+        "lerna": "^3.18.1"
     },
     "eslintConfig": {
         "extends": "eslint-config-typicalbot"

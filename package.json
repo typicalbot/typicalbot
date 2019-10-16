@@ -2,19 +2,20 @@
     "version": "3.0.0-beta",
     "private": true,
     "devDependencies": {
-        "@types/node": "^12.7.8",
+        "@types/node": "^12.11.1",
         "esdoc": "^1.1.0",
         "esdoc-ecmascript-proposal-plugin": "^1.0.0",
         "esdoc-standard-plugin": "^1.0.0",
         "eslint": "^6.1.0",
         "eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
-        "lerna": "^3.16.4"
+        "lerna": "^3.18.1"
     },
     "workspaces": [
         "packages/*"
     ],
     "dependencies": {
-        "veza": "^1.1.0",
-        "discord.js": "github:discordjs/discord.js#master"
+        "@typicalbot/eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
+        "discord.js": "github:discordjs/discord.js#master",
+        "veza": "^1.1.0"
     }
 }

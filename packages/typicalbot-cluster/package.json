@@ -17,6 +17,7 @@
     },
     "homepage": "https://github.com/typicalbot/typicalbot-cluster-manager#readme",
     "dependencies": {
+        "@typicalbot/eslint-config-typicalbot": "github:typicalbot/typicalbot-eslint",
         "veza": "^1.1.0"
     },
     "devDependencies": {
