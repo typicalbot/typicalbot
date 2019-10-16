@@ -23,7 +23,7 @@ export default class extends Command {
             return message.error(
                 message.translate('utility/strawpoll:INVALID')
             );
-        console.log(list, !!multi, multi, question);
+
         const data = await fetch('https://www.strawpoll.me/api/v2/polls', {
             method: 'post',
             body: JSON.stringify({
@@ -36,7 +36,7 @@ export default class extends Command {
             .catch(() => null);
         if (!data)
             return message.error(message.translate('common:REQUEST_ERROR'));
-        console.log(data);
+
         return message.reply(
             message.translate('utility/strawpoll:CREATED', { id: data.id })
         );
