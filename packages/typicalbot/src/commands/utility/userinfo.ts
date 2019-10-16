@@ -24,6 +24,15 @@ export default class extends Command {
 
         const user = member.user;
 
+        const ROLES =
+            member.roles.size > 1
+                ? member.roles
+                      .sort((a, b) => b.position - a.position)
+                      .map(role => role.name)
+                      .slice(0, -1)
+                      .join(', ')
+                : message.translate('common:NONE');
+
         if (!message.embedable)
             return message.reply(
                 [
@@ -48,13 +57,7 @@ export default class extends Command {
                         time: moment(member.user.createdAt).format('')
                     }),
                     message.translate('utility/userinfo:ROLES', {
-                        roles:
-                            member.roles.size > 1
-                                ? member.roles
-                                      .sort((a, b) => b.position - a.position)
-                                      .map(role => role.name)
-                                      .join(', ')
-                                : message.translate('common:NONE')
+                        roles: ROLES
                     }),
                     '```'
                 ].join('\n')
@@ -91,12 +94,7 @@ export default class extends Command {
                     message.translate('utility/userinfo:ROLE_FIELD', {
                         amount: member.roles.size - 1
                     }),
-                    member.roles.size > 1
-                        ? member.roles
-                              .sort((a, b) => b.position - a.position)
-                              .map(role => role.toString())
-                              .join(', ')
-                        : message.translate('common:NONE')
+                    ROLES
                 )
         );
     }
