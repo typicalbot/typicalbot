@@ -13,7 +13,8 @@ export default class extends Command {
         const args = regex.exec(message.content) || [];
         args.shift();
         const [number] = args;
-        const page = parseInt(number, 10);
+        const page = parseInt(number, 10) || 1;
+
         const paged = this.client.helpers.pagify.execute(
             message,
             this.client.guilds
