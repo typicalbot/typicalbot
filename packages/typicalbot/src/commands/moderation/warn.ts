@@ -67,8 +67,12 @@ export default class extends Command {
             );
         if (reason)
             embed.addField(message.translate('common:REASON_FIELD'), reason);
-        member.send().catch(() => null);
+        member.send(embed).catch(() => null);
 
-        return message.success(message.translate('moderation/warn:SUCCESS'));
+        return message.success(
+            message.translate('moderation/warn:SUCCESS', {
+                user: member.user.tag
+            })
+        );
     }
 }
