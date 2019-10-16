@@ -68,9 +68,12 @@ export default class TaskHandler {
             'tasks'
         );
 
-        tasks.forEach(task =>
-            this.collection.set(task.id, new Task(this.client, task))
-        );
+        for (const task of tasks) {
+            const taskType = this.taskTypes.get(task.type);
+            if (!taskType) continue;
+
+            this.collection.set(task.id, new taskType(this.client, task));
+        }
     }
 
     async create(type: string, end: number, data: unknown) {
@@ -84,11 +87,12 @@ export default class TaskHandler {
 
         await this.client.handlers.database.insert('tasks', payload);
 
-        const task = new Task(this.client, payload);
+        const Task = this.taskTypes.get(type);
+        if (!type) return null;
 
-        this.collection.set(id, task);
+        this.collection.set(id, new Task(this.client, payload));
 
-        return task;
+        return Task;
     }
 
     async delete(id: number) {
