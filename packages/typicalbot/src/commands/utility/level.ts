@@ -38,7 +38,8 @@ export default class extends Command {
                         permissionsHere.level !== permissions.level
                             ? ` (${permissionsHere.level} | ${permissionsHere.title})`
                             : ''
-                    }`
+                    }`,
+                    user: member.user.tag
                 })
             );
 
