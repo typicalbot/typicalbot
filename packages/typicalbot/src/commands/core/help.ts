@@ -49,20 +49,25 @@ export default class extends Command {
         }
 
         const path = command.path.substring(
-            command.path.indexOf('commands/') + 8
+            command.path.indexOf('commands/') + 9,
+            command.path.length - 3
         );
+
+        const DESCRIPTION = message.translate(`${path}:DESCRIPTION`);
+        const USAGE = message.translate(`${path}:USAGE`);
+        const ALIASES = command.aliases.length
+            ? command.aliases.join(', ')
+            : message.translate('common:NONE');
 
         if (!message.embedable)
             return message.send(
                 message.translate('core/help:TEXT', {
                     name: parameters,
                     commandName: command.name,
-                    aliases: command.aliases.length
-                        ? command.aliases.join(', ')
-                        : message.translate('common:NONE'),
+                    aliases: ALIASES,
                     permission: command.permission,
-                    description: message.translate(`${path}:DESCRIPTION`),
-                    usage: message.translate(`${path}:USAGE`)
+                    description: DESCRIPTION,
+                    usage: USAGE
                 })
             );
 
@@ -80,21 +85,12 @@ export default class extends Command {
                     command.name,
                     true
                 )
-                .addField(
-                    message.translate('core/help:ALIASES'),
-                    command.aliases.length ? command.aliases.join(', ') : 'None'
-                )
+                .addField(message.translate('core/help:ALIASES'), ALIASES)
                 .addField(message.translate('core/help:PERMISSION'), {
                     permission: command.permission
                 })
-                .addField(
-                    message.translate('core/help:DESC'),
-                    message.translate(`${path}:DESCRIPTION`)
-                )
-                .addField(
-                    message.translate('core/help:USE'),
-                    message.translate(`${path}:USAGE`)
-                )
+                .addField(message.translate('core/help:DESC'), DESCRIPTION)
+                .addField(message.translate('core/help:USE'), USAGE)
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );
