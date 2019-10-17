@@ -1,8 +1,8 @@
 {
-  "DESCRIPTION": "Displays a list of videos queued to stream.",
-  "USAGE": "queue",
-  "NONE": "**__Queue:__** There are no videos in the queue.",
-  "CURRENTLY": "**__Currently Streaming:__** **{{title}}** ({{time}) | Requested by **{{user}}**",
-  "LIST": "● **{{title}}** ({{time}) | Requested by **{{user}}**",
-  "LEFT": "**__Queue:__** There are **{{amount}}** videos in the queue. The queue will last for **{{time}}.**"
+    "DESCRIPTION": "Displays a list of videos queued to stream.",
+    "USAGE": "queue",
+    "NONE": "**__Queue:__** There are no videos in the queue.",
+    "CURRENT": "**__Currently Streaming:__** **{{title}}** ({{time}) | Requested by **{{user}}**",
+    "LIST": "● **{{title}}** ({{time}) | Requested by **{{user}}**",
+    "LEFT": "**__Queue:__** There are **{{amount}}** videos in the queue. The queue will last for **{{time}}.**"
 }
