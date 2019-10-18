@@ -346,7 +346,9 @@ export default class extends Command {
                 // @ts-ignore
                 const selectedSetting = settingsData[setting];
                 if (!selectedSetting)
-                    return message.translate('moderation/settings:INVALID');
+                    return message.error(
+                        message.translate('moderation/settings:INVALID')
+                    );
 
                 if (action === 'view')
                     return this.view(message, selectedSetting);
