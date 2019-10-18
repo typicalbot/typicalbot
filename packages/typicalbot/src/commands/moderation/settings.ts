@@ -508,6 +508,8 @@ export default class extends Command {
                 return message.error(
                     message.translate('settings:INVALID_OPTION')
                 );
+
+            value = selectedLanguage.name;
         }
 
         if (setting.type === 'boolean') {
