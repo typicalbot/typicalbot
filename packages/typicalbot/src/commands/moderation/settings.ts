@@ -342,6 +342,7 @@ export default class extends Command {
 
                 if (action === 'list')
                     return this.list(message, setting, settingsData);
+
                 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 const selectedSetting = settingsData[setting];
@@ -370,7 +371,12 @@ export default class extends Command {
 
         const list = settings
             .splice((page - 1) * 10, 10)
-            .map(k => ` • **${k}:** ${message.translate(settingsData[k])}`);
+            .map(
+                k =>
+                    ` • **${k}:** ${message.translate(
+                        settingsData[k].description
+                    )}`
+            );
 
         return message.send(
             [
