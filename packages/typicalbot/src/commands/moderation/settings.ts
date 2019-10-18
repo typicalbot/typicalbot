@@ -342,7 +342,11 @@ export default class extends Command {
 
                 if (action === 'list')
                     return this.list(message, setting, settingsData);
-
+                if (
+                    action === 'view' &&
+                    (!setting || !isNaN(parseInt(setting, 10)))
+                )
+                    return this.list(message, setting, settingsData, true);
                 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 const selectedSetting = settingsData[setting];
@@ -361,9 +365,14 @@ export default class extends Command {
 
         return null;
     }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    list(message: TypicalGuildMessage, setting: string, settingsData) {
+    list(
+        message: TypicalGuildMessage,
+        setting: string,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        settingsData,
+        view = false
+    ) {
         let page = parseInt(setting, 10) || 1;
         const settings = Object.keys(settingsData);
         const count = Math.ceil(settings.length / 10);
@@ -373,9 +382,11 @@ export default class extends Command {
             .splice((page - 1) * 10, 10)
             .map(
                 k =>
-                    ` • **${k}:** ${message.translate(
-                        settingsData[k].description
-                    )}`
+                    ` • **${k}:** ${
+                        view
+                            ? settingsData[k].value
+                            : message.translate(settingsData[k].description)
+                    }`
             );
 
         return message.send(
