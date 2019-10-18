@@ -28,7 +28,7 @@ export default class extends Command {
                 time: this.client.helpers.convertTime.execute(
                     message,
                     1000 *
-                    parseInt(message.guild.guildStream.current.length, 10)
+                        parseInt(message.guild.guildStream.current.length, 10)
                 ),
                 user:
                     message.guild.guildStream.current.requester.author.username
