@@ -508,7 +508,7 @@ export default class extends Command {
             );
             if (!selectedLanguage)
                 return message.error(
-                    message.translate('settings:INVALID_OPTION')
+                    message.translate('moderation/settings:INVALID_OPTION')
                 );
 
             value = selectedLanguage.name;
