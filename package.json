@@ -17,5 +17,8 @@
         "@typicalbot/eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
         "discord.js": "github:discordjs/discord.js#master",
         "veza": "^1.1.0"
+    },
+    "eslintConfig": {
+        "extends": "eslint-config-typicalbot"
     }
 }
