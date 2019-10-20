@@ -15,12 +15,12 @@
     "TEXT_7": "Permission: {{permission}}",
     "TEXT_8": "Description: {{description}}",
     "TEXT_9": "Usage: {{usage}}",
-		"TEXT_10": "```",
-		"COMMAND_USAGE": "Command Usage: {{name}}",
-		"PARAMETERS": "• [[Parameter]]() - Optional Parameter\n• [<Parameter>]() - Required Parameter",
-		"COMMAND": "» Command",
-		"ALIASES": "» Aliases",
-		"PERMISSION": "» Permission",
-		"DESC": "» Description",
-		"USE": "» Usage"
+    "TEXT_10": "```",
+    "COMMAND_USAGE": "Command Usage: {{name}}",
+    "PARAMETERS": "\u2022 [[Parameter]]() - Optional Parameter\n\u2022 [<Parameter>]() - Required Parameter",
+    "COMMAND": "\u00bb Command",
+    "ALIASES": "\u00bb Aliases",
+    "PERMISSION": "\u00bb Permission",
+    "DESC": "\u00bb Description",
+    "USE": "\u00bb Usage"
 }
