@@ -34,7 +34,7 @@
         "discord.js": "github:discordjs/discord.js#master",
         "erlpack": "github:discordapp/erlpack",
         "hot-shots": "^6.7.0",
-        "klaw": "^2.1.1",
+        "klaw": "^3.0.0",
         "mathjs": "^6.2.1",
         "moment": "^2.22.2",
         "node-fetch": "^2.6.0",
