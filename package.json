@@ -30,7 +30,7 @@
     "dependencies": {
         "bufferutil": "^4.0.1",
         "canvas": "^1.6.11",
-        "canvas-constructor": "^1.1.2",
+        "canvas-constructor": "^3.1.0",
         "discord.js": "github:discordjs/discord.js#master",
         "erlpack": "github:discordapp/erlpack",
         "hot-shots": "^6.7.0",
