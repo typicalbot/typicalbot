@@ -6,6 +6,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.1]
+### Fixed
+ - Update check of autorole-silent setting ([#83](https://github.com/typicalbot/typicalbot/pull/83))
+ - Incorrect setting being displayed for `modlogs-purge` ([#85](https://github.com/typicalbot/typicalbot/pull/85))
+
+### Removed
+ - Purged messages sent to hastebin ([#84](https://github.com/typicalbot/typicalbot/pull/84))
+
+## [2.7.0]
+### Changed
+ - `alias` command is available to everyone
+ - YouTube live streams is available to everyone via `play` command
+ - `music-timelimit` max limit has been changed from 600 to 7200
+ - `music-queuelimit` max limit has been changed from 10 to 100
+
+## [2.6.0]
+### Changed
+ - Update veza dependency ([#74](https://github.com/typicalbot/typicalbot/pull/74)) ([94035f8](https://github.com/typicalbot/typicalbot/commit/94035f839395ab7c7eb6e7873c2b6d9349f51969))
+
+### Fixed
+ - `userinfo` command to remove extra single quote ([#79](https://github.com/typicalbot/typicalbot/pull/79)) ([22c96b3](https://github.com/typicalbot/typicalbot/commit/22c96b36e5cc3ae2d999d9b5c4a53d33cc7cff86))
+ - `userinfo` command to use toString method ([#79](https://github.com/typicalbot/typicalbot/pull/79)) ([eb69c0a](https://github.com/typicalbot/typicalbot/commit/eb69c0a6515f3531e5df272718f7ddff39b36eb7))
+ - Update to use updated veza methods ([#74](https://github.com/typicalbot/typicalbot/pull/74)) ([17d7ee7](https://github.com/typicalbot/typicalbot/commit/17d7ee7e15451f9da542cd069a4b1ffdff36e2cd))
+
+### Removed
+ - `quote` command because of dead API ([#62](https://github.com/typicalbot/typicalbot/pull/62)) ([5db93ce](https://github.com/typicalbot/typicalbot/commit/5db93cee5222b8902ab02cab34664b02ed7d3a08))
+ - `tiger` command because of dead API ([#62](https://github.com/typicalbot/typicalbot/pull/62)) ([5db93ce](https://github.com/typicalbot/typicalbot/commit/5db93cee5222b8902ab02cab34664b02ed7d3a08))
+
+## [2.5.2]
+### Fixed
+ - Update error message in AudioUtil#searchError ([#72](https://github.com/typicalbot/typicalbot/pull/72)) ([f668b30](https://github.com/typicalbot/typicalbot/commit/f668b3065639ba5f4677875d4d17a7dd326e623c)), closes [#71](https://github.com/typicalbot/typicalbot/issues/71)
+
 ## [2.5.1]
 ### Changed
  - `twitch` command to change error response
@@ -94,7 +126,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.5.1...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.7.1...HEAD
+[2.7.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.1
+[2.7.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.0
+[2.6.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.6.0
+[2.5.2]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.2
 [2.5.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.1
 [2.5.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.5.0
 [2.4.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.4.1
