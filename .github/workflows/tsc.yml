@@ -1,4 +1,4 @@
-name: Lint
+name: TSC
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   pull_request:
 
 jobs:
-  eslint:
-    name: eslint
+  tsc:
+    name: tsc
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -16,11 +16,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: yarn install
+      - name: yarn
         run: yarn install
-      - name: eslint
-        uses: icrawl/action-eslint@v1
+      - name: tsc
+        uses: icrawl/action-tsc@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          job-name: eslint
+          job-name: tsc
