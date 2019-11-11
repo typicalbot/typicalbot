@@ -1,6 +1,7 @@
 {
     "build": "stable",
     "prefix": "$",
+    "clustered": true,
     "clusterServer": "Primula",
     "clusterBuild": "",
     "nodePort": 4000,
