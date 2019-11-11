@@ -2,8 +2,8 @@
   "version": "3.0.0-beta",
   "private": true,
   "scripts": {
-    "start": "cd packages/typicalbot && tsc && node ./production/packages/typicalbot/scripts/pm2.js",
-    "setup": "npm i && cd packages/typicalbot-cluster && npm i && cd ../typicalbot && npm i && npm run build:database"
+    "setup": "npm i && cd packages/typicalbot-cluster && npm i && cd ../typicalbot && npm i && npm run build:database",
+    "start": "cd packages/typicalbot && tsc && node ../../production/packages/typicalbot/scripts/pm2.js"
   },
   "devDependencies": {
     "@types/node": "^12.11.1",
