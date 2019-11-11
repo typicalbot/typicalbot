@@ -1,7 +1,8 @@
 {
     "DESCRIPTION": "Get TypicalBot's current statistics.",
     "USAGE": "stats",
-    "TEXT": "$t(core/stats:TEXT_1)\n$t(core/stats:TEXT_2)\n$t(core/stats:TEXT_3)\n$t(core/stats:TEXT_4)\n$t(core/stats:TEXT_5)\n$t(core/stats:TEXT_6)\n$t(core/stats:TEXT_7)\n$t(core/stats:TEXT_8)\n$t(core/stats:TEXT_9)\n$t(core/stats:TEXT_10)\n$t(core/stats:TEXT_11)\n$t(core/stats:TEXT_12)\n\n$t(core/stats:TEXT_13)\n$t(core/stats:TEXT_14)\n$t(core/stats:TEXT_15)\n$t(core/stats:TEXT_16)\n$t(core/stats:TEXT_17)\n$t(core/stats:TEXT_18)\n$t(core/stats:TEXT_19)\n$t(core/stats:TEXT_20)\n$t(core/stats:TEXT_21)",
+    "TEXT": "$t(core/stats:TEXT_1)\n$t(core/stats:TEXT_2)\n$t(core/stats:TEXT_3)\n$t(core/stats:TEXT_4)\n$t(core/stats:TEXT_5)\n$t(core/stats:TEXT_6)\n$t(core/stats:TEXT_7)\n$t(core/stats:TEXT_8)\n$t(core/stats:TEXT_9)\n$t(core/stats:TEXT_10)\n$t(core/stats:TEXT_11)\n$t(core/stats:TEXT_12)\n\n$t(core/stats:TEXT_21)",
+    "CLUSTERED_TEXT": "$t(core/stats:TEXT_1)\n$t(core/stats:TEXT_2)\n$t(core/stats:TEXT_3)\n$t(core/stats:TEXT_4)\n$t(core/stats:TEXT_5)\n$t(core/stats:TEXT_6)\n$t(core/stats:TEXT_7)\n$t(core/stats:TEXT_8)\n$t(core/stats:TEXT_9)\n$t(core/stats:TEXT_10)\n$t(core/stats:TEXT_11)\n$t(core/stats:TEXT_12)\n\n$t(core/stats:TEXT_13)\n$t(core/stats:TEXT_14)\n$t(core/stats:TEXT_15)\n$t(core/stats:TEXT_16)\n$t(core/stats:TEXT_17)\n$t(core/stats:TEXT_18)\n$t(core/stats:TEXT_19)\n$t(core/stats:TEXT_20)\n$t(core/stats:TEXT_21)",
     "TEXT_1": "**__TypicalBot's Statistics:__**",
     "TEXT_2": "```autohotkey",
     "TEXT_3": "=> Uptime: {{uptime}}",

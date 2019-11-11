@@ -15,7 +15,7 @@ TypicalBot is an ironically named multipurpose Discord bot that is far from typi
 
 ## Introduction
 
-TypicalBot is an ironically named multipurpose Discord bot that is far from typical, developed in [discord.js](https://github.com/discordjs/discord.js). 
+TypicalBot is an ironically named multipurpose Discord bot that is far from typical, developed in [discord.js](https://github.com/discordjs/discord.js).
 
 ## Table of Contents
 
@@ -42,25 +42,23 @@ This section provides a quick-start guide.
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/): Node.js 10.0.0 or newer is required.
-- [RethinkDB](https://rethinkdb.com/): RethinkDB is required. 
+- [RethinkDB](https://rethinkdb.com/): RethinkDB is required.
 - [PM2](http://pm2.keymetrics.io/): PM2 is required.
-- [TypicalBot Cluster Manager](https://github.com/typicalbot/typicalbot-cluster-manager): TypicalBot Cluster Manager is required. 
 
 **Windows Only**
-- [Windows Build Tools](https://github.com/felixrieseberg/windows-build-tools): Python 2.7 and VisualStudio is required to compile dependencies. 
+- [Windows Build Tools](https://github.com/felixrieseberg/windows-build-tools): Python 2.7 and VisualStudio is required to compile dependencies.
 - [OpenSSL](http://slproweb.com/products/Win32OpenSSL.html): OpenSSL is required for bignum, use version 1.0.X (Do not use version 1.1.X or the Light version).
-- [GTK+](http://ftp.gnome.org/pub/GNOME/binaries/win64/gtk+/): GTK 2 is required for canvas, use version 2.X.X (Do not use version 3.X.X) 
+- [GTK+](http://ftp.gnome.org/pub/GNOME/binaries/win64/gtk+/): GTK 2 is required for canvas, use version 2.X.X (Do not use version 3.X.X)
 
 ### Installation
 
-1. Make sure all prerequisites are installed, ie. `npm install`
-2. Fork the TypicalBot repository: https://github.com/typicalbot/typicalbot/fork
-3. Clone your forked repository, ie. `git clone git@github.com/<YOUR-USERNAME>/typicalbot.git`
-4. Start RethinkDB database
-5. Start TypicalBot Cluster Manager
-6. Run `npm run build:database`
-7. Run `npm run build:instance`
-8. Profit!
+0. Make sure all prerequisites above are installed.
+1. Clone the repository, ie. `git clone https://github.com/typicalbot/typicalbot.git`
+2. Start RethinkDB database `rethinkdb`
+3. Install all necessary packages to setup the environment: `npm run setup`
+4. While the above is running create your `config.json` file using the example file provided in the repo.
+5. Run `npm run start`
+6. Profit!
 
 ## Team
 
