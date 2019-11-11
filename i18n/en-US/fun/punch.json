@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Punch another user in the server.",
+    "USAGE": "punch [@user]",
+    "SELF": " stop hitting yourself! :punch::skin-tone-2:",
+    "RESPONSE": "just punched {{user}}! :punch::skin-tone-2:",
+    "RESPONSE_JAW": "just punched {{user}}! :punch::skin-tone-2: Oh, dang! Right to the jaw! That must've hurt!'"
+}

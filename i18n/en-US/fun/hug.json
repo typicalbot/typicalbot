@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Hug another user in the server.",
+    "USAGE": "hug [@user]",
+    "SELF": "just gave themselves a hug. :hugging: *That's not weird at all.* :eyes:",
+    "RESPONSE": "just gave {{user}} a hug. :hugging:",
+    "RESPONSE_AWW": "just gave {{user}} a hug. :hugging: Aww!"
+}

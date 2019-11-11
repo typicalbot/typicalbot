@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Check if any members of the server have any special characters in their username.",
+    "USAGE": "dehoist",
+    "NONE": "There are no users that can be dehoisted.",
+    "FOUND": "There {{amount}} that can be dehoisted:",
+    "ONE": "is 1 user",
+    "MULTIPLE": "are {{amount}} users"
+}

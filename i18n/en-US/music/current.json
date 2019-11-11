@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Displays the song currently streaming.",
+    "USAGE": "current",
+		"CURRENT": "**__Currently Streaming:__** **{{title}}**{{remaining}} | Requested by **{{requester}}**",
+		"REMAINING": " ({{amount}} remaining)"
+}

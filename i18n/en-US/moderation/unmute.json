@@ -1,0 +1,10 @@
+{
+	"DESCRIPTION": "Unmutes a member in the server.",
+	"USAGE": "unmute <@user> [reason]",
+	"NOT_MUTED": "The requested user is not muted.",
+	"TOO_LOW": "You cannot unmute a user with either the same or higher highest role.",
+	"UNMUTED": "You have been unmuted in **{{name}}**.",
+	"ERROR": "An error occurred while trying to unmute the requested user.",
+	"SUCCESS": "Successfully unmuted user **{{user}}**.",
+	"TASK_REASON": "Automatic Unmute: User's mute time has passed."
+}

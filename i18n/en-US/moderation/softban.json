@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Softban a member from the server.",
+	"USAGE": "softban <@user> [purge-days] [reason]",
+	"REASON": "Softbanned by {{mod}} | Reason {{reason}}",
+	"BANNED": "Successfully softbanned user **{{user}}**."
+}

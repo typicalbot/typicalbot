@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Give another user a cookie or keep them all for yourself.",
+    "USAGE": "cookie [@user]",
+    "SELF_LAUGH": "laughed like a madman while slowly eating the cookies they kept for themselves in front of everyone.",
+    "SELF_KEPT": "decided to keep all of the cookies for themselves! What a jerk! :angry:",
+    "GIVEN": "just gave {{user}} a cookie. :cookie:"
+}

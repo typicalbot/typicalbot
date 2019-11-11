@@ -5,8 +5,10 @@
     "license": "Apache-2.0",
     "main": "src/index.js",
     "scripts": {
-        "lint": "eslint src",
-        "lint:fix": "eslint src --fix"
+        "lint": "tsc --noEmit && eslint '*/**/*.ts'",
+        "lint:fix": "tsc --noEmit && eslint '*/**/*.ts' --fix",
+        "build": "tsc",
+        "develop": "tsc && node production/src/index.js"
     },
     "repository": {
         "type": "git",

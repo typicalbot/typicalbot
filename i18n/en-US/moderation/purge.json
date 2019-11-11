@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Purge messages in a channel.",
+    "USAGE": "purge [@user|#channel|@role|me|you|bots] <message-count>",
+    "TOO_LITTLE": "Please provide a number of messages to delete from 2 to 100.",
+    "MISSING_PERMS": "An error occured. This most likely means I do not have permissions to manage messages.",
+    "NONE": "No messages were deleted. This likely means I lack the permission to read message history or the messages are over two weeks old.",
+    "PURGED": "Successfully deleted **{{amount}}** message.",
+    "PURGED_MULTIPLE": "Successfully deleted **{{amount}}** messages."
+}

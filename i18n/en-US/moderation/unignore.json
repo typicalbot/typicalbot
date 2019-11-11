@@ -1,0 +1,9 @@
+{
+	"DESCRIPTION": "Makes the bot unignore commands, invites and stars in a channel.",
+	"USAGE": "unignore [commands|invites|stars]",
+	"COMMANDS": "This channel isn't ignoring commands.",
+	"INVITES": "This channel isn't ignoring invites.",
+	"DISABLED": "The starboard is not enabled.",
+	"STARBOARD": "This channel isn't ignoring stars.",
+	"SUCCESS": "Now listening to {{type}}."
+}

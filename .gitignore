@@ -22,3 +22,5 @@ node_modules
 package-lock.json
 config.json
 .env
+production/
+rethinkdb_data/

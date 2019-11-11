@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Ban a member from the server.",
+	"USAGE": "unban <user-id> [reason]",
+	"REASON": "Unbanned by {{mod}} | Reason: {{reason}}",
+	"UNBANNED": "Successfully unbanned user {{user}}.",
+	"USER_UNBAN": "**{{user}}** has been unbanned from the server.",
+	"USER_UNBANNED": "User Unbanned"
+}

@@ -5,10 +5,11 @@
     "license": "Apache-2.0",
     "main": "index.js",
     "scripts": {
-        "lint": "eslint src scripts",
-        "lint:fix": "eslint src scripts --fix",
-        "build:database": "node ./scripts/setup.js",
-        "build:instance": "node ./scripts/pm2.js",
+        "lint": "tsc --noEmit && eslint '*/**/*.ts'",
+        "lint:fix": "tsc --noEmit && eslint '*/**/*.ts' --fix",
+        "build:database": "tsc && node ./production/packages/typicalbot/scripts/setup.js",
+        "build:instance": "tsc && node ./production/packages/typicalbot/scripts/pm2.js",
+        "dev": "tsc --watch",
         "build:docs": "esdoc"
     },
     "repository": {
@@ -29,19 +30,24 @@
     },
     "homepage": "https://github.com/typicalbot/typicalbot#readme",
     "dependencies": {
-        "canvas": "github:Automattic/node-canvas",
-        "canvas-constructor": "^1.1.2",
+        "canvas": "^2.6.0",
+        "canvas-constructor": "^3.1.0",
         "discord.js": "github:discordjs/discord.js#master",
+        "fs": "0.0.1-security",
+        "i18next": "^17.0.16",
+        "i18next-node-fs-backend": "^2.1.3",
         "klaw": "^2.1.1",
         "mathjs": "^6.2.1",
         "moment": "^2.22.2",
         "node-fetch": "^2.6.0",
-        "node-opus": "^0.3.2",
+        "node-opus": "^0.3.3",
         "pm2": "^3.5.1",
+        "rethinkdb-ts": "^2.4.0-rc.16",
         "rethinkdbdash": "^2.3.31",
         "simple-youtube-api": "github:hypercoder2975/simple-youtube-api",
         "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
-        "veza": "^0.6.0",
+        "typescript": "^3.6.3",
+        "veza": "^1.1.0",
         "vm2": "^3.8.3",
         "ytdl-core": "github:fent/node-ytdl-core"
     },
@@ -53,10 +59,23 @@
         "zlib-sync": "^0.1.5"
     },
     "devDependencies": {
+        "@types/i18next-node-fs-backend": "^2.1.0",
+        "@types/klaw": "^3.0.0",
+        "@types/mathjs": "^6.0.2",
+        "@types/node": "^12.11.1",
+        "@types/node-fetch": "^2.5.1",
+        "@types/ws": "^6.0.3",
+        "@typescript-eslint/eslint-plugin": "^2.3.0",
+        "@typescript-eslint/parser": "^2.3.0",
         "esdoc": "^1.1.0",
         "esdoc-ecmascript-proposal-plugin": "^1.0.0",
         "esdoc-standard-plugin": "^1.0.0",
-        "eslint-config-typicalbot": "^1.0.0"
+        "eslint": "^6.1.0",
+        "eslint-config-airbnb-base": "^14.0.0",
+        "eslint-config-airbnb-typescript": "^5.0.0",
+        "eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
+        "eslint-plugin-import": "^2.18.2",
+        "lerna": "^3.18.1"
     },
     "eslintConfig": {
         "extends": "eslint-config-typicalbot"

@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Gain the server's subscriber role.",
+  "USAGE": "subscribe",
+  "NONE": "No subscriber role is set up for this server.",
+  "SUBSCRIBED": "You are now subscribed."
+}
