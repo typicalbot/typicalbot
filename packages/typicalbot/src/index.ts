@@ -93,6 +93,8 @@ export default class Cluster extends Client {
     }
 
     fetchData(property: string) {
+        if (!this.node) return eval(`this.client.${property}`);
+
         return this.node.sendTo(
             'manager',
             {
