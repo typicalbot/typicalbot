@@ -3,6 +3,7 @@ import { loadavg } from 'os';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
 import { TypicalMessage } from '../../types/typicalbot';
+import * as config from '../../../../../config.json';
 
 export default class extends Command {
     dm = true;
@@ -41,35 +42,41 @@ export default class extends Command {
         );
         if (!message.embedable)
             return message.send(
-                message.translate('core/stats:TEXT', {
-                    uptime,
-                    guilds: guilds.toLocaleString(),
-                    count: this.client.shardCount,
-                    voiceConnections: voiceConnections.toLocaleString(),
-                    channels: channels.toLocaleString(),
-                    users: users.toLocaleString(),
-                    cpu: Math.round(loadavg()[0] * 10000) / 100,
-                    usedRAM,
-                    totalRAM,
-                    clusterName,
-                    clusterShards,
-                    currentGuilds: this.client.guilds.size.toLocaleString(),
-                    currentVoiceConnections:
-                        this.client.voice &&
-                        this.client.voice.connections.size.toLocaleString(),
-                    currentChannels: this.client.channels.size
-                        .toLocaleString()
-                        .toLocaleString(),
-                    currentUsers: this.client.users.size.toLocaleString(),
-                    ram:
-                        Math.round(
-                            100 * (process.memoryUsage().heapUsed / 1048576)
-                        ) / 100,
-                    ramTotal:
-                        Math.round(
-                            100 * (process.memoryUsage().heapTotal / 1048576)
-                        ) / 100
-                })
+                message.translate(
+                    config.clustered
+                        ? 'core/stats:CLUSTERED_TEXT'
+                        : 'core/stats:TEXT',
+                    {
+                        uptime,
+                        guilds: guilds.toLocaleString(),
+                        count: this.client.shardCount,
+                        voiceConnections: voiceConnections.toLocaleString(),
+                        channels: channels.toLocaleString(),
+                        users: users.toLocaleString(),
+                        cpu: Math.round(loadavg()[0] * 10000) / 100,
+                        usedRAM,
+                        totalRAM,
+                        clusterName,
+                        clusterShards,
+                        currentGuilds: this.client.guilds.size.toLocaleString(),
+                        currentVoiceConnections:
+                            this.client.voice &&
+                            this.client.voice.connections.size.toLocaleString(),
+                        currentChannels: this.client.channels.size
+                            .toLocaleString()
+                            .toLocaleString(),
+                        currentUsers: this.client.users.size.toLocaleString(),
+                        ram:
+                            Math.round(
+                                100 * (process.memoryUsage().heapUsed / 1048576)
+                            ) / 100,
+                        ramTotal:
+                            Math.round(
+                                100 *
+                                    (process.memoryUsage().heapTotal / 1048576)
+                            ) / 100
+                    }
+                )
             );
 
         return message.send(

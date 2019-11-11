@@ -35,7 +35,7 @@ interface TypicalHandlers {
     music: MusicHandler;
 }
 export default class Cluster extends Client {
-    node: VezaClient;
+    node: VezaClient | undefined;
     config = config;
     build = config.build;
     shards: number[] = JSON.parse(process.env.SHARDS || '[1]');
@@ -58,7 +58,7 @@ export default class Cluster extends Client {
         invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
     translate: Map<string, i18next.TFunction> = new Map();
-    constructor(node: VezaClient) {
+    constructor(node: VezaClient | undefined) {
         super({
             messageCacheMaxSize: 150,
             messageCacheLifetime: 1800,
@@ -93,7 +93,7 @@ export default class Cluster extends Client {
     }
 
     fetchData(property: string) {
-        if (!this.node) return eval(`this.client.${property}`);
+        if (!this.node) return eval(`this.${property}`);
 
         return this.node.sendTo(
             'manager',
