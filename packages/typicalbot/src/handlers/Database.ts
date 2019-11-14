@@ -1,20 +1,21 @@
 import { r, MasterPool } from 'rethinkdb-ts';
-import { Client } from 'discord.js';
-import * as config from '../../../../config.json';
+import Cluster from '..';
 
 export default class DatabaseHandler {
     connection = r;
-    client: Client;
+    client: Cluster;
     pool: MasterPool | null = null;
 
-    constructor(client: Client) {
+    constructor(client: Cluster) {
         this.client = client;
 
         this.init();
     }
 
     async init() {
-        this.pool = await r.connectPool(config.database.credentials);
+        this.pool = await r.connectPool(
+            this.client.config.database.credentials
+        );
     }
 
     get(table: string, key?: string) {

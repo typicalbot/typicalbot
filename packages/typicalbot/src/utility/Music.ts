@@ -1,22 +1,22 @@
 import * as ytdl from 'ytdl-core';
 import * as YAPI from 'simple-youtube-api';
-import * as configs from '../../../../config.json';
 import Video from '../structures/Video';
 import Cluster from '../index.js';
 import { TypicalGuildMessage, GuildSettings } from '../types/typicalbot.js';
 import PermissionLevel from '../structures/PermissionLevel.js';
 import { Youtube } from 'simple-youtube-api';
 
-const apiKey = configs.apis.youtube;
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-const TBYT = new YAPI(apiKey);
-
 export default class AudioUtil {
     client: Cluster;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    TBYT: any;
+
     constructor(client: Cluster) {
         this.client = client;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        this.TBYT = new YAPI(this.client.config.apis.youtube);
     }
 
     withinLimit(message: TypicalGuildMessage, video: Video) {
@@ -36,7 +36,7 @@ export default class AudioUtil {
             ? // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
               // @ts-ignore
               new YAPI(message.guild.settings.music.apikey)
-            : TBYT) as Youtube;
+            : this.TBYT) as Youtube;
 
         const playlist = await YT.getPlaylistByID(id);
         const videos = playlist ? await playlist.getVideos() : [];
@@ -49,7 +49,7 @@ export default class AudioUtil {
             ? // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
               // @ts-ignore
               new YAPI(settings.music.apikey)
-            : TBYT) as Youtube;
+            : this.TBYT) as Youtube;
 
         return YT.searchVideos(query, 10).catch(() => []);
     }
