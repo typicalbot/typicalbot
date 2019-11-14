@@ -1,7 +1,6 @@
 import * as pm2 from 'pm2';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
-import * as config from '../../../../../config.json';
 import { TypicalGuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
@@ -16,8 +15,10 @@ export default class extends Command {
 
             for (let i = 1; i <= Number(process.env.CLUSTER_COUNT); i++) {
                 list.push(
-                    `${config.clusterServer}-${
-                        config.clusterBuild ? `${config.clusterBuild}-` : ''
+                    `${this.client.config.clusterServer}-${
+                        this.client.config.clusterBuild
+                            ? `${this.client.config.clusterBuild}-`
+                            : ''
                     }${i}`
                 );
             }

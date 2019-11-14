@@ -3,7 +3,6 @@ import { loadavg } from 'os';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
 import { TypicalMessage } from '../../types/typicalbot';
-import * as config from '../../../../../config.json';
 
 export default class extends Command {
     dm = true;
@@ -43,7 +42,7 @@ export default class extends Command {
         if (!message.embedable)
             return message.send(
                 message.translate(
-                    config.clustered
+                    this.client.config.clustered
                         ? 'core/stats:CLUSTERED_TEXT'
                         : 'core/stats:TEXT',
                     {
@@ -131,7 +130,7 @@ export default class extends Command {
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTimestamp();
 
-        if (config.clustered)
+        if (this.client.config.clustered)
             embed
                 .addBlankField()
                 .addField('» Cluster', `${clusterName}\n${clusterShards}`, true)
