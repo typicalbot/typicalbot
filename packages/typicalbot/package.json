@@ -73,7 +73,7 @@
         "esdoc-standard-plugin": "^1.0.0",
         "eslint": "^6.1.0",
         "eslint-config-airbnb-base": "^14.0.0",
-        "eslint-config-airbnb-typescript": "^5.0.0",
+        "eslint-config-airbnb-typescript": "^6.2.0",
         "eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
         "eslint-plugin-import": "^2.18.2",
         "lerna": "^3.18.1"
