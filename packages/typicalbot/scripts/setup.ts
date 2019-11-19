@@ -1,5 +1,5 @@
 import { r } from 'rethinkdb-ts';
-import * as configs from '../../../config.json';
+import configs from '../../../config.json';
 
 const { credentials } = configs.database;
 

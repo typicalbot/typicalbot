@@ -1,6 +1,6 @@
 import { Collection } from 'discord.js';
 import { join, parse } from 'path';
-import * as klaw from 'klaw';
+import klaw from 'klaw';
 import Command from '../structures/Command';
 import Cluster from '..';
 import { GuildSettings } from '../types/typicalbot';

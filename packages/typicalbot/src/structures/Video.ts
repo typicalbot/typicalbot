@@ -1,5 +1,5 @@
-import * as ytdl from 'ytdl-core';
-import * as SYS from 'simple-youtube-stream';
+import ytdl from 'ytdl-core';
+import SYS from 'simple-youtube-stream';
 import { TypicalGuildMessage } from '../types/typicalbot';
 
 const sys = new SYS();

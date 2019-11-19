@@ -2,7 +2,7 @@
 import { Client, ClientSocket, NodeMessage } from 'veza';
 import { TextChannel } from 'discord.js';
 import Cluster from './packages/typicalbot/src';
-import * as config from './config.json';
+import config from './config.json';
 
 if (!config.clustered) new Cluster(undefined);
 else {

@@ -1,6 +1,6 @@
 import { Collection } from 'discord.js';
 import { join, parse } from 'path';
-import * as klaw from 'klaw';
+import klaw from 'klaw';
 import Cluster from '../index';
 import { TaskOptions } from '../types/typicalbot';
 import Task from '../structures/Task';

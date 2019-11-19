@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';

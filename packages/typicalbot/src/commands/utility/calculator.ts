@@ -1,4 +1,4 @@
-import * as math from 'mathjs';
+import math from 'mathjs';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';

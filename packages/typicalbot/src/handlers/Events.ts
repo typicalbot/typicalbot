@@ -1,5 +1,5 @@
 import { join, parse } from 'path';
-import * as klaw from 'klaw';
+import klaw from 'klaw';
 import { Collection } from 'discord.js';
 import Cluster from '..';
 import Event from '../structures/Event';

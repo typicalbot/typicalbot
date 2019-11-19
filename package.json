@@ -19,6 +19,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@types/ws": "^6.0.3",
     "discord.js": "github:discordjs/discord.js#master",
     "veza": "^1.1.0"
   },

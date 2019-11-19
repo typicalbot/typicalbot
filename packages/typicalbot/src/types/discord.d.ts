@@ -1,10 +1,10 @@
-import * as i18next from 'i18next';
 import Cluster from '..';
 import { GuildSettings } from './typicalbot';
+import { TFunction } from 'i18next';
 
 declare module 'discord.js' {
     interface Client {
-        translate: Map<string, i18next.TFunction>;
+        translate: Map<string, TFunction>;
     }
 
     interface Guild {

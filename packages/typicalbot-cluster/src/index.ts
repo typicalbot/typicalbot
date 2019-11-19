@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 import { Server } from 'veza';
-import * as config from '../config.json';
+import config from '../config.json';
 
 const regex = /\d+$/;
 
