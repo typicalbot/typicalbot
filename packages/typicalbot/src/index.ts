@@ -5,7 +5,7 @@ import './extensions/TypicalMessage';
 import { Client, Collection } from 'discord.js';
 import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
-import * as config from '../../../config.json';
+import config from '../../../config.json';
 
 import DatabaseHandler from './handlers/Database';
 import TaskHandler from './handlers/Tasks';
@@ -25,7 +25,7 @@ import {
     UnbanLog
 } from './types/typicalbot';
 import i18n from '../src/i18n';
-import i18next = require('i18next');
+import { TFunction } from 'i18next';
 
 interface TypicalHandlers {
     database: DatabaseHandler;
@@ -57,7 +57,7 @@ export default class Cluster extends Client {
         softbans: new Collection(),
         invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
-    translate: Map<string, i18next.TFunction> = new Map();
+    translate: Map<string, TFunction> = new Map();
     constructor(node: VezaClient | undefined) {
         super({
             messageCacheMaxSize: 150,

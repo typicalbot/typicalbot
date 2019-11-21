@@ -1,4 +1,4 @@
-import * as pm2 from 'pm2';
+import pm2 from 'pm2';
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';

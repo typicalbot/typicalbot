@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import Function from '../structures/Function';
 import { TypicalGuild, FormatMessageOptions } from '../types/typicalbot';
 import { User } from 'discord.js';

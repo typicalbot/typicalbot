@@ -5,9 +5,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "incremental": true,
-        "lib": [
-            "esnext"
-        ],
+        "lib": ["esnext"],
         "module": "commonjs",
         "moduleResolution": "node",
         "noEmitOnError": true,
@@ -26,14 +24,10 @@
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
         "target": "esnext",
-        "types": [
-            "node"
-        ],
-        "allowJs": false
+        "types": ["node"],
+        "allowJs": false,
+        "esModuleInterop": true
     },
     "compileOnSave": true,
-    "include": [
-        "./**/*.ts",
-        "../../index.ts"
-    ]
+    "include": ["./**/*.ts", "../../index.ts"]
 }

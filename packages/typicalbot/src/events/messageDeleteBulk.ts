@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import fetch from 'node-fetch';
 import Event from '../structures/Event';
 import { Collection, TextChannel, MessageEmbed } from 'discord.js';

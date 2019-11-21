@@ -1,5 +1,5 @@
 import { join, parse } from 'path';
-import * as klaw from 'klaw';
+import klaw from 'klaw';
 import { Collection, Guild } from 'discord.js';
 import Cluster from '../index';
 import PermissionLevel from '../structures/PermissionLevel';

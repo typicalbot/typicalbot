@@ -1,5 +1,5 @@
-import * as ytdl from 'ytdl-core';
-import * as YAPI from 'simple-youtube-api';
+import ytdl from 'ytdl-core';
+import YAPI from 'simple-youtube-api';
 import Video from '../structures/Video';
 import Cluster from '../index.js';
 import { TypicalGuildMessage, GuildSettings } from '../types/typicalbot.js';

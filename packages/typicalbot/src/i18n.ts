@@ -1,5 +1,5 @@
-import * as i18next from 'i18next';
-import * as Backend from 'i18next-node-fs-backend';
+import i18next, { TFunction } from 'i18next';
+import Backend from 'i18next-node-fs-backend';
 import * as path from 'path';
 import { promises as fs } from 'fs';
 
@@ -33,7 +33,7 @@ async function walkDirectory(
     return { namespaces: [...new Set(namespaces)], languages };
 }
 
-export default async (): Promise<Map<string, i18next.TFunction>> => {
+export default async (): Promise<Map<string, TFunction>> => {
     const options = {
         jsonIndent: 2,
         loadPath: path.resolve(
