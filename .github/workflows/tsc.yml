@@ -18,6 +18,8 @@ jobs:
           node-version: 12
       - name: yarn
         run: yarn install
+      - name: config
+        run: cp config.example.json config.json
       - name: tsc
         uses: icrawl/action-tsc@v1
         env:
