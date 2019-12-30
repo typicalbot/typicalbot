@@ -7,7 +7,7 @@
     "start": "tsc && node production/index.js"
   },
   "devDependencies": {
-    "@types/node": "^12.11.1",
+    "@types/node": "^13.1.1",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",

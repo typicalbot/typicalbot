@@ -63,7 +63,7 @@
         "@types/i18next-node-fs-backend": "^2.1.0",
         "@types/klaw": "^3.0.0",
         "@types/mathjs": "^6.0.2",
-        "@types/node": "^12.11.1",
+        "@types/node": "^13.1.1",
         "@types/node-fetch": "^2.5.1",
         "@types/ws": "^6.0.3",
         "@typescript-eslint/eslint-plugin": "^2.3.0",
