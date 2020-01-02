@@ -29,11 +29,14 @@ export default class extends Command {
         const clusterParts = this.client.cluster.match(
             /^(\S+? \S+?) ([\s\S]+?)$/
         ) as RegExpMatchArray;
-        const clusterName = clusterParts[1];
-        const clusterShards = clusterParts[2]
-            .replace(/[\[\]]/g, '')
-            .split(',')
-            .join(', ');
+
+        const clusterName = clusterParts ? clusterParts[1] : 'Not-Clustered';
+        const clusterShards = clusterParts
+            ? clusterParts[2]
+                  .replace(/[\[\]]/g, '')
+                  .split(',')
+                  .join(', ')
+            : 'Not-Clustered';
 
         const uptime = this.client.helpers.convertTime.execute(
             message,

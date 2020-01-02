@@ -36,14 +36,11 @@ async function walkDirectory(
 export default async (): Promise<Map<string, i18next.TFunction>> => {
     const options = {
         jsonIndent: 2,
-        loadPath: path.resolve(
-            __dirname,
-            '../../../../../../i18n/{{lng}}/{{ns}}.json'
-        )
+        loadPath: path.resolve(__dirname, '../../i18n/{{lng}}/{{ns}}.json')
     };
 
     const { namespaces, languages } = await walkDirectory(
-        path.resolve(__dirname, '../../../../../../i18n/')
+        path.resolve(__dirname, '../../i18n')
     );
 
     i18next.use(Backend);
