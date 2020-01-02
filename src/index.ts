@@ -5,7 +5,7 @@ import './extensions/TypicalMessage';
 import { Client, Collection } from 'discord.js';
 import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
-import * as config from '../../../config.json';
+import * as config from '../config.json';
 
 import DatabaseHandler from './handlers/Database';
 import TaskHandler from './handlers/Tasks';
@@ -24,7 +24,7 @@ import {
     BanLog,
     UnbanLog
 } from './types/typicalbot';
-import i18n from '../src/i18n';
+import i18n from './i18n';
 import i18next = require('i18next');
 
 interface TypicalHandlers {
@@ -40,7 +40,9 @@ export default class Cluster extends Client {
     build = config.build;
     shards: number[] = JSON.parse(process.env.SHARDS || '[1]');
     shardCount = process.env.TOTAL_SHARD_COUNT || '1';
-    cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
+    cluster = `${process.env.CLUSTER || 'Not-Clustered'} [${this.shards.join(
+        ','
+    )}]`;
     handlers = {} as TypicalHandlers;
     settings = new SettingsHandler(this);
     functions = new FunctionHandler(this);

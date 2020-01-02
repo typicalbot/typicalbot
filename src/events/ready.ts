@@ -11,7 +11,8 @@ export default class Ready extends Event {
 
         setTimeout(
             () =>
-                (this.client.user as ClientUser).setActivity(
+                (this.client
+                    .user as ClientUser).setActivity(
                     `${this.client.config.prefix}help — typicalbot.com`,
                     { type: 'WATCHING' }
                 ),

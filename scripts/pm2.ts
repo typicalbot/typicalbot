@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Util } from 'discord.js';
 import * as pm2 from 'pm2';
-import * as config from '../../../config.json';
+import * as config from '../config.json';
 
 async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(config.token);
@@ -16,7 +16,7 @@ async function generateClusters() {
             name: `${config.clusterServer}-${
                 config.clusterBuild ? `${config.clusterBuild}-` : ''
             }${i}`,
-            script: '../../production/index.js',
+            script: '../production/index.js',
             // autorestart: true,
             watch: false,
             env: {
