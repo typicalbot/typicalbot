@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 import { Client, ClientSocket, NodeMessage } from 'veza';
 import { TextChannel } from 'discord.js';
-import Cluster from './packages/typicalbot/src';
+import Cluster from './src';
 import config from './config.json';
 
 if (!config.clustered) new Cluster(undefined);
 else {
-    const node = new Client(process.env.CLUSTER || 'TypicalBot')
+    console.log(process.env.CLUSTER);
+    const node = new Client(process.env.CLUSTER || 'TypicalBot 1')
         .on('error', (error: Error, client: ClientSocket) =>
             console.error(`[IPC] Error from ${client.name}:`, error)
         )

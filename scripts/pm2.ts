@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Util } from 'discord.js';
 import pm2 from 'pm2';
-import config from '../../../config.json';
+import config from '../config.json';
 
 async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(config.token);
@@ -9,20 +9,19 @@ async function generateClusters() {
     const clusterCount = Math.ceil(shardCount / 10);
     const clusters = [];
 
+    const build = config.clusterBuild ? `${config.clusterBuild}-` : '';
+
     for (let i = 1; i <= clusterCount; i++) {
         const clusterShards = shards.splice(0, 10);
+        const name = `${config.clusterServer}-${build}${i}`;
 
         clusters.push({
-            name: `${config.clusterServer}-${
-                config.clusterBuild ? `${config.clusterBuild}-` : ''
-            }${i}`,
-            script: '../../production/index.js',
+            name,
+            script: '../production/index.js',
             // autorestart: true,
             watch: false,
             env: {
-                CLUSTER: `${config.clusterServer} ${
-                    config.clusterBuild ? `${config.clusterBuild} ` : ''
-                }${i}`,
+                CLUSTER: name,
                 CLUSTER_COUNT: clusterCount.toString(),
                 SHARDS: `[${clusterShards.join(',')}]`,
                 SHARD_COUNT: clusterShards.length.toString(),

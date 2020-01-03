@@ -5,7 +5,7 @@ import './extensions/TypicalMessage';
 import { Client, Collection } from 'discord.js';
 import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
-import config from '../../../config.json';
+import config from '../config.json';
 
 import DatabaseHandler from './handlers/Database';
 import TaskHandler from './handlers/Tasks';
@@ -24,7 +24,7 @@ import {
     BanLog,
     UnbanLog
 } from './types/typicalbot';
-import i18n from '../src/i18n';
+import i18n from './i18n';
 import { TFunction } from 'i18next';
 
 interface TypicalHandlers {
