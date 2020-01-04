@@ -19,7 +19,7 @@ jobs:
       - name: yarn
         run: yarn install
       - name: config
-        run: cp config.example.json config.json && cp packages/typicalbot-cluster/config.example.json packages/typicalbot-cluster/config.json
+        run: cp config.example.json config.json
       - name: tsc
         uses: icrawl/action-tsc@v1
         env:
