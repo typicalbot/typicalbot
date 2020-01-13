@@ -23,7 +23,7 @@ module.exports = class extends Command {
             + `\`\`\`\n`
             + `ID                  : ${user.id}\n`
             + `Status              : ${user.presence.status}\n`
-            + `Avatar              : ${user.avatarURL("png", 2048)}\n`
+            + `Avatar              : ${user.avatarURL({format: "png", size: 2048, dynamic: true})}\n`
             + `Joined              : ${moment(member.joinedAt).format('MMM DD, YYYY hh:mm A')}\n`
             + `Registered          : ${moment(user.createdAt).format('MMM DD, YYYY hh:mm A')}\n`
             + (member.roles.size > 1 ? `Roles               : ${member.roles.array().filter(r => r.position !== 0).sort((a, b) => b.position - a.position).map(r => r.name).join(', ')}\n` : 'None')
@@ -38,8 +38,8 @@ module.exports = class extends Command {
         const user = member.user;
 
         message.buildEmbed()
-            .setAuthor(user.tag, user.avatarURL('png', 2048))
-            .setThumbnail(user.avatarURL('png', 2048))
+            .setAuthor(user.tag, user.avatarURL({format: "png", size: 2048, dynamic: true}))
+            .setThumbnail(user.avatarURL({format: "png", size: 2048, dynamic: true}))
             .addField('ID', user.id, true)
             .addField('Status', user.presence.status, true)
             .addField('Joined', moment(member.joinedAt).format('MMM DD, YYYY hh:mm A'), true)

@@ -36,7 +36,7 @@ class MessageReactionRemove extends Event {
                 .setColor(0xFFA500)
                 .addField("Author", `<@!${messageReaction.message.author.id}>`, true)
                 .addField("Channel", `<#${messageReaction.message.channel.id}>`, true)
-                .setThumbnail(messageReaction.message.author.avatarURL("png", 2048))
+                .setThumbnail(messageReaction.message.author.avatarURL({format: "png", size: 2048, dynamic: true}))
                 .setTimestamp(messageReaction.message.createdAt)
                 .setFooter(`⭐ ${count} | ${messageReaction.message.id}`);
 

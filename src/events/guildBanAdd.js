@@ -32,7 +32,7 @@ class GuildBanAdd extends Event {
         if (settings.logs.ban === "--embed") {
             channel.buildEmbed()
                 .setColor(0xFF0000)
-                .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
+                .setAuthor(`${user.tag} (${user.id})`, user.avatarURL({format: "png", dynamic: true}) || null)
                 .setFooter("User Banned")
                 .setTimestamp()
                 .send()

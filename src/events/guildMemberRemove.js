@@ -26,7 +26,7 @@ class GuildMemberRemove extends Event {
         if (settings.logs.leave === "--embed") {
             channel.buildEmbed()
                 .setColor(0xFF6600)
-                .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
+                .setAuthor(`${user.tag} (${user.id})`, user.avatarURL({format: "png", dynamic: true}) || null)
                 .setFooter("User Left")
                 .setTimestamp()
                 .send()

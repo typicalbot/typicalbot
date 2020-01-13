@@ -53,7 +53,7 @@ class GuildInvitePosted extends Event {
         if (settings.logs.invite === "--embed") {
             channel.buildEmbed()
                 .setColor(0x00FF00)
-                .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
+                .setAuthor(`${user.tag} (${user.id})`,user.avatarURL({format: "png", size: 2048, dynamic: true}) || null)
                 .setFooter(`Invite sent in <#${message.channel.id}>.`)
                 .setTimestamp()
                 .send()

@@ -21,7 +21,7 @@ class GuildMemberAdd extends Event {
                 if (settings.logs.join === "--embed") {
                     channel.buildEmbed()
                         .setColor(0x00FF00)
-                        .setAuthor(`${user.tag} (${user.id})`, user.avatarURL() || null)
+                        .setAuthor(`${user.tag} (${user.id})`, user.avatarURL({format: "png", dynamic: true}) || null)
                         .setFooter("User Joined")
                         .setTimestamp()
                         .send()
