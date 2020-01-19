@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Générer une nouvelle clé API.",
+	"USAGE": "api <view|generate>",
+	"NONE": "Aucune clé API n'existe. Utilisez `$api generate` pour en générer une.",
+	"SUCCESS": "Clé API à jour avec succès.",
+	"KEY": "la clé API de {{guild}} : `{{key}}`"
+}

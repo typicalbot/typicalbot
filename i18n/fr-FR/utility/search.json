@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Recherche dans la liste des utilisateurs un nom d'utilisateur ou un pseudo.",
+  "USAGE": "recherche <query> [page-number]",
+  "NONE": "Il n'y a pas de correspondance pour la requête **{{query}}**.",
+  "RESULTS": "**__Results for Query:__** {{query}}"
+}

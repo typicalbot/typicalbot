@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Fait envoyer un message avec le contenu utilisé.",
+	"USAGE": "dire [#channel] <content>",
+	"MISSING_SEND": "Il me manque la permission SEND_MESSAGES dans le canal demandé.",
+	"INVALID": "La marque fournie est invalide.",
+	"SENT": "Message Echo",
+	"TEXT": "**{{user}}** a envoyé un message en {{channel}} en utilisant TypicalBot."
+}

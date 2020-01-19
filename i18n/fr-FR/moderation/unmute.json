@@ -1,0 +1,10 @@
+{
+	"DESCRIPTION": "Rendre un utilisateur muet dans ce serveur",
+	"USAGE": "kick <@user> [reason]",
+	"NOT_MUTED": "L'utilisateur demandé est déjà muet.",
+	"TOO_LOW": "Vous ne pouvez pas bannir un utilisateur avec le même ou le plus haut rôle.",
+	"UNMUTED": "Vous avez été banni de **{{name}}**.",
+	"ERROR": "Une erreur s'est produite en essayant de sauvegarder la ressource.",
+	"SUCCESS": "Utilisateur {{user}} banni avec succès**.",
+	"TASK_REASON": "Démutation automatique : Le temps de mutation de l'utilisateur est écoulé."
+}

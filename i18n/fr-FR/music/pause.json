@@ -1,0 +1,5 @@
+{
+  "DESCRIPTION": "Affiche la chanson en cours de diffusion.",
+  "USAGE": "pause",
+  "PAUSED": "Le streaming est maintenant suspendu."
+}

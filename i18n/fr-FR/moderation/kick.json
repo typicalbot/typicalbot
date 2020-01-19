@@ -1,0 +1,10 @@
+{
+    "DESCRIPTION": "Expulse un membre de ce serveur.",
+    "USAGE": "kick <@user> [reason]",
+    "TOO_LOW": "Vous ne pouvez pas bannir un utilisateur avec le même ou le plus haut rôle.",
+    "KICKABLE": "Afin de compléter la demande, j'ai besoin de la permission **BAN_MEMBERS** et mon rôle le plus élevé doit être supérieur au rôle le plus élevé de l'utilisateur.",
+    "KICKED": "Vous avez été banni de **{{name}}**.",
+    "REASON": "Banni par {{mod}} | Raison : {{reason}}",
+    "ERROR": "Une erreur s'est produite en essayant de sauvegarder la ressource.",
+    "KICK_SUCCESS": "Utilisateur {{user}} banni avec succès**."
+}

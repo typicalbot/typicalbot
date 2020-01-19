@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Frappez un autre utilisateur sur le serveur.",
+    "USAGE": "tirer [@user]",
+    "SELF": "vient de prendre un coup ! :scream:",
+    "POLICE": "Quelqu'un appelle la police!",
+    "MISSED": "Attendez! Ils ont manqué!",
+    "HEADSHOT": "Bam ! Coup de tête !",
+    "RESPONSE": "vient de prendre un coup ! :scream:"
+}

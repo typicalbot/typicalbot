@@ -1,0 +1,5 @@
+{
+  "DESCRIPTION": "Ignorer ce qui est en cours de lecture.",
+  "USAGE": "arrêter",
+  "STOPPING": "Arrêt de tout le streaming audio."
+}

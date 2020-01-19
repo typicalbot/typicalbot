@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Gérer ou afficher les rôles sur un serveur.",
+    "USAGE": "Vérifiez `$roles help` pour l'utilisation de cette commande.",
+    "HELP_LIST": "Liste des rôles",
+    "HELP_FIRST": "rôles <give|take> <@user> <role-name>",
+    "HELP_SECOND": "rôles publics <list|clear|add|remove> <role-name>",
+    "LIST": "Rôles de **__ de{{name}}: __**",
+    "MEMBERS": "**__ Membres de{{name}}:__**",
+    "PUBLIC": "Rôles de **__ de{{name}}: __**",
+    "GIVE": "Vous ne pouvez pas donner à vous-même ou à un autre utilisateur votre rôle le plus élevé ou un rôle plus élevé.",
+    "TAKE": "Vous ne pouvez pas jouer un rôle de vous-même ou d'un autre utilisateur lorsque votre rôle le plus élevé est inférieur au rôle à jouer.",
+    "NONE_PUBLIC": "Aucune politique n'est configurée dans ce rôle.",
+    "ALREADY_PUBLIC": "Le rôle demandé n'est pas sur la liste des rôles publics.",
+    "NOT_PUBLIC": "Le rôle demandé n'est pas sur la liste des rôles publics."
+}

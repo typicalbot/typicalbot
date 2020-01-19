@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Bannis un membre de ce serveur.",
+	"USAGE": "débannir <user-id> [reason]",
+	"REASON": "Banni par {{mod}} | Raison : {{reason}}",
+	"UNBANNED": "Utilisateur {{user}} banni avec succès.",
+	"USER_UNBAN": "**{{user}}** a été débanni du serveur.",
+	"USER_UNBANNED": "Utilisateur dé-banni"
+}

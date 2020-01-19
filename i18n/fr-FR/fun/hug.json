@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Rendre un utilisateur muet dans ce serveur.",
+    "USAGE": "hug [@user]",
+    "SELF": "vient de se faire un câlin. :hugging: *Ce n'est pas du tout bizarre.* :eyes:",
+    "RESPONSE": "vient de donner un câlin à {{user}} . :hugging:",
+    "RESPONSE_AWW": "vient de donner un câlin à {{user}} . :hugging: Aww!"
+}

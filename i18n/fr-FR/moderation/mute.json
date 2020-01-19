@@ -1,0 +1,16 @@
+{
+    "DESCRIPTION": "Rendre un utilisateur muet dans ce serveur",
+    "USAGE": "bannir <@user> [time:xd(ays) xh(nos) xm(inutes) xs(econds)] [reason]",
+    "NO_ROLE": "Aucun rôle muet n'a été défini. Essayez `$set modifier muterole <role-name>`",
+    "INVALID_CHANNEL": "Ce réseau n'existe pas !",
+    "MISSING_PERMS": "Je ne peux pas gérer les permissions pour ce salon.",
+    "DENYING": "Refuser les permissions pour que les utilisateurs muets puissent parler.",
+    "DENY_ERROR": "Impossible de refuser l'autorisation aux utilisateurs en sourdine de parler.",
+    "TOO_LONG": "Vous ne pouvez pas bannir un utilisateur pendant plus d'une semaine.",
+    "ALREADY_MUTED": "L'utilisateur demandé est déjà muet.",
+    "TOO_LOW": "Vous ne pouvez pas bannir un utilisateur avec le même ou le plus haut rôle.",
+    "UNEDITABLE": "Afin de compléter la demande, j'ai besoin de la permission **BAN_MEMBERS** et mon rôle le plus élevé doit être supérieur au rôle le plus élevé de l'utilisateur.",
+    "MUTED": "Vous avez été banni de **{{name}}**.",
+    "SUCCESS": "Utilisateur {{user}} banni avec succès.",
+    "ERROR": "Une erreur s'est produite en essayant de sauvegarder la ressource."
+}

@@ -1,0 +1,22 @@
+{
+    "NEED_CHANNEL": "%var% vous devez être dans un canal vocal pour utiliser cette commande.",
+    "NOT_JOINABLE": "Je ne peux pas rejoindre le canal vocal dans lequel vous vous trouvez.",
+    "NOT_SPEAKABLE": "Je ne peux pas rejoindre le canal vocal dans lequel vous vous trouvez.",
+    "LOADING": "Chargement de la playlist dans la file d'attente. Cela peut prendre un certain temps.",
+    "TOO_LONG": "Le fichier que vous essayez d'envoyer est trop grand. La taille maximale du fichier est de {size} Mo",
+    "NOT_IN_QUEUE": "Vous ne pouvez ajouter à la file d'attente qu'en mode file d'attente.",
+    "INVALID_CHANNEL": "Vous devez être dans la même chaîne vocale pour demander une vidéo pour être lue.",
+    "ENQUEUED": "File d'attente **{{title}}**.",
+    "QUEUE_MAXED": "La limite de file d'attente de {{amount}} a été atteinte.",
+    "UNKNOWN": "Une erreur inconnue s'est produite lors de la demande de cette vidéo:\n {{error}}",
+    "INVALID_KEY": "**__Une erreur inconnue s'est produite lors de la demande de cette vidéo:__**\n\nCe serveur a entré une clé API YouTube invalide.",
+    "QUOTA_EXCEEDED": "**__Une erreur s'est produite lors de la demande de cette vidéo:__**\n\nNotre quota global d'API YouTube a été dépassé, ce qui signifie que plus aucune recherche ne peut être effectuée jusqu'à ce qu'elle soit réinitialisée à 3 AM EST.\n\n**__Comment résoudre le problème :__**\n```md\n# Vous pouvez résoudre le problème en créant votre propre API de données YouTube v3.\n\nRejoignez le serveur de Typicalbot et demandez plus d'informations sur la façon de le faire.```\n**Lien:** <https://typicalbot.com/join-us/>",
+    "MISSING_PERM": "Ce serveur requiert des permissions élevées pour utiliser cette commande. La commande requiert la permission niveau {{requiredLevel}} ({{requiredTitle}}) et vous êtes niveau {{userLevel}} ({{userTitle}})",
+    "STREAMING": "<unk> Flux en cours **{{title}}** demandé par **{{user}}** pour **{{time}}**.",
+    "ERROR_PLAYING": "Une erreur s'est produite lors de la lecture de la vidéo. Tentative de lecture de la prochaine vidéo dans la file d'attente.",
+    "ERROR_LEAVING": "Une erreur s'est produite lors de la lecture de la vidéo. Quitter le canal.",
+    "ERROR_LIVESTREAM": "Une erreur s'est produite en essayant de jouer le livestream. Quitter la chaîne.",
+    "CONCLUDED": "la queue est annulée",
+    "LIVE_STREAMING": "<unk> Flux en cours **{{title}}** demandé par **{{user}}** pour **{}**.",
+    "LIVE_CONCLUDED": "la queue est annulée"
+}

@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Exclure un membre d'un canal vocal.",
+    "USAGE": "kick <@user> [reason]",
+    "NO_VOICE": "Cet utilisateur n'est pas dans un salon vocal.",
+    "SUCCESS": "Utilisateur {{user}} banni avec succès**."
+}

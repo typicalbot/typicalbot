@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Prenez un rôle de votre part en dehors de la liste des rôles publics.",
+    "USAGE": "donner <role-name>",
+    "UNEDITABLE": "Autorisations insuffisantes données au bot. Assurez-vous que le rôle le plus élevé que j'ai est au-dessus du rôle que vous essayez de donner et que j'ai la permission Gérer les rôles."
+}

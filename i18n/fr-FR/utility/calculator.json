@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Évaluer les expressions mathématiques.",
+  "USAGE": "mathématique <expression>",
+  "INPUT": "**INPUT:**",
+  "OUTPUT": "**OUTPUT:**",
+  "FAILED": "Impossible d'évaluer l'expression mathématique."
+}

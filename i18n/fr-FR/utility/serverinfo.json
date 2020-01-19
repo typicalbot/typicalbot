@@ -1,0 +1,18 @@
+{
+    "DESCRIPTION": "Affiche les informations du serveur.",
+    "USAGE": "serveurinfo",
+    "SERVER": "**__Information du serveur pour:__** {{name}}",
+    "NAME": "Nom : {{name}} ({{id}})",
+    "OWNER": "Propriétaire : {{user}} ({{id}})",
+    "CREATED": "Date de création : {time}",
+    "REGION": "Région : {{region}}",
+    "VERIFICATION": "Niveau de vérification : {{level}}",
+    "ICON": "Icône : {{url}}",
+    "CHANNELS": "Canal:** {{amount}}",
+    "MEMBERS": "Canal:** {{amount}}",
+    "ROLES": "Volume : {{amount}}",
+    "EMOJIS": "Volume : {{amount}}",
+    "BOOSTED": "Niveau boosté : niveau {{level}} ({{amount}} Boosters)",
+    "BOOSTERS": "Niveau {{level}} ({{amount}} Boosters)",
+    "INFO": "Information serveur"
+}

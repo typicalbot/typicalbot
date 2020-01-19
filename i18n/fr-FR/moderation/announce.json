@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Envoyez une annonce sur le canal d'annonces. Utilisez le drapeau '-e' avant votre contenu pour que le message soit intégré. Si les annonces mentionnent le rôle, il l'utilisera toujours.",
+    "USAGE": "annoncer [-e] <content>",
+    "INVALID": "Aucun contenu d'annonce n'a été fourni.",
+    "INVALID_CHANNEL": "Pour annoncer, veuillez configurer un canal d'annonce en tapant : `$set modifier les annonces #nom-canal`",
+    "TEXT": "**__Annonce de {{usertag}}:__** {{role}}",
+    "TITLE": "Annonce"
+}

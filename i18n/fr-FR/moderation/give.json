@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Recevoir un rôle hors de la liste des rôles publics.",
+	"USAGE": "donner <role-name>",
+	"INVALID": "Rôle invalide. Veuillez vous assurer que votre orthographe est correcte, et que le rôle existe réellement.",
+	"UNEDITABLE": "Autorisations insuffisantes données au bot. Assurez-vous que le rôle le plus élevé que j'ai est au-dessus du rôle que vous essayez de donner et que j'ai la permission Gérer les rôles.",
+	"NOT_PUBLIC": "Le rôle demandé n'est pas sur la liste des rôles publics."
+}

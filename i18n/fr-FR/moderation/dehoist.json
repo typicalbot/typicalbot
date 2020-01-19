@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Vérifier si un membre du serveur a des caractères spéciaux dans son nom d'utilisateur.",
+    "USAGE": "déhoist",
+    "NONE": "Il n'y a plus de mail à supprimer.",
+    "FOUND": "Là-bas {{amount}} qui peuvent être démantelés:",
+    "ONE": "est 1 utilisateur",
+    "MULTIPLE": "sont {{amount}} utilisateurs"
+}

@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Affiche une liste de vidéos en attente de diffusion.",
+    "USAGE": "liste",
+    "NONE": "**__Queue:__** Il n'y a aucune vidéo dans la file d'attente.",
+    "CURRENT": "**__Actuellement Streaming:__** **{{title}}**{{user}} | Demandé par **{}**",
+    "LIST": "• **{{title}}** ({{time}) | Demandée par **{{user}}**",
+    "LEFT": "**__Queue:__** Il y a **{{amount}}** vidéos dans la file d'attente. La file d'attente durera pendant **{{time}}.**"
+}

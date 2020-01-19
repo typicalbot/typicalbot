@@ -1,0 +1,10 @@
+{
+	"PREFIX": "Le préfixe de ce serveur est {{prefix}}.",
+	"MULTIPLE_PREFIXES": "`{{default}}` ou `{{custom}}`",
+	"PTB_ONLY": "Cette commande est en mode PTB, ce qui signifie qu'elle ne peut pas être utilisée sur TypicalBot stable.",
+	"DISABLED": "Cette commande est déjà désactivée sur ce serveur.",
+	"MISSING_PERMS": "Ce serveur requiert des permissions élevées pour utiliser cette commande. La commande requiert la permission niveau {{requiredLevel}} ({{requiredTitle}}) et vous êtes niveau {{userLevel}} ({{userTitle}}).",
+	"MISSING_ACCESS": "Le niveau d'accès du propriétaire du serveur est trop bas pour exécuter cette commande. La commande requiert un niveau d'accès de {{command}}, mais le propriétaire n'a qu'un niveau de {{level}} ({{title}}). Le propriétaire peut augmenter son niveau d'accès en faisant un don de 5 $ ou plus à TypicalBot.",
+	"USAGE_ERROR": "Utilisation de commande invalide. Vérifiez `{{prefix}}help {{name}}` pour plus d'informations.",
+	"PAGIFY": "Page {{page}} / {{pages}} | {{total}} Total\n\n{{content}}"
+}

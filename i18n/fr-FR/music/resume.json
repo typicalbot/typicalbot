@@ -1,0 +1,5 @@
+{
+  "DESCRIPTION": "Reprendre la chanson en pause.",
+  "USAGE": "resume",
+  "RESUMING": "Le streaming est maintenant suspendu."
+}

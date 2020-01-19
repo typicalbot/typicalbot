@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Ignorer ce qui est en cours de lecture.",
+  "USAGE": "sauter [amount]",
+  "SKIPPING": "Sauts",
+  "DETAILS": "Saut de **${{title}}** demandé par **{{user}}**",
+  "DETAILS_MULTIPLE": "Sauter **{{title}}$ ** demandé par **{{user}}** et {{amount}} des chansons suivantes."
+}

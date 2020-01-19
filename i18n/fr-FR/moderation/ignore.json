@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Rend le bot ignorer les commandes, les invitations et les étoiles dans un canal.",
+	"USAGE": "ignorer [view|commandes|invites|étoiles]",
+	"IGNORING": "Les canaux suivants ignorent **{{type}} ** :",
+	"ALREADY_IGNORING": "Ce salon ignore déjà {{type}}.",
+	"STARBOARD": "L'tribord n'est pas activé.",
+	"ADDED": "Ignorant maintenant {{type}}."
+}

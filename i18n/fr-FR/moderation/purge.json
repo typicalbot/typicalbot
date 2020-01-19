@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Supprimer les messages d'un canal.",
+    "USAGE": "purge [@user|#channel|@role|me|you|bots] <message-count>",
+    "TOO_LITTLE": "Veuillez fournir un certain nombre de messages à supprimer de 2 à 100.",
+    "MISSING_PERMS": "Une erreur s'est produite. Cela signifie très probablement que je n'ai pas les permissions pour gérer les messages.",
+    "NONE": "Aucun message n'a été supprimé. Cela signifie probablement que je n'ai pas la permission de lire l'historique des messages ou que les messages ont plus de deux semaines.",
+    "PURGED": "Le message **{{amount}}** a été supprimé avec succès.",
+    "PURGED_MULTIPLE": "**{{amount}}** messages supprimés avec succès."
+}

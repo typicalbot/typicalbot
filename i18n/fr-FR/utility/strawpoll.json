@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Créez un vote de paille. Utilisez le drapeau '-m' pour un choix multiple.",
+  "USAGE": "paille ['-m'] <question> | Choix 1; Choix 2; Choix +",
+  "INVALID": "Il doit y avoir entre 2 et 30 choix pour que la paille soit créée.",
+  "CREATED": "Votre paille a été créée ! <https://strawpoll.me/{{id}}>"
+}

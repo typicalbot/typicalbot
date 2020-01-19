@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Rendre un utilisateur muet dans ce serveur",
+    "USAGE": "kick <@user> [reason]",
+    "TOO_LOW": "Vous ne pouvez pas bannir un utilisateur avec le même ou le plus haut rôle.",
+    "WARNED": "Vous avez été banni de **{{name}}**.",
+    "SUCCESS": "Utilisateur {{user}} banni avec succès`."
+}

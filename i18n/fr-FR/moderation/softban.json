@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Bannis un membre de ce serveur.",
+	"USAGE": "softban <@user> [purge-days] [reason]",
+	"REASON": "Banni par {{mod}} | Raison : {{reason}}",
+	"BANNED": "Utilisateur {{user}} banni avec succès**."
+}

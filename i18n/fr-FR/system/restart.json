@@ -1,0 +1,4 @@
+{
+  "DESCRIPTION": "Une commande pour redémarrer le bot ou un cluster.",
+  "USAGE": "redémarrer <cluster-name>"
+}

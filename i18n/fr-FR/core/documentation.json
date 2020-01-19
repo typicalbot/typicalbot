@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Récupérer un lien vers la documentation de TypicalBot.",
+	"USAGE": "documentation",
+	"TEXT": "La documentation de toutes les commandes et paramètres peut être trouvée à **<{{link}}>**.",
+	"TYPICAL_DOCS": "Documentation TypicalBot"
+}

@@ -1,0 +1,7 @@
+{
+	"CASE_ID": "Cas {{id}}",
+	"ACTION": "**Action:** {{display}} {{expiration}}",
+	"USER": "**Utilisateur:** {{tag}} ({{id}})",
+	"CHANNEL": "**Canal:** {{name}} {{channel}}",
+	"REASON": "**Raison :** %reason"
+}

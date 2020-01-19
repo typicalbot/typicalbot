@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Contrôler l'état de la tâche.",
+  "USAGE": "état discordant",
+  "OPERATIONAL": "Tous les systèmes sont opérationnels",
+  "INCIDENT": "**Incident** à **{{time}}**"
+}

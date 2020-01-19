@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Client, ClientSocket, NodeMessage } from 'veza';
 import { TextChannel } from 'discord.js';
-import Cluster from './packages/typicalbot/src';
+import Cluster from './src';
 import config from './config.json';
 
 if (!config.clustered) new Cluster(undefined);

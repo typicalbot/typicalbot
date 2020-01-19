@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Enroule un moule à nx.",
+	"USAGE": "dés [sides]",
+	"RESPONSE": "J'ai roulé un **__{{amount}}__**.",
+	"INVALID": "Nombre de côtés invalide. Le nombre doit être un entier supérieur à 1 et au maximum 100."
+}

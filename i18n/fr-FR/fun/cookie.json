@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Donnez un cookie à un autre utilisateur ou conservez-le tous par vous-même.",
+    "USAGE": "cookie [@user]",
+    "SELF_LAUGH": "riait comme un fou tout en mangeant lentement les biscuits qu'ils gardaient pour eux-mêmes devant tout le monde.",
+    "SELF_KEPT": "a décidé de conserver tous les cookies pour eux-mêmes! Quel saccage! :angry:",
+    "GIVEN": "vient de donner un cookie à {{user}} . :cookie:"
+}

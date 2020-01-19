@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Vérifier si un des membres du serveur a une invitation au serveur dans son état de jeu.",
+    "USAGE": "adcheck",
+    "NONE": "Il n'y a aucun utilisateur avec une invitation dans leur statut.",
+    "FOUND": "Là {{amount}} avec une invitation dans leur statut:\n\n",
+    "ONE": "est 1 utilisateur",
+    "MULTIPLE": "sont {{amount}} utilisateurs",
+    "TITLE": "Utilisateurs avec invitation dans le statut de jeu"
+}

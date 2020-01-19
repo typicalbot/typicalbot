@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Gagnez le rôle d'abonné du serveur.",
+  "USAGE": "souscrire",
+  "NONE": "Aucun rôle d'abonné n'est configuré pour ce serveur.",
+  "SUBSCRIBED": "Vous avez été abonné !"
+}

@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Frappez un autre utilisateur sur le serveur.",
+    "USAGE": "gifle [@user]",
+    "SELF": "vient de se poignarder! :dagger::scream:",
+    "SELF_POLICE": "vient de se poignarder! :dagger::scream: Quelqu'un appelle la police!",
+    "RESPONSE": "vient de s'emparer de {{user}}! :dagger::scream:",
+    "RESPONSE_POLICE": "vient de se poignarder! :dagger::scream: Quelqu'un appelle la police!"
+}
