@@ -5,7 +5,7 @@
     "TEXT_1": "**__Statistiques TypicalBot:__**",
     "TEXT_2": "``autoraccourci",
     "TEXT_3": "Disponibilité: {{uptime}}",
-    "TEXT_4": "=> Serveurs: {{guilds}} ({{count}} Fragments})",
+    "TEXT_4": "=> Serveurs: {{guilds}} ({{count}} Fragments)",
     "TEXT_5": "=> Connexions vocales : {{voiceConnections}}",
     "TEXT_6": "=> Canal:** {{channels}}",
     "TEXT_7": "=> Utilisateur:** {{users}}",

@@ -6,7 +6,7 @@
     "TEXT_1": "**__TypicalBot's Statistics:__**",
     "TEXT_2": "```autohotkey",
     "TEXT_3": "=> Uptime: {{uptime}}",
-    "TEXT_4": "=> Servers: {{guilds}} ({{count}} Shards})",
+    "TEXT_4": "=> Servers: {{guilds}} ({{count}} Shards)",
     "TEXT_5": "=> Voice Connections: {{voiceConnections}}",
     "TEXT_6": "=> Channels: {{channels}}",
     "TEXT_7": "=> Users: {{users}}",
