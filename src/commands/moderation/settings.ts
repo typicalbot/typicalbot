@@ -1,5 +1,3 @@
-// TODO: add a setting to change language
-
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
 import { TypicalGuildMessage, SettingsData } from '../../types/typicalbot';
@@ -50,7 +48,8 @@ export default class extends Command {
                 this.client.helpers.permissionError.execute(
                     message,
                     this,
-                    permission
+                    permission,
+                    Constants.PermissionsLevels.SERVER_ADMINISTRATOR
                 )
             );
 
