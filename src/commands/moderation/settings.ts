@@ -50,7 +50,8 @@ export default class extends Command {
                 this.client.helpers.permissionError.execute(
                     message,
                     this,
-                    permission
+                    permission,
+                    Constants.PermissionsLevels.SERVER_ADMINISTRATOR
                 )
             );
 
