@@ -1,5 +1,3 @@
-// TODO: add a setting to change language
-
 import Command from '../../structures/Command';
 import Constants from '../../utility/Constants';
 import { TypicalGuildMessage, SettingsData } from '../../types/typicalbot';
