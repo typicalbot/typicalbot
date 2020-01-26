@@ -29,9 +29,6 @@ export default class Command {
         this.client = client;
         this.name = name;
         this.path = path;
-        this.description =
-            (options && options.description) || 'Description Not Provided';
-        this.usage = (options && options.usage) || 'Usage Not Provided';
         this.aliases = (options && options.aliases) || [];
         this.dm = (options && options.dm) || false;
         this.permission =
