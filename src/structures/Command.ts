@@ -11,8 +11,6 @@ export default class Command {
     client: Cluster;
     name: string;
     path: string;
-    description: string;
-    usage: string;
     aliases: string[];
     dm: boolean;
     permission: -1 | 0 | 1 | 2 | 3 | 4 | 10;
