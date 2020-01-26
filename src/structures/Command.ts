@@ -11,8 +11,6 @@ export default class Command {
     client: Cluster;
     name: string;
     path: string;
-    description: string;
-    usage: string;
     aliases: string[];
     dm: boolean;
     permission: -1 | 0 | 1 | 2 | 3 | 4 | 10;
@@ -29,9 +27,6 @@ export default class Command {
         this.client = client;
         this.name = name;
         this.path = path;
-        this.description =
-            (options && options.description) || 'Description Not Provided';
-        this.usage = (options && options.usage) || 'Usage Not Provided';
         this.aliases = (options && options.aliases) || [];
         this.dm = (options && options.dm) || false;
         this.permission =
