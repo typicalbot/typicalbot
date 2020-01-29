@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0]
+### Added
+ - i18n ([#78](https://github.com/typicalbot/typicalbot/pull/78)) ([ae0b16f](https://github.com/typicalbot/typicalbot/commit/ae0b16f5f50e470b5d94c36255058db657ce3434))
+ - `language` setting ([#78](https://github.com/typicalbot/typicalbot/pull/78)) ([ae0b16f](https://github.com/typicalbot/typicalbot/commit/ae0b16f5f50e470b5d94c36255058db657ce3434))
+ - `.prettier` to enforce code styles ([#78](https://github.com/typicalbot/typicalbot/pull/78)) ([ae0b16f](https://github.com/typicalbot/typicalbot/commit/ae0b16f5f50e470b5d94c36255058db657ce3434))
+ - Typings ([#78](https://github.com/typicalbot/typicalbot/pull/78)) ([ae0b16f](https://github.com/typicalbot/typicalbot/commit/ae0b16f5f50e470b5d94c36255058db657ce3434))
+
+### Changed
+ - Project is now in TypeScript ([#78](https://github.com/typicalbot/typicalbot/pull/78)) ([ae0b16f](https://github.com/typicalbot/typicalbot/commit/ae0b16f5f50e470b5d94c36255058db657ce3434))
+ - Updated dependencies
+
+### Fixed
+ - `set` command to display correct permission level ([#107](https://github.com/typicalbot/typicalbot/pull/107)) ([da1ad8a](https://github.com/typicalbot/typicalbot/commit/da1ad8a3a0a318a65fbb0cd9e28f8023e668d6c4))
+ - `set view` command to display all setting values ([#78](https://github.com/typicalbot/typicalbot/pull/78)) ([ae0b16f](https://github.com/typicalbot/typicalbot/commit/ae0b16f5f50e470b5d94c36255058db657ce3434)), closes [#52](https://github.com/typicalbot/typicalbot/issues/52)
+
+### Removed
+ - `alias` and `description` properties from `Command` structure ([#108](https://github.com/typicalbot/typicalbot/pull/108))
+ - Music commands and functionality ([00e7d95](https://github.com/typicalbot/typicalbot/commit/00e7d95f5ba6892d0b7f1de48fe84f9f5f5bbbe2))
+
 ## [2.7.1]
 ### Fixed
  - Update check of autorole-silent setting ([#83](https://github.com/typicalbot/typicalbot/pull/83))
@@ -126,7 +145,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/2.7.1...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.0.0
 [2.7.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.1
 [2.7.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.0
 [2.6.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.6.0
