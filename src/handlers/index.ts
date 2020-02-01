@@ -2,7 +2,7 @@ export * from './Commands';
 export * from './Database';
 export * from './Events';
 export * from './Functions';
-export * from './ModerationLogs';
+export * from './ModerationLog';
 export * from './Music';
 export * from './Permissions';
 export * from './Settings';
