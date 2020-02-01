@@ -7,15 +7,17 @@ import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
 import config from '../config.json';
 
-import DatabaseHandler from './handlers/Database';
-import TaskHandler from './handlers/Tasks';
-import PermissionsHandler from './handlers/Permissions';
-import ModerationLogHandler from './handlers/ModerationLog';
-import MusicHandler from './handlers/Music';
-import SettingsHandler from './handlers/Settings';
-import FunctionHandler from './handlers/Functions';
-import CommandHandler from './handlers/Commands';
-import EventHandler from './handlers/Events';
+import {
+    DatabaseHandler,
+    TaskHandler,
+    PermissionsHandler,
+    ModerationLogHandler,
+    MusicHandler,
+    SettingsHandler,
+    FunctionHandler,
+    CommandHandler,
+    EventHandler
+} from './handlers';
 
 import MusicUtility from './utility/Music';
 import {
