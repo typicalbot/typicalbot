@@ -40,7 +40,8 @@ export default class extends Command {
         if (
             message.member.roles.highest.position <=
                 member.roles.highest.position &&
-            (permissionLevel.level !== 4 && permissionLevel.level < 9)
+            permissionLevel.level !== 4 &&
+            permissionLevel.level < 9
         )
             return message.error(message.translate('moderation/warn:TOO_LOW'));
 

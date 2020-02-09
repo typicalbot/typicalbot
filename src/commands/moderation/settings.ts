@@ -382,9 +382,9 @@ export default class extends Command {
             .map(
                 k =>
                     ` • **${k}:** ${
-                    view
-                        ? settingsData[k].value
-                        : message.translate(settingsData[k].description)
+                        view
+                            ? settingsData[k].value
+                            : message.translate(settingsData[k].description)
                     }`
             );
 
@@ -409,8 +409,8 @@ export default class extends Command {
         return deleted
             ? message.reply(message.translate('moderation/settings:CLEARED'))
             : message.error(
-                message.translate('moderation/settings:CLEAR_ERROR')
-            );
+                  message.translate('moderation/settings:CLEAR_ERROR')
+              );
     }
 
     view(message: TypicalGuildMessage, setting: SettingsData) {
@@ -434,9 +434,9 @@ export default class extends Command {
 
                 list.push(
                     `*${
-                    message.guild.id === roleID
-                        ? role.name.slice(1)
-                        : role.name
+                        message.guild.id === roleID
+                            ? role.name.slice(1)
+                            : role.name
                     }*`
                 );
             }
@@ -481,10 +481,10 @@ export default class extends Command {
             const logText = !setting.value
                 ? message.translate('common:DEFAULT')
                 : disabled
-                    ? message.translate('common:DISABLED')
-                    : embed
-                        ? message.translate('common:EMBED')
-                        : ['```txt', '', setting.value, '```'].join('\n');
+                ? message.translate('common:DISABLED')
+                : embed
+                ? message.translate('common:EMBED')
+                : ['```txt', '', setting.value, '```'].join('\n');
 
             return message.reply(
                 message.translate('moderation/settings:CURRENT_VALUE', {
@@ -570,8 +570,8 @@ export default class extends Command {
                 const role = roleID
                     ? message.guild.roles.get(roleID)
                     : message.guild.roles.find(
-                        r => r.name.toLowerCase() === roleName.toLowerCase()
-                    );
+                          r => r.name.toLowerCase() === roleName.toLowerCase()
+                      );
 
                 if (!role)
                     return message.error(
@@ -616,8 +616,8 @@ export default class extends Command {
                 const role = roleID
                     ? message.guild.roles.get(roleID)
                     : message.guild.roles.find(
-                        r => r.name.toLowerCase() === roleName.toLowerCase()
-                    );
+                          r => r.name.toLowerCase() === roleName.toLowerCase()
+                      );
 
                 if (!role)
                     return message.error(
@@ -676,9 +676,9 @@ export default class extends Command {
                 const channel = channelID
                     ? message.guild.channels.get(channelID)
                     : message.guild.channels.find(
-                        r =>
-                            r.name.toLowerCase() === channelName.toLowerCase()
-                    );
+                          r =>
+                              r.name.toLowerCase() === channelName.toLowerCase()
+                      );
 
                 if (!channel)
                     return message.error(

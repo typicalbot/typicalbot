@@ -141,7 +141,7 @@ export default class Cluster extends Client {
 
         fetch(
             `https://discordbots.org/api/bots/${this.user &&
-            this.user.id}/stats`,
+                this.user.id}/stats`,
             {
                 method: 'post',
                 headers: {

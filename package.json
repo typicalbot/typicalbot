@@ -9,8 +9,8 @@
         "build:database": "tsc && node production/scripts/setup.js",
         "build:docs": "esdoc",
         "build:instance": "tsc && node production/scripts/pm2.js",
-        "lint": "tsc --noEmit && eslint '*/**/*.ts'",
-        "lint:fix": "tsc --noEmit && eslint '*/**/*.ts' --fix",
+        "lint": "tsc --noEmit && eslint . --ext .ts'",
+        "lint:fix": "tsc --noEmit && eslint . --ext .ts --fix",
         "start": "tsc && node production/index.js"
     },
     "repository": {

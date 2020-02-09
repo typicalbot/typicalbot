@@ -36,10 +36,7 @@ async function walkDirectory(
 export default async (): Promise<Map<string, TFunction>> => {
     const options = {
         jsonIndent: 2,
-        loadPath: path.resolve(
-            __dirname,
-            '../../i18n/{{lng}}/{{ns}}.json'
-        )
+        loadPath: path.resolve(__dirname, '../../i18n/{{lng}}/{{ns}}.json')
     };
 
     const { namespaces, languages } = await walkDirectory(

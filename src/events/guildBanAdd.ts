@@ -60,7 +60,7 @@ export default class GuildBanAdd extends Event {
                       )
                     : `**${user.tag}** has been banned from the server.`
             )
-            .catch(() => {});
+            .catch(err => console.log(err));
     }
 }
 

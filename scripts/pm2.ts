@@ -15,14 +15,14 @@ async function generateClusters() {
         clusters.push({
             name: `${config.clusterServer}-${
                 config.clusterBuild ? `${config.clusterBuild}-` : ''
-                }${i}`,
+            }${i}`,
             script: './production/index.js',
             // autorestart: true,
             watch: false,
             env: {
                 CLUSTER: `${config.clusterServer} ${
                     config.clusterBuild ? `${config.clusterBuild} ` : ''
-                    }${i}`,
+                }${i}`,
                 CLUSTER_COUNT: clusterCount.toString(),
                 SHARDS: `[${clusterShards.join(',')}]`,
                 SHARD_COUNT: clusterShards.length.toString(),
