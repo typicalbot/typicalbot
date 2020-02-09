@@ -17,7 +17,7 @@ async function generateClusters() {
                 config.clusterBuild ? `${config.clusterBuild}-` : ''
             }${i}`,
             script: './production/index.js',
-            // autorestart: true,
+            autorestart: true,
             watch: false,
             env: {
                 CLUSTER: `${config.clusterServer} ${
@@ -25,7 +25,7 @@ async function generateClusters() {
                 }${i}`,
                 CLUSTER_COUNT: clusterCount.toString(),
                 SHARDS: `[${clusterShards.join(',')}]`,
-                SHARD_COUNT: clusterShards.length.toString(),
+                SHARD_COUNT: shardCount.toString(),
                 TOTAL_SHARD_COUNT: shardCount.toString()
             }
         });
