@@ -9,7 +9,7 @@ export default class extends Command {
         const randomNumber = Math.floor(Math.random() * 20);
 
         return message.reply(
-            message.translate(`8ball:RESPONSE_${randomNumber}`)
+            message.translate(`fun/8ball:RESPONSE_${randomNumber}`)
         );
     }
 }
