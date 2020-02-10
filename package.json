@@ -5,7 +5,8 @@
     "license": "Apache-2.0",
     "main": "index.js",
     "scripts": {
-        "build": "tsc --watch",
+        "build": "tsc",
+        "build:watch": "tsc --watch",
         "build:database": "tsc && node production/scripts/setup.js",
         "build:instance": "tsc && node production/scripts/pm2.js",
         "lint": "tsc --noEmit && eslint . --ext .ts'",
