@@ -3,7 +3,7 @@ name: Lint
 on:
   push:
     branches:
-      - 3.0.0-beta
+      - 3.x
   pull_request:
 
 jobs:
