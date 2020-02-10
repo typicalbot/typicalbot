@@ -1,7 +1,6 @@
 import Event from '../structures/Event';
 import { TypicalGuildMember, TypicalGuild } from '../types/typicalbot';
 import { MessageEmbed, TextChannel } from 'discord.js';
-import roles from '../commands/moderation/roles';
 
 export default class GuildMemberAdd extends Event {
     async execute(member: TypicalGuildMember) {
@@ -94,6 +93,8 @@ export default class GuildMemberAdd extends Event {
                 .add(autorole.id)
                 .catch(() => console.log('Missing Permissions'));
 
+            if (!settings.auto.role.silent) return null;
+
             if (!added || !settings.logs.id) return null;
 
             const channel = guild.channels.get(settings.logs.id) as TextChannel;
@@ -102,7 +103,7 @@ export default class GuildMemberAdd extends Event {
             return channel.send(
                 guild.translate('help/logs:AUTOROLE', {
                     user: user.tag,
-                    role: roles.name
+                    role: autorole.name
                 })
             );
         }, settings.auto.role.delay || 2000);
