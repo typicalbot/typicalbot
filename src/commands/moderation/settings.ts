@@ -118,7 +118,8 @@ export default class extends Command {
                     'autorole-delay': {
                         description: 'moderation/settings:AUTOROLE-DELAY',
                         value: settings.auto.role.delay,
-                        type: 'ms'
+                        type: 'ms',
+                        path: 'auto.role.delay'
                     },
                     'autorole-silent': {
                         description: 'moderation/settings:AUTOROLE-SILENT',
