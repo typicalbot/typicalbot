@@ -102,9 +102,10 @@ export default class extends Event {
         if (
             !this.client.config.maintainers.includes(message.author.id) &&
             message.author.id !== message.guild.ownerID &&
-            command.mode > 0 &&
             command.mode <
-                (settings.mode === 'lite'
+                (settings.mode === 'free'
+                    ? Constants.Modes.FREE
+                    : settings.mode === 'lite'
                     ? Constants.Modes.LITE
                     : Constants.Modes.STRICT)
         )
