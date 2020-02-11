@@ -733,25 +733,13 @@ export default class extends Command {
         );
     }
 
-    stringToObject(path: string, value: unknown) {
-        const stack = path.split('.');
-        const last = stack.pop();
-        const ret = {};
-        let ref = ret;
-
-        while (stack.length) {
-            const i = stack.shift();
+    stringToObject(path: string, value: unknown): {} {
+        if (!path.includes('.')) return { [path]: value };
+        const parts = path.split('.');
+        return {
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
-            ret[i] = {};
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore
-            ref = ref[i];
-        }
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        ref[last] = value;
-
-        return ret;
+            [parts.shift()]: this.stringToObject(parts.join('.'), value)
+        };
     }
 }
