@@ -26,9 +26,9 @@ export default class MessageReactionRemove extends Event {
         let { count } = messageReaction;
         if (count === null) count = 0;
 
-        if (messageReaction.users.get(message.author.id)) count--;
+        if (messageReaction.users.cache.get(message.author.id)) count--;
 
-        const channel = message.guild.channels.get(
+        const channel = message.guild.channels.cache.get(
             settings.starboard.id
         ) as TextChannel;
         if (!channel || channel.type !== 'text') return;

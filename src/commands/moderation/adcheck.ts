@@ -12,7 +12,7 @@ export default class extends Command {
     execute(message: TypicalGuildMessage) {
         const list = [];
 
-        for (const member of message.guild.members.values()) {
+        for (const member of message.guild.members.cache.values()) {
             if (
                 !member.user.presence.activities[0] ||
                 !regex.test(member.user.presence.activities[0].name)

@@ -68,7 +68,7 @@ export default class extends Command {
     list(message: TypicalGuildMessage, page: string) {
         const content = this.client.helpers.pagify.execute(
             message,
-            message.guild.roles
+            message.guild.roles.cache
                 .sort((a, b) => b.position - a.position)
                 .map(role => `${role.name.padEnd(30)} : ${role.id}`),
             parseInt(page, 10) || 1
@@ -104,9 +104,9 @@ export default class extends Command {
 
         const role =
             roleMention || roleID
-                ? message.guild.roles.get(roleMention || roleID)
+                ? message.guild.roles.cache.get(roleMention || roleID)
                 : roleName
-                ? message.guild.roles.find(
+                ? message.guild.roles.cache.find(
                       r => r.name.toLowerCase() === roleName.toLowerCase()
                   )
                 : null;
@@ -178,9 +178,9 @@ export default class extends Command {
             return message.error(message.translate('common:USER_FETCH_ERROR'));
 
         const role = roleID
-            ? message.guild.roles.get(roleID)
+            ? message.guild.roles.cache.get(roleID)
             : roleName
-            ? message.guild.roles.find(
+            ? message.guild.roles.cache.find(
                   r => r.name.toLowerCase() === roleName.toLowerCase()
               )
             : null;
@@ -230,9 +230,9 @@ export default class extends Command {
         const [action, roleID, roleName] = args;
 
         const role = roleID
-            ? message.guild.roles.get(roleID)
+            ? message.guild.roles.cache.get(roleID)
             : roleName
-            ? message.guild.roles.find(
+            ? message.guild.roles.cache.find(
                   r => r.name.toLowerCase() === roleName.toLowerCase()
               )
             : null;
@@ -254,7 +254,7 @@ export default class extends Command {
         const roles: Role[] = [];
 
         for (const roleID of message.guild.settings.roles.public) {
-            const role = message.guild.roles.get(roleID);
+            const role = message.guild.roles.cache.get(roleID);
             if (!role) continue;
             roles.push(role);
         }
@@ -306,7 +306,7 @@ export default class extends Command {
             return message.error(message.translate('moderation/give:INVALID'));
 
         const roleIDs = message.guild.settings.roles.public.filter(r =>
-            message.guild.roles.has(r)
+            message.guild.roles.cache.has(r)
         );
         if (subcommand === 'add') {
             if (roleIDs.includes(role.id))

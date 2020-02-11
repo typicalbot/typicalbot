@@ -16,10 +16,12 @@ export default class ModerationLogHandler {
 
         if (!settings.logs.moderation)
             throw 'No moderation log channel is set.';
-        if (!guild.channels.has(settings.logs.moderation))
+        if (!guild.channels.cache.has(settings.logs.moderation))
             throw 'Channel does not exist.';
 
-        return guild.channels.get(settings.logs.moderation) as TextChannel;
+        return guild.channels.cache.get(
+            settings.logs.moderation
+        ) as TextChannel;
     }
 
     async fetchCase(guild: Guild, id = 'latest') {

@@ -15,7 +15,7 @@ export default class extends Command {
         const discriminator = userDiscriminator || message.author.discriminator;
         const page = number ? parseInt(number, 10) : 1;
 
-        const list = this.client.users.filter(
+        const list = this.client.users.cache.filter(
             user => user.discriminator === discriminator
         );
         if (!list.size)

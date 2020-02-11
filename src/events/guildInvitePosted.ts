@@ -92,7 +92,7 @@ export default class GuildInvitePosted extends Event {
 
         if (!settings.logs.id || !settings.logs.invite) return;
 
-        const channel = message.guild.channels.get(
+        const channel = message.guild.channels.cache.get(
             settings.logs.id
         ) as TextChannel;
         if (!channel || channel.type !== 'text') return;

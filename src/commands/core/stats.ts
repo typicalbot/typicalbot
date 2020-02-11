@@ -57,14 +57,14 @@ export default class extends Command {
                         totalRAM,
                         clusterName,
                         clusterShards,
-                        currentGuilds: this.client.guilds.size.toLocaleString(),
+                        currentGuilds: this.client.guilds.cache.size.toLocaleString(),
                         currentVoiceConnections:
                             this.client.voice &&
                             this.client.voice.connections.size.toLocaleString(),
-                        currentChannels: this.client.channels.size
+                        currentChannels: this.client.channels.cache.size
                             .toLocaleString()
                             .toLocaleString(),
-                        currentUsers: this.client.users.size.toLocaleString(),
+                        currentUsers: this.client.users.cache.size.toLocaleString(),
                         ram:
                             Math.round(
                                 100 * (process.memoryUsage().heapUsed / 1048576)
@@ -136,7 +136,7 @@ export default class extends Command {
                 .addField('» Cluster', `${clusterName}\n${clusterShards}`, true)
                 .addField(
                     message.translate('core/stats:SERVERS'),
-                    this.client.guilds.size.toLocaleString(),
+                    this.client.guilds.cache.size.toLocaleString(),
                     true
                 )
                 .addField(
@@ -147,12 +147,12 @@ export default class extends Command {
                 )
                 .addField(
                     message.translate('core/stats:CHANNELS'),
-                    this.client.channels.size.toLocaleString(),
+                    this.client.channels.cache.size.toLocaleString(),
                     true
                 )
                 .addField(
                     message.translate('core/stats:USERS'),
-                    this.client.users.size.toLocaleString(),
+                    this.client.users.cache.size.toLocaleString(),
                     true
                 )
                 .addField(

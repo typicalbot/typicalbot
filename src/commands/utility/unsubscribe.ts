@@ -8,7 +8,7 @@ export default class extends Command {
 
     async execute(message: TypicalGuildMessage) {
         const role = message.guild.settings.subscriber
-            ? message.guild.roles.get(message.guild.settings.subscriber)
+            ? message.guild.roles.cache.get(message.guild.settings.subscriber)
             : null;
 
         if (!role)

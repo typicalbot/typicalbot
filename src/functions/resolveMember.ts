@@ -26,7 +26,7 @@ export default class ResolveMember extends Function {
                 .fetch({ query: username })
                 .catch(console.error);
 
-            const member = message.guild.members.find(
+            const member = message.guild.members.cache.find(
                 m => m.user.tag === `${username}#${discriminator}`
             );
             if (!member) return returnSelf ? message.member : null;

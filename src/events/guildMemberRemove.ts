@@ -16,7 +16,9 @@ export default class GuildMemberRemove extends Event {
 
         const { user } = member;
 
-        const channel = guild.channels.get(settings.logs.id) as TextChannel;
+        const channel = guild.channels.cache.get(
+            settings.logs.id
+        ) as TextChannel;
         if (!channel || channel.type !== 'text') return;
 
         if (settings.logs.leave !== '--embed')

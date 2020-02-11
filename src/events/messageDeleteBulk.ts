@@ -35,7 +35,7 @@ export default class MessageBulkDelete extends Event {
 
         if (!settings.logs.id || !settings.logs.delete) return;
 
-        const logsChannel = message.guild.channels.get(
+        const logsChannel = message.guild.channels.cache.get(
             settings.logs.id
         ) as TextChannel;
         if (!logsChannel || logsChannel.type !== 'text') return;

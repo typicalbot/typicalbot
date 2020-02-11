@@ -25,8 +25,8 @@ export default class extends Command {
         const user = member.user;
 
         const ROLES =
-            member.roles.size > 1
-                ? member.roles
+            member.roles.cache.size > 1
+                ? member.roles.cache
                       .sort((a, b) => b.position - a.position)
                       .map(role => role.name)
                       .slice(0, -1)
@@ -92,7 +92,7 @@ export default class extends Command {
                 )
                 .addField(
                     message.translate('utility/userinfo:ROLE_FIELD', {
-                        amount: member.roles.size - 1
+                        amount: member.roles.cache.size - 1
                     }),
                     ROLES
                 )

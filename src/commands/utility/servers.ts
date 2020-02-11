@@ -17,7 +17,7 @@ export default class extends Command {
 
         const paged = this.client.helpers.pagify.execute(
             message,
-            this.client.guilds
+            this.client.guilds.cache
                 .array()
                 .sort((a, b) => b.memberCount - a.memberCount)
                 .map(

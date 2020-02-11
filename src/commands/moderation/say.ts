@@ -22,7 +22,7 @@ export default class extends Command {
         args.shift();
 
         const [json, channelID, content] = args;
-        const channel = (message.guild.channels.get(channelID) ||
+        const channel = (message.guild.channels.cache.get(channelID) ||
             message.channel) as TextChannel;
 
         if (!!json) {
@@ -51,7 +51,8 @@ export default class extends Command {
 
         const { settings } = message.guild;
         const logChannel =
-            settings.logs.id && message.guild.channels.get(settings.logs.id);
+            settings.logs.id &&
+            message.guild.channels.cache.get(settings.logs.id);
         if (
             logChannel &&
             logChannel instanceof TextChannel &&
