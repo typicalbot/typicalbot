@@ -22,7 +22,7 @@ export default class extends Command {
         const page = number ? parseInt(number, 10) : 1;
         const lowerQuery = query.toLowerCase();
 
-        const list = message.guild.members.filter(m =>
+        const list = message.guild.members.cache.filter(m =>
             [
                 m.user.username.toLowerCase(),
                 m.nickname ? m.nickname.toLowerCase() : ''

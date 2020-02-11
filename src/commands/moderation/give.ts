@@ -29,9 +29,9 @@ export default class extends Command {
         );
 
         const role = roleID
-            ? message.guild.roles.get(roleID)
+            ? message.guild.roles.cache.get(roleID)
             : roleName
-            ? message.guild.roles.find(
+            ? message.guild.roles.cache.find(
                   r => r.name.toLowerCase() === roleName.toLowerCase()
               )
             : null;

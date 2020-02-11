@@ -28,7 +28,7 @@ export default class extends Command {
 
     execute(message: TypicalGuildMessage) {
         const list = [];
-        for (const member of message.guild.members.values()) {
+        for (const member of message.guild.members.cache.values()) {
             if (!characters.includes(member.displayName[0])) continue;
             list.push(`» ${member.displayName} (${member.id})`);
         }

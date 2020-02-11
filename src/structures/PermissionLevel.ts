@@ -24,7 +24,7 @@ export default class PermissionLevel {
         permission: 'blacklist' | 'dj' | 'moderator' | 'administrator'
     ) {
         const pool = guild.settings.roles[permission].filter(role =>
-            guild.roles.has(role)
+            guild.roles.cache.has(role)
         );
 
         let roleName: string;
@@ -42,7 +42,7 @@ export default class PermissionLevel {
                 roleName = Constants.PermissionsRoleTitles.MODERATOR.toLowerCase();
         }
 
-        const permRole = guild.roles.find(
+        const permRole = guild.roles.cache.find(
             role => role.name.toLowerCase() === roleName
         );
         if (permRole && !pool.includes(permRole.id)) pool.push(permRole.id);

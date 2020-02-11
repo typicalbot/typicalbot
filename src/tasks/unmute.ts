@@ -6,7 +6,9 @@ import { ClientUser } from 'discord.js';
 
 export default class extends Task {
     async execute(data: UnmuteTaskData) {
-        const guild = this.client.guilds.get(data.guildID) as TypicalGuild;
+        const guild = this.client.guilds.cache.get(
+            data.guildID
+        ) as TypicalGuild;
         if (!guild) return;
 
         const member = await guild.members
@@ -16,10 +18,13 @@ export default class extends Task {
 
         const settings = await guild.fetchSettings();
 
-        if (!settings.roles.mute || !member.roles.has(settings.roles.mute))
+        if (
+            !settings.roles.mute ||
+            !member.roles.cache.has(settings.roles.mute)
+        )
             return;
 
-        const editable = guild.roles.get(settings.roles.mute);
+        const editable = guild.roles.cache.get(settings.roles.mute);
         if (!editable) return;
 
         const reason = guild.translate('moderation/unmute:TASK_REASON');

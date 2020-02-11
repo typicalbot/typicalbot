@@ -4,7 +4,7 @@ import { User } from 'discord.js';
 
 export default class extends Task {
     async execute(data: UnbanTaskData) {
-        const guild = this.client.guilds.get(data.guildID);
+        const guild = this.client.guilds.cache.get(data.guildID);
         if (!guild) return;
 
         this.client.caches.unbans.set(data.userID, {

@@ -37,7 +37,7 @@ else {
                 'utf-8'
             );
 
-            const trueGuild = client.guilds.get(guild);
+            const trueGuild = client.guilds.cache.get(guild);
             if (!trueGuild)
                 return message.reply({ response: "Guild doesn't exist." });
 
@@ -47,10 +47,10 @@ else {
             if (apiKey !== trueApiKey)
                 return message.reply({ response: 'Invalid API key.' });
 
-            if (!trueGuild.channels.has(channel))
+            if (!trueGuild.channels.cache.has(channel))
                 return message.reply({ response: "Channel doesn't exist." });
 
-            const trueChannel = trueGuild.channels.get(channel);
+            const trueChannel = trueGuild.channels.cache.get(channel);
             if (trueChannel instanceof TextChannel) {
                 const botPerms = trueChannel.permissionsFor(config.id);
                 if (

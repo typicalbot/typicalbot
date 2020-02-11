@@ -130,7 +130,7 @@ export default class Cluster extends Client {
             body: JSON.stringify({
                 shardid: shardID,
                 shardcount: this.shardCount.toString(),
-                servercount: this.guilds
+                servercount: this.guilds.cache
                     .filter(g => g.shardID === shardID)
                     .size.toString(),
                 key: this.config.apis.carbonkey
@@ -153,7 +153,7 @@ export default class Cluster extends Client {
                     // eslint-disable-next-line @typescript-eslint/camelcase
                     shard_count: this.shardCount.toString(),
                     // eslint-disable-next-line @typescript-eslint/camelcase
-                    server_count: this.guilds
+                    server_count: this.guilds.cache
                         .filter(g => g.shardID === shardID)
                         .size.toString()
                 })

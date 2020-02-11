@@ -31,7 +31,7 @@ export default class extends Command {
                 message.translate('moderation/announce:INVALID_CHANNEL')
             );
 
-        const channel = message.guild.channels.get(channelID) as
+        const channel = message.guild.channels.cache.get(channelID) as
             | TextChannel
             | undefined;
         if (!channel || channel.type !== 'text')
@@ -40,7 +40,9 @@ export default class extends Command {
             );
 
         const roleID = message.guild.settings.announcements.mention;
-        const mentionRole = roleID ? message.guild.roles.get(roleID) : null;
+        const mentionRole = roleID
+            ? message.guild.roles.cache.get(roleID)
+            : null;
 
         if (!embed) {
             return channel.send(

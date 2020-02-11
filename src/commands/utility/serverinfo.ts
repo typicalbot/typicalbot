@@ -48,16 +48,16 @@ export default class extends Command {
                             }) || message.translate('common:NONE')
                     }),
                     message.translate('utility/serverinfo:CHANNELS', {
-                        amount: message.guild.channels.size
+                        amount: message.guild.channels.cache.size
                     }),
                     message.translate('utility/serverinfo:MEMBERS', {
                         amount: message.guild.memberCount
                     }),
                     message.translate('utility/serverinfo:ROLES', {
-                        amount: message.guild.roles.size
+                        amount: message.guild.roles.cache.size
                     }),
                     message.translate('utility/serverinfo:EMOJIS', {
-                        amount: message.guild.emojis.size
+                        amount: message.guild.emojis.cache.size
                     }),
                     message.translate('utility/serverinfo:BOOSTED', {
                         level: message.guild.premiumTier,
@@ -107,7 +107,7 @@ export default class extends Command {
                 )
                 .addField(
                     message.translate('common:CHANNELS_FIELD'),
-                    message.guild.channels.size,
+                    message.guild.channels.cache.size,
                     true
                 )
                 .addField(
@@ -117,12 +117,12 @@ export default class extends Command {
                 )
                 .addField(
                     message.translate('common:ROLES_FIELD'),
-                    message.guild.roles.size,
+                    message.guild.roles.cache.size,
                     true
                 )
                 .addField(
                     message.translate('common:EMOJIS_FIELD'),
-                    message.guild.emojis.size,
+                    message.guild.emojis.cache.size,
                     true
                 )
                 .addField(

@@ -430,7 +430,7 @@ export default class extends Command {
         if (setting.type === 'roles') {
             const list = [];
             for (const roleID of setting.value as string[]) {
-                const role = message.guild.roles.get(roleID);
+                const role = message.guild.roles.cache.get(roleID);
                 if (!role) continue;
 
                 list.push(
@@ -449,7 +449,7 @@ export default class extends Command {
         }
 
         if (setting.type === 'role') {
-            const role = message.guild.roles.get(setting.value as string);
+            const role = message.guild.roles.cache.get(setting.value as string);
             return message.reply(
                 message.translate('moderation/settings:CURRENT_VALUE', {
                     value: role ? role.name : NONE
@@ -468,7 +468,9 @@ export default class extends Command {
         }
 
         if (setting.type === 'channel') {
-            const channel = message.guild.channels.get(setting.value as string);
+            const channel = message.guild.channels.cache.get(
+                setting.value as string
+            );
             return message.reply(
                 message.translate('moderation/settings:CURRENT_VALUE', {
                     value: channel ? channel.toString() : NONE
@@ -569,8 +571,8 @@ export default class extends Command {
                 const [roleID, roleName] = args;
 
                 const role = roleID
-                    ? message.guild.roles.get(roleID)
-                    : message.guild.roles.find(
+                    ? message.guild.roles.cache.get(roleID)
+                    : message.guild.roles.cache.find(
                           r => r.name.toLowerCase() === roleName.toLowerCase()
                       );
 
@@ -615,8 +617,8 @@ export default class extends Command {
                 const [roleID, roleName] = args;
 
                 const role = roleID
-                    ? message.guild.roles.get(roleID)
-                    : message.guild.roles.find(
+                    ? message.guild.roles.cache.get(roleID)
+                    : message.guild.roles.cache.find(
                           r => r.name.toLowerCase() === roleName.toLowerCase()
                       );
 
@@ -675,8 +677,8 @@ export default class extends Command {
                 const [channelID, channelName] = args;
 
                 const channel = channelID
-                    ? message.guild.channels.get(channelID)
-                    : message.guild.channels.find(
+                    ? message.guild.channels.cache.get(channelID)
+                    : message.guild.channels.cache.find(
                           r =>
                               r.name.toLowerCase() === channelName.toLowerCase()
                       );

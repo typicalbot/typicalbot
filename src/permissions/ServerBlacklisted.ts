@@ -9,6 +9,6 @@ export default class extends PermissionLevel {
     check(guild: Guild, member: GuildMember) {
         const roleIDs = this.fetchRoles(guild, 'blacklist');
 
-        return roleIDs.some(id => member.roles.has(id));
+        return roleIDs.some(id => member.roles.cache.has(id));
     }
 }

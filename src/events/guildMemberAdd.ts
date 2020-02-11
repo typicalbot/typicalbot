@@ -12,8 +12,11 @@ export default class GuildMemberAdd extends Event {
         const settings = await this.client.settings.fetch(guild.id);
 
         if (settings.logs.join !== '--disabled') {
-            if (settings.logs.id && guild.channels.has(settings.logs.id)) {
-                const channel = guild.channels.get(
+            if (
+                settings.logs.id &&
+                guild.channels.cache.has(settings.logs.id)
+            ) {
+                const channel = guild.channels.cache.get(
                     settings.logs.id
                 ) as TextChannel;
                 if (channel.type !== 'text') return;
@@ -82,9 +85,9 @@ export default class GuildMemberAdd extends Event {
 
         const autorole =
             settings.auto.role.bots && member.user.bot
-                ? guild.roles.get(settings.auto.role.bots)
+                ? guild.roles.cache.get(settings.auto.role.bots)
                 : settings.auto.role.id
-                ? guild.roles.get(settings.auto.role.id)
+                ? guild.roles.cache.get(settings.auto.role.id)
                 : null;
         if (!autorole || !autorole.editable) return;
 
@@ -97,7 +100,9 @@ export default class GuildMemberAdd extends Event {
 
             if (!added || !settings.logs.id) return null;
 
-            const channel = guild.channels.get(settings.logs.id) as TextChannel;
+            const channel = guild.channels.cache.get(
+                settings.logs.id
+            ) as TextChannel;
             if (!channel || channel.type !== 'text') return null;
 
             return channel.send(
