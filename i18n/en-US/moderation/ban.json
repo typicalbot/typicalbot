@@ -1,12 +1,12 @@
 {
-	"DESCRIPTION": "Ban a member from the server.",
-	"USAGE": "ban <@user> [time:xd(ays) xh(ours) xm(inutes) xs(econds)] [purge-days] [reason]",
-	"WEEk": "You cannot ban a user for more than a week.",
-	"TOO_LOW": "You cannot ban a user with either the same or higher highest role.",
-	"UNBANNABLE": "In order to complete the request, I need the **BAN_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.",
-	"BANNED": "You have been banned from **{{name}}**.",
-	"REASON": "Banned by {{mod}} | Reason: {{reason}}",
-	"ERROR": "An error occured while trying to ban the requested user.",
-	"BAN_SUCCESS": "Successfully banned user {{user}}.",
-	"USER_BANNED": "User Banned."
+    "DESCRIPTION": "Ban a member from the server.",
+    "USAGE": "ban <@user> [time:xd(ays) xh(ours) xm(inutes) xs(econds)] [purge-days] [reason]",
+    "WEEk": "You cannot ban a user for more than a week.",
+    "TOO_LOW": "You cannot ban a user with either the same or higher highest role.",
+    "UNBANNABLE": "In order to complete the request, I need the **BAN_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.",
+    "BANNED": "You have been banned from **{{name}}**.",
+    "REASON": "Banned by {{mod}} | Reason: {{reason}}",
+    "ERROR": "An error occurred while trying to ban the requested user.",
+    "BAN_SUCCESS": "Successfully banned user {{user}}.",
+    "USER_BANNED": "User Banned."
 }

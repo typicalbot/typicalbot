@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "Grab a link to TypicalBot's documentation.",
-	"USAGE": "documentation",
-	"TEXT": "Documentation for all commands and settings can be found at **<{{link}}>**.",
-	"TYPICAL_DOCS": "TypicalBot Documentation"
+    "DESCRIPTION": "Grab a link to TypicalBot's documentation.",
+    "USAGE": "documentation",
+    "TEXT": "Documentation for all commands and settings can be found at **<{{link}}>**.",
+    "TYPICAL_DOCS": "TypicalBot Documentation"
 }

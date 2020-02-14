@@ -1,6 +1,6 @@
 {
-  "DESCRIPTION": "Create a strawpoll vote. Use the '-m' flag for multiple choice.",
-  "USAGE": "strawpoll ['-m'] <question> | Choice1; Choice2; Choice+",
-  "INVALID": "There must be between 2 and 30 choices for the strawpoll to be created.",
-  "CREATED": "Your strawpoll has been created! <https://strawpoll.me/{{id}}>"
+    "DESCRIPTION": "Create a strawpoll vote. Use the '-m' flag for multiple choice.",
+    "USAGE": "strawpoll ['-m'] <question> | Choice1; Choice2; Choice+",
+    "INVALID": "There must be between 2 and 30 choices for the strawpoll to be created.",
+    "CREATED": "Your strawpoll has been created! <https://strawpoll.me/{{id}}>"
 }

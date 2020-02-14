@@ -1,10 +1,10 @@
 {
-	"PREFIX": "This server's prefix is {{prefix}}.",
-	"MULTIPLE_PREFIXES": "`{{default}}` or `{{custom}}`",
-	"PTB_ONLY": "This command in is PTB mode, meaning it cannot be used on TypicalBot stable.",
-	"DISABLED": "That command is not enabled on this server.",
-	"MISSING_PERMS": "Your permission level is too low to execute that command. The command requires permission level {{requiredLevel}} ({{requiredTitle}}) and you are level {{userLevel}} ({{userTitle}}).",
-	"MISSING_ACCESS": "The server owner's access level is too low to execute that command. The command requires an access level of {{command}}, but the owner only has a level of {{level}} ({{title}}). The owner can raise their access level by donating $5 or more to TypicalBot.",
-	"USAGE_ERROR": "Invalid command usage. Check `{{prefix}}help {{name}}` for more information.",
-	"PAGIFY": "Page {{page}} / {{pages}} | {{total}} Total\n\n{{content}}"
+    "PREFIX": "This server's prefix is {{prefix}}.",
+    "MULTIPLE_PREFIXES": "`{{default}}` or `{{custom}}`",
+    "PTB_ONLY": "This command in is PTB mode, meaning it cannot be used on TypicalBot stable.",
+    "DISABLED": "That command is not enabled on this server.",
+    "MISSING_PERMS": "Your permission level is too low to execute that command. The command requires permission level {{requiredLevel}} ({{requiredTitle}}) and you are level {{userLevel}} ({{userTitle}}).",
+    "MISSING_ACCESS": "The server owner's access level is too low to execute that command. The command requires an access level of {{command}}, but the owner only has a level of {{level}} ({{title}}). The owner can raise their access level by donating $5 or more to TypicalBot.",
+    "USAGE_ERROR": "Invalid command usage. Check `{{prefix}}help {{name}}` for more information.",
+    "PAGIFY": "Page {{page}} / {{pages}} | {{total}} Total\n\n{{content}}"
 }

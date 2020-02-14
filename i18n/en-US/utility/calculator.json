@@ -1,7 +1,7 @@
 {
-  "DESCRIPTION": "Evaluate math expressions.",
-  "USAGE": "math <expression>",
-  "INPUT": "**INPUT:**",
-  "OUTPUT": "**OUTPUT:**",
-  "FAILED": "Failed to evaluate math expression."
+    "DESCRIPTION": "Evaluate math expressions.",
+    "USAGE": "math <expression>",
+    "INPUT": "**INPUT:**",
+    "OUTPUT": "**OUTPUT:**",
+    "FAILED": "Failed to evaluate math expression."
 }

@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "Donate to support the development of TypicalBot.",
-	"USAGE": "donate",
-	"TEXT": "You can donate to support the continued development of TypicalBot at **<{{link}}>** to help support my growth, development, and stability.",
-	"SUPPORT": "Support the TypicalBot Project"
+    "DESCRIPTION": "Donate to support the development of TypicalBot.",
+    "USAGE": "donate",
+    "TEXT": "You can donate to support the continued development of TypicalBot at **<{{link}}>** to help support my growth, development, and stability.",
+    "SUPPORT": "Support the TypicalBot Project"
 }

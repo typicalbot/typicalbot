@@ -27,7 +27,7 @@
     "TYPICAL_STATS": "TypicalBot Statistics",
     "UPTIME": "\u00bb Uptime",
     "SERVERS": "\u00bb Servers",
-    "SERVERS_VALUE": "{{guilds}} ({{count}} Shards})",
+    "SERVERS_VALUE": "{{guilds}} ({{count}} Shards)",
     "VOICE": "\u00bb Voice Connections",
     "CHANNELS": "\u00bb Channels",
     "USERS": "\u00bb Users",

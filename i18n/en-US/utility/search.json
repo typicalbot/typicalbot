@@ -1,6 +1,6 @@
 {
-  "DESCRIPTION": "Searches in the user list for a username or nickname.",
-  "USAGE": "search <query> [page-number]",
-  "NONE": "There are no matches for the query **{{query}}**.",
-  "RESULTS": "**__Results for Query:__** {{query}}"
+    "DESCRIPTION": "Searches in the user list for a username or nickname.",
+    "USAGE": "search <query> [page-number]",
+    "NONE": "There are no matches for the query **{{query}}**.",
+    "RESULTS": "**__Results for Query:__** {{query}}"
 }

@@ -1,6 +1,6 @@
 {
-  "DESCRIPTION": "Check the status of Discord.",
-  "USAGE": "discordstatus",
-  "OPERATIONAL": "All systems are operational.",
-  "INCIDENT": "**Incident** at **{{time}}**"
+    "DESCRIPTION": "Check the status of Discord.",
+    "USAGE": "discordstatus",
+    "OPERATIONAL": "All systems are operational.",
+    "INCIDENT": "**Incident** at **{{time}}**"
 }

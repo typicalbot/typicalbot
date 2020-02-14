@@ -1,7 +1,7 @@
 {
-	"DESCRIPTION": "Give credit to those who have contributed to the bot.",
-	"USAGE": "credits",
-	"TEXT": "The TypicalBot Team would like to give thanks to the following people for making contributions to me:\n\n» Aklixio#0588 (84430408447426560) - Designer of TypicalBot's icon.",
-	"CREDITS": "Credits",
-	"DESIGNER": "Designer of TypicalBot's icon."
+    "DESCRIPTION": "Give credit to those who have contributed to the bot.",
+    "USAGE": "credits",
+    "TEXT": "The TypicalBot Team would like to give thanks to the following people for making contributions to me:\n\n» Aklixio#0588 (84430408447426560) - Designer of TypicalBot's icon.",
+    "CREDITS": "Credits",
+    "DESIGNER": "Designer of TypicalBot's icon."
 }

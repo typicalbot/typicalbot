@@ -1,4 +1,4 @@
 {
-  "DESCRIPTION": "A command to restart the bot or a cluster.",
-  "USAGE": "restart <cluster-name>"
+    "DESCRIPTION": "A command to restart the bot or a cluster.",
+    "USAGE": "restart <cluster-name>"
 }

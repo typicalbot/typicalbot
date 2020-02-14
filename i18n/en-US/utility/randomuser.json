@@ -1,5 +1,5 @@
 {
-  "DESCRIPTION": "Selects a random member in the server.",
-  "USAGE": "randomuser [-o]",
-  "RANDOM": "Your random pick is: **{{tag}}** ({{id}})."
+    "DESCRIPTION": "Selects a random member in the server.",
+    "USAGE": "randomuser [-o]",
+    "RANDOM": "Your random pick is: **{{tag}}** ({{id}})."
 }
