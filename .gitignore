@@ -19,7 +19,6 @@ pids
 node_modules
 
 # Custom
-package-lock.json
 config.json
 .env
 production/
