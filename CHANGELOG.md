@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.1]
+### Fixed
+ - Shard count using incorrect number
+ - 8ball now showing translation
+ - Missing setting check (autorole-silent)
+ - Incorrect role name (autorole)
+ - Incorrect path for 8ball invalid localization message
+ - Missing path for `auto.role.delay`
+ - Depth search for 3+ in settings
+ - Command mode not recognizing free mode
+
 ## [3.0.0]
 ### Added
  - i18n ([#78](https://github.com/typicalbot/typicalbot/pull/78)) ([ae0b16f](https://github.com/typicalbot/typicalbot/commit/ae0b16f5f50e470b5d94c36255058db657ce3434))
@@ -145,7 +156,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.0.0...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.0.1...HEAD
+[3.0.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.0.1
 [3.0.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.0.0
 [2.7.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.1
 [2.7.0]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.0
