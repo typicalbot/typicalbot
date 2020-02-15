@@ -1,0 +1,45 @@
+{
+    "name": "typicalbot",
+    "version": "4.0.0",
+    "description": "TypicalBot is an open-source discord bot written in TypeScript, using the discord.js library.",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/typicalbot/typicalbot"
+    },
+    "scripts": {
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix"
+    },
+    "dependencies": {
+        "@sentry/node": "^5.12.3",
+        "bufferutil": "^4.0.1",
+        "discord.js": "github:discordjs/discord.js#master",
+        "erlpack": "discordapp/erlpack",
+        "utf-8-validate": "^5.0.2",
+        "zlib-sync": "^0.1.6"
+    },
+    "devDependencies": {
+        "@types/node": "^13.7.1",
+        "@typescript-eslint/eslint-plugin": "^2.19.2",
+        "@typescript-eslint/parser": "^2.19.2",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "husky": "^4.2.3",
+        "lint-staged": "^10.0.7",
+        "prettier": "^1.19.1",
+        "typescript": "^3.7.5"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "src/**/*.ts": [
+            "eslint . --ext .ts --fix",
+            "git add"
+        ]
+    }
+}
