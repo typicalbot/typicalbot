@@ -2,6 +2,7 @@ import Event from '../structures/Event';
 import Constants from '../utility/Constants';
 import { TypicalGuild } from '../types/typicalbot';
 import { MessageEmbed, User, TextChannel } from 'discord.js';
+import * as Sentry from '@sentry/node';
 
 export default class GuildBanRemove extends Event {
     async execute(guild: TypicalGuild, user: User) {
@@ -63,6 +64,6 @@ export default class GuildBanRemove extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(() => null);
+            .catch(err => Sentry.captureException(err));
     }
 }

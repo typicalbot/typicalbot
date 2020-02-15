@@ -3,6 +3,7 @@ import Event from '../structures/Event';
 import Constants from '../utility/Constants';
 import { TypicalGuildMessage } from '../types/typicalbot';
 import { MessageEmbed, TextChannel, User } from 'discord.js';
+import * as Sentry from '@sentry/node';
 
 export default class GuildInvitePosted extends Event {
     async execute(message: TypicalGuildMessage) {
@@ -129,6 +130,6 @@ export default class GuildInvitePosted extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(() => null);
+            .catch(err => Sentry.captureException(err));
     }
 }

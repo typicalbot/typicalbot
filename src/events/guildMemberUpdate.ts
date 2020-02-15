@@ -2,6 +2,7 @@ import Event from '../structures/Event';
 import { TypicalGuildMember } from '../extensions/TypicalGuildMember';
 import { TypicalGuild } from '../extensions/TypicalGuild';
 import { TextChannel, MessageEmbed } from 'discord.js';
+import * as Sentry from '@sentry/node';
 
 export default class GuildMemberUpdate extends Event {
     async execute(oldMember: TypicalGuildMember, member: TypicalGuildMember) {
@@ -51,7 +52,7 @@ export default class GuildMemberUpdate extends Event {
                               nickname: member.displayName
                           })
                 )
-                .catch(() => null);
+                .catch(err => Sentry.captureException(err));
 
         return channel
             .send(
@@ -68,6 +69,6 @@ export default class GuildMemberUpdate extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(() => null);
+            .catch(err => Sentry.captureException(err));
     }
 }

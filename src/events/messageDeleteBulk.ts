@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 import Event from '../structures/Event';
 import { Collection, TextChannel, MessageEmbed } from 'discord.js';
 import { TypicalGuildMessage } from '../types/typicalbot';
+import * as Sentry from '@sentry/node';
 
 async function hastebin(input: string) {
     const options = { url: 'https://www.hastebin.com', extension: 'js' };
@@ -61,7 +62,7 @@ export default class MessageBulkDelete extends Event {
                         url: haste
                     })
                 )
-                .catch(() => null);
+                .catch(err => Sentry.captureException(err));
 
         return logsChannel
             .send(
@@ -81,6 +82,6 @@ export default class MessageBulkDelete extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(() => null);
+            .catch(err => Sentry.captureException(err));
     }
 }

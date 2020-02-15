@@ -2,6 +2,7 @@ import Event from '../structures/Event';
 import { TypicalGuild } from '../extensions/TypicalGuild';
 import { TextChannel, MessageEmbed } from 'discord.js';
 import { TypicalGuildMessage } from '../types/typicalbot';
+import * as Sentry from '@sentry/node';
 
 export default class MessageDelete extends Event {
     async execute(message: TypicalGuildMessage) {
@@ -42,7 +43,7 @@ export default class MessageDelete extends Event {
                               }
                           )
                 )
-                .catch(() => null);
+                .catch(err => Sentry.captureException(err));
 
         return channel
             .send(
@@ -66,6 +67,6 @@ export default class MessageDelete extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(() => null);
+            .catch(err => Sentry.captureException(err));
     }
 }

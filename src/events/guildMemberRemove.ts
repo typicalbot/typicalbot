@@ -1,6 +1,7 @@
 import { TextChannel, MessageEmbed } from 'discord.js';
 import Event from '../structures/Event';
 import { TypicalGuildMember, TypicalGuild } from '../types/typicalbot';
+import * as Sentry from '@sentry/node';
 
 export default class GuildMemberRemove extends Event {
     async execute(member: TypicalGuildMember) {
@@ -33,7 +34,7 @@ export default class GuildMemberRemove extends Event {
                           )
                         : guild.translate('help/logs:LEFT', { user: user.tag })
                 )
-                .catch(() => null);
+                .catch(err => Sentry.captureException(err));
 
         return channel
             .send(
@@ -46,6 +47,6 @@ export default class GuildMemberRemove extends Event {
                     .setFooter(guild.translate('help/logs:USER_LEFT'))
                     .setTimestamp()
             )
-            .catch(() => null);
+            .catch(err => Sentry.captureException(err));
     }
 }

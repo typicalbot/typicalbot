@@ -27,6 +27,8 @@ import {
 import i18n from './i18n';
 import { TFunction } from 'i18next';
 
+import * as Sentry from '@sentry/node';
+
 interface TypicalHandlers {
     database: DatabaseHandler;
     tasks: TaskHandler;
@@ -66,6 +68,10 @@ export default class Cluster extends Client {
             disableEveryone: true,
             disabledEvents: ['TYPING_START', 'CHANNEL_PINS_UPDATE'],
             partials: ['MESSAGE']
+        });
+
+        Sentry.init({
+            dsn: this.config.apis.sentry
         });
 
         this.node = node;
@@ -136,7 +142,7 @@ export default class Cluster extends Client {
                 key: this.config.apis.carbonkey
             })
         }).catch(err => {
-            if (err) console.error(`Carbonitex Stats Transfer Failed ${err}`);
+            Sentry.captureException(err);
         });
 
         fetch(
@@ -159,7 +165,7 @@ export default class Cluster extends Client {
                 })
             }
         ).catch(err => {
-            if (err) console.error(`DiscordBots Stats Transfer Failed ${err}`);
+            Sentry.captureException(err);
         });
     }
 }
