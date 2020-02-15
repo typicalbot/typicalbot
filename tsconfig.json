@@ -12,7 +12,8 @@
         "noUnusedParameters": true,
         "resolveJsonModule": true,
         "strict": true,
-        "target": "ESNext"
+        "target": "ESNext",
+        "outDir": "dist"
     },
     "exclude": [
         "node_modules"
