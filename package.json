@@ -8,6 +8,9 @@
         "url": "git+https://github.com/typicalbot/typicalbot"
     },
     "scripts": {
+        "build": "tsc",
+        "start:dev": "cross-env NODE_ENV=development node ./dist/index.js",
+        "start:prod": "cross-env NODE_ENV=production node ./dist/index.js",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix"
     },
@@ -22,15 +25,18 @@
     "devDependencies": {
         "@commitlint/cli": "^8.3.5",
         "@commitlint/config-conventional": "^8.3.4",
+        "@types/lodash": "^4.14.149",
         "@types/node": "^13.7.1",
         "@types/ws": "^7.2.1",
         "@typescript-eslint/eslint-plugin": "^2.19.2",
         "@typescript-eslint/parser": "^2.19.2",
+        "cross-env": "^7.0.0",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.10.0",
         "eslint-plugin-prettier": "^3.1.2",
         "husky": "^4.2.3",
         "lint-staged": "^10.0.7",
+        "lodash": "^4.17.15",
         "prettier": "^1.19.1",
         "typescript": "^3.7.5"
     },
