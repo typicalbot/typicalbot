@@ -1,4 +1,4 @@
-import { Client, ClientOptions } from "discord.js";
+import {Client} from "discord.js";
 import * as Sentry from "@sentry/node";
 
 /**
@@ -9,9 +9,9 @@ class TuposClient extends Client {
      * Constructs the Tupos client.
      *
      * @since 4.0.0
-     * @param {ClientOptions} options
+     * @param options
      */
-    constructor(options?: ClientOptions) {
+    constructor(options?: {}) {
         super(options);
 
         // Initialize Sentry if node environment is set to production
