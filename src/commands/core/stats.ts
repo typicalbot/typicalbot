@@ -10,10 +10,10 @@ export default class extends Command {
 
     async execute(message: TypicalMessage) {
         const paths = [
-            'guilds.size',
+            'guilds.cache.size',
             'voice.connections.size',
-            'channels.size',
-            'users.size',
+            'channels.cache.size',
+            'users.cache.size',
             'usedRAM',
             'totalRAM'
         ];
