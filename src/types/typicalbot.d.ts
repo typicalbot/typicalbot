@@ -35,7 +35,7 @@ export interface GuildSettings {
         dj: string[];
         blacklist: string[];
         public: string[];
-        mute: string | string | null;
+        mute: string | null;
     };
     ignored: {
         commands: string[];
