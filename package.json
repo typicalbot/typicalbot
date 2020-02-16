@@ -19,6 +19,8 @@
         "bufferutil": "^4.0.1",
         "discord.js": "github:discordjs/discord.js#master",
         "erlpack": "discordapp/erlpack",
+        "mongoose": "^5.9.1",
+        "redis": "^3.0.2",
         "utf-8-validate": "^5.0.2",
         "zlib-sync": "^0.1.6"
     },
@@ -26,7 +28,9 @@
         "@commitlint/cli": "^8.3.5",
         "@commitlint/config-conventional": "^8.3.4",
         "@types/lodash": "^4.14.149",
+        "@types/mongoose": "^5.7.1",
         "@types/node": "^13.7.1",
+        "@types/redis": "^2.8.15",
         "@types/ws": "^7.2.1",
         "@typescript-eslint/eslint-plugin": "^2.19.2",
         "@typescript-eslint/parser": "^2.19.2",
