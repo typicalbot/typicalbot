@@ -11,13 +11,11 @@ import DatabaseHandler from './handlers/Database';
 import TaskHandler from './handlers/Tasks';
 import PermissionsHandler from './handlers/Permissions';
 import ModerationLogHandler from './handlers/ModerationLog';
-import MusicHandler from './handlers/Music';
 import SettingsHandler from './handlers/Settings';
 import FunctionHandler from './handlers/Functions';
 import CommandHandler from './handlers/Commands';
 import EventHandler from './handlers/Events';
 
-import MusicUtility from './utility/Music';
 import {
     TypicalDonor,
     HelperFunctions,
@@ -34,7 +32,6 @@ interface TypicalHandlers {
     tasks: TaskHandler;
     permissions: PermissionsHandler;
     moderationLog: ModerationLogHandler;
-    music: MusicHandler;
 }
 export default class Cluster extends Client {
     node: VezaClient | undefined;
@@ -48,9 +45,6 @@ export default class Cluster extends Client {
     functions = new FunctionHandler(this);
     helpers = {} as HelperFunctions;
     commands = new CommandHandler(this);
-    utility = {
-        music: new MusicUtility(this)
-    };
     events = new EventHandler(this);
     caches = {
         donors: new Collection<string, TypicalDonor>(),
@@ -87,7 +81,6 @@ export default class Cluster extends Client {
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);
-        this.handlers.music = new MusicHandler(this);
 
         // Fetch donors
         this.fetchDonors();

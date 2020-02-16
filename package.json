@@ -45,12 +45,9 @@
         "node-fetch": "^2.6.0",
         "pm2": "^4.2.3",
         "rethinkdb-ts": "^2.4.2",
-        "simple-youtube-api": "github:hypercoder2975/simple-youtube-api",
-        "simple-youtube-stream": "github:hypercoder2975/simple-youtube-stream",
         "typescript": "^3.7.4",
         "veza": "^1.1.0",
-        "vm2": "^3.8.3",
-        "ytdl-core": "github:fent/node-ytdl-core"
+        "vm2": "^3.8.3"
     },
     "optionalDependencies": {
         "bignum": "^0.13.0",

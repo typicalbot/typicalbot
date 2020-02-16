@@ -1,6 +1,5 @@
 import Event from '../structures/Event';
 import { ClientUser } from 'discord.js';
-import { TypicalGuild } from '../extensions/TypicalGuild';
 
 export default class Ready extends Event {
     once = true;
@@ -18,16 +17,5 @@ export default class Ready extends Event {
                 ),
             1000 * 60 * 5
         );
-
-        setInterval(() => {
-            this.client.voice &&
-                this.client.voice.connections
-                    .filter(c => c.channel.members.size === 1)
-                    .forEach(c =>
-                        (c.voice.guild as TypicalGuild).guildStream
-                            ? (c.voice.guild as TypicalGuild).guildStream.end()
-                            : c.disconnect()
-                    );
-        }, 1000 * 30);
     }
 }

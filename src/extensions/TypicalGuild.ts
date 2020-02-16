@@ -1,15 +1,6 @@
 import { Structures } from 'discord.js';
-import Stream from '../structures/Stream';
 
 export class TypicalGuild extends Structures.get('Guild') {
-    _guildStream: Stream | null = null;
-
-    get guildStream() {
-        if (!this._guildStream)
-            this._guildStream = new Stream(this.client, this);
-        return this._guildStream as Stream;
-    }
-
     fetchSettings() {
         return this.client.settings.fetch(this.id);
     }

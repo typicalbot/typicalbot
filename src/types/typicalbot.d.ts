@@ -10,7 +10,6 @@ import {
 } from 'discord.js';
 import Command from '../structures/Command';
 import Cluster from '..';
-import Stream from '../structures/Stream';
 import ModerationLog from '../structures/ModerationLog';
 import PermLevel from '../structures/PermissionLevel';
 
@@ -257,8 +256,6 @@ export interface TypicalGuild extends Guild {
     translate(key: string, args?: object): string;
     fetchPermissions(userID: string, ignoreStaff?: boolean): Promise<PermLevel>;
     fetchSettings(): Promise<GuildSettings>;
-    guildStream: Stream;
-    _guildStream: Stream | null;
 }
 
 export interface SettingsData {
