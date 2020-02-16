@@ -31,7 +31,7 @@ export default class extends Command {
             member.id
         );
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.reply(
                 message.translate('utility/level:TEXT', {
                     level: `${permissions.level} | ${permissions.title}${

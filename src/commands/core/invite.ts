@@ -8,7 +8,7 @@ export default class extends Command {
     mode = Constants.Modes.STRICT;
 
     execute(message: TypicalMessage) {
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.reply(
                 message.translate('core/invite:TEXT', {
                     link: Constants.Links.OAUTH

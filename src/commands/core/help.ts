@@ -16,7 +16,7 @@ export default class extends Command {
                 server: Constants.Links.SERVER
             });
 
-            if (!message.embedable) return message.send(response);
+            if (!message.embeddable) return message.send(response);
 
             return message.send(
                 new MessageEmbed()
@@ -36,7 +36,7 @@ export default class extends Command {
             const response = message.translate('core/help:INVALID', {
                 name: parameters
             });
-            if (!message.embedable) return message.error(response);
+            if (!message.embeddable) return message.error(response);
 
             return message.send(
                 new MessageEmbed()
@@ -59,7 +59,7 @@ export default class extends Command {
             ? command.aliases.join(', ')
             : message.translate('common:NONE');
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.send(
                 message.translate('core/help:TEXT', {
                     name: parameters,

@@ -33,7 +33,7 @@ export default class extends Command {
                       .join(', ')
                 : message.translate('common:NONE');
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.reply(
                 [
                     `**__${user.tag}__**`,

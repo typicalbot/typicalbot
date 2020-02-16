@@ -24,7 +24,7 @@ export default class extends Command {
             );
         }
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.send(
                 list.length
                     ? message.translate('moderation/adcheck:FOUND', {
