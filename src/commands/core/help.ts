@@ -86,9 +86,10 @@ export default class extends Command {
                     true
                 )
                 .addField(message.translate('core/help:ALIASES'), ALIASES)
-                .addField(message.translate('core/help:PERMISSION'), {
-                    permission: command.permission
-                })
+                .addField(
+                    message.translate('core/help:PERMISSION'),
+                    JSON.stringify(command.permission)
+                )
                 .addField(message.translate('core/help:DESC'), DESCRIPTION)
                 .addField(message.translate('core/help:USE'), USAGE)
                 .setFooter('TypicalBot', Constants.Links.ICON)
