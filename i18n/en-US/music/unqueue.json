@@ -1,8 +1,0 @@
-{
-  "DESCRIPTION": "Removes a song from the server's queue.",
-  "USAGE": "unqueue",
-  "NONE": "No results were found in the queue for the query **{{query}}**.",
-  "FOUND_MULTIPLE": "Multiple videos were found that matched your query. Type `cancel` to cancel or `all` to remove all. Otherwise, select from the videos listed below:",
-  "ALL": "Removed **{{amount}}** videos from the queue.",
-  "ONE": "Removed **{{title}}** videos from the queue." 
-}

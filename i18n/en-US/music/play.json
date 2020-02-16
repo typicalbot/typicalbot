@@ -1,8 +1,3 @@
 {
-    "DESCRIPTION": "Streams a song to a voice channel from YouTube.",
-    "USAGE": "play <video-name|url>",
-    "NO_INFO": "Information cannot be fetched from that song. Please try another url.",
-    "PRIME_ONLY": "This feature is only available to TypicalBot Prime members.",
-    "NONE": "No results were found for the query **{{query}}**.",
     "DISCONTINUED": "Music functionality has been discontinued due to lack of use. For more information, read our announcement at <http://bit.ly/38oYwXw>."
 }

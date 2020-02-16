@@ -1,7 +1,0 @@
-{
-  "DESCRIPTION": "Skip what is currently playing.",
-  "USAGE": "skip [amount]",
-  "SKIPPING": "Skipping.",
-  "DETAILS": "Skipping **${{title}}** requested by **{{user}}**",
-  "DETAILS_MULTIPLE": "Skipping **${{title}}** requested by **{{user}}** and {{amount}} of the following songs."
-}

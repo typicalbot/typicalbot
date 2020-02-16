@@ -1,6 +1,0 @@
-{
-  "VOLUME": "Change the volume of the song currently streaming.",
-  "USAGE": "volume <percent:0-200>",
-  "CHANGED": "Volume: {{amount}}%",
-  "INVALID": "Invalid command usage. Volume must be a percent from 0% to 200%."
-}
