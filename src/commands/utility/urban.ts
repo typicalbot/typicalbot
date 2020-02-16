@@ -35,7 +35,7 @@ export default class extends Command {
                 message.translate('utility/urban:NONE', { query })
             );
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.reply(
                 message.translate('utility/urban:TEXT', {
                     query,

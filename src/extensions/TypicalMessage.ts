@@ -6,7 +6,7 @@ import {
 } from 'discord.js';
 
 export class TypicalMessage extends Structures.get('Message') {
-    get embedable() {
+    get embeddable() {
         if (
             !this.guild ||
             !this.guild.me ||

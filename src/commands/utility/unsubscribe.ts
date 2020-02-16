@@ -22,7 +22,7 @@ export default class extends Command {
 
         if (!removed) return null;
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.reply(
                 message.translate('utility/unsubscribe:UNSUBBED')
             );

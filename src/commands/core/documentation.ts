@@ -9,7 +9,7 @@ export default class extends Command {
     mode = Constants.Modes.STRICT;
 
     execute(message: TypicalMessage) {
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.send(
                 message.translate('core/documentation:TEXT', {
                     link: Constants.Links.DOCUMENTATION

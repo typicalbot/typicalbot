@@ -35,7 +35,7 @@ export default class extends Command {
             .addText(`#${hex}`.toUpperCase(), 5, 95)
             .toBuffer();
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.channel.send(new MessageAttachment(buffer));
 
         return message.send(

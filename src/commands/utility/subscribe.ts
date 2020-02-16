@@ -17,7 +17,7 @@ export default class extends Command {
         const subbed = await message.member.roles.add(role).catch(() => null);
         if (!subbed) return null;
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.success(
                 message.translate('utility/subscribe:SUBSCRIBED')
             );

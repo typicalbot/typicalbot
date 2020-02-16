@@ -8,7 +8,7 @@ export default class extends Command {
     mode = Constants.Modes.STRICT;
 
     execute(message: TypicalMessage) {
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.send(
                 message.translate('core/donate:TEXT', {
                     link: Constants.Links.DONATE

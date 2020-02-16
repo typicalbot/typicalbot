@@ -32,7 +32,7 @@ export default class extends Command {
             return message.error(message.translate('common:REQUEST_ERROR'));
 
         const data = json.data[0];
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.reply(
                 [
                     message.translate('utility/twitch:STATS', {

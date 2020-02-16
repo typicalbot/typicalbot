@@ -17,7 +17,7 @@ export default class extends Command {
                 message.error(message.translate('common:REQUEST_ERROR'))
             );
 
-        if (!message.embedable) return message.send(data.media[type]);
+        if (!message.embeddable) return message.send(data.media[type]);
 
         return message.send(
             new MessageEmbed().setColor(0x00adff).setImage(data.media[type])

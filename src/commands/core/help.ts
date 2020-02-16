@@ -16,7 +16,7 @@ export default class extends Command {
                 server: Constants.Links.SERVER
             });
 
-            if (!message.embedable) return message.send(response);
+            if (!message.embeddable) return message.send(response);
 
             return message.send(
                 new MessageEmbed()
@@ -36,7 +36,7 @@ export default class extends Command {
             const response = message.translate('core/help:INVALID', {
                 name: parameters
             });
-            if (!message.embedable) return message.error(response);
+            if (!message.embeddable) return message.error(response);
 
             return message.send(
                 new MessageEmbed()
@@ -59,13 +59,17 @@ export default class extends Command {
             ? command.aliases.join(', ')
             : message.translate('common:NONE');
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.send(
                 message.translate('core/help:TEXT', {
                     name: parameters,
                     commandName: command.name,
                     aliases: ALIASES,
-                    permission: command.permission,
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                    // @ts-ignore
+                    permission: this.client.handlers.permissions.levels.get(
+                        command.permission
+                    ).title,
                     description: DESCRIPTION,
                     usage: USAGE
                 })
@@ -86,9 +90,14 @@ export default class extends Command {
                     true
                 )
                 .addField(message.translate('core/help:ALIASES'), ALIASES)
-                .addField(message.translate('core/help:PERMISSION'), {
-                    permission: command.permission
-                })
+                .addField(
+                    message.translate('core/help:PERMISSION'),
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                    // @ts-ignore
+                    this.client.handlers.permissions.levels.get(
+                        command.permission
+                    ).title
+                )
                 .addField(message.translate('core/help:DESC'), DESCRIPTION)
                 .addField(message.translate('core/help:USE'), USAGE)
                 .setFooter('TypicalBot', Constants.Links.ICON)
