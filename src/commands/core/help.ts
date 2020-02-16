@@ -65,7 +65,11 @@ export default class extends Command {
                     name: parameters,
                     commandName: command.name,
                     aliases: ALIASES,
-                    permission: command.permission,
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                    // @ts-ignore
+                    permission: this.client.handlers.permissions.levels.get(
+                        command.permission
+                    ).title,
                     description: DESCRIPTION,
                     usage: USAGE
                 })
@@ -88,7 +92,11 @@ export default class extends Command {
                 .addField(message.translate('core/help:ALIASES'), ALIASES)
                 .addField(
                     message.translate('core/help:PERMISSION'),
-                    JSON.stringify(command.permission)
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                    // @ts-ignore
+                    this.client.handlers.permissions.levels.get(
+                        command.permission
+                    ).title
                 )
                 .addField(message.translate('core/help:DESC'), DESCRIPTION)
                 .addField(message.translate('core/help:USE'), USAGE)
