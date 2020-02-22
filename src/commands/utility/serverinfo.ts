@@ -14,7 +14,7 @@ export default class extends Command {
             .catch(() => null);
         const UNKNOWN = message.translate('common:USER_FETCH_ERROR');
 
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.reply(
                 [
                     message.translate('utility/serverinfo:SERVER', {

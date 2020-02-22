@@ -34,7 +34,7 @@ export default class extends Command {
             cluster: this.client.cluster,
             count: this.client.shardCount
         });
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.reply(
                 [CLUSTER, '```autohotkey', paged, '```'].join('\n')
             );

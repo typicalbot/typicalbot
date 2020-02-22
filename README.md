@@ -66,7 +66,7 @@ This section provides a quick-start guide.
 | [Braxton Mahr](https://github.com/SirPacker) | Core Contributor |
 | [Tyler Richards](https://github.com/tjrgg) | Core Contributor |
 | [Tobias Feld](https://github.com/TobiasFeld22)| Web Contributor |
-| [Gigakek Vermin](https://github.com/AKSKL) | Docs Contributor |
+| [Akshin Vemana](https://github.com/AkshinVemana) | Docs Contributor |
 
 ## Show Your Support
 

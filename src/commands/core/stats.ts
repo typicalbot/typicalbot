@@ -39,7 +39,7 @@ export default class extends Command {
             message,
             this.client.uptime || 0
         );
-        if (!message.embedable)
+        if (!message.embeddable)
             return message.send(
                 message.translate(
                     this.client.config.clustered

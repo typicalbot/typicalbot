@@ -12,7 +12,7 @@ export default class extends Command {
             .catch(() =>
                 message.error(message.translate('common:REQUEST_ERROR'))
             );
-        if (!message.embedable) return message.send(data.file);
+        if (!message.embeddable) return message.send(data.file);
 
         return message.send(
             new MessageEmbed().setColor(0x00adff).setImage(data.file)

@@ -208,7 +208,7 @@ export interface AccessLevel {
 }
 
 export interface TypicalMessage extends Message {
-    embedable: boolean;
+    embeddable: boolean;
 
     dm(
         content: string | MessageEmbed,
