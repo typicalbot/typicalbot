@@ -45,7 +45,7 @@ export default class DatabaseHandler {
         return this.connection
             .table(table)
             .get(key)
-            .update(data)
+            .update(data, { returnChanges: true })
             .run();
     }
 
