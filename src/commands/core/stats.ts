@@ -82,89 +82,108 @@ export default class extends Command {
             .setColor(0x00adff)
             .setThumbnail(Constants.Links.ICON)
             .setTitle(message.translate('core/stats:TYPICAL_STATS'))
-            .addField(message.translate('core/stats:UPTIME'), uptime, true)
-            .addField(
-                message.translate('core/stats:SERVERS'),
-                message.translate('core/stats:SERVERS_VALUE', {
-                    guilds: guilds.toLocaleString(),
-                    count: this.client.shardCount
-                }),
-                true
-            )
-            .addField(
-                message.translate('core/stats:VOICE'),
-                voiceConnections.toLocaleString(),
-                true
-            )
-            .addField(
-                message.translate('core/stats:CHANNELS'),
-                channels.toLocaleString(),
-                true
-            )
-            .addField(
-                message.translate('core/stats:USERS'),
-                users.toLocaleString(),
-                true
-            )
-            .addField(
-                message.translate('core/stats:CPU'),
-                `${Math.round(loadavg()[0] * 10000) / 100}%`,
-                true
-            )
-            .addField(message.translate('core/stats:RAM'), `${usedRAM}MB`, true)
-            .addField(
-                message.translate('core/stats:RAM_TOTAL'),
-                `${totalRAM}MB`,
-                true
-            )
-            .addField(
-                message.translate('core/stats:LIBRARY'),
-                'discord.js',
-                true
-            )
-            .addField(
-                message.translate('core/stats:CREATED_BY'),
-                'HyperCoder#2975\nnsylke#4490',
-                true
-            )
+            .addFields([
+                {
+                    name: message.translate('core/stats:UPTIME'),
+                    value: uptime,
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:SERVERS'),
+                    value: message.translate('core/stats:SERVERS_VALUE', {
+                        guilds: guilds.toLocaleString(),
+                        count: this.client.shardCount
+                    }),
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:VOICE'),
+                    value: voiceConnections.toLocaleString(),
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:CHANNELS'),
+                    value: channels.toLocaleString(),
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:USERS'),
+                    value: users.toLocaleString(),
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:CPU'),
+                    value: `${Math.round(loadavg()[0] * 10000) / 100}%`,
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:RAM'),
+                    value: `${usedRAM}MB`,
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:RAM_TOTAL'),
+                    value: `${totalRAM}MB`,
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:LIBRARY'),
+                    value: 'discord.js',
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:CREATED_BY'),
+                    value: 'nsylke#4490',
+                    inline: true
+                }
+            ])
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTimestamp();
 
         if (this.client.config.clustered)
-            embed
-                .addBlankField()
-                .addField('» Cluster', `${clusterName}\n${clusterShards}`, true)
-                .addField(
-                    message.translate('core/stats:SERVERS'),
-                    this.client.guilds.cache.size.toLocaleString(),
-                    true
-                )
-                .addField(
-                    message.translate('core/stats:VOICE'),
-                    this.client.voice &&
+            embed.addFields([
+                {
+                    name: '',
+                    value: ''
+                },
+                {
+                    name: '» Cluster',
+                    value: `${clusterName}\n${clusterShards}`,
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:SERVERS'),
+                    value: this.client.guilds.cache.size.toLocaleString(),
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:VOICE'),
+                    value:
+                        this.client.voice &&
                         this.client.voice.connections.size.toLocaleString(),
-                    true
-                )
-                .addField(
-                    message.translate('core/stats:CHANNELS'),
-                    this.client.channels.cache.size.toLocaleString(),
-                    true
-                )
-                .addField(
-                    message.translate('core/stats:USERS'),
-                    this.client.users.cache.size.toLocaleString(),
-                    true
-                )
-                .addField(
-                    message.translate('core/stats:RAM'),
-                    `${this.client.usedRAM}MB`,
-                    true
-                )
-                .addField(
-                    message.translate('core/stats:RAM_TOTAL'),
-                    `${this.client.totalRAM}MB`,
-                    true
-                );
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:CHANNELS'),
+                    value: this.client.channels.cache.size.toLocaleString(),
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:USERS'),
+                    value: this.client.users.cache.size.toLocaleString(),
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:RAM'),
+                    value: `${this.client.usedRAM}MB`,
+                    inline: true
+                },
+                {
+                    name: message.translate('core/stats:RAM_TOTAL'),
+                    value: `${this.client.totalRAM}MB`,
+                    inline: true
+                }
+            ]);
 
         return message.send(embed);
     }

@@ -72,30 +72,43 @@ export default class extends Command {
                 .setThumbnail(
                     user.displayAvatarURL({ format: 'png', size: 2048 })
                 )
-                .addField(message.translate('common:ID_FIELD'), user.id, true)
-                .addField(
-                    message.translate('common:STATUS_FIELD'),
-                    user.presence.status,
-                    true
-                )
-                .addField(
-                    message.translate('common:JOINED_FIELD'),
-                    moment(member.joinedAt as Date).format(
-                        'MMM DD, YYYY hh:mm A'
-                    ),
-                    true
-                )
-                .addField(
-                    message.translate('common:REGISTERED_FIELD'),
-                    moment(user.createdAt).format('MMM DD, YYYY hh:mm A'),
-                    true
-                )
-                .addField(
-                    message.translate('utility/userinfo:ROLE_FIELD', {
-                        amount: member.roles.cache.size - 1
-                    }),
-                    ROLES
-                )
+                .addFields([
+                    {
+                        name: message.translate('common:ID_FIELD'),
+                        value: user.id,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:STATUS_FIELD'),
+                        value: user.presence.status,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:STATUS_FIELD'),
+                        value: user.presence.status,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:JOINED_FIELD'),
+                        value: moment(member.joinedAt as Date).format(
+                            'MMM DD, YYYY hh:mm A'
+                        ),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:REGISTERED_FIELD'),
+                        value: moment(user.createdAt).format(
+                            'MMM DD, YYYY hh:mm A'
+                        ),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('utility/userinfo:ROLE_FIELD', {
+                            amount: member.roles.cache.size - 1
+                        }),
+                        value: ROLES
+                    }
+                ])
         );
     }
 }

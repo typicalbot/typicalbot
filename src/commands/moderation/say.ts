@@ -41,7 +41,7 @@ export default class extends Command {
             }
         } else {
             channel
-                .send(content, { disableEveryone: false })
+                .send(content, { disableMentions: true })
                 .catch(() =>
                     message.error(
                         message.translate('moderation/say:MISSING_SEND')
@@ -67,10 +67,12 @@ export default class extends Command {
                                 `${message.author.tag} (${message.author.id})`,
                                 message.author.displayAvatarURL()
                             )
-                            .addField(
-                                message.translate('common:CHANNEL'),
-                                channel
-                            )
+                            .addFields([
+                                {
+                                    name: message.translate('common:CHANNEL'),
+                                    value: channel
+                                }
+                            ])
                             .setDescription(content)
                             .setFooter(message.translate('moderation/say:SENT'))
                             .setTimestamp()

@@ -50,7 +50,7 @@ export default class extends Command {
                     usertag: message.author.tag,
                     role: mentionRole ? mentionRole.toString() : ''
                 })}\n\n${content}`,
-                { disableEveryone: false }
+                { disableMentions: false }
             );
         }
 
@@ -63,7 +63,7 @@ export default class extends Command {
                     message.author.tag,
                     message.author.displayAvatarURL()
                 ),
-            disableEveryone: false
+            disableMentions: false
         });
     }
 }

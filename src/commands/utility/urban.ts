@@ -52,28 +52,31 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle(query)
                 .setURL(resp.permalink)
-                .addField(
-                    message.translate('utility/urban:AMOUNT', {
-                        amount: data.length
-                    }),
-                    `\n\u200B    ${resp.definition}`
-                )
-                .addField(
-                    message.translate('utility/urban:RATING'),
-                    message.translate('utility/urban:RATING_VALUE', {
-                        up: resp.thumbs_up,
-                        down: resp.thumbs_down,
-                        rating: !isNaN(rating)
-                            ? message.translate(
-                                  'utility/urban:RATING_PERCENT',
-                                  {
-                                      amount: rating,
-                                      total: resp.thumbs_up + resp.thumbs_down
-                                  }
-                              )
-                            : ''
-                    })
-                )
+                .addFields([
+                    {
+                        name: message.translate('utility/urban:AMOUNT', {
+                            amount: data.length
+                        }),
+                        value: `\n\u200B    ${resp.definition}`
+                    },
+                    {
+                        name: message.translate('utility/urban:RATING'),
+                        value: message.translate('utility/urban:RATING_VALUE', {
+                            up: resp.thumbs_up,
+                            down: resp.thumbs_down,
+                            rating: !isNaN(rating)
+                                ? message.translate(
+                                      'utility/urban:RATING_PERCENT',
+                                      {
+                                          amount: rating,
+                                          total:
+                                              resp.thumbs_up + resp.thumbs_down
+                                      }
+                                  )
+                                : ''
+                        })
+                    }
+                ])
                 .setThumbnail('http://i.imgur.com/CcIZZsa.png')
                 .setFooter(message.translate('utility/urban:DICTIONARY'))
         );

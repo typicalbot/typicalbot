@@ -16,10 +16,12 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle(message.translate('core/credits:CREDITS'))
                 .setDescription(message.translate('core/credits:TEXT'))
-                .addField(
-                    '» Aklixio#0588 (84430408447426560)',
-                    message.translate('core/credits:DESIGNER')
-                )
+                .addFields([
+                    {
+                        name: '» Aklixio#0588 (84430408447426560)',
+                        value: message.translate('core/credits:DESIGNER')
+                    }
+                ])
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );

@@ -64,22 +64,28 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle('Twitch Statistics')
                 .setDescription(data.description)
-                .addField(message.translate('common:ID_FIELD'), data.id, true)
-                .addField(
-                    message.translate('common:DISPLAYNAME_FIELD'),
-                    data.display_name,
-                    true
-                )
-                .addField(
-                    message.translate('common:STATUS_FIELD'),
-                    data.broadcaster_type,
-                    true
-                )
-                .addField(
-                    message.translate('common:TOTALVIEWS_FIELD'),
-                    data.view_count,
-                    true
-                )
+                .addFields([
+                    {
+                        name: message.translate('common:ID_FIELD'),
+                        value: data.id,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:DISPLAYNAME_FIELD'),
+                        value: data.display_name,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:STATUS_FIELD'),
+                        value: data.broadcaster_type,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:TOTALVIEWS_FIELD'),
+                        value: data.view_count,
+                        inline: true
+                    }
+                ])
                 .setThumbnail(data.profile_image_url)
         );
     }

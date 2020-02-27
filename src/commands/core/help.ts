@@ -84,22 +84,33 @@ export default class extends Command {
                     })
                 )
                 .setDescription(message.translate('core/help:PARAMETERS'))
-                .addField(
-                    message.translate('core/help:COMMAND'),
-                    command.name,
-                    true
-                )
-                .addField(message.translate('core/help:ALIASES'), ALIASES)
-                .addField(
-                    message.translate('core/help:PERMISSION'),
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                    // @ts-ignore
-                    this.client.handlers.permissions.levels.get(
-                        command.permission
-                    ).title
-                )
-                .addField(message.translate('core/help:DESC'), DESCRIPTION)
-                .addField(message.translate('core/help:USE'), USAGE)
+                .addFields([
+                    {
+                        name: message.translate('core/help:COMMAND'),
+                        value: command.name,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('core/help:ALIASES'),
+                        value: ALIASES
+                    },
+                    {
+                        name: message.translate('core/help:PERMISSION'),
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                        // @ts-ignore
+                        value: this.client.handlers.permissions.levels.get(
+                            command.permission
+                        ).title
+                    },
+                    {
+                        name: message.translate('core/help:DESC'),
+                        value: DESCRIPTION
+                    },
+                    {
+                        name: message.translate('core/help:USE'),
+                        value: USAGE
+                    }
+                ])
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );

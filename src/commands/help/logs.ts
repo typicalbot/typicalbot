@@ -17,45 +17,47 @@ export default class extends Command {
                         link: Constants.Links.SETTINGS
                     })
                 )
-                .addField(
-                    message.translate('help/logs:ACTIVITY'),
-                    message.translate('help/logs:ACTIVITY_VALUE')
-                )
-                .addField(
-                    message.translate('help/logs:JOIN'),
-                    message.translate('help/logs:JOIN_VALUE'),
-                    true
-                )
-                .addField(
-                    message.translate('help/logs:LEAVE'),
-                    message.translate('help/logs:LEAVE_VALUE'),
-                    true
-                )
-                .addField(
-                    message.translate('help/logs:BAN'),
-                    message.translate('help/logs:BAN_VALUE'),
-                    true
-                )
-                .addField(
-                    message.translate('help/logs:UNBAN'),
-                    message.translate('help/logs:UNBAN_VALUE'),
-                    true
-                )
-                .addField(
-                    message.translate('help/logs:NICKNAME'),
-                    message.translate('help/logs:NICKNAME_VALUE'),
-                    true
-                )
-                .addField(
-                    message.translate('help/logs:INVITE'),
-                    message.translate('help/logs:INVITE_VALUE'),
-                    true
-                )
-                .addField(
-                    message.translate('help/logs:MODERATION'),
-                    message.translate('help/logs:MODERATION_VALUE'),
-                    false
-                )
+                .addFields([
+                    {
+                        name: message.translate('help/logs:ACTIVITY'),
+                        value: message.translate('help/logs:ACTIVITY_VALUE')
+                    },
+                    {
+                        name: message.translate('help/logs:JOIN'),
+                        value: message.translate('help/logs:JOIN_VALUE'),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('help/logs:LEAVE'),
+                        value: message.translate('help/logs:LEAVE_VALUE'),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('help/logs:BAN'),
+                        value: message.translate('help/logs:BAN_VALUE'),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('help/logs:UNBAN'),
+                        value: message.translate('help/logs:UNBAN_VALUE'),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('help/logs:NICKNAME'),
+                        value: message.translate('help/logs:NICKNAME_VALUE'),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('help/logs:INVITE'),
+                        value: message.translate('help/logs:INVITE_VALUE'),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('help/logs:MODERATION'),
+                        value: message.translate('help/logs:MODERATION_VALUE'),
+                        inline: false
+                    }
+                ])
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );

@@ -65,12 +65,17 @@ export default class MessageReactionAdd extends Event {
 
         const embed = new MessageEmbed()
             .setColor(0xffa500)
-            .addField(
-                message.translate('common:AUTHOR'),
-                message.author.toString(),
-                true
-            )
-            .addField(message.channel.toString(), true)
+            .addFields([
+                {
+                    name: message.translate('common:AUTHOR'),
+                    value: message.author.toString(),
+                    inline: true
+                },
+                {
+                    name: message.channel.toString(),
+                    value: true
+                }
+            ])
             .setThumbnail(
                 message.author.displayAvatarURL({ format: 'png', size: 2048 })
             )
@@ -80,11 +85,13 @@ export default class MessageReactionAdd extends Event {
         if (image) {
             embed.setImage(image);
         } else {
-            embed.addField(
-                message.translate('common:MESSAGE'),
-                message.content,
-                false
-            );
+            embed.addFields([
+                {
+                    name: message.translate('common:MESSAGE'),
+                    value: message.content,
+                    inline: false
+                }
+            ]);
         }
 
         return channel.send({ embed });

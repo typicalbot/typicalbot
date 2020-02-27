@@ -71,67 +71,75 @@ export default class extends Command {
             new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('utility/serverinfo:INFO'))
-                .addField(
-                    message.translate('common:NAME_FIELD'),
-                    message.guild.name,
-                    true
-                )
-                .addField(
-                    message.translate('common:ID_FIELD'),
-                    message.guild.id,
-                    true
-                )
-                .addField(
-                    message.translate('common:OWNER_FIELD'),
-                    `${guildOwner ? guildOwner.tag : UNKNOWN}\n${
-                        message.guild.ownerID
-                    }`,
-                    true
-                )
-                .addField(
-                    message.translate('common:CREATED_FIELD'),
-                    `${moment(message.guild.createdAt).format(
-                        'dddd MMMM Do, YYYY'
-                    )}\n${moment(message.guild.createdAt).format('hh:mm A')}`,
-                    true
-                )
-                .addField(
-                    message.translate('common:REGION_FIELD'),
-                    message.guild.region.toUpperCase(),
-                    true
-                )
-                .addField(
-                    message.translate('common:VERIFICATION_FIELD'),
-                    message.guild.verificationLevel,
-                    true
-                )
-                .addField(
-                    message.translate('common:CHANNELS_FIELD'),
-                    message.guild.channels.cache.size,
-                    true
-                )
-                .addField(
-                    message.translate('common:MEMBERS_FIELD'),
-                    message.guild.memberCount,
-                    true
-                )
-                .addField(
-                    message.translate('common:ROLES_FIELD'),
-                    message.guild.roles.cache.size,
-                    true
-                )
-                .addField(
-                    message.translate('common:EMOJIS_FIELD'),
-                    message.guild.emojis.cache.size,
-                    true
-                )
-                .addField(
-                    message.translate('common:BOOSTED_FIELD'),
-                    message.translate('utility/serverinfo:BOOSTERS', {
-                        level: message.guild.premiumTier,
-                        amount: message.guild.premiumSubscriptionCount || 0
-                    })
-                )
+                .addFields([
+                    {
+                        name: message.translate('common:NAME_FIELD'),
+                        value: message.guild.name,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:ID_FIELD'),
+                        value: message.guild.id,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:OWNER_FIELD'),
+                        value: `${guildOwner ? guildOwner.tag : UNKNOWN}\n${
+                            message.guild.ownerID
+                        }`,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:CREATED_FIELD'),
+                        value: `${moment(message.guild.createdAt).format(
+                            'dddd MMMM Do, YYYY'
+                        )}\n${moment(message.guild.createdAt).format(
+                            'hh:mm A'
+                        )}`,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:REGION_FIELD'),
+                        value: message.guild.region.toUpperCase(),
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:VERIFICATION_FIELD'),
+                        value: message.guild.verificationLevel,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:CHANNELS_FIELD'),
+                        value: message.guild.channels.cache.size,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:MEMBERS_FIELD'),
+                        value: message.guild.memberCount,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:ROLES_FIELD'),
+                        value: message.guild.roles.cache.size,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:EMOJIS_FIELD'),
+                        value: message.guild.emojis.cache.size,
+                        inline: true
+                    },
+                    {
+                        name: message.translate('common:BOOSTED_FIELD'),
+                        value: message.translate(
+                            'utility/serverinfo:BOOSTERS',
+                            {
+                                level: message.guild.premiumTier,
+                                amount:
+                                    message.guild.premiumSubscriptionCount || 0
+                            }
+                        )
+                    }
+                ])
                 .setThumbnail(
                     message.guild.iconURL({ format: 'png', size: 2048 }) || ''
                 )

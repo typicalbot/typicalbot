@@ -74,12 +74,19 @@ export default class extends Command {
                     name: message.guild.name
                 })
             )
-            .addField(
-                message.translate('common:MODERATOR_FIELD'),
-                message.author.tag
-            );
+            .addFields([
+                {
+                    name: message.translate('common:MODERATOR_FIELD'),
+                    value: message.author.tag
+                }
+            ]);
         if (reason)
-            embed.addField(message.translate('common:REASON_FIELD'), reason);
+            embed.addFields([
+                {
+                    name: message.translate('common:REASON_FIELD'),
+                    value: reason
+                }
+            ]);
 
         await user.send(embed).catch(() => null);
 

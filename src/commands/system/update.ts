@@ -20,15 +20,19 @@ export default class extends Command {
                 .setColor(0x00adff);
 
             if (stdout)
-                embed.addField(
-                    '» STDOUT',
-                    stdout.toString().substring(0, 1024)
-                );
+                embed.addFields([
+                    {
+                        name: '» STDOUT',
+                        value: stdout.toString().substring(0, 1024)
+                    }
+                ]);
             if (stderr)
-                embed.addField(
-                    '» STDERR',
-                    stderr.toString().substring(0, 1024)
-                );
+                embed.addFields([
+                    {
+                        name: '» STDERR',
+                        value: stderr.toString().substring(0, 1024)
+                    }
+                ]);
 
             message.send(embed);
         });

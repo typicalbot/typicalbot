@@ -17,30 +17,32 @@ export default class extends Command {
                         prefix: this.client.config.prefix
                     })
                 )
-                .addField(
-                    message.translate('help/perms:BLACKLISTED'),
-                    message.translate('help/perms:BLACKLISTED_VALUE')
-                )
-                .addField(
-                    message.translate('help/perms:MEMBER'),
-                    message.translate('help/perms:MEMBER_VALUE')
-                )
-                .addField(
-                    message.translate('help/perms:DJ'),
-                    message.translate('help/perms:DJ_VALUE')
-                )
-                .addField(
-                    message.translate('help/perms:MODERATOR'),
-                    message.translate('help/perms:MODERATOR_VALUE')
-                )
-                .addField(
-                    message.translate('help/perms:ADMIN'),
-                    message.translate('help/perms:ADMIN_VALUE')
-                )
-                .addField(
-                    message.translate('help/perms:OWNER'),
-                    message.translate('help/perms:OWNER_VALUE')
-                )
+                .addFields([
+                    {
+                        name: message.translate('help/perms:BLACKLISTED'),
+                        value: message.translate('help/perms:BLACKLISTED_VALUE')
+                    },
+                    {
+                        name: message.translate('help/perms:MEMBER'),
+                        value: message.translate('help/perms:MEMBER_VALUE')
+                    },
+                    {
+                        name: message.translate('help/perms:DJ'),
+                        value: message.translate('help/perms:DJ_VALUE')
+                    },
+                    {
+                        name: message.translate('help/perms:MODERATOR'),
+                        value: message.translate('help/perms:MODERATOR_VALUE')
+                    },
+                    {
+                        name: message.translate('help/perms:ADMIN'),
+                        value: message.translate('help/perms:ADMIN_VALUE')
+                    },
+                    {
+                        name: message.translate('help/perms:OWNER'),
+                        value: message.translate('help/perms:OWNER_VALUE')
+                    }
+                ])
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp()
         );

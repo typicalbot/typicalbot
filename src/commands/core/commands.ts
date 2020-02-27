@@ -52,26 +52,28 @@ export default class extends Command {
                             prefix: this.client.config.prefix
                         })
                     )
-                    .addField(
-                        message.translate('core/commands:OWNER'),
-                        level4.length ? level4.join(', ') : NONE
-                    )
-                    .addField(
-                        message.translate('core/commands:ADMIN'),
-                        level3.length ? level3.join(', ') : NONE
-                    )
-                    .addField(
-                        message.translate('core/commands:MOD'),
-                        level2.length ? level2.join(', ') : NONE
-                    )
-                    .addField(
-                        message.translate('core/commands:DJ'),
-                        level1.length ? level1.join(', ') : NONE
-                    )
-                    .addField(
-                        message.translate('core/commands:MEMBER'),
-                        level0.length ? level0.join(', ') : NONE
-                    )
+                    .addFields([
+                        {
+                            name: message.translate('core/commands:OWNER'),
+                            value: level4.length ? level4.join(', ') : NONE
+                        },
+                        {
+                            name: message.translate('core/commands:ADMIN'),
+                            value: level3.length ? level3.join(', ') : NONE
+                        },
+                        {
+                            name: message.translate('core/commands:MOD'),
+                            value: level2.length ? level2.join(', ') : NONE
+                        },
+                        {
+                            name: message.translate('core/commands:DJ'),
+                            value: level1.length ? level1.join(', ') : NONE
+                        },
+                        {
+                            name: message.translate('core/commands:MEMBER'),
+                            value: level0.length ? level0.join(', ') : NONE
+                        }
+                    ])
                     .setFooter('TypicalBot', Constants.Links.ICON)
                     .setTimestamp()
             )

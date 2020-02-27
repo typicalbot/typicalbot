@@ -62,7 +62,7 @@ export default class ModerationLogHandler {
     edit(message: TypicalGuildMessage, moderator: User, reason: string) {
         const [embed] = message.embeds;
 
-        const start = embed.description.substring(
+        const start = embed.description?.substring(
             0,
             embed.description.lastIndexOf('\n')
         );
