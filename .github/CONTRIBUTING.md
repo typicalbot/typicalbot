@@ -20,7 +20,7 @@ What follows is a set of guidelines for contributing to TypicalBot and its repos
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [support@typicalbot.com](mailto:support@typicalbot.com).
+This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [opensource@sylke.co](mailto:opensource@sylke.co).
 
 ## Making Contributions
 
