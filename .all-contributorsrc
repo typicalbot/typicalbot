@@ -1,0 +1,44 @@
+{
+  "projectName": "typicalbot",
+  "projectOwner": "sylkellc",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 50,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "nsylke",
+      "name": "Nicholas Sylke",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/19676879?v=4",
+      "profile": "https://github.com/nsylke",
+      "contributions": [
+        "business",
+        "code",
+        "financial",
+        "infra",
+        "maintenance",
+        "projectManagement",
+        "review"
+      ]
+    },
+    {
+      "login": "tjrgg",
+      "name": "Tyler Richards",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/11968358?v=4",
+      "profile": "https://github.com/tjrgg",
+      "contributions": [
+        "code",
+        "ideas",
+        "maintenance",
+        "projectManagement",
+        "question",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
