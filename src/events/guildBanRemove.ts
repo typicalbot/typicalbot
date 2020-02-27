@@ -38,7 +38,7 @@ export default class GuildBanRemove extends Event {
             channel
                 .send(
                     settings.logs.unban
-                        ? this.client.helpers.formatMessage.execute(
+                        ? await this.client.helpers.formatMessage.execute(
                               'logs',
                               guild,
                               user,

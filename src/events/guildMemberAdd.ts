@@ -41,7 +41,7 @@ export default class GuildMemberAdd extends Event {
                     channel
                         .send(
                             settings.logs.join
-                                ? this.client.helpers.formatMessage.execute(
+                                ? await this.client.helpers.formatMessage.execute(
                                       'logs',
                                       guild,
                                       user,

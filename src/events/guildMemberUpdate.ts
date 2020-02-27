@@ -27,12 +27,12 @@ export default class GuildMemberUpdate extends Event {
         if (
             settings.auto.nickname &&
             nickname ===
-                this.client.helpers.formatMessage.execute(
+                (await this.client.helpers.formatMessage.execute(
                     'autonick',
                     guild,
                     user,
                     settings.auto.nickname
-                )
+                ))
         )
             return;
 
@@ -40,7 +40,7 @@ export default class GuildMemberUpdate extends Event {
             return channel
                 .send(
                     settings.logs.nickname !== '--enabled'
-                        ? this.client.helpers.formatMessage.execute(
+                        ? await this.client.helpers.formatMessage.execute(
                               'logs-nick',
                               guild,
                               user,
