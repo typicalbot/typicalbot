@@ -41,7 +41,7 @@ export default class extends Command {
             }
         } else {
             channel
-                .send(content, { disableMentions: true })
+                .send(content, { disableMentions: false })
                 .catch(() =>
                     message.error(
                         message.translate('moderation/say:MISSING_SEND')
