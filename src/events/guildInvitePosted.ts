@@ -105,7 +105,7 @@ export default class GuildInvitePosted extends Event {
                           user: message.author.tag,
                           channel: message.channel.toString()
                       })
-                    : this.client.helpers.formatMessage.execute(
+                    : await this.client.helpers.formatMessage.execute(
                           'logs-invite',
                           message.guild,
                           message.author,

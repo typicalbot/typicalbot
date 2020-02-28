@@ -26,7 +26,7 @@ export default class GuildMemberRemove extends Event {
             return channel
                 .send(
                     settings.logs.leave
-                        ? this.client.helpers.formatMessage.execute(
+                        ? await this.client.helpers.formatMessage.execute(
                               'logs',
                               guild,
                               user,

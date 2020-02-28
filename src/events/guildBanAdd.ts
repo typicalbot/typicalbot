@@ -55,7 +55,7 @@ export default class GuildBanAdd extends Event {
         return channel
             .send(
                 settings.logs.ban
-                    ? this.client.helpers.formatMessage.execute(
+                    ? await this.client.helpers.formatMessage.execute(
                           'logs',
                           guild,
                           user,

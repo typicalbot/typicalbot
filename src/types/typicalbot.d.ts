@@ -171,7 +171,7 @@ export interface HelperFunctions {
             user: User,
             content: string,
             options?: FormatMessageOptions
-        ): string;
+        ): Promise<string>;
     };
     lengthen: {
         execute(text: string, length: number): string;

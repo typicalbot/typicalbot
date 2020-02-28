@@ -32,7 +32,7 @@ export default class MessageDelete extends Event {
                         ? message.translate('help/logs:DELETED', {
                               user: user.tag
                           })
-                        : this.client.helpers.formatMessage.execute(
+                        : await this.client.helpers.formatMessage.execute(
                               'logs-msgdel',
                               message.guild as TypicalGuild,
                               user,
