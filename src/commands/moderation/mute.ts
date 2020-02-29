@@ -144,7 +144,7 @@ export default class extends Command {
                     value: reason
                 }
             ]);
-        member.send().catch(() => null);
+        member.send(embed).catch(() => null);
 
         const muted = await member.roles.add(role).catch(() => null);
         if (!muted)
@@ -169,7 +169,7 @@ export default class extends Command {
 
         return message.success(
             message.translate('moderation/mute:SUCCESS', {
-                user: message.author.tag
+                user: member.user.tag
             })
         );
     }

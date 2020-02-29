@@ -40,7 +40,8 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
             payload
         );
 
-        if (updated.changes) this.set(id, updated.changes[0].new_val);
+        if (updated.changes != undefined && updated.changes?.length > 0)
+            this.set(id, updated.changes[0].new_val);
 
         return true;
     }

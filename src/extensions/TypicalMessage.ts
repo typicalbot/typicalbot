@@ -31,8 +31,27 @@ export class TypicalMessage extends Structures.get('Message') {
         embed?: MessageEmbed,
         options?: MessageOptions
     ) {
-        if (typeof content === 'string')
+        if (typeof content === 'string') {
+            content = (content || '').replace(/@(everyone|here)/g, '@\u200b$1');
+            const matches = content.match(/<@&(\d{17,19})>/g);
+            if (matches != null) {
+                matches.forEach(match => {
+                    match = match.replace('<@&', '').replace('>', '');
+
+                    if (this.guild && this.guild.roles.cache.has(match)) {
+                        match =
+                            '@\u200b' + this.guild.roles.cache.get(match)?.name;
+                    } else {
+                        match = '@\u200bdeleted-role';
+                    }
+                    content = (content as string).replace(
+                        /<@&(\d{17,19})>/,
+                        match
+                    );
+                });
+            }
             return this.channel.send(content, { ...options, embed });
+        }
         return this.channel.send(content);
     }
 

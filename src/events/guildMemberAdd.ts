@@ -41,7 +41,7 @@ export default class GuildMemberAdd extends Event {
                     channel
                         .send(
                             settings.logs.join
-                                ? this.client.helpers.formatMessage.execute(
+                                ? await this.client.helpers.formatMessage.execute(
                                       'logs',
                                       guild,
                                       user,
@@ -63,7 +63,7 @@ export default class GuildMemberAdd extends Event {
                         name: guild.name
                     }),
                     '',
-                    this.client.helpers.formatMessage.execute(
+                    await this.client.helpers.formatMessage.execute(
                         'automessage',
                         guild,
                         user,
@@ -75,7 +75,7 @@ export default class GuildMemberAdd extends Event {
         if (settings.auto.nickname)
             member
                 .setNickname(
-                    this.client.helpers.formatMessage.execute(
+                    await this.client.helpers.formatMessage.execute(
                         'autonick',
                         guild,
                         user,
