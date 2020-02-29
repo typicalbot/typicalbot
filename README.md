@@ -52,9 +52,9 @@ This section provides a quick-start guide.
 0. Make sure all prerequisites above are installed.
 1. Clone the repository, ie. `git clone https://github.com/typicalbot/typicalbot.git`
 2. Start RethinkDB database `rethinkdb`
-3. Install all necessary packages to setup the environment: `npm run setup`
+3. Install all necessary packages to setup the environment: `npm run build:database`
 4. While the above is running create your `config.json` file using the example file provided in the repo.
-5. Run `npm run start`
+5. Run `npm run build:instance`
 6. Profit!
 
 ## Team
