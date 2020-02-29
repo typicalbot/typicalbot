@@ -19,7 +19,7 @@ export default class FormatMessage extends Function {
 
         if (type === 'logs') return this.logs(content, guild, user);
         if (type === 'logs-nick') {
-            return this.logs(content, guild, user)
+            const formatted = this.logs(content, guild, user)
                 .replace(
                     /{user.nick}|{user.nickname}/gi,
                     member ? member.displayName : user.username
@@ -30,33 +30,35 @@ export default class FormatMessage extends Function {
                         ? options.oldMember.displayName
                         : user.username
                 );
+            return this.filterMentions(formatted, guild);
         }
         if (type === 'logs-invite') {
-            const formatted = this.logs(content, guild, user).replace(
+            let formatted = this.logs(content, guild, user).replace(
                 /{user.nick}|{user.nickname}/gi,
                 member ? member.displayName : user.username
             );
-            if (!options.channel) return formatted;
+            if (!options.channel) return this.filterMentions(formatted, guild);
 
-            return formatted
+            formatted = formatted
                 .replace(/{channel}/gi, options.channel.toString())
                 .replace(/{channel.name}/gi, options.channel.name)
                 .replace(/{channel.id}/gi, options.channel.id);
+            return this.filterMentions(formatted, guild);
         }
         if (type === 'logs-msgdel') {
-            const formatted = this.logs(content, guild, user).replace(
+            let formatted = this.logs(content, guild, user).replace(
                 /{user.nick}|{user.nickname}/gi,
                 member ? member.displayName : user.username
             );
             if (options.channel) {
-                formatted
+                formatted = formatted
                     .replace(/{channel}/gi, options.channel.toString())
                     .replace(/{channel.name}/gi, options.channel.name)
                     .replace(/{channel.id}/gi, options.channel.id);
             }
-            if (!options.message) return formatted;
+            if (!options.message) return this.filterMentions(formatted, guild);
 
-            return formatted
+            formatted = formatted
                 .replace(
                     /{message.content}|{message.text}/gi,
                     options.message.content
@@ -68,9 +70,10 @@ export default class FormatMessage extends Function {
                         100
                     )
                 );
+            return this.filterMentions(formatted, guild);
         }
         if (type === 'automessage') {
-            return content
+            const formatted = content
                 .replace(/{user.name}/gi, user.username)
                 .replace(/{user.id}/gi, user.id)
                 .replace(
@@ -79,21 +82,23 @@ export default class FormatMessage extends Function {
                 )
                 .replace(/{guild.name}|{server.name}/gi, guild.name)
                 .replace(/{guild.id}|{server.id}/gi, guild.id);
+            return this.filterMentions(formatted, guild);
         }
         if (type === 'autonick') {
-            return content
+            const formatted = content
                 .replace(/{user.name}/gi, user.username)
                 .replace(
                     /{user.discrim}|{user.discriminator}/gi,
                     user.discriminator
                 );
+            return this.filterMentions(formatted, guild);
         }
 
-        return content;
+        return this.filterMentions(content, guild);
     }
 
-    logs(content: string, guild: TypicalGuild, user: User) {
-        return content
+    logs(content: string, guild: TypicalGuild, user: User): string {
+        const formatted = content
             .replace(/{user}|{user.mention}/gi, user.toString())
             .replace(/{user.name}/gi, user.username)
             .replace(/{user.id}/gi, user.id)
@@ -116,5 +121,23 @@ export default class FormatMessage extends Function {
             .replace(/{now}/gi, moment().format('dddd MMMM Do, YYYY, hh:mm A'))
             .replace(/{now.time}/gi, moment().format('hh:mm A'))
             .replace(/{now.date}/gi, moment().format('MMM DD, YYYY'));
+        return this.filterMentions(formatted, guild);
+    }
+    filterMentions(content: string, guild: TypicalGuild): string {
+        content = content.replace(/@(everyone|here)/g, '@\u200b$1');
+        const matches = content.match(/<@&(\d{17,19})>/g);
+
+        if (matches != null) {
+            matches.forEach(match => {
+                match = match.replace('<@&', '').replace('>', '');
+                if (guild.roles.cache.has(match)) {
+                    match = '@\u200b' + guild.roles.cache.get(match)?.name;
+                } else {
+                    match = '@\u200bdeleted-role';
+                }
+                content = content.replace(/<@&(\d{17,19})>/, match);
+            });
+        }
+        return content;
     }
 }
