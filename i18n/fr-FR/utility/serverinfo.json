@@ -4,7 +4,7 @@
     "SERVER": "**__Information du serveur pour:__** {{name}}",
     "NAME": "Nom : {{name}} ({{id}})",
     "OWNER": "Propriétaire : {{user}} ({{id}})",
-    "CREATED": "Date de création : {time}",
+    "CREATED": "Date de création : {{time}}",
     "REGION": "Région : {{region}}",
     "VERIFICATION": "Niveau de vérification : {{level}}",
     "ICON": "Icône : {{url}}",
