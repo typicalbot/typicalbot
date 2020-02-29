@@ -59,8 +59,7 @@ export default class Cluster extends Client {
             messageCacheMaxSize: 150,
             messageCacheLifetime: 1800,
             messageSweepInterval: 300,
-            disableMentions: false,
-            disabledEvents: ['TYPING_START', 'CHANNEL_PINS_UPDATE'],
+            disableMentions: 'everyone',
             partials: ['MESSAGE']
         });
 

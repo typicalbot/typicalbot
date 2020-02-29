@@ -74,10 +74,10 @@ export default class extends Command {
             );
 
             const edited = await channel
-                .overwritePermissions({
-                    permissionOverwrites: currentOverwrites,
-                    reason: message.translate('moderation/mute:DENYING')
-                })
+                .overwritePermissions(
+                    currentOverwrites,
+                    message.translate('moderation/mute:DENYING')
+                )
                 .catch(() => null);
 
             return edited
