@@ -906,7 +906,7 @@ detect-libc@^1.0.2:
 
 "discord.js@github:discordjs/discord.js#master":
   version "12.0.0-dev"
-  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/8a2f8938be35e70f87ad99b3860116526e8622e6"
+  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/713309e7bb87b10ca7432fdbbd7ca65fcddd4882"
   dependencies:
     "@discordjs/collection" "^0.1.5"
     abort-controller "^3.0.0"
