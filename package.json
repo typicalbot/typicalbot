@@ -31,7 +31,7 @@
     },
     "homepage": "https://github.com/typicalbot/typicalbot#readme",
     "dependencies": {
-        "@sentry/node": "^5.12.5",
+        "@sentry/node": "^5.13.1",
         "@typicalbot/eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
         "canvas": "^2.6.0",
         "canvas-constructor": "^3.1.0",
@@ -45,7 +45,7 @@
         "node-fetch": "^2.6.0",
         "pm2": "^4.2.3",
         "rethinkdb-ts": "^2.4.2",
-        "typescript": "^3.8.2",
+        "typescript": "^3.8.3",
         "veza": "^1.1.0",
         "vm2": "^3.8.3"
     },
@@ -60,7 +60,7 @@
         "@types/i18next-node-fs-backend": "^2.1.0",
         "@types/klaw": "^3.0.0",
         "@types/mathjs": "^6.0.4",
-        "@types/node": "^12.12.28",
+        "@types/node": "^12.12.29",
         "@types/node-fetch": "^2.5.5",
         "@types/ws": "^7.2.2",
         "@typescript-eslint/eslint-plugin": "^2.21.0",
