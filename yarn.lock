@@ -905,8 +905,9 @@ detect-libc@^1.0.2:
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
 "discord.js@github:discordjs/discord.js#master":
-  version "12.0.0-dev"
-  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/713309e7bb87b10ca7432fdbbd7ca65fcddd4882"
+  version "12.0.1"
+  uid "11f30ccb31b9e01ca205693faf5b3d638874447f"
+  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/11f30ccb31b9e01ca205693faf5b3d638874447f"
   dependencies:
     "@discordjs/collection" "^0.1.5"
     abort-controller "^3.0.0"
