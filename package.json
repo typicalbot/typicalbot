@@ -32,7 +32,6 @@
     "homepage": "https://github.com/typicalbot/typicalbot#readme",
     "dependencies": {
         "@sentry/node": "^5.13.1",
-        "@typicalbot/eslint-config-typicalbot": "github:typicalbot/eslint-config-typicalbot",
         "canvas": "^2.6.0",
         "canvas-constructor": "^3.1.0",
         "discord.js": "github:discordjs/discord.js#master",
