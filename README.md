@@ -70,7 +70,7 @@ This section provides a quick-start guide.
 
 ## Show Your Support
 
-If you like what we do, consider supporting us on [Patreon](https://patreon.com/typicalbot) or donate to us via [PayPal](https://paypal.me/typicalbot).
+If you like what we do, consider supporting us on [Patreon](https://patreon.com/typicalbot).
 
 ## License
 
