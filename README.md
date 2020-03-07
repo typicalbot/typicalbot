@@ -38,7 +38,7 @@ This section provides a quick-start guide.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/): Node.js 10.0.0 or newer is required.
+- [Node.js](https://nodejs.org/en/): Node.js 12.x or newer is required.
 - [RethinkDB](https://rethinkdb.com/): RethinkDB is required.
 - [PM2](http://pm2.keymetrics.io/): PM2 is required.
 
