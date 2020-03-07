@@ -20,7 +20,7 @@ What follows is a set of guidelines for contributing to TypicalBot and its repos
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [support@typicalbot.com](mailto:support@typicalbot.com).
+This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [opensource@sylke.co](mailto:opensource@sylke.co).
 
 ## Making Contributions
 
@@ -64,7 +64,7 @@ Before creating enhancement suggestions, please check [this list](#before-submit
 In order to have your pull request considered for review, it must meet the following requirements:
 
 - A completed [pull request template](https://github.com/typicalbot/typicalbot/blob/master/.github/PULL_REQUEST_TEMPLATE.md). If the pull request template is not completed, you'll be asked to complete it before your pull request will be considered for merging.
-- Compliance with the [style guides](#style-guides). If your pull request doesn't comply with one or more of the style guides, you'll be asked to bring it to complaince before your pull request will be considered for merging.
+- Compliance with the [style guides](#style-guides). If your pull request doesn't comply with one or more of the style guides, you'll be asked to bring it to compliance before your pull request will be considered for merging.
 - Completed documentation and tests, if applicable.
 
 > If your pull request closes an issue, state so under the Issues section in your pull request like so: `Closes #<issue>`. This helps ensure that GitHub automatically closes the issue when your pull request is merged.
