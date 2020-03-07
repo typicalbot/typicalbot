@@ -29,8 +29,7 @@ TypicalBot is an ironically named multipurpose Discord bot that is far from typi
 
 | Project | Description |
 |---------|-------------|
-| [typicalbot-cluster-manager](https://github.com/typicalbot/typicalbot-cluster-manager) | Inter-process communication manager |
-| [typicalbot-api](https://github.com/typicalbot/typicalbot-api) | Internal API |
+| [typicalbot-cluster-manager](https://github.com/sylkellc/typicalbot-cluster-manager) | Inter-process communication manager |
 
 ## Getting Started
 
