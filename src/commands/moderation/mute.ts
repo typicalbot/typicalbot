@@ -83,8 +83,8 @@ export default class extends Command {
             return edited
                 ? message.success(message.translate('moderation/mute:DENYING'))
                 : message.error(
-                      message.translate('moderation/mute:DENY_ERROR')
-                  );
+                    message.translate('moderation/mute:DENY_ERROR')
+                );
         }
 
         // Mute a member

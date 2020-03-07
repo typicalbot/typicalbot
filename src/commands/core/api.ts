@@ -11,9 +11,9 @@ export default class extends Command {
             return message.dm(
                 message.guild.settings.apikey
                     ? message.translate('core/api:KEY', {
-                          guild: message.guild.name,
-                          key: message.guild.settings.apikey
-                      })
+                        guild: message.guild.name,
+                        key: message.guild.settings.apikey
+                    })
                     : message.translate('core/api:NONE')
             );
         }

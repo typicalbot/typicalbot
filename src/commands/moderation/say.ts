@@ -25,7 +25,7 @@ export default class extends Command {
         const channel = (message.guild.channels.cache.get(channelID) ||
             message.channel) as TextChannel;
 
-        if (!!json) {
+        if (json) {
             try {
                 const jsonParse = JSON.parse(content);
 

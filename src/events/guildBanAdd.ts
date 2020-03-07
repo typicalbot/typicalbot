@@ -56,11 +56,11 @@ export default class GuildBanAdd extends Event {
             .send(
                 settings.logs.ban
                     ? await this.client.helpers.formatMessage.execute(
-                          'logs',
-                          guild,
-                          user,
-                          settings.logs.ban
-                      )
+                        'logs',
+                        guild,
+                        user,
+                        settings.logs.ban
+                    )
                     : `**${user.tag}** has been banned from the server.`
             )
             .catch(err => Sentry.captureException(err));

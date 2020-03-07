@@ -39,14 +39,14 @@ export default class GuildBanRemove extends Event {
                 .send(
                     settings.logs.unban
                         ? await this.client.helpers.formatMessage.execute(
-                              'logs',
-                              guild,
-                              user,
-                              settings.logs.unban
-                          )
+                            'logs',
+                            guild,
+                            user,
+                            settings.logs.unban
+                        )
                         : guild.translate('moderation/unban:USER_UNBAN', {
-                              user: user.tag
-                          })
+                            user: user.tag
+                        })
                 )
                 .catch(() => null);
         }

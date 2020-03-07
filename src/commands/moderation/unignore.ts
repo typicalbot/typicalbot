@@ -57,8 +57,8 @@ export default class extends Command {
         const channelIDs = commands
             ? ignoredIDs.commands
             : invites
-            ? ignoredIDs.invites
-            : ignoredIDs.stars;
+                ? ignoredIDs.invites
+                : ignoredIDs.stars;
 
         channelIDs.splice(channelIDs.indexOf(message.channel.id), 1);
 

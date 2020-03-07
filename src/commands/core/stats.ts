@@ -31,7 +31,7 @@ export default class extends Command {
         ) as RegExpMatchArray;
         const clusterName = clusterParts[1];
         const clusterShards = clusterParts[2]
-            .replace(/[\[\]]/g, '')
+            .replace(/[\\[\]]/g, '')
             .split(',')
             .join(', ');
 
@@ -142,10 +142,6 @@ export default class extends Command {
 
         if (this.client.config.clustered)
             embed.addFields([
-                {
-                    name: '',
-                    value: ''
-                },
                 {
                     name: '» Cluster',
                     value: `${clusterName}\n${clusterShards}`,

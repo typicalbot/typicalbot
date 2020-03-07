@@ -41,16 +41,16 @@ export default class GuildMemberUpdate extends Event {
                 .send(
                     settings.logs.nickname !== '--enabled'
                         ? await this.client.helpers.formatMessage.execute(
-                              'logs-nick',
-                              guild,
-                              user,
-                              settings.logs.nickname,
-                              { oldMember }
-                          )
+                            'logs-nick',
+                            guild,
+                            user,
+                            settings.logs.nickname,
+                            { oldMember }
+                        )
                         : guild.translate('help/logs:NICKNAMED', {
-                              user: user.tag,
-                              nickname: member.displayName
-                          })
+                            user: user.tag,
+                            nickname: member.displayName
+                        })
                 )
                 .catch(err => Sentry.captureException(err));
 

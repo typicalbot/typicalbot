@@ -82,7 +82,6 @@ export default class extends Command {
                 '',
                 '',
                 '```autohotkey',
-                ,
                 content,
                 '```'
             ].join('\n')
@@ -106,10 +105,10 @@ export default class extends Command {
             roleMention || roleID
                 ? message.guild.roles.cache.get(roleMention || roleID)
                 : roleName
-                ? message.guild.roles.cache.find(
-                      r => r.name.toLowerCase() === roleName.toLowerCase()
-                  )
-                : null;
+                    ? message.guild.roles.cache.find(
+                        r => r.name.toLowerCase() === roleName.toLowerCase()
+                    )
+                    : null;
         if (!role)
             return message.error(message.translate('moderation/give:INVALID'));
 
@@ -180,10 +179,10 @@ export default class extends Command {
         const role = roleID
             ? message.guild.roles.cache.get(roleID)
             : roleName
-            ? message.guild.roles.cache.find(
-                  r => r.name.toLowerCase() === roleName.toLowerCase()
-              )
-            : null;
+                ? message.guild.roles.cache.find(
+                    r => r.name.toLowerCase() === roleName.toLowerCase()
+                )
+                : null;
 
         if (!role)
             return message.error(message.translate('moderation/give:INVALID'));
@@ -232,10 +231,10 @@ export default class extends Command {
         const role = roleID
             ? message.guild.roles.cache.get(roleID)
             : roleName
-            ? message.guild.roles.cache.find(
-                  r => r.name.toLowerCase() === roleName.toLowerCase()
-              )
-            : null;
+                ? message.guild.roles.cache.find(
+                    r => r.name.toLowerCase() === roleName.toLowerCase()
+                )
+                : null;
 
         switch (action) {
             case 'list':

@@ -42,14 +42,14 @@ export default class GuildMemberAdd extends Event {
                         .send(
                             settings.logs.join
                                 ? await this.client.helpers.formatMessage.execute(
-                                      'logs',
-                                      guild,
-                                      user,
-                                      settings.logs.join
-                                  )
+                                    'logs',
+                                    guild,
+                                    user,
+                                    settings.logs.join
+                                )
                                 : guild.translate('help/logs:JOINED_SERVER', {
-                                      user: user.tag
-                                  })
+                                    user: user.tag
+                                })
                         )
                         .catch(err => Sentry.captureException(err));
                 }
@@ -88,8 +88,8 @@ export default class GuildMemberAdd extends Event {
             settings.auto.role.bots && member.user.bot
                 ? guild.roles.cache.get(settings.auto.role.bots)
                 : settings.auto.role.id
-                ? guild.roles.cache.get(settings.auto.role.id)
-                : null;
+                    ? guild.roles.cache.get(settings.auto.role.id)
+                    : null;
         if (!autorole || !autorole.editable) return;
 
         setTimeout(async () => {

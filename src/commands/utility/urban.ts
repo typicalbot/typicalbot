@@ -66,13 +66,13 @@ export default class extends Command {
                             down: resp.thumbs_down,
                             rating: !isNaN(rating)
                                 ? message.translate(
-                                      'utility/urban:RATING_PERCENT',
-                                      {
-                                          amount: rating,
-                                          total:
+                                    'utility/urban:RATING_PERCENT',
+                                    {
+                                        amount: rating,
+                                        total:
                                               resp.thumbs_up + resp.thumbs_down
-                                      }
-                                  )
+                                    }
+                                )
                                 : ''
                         })
                     }

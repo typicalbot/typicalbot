@@ -27,10 +27,10 @@ export default class extends Command {
         const ROLES =
             member.roles.cache.size > 1
                 ? member.roles.cache
-                      .sort((a, b) => b.position - a.position)
-                      .map(role => role.name)
-                      .slice(0, -1)
-                      .join(', ')
+                    .sort((a, b) => b.position - a.position)
+                    .map(role => role.name)
+                    .slice(0, -1)
+                    .join(', ')
                 : message.translate('common:NONE');
 
         if (!message.embeddable)

@@ -410,8 +410,8 @@ export default class extends Command {
         return deleted
             ? message.reply(message.translate('moderation/settings:CLEARED'))
             : message.error(
-                  message.translate('moderation/settings:CLEAR_ERROR')
-              );
+                message.translate('moderation/settings:CLEAR_ERROR')
+            );
     }
 
     view(message: TypicalGuildMessage, setting: SettingsData) {
@@ -484,10 +484,10 @@ export default class extends Command {
             const logText = !setting.value
                 ? message.translate('common:DEFAULT')
                 : disabled
-                ? message.translate('common:DISABLED')
-                : embed
-                ? message.translate('common:EMBED')
-                : ['```txt', '', setting.value, '```'].join('\n');
+                    ? message.translate('common:DISABLED')
+                    : embed
+                        ? message.translate('common:EMBED')
+                        : ['```txt', '', setting.value, '```'].join('\n');
 
             return message.reply(
                 message.translate('moderation/settings:CURRENT_VALUE', {
@@ -573,8 +573,8 @@ export default class extends Command {
                 const role = roleID
                     ? message.guild.roles.cache.get(roleID)
                     : message.guild.roles.cache.find(
-                          r => r.name.toLowerCase() === roleName.toLowerCase()
-                      );
+                        r => r.name.toLowerCase() === roleName.toLowerCase()
+                    );
 
                 if (!role)
                     return message.error(
@@ -619,8 +619,8 @@ export default class extends Command {
                 const role = roleID
                     ? message.guild.roles.cache.get(roleID)
                     : message.guild.roles.cache.find(
-                          r => r.name.toLowerCase() === roleName.toLowerCase()
-                      );
+                        r => r.name.toLowerCase() === roleName.toLowerCase()
+                    );
 
                 if (!role)
                     return message.error(
@@ -679,9 +679,9 @@ export default class extends Command {
                 const channel = channelID
                     ? message.guild.channels.cache.get(channelID)
                     : message.guild.channels.cache.find(
-                          r =>
-                              r.name.toLowerCase() === channelName.toLowerCase()
-                      );
+                        r =>
+                            r.name.toLowerCase() === channelName.toLowerCase()
+                    );
 
                 if (!channel)
                     return message.error(

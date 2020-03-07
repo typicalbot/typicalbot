@@ -28,14 +28,14 @@ export default class extends Command {
             return message.send(
                 list.length
                     ? message.translate('moderation/adcheck:FOUND', {
-                          amount: message.translate(
-                              list.length === 1
-                                  ? 'moderation/adcheck:ONE'
-                                  : 'moderation/adcheck:MULTIPLE',
-                              { amount: list.length }
-                          ),
-                          list: list.join('\n\n').substring(0, 2000)
-                      })
+                        amount: message.translate(
+                            list.length === 1
+                                ? 'moderation/adcheck:ONE'
+                                : 'moderation/adcheck:MULTIPLE',
+                            { amount: list.length }
+                        ),
+                        list: list.join('\n\n').substring(0, 2000)
+                    })
                     : message.translate('moderation/adcheck:NONE')
             );
 

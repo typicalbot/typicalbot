@@ -5,8 +5,8 @@ import Cluster from '..';
 import TypicalFunction from '../structures/Function';
 
 export default class FunctionHandler extends Collection<
-    string,
-    TypicalFunction
+string,
+TypicalFunction
 > {
     client: Cluster;
     constructor(client: Cluster) {

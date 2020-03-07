@@ -39,9 +39,9 @@ export default class ModerationLog {
             display: data.display,
             expiration: this.expiration
                 ? ` (${this.client.helpers.convertTime.execute(
-                      this.guild,
-                      this.expiration
-                  )})`
+                    this.guild,
+                    this.expiration
+                )})`
                 : ''
         });
         return this;
@@ -116,13 +116,13 @@ export default class ModerationLog {
         if (!this.id) {
             const id = latest
                 ? Number(
-                      latest.embeds[0] &&
+                    latest.embeds[0] &&
                           latest.embeds[0].footer &&
                           latest.embeds[0].footer.text &&
                           latest.embeds[0].footer.text.match(
                               Constants.ModerationLogRegex.CASE
                           )
-                  )
+                )
                 : 1;
 
             this.setId(id || 1);

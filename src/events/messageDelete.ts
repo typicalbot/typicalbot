@@ -30,18 +30,18 @@ export default class MessageDelete extends Event {
                 .send(
                     settings.logs.delete === '--enabled'
                         ? message.translate('help/logs:DELETED', {
-                              user: user.tag
-                          })
+                            user: user.tag
+                        })
                         : await this.client.helpers.formatMessage.execute(
-                              'logs-msgdel',
-                              message.guild as TypicalGuild,
-                              user,
-                              settings.logs.delete,
-                              {
-                                  message,
-                                  channel: message.channel as TextChannel
-                              }
-                          )
+                            'logs-msgdel',
+                            message.guild as TypicalGuild,
+                            user,
+                            settings.logs.delete,
+                            {
+                                message,
+                                channel: message.channel as TextChannel
+                            }
+                        )
                 )
                 .catch(err => Sentry.captureException(err));
 

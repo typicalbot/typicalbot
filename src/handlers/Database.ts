@@ -21,9 +21,9 @@ export default class DatabaseHandler {
     get(table: string, key?: string) {
         return key
             ? this.connection
-                  .table(table)
-                  .get(key)
-                  .run()
+                .table(table)
+                .get(key)
+                .run()
             : this.connection.table(table).run();
     }
 

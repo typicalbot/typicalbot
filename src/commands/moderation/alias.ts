@@ -43,8 +43,8 @@ export default class extends Command {
             message.translate('moderation/alias:CURRENT'),
             message.guild.settings.aliases.length
                 ? message.guild.settings.aliases
-                      .map(a => `${a.alias} -> ${a.command}`)
-                      .join('\n')
+                    .map(a => `${a.alias} -> ${a.command}`)
+                    .join('\n')
                 : NONE
         ]);
     }

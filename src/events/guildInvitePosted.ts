@@ -48,16 +48,16 @@ export default class GuildInvitePosted extends Event {
                                 type:
                                     settings.automod.invitewarn === 1
                                         ? message.translate(
-                                              'core/invite:INVITE'
-                                          )
+                                            'core/invite:INVITE'
+                                        )
                                         : message.translate(
-                                              'core/invite:CONSECUTIVE',
-                                              {
-                                                  amount:
+                                            'core/invite:CONSECUTIVE',
+                                            {
+                                                amount:
                                                       settings.automod
                                                           .invitewarn
-                                              }
-                                          ),
+                                            }
+                                        ),
                                 channel: message.channel.toString()
                             })
                         )
@@ -73,8 +73,8 @@ export default class GuildInvitePosted extends Event {
                         settings.automod.invitekick === 1
                             ? message.translate('core/invite:INVITE')
                             : message.translate('core/invite:CONSECUTIVE', {
-                                  amount: settings.automod.invitewarn
-                              }),
+                                amount: settings.automod.invitewarn
+                            }),
                     channel: message.channel.toString()
                 });
                 message.member.kick(reason);
@@ -102,16 +102,16 @@ export default class GuildInvitePosted extends Event {
             return channel.send(
                 settings.logs.invite === '--enabled'
                     ? message.translate('core/invite:SENT', {
-                          user: message.author.tag,
-                          channel: message.channel.toString()
-                      })
+                        user: message.author.tag,
+                        channel: message.channel.toString()
+                    })
                     : await this.client.helpers.formatMessage.execute(
-                          'logs-invite',
-                          message.guild,
-                          message.author,
-                          settings.logs.invite,
-                          { channel: message.channel }
-                      )
+                        'logs-invite',
+                        message.guild,
+                        message.author,
+                        settings.logs.invite,
+                        { channel: message.channel }
+                    )
             );
         }
 

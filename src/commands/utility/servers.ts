@@ -4,7 +4,7 @@ import { TypicalGuildMessage } from '../../types/typicalbot';
 import { MessageEmbed } from 'discord.js';
 
 const regex = /(\d+)/;
-const guildNameRegex = /[^a-z0-9 '"\/[\]()-_!@#$%^&*]/gim;
+const guildNameRegex = /[^a-z0-9 '"\\/[\]()-_!@#$%^&*]/gim;
 
 export default class extends Command {
     mode = Constants.Modes.STRICT;

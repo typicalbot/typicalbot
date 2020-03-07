@@ -33,9 +33,9 @@ export default class extends Event {
             const prefix = settings.prefix.custom
                 ? settings.prefix.default
                     ? message.translate('misc:MULTIPLE_PREFIXES', {
-                          default: this.client.config.prefix,
-                          custom: settings.prefix.custom
-                      })
+                        default: this.client.config.prefix,
+                        custom: settings.prefix.custom
+                    })
                     : `\`${settings.prefix.custom}\``
                 : `\`${this.client.config.prefix}\``;
 
@@ -106,8 +106,8 @@ export default class extends Event {
                 (settings.mode === 'free'
                     ? Constants.Modes.FREE
                     : settings.mode === 'lite'
-                    ? Constants.Modes.LITE
-                    : Constants.Modes.STRICT)
+                        ? Constants.Modes.LITE
+                        : Constants.Modes.STRICT)
         )
             return message.error(message.translate('misc:DISABLED'));
 

@@ -64,9 +64,9 @@ export default class ModerationLogHandler {
 
         const start = embed.description
             ? embed.description.substring(
-                  0,
-                  embed.description.lastIndexOf('\n')
-              )
+                0,
+                embed.description.lastIndexOf('\n')
+            )
             : '';
 
         return message.edit(

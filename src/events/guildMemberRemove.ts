@@ -27,11 +27,11 @@ export default class GuildMemberRemove extends Event {
                 .send(
                     settings.logs.leave
                         ? await this.client.helpers.formatMessage.execute(
-                              'logs',
-                              guild,
-                              user,
-                              settings.logs.leave
-                          )
+                            'logs',
+                            guild,
+                            user,
+                            settings.logs.leave
+                        )
                         : guild.translate('help/logs:LEFT', { user: user.tag })
                 )
                 .catch(err => Sentry.captureException(err));

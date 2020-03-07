@@ -20,7 +20,7 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle('core/donate:SUPPORT')
                 .setDescription(
-                    message.translate(`donate:TEXT`, {
+                    message.translate('donate:TEXT', {
                         link: Constants.Links.DONATE
                     })
                 )

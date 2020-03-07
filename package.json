@@ -9,8 +9,8 @@
         "build:watch": "tsc --watch",
         "build:database": "tsc && node production/scripts/setup.js",
         "build:instance": "tsc && node production/scripts/pm2.js",
-        "lint": "tsc --noEmit && eslint . --ext .ts'",
-        "lint:fix": "tsc --noEmit && eslint . --ext .ts --fix",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix",
         "start": "tsc && node production/index.js"
     },
     "repository": {
@@ -64,7 +64,6 @@
         "@types/ws": "^7.2.2",
         "@typescript-eslint/eslint-plugin": "^2.21.0",
         "@typescript-eslint/parser": "^2.21.0",
-        "eslint": "^6.1.0",
-        "eslint-plugin-import": "^2.20.1"
+        "eslint": "^6.1.0"
     }
 }

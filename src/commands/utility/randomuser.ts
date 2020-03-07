@@ -13,8 +13,8 @@ export default class extends Command {
 
         const members = args
             ? message.guild.members.cache.filter(
-                  m => m.presence.status !== 'offline'
-              )
+                m => m.presence.status !== 'offline'
+            )
             : message.guild.members.cache;
         if (!members.size) return null;
 
