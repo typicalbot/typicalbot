@@ -61,9 +61,7 @@ This section provides a quick-start guide.
 
 | Name | Role |
 |--|--|
-| [Bryan Pikaard](https://github.com/bwpikaard) | Maintainer, Core Contributor |
 | [Nicholas Sylke](https://github.com/nsylke) | Maintainer, Core Contributor |
-| [Braxton Mahr](https://github.com/SirPacker) | Core Contributor |
 | [Tyler Richards](https://github.com/tjrgg) | Core Contributor |
 | [Tobias Feld](https://github.com/TobiasFeld22)| Web Contributor |
 | [Akshin Vemana](https://github.com/AkshinVemana) | Docs Contributor |
