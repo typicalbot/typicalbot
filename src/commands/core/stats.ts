@@ -11,29 +11,16 @@ export default class extends Command {
     async execute(message: TypicalMessage) {
         const paths = [
             'guilds.cache.size',
-            'voice.connections.size',
-            'channels.cache.size',
             'users.cache.size',
             'usedRAM',
             'totalRAM'
         ];
         const [
             guilds,
-            voiceConnections,
-            channels,
             users,
             usedRAM,
             totalRAM
         ] = await Promise.all(paths.map(path => this.client.fetchData(path)));
-
-        const clusterParts = this.client.cluster.match(
-            /^(\S+? \S+?) ([\s\S]+?)$/
-        ) as RegExpMatchArray;
-        const clusterName = clusterParts[1];
-        const clusterShards = clusterParts[2]
-            .replace(/[\\[\]]/g, '')
-            .split(',')
-            .join(', ');
 
         const uptime = this.client.helpers.convertTime.execute(
             message,
@@ -41,39 +28,15 @@ export default class extends Command {
         );
         if (!message.embeddable)
             return message.send(
-                message.translate(
-                    this.client.config.clustered
-                        ? 'core/stats:CLUSTERED_TEXT'
-                        : 'core/stats:TEXT',
+                message.translate('core/stats:TEXT',
                     {
                         uptime,
                         guilds: guilds.toLocaleString(),
                         count: this.client.shardCount,
-                        voiceConnections: voiceConnections.toLocaleString(),
-                        channels: channels.toLocaleString(),
                         users: users.toLocaleString(),
                         cpu: Math.round(loadavg()[0] * 10000) / 100,
                         usedRAM,
-                        totalRAM,
-                        clusterName,
-                        clusterShards,
-                        currentGuilds: this.client.guilds.cache.size.toLocaleString(),
-                        currentVoiceConnections:
-                            this.client.voice &&
-                            this.client.voice.connections.size.toLocaleString(),
-                        currentChannels: this.client.channels.cache.size
-                            .toLocaleString()
-                            .toLocaleString(),
-                        currentUsers: this.client.users.cache.size.toLocaleString(),
-                        ram:
-                            Math.round(
-                                100 * (process.memoryUsage().heapUsed / 1048576)
-                            ) / 100,
-                        ramTotal:
-                            Math.round(
-                                100 *
-                                    (process.memoryUsage().heapTotal / 1048576)
-                            ) / 100
+                        totalRAM
                     }
                 )
             );
@@ -97,16 +60,6 @@ export default class extends Command {
                     inline: true
                 },
                 {
-                    name: message.translate('core/stats:VOICE'),
-                    value: voiceConnections.toLocaleString(),
-                    inline: true
-                },
-                {
-                    name: message.translate('core/stats:CHANNELS'),
-                    value: channels.toLocaleString(),
-                    inline: true
-                },
-                {
                     name: message.translate('core/stats:USERS'),
                     value: users.toLocaleString(),
                     inline: true
@@ -125,61 +78,10 @@ export default class extends Command {
                     name: message.translate('core/stats:RAM_TOTAL'),
                     value: `${totalRAM}MB`,
                     inline: true
-                },
-                {
-                    name: message.translate('core/stats:LIBRARY'),
-                    value: 'discord.js',
-                    inline: true
-                },
-                {
-                    name: message.translate('core/stats:CREATED_BY'),
-                    value: 'nsylke#4490',
-                    inline: true
                 }
             ])
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTimestamp();
-
-        if (this.client.config.clustered)
-            embed.addFields([
-                {
-                    name: '» Cluster',
-                    value: `${clusterName}\n${clusterShards}`,
-                    inline: true
-                },
-                {
-                    name: message.translate('core/stats:SERVERS'),
-                    value: this.client.guilds.cache.size.toLocaleString(),
-                    inline: true
-                },
-                {
-                    name: message.translate('core/stats:VOICE'),
-                    value:
-                        this.client.voice &&
-                        this.client.voice.connections.size.toLocaleString(),
-                    inline: true
-                },
-                {
-                    name: message.translate('core/stats:CHANNELS'),
-                    value: this.client.channels.cache.size.toLocaleString(),
-                    inline: true
-                },
-                {
-                    name: message.translate('core/stats:USERS'),
-                    value: this.client.users.cache.size.toLocaleString(),
-                    inline: true
-                },
-                {
-                    name: message.translate('core/stats:RAM'),
-                    value: `${this.client.usedRAM}MB`,
-                    inline: true
-                },
-                {
-                    name: message.translate('core/stats:RAM_TOTAL'),
-                    value: `${this.client.totalRAM}MB`,
-                    inline: true
-                }
-            ]);
 
         return message.send(embed);
     }
