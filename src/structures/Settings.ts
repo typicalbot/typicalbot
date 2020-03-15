@@ -55,19 +55,6 @@ export default (id: string) => ({
         link: false
     },
     nonickname: true,
-    music: {
-        default: 'all',
-        play: 'off',
-        skip: 'off',
-        stop: 'off',
-        pause: 'off',
-        resume: 'off',
-        unqueue: 'off',
-        volume: 'off',
-        timelimit: null,
-        queuelimit: null,
-        apikey: null
-    },
     subscriber: null,
     starboard: {
         id: null,

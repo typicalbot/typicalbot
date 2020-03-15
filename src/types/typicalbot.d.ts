@@ -82,19 +82,6 @@ export interface GuildSettings {
         link: boolean;
     };
     nonickname: boolean;
-    music: {
-        default: string;
-        play: string;
-        skip: string;
-        stop: string;
-        pause: string;
-        resume: string;
-        unqueue: string;
-        volume: string;
-        timelimit: number | null;
-        queuelimit: number | null;
-        apikey: string | null;
-    };
     subscriber: string | null;
     starboard: {
         id: string | null;
