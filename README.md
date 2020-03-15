@@ -21,7 +21,7 @@ TypicalBot is an ironically named multipurpose Discord bot that is far from typi
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
 - [Maintainers](#maintainers)
-- [Contributors](#contributors)
+- [Contributors](#contributors-)
 - [Show Your Support](#show-your-support)
 - [License](#license)
 
