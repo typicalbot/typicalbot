@@ -6,6 +6,6 @@ export default class GuildCreate extends Event {
         if (!guild.available) return;
 
         if (this.client.build === 'stable')
-            this.client.sendStatistics(guild.shardID);
+            await this.client.sendStatistics(guild.shardID);
     }
 }
