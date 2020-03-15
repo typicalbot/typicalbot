@@ -5,7 +5,7 @@ import Cluster from '..';
 
 export default class PermissionLevel {
     title: string;
-    level: -1 | 0 | 1 | 2 | 3 | 4 | 10;
+    level: -1 | 0 | 2 | 3 | 4 | 10;
     staff = false;
     staffOverride = false;
     client: Cluster;

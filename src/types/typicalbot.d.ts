@@ -115,14 +115,14 @@ export interface UnmuteTaskData {
 
 export interface PermissionLevelOptions {
     title: string;
-    level: -1 | 0 | 1 | 2 | 3 | 4 | 10;
+    level: -1 | 0 | 2 | 3 | 4 | 10;
     staff?: boolean;
     staffOverride?: boolean;
 }
 
 export interface PermissionLevel {
     title: string;
-    level: -1 | 0 | 1 | 2 | 3 | 4 | 10;
+    level: -1 | 0 | 2 | 3 | 4 | 10;
     staff?: boolean;
     staffOverride?: boolean;
     check(guild: Guild, member: GuildMember): boolean;
