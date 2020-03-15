@@ -21,7 +21,7 @@ export default class PermissionLevel {
 
     fetchRoles(
         guild: Guild,
-        permission: 'blacklist' | 'dj' | 'moderator' | 'administrator'
+        permission: 'blacklist' | 'moderator' | 'administrator'
     ) {
         const pool = guild.settings.roles[permission].filter(role =>
             guild.roles.cache.has(role)
@@ -31,9 +31,6 @@ export default class PermissionLevel {
         switch (permission) {
             case 'blacklist':
                 roleName = Constants.PermissionsRoleTitles.BLACKLIST.toLowerCase();
-                break;
-            case 'dj':
-                roleName = Constants.PermissionsRoleTitles.DJ.toLowerCase();
                 break;
             case 'administrator':
                 roleName = Constants.PermissionsRoleTitles.ADMINISTRATOR.toLowerCase();

@@ -27,10 +27,6 @@ export default class extends Command {
                         value: message.translate('help/perms:MEMBER_VALUE')
                     },
                     {
-                        name: message.translate('help/perms:DJ'),
-                        value: message.translate('help/perms:DJ_VALUE')
-                    },
-                    {
                         name: message.translate('help/perms:MODERATOR'),
                         value: message.translate('help/perms:MODERATOR_VALUE')
                     },

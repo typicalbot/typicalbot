@@ -32,7 +32,6 @@ export interface GuildSettings {
     roles: {
         administrator: string[];
         moderator: string[];
-        dj: string[];
         blacklist: string[];
         public: string[];
         mute: string | null;

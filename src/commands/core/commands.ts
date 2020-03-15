@@ -66,10 +66,6 @@ export default class extends Command {
                             value: level2.length ? level2.join(', ') : NONE
                         },
                         {
-                            name: message.translate('core/commands:DJ'),
-                            value: level1.length ? level1.join(', ') : NONE
-                        },
-                        {
                             name: message.translate('core/commands:MEMBER'),
                             value: level0.length ? level0.join(', ') : NONE
                         }

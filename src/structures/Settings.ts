@@ -5,7 +5,6 @@ export default (id: string) => ({
     roles: {
         administrator: [],
         moderator: [],
-        dj: [],
         blacklist: [],
         public: [],
         mute: null

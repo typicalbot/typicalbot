@@ -33,7 +33,6 @@ export const Permissions = {};
 export enum PermissionsLevels {
     SERVER_BLACKLISTED = -1,
     SERVER_MEMBER = 0,
-    SERVER_DJ = 1,
     SERVER_MODERATOR = 2,
     SERVER_ADMINISTRATOR = 3,
     SERVER_OWNER = 4,
@@ -43,7 +42,6 @@ export enum PermissionsLevels {
 export const PermissionsRoleTitles = {
     ADMINISTRATOR: 'TypicalBot Administrator',
     MODERATOR: 'TypicalBot Moderator',
-    DJ: 'TypicalBot DJ',
     BLACKLIST: 'TypicalBot Blacklist'
 };
 
