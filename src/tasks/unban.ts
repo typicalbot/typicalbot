@@ -12,7 +12,7 @@ export default class extends Task {
             reason: "Automatic Unban: User's ban time has passed."
         });
 
-        guild.members.unban(
+        await guild.members.unban(
             data.userID,
             "Automatic Unban: User's ban time has passed."
         );

@@ -35,8 +35,8 @@ export default class extends Task {
             .setModerator(this.client.user as ClientUser)
             .setUser(member.user)
             .setReason(reason);
-        newCase.send();
+        await newCase.send();
 
-        member.roles.remove(settings.roles.mute, reason);
+        await member.roles.remove(settings.roles.mute, reason);
     }
 }
