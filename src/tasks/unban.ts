@@ -3,7 +3,7 @@ import { UnbanTaskData } from '../types/typicalbot';
 import { User } from 'discord.js';
 
 export default class extends Task {
-    async execute(data: UnbanTaskData) {
+    async execute(data: UnbanTaskData): Promise<void> {
         const guild = this.client.guilds.cache.get(data.guildID);
         if (!guild) return;
 

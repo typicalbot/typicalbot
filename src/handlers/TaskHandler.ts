@@ -57,23 +57,10 @@ export default class TaskHandler {
             this.collection
                 .filter(task => Date.now() >= task.end)
                 .forEach(async task => {
-                    task.execute(task.data);
+                    await task.execute(task.data);
                     this.collection.delete(task.id);
                 });
         }, 1000);
-    }
-
-    async taskInit() {
-        const tasks: TaskOptions[] = await this.client.handlers.database.get(
-            'tasks'
-        );
-
-        for (const task of tasks) {
-            const taskType = this.taskTypes.get(task.type);
-            if (!taskType) continue;
-
-            this.collection.set(task.id, new taskType(this.client, task));
-        }
     }
 
     async create(type: string, end: number, data: unknown) {

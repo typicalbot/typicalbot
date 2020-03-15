@@ -5,7 +5,7 @@ import { TypicalGuild } from '../extensions/TypicalGuild';
 import { ClientUser } from 'discord.js';
 
 export default class extends Task {
-    async execute(data: UnmuteTaskData) {
+    async execute(data: UnmuteTaskData): Promise<void> {
         const guild = this.client.guilds.cache.get(
             data.guildID
         ) as TypicalGuild;
