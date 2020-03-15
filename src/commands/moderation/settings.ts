@@ -327,7 +327,6 @@ export default class extends Command {
             [
                 message.translate('moderation/settings:AVAILABLE'),
                 '',
-                '',
                 message.translate('moderation/settings:PAGE', { page, count }),
                 list.join('\n')
             ].join('\n')
