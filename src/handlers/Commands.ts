@@ -4,6 +4,7 @@ import klaw from 'klaw';
 import Command from '../structures/Command';
 import Cluster from '..';
 import { GuildSettings } from '../types/typicalbot';
+import * as Sentry from '@sentry/node';
 
 export default class CommandHandler extends Collection<string, Command> {
     client: Cluster;
@@ -11,7 +12,7 @@ export default class CommandHandler extends Collection<string, Command> {
         super();
         this.client = client;
 
-        this.init();
+        this.init().catch(err => Sentry.captureException(err));
     }
 
     async init() {

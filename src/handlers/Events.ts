@@ -3,6 +3,7 @@ import klaw from 'klaw';
 import { Collection } from 'discord.js';
 import Cluster from '..';
 import Event from '../structures/Event';
+import * as Sentry from '@sentry/node';
 
 export default class EventHandler extends Collection<string, Event> {
     client: Cluster;
@@ -11,7 +12,7 @@ export default class EventHandler extends Collection<string, Event> {
 
         this.client = client;
 
-        this.init();
+        this.init().catch(err => Sentry.captureException(err));
     }
 
     async init() {
