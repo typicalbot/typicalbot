@@ -489,7 +489,7 @@ export default class extends Command {
             ) {
                 payload = this.stringToObject(setting.path, []);
             } else if (
-                [ADD, 'add', REMOVE, 'remove'].includes(type.toLowerCase())
+                [ADD, 'add', REMOVE, 'remove'].includes(value.toLowerCase())
             ) {
                 const args = roleRegex.exec(value);
                 if (!args)
