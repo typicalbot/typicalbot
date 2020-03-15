@@ -84,11 +84,6 @@ export default class extends Command {
                         inline: true
                     },
                     {
-                        name: message.translate('common:STATUS_FIELD'),
-                        value: user.presence.status,
-                        inline: true
-                    },
-                    {
                         name: message.translate('common:JOINED_FIELD'),
                         value: moment(member.joinedAt as Date).format(
                             'MMM DD, YYYY hh:mm A'
