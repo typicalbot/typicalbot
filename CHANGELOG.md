@@ -9,13 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### [3.1.0]
 ### Added
  - Sentry error tracking ([e80a29a](https://github.com/sylkellc/typicalbot/commit/e80a29af42147f231df18049db17a23bd9cb265c))
- - Short codes to `lang` setting. ([1e08bd9](https://github.com/sylkellc/typicalbot/commit/1e08bd9577a200c9060e07a8e8b6bfeebd8542e1))
+ - Short codes to `lang` setting ([1e08bd9](https://github.com/sylkellc/typicalbot/commit/1e08bd9577a200c9060e07a8e8b6bfeebd8542e1))
 
 ### Changed
  - Removed unnecessary information from `stats` command ([88eb179](https://github.com/sylkellc/typicalbot/commit/88eb1798307712d786cb910858ce285e2ace4f91))
  - Updated french localization strings ([59b0f05](https://github.com/sylkellc/typicalbot/commit/59b0f05134380d608b2f20a333ff8f066b9154a6))
 
-### Fix
+### Fixed
  - Mute typings ([4e56c5f](https://github.com/sylkellc/typicalbot/commit/4e56c5f67335cdd3caf85d6c66eab837790861d0))
  - Permission showing [Object object] instead of permission title in help command ([#116](https://github.com/sylkellc/typicalbot/pull/116))
 
