@@ -13,17 +13,12 @@ export default class Command {
     path: string;
     aliases: string[];
     dm: boolean;
-    permission: -1 | 0 | 1 | 2 | 3 | 4 | 10;
+    permission: -1 | 0 | 2 | 3 | 4 | 10;
     mode: 0 | 1 | 2;
     access: 0 | 1 | 3;
     ptb = false;
 
-    constructor(
-        client: Cluster,
-        name: string,
-        path: string,
-        options?: CommandOptions
-    ) {
+    constructor(client: Cluster, name: string, path: string, options?: CommandOptions) {
         this.client = client;
         this.name = name;
         this.path = path;
@@ -38,14 +33,8 @@ export default class Command {
         this.ptb = (options && options.ptb) || false;
     }
 
-    execute(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        _message: Message | TypicalGuildMessage,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        _params?: string,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        _permissions?: PermissionLevel
-    ) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    execute(_message: Message | TypicalGuildMessage, _params?: string, _permissions?: PermissionLevel) {
         throw 'Silly you, how does your command execute without an execute method?';
     }
 }
