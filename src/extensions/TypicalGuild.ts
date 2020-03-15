@@ -18,7 +18,7 @@ export class TypicalGuild extends Structures.get('Guild') {
     }
 
     translate(key: string, args?: object) {
-        const language = this.client.translate.get(this.settings.language);
+        const language = this.client.translate.get(this.settings.language || 'en-US');
 
         if (!language) throw 'Guild: Invalid language set in settings.';
 
