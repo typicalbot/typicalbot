@@ -1,7 +1,0 @@
-{
-  "DESCRIPTION": "Diffuse une chanson vers un canal vocal depuis YouTube.",
-  "USAGE": "jouer à <video-name|url>",
-  "NO_INFO": "Impossible de récupérer les informations de cette chanson. Veuillez essayer une autre url.",
-  "PRIME_ONLY": "Cette fonctionnalité est uniquement disponible pour les membres TypicalBot Prime.",
-  "NONE": "Aucun résultat n'a été trouvé pour la requête **{{query}}**."
-}

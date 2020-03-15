@@ -1,15 +1,15 @@
 {
-	"DESCRIPTION": "Créer un alias pour les commandes.",
-	"USAGE": "alias <list|add|remove|clear> <add/remove:command> <add:new-alias>",
-	"CURRENT": "Alias actuels:",
-	"INVALID_COMMAND": "Cette commande n'existe pas.",
-	"ALIAS_EXISTS": "L'alias donné pointe déjà vers la commande `{{name}}`.",
-	"LONG": "Vous ne pouvez pas créer un alias de plus de 10 caractères.",
-	"ADDED": "Ajouté avec succès !",
-	"ADD_ERROR": "Une erreur est survenue lors de l'ajout d'un état.",
-	"INVALID_ALIAS": "L''entité demandée n''existe pas.",
-	"REMOVED": "Ajouté avec succès !",
-	"REMOVE_ERROR": "Une erreur s'est produite lors de la suppression du plugin.",
-	"CLEARED": "Ajouté avec succès !",
-	"CLEAR_ERROR": "Une erreur est survenue lors de l'ajout d'un état."
+    "DESCRIPTION": "Créer un alias pour les commandes.",
+    "USAGE": "alias <list|add|remove|clear> <add/remove:command> <add:new-alias>",
+    "CURRENT": "Alias actuels:",
+    "INVALID_COMMAND": "Cette commande n'existe pas.",
+    "ALIAS_EXISTS": "L'alias donné pointe déjà vers la commande `{{name}}`.",
+    "LONG": "Vous ne pouvez pas créer un alias de plus de 10 caractères.",
+    "ADDED": "Ajouté avec succès !",
+    "ADD_ERROR": "Une erreur est survenue lors de l'ajout d'un état.",
+    "INVALID_ALIAS": "L''entité demandée n''existe pas.",
+    "REMOVED": "Ajouté avec succès !",
+    "REMOVE_ERROR": "Une erreur s'est produite lors de la suppression du plugin.",
+    "CLEARED": "Ajouté avec succès !",
+    "CLEAR_ERROR": "Une erreur est survenue lors de l'ajout d'un état."
 }

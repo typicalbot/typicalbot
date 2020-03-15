@@ -1,6 +1,0 @@
-{
-  "VOLUME": "Changer le volume de la chanson en cours de diffusion.",
-  "USAGE": "volume <percent:0-200>",
-  "CHANGED": "Volume : {{amount}}%",
-  "INVALID": "Utilisation de commande invalide. Le volume doit être de 0 % à 200 %."
-}

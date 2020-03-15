@@ -1,8 +1,0 @@
-{
-  "DESCRIPTION": "Supprimer toutes les chansons de la file.",
-  "USAGE": "détacher",
-  "NONE": "Aucun résultat n'a été trouvé pour la requête **{{query}}**.",
-  "FOUND_MULTIPLE": "Plusieurs vidéos ont été trouvées correspondant à votre requête. Tapez `cancel` pour annuler ou `tout` pour tout supprimer. Sinon, sélectionnez parmi les vidéos listées ci-dessous:",
-  "ALL": "**{1}** éléments ont été retirés de la file d'attente !",
-  "ONE": "**{1}** éléments ont été retirés de la file d'attente !"
-}

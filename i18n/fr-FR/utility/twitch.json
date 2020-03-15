@@ -1,12 +1,12 @@
 {
-  "DESCRIPTION": "Vérifier les données des utilisateurs twitch de l'API Twitch .",
-  "USAGE": "twitch <user>",
-  "STATS": "**__Statistiques Twitch :__** {{name}}",
-  "ID": "(ID : {id})",
-  "DISPLAY": "Nom affiché : {{name}}",
-  "DESC": "Description : ${description}",
-  "STATUS": "Statut : {{type}}",
-  "PROFILE": "URL de la photo de profil",
-  "VIEWS": "Vues totales : {amount}",
-  "TITLE": "Statistiques de Twitch"
+    "DESCRIPTION": "Vérifier les données des utilisateurs twitch de l'API Twitch .",
+    "USAGE": "twitch <user>",
+    "STATS": "**__Statistiques Twitch :__** {{name}}",
+    "ID": "(ID : {id})",
+    "DISPLAY": "Nom affiché : {{name}}",
+    "DESC": "Description : ${description}",
+    "STATUS": "Statut : {{type}}",
+    "PROFILE": "URL de la photo de profil",
+    "VIEWS": "Vues totales : {{amount}}",
+    "TITLE": "Statistiques de Twitch"
 }

@@ -1,9 +1,9 @@
 {
-  "DESCRIPTION": "Changez ou effacez votre pseudo ou le pseudo d'un autre utilisateur.",
-  "USAGE": "surnom [@user] [nickname]",
-  "DISABLED": "Cette commande est actuellement désactivée. Désactivez le paramètre `nonickname` pour activer cette commande.",
-  "ERROR": "Une erreur s'est produite. Cela signifie que je ne peux pas gérer le surnom du membre.",
-  "SELF_ERROR": "Une erreur s'est produite. Cela signifie que je ne peux pas gérer le surnom du membre.",
-  "SUCCESS": "Pseudo du membre {{type}} réussi.",
-  "SELF_SUCCESS": "{{type}} votre pseudo réussi."
+    "DESCRIPTION": "Changez ou effacez votre pseudo ou le pseudo d'un autre utilisateur.",
+    "USAGE": "surnom [@user] [nickname]",
+    "DISABLED": "Cette commande est actuellement désactivée. Désactivez le paramètre `nonickname` pour activer cette commande.",
+    "ERROR": "Une erreur s'est produite. Cela signifie que je ne peux pas gérer le surnom du membre.",
+    "SELF_ERROR": "Une erreur s'est produite. Cela signifie que je ne peux pas gérer le surnom du membre.",
+    "SUCCESS": "Pseudo du membre {{type}} réussi.",
+    "SELF_SUCCESS": "{{type}} votre pseudo réussi."
 }

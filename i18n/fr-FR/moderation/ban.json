@@ -1,12 +1,12 @@
 {
-	"DESCRIPTION": "Bannis un membre de ce serveur.",
-	"USAGE": "bannir <@user> [time:xd(ays) xh(nos) xm(inutes) xs(econds)] [purge-days] [reason]",
-	"WEEk": "Vous ne pouvez pas bannir un utilisateur pendant plus d'une semaine.",
-	"TOO_LOW": "Vous ne pouvez pas bannir un utilisateur avec le même ou le plus haut rôle.",
-	"UNBANNABLE": "Afin de compléter la demande, j'ai besoin de la permission **BAN_MEMBERS** et mon rôle le plus élevé doit être supérieur au rôle le plus élevé de l'utilisateur.",
-	"BANNED": "Vous avez été banni de **{{name}}**.",
-	"REASON": "Banni par {{mod}} | Raison : {{reason}}",
-	"ERROR": "Une erreur s'est produite en essayant de sauvegarder la ressource.",
-	"BAN_SUCCESS": "Utilisateur {{user}} banni avec succès.",
-	"USER_BANNED": "Utilisateur banni"
+    "DESCRIPTION": "Bannis un membre de ce serveur.",
+    "USAGE": "bannir <@user> [time:xd(ays) xh(nos) xm(inutes) xs(econds)] [purge-days] [reason]",
+    "WEEk": "Vous ne pouvez pas bannir un utilisateur pendant plus d'une semaine.",
+    "TOO_LOW": "Vous ne pouvez pas bannir un utilisateur avec le même ou le plus haut rôle.",
+    "UNBANNABLE": "Afin de compléter la demande, j'ai besoin de la permission **BAN_MEMBERS** et mon rôle le plus élevé doit être supérieur au rôle le plus élevé de l'utilisateur.",
+    "BANNED": "Vous avez été banni de **{{name}}**.",
+    "REASON": "Banni par {{mod}} | Raison : {{reason}}",
+    "ERROR": "Une erreur s'est produite en essayant de sauvegarder la ressource.",
+    "BAN_SUCCESS": "Utilisateur {{user}} banni avec succès.",
+    "USER_BANNED": "Utilisateur banni"
 }
