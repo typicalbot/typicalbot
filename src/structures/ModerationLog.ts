@@ -92,7 +92,7 @@ export default class ModerationLog {
             .setURL(Constants.Links.BASE)
             .setDescription(
                 `${this.action}\n${this.channel || this.user}\n${this.reason ||
-                    `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`
+                `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`
             )
             .setFooter(this.id, Constants.Links.ICON)
             .setTimestamp();
@@ -114,16 +114,13 @@ export default class ModerationLog {
         );
 
         if (!this.id) {
-            const id = latest
-                ? Number(
-                    latest.embeds[0] &&
-                          latest.embeds[0].footer &&
-                          latest.embeds[0].footer.text &&
-                          latest.embeds[0].footer.text.match(
-                              Constants.ModerationLogRegex.CASE
-                          )
-                )
-                : 1;
+            let id = 1;
+
+            if (latest && latest.embeds[0] && latest.embeds[0].footer && latest.embeds[0].footer.text && latest.embeds[0].footer.text.match(Constants.ModerationLogRegex.CASE)) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
+                id = Number(latest.embeds[0].footer.text.match(Constants.ModerationLogRegex.CASE)[1]) + 1;
+            }
 
             this.setId(id || 1);
         }
