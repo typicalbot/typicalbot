@@ -79,12 +79,6 @@ export default class extends Command {
                         type: 'roles',
                         path: 'roles.moderator'
                     },
-                    djrole: {
-                        description: 'moderation/settings:DJROLE',
-                        value: settings.roles.dj,
-                        type: 'roles',
-                        path: 'roles.dj'
-                    },
                     muterole: {
                         description: 'moderation/settings:MUTEROLE',
                         value: settings.roles.mute,
