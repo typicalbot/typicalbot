@@ -7,14 +7,14 @@ import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
 import config from '../config.json';
 
-import DatabaseHandler from './handlers/Database';
-import TaskHandler from './handlers/Tasks';
-import PermissionsHandler from './handlers/Permissions';
-import ModerationLogHandler from './handlers/ModerationLog';
-import SettingsHandler from './handlers/Settings';
-import FunctionHandler from './handlers/Functions';
-import CommandHandler from './handlers/Commands';
-import EventHandler from './handlers/Events';
+import DatabaseHandler from './handlers/DatabaseHandler';
+import TaskHandler from './handlers/TaskHandler';
+import PermissionsHandler from './handlers/PermissionsHandler';
+import ModerationLogHandler from './handlers/ModerationLogHandler';
+import SettingHandler from './handlers/SettingHandler';
+import FunctionHandler from './handlers/FunctionHandler';
+import CommandHandler from './handlers/CommandHandler';
+import EventHandler from './handlers/EventHandler';
 
 import {
     TypicalDonor,
@@ -41,7 +41,7 @@ export default class Cluster extends Client {
     shardCount = process.env.TOTAL_SHARD_COUNT || '1';
     cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
     handlers = {} as TypicalHandlers;
-    settings = new SettingsHandler(this);
+    settings = new SettingHandler(this);
     functions = new FunctionHandler(this);
     helpers = {} as HelperFunctions;
     commands = new CommandHandler(this);
