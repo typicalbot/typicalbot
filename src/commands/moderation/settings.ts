@@ -10,11 +10,11 @@ const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
 const possibleLanguages = [
     {
         name: 'en-US',
-        aliases: ['english']
+        aliases: ['en', 'english']
     },
     {
         name: 'fr-FR',
-        aliases: ['french', 'française', 'français']
+        aliases: ['fr', 'french', 'française', 'français']
     }
 ];
 export default class extends Command {
