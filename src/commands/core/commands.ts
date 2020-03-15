@@ -13,7 +13,6 @@ export default class extends Command {
             message.respond(message.translate('core/commands:CHECK_DM'));
 
         const level0 = [];
-        const level1 = [];
         const level2 = [];
         const level3 = [];
         const level4 = [];
@@ -24,9 +23,6 @@ export default class extends Command {
             switch (command.permission) {
                 case 0:
                     level0.push(commandName);
-                    break;
-                case 1:
-                    level1.push(commandName);
                     break;
                 case 2:
                     level2.push(commandName);
