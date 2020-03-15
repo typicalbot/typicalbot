@@ -254,66 +254,6 @@ export default class extends Command {
                         type: 'boolean',
                         path: 'nonickname'
                     },
-                    'music-permissions': {
-                        description: 'moderation/settings:MUSIC-PERMISSIONS',
-                        value: settings.music.default,
-                        type: 'default',
-                        path: 'music.default'
-                    },
-                    'music-play': {
-                        description: 'moderation/settings:MUSIC-PLAY',
-                        value: settings.music.play,
-                        type: 'default',
-                        path: 'music.play'
-                    },
-                    'music-skip': {
-                        description: 'moderation/settings:MUSIC-SKIP',
-                        value: settings.music.skip,
-                        type: 'default',
-                        path: 'music.skip'
-                    },
-                    'music-stop': {
-                        description: 'moderation/settings:MUSIC-STOP',
-                        value: settings.music.stop,
-                        type: 'default',
-                        path: 'music.stop'
-                    },
-                    'music-pause': {
-                        description: 'moderation/settings:MUSIC-PAUSE',
-                        value: settings.music.pause,
-                        type: 'default',
-                        path: 'music.pause'
-                    },
-                    'music-resume': {
-                        description: 'moderation/settings:MUSIC-RESUME',
-                        value: settings.music.resume,
-                        type: 'default',
-                        path: 'music.resume'
-                    },
-                    'music-unqueue': {
-                        description: 'moderation/settings:MUSIC-UNQUEUE',
-                        value: settings.music.unqueue,
-                        type: 'default',
-                        path: 'music.unqueue'
-                    },
-                    'music-volume': {
-                        description: 'moderation/settings:MUSIC-VOLUME',
-                        value: settings.music.volume,
-                        type: 'default',
-                        path: 'music.volume'
-                    },
-                    'music-timelimit': {
-                        description: 'moderation/settings:MUSIC-TIMELIMIT',
-                        value: settings.music.timelimit,
-                        type: 'default',
-                        path: 'music.timelimit'
-                    },
-                    'music-queuelimit': {
-                        description: 'moderation/settings:MUSIC-QUEUELIMIT',
-                        value: settings.music.queuelimit,
-                        type: 'default',
-                        path: 'music.queuelimit'
-                    },
                     starboard: {
                         description: 'moderation/settings:STARBOARD',
                         value: settings.starboard.id,
