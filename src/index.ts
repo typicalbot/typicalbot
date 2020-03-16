@@ -6,6 +6,7 @@ import { Client, Collection } from 'discord.js';
 import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
 import config from '../config.json';
+import pkg from '../package.json';
 
 import DatabaseHandler from './handlers/DatabaseHandler';
 import TaskHandler from './handlers/TaskHandler';
@@ -64,7 +65,8 @@ export default class Cluster extends Client {
         });
 
         Sentry.init({
-            dsn: this.config.apis.sentry
+            dsn: this.config.apis.sentry,
+            release: pkg.version
         });
 
         this.node = node;
