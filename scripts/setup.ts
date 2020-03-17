@@ -19,7 +19,7 @@ const { credentials } = configs.database;
     const tables = ['guilds', 'mutes', 'tasks', 'donors'];
 
     for (const table of tables) {
-        r.branch(dbTables.contains(table), null, db.tableCreate(table)).run();
+        await r.branch(dbTables.contains(table), null, db.tableCreate(table)).run();
     }
 
     console.log('The database should be good to go.');
