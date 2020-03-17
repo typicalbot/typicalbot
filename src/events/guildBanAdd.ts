@@ -66,5 +66,3 @@ export default class GuildBanAdd extends Event {
             .catch(err => Sentry.captureException(err));
     }
 }
-
-module.exports = GuildBanAdd;

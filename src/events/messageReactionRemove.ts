@@ -57,5 +57,3 @@ export default class MessageReactionRemove extends Event {
         });
     }
 }
-
-module.exports = MessageReactionRemove;
