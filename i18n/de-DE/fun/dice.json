@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Würfelt einen n-seitigen Würfel.",
+	"USAGE": "dice [Seiten]",
+	"RESPONSE": "Ich habe eine **__{{amount}}__** gewürfelt.",
+	"INVALID": "Ungültige Anzahl Seiten. Die Anzahl muss eine Ganzzahl, grösser als 1 und nicht grösser als 100 sein."
+}

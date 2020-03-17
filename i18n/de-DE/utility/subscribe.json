@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Erhalte die Abonnentenrolle des Servers.",
+  "USAGE": "subscribe",
+  "NONE": "Für diesen Server ist keine Abonnentenrolle eingerichtet.",
+  "SUBSCRIBED": "Du hast jetzt abonniert."
+}

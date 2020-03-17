@@ -1,0 +1,18 @@
+{
+    "DESCRIPTION": "Zeigt die Informationen des Servers an.",
+    "USAGE": "serverinfo",
+    "SERVER": "**__Serverinformationen für:__** {{name}}",
+    "NAME": "Name: {{name}} ({{id}})",
+    "OWNER": "Besitzer: {{user}} ({{id}})",
+    "CREATED": "Erstellt: {{time}}",
+    "REGION": "Region: {{region}}",
+    "VERIFICATION": "Verifizierungsstufe: {{level}}",
+    "ICON": "Icon: {{url}}",
+    "CHANNELS": "Kanäle: {{amount}}",
+    "MEMBERS": "Mitglieder: {{amount}}",
+    "ROLES": "Rollen: {{amount}}",
+    "EMOJIS": "Emojis: {{amount}}",
+    "BOOSTED": "Boosted Tier: Level {{level}} ({{amount}} Booster)",
+    "BOOSTERS": "Level {{level}} ({{amount}} Booster)",
+    "INFO": "Serverinformationen"
+}

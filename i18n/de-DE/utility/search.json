@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Sucht in der Nutzerliste nach einem Nutzernamen oder einem Nickname.",
+  "USAGE": "search <Query> [Seiten-Zahl]",
+  "NONE": "Es gibt keine Treffer für die Query **{{query}}**.",
+  "RESULTS": "**__Ergebnisse für die Query:__** {{query}}"
+}

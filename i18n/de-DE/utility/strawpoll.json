@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Erstelle eine Strawpoll Abstimmung. Nutze die '-m' flag für Mehrfachwahl.",
+  "USAGE": "strawpoll ['-m'] <Frage> | Auswahl1; Auswahl2; Auswahl+",
+  "INVALID": "Es muss zwischen 2 und 30 Wahlmöglichkeiten geben, um einen Strawpoll zu erstellen.",
+  "CREATED": "Dein Strawpoll wurde erstellt! <https://strawpoll.me/{{id}}>"
+}

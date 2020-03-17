@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Zeigt deine Berechtigungsstufe oder die eines anderen Nutzers an.",
+  "USAGE": "level [@Nutzer|Nutzer-ID|Nutzer-Tag]",
+  "TEXT": "**__{{user}}'s Berechtigungsstufe:__** {{level}}",
+  "TITLE": "{{user}}'s Berechtigungsstufe",
+  "EMBED": "Level {{level}}"
+}

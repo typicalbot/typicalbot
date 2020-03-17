@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Umarme einen anderen Nutzer auf dem Server.",
+    "USAGE": "hug [@Nutzer]",
+    "SELF": "hat sich selber umarmt. :hugging: *Das ist überhaupt nicht komisch.* :eyes:",
+    "RESPONSE": "hat gerade {{user}} umarmt. :hugging:",
+    "RESPONSE_AWW": "hat gerade {{user}} umarmt. :hugging: Aww!"
+}

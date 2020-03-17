@@ -1,0 +1,5 @@
+{
+  "DESCRIPTION": "Wählt ein zufälliges Mitglied des Servers aus.",
+  "USAGE": "randomuser [-o]",
+  "RANDOM": "Deine zufällige Auswahl ist: **{{tag}}** ({{id}})."
+}

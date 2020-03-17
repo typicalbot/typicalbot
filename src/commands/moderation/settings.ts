@@ -10,11 +10,21 @@ const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
 const possibleLanguages = [
     {
         name: 'en-US',
+        canonical: 'English',
+        complete: true,
         aliases: ['en', 'english']
     },
     {
         name: 'fr-FR',
+        canonical: 'French',
+        complete: true,
         aliases: ['fr', 'french', 'française', 'français']
+    },
+    {
+        name: 'de-DE',
+        canonical: 'German',
+        complete: false,
+        aliases: ['de', 'german', 'deutsch', 'deutsche']
     }
 ];
 export default class extends Command {
@@ -462,6 +472,9 @@ export default class extends Command {
                 return message.error(
                     message.translate('moderation/settings:INVALID_OPTION')
                 );
+
+            if (!selectedLanguage.complete)
+                await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <https://translate.typicalbot.com>`);
 
             value = selectedLanguage.name;
         }

@@ -1,0 +1,4 @@
+{
+  "DESCRIPTION": "Sendet eine Vorschau einer Hex-Farbe.",
+  "USAGE": "hex <Hex-Farbe:0-9a-fA-F>"
+}

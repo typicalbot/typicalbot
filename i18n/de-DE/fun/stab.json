@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Ersteche einen andern Nutzer auf dem Server.",
+    "USAGE": "stab [@Nutzer]",
+    "SELF": "hat sich selbst erstochen! :dagger::scream:",
+    "SELF_POLICE": "hat sich selbst erstochen! :dagger::scream: Jemand ruf die Polizei!",
+    "RESPONSE": "hat gerade {{user}} erstochen! :dagger::scream:",
+    "RESPONSE_POLICE": "hat gerade {{user}} erstochen! :dagger::scream: Jemand ruf die Polizei!"
+}

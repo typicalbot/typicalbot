@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Gibt eine Liste der Bots von Carbonitex, sortiert nach Serveranzahl.",
+  "USAGE": "bots [Seitenanzahl]",
+  "COMPLIANT": " | Kohlenstoff-konform",
+  "RANKED": "**__Bot Rangliste - bereitgestellt von Carbonitex:__**"
+}

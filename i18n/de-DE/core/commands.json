@@ -1,0 +1,13 @@
+{
+    "DESCRIPTION": "Erhalte eine Liste von TypicalBot Befehlen.",
+    "USAGE": "Befehle",
+    "CHECK_DM": "Eine Liste von Befehlen sollte in deinen Direktnachrichten angekommen sein.",
+    "TYPICAL_COMMANDS": "TypicalBot Befehle",
+    "TEXT": "Nutze `{{prefix}}help <Befehl>`, um mehr Informationen über einen bestimmten Befehl zu erhalten.",
+    "OWNER": "» Serverbesitzer (Stufe 4)",
+    "ADMIN": "» Server Administrator (Stufe 3)",
+    "MOD": "» Server-Moderator (Stufe 2)",
+    "DJ": "» Server DJ (Level 1)",
+    "MEMBER": "» Server Mitglied (Stufe 0)",
+    "NONE": "Keine anzuzeigende Befehle."
+}

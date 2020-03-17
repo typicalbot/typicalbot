@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Entferne die Abonnentenrolle des Servers von dir selber.",
+    "USAGE": "unsubscribe",
+    "UNSUBBED": "Du hast jetzt deabonniert."
+}

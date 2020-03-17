@@ -1,0 +1,5 @@
+{
+  "DESCRIPTION": "Erhalte eine Liste von Servers mit dem zurzeitigen Shard.",
+  "USAGE": "servers [Seite]",
+  "CLUSTER": "**__Server auf dem Cluster {{cluster}} / {{count}}:__**"
+}

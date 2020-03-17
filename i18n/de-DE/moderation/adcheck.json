@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Überprüft ob irgendein Mitglied des Servers eine Server-Einladung in deren Status hat.",
+    "USAGE": "addcheck",
+    "NONE": "Es gibt keine Nutzer mit einer Einladung in ihrem Status.",
+    "FOUND": "Es gibt {{amount}} mit einer Einladung in ihrem Status:\n\n",
+    "ONE": "1 Nutzer",
+    "MULTIPLE": "{{amount}} Nutzer",
+    "TITLE": "Nutzer mit Einladung in ihrem Status"
+}
