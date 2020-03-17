@@ -74,7 +74,7 @@ export default class Cluster extends Client {
 
         this.node = node;
 
-        this.login(this.config.token);
+        this.login(this.config.token).catch(err => Sentry.captureException(err));
     }
 
     async login(token: string) {
