@@ -6,7 +6,7 @@ export default class Ready extends Event {
 
     async execute() {
         this.client.logger.info(`Client Connected | Cluster ${this.client.cluster}`);
-        (this.client.user as ClientUser).setActivity('Client is loading');
+        await (this.client.user as ClientUser).setActivity('Client is loading');
 
         setTimeout(
             () =>
