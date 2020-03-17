@@ -1,0 +1,19 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - 3.x
+  pull_request:
+
+jobs:
+  docker:
+    name: docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: install
+        uses: docker://mhart/alpine-node:12
+        with:
+          entrypoint: sh
+          args: -c "yarn install && yarn build"
