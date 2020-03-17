@@ -11,9 +11,9 @@ jobs:
     name: docker
     runs-on: ubuntu-latest
     steps:
+      - run: apt install build-essential python -y
       - uses: actions/checkout@v1
       - name: install
-        run: apt install build-essential python -y
         uses: docker://mhart/alpine-node:12
         with:
           entrypoint: sh
