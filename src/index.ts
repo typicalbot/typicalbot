@@ -87,7 +87,7 @@ export default class Cluster extends Client {
         this.handlers.moderationLog = new ModerationLogHandler(this);
 
         // Fetch donors
-        this.fetchDonors();
+        await this.fetchDonors();
         // Setup translation i18n before login to client
         this.translate = await i18n();
         this.logger.info('Loaded i18n Languages');
