@@ -43,7 +43,7 @@ TypicalFunction
                 this.client.helpers[file.name] = newReq;
             })
             .on('end', () => {
-                console.log(
+                this.client.logger.info(
                     `Loaded ${count} Functions in ${Date.now() - start}ms`
                 );
 

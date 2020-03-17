@@ -43,7 +43,7 @@ export default class EventHandler extends Collection<string, Event> {
                 }
             })
             .on('end', () => {
-                console.log(
+                this.client.logger.info(
                     `Loaded ${this.size} Events in ${Date.now() - start}ms`
                 );
             });

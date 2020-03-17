@@ -16,6 +16,7 @@ import SettingHandler from './handlers/SettingHandler';
 import FunctionHandler from './handlers/FunctionHandler';
 import CommandHandler from './handlers/CommandHandler';
 import EventHandler from './handlers/EventHandler';
+import Logger from './utility/Logger';
 
 import {
     TypicalDonor,
@@ -55,6 +56,8 @@ export default class Cluster extends Client {
         invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
     translate: Map<string, TFunction> = new Map();
+    logger = new Logger();
+
     constructor(node: VezaClient | undefined) {
         super({
             messageCacheMaxSize: 150,
@@ -87,7 +90,7 @@ export default class Cluster extends Client {
         this.fetchDonors();
         // Setup translation i18n before login to client
         this.translate = await i18n();
-        console.log('Loaded i18n Languages');
+        this.logger.info('Loaded i18n Languages');
 
         return super.login(token);
     }

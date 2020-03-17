@@ -34,7 +34,7 @@ export default class TaskHandler {
             })
             .on('end', async () => {
                 // eslint-disable-next-line no-console
-                console.log(
+                this.client.logger.info(
                     `Loaded ${this.collection.size} Tasks in ${Date.now() -
                         start}ms`
                 );

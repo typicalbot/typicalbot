@@ -37,7 +37,7 @@ export default class CommandHandler extends Collection<string, Command> {
                 this.set(file.name, newReq);
             })
             .on('end', () => {
-                console.log(
+                this.client.logger.info(
                     `Loaded ${this.size} Commands in ${Date.now() - start}ms`
                 );
 
