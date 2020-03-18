@@ -19,6 +19,17 @@ export default class extends Event {
         if (!message.guild.me)
             await message.guild.members.fetch(this.client.config.id);
 
+        this.client.amplitude.addEvent({
+            userId: message.author.id,
+            eventType: 'MESSAGE_CREATE',
+            eventProperties: {
+                messageId: message.id,
+                channelId: message.channel.id,
+                guildId: message.guild.id,
+                timestamp: message.createdTimestamp
+            }
+        });
+
         const botMember = message.guild.me as GuildMember;
         const botSendPerms = message.channel.permissionsFor(botMember);
         if (!botSendPerms || !botSendPerms.has('SEND_MESSAGES')) return;
@@ -54,13 +65,13 @@ export default class extends Event {
 
         if (
             userPermissions.level <
-                Constants.PermissionsLevels.SERVER_MODERATOR &&
+            Constants.PermissionsLevels.SERVER_MODERATOR &&
             !settings.ignored.invites.includes(message.channel.id)
         )
             this.inviteCheck(message);
         if (
             userPermissions.level <
-                Constants.PermissionsLevels.SERVER_MODERATOR &&
+            Constants.PermissionsLevels.SERVER_MODERATOR &&
             settings.ignored.commands.includes(message.channel.id)
         )
             return;
@@ -103,11 +114,11 @@ export default class extends Event {
             !this.client.config.maintainers.includes(message.author.id) &&
             message.author.id !== message.guild.ownerID &&
             command.mode <
-                (settings.mode === 'free'
-                    ? Constants.Modes.FREE
-                    : settings.mode === 'lite'
-                        ? Constants.Modes.LITE
-                        : Constants.Modes.STRICT)
+            (settings.mode === 'free'
+                ? Constants.Modes.FREE
+                : settings.mode === 'lite'
+                    ? Constants.Modes.LITE
+                    : Constants.Modes.STRICT)
         )
             return message.error(message.translate('misc:DISABLED'));
 
@@ -115,7 +126,7 @@ export default class extends Event {
             userPermissions.level < command.permission ||
             (actualUserPermissions.level < command.permission &&
                 actualUserPermissions.level !==
-                    Constants.PermissionsLevels.SERVER_BLACKLISTED &&
+                Constants.PermissionsLevels.SERVER_BLACKLISTED &&
                 command.permission <= Constants.PermissionsLevels.SERVER_OWNER)
         ) {
             return message.error(
@@ -126,6 +137,19 @@ export default class extends Event {
                 )
             );
         }
+
+        this.client.amplitude.addEvent({
+            userId: message.author.id,
+            eventType: 'COMMAND_CREATE',
+            eventProperties: {
+                messageId: message.id,
+                channelId: message.channel.id,
+                guildId: message.guild.id,
+                timestamp: message.createdTimestamp,
+                command: command.name,
+                commandArgs: params
+            }
+        });
 
         return command.execute(message, params.join(' '), userPermissions);
     }
