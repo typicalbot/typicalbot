@@ -16,7 +16,7 @@ const { credentials } = configs.database;
     const db = r.db(credentials.db);
     const dbTables = db.tableList();
 
-    const tables = ['guilds', 'mutes', 'tasks', 'donors'];
+    const tables = ['guilds', 'mutes', 'tasks', 'donors', 'analytics'];
 
     for (const table of tables) {
         await r.branch(dbTables.contains(table), null, db.tableCreate(table)).run();

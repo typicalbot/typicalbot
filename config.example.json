@@ -11,8 +11,7 @@
         "discordbots": "",
         "carbonkey": "",
         "twitch": "",
-        "sentry": "",
-        "amplitude": ""
+        "sentry": ""
     },
     "database": {
         "credentials": {

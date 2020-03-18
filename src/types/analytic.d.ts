@@ -1,6 +1,6 @@
-export interface AmplitudeEvent {
+export interface AnalyticEvent {
     userId: string;
-    eventType: 'MESSAGE_CREATE' | 'COMMAND_CREATE';
+    eventType: 'COMMAND_CREATE';
     eventProperties: {
         messageId?: string;
         channelId?: string;

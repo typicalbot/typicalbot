@@ -16,7 +16,7 @@ import SettingHandler from './handlers/SettingHandler';
 import FunctionHandler from './handlers/FunctionHandler';
 import CommandHandler from './handlers/CommandHandler';
 import EventHandler from './handlers/EventHandler';
-import AmplitudeHandler from './handlers/AmplitudeHandler';
+import AnalyticHandler from './handlers/AnalyticHandler';
 import Logger from './utility/Logger';
 
 import {
@@ -49,7 +49,7 @@ export default class Cluster extends Client {
     helpers = {} as HelperFunctions;
     commands = new CommandHandler(this);
     events = new EventHandler(this);
-    amplitude = new AmplitudeHandler(this);
+    analytics = new AnalyticHandler(this);
     caches = {
         donors: new Collection<string, TypicalDonor>(),
         bans: new Collection<string, BanLog>(),

@@ -19,17 +19,6 @@ export default class extends Event {
         if (!message.guild.me)
             await message.guild.members.fetch(this.client.config.id);
 
-        this.client.amplitude.addEvent({
-            userId: message.author.id,
-            eventType: 'MESSAGE_CREATE',
-            eventProperties: {
-                messageId: message.id,
-                channelId: message.channel.id,
-                guildId: message.guild.id,
-                timestamp: message.createdTimestamp
-            }
-        });
-
         const botMember = message.guild.me as GuildMember;
         const botSendPerms = message.channel.permissionsFor(botMember);
         if (!botSendPerms || !botSendPerms.has('SEND_MESSAGES')) return;
@@ -138,7 +127,7 @@ export default class extends Event {
             );
         }
 
-        this.client.amplitude.addEvent({
+        this.client.analytics.addEvent({
             userId: message.author.id,
             eventType: 'COMMAND_CREATE',
             eventProperties: {

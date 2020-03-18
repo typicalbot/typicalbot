@@ -8,13 +8,13 @@ export default class Ready extends Event {
         this.client.logger.info(`Client Connected | Cluster ${this.client.cluster}`);
         await (this.client.user as ClientUser).setActivity('Client is loading');
 
-        if (this.client.config.apis.amplitude) {
-            setInterval(async () => {
-                if (this.client.amplitude.getEvents().length >= 10) return;
+        setInterval(async () => {
+            for (let i = 0; i < 50; i++) {
+                if (!this.client.analytics.getEvents().length) break;
 
-                await this.client.amplitude.publish();
-            }, 1000);
-        }
+                await this.client.analytics.publish();
+            }
+        }, 1000);
 
         setTimeout(
             () =>
