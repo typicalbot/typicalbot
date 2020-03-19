@@ -78,7 +78,7 @@ export default class extends Command {
                             .setTimestamp()
                     )
                     .catch(() => null);
-            } else if (logChannel && logChannel instanceof TextChannel) {
+            } else if (logChannel) {
                 logChannel
                     .send(
                         [
