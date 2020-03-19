@@ -145,12 +145,11 @@ export default class Cluster extends Client {
         });
 
         fetch(
-            `https://discordbots.org/api/bots/${this.user &&
-                this.user.id}/stats`,
+            `https://top.gg/api/bots/${this.config.id}/stats`,
             {
                 method: 'post',
                 headers: {
-                    Authorization: this.config.apis.discordbots
+                    Authorization: this.config.apis.topgg
                 },
                 body: JSON.stringify({
                     // eslint-disable-next-line @typescript-eslint/camelcase
