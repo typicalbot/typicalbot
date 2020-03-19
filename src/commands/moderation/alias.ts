@@ -36,10 +36,10 @@ export default class extends Command {
         }
     }
 
-    list(message: TypicalGuildMessage) {
+    async list(message: TypicalGuildMessage) {
         const NONE = message.translate('common:NONE');
 
-        message.reply([
+        await message.reply([
             message.translate('moderation/alias:CURRENT'),
             message.guild.settings.aliases.length
                 ? message.guild.settings.aliases

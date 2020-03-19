@@ -91,11 +91,11 @@ export default class extends Command {
                 .setModerator(message.author)
                 .setChannel(channelToUse);
             if (reason) newCase.setReason(reason);
-            newCase.send();
+            await newCase.send();
         }
 
         if (!purged.size)
-            message.reply(message.translate('moderation/purge:NONE'));
+            await message.reply(message.translate('moderation/purge:NONE'));
         else {
             const response = await message.reply(
                 message.translate(

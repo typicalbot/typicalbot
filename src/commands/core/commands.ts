@@ -8,9 +8,9 @@ export default class extends Command {
     dm = true;
     mode = Constants.Modes.STRICT;
 
-    execute(message: TypicalMessage) {
+    async execute(message: TypicalMessage) {
         if (message.channel.type === 'text')
-            message.respond(message.translate('core/commands:CHECK_DM'));
+            await message.respond(message.translate('core/commands:CHECK_DM'));
 
         const level0 = [];
         const level2 = [];

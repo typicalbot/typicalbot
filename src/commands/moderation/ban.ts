@@ -110,7 +110,7 @@ export default class extends Command {
             });
 
         if (time)
-            this.client.handlers.tasks.create('unban', Date.now() + time, {
+            await this.client.handlers.tasks.create('unban', Date.now() + time, {
                 guildID: message.guild.id,
                 userID: user.id
             });

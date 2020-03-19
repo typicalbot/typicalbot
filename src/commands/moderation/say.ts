@@ -10,7 +10,7 @@ export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_MODERATOR;
     mode = Constants.Modes.STRICT;
 
-    execute(message: TypicalGuildMessage, parameters: string) {
+    async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
         if (!args)
             return message.error(
@@ -37,7 +37,7 @@ export default class extends Command {
                         )
                     );
             } catch (err) {
-                message.error(message.translate('moderation/say:INVALID'));
+                await message.error(message.translate('moderation/say:INVALID'));
             }
         } else {
             channel
@@ -95,7 +95,7 @@ export default class extends Command {
             }
         }
 
-        if (message.deletable) message.delete({ timeout: 500 });
+        if (message.deletable) await message.delete({ timeout: 500 });
 
         return null;
     }

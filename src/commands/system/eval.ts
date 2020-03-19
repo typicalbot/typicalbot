@@ -11,7 +11,7 @@ export default class extends Command {
     permission = Constants.PermissionsLevels.TYPICALBOT_MAINTAINER;
     mode = Constants.Modes.STRICT;
 
-    execute(message: TypicalGuildMessage, parameters: string) {
+    async execute(message: TypicalGuildMessage, parameters: string) {
         const embed = new MessageEmbed()
             .setColor(0x00ff00)
             .setFooter('TypicalBot Eval', Constants.Links.ICON);

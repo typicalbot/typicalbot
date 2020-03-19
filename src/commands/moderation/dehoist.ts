@@ -26,14 +26,14 @@ export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_ADMINISTRATOR;
     mode = Constants.Modes.STRICT;
 
-    execute(message: TypicalGuildMessage) {
+    async execute(message: TypicalGuildMessage) {
         const list = [];
         for (const member of message.guild.members.cache.values()) {
             if (!characters.includes(member.displayName[0])) continue;
             list.push(`» ${member.displayName} (${member.id})`);
         }
 
-        message.send(
+        await message.send(
             list.length
                 ? [
                     message.translate('moderation/dehoist:FOUND', {

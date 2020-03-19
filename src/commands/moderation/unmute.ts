@@ -97,7 +97,7 @@ export default class extends Command {
                 .setModerator(message.author)
                 .setUser(member.user);
             if (reason) newCase.setReason(reason);
-            newCase.send();
+            await newCase.send();
 
             const tasks = (await this.client.handlers.database
                 .get('tasks')
@@ -110,7 +110,7 @@ export default class extends Command {
                     (task.data as UnmuteTaskData).memberID === member.id
             );
             if (releventTask)
-                this.client.handlers.tasks.delete(releventTask.id);
+                await this.client.handlers.tasks.delete(releventTask.id);
         }
 
         return message.success(

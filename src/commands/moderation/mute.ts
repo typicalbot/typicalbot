@@ -158,11 +158,11 @@ export default class extends Command {
                 .setModerator(message.author)
                 .setUser(member.user);
             if (reason) newCase.setReason(reason);
-            newCase.send();
+            await newCase.send();
         }
 
         if (time)
-            this.client.handlers.tasks.create('unmute', Date.now() + time, {
+            await this.client.handlers.tasks.create('unmute', Date.now() + time, {
                 guildID: message.guild.id,
                 memberID: member.id
             });

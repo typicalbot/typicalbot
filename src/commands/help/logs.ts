@@ -6,8 +6,8 @@ import { MessageEmbed } from 'discord.js';
 export default class extends Command {
     mode = Constants.Modes.STRICT;
 
-    execute(message: TypicalGuildMessage) {
-        message.send(
+    async execute(message: TypicalGuildMessage) {
+        await message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('help/logs:POSSIBLE'))

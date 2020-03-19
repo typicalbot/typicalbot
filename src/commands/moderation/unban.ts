@@ -57,7 +57,7 @@ export default class extends Command {
 
         if (unbanned instanceof Message) return null;
 
-        message.success(
+        await message.success(
             message.translate('moderation/unban:UNBANNED', { user: user.tag })
         );
 

@@ -51,7 +51,7 @@ export default class extends Command {
             .setModerator(message.author)
             .setUser(member.user);
         if (reason) newCase.setReason(reason);
-        newCase.send();
+        await newCase.send();
 
         const embed = new MessageEmbed()
             .setColor(Constants.ModerationLogTypes.WARN.hex)
