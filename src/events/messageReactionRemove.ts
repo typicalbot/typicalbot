@@ -37,14 +37,10 @@ export default class MessageReactionRemove extends Event {
         const boardMsg = messages.find(m => {
             if (!m.embeds.length) return false;
             const [embed] = m.embeds;
-            if (
-                !embed.footer ||
+            return !(!embed.footer ||
                 !embed.footer.text ||
                 !embed.footer.text.startsWith('⭐') ||
-                !embed.footer.text.endsWith(message.id)
-            )
-                return false;
-            return true;
+                !embed.footer.text.endsWith(message.id));
         });
 
         if (!boardMsg) return;
