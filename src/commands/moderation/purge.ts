@@ -58,16 +58,12 @@ export default class extends Command {
             if (filter === 'you' && msg.author.id === this.client.config.id)
                 return true;
             if (filter === 'bots' && msg.author.bot) return true;
-            if (
-                !userMention &&
+            return !userMention &&
                 !userID &&
                 !roleID &&
                 !channelID &&
                 !filter &&
-                !reason
-            )
-                return true;
-            return false;
+                !reason;
         });
 
         const messagesToDelete = messages.array().splice(0, messageCount);
