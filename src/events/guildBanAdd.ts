@@ -24,7 +24,7 @@ export default class GuildBanAdd extends Event {
                 if (cachedLog.expiration)
                     newCase.setExpiration(cachedLog.expiration);
             }
-            newCase.send();
+            await newCase.send();
 
             this.client.caches.bans.delete(user.id);
         }

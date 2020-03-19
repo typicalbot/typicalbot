@@ -22,7 +22,7 @@ export default class GuildBanRemove extends Event {
                 newCase.setModerator(cachedLog.moderator);
                 if (cachedLog.reason) newCase.setReason(cachedLog.reason);
             }
-            newCase.send();
+            await newCase.send();
 
             this.client.caches.unbans.delete(user.id);
         }
