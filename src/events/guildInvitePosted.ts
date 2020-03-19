@@ -8,7 +8,7 @@ import * as Sentry from '@sentry/node';
 export default class GuildInvitePosted extends Event {
     async execute(message: TypicalGuildMessage) {
         await message.delete();
-        message.error(message.translate('core/invite:PROHIBITED'));
+        await message.error(message.translate('core/invite:PROHIBITED'));
 
         const { settings } = message.guild;
 
@@ -37,7 +37,7 @@ export default class GuildInvitePosted extends Event {
                 cache.size === settings.automod.invitewarn
             ) {
                 if (settings.logs.moderation) {
-                    this.client.handlers.moderationLog
+                    await this.client.handlers.moderationLog
                         .buildCase(message.guild)
                         .setAction(Constants.ModerationLogTypes.WARN)
                         .setModerator(this.client.user as User)
@@ -53,9 +53,7 @@ export default class GuildInvitePosted extends Event {
                                         : message.translate(
                                             'core/invite:CONSECUTIVE',
                                             {
-                                                amount:
-                                                      settings.automod
-                                                          .invitewarn
+                                                amount: settings.automod.invitewarn
                                             }
                                         ),
                                 channel: message.channel.toString()
@@ -77,10 +75,10 @@ export default class GuildInvitePosted extends Event {
                             }),
                     channel: message.channel.toString()
                 });
-                message.member.kick(reason);
+                await message.member.kick(reason);
 
                 if (settings.logs.moderation) {
-                    this.client.handlers.moderationLog
+                    await this.client.handlers.moderationLog
                         .buildCase(message.guild)
                         .setAction(Constants.ModerationLogTypes.KICK)
                         .setModerator(this.client.user as User)
