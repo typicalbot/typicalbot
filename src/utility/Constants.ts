@@ -5,7 +5,8 @@ export const Links = {
     DONATE: 'https://www.typicalbot.com/donate/',
     DOCUMENTATION: 'https://www.typicalbot.com/documentation/',
     SETTINGS: 'https://www.typicalbot.com/documentation/#settings',
-    ICON: 'https://www.typicalbot.com/x/images/icon.png'
+    ICON: 'https://www.typicalbot.com/x/images/icon.png',
+    TRANSLATE: 'https://translate.typicalbot.com/'
 };
 
 export const Colors = {

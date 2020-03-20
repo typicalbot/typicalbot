@@ -474,7 +474,7 @@ export default class extends Command {
                 );
 
             if (!selectedLanguage.complete)
-                await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <https://translate.typicalbot.com>`);
+                await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <${Constants.Links.TRANSLATE}>`);
 
             value = selectedLanguage.name;
         }
