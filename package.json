@@ -50,7 +50,6 @@
         "winston": "^3.2.1"
     },
     "optionalDependencies": {
-        "bignum": "^0.13.0",
         "bufferutil": "^4.0.1",
         "erlpack": "github:discordapp/erlpack",
         "utf-8-validate": "^5.0.2",
