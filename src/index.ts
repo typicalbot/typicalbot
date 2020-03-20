@@ -37,30 +37,30 @@ interface TypicalHandlers {
     moderationLog: ModerationLogHandler;
 }
 export default class Cluster extends Client {
-    node: VezaClient | undefined;
-    config = config;
-    build = config.build;
-    shards: number[] = JSON.parse(process.env.SHARDS || '[1]');
-    shardCount = process.env.TOTAL_SHARD_COUNT || '1';
-    cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
-    handlers = {} as TypicalHandlers;
-    settings = new SettingHandler(this);
-    functions = new FunctionHandler(this);
-    helpers = {} as HelperFunctions;
-    commands = new CommandHandler(this);
-    events = new EventHandler(this);
-    analytics = new AnalyticHandler(this);
-    caches = {
+    public node: VezaClient | undefined;
+    public config = config;
+    public build = config.build;
+    public shards: number[] = JSON.parse(process.env.SHARDS || '[1]');
+    public shardCount = process.env.TOTAL_SHARD_COUNT || '1';
+    public cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
+    public handlers = {} as TypicalHandlers;
+    public settings = new SettingHandler(this);
+    public functions = new FunctionHandler(this);
+    public helpers = {} as HelperFunctions;
+    public commands = new CommandHandler(this);
+    public events = new EventHandler(this);
+    public analytics = new AnalyticHandler(this);
+    public caches = {
         donors: new Collection<string, TypicalDonor>(),
         bans: new Collection<string, BanLog>(),
         unbans: new Collection<string, UnbanLog>(),
         softbans: new Collection(),
         invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
-    translate: Map<string, TFunction> = new Map();
-    logger = new Logger();
+    public translate: Map<string, TFunction> = new Map();
+    public logger = new Logger();
 
-    constructor(node: VezaClient | undefined) {
+    public constructor(node: VezaClient | undefined) {
         super({
             messageCacheMaxSize: 150,
             messageCacheLifetime: 1800,
@@ -79,7 +79,7 @@ export default class Cluster extends Client {
         this.login(this.config.token).catch(err => Sentry.captureException(err));
     }
 
-    async login(token: string) {
+    public async login(token: string): Promise<string> {
         // MUST SETUP DATABASE BEFORE ANYTHING ELSE
         this.handlers.database = new DatabaseHandler(this);
         await this.handlers.database.init();
@@ -97,7 +97,7 @@ export default class Cluster extends Client {
         return super.login(token);
     }
 
-    fetchData(property: string) {
+    public fetchData(property: string): any {
         if (!this.node) return eval(`this.${property}`);
 
         return this.node.sendTo(
@@ -110,7 +110,7 @@ export default class Cluster extends Client {
         );
     }
 
-    async fetchDonors() {
+    private async fetchDonors(): Promise<void> {
         const donors = await this.handlers.database.get('donors');
 
         donors.forEach((donor: TypicalDonor) => {
@@ -118,15 +118,15 @@ export default class Cluster extends Client {
         });
     }
 
-    get usedRAM() {
+    public get usedRAM(): number {
         return Math.round(process.memoryUsage().heapUsed / 1048576);
     }
 
-    get totalRAM() {
+    public get totalRAM(): number {
         return Math.round(process.memoryUsage().heapTotal / 1048576);
     }
 
-    async sendStatistics(shardID: number) {
+    public async sendStatistics(shardID: number): Promise<void> {
         fetch('https://www.carbonitex.net/discord/data/botdata.php', {
             method: 'post',
             headers: {
