@@ -5,7 +5,8 @@
     <i>A stable, lightning fast, easy to use, <a href="https://discordapp.com">Discord</a> bot built using <a href="https://discord.js.org">Discord.js</a> and <a href="https://nodejs.org">Node.js</a>.<br>Try out TypicalBot using our hosted version at <a href="https://typicalbot.com/invite">typicalbot.com/invite</a>.</i>
 </p>
 <p align="center">
-    <a href="https://discord.gg/typicalbot"><img src="https://discordapp.com/api/guilds/163038706117115906/embed.png?style=shield" alt="Discord"></a>
+    <a target="_blank" href="https://discord.gg/typicalbot"><img src="https://discordapp.com/api/guilds/163038706117115906/embed.png?style=shield" alt="Discord"></a>
+    <a target="_blank" href="https://translate.typicalbot.com/project/typicalbot"><img src="https://badges.crowdin.net/typicalbot/localized.svg" alt="Crowdin"></a>
 </p>
 
 TypicalBot is an ironically named multipurpose Discord bot that is far from typical, developed in [discord.js](https://github.com/discordjs/discord.js).
