@@ -6,7 +6,8 @@ export const Links = {
     DOCUMENTATION: 'https://www.typicalbot.com/documentation/',
     SETTINGS: 'https://www.typicalbot.com/documentation/#settings',
     ICON: 'https://www.typicalbot.com/x/images/icon.png',
-    TRANSLATE: 'https://translate.typicalbot.com/'
+    TRANSLATE: 'https://translate.typicalbot.com/',
+    VOTE: 'https://top.gg/bot/153613756348366849/vote'
 };
 
 export const Colors = {
