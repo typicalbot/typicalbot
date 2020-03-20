@@ -1,6 +1,6 @@
+import * as Sentry from '@sentry/node';
 import { r, MasterPool } from 'rethinkdb-ts';
 import Cluster from '..';
-import * as Sentry from '@sentry/node';
 
 export default class DatabaseHandler {
     connection = r;
@@ -14,9 +14,7 @@ export default class DatabaseHandler {
     }
 
     async init() {
-        this.pool = await r.connectPool(
-            this.client.config.database.credentials
-        );
+        this.pool = await r.connectPool(this.client.config.database.credentials);
     }
 
     get(table: string, key?: string) {

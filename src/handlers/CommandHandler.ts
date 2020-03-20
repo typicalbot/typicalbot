@@ -1,13 +1,14 @@
-import { Collection } from 'discord.js';
 import { join, parse } from 'path';
+import * as Sentry from '@sentry/node';
+import { Collection } from 'discord.js';
 import klaw from 'klaw';
 import Command from '../structures/Command';
-import Cluster from '..';
 import { GuildSettings } from '../types/typicalbot';
-import * as Sentry from '@sentry/node';
+import Cluster from '..';
 
 export default class CommandHandler extends Collection<string, Command> {
     client: Cluster;
+
     constructor(client: Cluster) {
         super();
         this.client = client;
@@ -24,22 +25,14 @@ export default class CommandHandler extends Collection<string, Command> {
                 const file = parse(item.path);
                 if (!file.ext || file.ext !== '.js') return;
 
-                const req = ((r) => r.default || r)(
-                    // eslint-disable-next-line @typescript-eslint/no-var-requires
-                    require(join(file.dir, file.base))
-                );
-                const newReq = new req(
-                    this.client,
-                    file.name,
-                    join(file.dir, file.base)
-                );
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
+                const req = ((r) => r.default || r)(require(join(file.dir, file.base)));
+                const newReq = new req(this.client, file.name, join(file.dir, file.base));
 
                 this.set(file.name, newReq);
             })
             .on('end', () => {
-                this.client.logger.info(
-                    `Loaded ${this.size} Commands in ${Date.now() - start}ms`
-                );
+                this.client.logger.info(`Loaded ${this.size} Commands in ${Date.now() - start}ms`);
 
                 return this;
             });

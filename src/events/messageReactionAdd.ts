@@ -31,9 +31,7 @@ export default class MessageReactionAdd extends Event {
 
         if (count < settings.starboard.count) return;
 
-        const channel = message.guild.channels.cache.get(
-            settings.starboard.id
-        ) as TextChannel;
+        const channel = message.guild.channels.cache.get(settings.starboard.id) as TextChannel;
         if (!channel || channel.type !== 'text') return;
 
         const messages = await channel.messages.fetch({ limit: 100 });
@@ -72,9 +70,7 @@ export default class MessageReactionAdd extends Event {
                     value: true
                 }
             ])
-            .setThumbnail(
-                message.author.displayAvatarURL({ format: 'png', size: 2048 })
-            )
+            .setThumbnail(message.author.displayAvatarURL({ format: 'png', size: 2048 }))
             .setTimestamp(message.createdAt)
             .setFooter(`⭐ ${count} | ${message.id}`);
 

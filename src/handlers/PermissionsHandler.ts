@@ -1,6 +1,6 @@
 import { join, parse } from 'path';
-import klaw from 'klaw';
 import { Collection, Guild } from 'discord.js';
+import klaw from 'klaw';
 import Cluster from '../index';
 import PermissionLevel from '../structures/PermissionLevel';
 
@@ -19,19 +19,15 @@ export default class PermissionsHandler {
                 const file = parse(item.path);
                 if (!file.ext || file.ext !== '.js') return;
 
-                const Permission = ((r) => r.default || r)(
-                    // eslint-disable-next-line @typescript-eslint/no-var-requires
-                    require(join(file.dir, file.base))
-                );
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
+                const Permission = ((r) => r.default || r)(require(join(file.dir, file.base)));
                 const perm = new Permission(this.client, {});
 
                 this.levels.set(perm.level, perm);
             })
             .on('end', () => {
-                this.levels = this.levels.sort(
-                    (a: PermissionLevel, b: PermissionLevel) =>
-                        b.level - a.level
-                );
+                this.levels = this.levels.sort((a: PermissionLevel, b: PermissionLevel) =>
+                    b.level - a.level);
             });
     }
 

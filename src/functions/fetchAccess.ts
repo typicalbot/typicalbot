@@ -1,6 +1,6 @@
 import Function from '../structures/Function';
-import Constants from '../utility/Constants';
 import { TypicalGuild } from '../types/typicalbot';
+import Constants from '../utility/Constants';
 
 export default class FetchAccess extends Function {
     async execute(guild: TypicalGuild) {

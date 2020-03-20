@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(-o(?:nline)?\s)?/i;
 
@@ -12,19 +12,15 @@ export default class extends Command {
         const args = regex.exec(parameters);
 
         const members = args
-            ? message.guild.members.cache.filter(
-                (m) => m.presence.status !== 'offline'
-            )
+            ? message.guild.members.cache.filter((m) => m.presence.status !== 'offline')
             : message.guild.members.cache;
         if (!members.size) return null;
 
         const member = members.random();
 
-        return message.send(
-            message.translate('utility/randomuser:RANDOM', {
-                tag: member.user.tag,
-                id: member.id
-            })
-        );
+        return message.send(message.translate('utility/randomuser:RANDOM', {
+            tag: member.user.tag,
+            id: member.id
+        }));
     }
 }

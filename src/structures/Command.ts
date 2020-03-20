@@ -1,11 +1,11 @@
-import Constants from '../utility/Constants';
+import { Message } from 'discord.js';
 import {
     CommandOptions,
     TypicalGuildMessage,
     PermissionLevel
 } from '../types/typicalbot';
+import Constants from '../utility/Constants';
 import Cluster from '..';
-import { Message } from 'discord.js';
 
 export default class Command {
     client: Cluster;

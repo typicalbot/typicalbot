@@ -8,7 +8,6 @@ export default class extends Command {
             .then((res) => res.json())
             .then((json) => message.send(json.slip.advice))
             .catch(() =>
-                message.error(message.translate('common:REQUEST_ERROR'))
-            );
+                message.error(message.translate('common:REQUEST_ERROR')));
     }
 }

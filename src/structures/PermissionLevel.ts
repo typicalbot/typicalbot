@@ -1,6 +1,6 @@
 import { Guild, GuildMember } from 'discord.js';
-import Constants from '../utility/Constants';
 import { PermissionLevelOptions } from '../types/typicalbot';
+import Constants from '../utility/Constants';
 import Cluster from '..';
 
 export default class PermissionLevel {
@@ -19,13 +19,10 @@ export default class PermissionLevel {
         if (options.staffOverride) this.staffOverride = options.staffOverride;
     }
 
-    fetchRoles(
-        guild: Guild,
-        permission: 'blacklist' | 'moderator' | 'administrator'
-    ) {
+    fetchRoles(guild: Guild,
+        permission: 'blacklist' | 'moderator' | 'administrator') {
         const pool = guild.settings.roles[permission].filter((role) =>
-            guild.roles.cache.has(role)
-        );
+            guild.roles.cache.has(role));
 
         let roleName: string;
         switch (permission) {
@@ -39,9 +36,7 @@ export default class PermissionLevel {
                 roleName = Constants.PermissionsRoleTitles.MODERATOR.toLowerCase();
         }
 
-        const permRole = guild.roles.cache.find(
-            (role) => role.name.toLowerCase() === roleName
-        );
+        const permRole = guild.roles.cache.find((role) => role.name.toLowerCase() === roleName);
         if (permRole && !pool.includes(permRole.id)) pool.push(permRole.id);
 
         return pool;
@@ -49,8 +44,6 @@ export default class PermissionLevel {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     check(_guild: Guild, _member: GuildMember): boolean {
-        throw new Error(
-            'So silly of you. One of your permissions do not have a check function. What is the point of having a permission if you never check it?'
-        );
+        throw new Error('So silly of you. One of your permissions do not have a check function. What is the point of having a permission if you never check it?');
     }
 }

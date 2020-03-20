@@ -6,11 +6,7 @@ const { credentials } = configs.database;
 (async () => {
     await r.connectPool(credentials);
     await r
-        .branch(
-            r.dbList().contains(credentials.db),
-            null,
-            r.dbCreate(credentials.db)
-        )
+        .branch(r.dbList().contains(credentials.db), null, r.dbCreate(credentials.db))
         .run();
 
     const db = r.db(credentials.db);

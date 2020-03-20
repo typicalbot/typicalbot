@@ -1,5 +1,5 @@
-import Event from '../structures/Event';
 import { ClientUser } from 'discord.js';
+import Event from '../structures/Event';
 
 export default class Ready extends Event {
     once = true;
@@ -16,14 +16,8 @@ export default class Ready extends Event {
             }
         }, 1000);
 
-        setTimeout(
-            () =>
-                (this.client
-                    .user as ClientUser).setActivity(
-                    `${this.client.config.prefix}help — typicalbot.com`,
-                    { type: 'WATCHING' }
-                ),
-            1000 * 60 * 5
-        );
+        setTimeout(() =>
+            (this.client
+                .user as ClientUser).setActivity(`${this.client.config.prefix}help — typicalbot.com`, { type: 'WATCHING' }), 1000 * 60 * 5);
     }
 }

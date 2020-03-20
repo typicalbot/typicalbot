@@ -1,8 +1,8 @@
 import { Canvas } from 'canvas-constructor';
 import { MessageAttachment, MessageEmbed } from 'discord.js';
-import Constants from '../../utility/Constants';
 import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /#?([0-9a-fA-F]{6}|random)/i;
 
@@ -12,12 +12,10 @@ export default class extends Command {
     execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
 
         const [color] = args;
@@ -38,18 +36,16 @@ export default class extends Command {
         if (!message.embeddable)
             return message.channel.send(new MessageAttachment(buffer));
 
-        return message.send(
-            new MessageEmbed()
-                .attachFiles([
-                    {
-                        attachment: buffer,
-                        name: 'color.png'
-                    }
-                ])
-                .setColor(parseInt(hex, 16))
-                .setImage('attachment://color.png')
-                .setFooter(`#${hex}`)
-        );
+        return message.send(new MessageEmbed()
+            .attachFiles([
+                {
+                    attachment: buffer,
+                    name: 'color.png'
+                }
+            ])
+            .setColor(parseInt(hex, 16))
+            .setImage('attachment://color.png')
+            .setFooter(`#${hex}`));
     }
 
     bw(hexcolor: string) {

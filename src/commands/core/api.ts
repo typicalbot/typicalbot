@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_ADMINISTRATOR;
@@ -8,37 +8,28 @@ export default class extends Command {
 
     execute(message: TypicalGuildMessage, parameters: string) {
         if (parameters === 'view') {
-            return message.dm(
-                message.guild.settings.apikey
-                    ? message.translate('core/api:KEY', {
-                        guild: message.guild.name,
-                        key: message.guild.settings.apikey
-                    })
-                    : message.translate('core/api:NONE')
-            );
+            return message.dm(message.guild.settings.apikey
+                ? message.translate('core/api:KEY', {
+                    guild: message.guild.name,
+                    key: message.guild.settings.apikey
+                })
+                : message.translate('core/api:NONE'));
         }
 
         if (parameters === 'generate') {
-            const newApiKey = `${Buffer.from(
-                message.guild.id.toString()
-            ).toString('base64')}.${Buffer.from(Date.now().toString()).toString(
-                'base64'
-            )}`;
+            const newApiKey = `${Buffer.from(message.guild.id.toString()).toString('base64')}.${Buffer.from(Date.now().toString()).toString('base64')}`;
 
             this.client.settings
                 .update(message.guild.id, {
                     apikey: newApiKey
                 })
                 .then(() =>
-                    message.success(message.translate('core/api:SUCCESS'))
-                );
+                    message.success(message.translate('core/api:SUCCESS')));
 
-            return message.dm(
-                message.translate('core/api:KEY', {
-                    guild: message.guild.name,
-                    key: newApiKey
-                })
-            );
+            return message.dm(message.translate('core/api:KEY', {
+                guild: message.guild.name,
+                key: newApiKey
+            }));
         }
         return message.error(message.translate('common:INVALID_OPTION'));
     }

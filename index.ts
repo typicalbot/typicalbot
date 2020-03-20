@@ -1,25 +1,22 @@
 /* eslint-disable no-console */
-import { Client, ClientSocket, NodeMessage } from 'veza';
 import { TextChannel } from 'discord.js';
-import Cluster from './src';
+import { Client, ClientSocket, NodeMessage } from 'veza';
 import config from './config.json';
+import Cluster from './src';
 
 if (!config.clustered) new Cluster(undefined);
 else {
     const node = new Client(process.env.CLUSTER || 'TypicalBot')
         .on('error', (error: Error, client: ClientSocket) =>
-            console.error(`[IPC] Error from ${client.name}:`, error)
-        )
+            console.error(`[IPC] Error from ${client.name}:`, error))
         .on('disconnect', (client: ClientSocket) =>
-            console.error(`[IPC] Disconnected from ${client.name}`)
-        )
+            console.error(`[IPC] Disconnected from ${client.name}`))
         .on('ready', async (client: ClientSocket) => {
             console.log(`[IPC] Connected to: ${client.name}`);
         });
 
     node.connectTo(config.nodePort).catch((error) =>
-        console.error('[IPC] Disconnected!', error)
-    );
+        console.error('[IPC] Disconnected!', error));
 
     const client = new Cluster(node);
 
@@ -33,9 +30,7 @@ else {
         } else if (message.data.event === 'channelEmbed') {
             const { apiKey, channel, json } = message.data;
 
-            const guild = Buffer.from(apiKey.split('.')[0], 'base64').toString(
-                'utf-8'
-            );
+            const guild = Buffer.from(apiKey.split('.')[0], 'base64').toString('utf-8');
 
             const trueGuild = client.guilds.cache.get(guild);
             if (!trueGuild)
@@ -66,8 +61,7 @@ else {
                     .send('', json)
                     .then(() => message.reply({ response: 'Success' }))
                     .catch(() =>
-                        message.reply({ response: 'An error occurred.' })
-                    );
+                        message.reply({ response: 'An error occurred.' }));
             }
 
             return message.reply({

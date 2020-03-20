@@ -1,12 +1,12 @@
+import { MessageEmbed } from 'discord.js';
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
+import PermissionLevel from '../../structures/PermissionLevel';
 import {
     TypicalGuildMessage,
     TaskOptions,
     UnmuteTaskData
 } from '../../types/typicalbot';
-import PermissionLevel from '../../structures/PermissionLevel';
-import { MessageEmbed } from 'discord.js';
+import Constants from '../../utility/Constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 
@@ -14,19 +14,15 @@ export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_MODERATOR;
     mode = Constants.Modes.STRICT;
 
-    async execute(
-        message: TypicalGuildMessage,
+    async execute(message: TypicalGuildMessage,
         parameters: string,
-        permissionLevel: PermissionLevel
-    ) {
+        permissionLevel: PermissionLevel) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
         const [userID, reason] = args;
 
@@ -43,9 +39,7 @@ export default class extends Command {
             return message.error(message.translate('moderation/mute:NO_ROLE'));
 
         if (!member.roles.cache.has(message.guild.settings.roles.mute))
-            return message.error(
-                message.translate('moderation/unmute:NOT_MUTED')
-            );
+            return message.error(message.translate('moderation/unmute:NOT_MUTED'));
 
         if (
             message.member.roles.highest.position <=
@@ -53,24 +47,18 @@ export default class extends Command {
             permissionLevel.level !== 4 &&
             permissionLevel.level < 9
         )
-            return message.error(
-                message.translate('moderation/unmute:TOO_LOW')
-            );
+            return message.error(message.translate('moderation/unmute:TOO_LOW'));
 
         if (!role.editable)
-            return message.error(
-                message.translate('moderation/mute:UNEDITABLE')
-            );
+            return message.error(message.translate('moderation/mute:UNEDITABLE'));
 
         const embed = new MessageEmbed()
             .setColor(0xff9900)
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
-            .setDescription(
-                message.translate('moderation/unmute:UNMUTED', {
-                    name: message.guild.name
-                })
-            )
+            .setDescription(message.translate('moderation/unmute:UNMUTED', {
+                name: message.guild.name
+            }))
             .addFields([
                 {
                     name: message.translate('common:MODERATOR_FIELD'),
@@ -102,21 +90,17 @@ export default class extends Command {
             const tasks = (await this.client.handlers.database
                 .get('tasks')
                 .catch(() => [])) as TaskOptions[];
-            const releventTask = tasks.find(
-                (task) =>
-                    task.type === 'unmute' &&
+            const releventTask = tasks.find((task) =>
+                task.type === 'unmute' &&
                     (task.data as UnmuteTaskData).guildID ===
                         message.guild.id &&
-                    (task.data as UnmuteTaskData).memberID === member.id
-            );
+                    (task.data as UnmuteTaskData).memberID === member.id);
             if (releventTask)
                 await this.client.handlers.tasks.delete(releventTask.id);
         }
 
-        return message.success(
-            message.translate('moderation/unmute:SUCCESS', {
-                user: member.user.tag
-            })
-        );
+        return message.success(message.translate('moderation/unmute:SUCCESS', {
+            user: member.user.tag
+        }));
     }
 }

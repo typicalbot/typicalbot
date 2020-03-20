@@ -9,20 +9,16 @@ export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
         const [multi, question, answers] = args;
 
         const list = answers.split(splitRegex);
         if (list.length < 2 || list.length > 30)
-            return message.error(
-                message.translate('utility/strawpoll:INVALID')
-            );
+            return message.error(message.translate('utility/strawpoll:INVALID'));
 
         const data = await fetch('https://www.strawpoll.me/api/v2/polls', {
             method: 'post',
@@ -37,8 +33,6 @@ export default class extends Command {
         if (!data)
             return message.error(message.translate('common:REQUEST_ERROR'));
 
-        return message.reply(
-            message.translate('utility/strawpoll:CREATED', { id: data.id })
-        );
+        return message.reply(message.translate('utility/strawpoll:CREATED', { id: data.id }));
     }
 }

@@ -1,7 +1,7 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
-import { TypicalGuildMessage } from '../../types/typicalbot';
 import PermissionLevel from '../../structures/PermissionLevel';
+import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(\d+))?(?:\s+(.+))?/i;
 
@@ -9,19 +9,15 @@ export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_MODERATOR;
     mode = Constants.Modes.STRICT;
 
-    async execute(
-        message: TypicalGuildMessage,
+    async execute(message: TypicalGuildMessage,
         parameters: string,
-        permissionLevel: PermissionLevel
-    ) {
+        permissionLevel: PermissionLevel) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
 
         const [userID, days, reason] = args;
@@ -40,9 +36,7 @@ export default class extends Command {
         )
             return message.error(message.translate('moderation/ban:TOO_LOW'));
         if (!member.bannable)
-            return message.error(
-                message.translate('moderation/ban:UNBANNABLEs')
-            );
+            return message.error(message.translate('moderation/ban:UNBANNABLEs'));
 
         this.client.caches.softbans.set(userID, userID);
 
@@ -72,11 +66,9 @@ export default class extends Command {
                 await newCase.send();
             }
 
-            return message.success(
-                message.translate('moderation/softban:BANNED', {
-                    user: member.user.tag
-                })
-            );
+            return message.success(message.translate('moderation/softban:BANNED', {
+                user: member.user.tag
+            }));
         }, 1000);
     }
 }

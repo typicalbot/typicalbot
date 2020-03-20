@@ -10,10 +10,8 @@ export default class extends Command {
         if (sides < 2 || sides > 100 || sides % 1 !== 0)
             return message.error('fun/dice:INVALID');
 
-        return message.reply(
-            message.translate('fun/dice:RESPONSE', {
-                amount: Math.floor(Math.random() * sides) + 1
-            })
-        );
+        return message.reply(message.translate('fun/dice:RESPONSE', {
+            amount: Math.floor(Math.random() * sides) + 1
+        }));
     }
 }

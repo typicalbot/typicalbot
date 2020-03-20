@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(?:<@!?(\d{17,20})>\s+)?(?:(.{1,32}))?/i;
 
@@ -26,35 +26,19 @@ export default class extends Command {
         // A user id was not found and so edit the authors nickname
         if (!member) {
             if (message.guild.settings.nonickname)
-                return message.error(
-                    message.translate('utility/nickname:DISABLED')
-                );
+                return message.error(message.translate('utility/nickname:DISABLED'));
 
             const changed = await message.member
                 .setNickname(reset ? '' : nickname)
                 .catch(() => null);
             if (!changed)
-                return message.error(
-                    message.translate('utility/nickname:SELF_ERROR')
-                );
-            return message.reply(
-                message.translate('utility/nickname:SELF_SUCCESS', { type })
-            );
+                return message.error(message.translate('utility/nickname:SELF_ERROR'));
+            return message.reply(message.translate('utility/nickname:SELF_SUCCESS', { type }));
         }
         // Edit another members nickname
-        const permissions = await this.client.handlers.permissions.fetch(
-            message.guild,
-            message.author.id,
-            true
-        );
+        const permissions = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
         if (permissions.level < 2)
-            return message.error(
-                this.client.helpers.permissionError.execute(
-                    message,
-                    this,
-                    permissions
-                )
-            );
+            return message.error(this.client.helpers.permissionError.execute(message, this, permissions));
 
         const changed = await member
             .setNickname(reset ? '' : nickname)
@@ -62,8 +46,6 @@ export default class extends Command {
         if (!changed)
             return message.error(message.translate('utility/nickname:ERROR'));
 
-        return message.reply(
-            message.translate('utility/nickname:SUCCESS', { type })
-        );
+        return message.reply(message.translate('utility/nickname:SUCCESS', { type }));
     }
 }

@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 
@@ -11,12 +11,10 @@ export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
         const [userID, reason] = args;
 
@@ -27,9 +25,7 @@ export default class extends Command {
         if (!member)
             return message.error(message.translate('common:USER_NOT_FOUND'));
         if (!member.voice.channel)
-            return message.error(
-                message.translate('moderation/voicekick:NO_VOICE')
-            );
+            return message.error(message.translate('moderation/voicekick:NO_VOICE'));
 
         const removed = await member.voice
             .setChannel(null, reason || 'No reason provided.')
@@ -47,10 +43,8 @@ export default class extends Command {
             await newCase.send();
         }
 
-        return message.success(
-            message.translate('moderation/voicekick:SUCCESS', {
-                user: member.user.tag
-            })
-        );
+        return message.success(message.translate('moderation/voicekick:SUCCESS', {
+            user: member.user.tag
+        }));
     }
 }

@@ -11,12 +11,8 @@ export default class Pagify extends Function {
         const currentPage = list.splice(page * 10, 10);
 
         const pageContent = currentPage
-            .map(
-                (item, index) =>
-                    `• ${String(index + 1 + 10 * page).padStart(
-                        String(10 + 10 * page).length
-                    )}: ${item}`
-            )
+            .map((item, index) =>
+                `• ${String(index + 1 + 10 * page).padStart(String(10 + 10 * page).length)}: ${item}`)
             .join('\n');
 
         return message.translate('misc:PAGIFY', {

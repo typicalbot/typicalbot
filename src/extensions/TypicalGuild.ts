@@ -6,11 +6,7 @@ export class TypicalGuild extends Structures.get('Guild') {
     }
 
     async fetchPermissions(userID: string, ignoreStaff = false) {
-        return this.client.handlers.permissions.fetch(
-            this,
-            userID,
-            ignoreStaff
-        );
+        return this.client.handlers.permissions.fetch(this, userID, ignoreStaff);
     }
 
     async buildModerationLog() {

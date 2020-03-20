@@ -1,9 +1,9 @@
-import { VM } from 'vm2';
 import { inspect } from 'util';
-import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
-import { TypicalGuildMessage } from '../../types/typicalbot';
 import { MessageEmbed } from 'discord.js';
+import { VM } from 'vm2';
+import Command from '../../structures/Command';
+import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /^(-(?:u|unsafe)\s+)?([\W\w]+)/;
 
@@ -30,62 +30,40 @@ export default class extends Command {
                 result
                     .then((a) => {
                         message
-                            .send(
-                                embed.setDescription(
-                                    [
-                                        '',
-                                        '',
-                                        '```ts',
-                                        inspect(a, { depth: 0 }),
-                                        '```'
-                                    ].join('\n')
-                                )
-                            )
+                            .send(embed.setDescription([
+                                '',
+                                '',
+                                '```ts',
+                                inspect(a, { depth: 0 }),
+                                '```'
+                            ].join('\n')))
                             .catch((err) => {
-                                message.send(
-                                    embed.setDescription(
-                                        ['```', err.stack, '```'].join('\n')
-                                    )
-                                );
+                                message.send(embed.setDescription(['```', err.stack, '```'].join('\n')));
                             });
                     })
                     .catch((err) => {
-                        message.send(
-                            embed.setDescription(
-                                [
-                                    '',
-                                    '',
-                                    '```',
-                                    err ? err.stack : 'Unknown Error',
-                                    '```'
-                                ].join('\n')
-                            )
-                        );
+                        message.send(embed.setDescription([
+                            '',
+                            '',
+                            '```',
+                            err ? err.stack : 'Unknown Error',
+                            '```'
+                        ].join('\n')));
                     });
 
                 return null;
             }
 
             if (result instanceof Object) {
-                return message.send(
-                    embed.setDescription(
-                        ['```ts', inspect(result, { depth: 0 }), '```'].join(
-                            '\n'
-                        )
-                    )
-                );
+                return message.send(embed.setDescription(['```ts', inspect(result, { depth: 0 }), '```'].join('\n')));
             }
 
-            return message.send(
-                embed.setDescription(['```', result, '```'].join('\n'))
-            );
+            return message.send(embed.setDescription(['```', result, '```'].join('\n')));
         } catch (err) {
             return message
-                .send(
-                    embed
-                        .setDescription(['```', err.stack, '```'].join('\n'))
-                        .setColor(0xff0000)
-                )
+                .send(embed
+                    .setDescription(['```', err.stack, '```'].join('\n'))
+                    .setColor(0xff0000))
                 .catch(() => {
                     return message.reply('Cannot send embeds.');
                 });

@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 export default class extends Command {
     aliases = ['cmds'];
@@ -39,36 +39,32 @@ export default class extends Command {
         const NONE = message.translate('core/commands:NONE');
 
         return message.author
-            .send(
-                new MessageEmbed()
-                    .setColor(0x00adff)
-                    .setTitle('TypicalBot Commands')
-                    .setDescription(
-                        message.translate('core/commands:TEXT', {
-                            prefix: this.client.config.prefix
-                        })
-                    )
-                    .addFields([
-                        {
-                            name: message.translate('core/commands:OWNER'),
-                            value: level4.length ? level4.join(', ') : NONE
-                        },
-                        {
-                            name: message.translate('core/commands:ADMIN'),
-                            value: level3.length ? level3.join(', ') : NONE
-                        },
-                        {
-                            name: message.translate('core/commands:MOD'),
-                            value: level2.length ? level2.join(', ') : NONE
-                        },
-                        {
-                            name: message.translate('core/commands:MEMBER'),
-                            value: level0.length ? level0.join(', ') : NONE
-                        }
-                    ])
-                    .setFooter('TypicalBot', Constants.Links.ICON)
-                    .setTimestamp()
-            )
+            .send(new MessageEmbed()
+                .setColor(0x00adff)
+                .setTitle('TypicalBot Commands')
+                .setDescription(message.translate('core/commands:TEXT', {
+                    prefix: this.client.config.prefix
+                }))
+                .addFields([
+                    {
+                        name: message.translate('core/commands:OWNER'),
+                        value: level4.length ? level4.join(', ') : NONE
+                    },
+                    {
+                        name: message.translate('core/commands:ADMIN'),
+                        value: level3.length ? level3.join(', ') : NONE
+                    },
+                    {
+                        name: message.translate('core/commands:MOD'),
+                        value: level2.length ? level2.join(', ') : NONE
+                    },
+                    {
+                        name: message.translate('core/commands:MEMBER'),
+                        value: level0.length ? level0.join(', ') : NONE
+                    }
+                ])
+                .setFooter('TypicalBot', Constants.Links.ICON)
+                .setTimestamp())
             .catch(() => null);
     }
 }

@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(\d+|latest)(?:\s+(.+))/i;
 
@@ -10,26 +10,19 @@ export default class extends Command {
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         if (!message.guild.settings.logs.moderation)
-            return message.error(
-                message.translate('moderation/reason:DISABLED')
-            );
+            return message.error(message.translate('moderation/reason:DISABLED'));
 
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
 
         const [id, reason] = args;
 
-        const log = (await this.client.handlers.moderationLog.fetchCase(
-            message.guild,
-            id
-        )) as TypicalGuildMessage;
+        const log = (await this.client.handlers.moderationLog.fetchCase(message.guild, id)) as TypicalGuildMessage;
 
         if (!log)
             return message.error(message.translate('moderation/reason:NONE'));

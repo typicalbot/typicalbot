@@ -1,9 +1,9 @@
+import * as Sentry from '@sentry/node';
+import { Collection, TextChannel, MessageEmbed } from 'discord.js';
 import moment from 'moment';
 import fetch from 'node-fetch';
 import Event from '../structures/Event';
-import { Collection, TextChannel, MessageEmbed } from 'discord.js';
 import { TypicalGuildMessage } from '../types/typicalbot';
-import * as Sentry from '@sentry/node';
 
 async function hastebin(input: string) {
     const options = { url: 'https://www.hastebin.com', extension: 'js' };
@@ -36,52 +36,36 @@ export default class MessageBulkDelete extends Event {
 
         if (!settings.logs.id || !settings.logs.delete) return;
 
-        const logsChannel = message.guild.channels.cache.get(
-            settings.logs.id
-        ) as TextChannel;
+        const logsChannel = message.guild.channels.cache.get(settings.logs.id) as TextChannel;
         if (!logsChannel || logsChannel.type !== 'text') return;
 
-        const haste = await hastebin(
-            messages
-                .map(
-                    (m) =>
-                        `${moment(m.createdAt).format(
-                            'dddd MMMM Do, YYYY, hh:mm A'
-                        )} | ${m.author.tag} (${m.author.id}):\n${m.content}`
-                )
-                .join('\n\n--  --  --  --  --\n\n')
-        );
+        const haste = await hastebin(messages
+            .map((m) =>
+                `${moment(m.createdAt).format('dddd MMMM Do, YYYY, hh:mm A')} | ${m.author.tag} (${m.author.id}):\n${m.content}`)
+            .join('\n\n--  --  --  --  --\n\n'));
 
         if (settings.logs.delete !== '--embed')
             return logsChannel
-                .send(
-                    message.translate('help/logs:BULK_DELETED', {
-                        amount: messages.size,
-                        channel: message.channel.toString(),
-                        id: message.channel.id,
-                        url: haste
-                    })
-                )
+                .send(message.translate('help/logs:BULK_DELETED', {
+                    amount: messages.size,
+                    channel: message.channel.toString(),
+                    id: message.channel.id,
+                    url: haste
+                }))
                 .catch((err) => Sentry.captureException(err));
 
         return logsChannel
-            .send(
-                new MessageEmbed()
-                    .setColor(0x3ea7ed)
-                    .setDescription(
-                        message.translate('help/logs:PURGED', {
-                            amount: messages.size,
-                            url: haste
-                        })
-                    )
-                    .setFooter(
-                        message.translate('help/logs:MESSAGES_PURGED', {
-                            channel: message.channel.toString(),
-                            id: message.channel.id
-                        })
-                    )
-                    .setTimestamp()
-            )
+            .send(new MessageEmbed()
+                .setColor(0x3ea7ed)
+                .setDescription(message.translate('help/logs:PURGED', {
+                    amount: messages.size,
+                    url: haste
+                }))
+                .setFooter(message.translate('help/logs:MESSAGES_PURGED', {
+                    channel: message.channel.toString(),
+                    id: message.channel.id
+                }))
+                .setTimestamp())
             .catch((err) => Sentry.captureException(err));
     }
 }

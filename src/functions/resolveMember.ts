@@ -2,13 +2,11 @@ import Function from '../structures/Function';
 import { TypicalGuildMessage } from '../types/typicalbot';
 
 export default class ResolveMember extends Function {
-    async execute(
-        message: TypicalGuildMessage,
+    async execute(message: TypicalGuildMessage,
         id?: string,
         username?: string,
         discriminator?: string,
-        returnSelf = true
-    ) {
+        returnSelf = true) {
         if (id) {
             const user = await this.client.users.fetch(id).catch(console.error);
             if (!user) return returnSelf ? message.member : null;
@@ -26,9 +24,7 @@ export default class ResolveMember extends Function {
                 .fetch({ query: username })
                 .catch(console.error);
 
-            const member = message.guild.members.cache.find(
-                (m) => m.user.tag === `${username}#${discriminator}`
-            );
+            const member = message.guild.members.cache.find((m) => m.user.tag === `${username}#${discriminator}`);
             if (!member) return returnSelf ? message.member : null;
 
             return member;

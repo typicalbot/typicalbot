@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 export default class extends Command {
     aliases = ['docs'];
@@ -10,23 +10,17 @@ export default class extends Command {
 
     execute(message: TypicalMessage) {
         if (!message.embeddable)
-            return message.send(
-                message.translate('core/documentation:TEXT', {
-                    link: Constants.Links.DOCUMENTATION
-                })
-            );
+            return message.send(message.translate('core/documentation:TEXT', {
+                link: Constants.Links.DOCUMENTATION
+            }));
 
-        return message.send(
-            new MessageEmbed()
-                .setColor(0x00adff)
-                .setTitle(message.translate('core/documentation:TYPICAL_DOCS'))
-                .setDescription(
-                    message.translate('core/documentation:TEXT', {
-                        link: Constants.Links.DOCUMENTATION
-                    })
-                )
-                .setFooter('TypicalBot', Constants.Links.ICON)
-                .setTimestamp()
-        );
+        return message.send(new MessageEmbed()
+            .setColor(0x00adff)
+            .setTitle(message.translate('core/documentation:TYPICAL_DOCS'))
+            .setDescription(message.translate('core/documentation:TEXT', {
+                link: Constants.Links.DOCUMENTATION
+            }))
+            .setFooter('TypicalBot', Constants.Links.ICON)
+            .setTimestamp());
     }
 }

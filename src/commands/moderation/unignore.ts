@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(commands|invites|stars)/i;
 
@@ -11,12 +11,10 @@ export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
         const [type] = args;
         const commands = type === 'commands';
@@ -25,31 +23,21 @@ export default class extends Command {
 
         if (
             commands &&
-            !message.guild.settings.ignored.commands.includes(
-                message.channel.id
-            )
+            !message.guild.settings.ignored.commands.includes(message.channel.id)
         )
-            return message.error(
-                message.translate('moderation/unignore:COMMANDS')
-            );
+            return message.error(message.translate('moderation/unignore:COMMANDS'));
         if (
             invites &&
             !message.guild.settings.ignored.invites.includes(message.channel.id)
         )
-            return message.error(
-                message.translate('moderation/unignore:INVITES')
-            );
+            return message.error(message.translate('moderation/unignore:INVITES'));
         if (
             stars &&
             !message.guild.settings.ignored.stars.includes(message.channel.id)
         ) {
             if (!message.guild.settings.starboard.id)
-                return message.error(
-                    message.translate('moderation/unignore:DISABLED')
-                );
-            return message.error(
-                message.translate('moderation/unignore:STARBOARD')
-            );
+                return message.error(message.translate('moderation/unignore:DISABLED'));
+            return message.error(message.translate('moderation/unignore:STARBOARD'));
         }
 
         const ignoredIDs = message.guild.settings.ignored;
@@ -72,9 +60,7 @@ export default class extends Command {
             .catch(() => null);
 
         if (ignored)
-            return message.success(
-                message.translate('moderation/unignore:SUCCESS', { type })
-            );
+            return message.success(message.translate('moderation/unignore:SUCCESS', { type }));
 
         return null;
     }

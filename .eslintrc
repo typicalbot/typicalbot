@@ -5,7 +5,8 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "import"
     ],
     "parserOptions": {
         "ecmaVersion": 2019,
@@ -32,6 +33,30 @@
             "1tbs",
             {
                 "allowSingleLine": true
+            }
+        ],
+        "function-call-argument-newline": [
+            "error",
+            "never"
+        ],
+        "function-paren-newline": [
+            "error",
+            "never"
+        ],
+        "import/order": [
+            "error",
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    "index",
+                    "sibling",
+                    "parent"
+                ],
+                "alphabetize": {
+                    "order": "asc"
+                }
             }
         ],
         "object-curly-spacing": [

@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(\S+)(?:\s+(\d+))?/i;
 
@@ -10,12 +10,10 @@ export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
 
         const [query, number] = args;
@@ -26,33 +24,22 @@ export default class extends Command {
             [
                 m.user.username.toLowerCase(),
                 m.nickname ? m.nickname.toLowerCase() : ''
-            ].includes(lowerQuery)
-        );
+            ].includes(lowerQuery));
 
         if (!list.size)
-            return message.reply(
-                message.translate('utility/search:NONE', { query })
-            );
+            return message.reply(message.translate('utility/search:NONE', { query }));
 
-        const content = this.client.helpers.pagify.execute(
-            message,
-            list.map(
-                (m) =>
-                    `${`${m.user.username}${
-                        m.nickname ? ` (${m.nickname})` : ''
-                    }`.padEnd(40)}: ${m.id}`
-            ),
-            page
-        );
+        const content = this.client.helpers.pagify.execute(message, list.map((m) =>
+            `${`${m.user.username}${
+                m.nickname ? ` (${m.nickname})` : ''
+            }`.padEnd(40)}: ${m.id}`), page);
 
-        return message.send(
-            [
-                message.translate('utility/search:RESULTS', { query }),
-                '',
-                '```autohotkey',
-                content,
-                '```'
-            ].join('\n')
-        );
+        return message.send([
+            message.translate('utility/search:RESULTS', { query }),
+            '',
+            '```autohotkey',
+            content,
+            '```'
+        ].join('\n'));
     }
 }

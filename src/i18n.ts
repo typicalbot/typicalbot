@@ -1,13 +1,9 @@
+import { promises as fs } from 'fs';
+import * as path from 'path';
 import i18next, { TFunction } from 'i18next';
 import Backend from 'i18next-node-fs-backend';
-import * as path from 'path';
-import { promises as fs } from 'fs';
 
-async function walkDirectory(
-    dir: string,
-    namespaces: string[] = [],
-    folderName = ''
-) {
+async function walkDirectory(dir: string, namespaces: string[] = [], folderName = '') {
     const files = await fs.readdir(dir);
 
     const languages: string[] = [];
@@ -17,11 +13,7 @@ async function walkDirectory(
             const isLanguage = file.includes('-');
             if (isLanguage) languages.push(file);
 
-            const folder = await walkDirectory(
-                path.join(dir, file),
-                namespaces,
-                isLanguage ? '' : `${file}/`
-            );
+            const folder = await walkDirectory(path.join(dir, file), namespaces, isLanguage ? '' : `${file}/`);
 
             // eslint-disable-next-line no-param-reassign
             namespaces = folder.namespaces;
@@ -39,9 +31,7 @@ export default async (): Promise<Map<string, TFunction>> => {
         loadPath: path.resolve(__dirname, '../../i18n/{{lng}}/{{ns}}.json')
     };
 
-    const { namespaces, languages } = await walkDirectory(
-        path.resolve(__dirname, '../../i18n/')
-    );
+    const { namespaces, languages } = await walkDirectory(path.resolve(__dirname, '../../i18n/'));
 
     i18next.use(Backend);
 

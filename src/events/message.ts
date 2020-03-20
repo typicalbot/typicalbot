@@ -1,8 +1,8 @@
 import { inspect } from 'util';
-import Constants from '../utility/Constants';
+import { Message, GuildMember, User } from 'discord.js';
 import Event from '../structures/Event';
 import { TypicalGuildMessage, GuildSettings } from '../types/typicalbot';
-import { Message, GuildMember, User } from 'discord.js';
+import Constants from '../utility/Constants';
 
 export default class extends Event {
     async execute(message: Message | TypicalGuildMessage) {
@@ -42,15 +42,8 @@ export default class extends Event {
             return message.reply(message.translate('misc:PREFIX', { prefix }));
         }
 
-        const userPermissions = await this.client.handlers.permissions.fetch(
-            message.guild,
-            message.author.id
-        );
-        const actualUserPermissions = await this.client.handlers.permissions.fetch(
-            message.guild,
-            message.author.id,
-            true
-        );
+        const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author.id);
+        const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
 
         if (
             userPermissions.level <
@@ -75,10 +68,7 @@ export default class extends Event {
         const prefix = this.matchPrefix(message.author, settings, split);
         if (!prefix || !message.content.startsWith(prefix)) return;
 
-        const command = this.client.commands.fetch(
-            split.slice(prefix.length).toLowerCase(),
-            settings
-        );
+        const command = this.client.commands.fetch(split.slice(prefix.length).toLowerCase(), settings);
         if (!command) return;
         if (!message.member)
             await message.guild.members.fetch(message.author.id);
@@ -86,17 +76,13 @@ export default class extends Event {
         if (command.ptb && this.client.build !== 'ptb')
             return message.error(message.translate('misc:PTB_ONLY'));
 
-        const accessLevel = await this.client.helpers.fetchAccess.execute(
-            message.guild
-        );
+        const accessLevel = await this.client.helpers.fetchAccess.execute(message.guild);
         if (command.access && accessLevel.level < command.access) {
-            return message.error(
-                message.translate('misc:MISSING_ACCESS', {
-                    command: command.access,
-                    level: accessLevel.level,
-                    title: accessLevel.title
-                })
-            );
+            return message.error(message.translate('misc:MISSING_ACCESS', {
+                command: command.access,
+                level: accessLevel.level,
+                title: accessLevel.title
+            }));
         }
 
         if (
@@ -118,13 +104,7 @@ export default class extends Event {
                 Constants.PermissionsLevels.SERVER_BLACKLISTED &&
                 command.permission <= Constants.PermissionsLevels.SERVER_OWNER)
         ) {
-            return message.error(
-                this.client.helpers.permissionError.execute(
-                    message,
-                    command,
-                    actualUserPermissions
-                )
-            );
+            return message.error(this.client.helpers.permissionError.execute(message, command, actualUserPermissions));
         }
 
         this.client.analytics.addEvent({
@@ -176,11 +156,9 @@ export default class extends Event {
     handleDM(message: Message) {
         if (!message.content.startsWith(this.client.config.prefix)) return;
 
-        const command = this.client.commands.get(
-            message.content
-                .split(' ')[0]
-                .slice(this.client.config.prefix.length)
-        );
+        const command = this.client.commands.get(message.content
+            .split(' ')[0]
+            .slice(this.client.config.prefix.length));
 
         if (
             !command ||

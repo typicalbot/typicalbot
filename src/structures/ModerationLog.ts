@@ -1,8 +1,8 @@
 import { MessageEmbed, User, TextChannel } from 'discord.js';
-import Constants from '../utility/Constants';
+import { TypicalGuild } from '../extensions/TypicalGuild';
 import Cluster from '../index';
 import { ModlogAction } from '../types/typicalbot';
-import { TypicalGuild } from '../extensions/TypicalGuild';
+import Constants from '../utility/Constants';
 
 export default class ModerationLog {
     client: Cluster;
@@ -38,10 +38,7 @@ export default class ModerationLog {
         this.action = this.guild.translate('moderation/modlog:ACTION', {
             display: data.display,
             expiration: this.expiration
-                ? ` (${this.client.helpers.convertTime.execute(
-                    this.guild,
-                    this.expiration
-                )})`
+                ? ` (${this.client.helpers.convertTime.execute(this.guild, this.expiration)})`
                 : ''
         });
         return this;
@@ -90,10 +87,8 @@ export default class ModerationLog {
         const embed = new MessageEmbed()
             .setColor(this._action.hex)
             .setURL(Constants.Links.BASE)
-            .setDescription(
-                `${this.action}\n${this.channel || this.user}\n${this.reason ||
-                `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`
-            )
+            .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason ||
+                `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
             .setFooter(this.id, Constants.Links.ICON)
             .setTimestamp();
 
@@ -104,14 +99,9 @@ export default class ModerationLog {
     }
 
     async send() {
-        const channel = await this.client.handlers.moderationLog.fetchChannel(
-            this.guild
-        );
+        const channel = await this.client.handlers.moderationLog.fetchChannel(this.guild);
 
-        const latest = await this.client.handlers.moderationLog.fetchCase(
-            this.guild,
-            'latest'
-        );
+        const latest = await this.client.handlers.moderationLog.fetchCase(this.guild, 'latest');
 
         if (!this.id) {
             let id = 1;

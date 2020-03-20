@@ -14,13 +14,9 @@ export default class extends Command {
             randomAddon = message.translate('fun/shoot:HEADSHOT');
 
         if (!mention || mention.id === message.author.id)
-            return message.reply(
-                `${message.translate('fun/shoot:SELF')} ${randomAddon}`
-            );
-        return message.reply(
-            `${message.translate('fun/shoot:RESPONSE', {
-                user: mention.toString()
-            })} ${randomAddon}`
-        );
+            return message.reply(`${message.translate('fun/shoot:SELF')} ${randomAddon}`);
+        return message.reply(`${message.translate('fun/shoot:RESPONSE', {
+            user: mention.toString()
+        })} ${randomAddon}`);
     }
 }

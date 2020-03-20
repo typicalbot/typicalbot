@@ -9,18 +9,13 @@ export default class extends Command {
     async execute(message: TypicalGuildMessage) {
         const type = Math.random() <= 0.25 ? 'gif' : 'poster';
 
-        const data = await fetch(
-            `https://api.bunnies.io/v2/loop/random/?media=${type}`
-        )
+        const data = await fetch(`https://api.bunnies.io/v2/loop/random/?media=${type}`)
             .then((res) => res.json())
             .catch(() =>
-                message.error(message.translate('common:REQUEST_ERROR'))
-            );
+                message.error(message.translate('common:REQUEST_ERROR')));
 
         if (!message.embeddable) return message.send(data.media[type]);
 
-        return message.send(
-            new MessageEmbed().setColor(0x00adff).setImage(data.media[type])
-        );
+        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.media[type]));
     }
 }

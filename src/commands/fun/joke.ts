@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import jokes from '../../utility/jokes.json';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import jokes from '../../utility/jokes.json';
 
 export default class extends Command {
     execute(message: TypicalGuildMessage) {

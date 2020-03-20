@@ -2,33 +2,26 @@ import './extensions/TypicalGuild';
 import './extensions/TypicalGuildMember';
 import './extensions/TypicalMessage';
 
+import * as Sentry from '@sentry/node';
 import { Client, Collection } from 'discord.js';
+import { TFunction } from 'i18next';
 import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
+import AnalyticHandler from './handlers/AnalyticHandler';
+import CommandHandler from './handlers/CommandHandler';
+import DatabaseHandler from './handlers/DatabaseHandler';
+import EventHandler from './handlers/EventHandler';
+import FunctionHandler from './handlers/FunctionHandler';
+import ModerationLogHandler from './handlers/ModerationLogHandler';
+import PermissionsHandler from './handlers/PermissionsHandler';
+import SettingHandler from './handlers/SettingHandler';
+import TaskHandler from './handlers/TaskHandler';
+import i18n from './i18n';
+import { TypicalDonor, HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
+import Logger from './utility/Logger';
 import config from '../config.json';
 import pkg from '../package.json';
 
-import DatabaseHandler from './handlers/DatabaseHandler';
-import TaskHandler from './handlers/TaskHandler';
-import PermissionsHandler from './handlers/PermissionsHandler';
-import ModerationLogHandler from './handlers/ModerationLogHandler';
-import SettingHandler from './handlers/SettingHandler';
-import FunctionHandler from './handlers/FunctionHandler';
-import CommandHandler from './handlers/CommandHandler';
-import EventHandler from './handlers/EventHandler';
-import AnalyticHandler from './handlers/AnalyticHandler';
-import Logger from './utility/Logger';
-
-import {
-    TypicalDonor,
-    HelperFunctions,
-    BanLog,
-    UnbanLog
-} from './types/typicalbot';
-import i18n from './i18n';
-import { TFunction } from 'i18next';
-
-import * as Sentry from '@sentry/node';
 
 interface TypicalHandlers {
     database: DatabaseHandler;
@@ -101,14 +94,10 @@ export default class Cluster extends Client {
     public fetchData(property: string): any {
         if (!this.node) return eval(`this.${property}`);
 
-        return this.node.sendTo(
-            'manager',
-            {
-                event: 'collectData',
-                data: property
-            },
-            { receptive: true }
-        );
+        return this.node.sendTo('manager', {
+            event: 'collectData',
+            data: property
+        }, { receptive: true });
     }
 
     private async fetchDonors(): Promise<void> {
@@ -145,25 +134,22 @@ export default class Cluster extends Client {
             Sentry.captureException(err);
         });
 
-        fetch(
-            `https://top.gg/api/bots/${this.config.id}/stats`,
-            {
-                method: 'post',
-                headers: {
-                    Authorization: this.config.apis.topgg
-                },
-                body: JSON.stringify({
-                    // eslint-disable-next-line @typescript-eslint/camelcase
-                    shard_id: shardID,
-                    // eslint-disable-next-line @typescript-eslint/camelcase
-                    shard_count: this.shardCount.toString(),
-                    // eslint-disable-next-line @typescript-eslint/camelcase
-                    server_count: this.guilds.cache
-                        .filter((g) => g.shardID === shardID)
-                        .size.toString()
-                })
-            }
-        ).catch((err) => {
+        fetch(`https://top.gg/api/bots/${this.config.id}/stats`, {
+            method: 'post',
+            headers: {
+                Authorization: this.config.apis.topgg
+            },
+            body: JSON.stringify({
+                // eslint-disable-next-line @typescript-eslint/camelcase
+                shard_id: shardID,
+                // eslint-disable-next-line @typescript-eslint/camelcase
+                shard_count: this.shardCount.toString(),
+                // eslint-disable-next-line @typescript-eslint/camelcase
+                server_count: this.guilds.cache
+                    .filter((g) => g.shardID === shardID)
+                    .size.toString()
+            })
+        }).catch((err) => {
             Sentry.captureException(err);
         });
     }

@@ -1,8 +1,8 @@
 import { Guild, TextChannel, User } from 'discord.js';
-import ModerationLog from '../structures/ModerationLog';
-import Cluster from '..';
-import { TypicalGuildMessage } from '../types/typicalbot';
 import { TypicalGuild } from '../extensions/TypicalGuild';
+import ModerationLog from '../structures/ModerationLog';
+import { TypicalGuildMessage } from '../types/typicalbot';
+import Cluster from '..';
 
 export default class ModerationLogHandler {
     client: Cluster;
@@ -19,9 +19,7 @@ export default class ModerationLogHandler {
         if (!guild.channels.cache.has(settings.logs.moderation))
             throw 'Channel does not exist.';
 
-        return guild.channels.cache.get(
-            settings.logs.moderation
-        ) as TextChannel;
+        return guild.channels.cache.get(settings.logs.moderation) as TextChannel;
     }
 
     async fetchCase(guild: Guild, id = 'latest') {
@@ -63,21 +61,16 @@ export default class ModerationLogHandler {
         const [embed] = message.embeds;
 
         const start = embed.description
-            ? embed.description.substring(
-                0,
-                embed.description.lastIndexOf('\n')
-            )
+            ? embed.description.substring(0, embed.description.lastIndexOf('\n'))
             : '';
 
-        return message.edit(
-            embed
-                .setAuthor(moderator.tag, moderator.displayAvatarURL())
-                .setDescription([
-                    start,
-                    message.translate('moderation/modlog:REASON', {
-                        reason
-                    })
-                ])
-        );
+        return message.edit(embed
+            .setAuthor(moderator.tag, moderator.displayAvatarURL())
+            .setDescription([
+                start,
+                message.translate('moderation/modlog:REASON', {
+                    reason
+                })
+            ]));
     }
 }

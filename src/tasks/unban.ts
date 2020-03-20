@@ -1,6 +1,6 @@
+import { User } from 'discord.js';
 import Task from '../structures/Task';
 import { UnbanTaskData } from '../types/typicalbot';
-import { User } from 'discord.js';
 
 export default class extends Task {
     async execute(data: UnbanTaskData): Promise<void> {
@@ -12,9 +12,6 @@ export default class extends Task {
             reason: "Automatic Unban: User's ban time has passed."
         });
 
-        await guild.members.unban(
-            data.userID,
-            "Automatic Unban: User's ban time has passed."
-        );
+        await guild.members.unban(data.userID, "Automatic Unban: User's ban time has passed.");
     }
 }

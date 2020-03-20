@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const characters = [
     '!',
@@ -33,21 +33,16 @@ export default class extends Command {
             list.push(`» ${member.displayName} (${member.id})`);
         }
 
-        await message.send(
-            list.length
-                ? [
-                    message.translate('moderation/dehoist:FOUND', {
-                        amount: message.translate(
-                            list.length === 1
-                                ? 'moderation/dehoist:ONE'
-                                : 'moderation/dehoist:MULTIPLE',
-                            { amount: list.length }
-                        )
-                    }),
-                    '',
-                    list.join('\n\n').substring(0, 2000)
-                ].join('\n')
-                : message.translate('moderation/dehoist:NONE')
-        );
+        await message.send(list.length
+            ? [
+                message.translate('moderation/dehoist:FOUND', {
+                    amount: message.translate(list.length === 1
+                        ? 'moderation/dehoist:ONE'
+                        : 'moderation/dehoist:MULTIPLE', { amount: list.length })
+                }),
+                '',
+                list.join('\n\n').substring(0, 2000)
+            ].join('\n')
+            : message.translate('moderation/dehoist:NONE'));
     }
 }

@@ -1,6 +1,6 @@
 import { Collection } from 'discord.js';
-import DefaultSettings from '../structures/Settings.js';
 import Cluster from '../index.js';
+import DefaultSettings from '../structures/Settings.js';
 import { GuildSettings } from '../types/typicalbot';
 
 export default class SettingHandler extends Collection<string, GuildSettings> {
@@ -13,10 +13,7 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
     async fetch(id: string) {
         if (this.has(id)) return this.get(id) as GuildSettings;
 
-        const row = (await this.client.handlers.database.get(
-            'guilds',
-            id
-        )) as GuildSettings;
+        const row = (await this.client.handlers.database.get('guilds', id)) as GuildSettings;
 
         if (!row) return this.create(id);
 
@@ -34,11 +31,7 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
     }
 
     async update(id: string, payload: object = {}) {
-        const updated = await this.client.handlers.database.update(
-            'guilds',
-            id,
-            payload
-        );
+        const updated = await this.client.handlers.database.update('guilds', id, payload);
 
         if (updated.changes != undefined && updated.changes?.length > 0)
             this.set(id, updated.changes[0].new_val);

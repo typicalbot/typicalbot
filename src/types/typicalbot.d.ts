@@ -9,9 +9,9 @@ import {
     User
 } from 'discord.js';
 import Command from '../structures/Command';
-import Cluster from '..';
 import ModerationLog from '../structures/ModerationLog';
 import PermLevel from '../structures/PermissionLevel';
+import Cluster from '..';
 
 export interface CommandOptions {
     description?: string;

@@ -1,9 +1,9 @@
-import { Collection } from 'discord.js';
 import { join, parse } from 'path';
+import { Collection } from 'discord.js';
 import klaw from 'klaw';
 import Cluster from '../index';
-import { TaskOptions } from '../types/typicalbot';
 import Task from '../structures/Task';
+import { TaskOptions } from '../types/typicalbot';
 
 export default class TaskHandler {
     client: Cluster;
@@ -24,31 +24,21 @@ export default class TaskHandler {
 
                 if (!file.ext || file.ext !== '.js') return;
 
-                const req = ((r) => r.default || r)(
-                    // eslint-disable-next-line @typescript-eslint/no-var-requires
-                    require(join(file.dir, file.base))
-                );
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
+                const req = ((r) => r.default || r)(require(join(file.dir, file.base)));
 
                 this.taskTypes.set(file.name, req);
             })
             .on('end', async () => {
                 // eslint-disable-next-line no-console
-                this.client.logger.info(
-                    `Loaded ${this.collection.size} Tasks in ${Date.now() -
-                        start}ms`
-                );
+                this.client.logger.info(`Loaded ${this.collection.size} Tasks in ${Date.now() - start}ms`);
 
-                const list: TaskOptions[] = await this.client.handlers.database.get(
-                    'tasks'
-                );
+                const list: TaskOptions[] = await this.client.handlers.database.get('tasks');
                 for (const task of list) {
                     const taskType = this.taskTypes.get(task.type);
                     if (!taskType) continue;
 
-                    this.collection.set(
-                        task.id,
-                        new taskType(this.client, task)
-                    );
+                    this.collection.set(task.id, new taskType(this.client, task));
                 }
             });
 

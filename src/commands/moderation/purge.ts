@@ -1,7 +1,7 @@
-import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
-import { TypicalGuildMessage } from '../../types/typicalbot';
 import { TextChannel } from 'discord.js';
+import Command from '../../structures/Command';
+import { TypicalGuildMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(?:(?:<@!?(\d{17,20})>|(\d{17,20})|<@&(\d{17,20})>|<#(\d{17,20})>|(you|me|bots))\s+)?(\d+)(?:\s+((?:.|[\r\n])+))?/i;
 
@@ -13,12 +13,10 @@ export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
 
         const [
@@ -34,13 +32,9 @@ export default class extends Command {
         let messageCount = parseInt(amount, 10);
         if (messageCount > 100) messageCount = 100;
         if (messageCount < 2)
-            return message.error(
-                message.translate('moderation/purge:TOO_LITTLE')
-            );
+            return message.error(message.translate('moderation/purge:TOO_LITTLE'));
 
-        let channelToUse = message.guild.channels.cache.get(
-            channelID
-        ) as TextChannel;
+        let channelToUse = message.guild.channels.cache.get(channelID) as TextChannel;
         if (!channelToUse || channelToUse.type !== 'text')
             channelToUse = message.channel;
 
@@ -73,9 +67,7 @@ export default class extends Command {
             .catch(() => null);
 
         if (!purged)
-            return message.error(
-                message.translate('moderation/purge:MISSING_PERMS')
-            );
+            return message.error(message.translate('moderation/purge:MISSING_PERMS'));
 
         if (
             message.guild.settings.logs.moderation &&
@@ -93,14 +85,9 @@ export default class extends Command {
         if (!purged.size)
             await message.reply(message.translate('moderation/purge:NONE'));
         else {
-            const response = await message.reply(
-                message.translate(
-                    purged.size === 1
-                        ? 'moderation/purge:PURGED'
-                        : 'moderation/purge:PURGED_MULTIPLE',
-                    { amount: purged.size }
-                )
-            );
+            const response = await message.reply(message.translate(purged.size === 1
+                ? 'moderation/purge:PURGED'
+                : 'moderation/purge:PURGED_MULTIPLE', { amount: purged.size }));
             response.delete({ timeout: 2500 }).catch(() => null);
         }
 

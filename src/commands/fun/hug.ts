@@ -10,13 +10,8 @@ export default class extends Command {
         if (!mention || mention.id === message.author.id)
             return message.reply(message.translate('fun/hug:SELF'));
 
-        return message.reply(
-            message.translate(
-                randomAddon ? 'fun/hug:RESPONSE_AWW' : 'fun/hug:RESPONSE',
-                {
-                    user: mention.toString()
-                }
-            )
-        );
+        return message.reply(message.translate(randomAddon ? 'fun/hug:RESPONSE_AWW' : 'fun/hug:RESPONSE', {
+            user: mention.toString()
+        }));
     }
 }

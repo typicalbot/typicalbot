@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 export default class extends Command {
     aliases = [

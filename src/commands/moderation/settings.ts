@@ -1,6 +1,6 @@
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalGuildMessage, SettingsData } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
 const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
@@ -41,11 +41,7 @@ export default class extends Command {
         if (!args) return message.error(usageError);
         args.shift();
 
-        const permission = await this.client.handlers.permissions.fetch(
-            message.guild,
-            message.author.id,
-            true
-        );
+        const permission = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
 
         // const accessLevel = await this.client.helpers.fetchAccess.execute(
         //     message.guild
@@ -54,14 +50,7 @@ export default class extends Command {
         const [action, setting, type, value] = args;
 
         if (['edit', 'clear'].includes(action) && permission.level < 3)
-            return message.error(
-                this.client.helpers.permissionError.execute(
-                    message,
-                    this,
-                    permission,
-                    Constants.PermissionsLevels.SERVER_ADMINISTRATOR
-                )
-            );
+            return message.error(this.client.helpers.permissionError.execute(message, this, permission, Constants.PermissionsLevels.SERVER_ADMINISTRATOR));
 
         switch (action) {
             case 'clear':
@@ -295,9 +284,7 @@ export default class extends Command {
                 // @ts-ignore
                 const selectedSetting = settingsData[setting];
                 if (!selectedSetting)
-                    return message.error(
-                        message.translate('moderation/settings:INVALID')
-                    );
+                    return message.error(message.translate('moderation/settings:INVALID'));
 
                 if (action === 'view')
                     return this.view(message, selectedSetting);
@@ -309,14 +296,12 @@ export default class extends Command {
 
         return null;
     }
-    list(
-        message: TypicalGuildMessage,
+    list(message: TypicalGuildMessage,
         setting: string,
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         settingsData,
-        view = false
-    ) {
+        view = false) {
         let page = parseInt(setting, 10) || 1;
         const settings = Object.keys(settingsData);
         const count = Math.ceil(settings.length / 10);
@@ -324,23 +309,19 @@ export default class extends Command {
 
         const list = settings
             .splice((page - 1) * 10, 10)
-            .map(
-                (k) =>
-                    ` • **${k}:** ${
-                        view
-                            ? settingsData[k].value
-                            : message.translate(settingsData[k].description)
-                    }`
-            );
+            .map((k) =>
+                ` • **${k}:** ${
+                    view
+                        ? settingsData[k].value
+                        : message.translate(settingsData[k].description)
+                }`);
 
-        return message.send(
-            [
-                message.translate('moderation/settings:AVAILABLE'),
-                '',
-                message.translate('moderation/settings:PAGE', { page, count }),
-                list.join('\n')
-            ].join('\n')
-        );
+        return message.send([
+            message.translate('moderation/settings:AVAILABLE'),
+            '',
+            message.translate('moderation/settings:PAGE', { page, count }),
+            list.join('\n')
+        ].join('\n'));
     }
 
     async clear(message: TypicalGuildMessage) {
@@ -352,22 +333,16 @@ export default class extends Command {
 
         return deleted
             ? message.reply(message.translate('moderation/settings:CLEARED'))
-            : message.error(
-                message.translate('moderation/settings:CLEAR_ERROR')
-            );
+            : message.error(message.translate('moderation/settings:CLEAR_ERROR'));
     }
 
     view(message: TypicalGuildMessage, setting: SettingsData) {
         const NONE = message.translate('common:NONE');
 
         if (setting.type === 'boolean') {
-            return message.reply(
-                message.translate('moderation/settings:CURRENT_VALUE', {
-                    value: message.translate(
-                        setting.value ? 'common:ENABLED' : 'common:DISABLED'
-                    )
-                })
-            );
+            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+                value: message.translate(setting.value ? 'common:ENABLED' : 'common:DISABLED')
+            }));
         }
 
         if (setting.type === 'roles') {
@@ -376,49 +351,37 @@ export default class extends Command {
                 const role = message.guild.roles.cache.get(roleID);
                 if (!role) continue;
 
-                list.push(
-                    `*${
-                        message.guild.id === roleID
-                            ? role.name.slice(1)
-                            : role.name
-                    }*`
-                );
+                list.push(`*${
+                    message.guild.id === roleID
+                        ? role.name.slice(1)
+                        : role.name
+                }*`);
             }
-            return message.reply(
-                message.translate('moderation/settings:CURRENT_VALUE', {
-                    value: list.length ? list.join(', ') : NONE
-                })
-            );
+            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+                value: list.length ? list.join(', ') : NONE
+            }));
         }
 
         if (setting.type === 'role') {
             const role = message.guild.roles.cache.get(setting.value as string);
-            return message.reply(
-                message.translate('moderation/settings:CURRENT_VALUE', {
-                    value: role ? role.name : NONE
-                })
-            );
+            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+                value: role ? role.name : NONE
+            }));
         }
 
         if (setting.type === 'ms') {
-            return message.reply(
-                message.translate('moderation/settings:CURRENT_VALUE', {
-                    value: setting.value
-                        ? `${setting.value}ms`
-                        : message.translate('common:DEFAULT')
-                })
-            );
+            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+                value: setting.value
+                    ? `${setting.value}ms`
+                    : message.translate('common:DEFAULT')
+            }));
         }
 
         if (setting.type === 'channel') {
-            const channel = message.guild.channels.cache.get(
-                setting.value as string
-            );
-            return message.reply(
-                message.translate('moderation/settings:CURRENT_VALUE', {
-                    value: channel ? channel.toString() : NONE
-                })
-            );
+            const channel = message.guild.channels.cache.get(setting.value as string);
+            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+                value: channel ? channel.toString() : NONE
+            }));
         }
 
         if (setting.type === 'log') {
@@ -432,26 +395,20 @@ export default class extends Command {
                         ? message.translate('common:EMBED')
                         : ['```txt', '', setting.value, '```'].join('\n');
 
-            return message.reply(
-                message.translate('moderation/settings:CURRENT_VALUE', {
-                    value: logText
-                })
-            );
+            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+                value: logText
+            }));
         }
 
-        return message.reply(
-            message.translate('moderation/settings:CURRENT_VALUE', {
-                value: setting.value || NONE
-            })
-        );
+        return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+            value: setting.value || NONE
+        }));
     }
 
-    async edit(
-        message: TypicalGuildMessage,
+    async edit(message: TypicalGuildMessage,
         setting: SettingsData,
         value: string,
-        type: string
-    ) {
+        type: string) {
         let payload = {};
         const ENABLE = message.translate('common:ENABLE').toLowerCase();
         const DISABLE = message.translate('common:DISABLE').toLowerCase();
@@ -463,15 +420,11 @@ export default class extends Command {
         const EMBED = message.translate('common:EMBED');
 
         if (setting.path.endsWith('language')) {
-            const selectedLanguage = possibleLanguages.find(
-                (data) =>
-                    data.name === value.toLowerCase() ||
-                    data.aliases.includes(value.toLowerCase())
-            );
+            const selectedLanguage = possibleLanguages.find((data) =>
+                data.name === value.toLowerCase() ||
+                    data.aliases.includes(value.toLowerCase()));
             if (!selectedLanguage)
-                return message.error(
-                    message.translate('moderation/settings:INVALID_OPTION')
-                );
+                return message.error(message.translate('moderation/settings:INVALID_OPTION'));
 
             if (!selectedLanguage.complete)
                 await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <${Constants.Links.TRANSLATE}>`);
@@ -481,24 +434,18 @@ export default class extends Command {
 
         if (setting.type === 'boolean') {
             if (
-                ![DISABLE, ENABLE, 'enable', 'disable'].includes(
-                    value.toLowerCase()
-                )
+                ![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase())
             )
                 return message.translate('moderation/settings:INVALID_OPTION');
 
-            const enableSetting = ['enable', ENABLE].includes(
-                value.toLowerCase()
-            );
+            const enableSetting = ['enable', ENABLE].includes(value.toLowerCase());
 
             payload = this.stringToObject(setting.path, enableSetting);
         }
 
         if (setting.type === 'roles') {
             if (
-                [DISABLE, 'disable', CLEAR, 'clear'].includes(
-                    value.toLowerCase()
-                )
+                [DISABLE, 'disable', CLEAR, 'clear'].includes(value.toLowerCase())
             ) {
                 payload = this.stringToObject(setting.path, []);
             } else if (
@@ -506,37 +453,27 @@ export default class extends Command {
             ) {
                 const args = roleRegex.exec(value);
                 if (!args)
-                    return message.error(
-                        message.translate('misc:USAGE_ERROR', {
-                            name: this.name,
-                            prefix: this.client.config.prefix
-                        })
-                    );
+                    return message.error(message.translate('misc:USAGE_ERROR', {
+                        name: this.name,
+                        prefix: this.client.config.prefix
+                    }));
                 args.shift();
 
                 const [roleID, roleName] = args;
 
                 const role = roleID
                     ? message.guild.roles.cache.get(roleID)
-                    : message.guild.roles.cache.find(
-                        (r) => r.name.toLowerCase() === roleName.toLowerCase()
-                    );
+                    : message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase());
 
                 if (!role)
-                    return message.error(
-                        message.translate('moderation/give:INVALID')
-                    );
+                    return message.error(message.translate('moderation/give:INVALID'));
 
                 const isAdd = [ADD, 'add'].includes(type.toLowerCase());
 
                 if (isAdd && (setting.value as string[]).includes(role.id))
-                    return message.error(
-                        message.translate('moderation/settings:ROLE_EXISTS')
-                    );
+                    return message.error(message.translate('moderation/settings:ROLE_EXISTS'));
                 if (!isAdd && !(setting.value as string[]).includes(role.id))
-                    return message.error(
-                        message.translate('moderation/settings:ROLE_NOT_SET')
-                    );
+                    return message.error(message.translate('moderation/settings:ROLE_NOT_SET'));
 
                 const newValue = isAdd
                     ? [...(setting.value as string[]), role.id]
@@ -552,26 +489,20 @@ export default class extends Command {
             } else {
                 const args = roleRegex.exec(value);
                 if (!args)
-                    return message.error(
-                        message.translate('misc:USAGE_ERROR', {
-                            name: this.name,
-                            prefix: this.client.config.prefix
-                        })
-                    );
+                    return message.error(message.translate('misc:USAGE_ERROR', {
+                        name: this.name,
+                        prefix: this.client.config.prefix
+                    }));
                 args.shift();
 
                 const [roleID, roleName] = args;
 
                 const role = roleID
                     ? message.guild.roles.cache.get(roleID)
-                    : message.guild.roles.cache.find(
-                        (r) => r.name.toLowerCase() === roleName.toLowerCase()
-                    );
+                    : message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase());
 
                 if (!role)
-                    return message.error(
-                        message.translate('moderation/give:INVALID')
-                    );
+                    return message.error(message.translate('moderation/give:INVALID'));
 
                 payload = this.stringToObject(setting.path, role.id);
             }
@@ -579,26 +510,20 @@ export default class extends Command {
 
         if (setting.type === 'ms') {
             if (
-                [DISABLE, 'disable', DEFAULT, 'default'].includes(
-                    value.toLowerCase()
-                )
+                [DISABLE, 'disable', DEFAULT, 'default'].includes(value.toLowerCase())
             ) {
                 payload = this.stringToObject(setting.path, null);
             } else {
                 const args = msRegex.exec(value);
                 if (!args)
-                    return message.error(
-                        message.translate('moderation/settings:INVALID_MS')
-                    );
+                    return message.error(message.translate('moderation/settings:INVALID_MS'));
                 args.shift();
 
                 const [ms] = args;
                 const amount = parseInt(ms, 10);
 
                 if (amount > 600000 || amount < 2000)
-                    return message.error(
-                        message.translate('moderation/settings:INVALID_MS')
-                    );
+                    return message.error(message.translate('moderation/settings:INVALID_MS'));
 
                 payload = this.stringToObject(setting.path, amount);
             }
@@ -612,33 +537,23 @@ export default class extends Command {
             } else {
                 const args = channelRegex.exec(value);
                 if (!args)
-                    return message.error(
-                        message.translate('misc:USAGE_ERROR', {
-                            name: this.name,
-                            prefix: this.client.config.prefix
-                        })
-                    );
+                    return message.error(message.translate('misc:USAGE_ERROR', {
+                        name: this.name,
+                        prefix: this.client.config.prefix
+                    }));
                 args.shift();
 
                 const [channelID, channelName] = args;
 
                 const channel = channelID
                     ? message.guild.channels.cache.get(channelID)
-                    : message.guild.channels.cache.find(
-                        (r) =>
-                            r.name.toLowerCase() === channelName.toLowerCase()
-                    );
+                    : message.guild.channels.cache.find((r) =>
+                        r.name.toLowerCase() === channelName.toLowerCase());
 
                 if (!channel)
-                    return message.error(
-                        message.translate('moderation/settings:INVALID_CHANNEL')
-                    );
+                    return message.error(message.translate('moderation/settings:INVALID_CHANNEL'));
                 if (channel.type !== 'text')
-                    return message.error(
-                        message.translate(
-                            'moderation/settings:NOT_TEXT_CHANNEL'
-                        )
-                    );
+                    return message.error(message.translate('moderation/settings:NOT_TEXT_CHANNEL'));
 
                 payload = this.stringToObject(setting.path, channel.id);
             }
@@ -646,16 +561,12 @@ export default class extends Command {
 
         if (setting.type === 'log') {
             if (!message.guild.settings.logs.id)
-                return message.error(
-                    message.translate('moderation/settings:NEED_LOG')
-                );
+                return message.error(message.translate('moderation/settings:NEED_LOG'));
 
             if ([DISABLE, 'disable'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, '--disabled');
             } else if (
-                [DEFAULT, 'default', ENABLE, 'enable'].includes(
-                    value.toLowerCase()
-                )
+                [DEFAULT, 'default', ENABLE, 'enable'].includes(value.toLowerCase())
             ) {
                 payload = this.stringToObject(setting.path, null);
             } else if ([EMBED, 'embed'].includes(value.toLowerCase())) {
@@ -666,19 +577,14 @@ export default class extends Command {
         }
 
         if (setting.type === 'default') {
-            payload = this.stringToObject(
-                setting.path,
-                [DISABLE, 'disable'].includes(value.toLowerCase())
-                    ? null
-                    : value
-            );
+            payload = this.stringToObject(setting.path, [DISABLE, 'disable'].includes(value.toLowerCase())
+                ? null
+                : value);
         }
 
         await this.client.settings.update(message.guild.id, payload);
 
-        return message.success(
-            message.translate('moderation/settings:UPDATED')
-        );
+        return message.success(message.translate('moderation/settings:UPDATED'));
     }
 
     stringToObject(path: string, value: unknown): {} {

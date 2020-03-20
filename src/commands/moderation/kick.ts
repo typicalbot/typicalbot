@@ -1,26 +1,22 @@
-import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
-import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
 import { MessageEmbed } from 'discord.js';
+import Command from '../../structures/Command';
+import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_MODERATOR;
     mode = Constants.Modes.STRICT;
 
-    async execute(
-        message: TypicalGuildMessage,
+    async execute(message: TypicalGuildMessage,
         parameters: string,
-        permissionLevel: PermissionLevel
-    ) {
+        permissionLevel: PermissionLevel) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
 
         const [userID, reason] = args;
@@ -46,11 +42,9 @@ export default class extends Command {
             .setColor(0xff0000)
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
-            .setDescription(
-                message.translate('moderation/kick:KICKED', {
-                    name: message.guild.name
-                })
-            )
+            .setDescription(message.translate('moderation/kick:KICKED', {
+                name: message.guild.name
+            }))
             .addFields([
                 {
                     name: message.translate('common:MODERATOR_FIELD'),
@@ -68,12 +62,10 @@ export default class extends Command {
         await member.send().catch(() => null);
 
         const kicked = await member
-            .kick(
-                message.translate('moderation/kick:REASON', {
-                    mod: message.author.tag,
-                    reason: reason || message.translate('common:NO_REASON')
-                })
-            )
+            .kick(message.translate('moderation/kick:REASON', {
+                mod: message.author.tag,
+                reason: reason || message.translate('common:NO_REASON')
+            }))
             .catch(() => null);
         if (!kicked)
             return message.error(message.translate('moderation/kick:ERROR'));
@@ -89,10 +81,8 @@ export default class extends Command {
             await newCase.send();
         }
 
-        return message.success(
-            message.translate('moderation/kick:KICK_SUCCESS', {
-                user: member.user.tag
-            })
-        );
+        return message.success(message.translate('moderation/kick:KICK_SUCCESS', {
+            user: member.user.tag
+        }));
     }
 }

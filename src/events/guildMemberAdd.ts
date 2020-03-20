@@ -1,7 +1,7 @@
+import * as Sentry from '@sentry/node';
+import { MessageEmbed, TextChannel } from 'discord.js';
 import Event from '../structures/Event';
 import { TypicalGuildMember, TypicalGuild } from '../types/typicalbot';
-import { MessageEmbed, TextChannel } from 'discord.js';
-import * as Sentry from '@sentry/node';
 
 export default class GuildMemberAdd extends Event {
     async execute(member: TypicalGuildMember) {
@@ -17,71 +17,41 @@ export default class GuildMemberAdd extends Event {
                 settings.logs.id &&
                 guild.channels.cache.has(settings.logs.id)
             ) {
-                const channel = guild.channels.cache.get(
-                    settings.logs.id
-                ) as TextChannel;
+                const channel = guild.channels.cache.get(settings.logs.id) as TextChannel;
                 if (channel.type !== 'text') return;
 
                 if (settings.logs.join === '--embed') {
                     channel
-                        .send(
-                            new MessageEmbed()
-                                .setColor(0x00ff00)
-                                .setAuthor(
-                                    `${user.tag} (${user.id})`,
-                                    user.displayAvatarURL()
-                                )
-                                .setFooter(
-                                    guild.translate('help/logs:USER_JOINED')
-                                )
-                                .setTimestamp()
-                        )
+                        .send(new MessageEmbed()
+                            .setColor(0x00ff00)
+                            .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
+                            .setFooter(guild.translate('help/logs:USER_JOINED'))
+                            .setTimestamp())
                         .catch(() => null);
                 } else {
                     channel
-                        .send(
-                            settings.logs.join
-                                ? await this.client.helpers.formatMessage.execute(
-                                    'logs',
-                                    guild,
-                                    user,
-                                    settings.logs.join
-                                )
-                                : guild.translate('help/logs:JOINED_SERVER', {
-                                    user: user.tag
-                                })
-                        )
+                        .send(settings.logs.join
+                            ? await this.client.helpers.formatMessage.execute('logs', guild, user, settings.logs.join)
+                            : guild.translate('help/logs:JOINED_SERVER', {
+                                user: user.tag
+                            }))
                         .catch((err) => Sentry.captureException(err));
                 }
             }
         }
 
         if (settings.auto.message && !user.bot)
-            user.send(
-                [
-                    guild.translate('help/logs:WELCOME_ALERT', {
-                        name: guild.name
-                    }),
-                    '',
-                    await this.client.helpers.formatMessage.execute(
-                        'automessage',
-                        guild,
-                        user,
-                        settings.auto.message
-                    )
-                ].join('\n')
-            ).catch((err) => Sentry.captureException(err));
+            user.send([
+                guild.translate('help/logs:WELCOME_ALERT', {
+                    name: guild.name
+                }),
+                '',
+                await this.client.helpers.formatMessage.execute('automessage', guild, user, settings.auto.message)
+            ].join('\n')).catch((err) => Sentry.captureException(err));
 
         if (settings.auto.nickname)
             member
-                .setNickname(
-                    await this.client.helpers.formatMessage.execute(
-                        'autonick',
-                        guild,
-                        user,
-                        settings.auto.nickname
-                    )
-                )
+                .setNickname(await this.client.helpers.formatMessage.execute('autonick', guild, user, settings.auto.nickname))
                 .catch((err) => Sentry.captureException(err));
 
         const autorole =
@@ -101,17 +71,13 @@ export default class GuildMemberAdd extends Event {
 
             if (!added || !settings.logs.id) return null;
 
-            const channel = guild.channels.cache.get(
-                settings.logs.id
-            ) as TextChannel;
+            const channel = guild.channels.cache.get(settings.logs.id) as TextChannel;
             if (!channel || channel.type !== 'text') return null;
 
-            return channel.send(
-                guild.translate('help/logs:AUTOROLE', {
-                    user: user.tag,
-                    role: autorole.name
-                })
-            );
+            return channel.send(guild.translate('help/logs:AUTOROLE', {
+                user: user.tag,
+                role: autorole.name
+            }));
         }, settings.auto.role.delay || 2000);
     }
 }

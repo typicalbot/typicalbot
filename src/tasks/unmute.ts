@@ -1,14 +1,12 @@
-import Task from '../structures/Task';
-import Constants from '../utility/Constants';
-import { UnmuteTaskData } from '../types/typicalbot';
-import { TypicalGuild } from '../extensions/TypicalGuild';
 import { ClientUser } from 'discord.js';
+import { TypicalGuild } from '../extensions/TypicalGuild';
+import Task from '../structures/Task';
+import { UnmuteTaskData } from '../types/typicalbot';
+import Constants from '../utility/Constants';
 
 export default class extends Task {
     async execute(data: UnmuteTaskData): Promise<void> {
-        const guild = this.client.guilds.cache.get(
-            data.guildID
-        ) as TypicalGuild;
+        const guild = this.client.guilds.cache.get(data.guildID) as TypicalGuild;
         if (!guild) return;
 
         const member = await guild.members

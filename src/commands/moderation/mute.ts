@@ -1,7 +1,7 @@
-import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
-import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
 import { PermissionOverwrites, MessageEmbed } from 'discord.js';
+import Command from '../../structures/Command';
+import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 const regex = /(?:(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)d(?:ays?)?)?\s?(?:(\d+)h(?:ours?|rs?)?)?\s?(?:(\d+)m(?:inutes?|in)?)?\s?(?:(\d+)s(?:econds?|ec)?)?)?(?:\s*(.+))?|(deny)\s+(?:(here)|(?:(?:<#)?(\d{17,20})>?)))/i;
 
@@ -9,19 +9,15 @@ export default class extends Command {
     permission = Constants.PermissionsLevels.SERVER_MODERATOR;
     mode = Constants.Modes.STRICT;
 
-    async execute(
-        message: TypicalGuildMessage,
+    async execute(message: TypicalGuildMessage,
         parameters: string,
-        permissionLevel: PermissionLevel
-    ) {
+        permissionLevel: PermissionLevel) {
         const args = regex.exec(parameters);
         if (!args)
-            return message.error(
-                message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                })
-            );
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
         args.shift();
 
         const [
@@ -38,9 +34,7 @@ export default class extends Command {
 
         if (!message.guild.settings.roles.mute)
             return message.error(message.translate('moderation/mute:NO_ROLE'));
-        const role = message.guild.roles.cache.get(
-            message.guild.settings.roles.mute
-        );
+        const role = message.guild.roles.cache.get(message.guild.settings.roles.mute);
         if (!role)
             return message.error(message.translate('moderation/mute:NO_ROLE'));
 
@@ -49,42 +43,28 @@ export default class extends Command {
                 ? message.channel
                 : message.guild.channels.cache.get(channelID);
             if (!channel)
-                return message.error(
-                    message.translate('moderation/mute:INVALID_CHANNEL')
-                );
+                return message.error(message.translate('moderation/mute:INVALID_CHANNEL'));
 
-            const permissions = channel.permissionsFor(
-                message.guild.me || this.client.config.id
-            );
+            const permissions = channel.permissionsFor(message.guild.me || this.client.config.id);
 
             if (permissions && !permissions.has('MANAGE_ROLES'))
-                return message.error(
-                    message.translate('moderation/mute:MISSING_PERMS')
-                );
+                return message.error(message.translate('moderation/mute:MISSING_PERMS'));
 
             const currentOverwrites = channel.permissionOverwrites;
-            currentOverwrites.set(
-                role.id,
-                new PermissionOverwrites(channel, {
-                    id: role.id,
-                    deny: ['SEND_MESSAGES'],
-                    allow: [],
-                    type: 'role'
-                })
-            );
+            currentOverwrites.set(role.id, new PermissionOverwrites(channel, {
+                id: role.id,
+                deny: ['SEND_MESSAGES'],
+                allow: [],
+                type: 'role'
+            }));
 
             const edited = await channel
-                .overwritePermissions(
-                    currentOverwrites,
-                    message.translate('moderation/mute:DENYING')
-                )
+                .overwritePermissions(currentOverwrites, message.translate('moderation/mute:DENYING'))
                 .catch(() => null);
 
             return edited
                 ? message.success(message.translate('moderation/mute:DENYING'))
-                : message.error(
-                    message.translate('moderation/mute:DENY_ERROR')
-                );
+                : message.error(message.translate('moderation/mute:DENY_ERROR'));
         }
 
         // Mute a member
@@ -105,9 +85,7 @@ export default class extends Command {
             return message.error(message.translate('common:USER_NOT_FOUND'));
 
         if (member.roles.cache.has(message.guild.settings.roles.mute))
-            return message.error(
-                message.translate('moderation/mute:ALREADY_MUTED')
-            );
+            return message.error(message.translate('moderation/mute:ALREADY_MUTED'));
 
         if (
             message.member.roles.highest.position <=
@@ -118,19 +96,15 @@ export default class extends Command {
             return message.error(message.translate('moderation/mute:TOO_LOW'));
 
         if (!role.editable)
-            return message.error(
-                message.translate('moderation/mute:UNEDITABLE')
-            );
+            return message.error(message.translate('moderation/mute:UNEDITABLE'));
 
         const embed = new MessageEmbed()
             .setColor(Constants.ModerationLogTypes.MUTE.hex)
             .setFooter('TypicalBot', Constants.Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
-            .setDescription(
-                message.translate('moderation/mute:MUTED', {
-                    name: message.guild.name
-                })
-            )
+            .setDescription(message.translate('moderation/mute:MUTED', {
+                name: message.guild.name
+            }))
             .addFields([
                 {
                     name: message.translate('common:MODERATOR_FIELD'),
@@ -167,10 +141,8 @@ export default class extends Command {
                 memberID: member.id
             });
 
-        return message.success(
-            message.translate('moderation/mute:SUCCESS', {
-                user: member.user.tag
-            })
-        );
+        return message.success(message.translate('moderation/mute:SUCCESS', {
+            user: member.user.tag
+        }));
     }
 }

@@ -26,11 +26,9 @@ export class TypicalMessage extends Structures.get('Message') {
         return this.send(`${this.author} | ${content}`, embed);
     }
 
-    send(
-        content: string | MessageEmbed,
+    send(content: string | MessageEmbed,
         embed?: MessageEmbed,
-        options?: MessageOptions
-    ) {
+        options?: MessageOptions) {
         if (typeof content === 'string') {
             return this.channel.send(content, { ...options, embed });
         }
@@ -49,18 +47,14 @@ export class TypicalMessage extends Structures.get('Message') {
         return this.channel.send(`${this.author} | ❌ | ${content}`, embed);
     }
 
-    dm(
-        content: string | MessageEmbed,
+    dm(content: string | MessageEmbed,
         embed?: MessageEmbed,
-        options?: MessageOptions
-    ) {
+        options?: MessageOptions) {
         return this.author && this.author.send(content, { ...options, embed });
     }
 
     translate(key: string, args?: object) {
-        const language = this.client.translate.get(
-            this.guild ? this.guild.settings.language : 'en-US'
-        );
+        const language = this.client.translate.get(this.guild ? this.guild.settings.language : 'en-US');
 
         if (!language) throw 'Message: Invalid language set in settings.';
 

@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../structures/Command';
-import Constants from '../../utility/Constants';
 import { TypicalMessage } from '../../types/typicalbot';
+import Constants from '../../utility/Constants';
 
 export default class extends Command {
     aliases = ['info', 'support'];
@@ -18,40 +18,30 @@ export default class extends Command {
 
             if (!message.embeddable) return message.send(response);
 
-            return message.send(
-                new MessageEmbed()
-                    .setColor(0x00adff)
-                    .setTitle(message.translate('core/help:TYPICAL_INFO'))
-                    .setDescription(response)
-                    .setFooter('TypicalBot', Constants.Links.ICON)
-                    .setTimestamp()
-            );
+            return message.send(new MessageEmbed()
+                .setColor(0x00adff)
+                .setTitle(message.translate('core/help:TYPICAL_INFO'))
+                .setDescription(response)
+                .setFooter('TypicalBot', Constants.Links.ICON)
+                .setTimestamp());
         }
 
-        const command = this.client.commands.fetch(
-            parameters,
-            message.guild.settings
-        );
+        const command = this.client.commands.fetch(parameters, message.guild.settings);
         if (!command) {
             const response = message.translate('core/help:INVALID', {
                 name: parameters
             });
             if (!message.embeddable) return message.error(response);
 
-            return message.send(
-                new MessageEmbed()
-                    .setColor(0x00adff)
-                    .setTitle(message.translate('core/help:INVALID_INFO'))
-                    .setDescription(response)
-                    .setFooter('TypicalBot', Constants.Links.ICON)
-                    .setTimestamp()
-            );
+            return message.send(new MessageEmbed()
+                .setColor(0x00adff)
+                .setTitle(message.translate('core/help:INVALID_INFO'))
+                .setDescription(response)
+                .setFooter('TypicalBot', Constants.Links.ICON)
+                .setTimestamp());
         }
 
-        const path = command.path.substring(
-            command.path.indexOf('commands/') + 9,
-            command.path.length - 3
-        );
+        const path = command.path.substring(command.path.indexOf('commands/') + 9, command.path.length - 3);
 
         const DESCRIPTION = message.translate(`${path}:DESCRIPTION`);
         const USAGE = message.translate(`${path}:USAGE`);
@@ -60,59 +50,49 @@ export default class extends Command {
             : message.translate('common:NONE');
 
         if (!message.embeddable)
-            return message.send(
-                message.translate('core/help:TEXT', {
-                    name: parameters,
-                    commandName: command.name,
-                    aliases: ALIASES,
+            return message.send(message.translate('core/help:TEXT', {
+                name: parameters,
+                commandName: command.name,
+                aliases: ALIASES,
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
+                permission: this.client.handlers.permissions.levels.get(command.permission).title,
+                description: DESCRIPTION,
+                usage: USAGE
+            }));
+
+        return message.send(new MessageEmbed()
+            .setColor(0x00adff)
+            .setTitle(message.translate('core/help:COMMAND_USAGE', {
+                name: command.name
+            }))
+            .setDescription(message.translate('core/help:PARAMETERS'))
+            .addFields([
+                {
+                    name: message.translate('core/help:COMMAND'),
+                    value: command.name,
+                    inline: true
+                },
+                {
+                    name: message.translate('core/help:ALIASES'),
+                    value: ALIASES
+                },
+                {
+                    name: message.translate('core/help:PERMISSION'),
                     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                     // @ts-ignore
-                    permission: this.client.handlers.permissions.levels.get(
-                        command.permission
-                    ).title,
-                    description: DESCRIPTION,
-                    usage: USAGE
-                })
-            );
-
-        return message.send(
-            new MessageEmbed()
-                .setColor(0x00adff)
-                .setTitle(
-                    message.translate('core/help:COMMAND_USAGE', {
-                        name: command.name
-                    })
-                )
-                .setDescription(message.translate('core/help:PARAMETERS'))
-                .addFields([
-                    {
-                        name: message.translate('core/help:COMMAND'),
-                        value: command.name,
-                        inline: true
-                    },
-                    {
-                        name: message.translate('core/help:ALIASES'),
-                        value: ALIASES
-                    },
-                    {
-                        name: message.translate('core/help:PERMISSION'),
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                        // @ts-ignore
-                        value: this.client.handlers.permissions.levels.get(
-                            command.permission
-                        ).title
-                    },
-                    {
-                        name: message.translate('core/help:DESC'),
-                        value: DESCRIPTION
-                    },
-                    {
-                        name: message.translate('core/help:USE'),
-                        value: USAGE
-                    }
-                ])
-                .setFooter('TypicalBot', Constants.Links.ICON)
-                .setTimestamp()
-        );
+                    value: this.client.handlers.permissions.levels.get(command.permission).title
+                },
+                {
+                    name: message.translate('core/help:DESC'),
+                    value: DESCRIPTION
+                },
+                {
+                    name: message.translate('core/help:USE'),
+                    value: USAGE
+                }
+            ])
+            .setFooter('TypicalBot', Constants.Links.ICON)
+            .setTimestamp());
     }
 }
