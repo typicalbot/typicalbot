@@ -16,8 +16,6 @@ export const Colors = {
     ERROR: 0xff0000
 };
 
-export const Access = {};
-
 export enum AccessLevels {
     DEFAULT = 0,
     DONOR = 1,
@@ -29,8 +27,6 @@ export const AccessTitles = {
     DONOR: { level: 1, title: 'TypicalBot Donor' },
     STAFF: { level: 3, title: 'TypicalBot Staff' }
 };
-
-export const Permissions = {};
 
 export enum PermissionsLevels {
     SERVER_BLACKLISTED = -1,
@@ -52,8 +48,6 @@ export enum Modes {
     LITE = 1,
     STRICT = 2
 }
-
-export const ModerationLog = {};
 
 export const ModerationLogTypes = {
     WARN: { hex: 0xffff00, display: 'Warn' },
@@ -81,14 +75,11 @@ export const ModerationLogRegex = {
 export default {
     Links,
     Colors,
-    Access,
     AccessLevels,
     AccessTitles,
-    Permissions,
     PermissionsLevels,
     PermissionsRoleTitles,
     Modes,
-    ModerationLog,
     ModerationLogTypes,
     ModerationLogRegex
 };
