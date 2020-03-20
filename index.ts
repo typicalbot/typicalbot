@@ -66,7 +66,7 @@ else {
                     .send('', json)
                     .then(() => message.reply({ response: 'Success' }))
                     .catch(() =>
-                        message.reply({ response: 'An error occured.' })
+                        message.reply({ response: 'An error occurred.' })
                     );
             }
 
