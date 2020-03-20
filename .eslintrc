@@ -23,6 +23,17 @@
             "error",
             "always"
         ],
+        "block-spacing": [
+            "error",
+            "always"
+        ],
+        "brace-style": [
+            "error",
+            "1tbs",
+            {
+                "allowSingleLine": true
+            }
+        ],
         "object-curly-spacing": [
             "error",
             "always"
