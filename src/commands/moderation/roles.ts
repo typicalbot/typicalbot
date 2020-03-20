@@ -16,7 +16,7 @@ export default class extends Command {
         const args = regex.exec(parameters);
         if (!args)
             return message.error(
-                message.translate('misc:USAGE_ERROR', {
+                message.translate('moderation/roles:USAGE', {
                     name: this.name,
                     prefix: this.client.config.prefix
                 })
@@ -92,7 +92,7 @@ export default class extends Command {
         const args = infoRegex.exec(argument);
         if (!args)
             return message.error(
-                message.translate('misc:USAGE_ERROR', {
+                message.translate('moderation/roles:USAGE', {
                     name: this.name,
                     prefix: this.client.config.prefix
                 })
@@ -157,7 +157,7 @@ export default class extends Command {
         const args = manageRegex.exec(argument);
         if (!args)
             return message.error(
-                message.translate('misc:USAGE_ERROR', {
+                message.translate('moderation/roles:USAGE', {
                     name: this.name,
                     prefix: this.client.config.prefix
                 })
@@ -219,7 +219,7 @@ export default class extends Command {
         const args = publicRegex.exec(argument);
         if (!args)
             return message.error(
-                message.translate('misc:USAGE_ERROR', {
+                message.translate('moderation/roles:USAGE', {
                     name: this.name,
                     prefix: this.client.config.prefix
                 })
