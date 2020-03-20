@@ -18,9 +18,9 @@ export default class extends Command {
         return message.send(
             new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle('core/donate:SUPPORT')
+                .setTitle(message.translate('core/donate:SUPPORT'))
                 .setDescription(
-                    message.translate('donate:TEXT', {
+                    message.translate('core/donate:TEXT', {
                         link: Constants.Links.DONATE
                     })
                 )
