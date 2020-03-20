@@ -10,7 +10,6 @@ export default class TaskHandler {
 
     collection: Collection<number, Task> = new Collection();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     taskTypes: Collection<string, any> = new Collection();
 
     constructor(client: Cluster) {

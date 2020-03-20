@@ -26,7 +26,6 @@ export default class Logger {
         this.#logger.warn(message);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public error(message: any): void {
         this.#logger.error(message.stack ? message.stack : message.toString());
     }
