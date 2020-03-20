@@ -14,7 +14,7 @@ TypicalFunction
         super();
         this.client = client;
 
-        this.init().catch(err => Sentry.captureException(err));
+        this.init().catch((err) => Sentry.captureException(err));
     }
 
     async init() {
@@ -24,13 +24,13 @@ TypicalFunction
         let count = 0;
 
         klaw(path)
-            .on('data', item => {
+            .on('data', (item) => {
                 const file = parse(item.path);
                 if (!file.ext || file.ext !== '.js') return;
 
                 count++;
 
-                const Function = (r => r.default || r)(
+                const Function = ((r) => r.default || r)(
                     // eslint-disable-next-line @typescript-eslint/no-var-requires
                     require(join(file.dir, file.base))
                 );

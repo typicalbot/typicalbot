@@ -56,5 +56,5 @@ export default async (): Promise<Map<string, TFunction>> => {
         preload: languages
     });
 
-    return new Map(languages.map(item => [item, i18next.getFixedT(item)]));
+    return new Map(languages.map((item) => [item, i18next.getFixedT(item)]));
 };

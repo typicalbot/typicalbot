@@ -11,7 +11,7 @@ export default class extends Command {
         const data = await fetch(
             'https://status.discordapp.com/api/v2/summary.json'
         )
-            .then(res => res.json())
+            .then((res) => res.json())
             .catch(() => null);
         if (!data)
             return message.error(message.translate('common:REQUEST_ERROR'));

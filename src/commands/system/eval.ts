@@ -28,7 +28,7 @@ export default class extends Command {
 
             if (result instanceof Promise) {
                 result
-                    .then(a => {
+                    .then((a) => {
                         message
                             .send(
                                 embed.setDescription(
@@ -41,7 +41,7 @@ export default class extends Command {
                                     ].join('\n')
                                 )
                             )
-                            .catch(err => {
+                            .catch((err) => {
                                 message.send(
                                     embed.setDescription(
                                         ['```', err.stack, '```'].join('\n')
@@ -49,7 +49,7 @@ export default class extends Command {
                                 );
                             });
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         message.send(
                             embed.setDescription(
                                 [

@@ -15,11 +15,11 @@ export default class PermissionsHandler {
 
     init() {
         klaw(join(__dirname, '..', 'permissions'))
-            .on('data', item => {
+            .on('data', (item) => {
                 const file = parse(item.path);
                 if (!file.ext || file.ext !== '.js') return;
 
-                const Permission = (r => r.default || r)(
+                const Permission = ((r) => r.default || r)(
                     // eslint-disable-next-line @typescript-eslint/no-var-requires
                     require(join(file.dir, file.base))
                 );

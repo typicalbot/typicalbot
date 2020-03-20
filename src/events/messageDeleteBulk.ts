@@ -44,7 +44,7 @@ export default class MessageBulkDelete extends Event {
         const haste = await hastebin(
             messages
                 .map(
-                    m =>
+                    (m) =>
                         `${moment(m.createdAt).format(
                             'dddd MMMM Do, YYYY, hh:mm A'
                         )} | ${m.author.tag} (${m.author.id}):\n${m.content}`
@@ -62,7 +62,7 @@ export default class MessageBulkDelete extends Event {
                         url: haste
                     })
                 )
-                .catch(err => Sentry.captureException(err));
+                .catch((err) => Sentry.captureException(err));
 
         return logsChannel
             .send(
@@ -82,6 +82,6 @@ export default class MessageBulkDelete extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(err => Sentry.captureException(err));
+            .catch((err) => Sentry.captureException(err));
     }
 }

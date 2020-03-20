@@ -21,7 +21,7 @@ export default class extends Command {
                 .array()
                 .sort((a, b) => b.memberCount - a.memberCount)
                 .map(
-                    g =>
+                    (g) =>
                         `${this.client.helpers.lengthen.execute(
                             `${g.name.replace(guildNameRegex, '')}`,
                             30

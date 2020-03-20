@@ -63,6 +63,6 @@ export default class GuildBanAdd extends Event {
                     )
                     : `**${user.tag}** has been banned from the server.`
             )
-            .catch(err => Sentry.captureException(err));
+            .catch((err) => Sentry.captureException(err));
     }
 }

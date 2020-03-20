@@ -33,6 +33,13 @@
         "object-curly-spacing": [
             "error",
             "always"
+        ],
+        "array-bracket-spacing": [
+            "error"
+        ],
+        "arrow-parens": [
+            "error",
+            "always"
         ]
     }
 }

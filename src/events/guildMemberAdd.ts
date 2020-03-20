@@ -51,7 +51,7 @@ export default class GuildMemberAdd extends Event {
                                     user: user.tag
                                 })
                         )
-                        .catch(err => Sentry.captureException(err));
+                        .catch((err) => Sentry.captureException(err));
                 }
             }
         }
@@ -70,7 +70,7 @@ export default class GuildMemberAdd extends Event {
                         settings.auto.message
                     )
                 ].join('\n')
-            ).catch(err => Sentry.captureException(err));
+            ).catch((err) => Sentry.captureException(err));
 
         if (settings.auto.nickname)
             member
@@ -82,7 +82,7 @@ export default class GuildMemberAdd extends Event {
                         settings.auto.nickname
                     )
                 )
-                .catch(err => Sentry.captureException(err));
+                .catch((err) => Sentry.captureException(err));
 
         const autorole =
             settings.auto.role.bots && member.user.bot
@@ -95,7 +95,7 @@ export default class GuildMemberAdd extends Event {
         setTimeout(async () => {
             const added = await member.roles
                 .add(autorole.id)
-                .catch(err => Sentry.captureException(err));
+                .catch((err) => Sentry.captureException(err));
 
             if (!settings.auto.role.silent) return null;
 

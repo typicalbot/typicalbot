@@ -20,7 +20,7 @@ export default class extends Command {
             users,
             usedRAM,
             totalRAM
-        ] = await Promise.all(paths.map(path => this.client.fetchData(path)));
+        ] = await Promise.all(paths.map((path) => this.client.fetchData(path)));
 
         const uptime = this.client.helpers.convertTime.execute(
             message,

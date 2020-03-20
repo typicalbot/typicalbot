@@ -103,7 +103,7 @@ export default class extends Command {
                 .get('tasks')
                 .catch(() => [])) as TaskOptions[];
             const releventTask = tasks.find(
-                task =>
+                (task) =>
                     task.type === 'unmute' &&
                     (task.data as UnmuteTaskData).guildID ===
                         message.guild.id &&

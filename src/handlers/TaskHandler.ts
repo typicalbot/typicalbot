@@ -19,12 +19,12 @@ export default class TaskHandler {
         const start = Date.now();
 
         klaw(path)
-            .on('data', item => {
+            .on('data', (item) => {
                 const file = parse(item.path);
 
                 if (!file.ext || file.ext !== '.js') return;
 
-                const req = (r => r.default || r)(
+                const req = ((r) => r.default || r)(
                     // eslint-disable-next-line @typescript-eslint/no-var-requires
                     require(join(file.dir, file.base))
                 );
@@ -54,8 +54,8 @@ export default class TaskHandler {
 
         setInterval(() => {
             this.collection
-                .filter(task => Date.now() >= task.end)
-                .forEach(async task => {
+                .filter((task) => Date.now() >= task.end)
+                .forEach(async (task) => {
                     await task.execute(task.data);
                     this.collection.delete(task.id);
                 });

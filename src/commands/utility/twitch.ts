@@ -25,7 +25,7 @@ export default class extends Command {
                 headers: { 'Client-ID': this.client.config.apis.twitch }
             }
         )
-            .then(res => res.json())
+            .then((res) => res.json())
             .catch(() => null);
 
         if (!json)

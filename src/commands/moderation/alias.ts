@@ -43,7 +43,7 @@ export default class extends Command {
             message.translate('moderation/alias:CURRENT'),
             message.guild.settings.aliases.length
                 ? message.guild.settings.aliases
-                    .map(a => `${a.alias} -> ${a.command}`)
+                    .map((a) => `${a.alias} -> ${a.command}`)
                     .join('\n')
                 : NONE
         ]);
@@ -64,7 +64,7 @@ export default class extends Command {
             );
 
         const aliasList = message.guild.settings.aliases;
-        const aliasExists = aliasList.find(a => a.alias === alias);
+        const aliasExists = aliasList.find((a) => a.alias === alias);
         if (aliasExists) {
             const aliasCommand = this.client.commands.fetch(
                 aliasExists.command,
@@ -102,7 +102,7 @@ export default class extends Command {
         if (!command) return message.error(usageError);
 
         const aliasList = message.guild.settings.aliases;
-        const aliasIndex = aliasList.findIndex(a => a.alias === command);
+        const aliasIndex = aliasList.findIndex((a) => a.alias === command);
 
         if (aliasIndex < 0)
             return message.error(

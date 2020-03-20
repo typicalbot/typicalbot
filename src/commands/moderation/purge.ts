@@ -49,7 +49,7 @@ export default class extends Command {
             before: message.id
         });
 
-        messages = messages.filter(msg => {
+        messages = messages.filter((msg) => {
             if (!msg.member) return false;
             if ([userMention, userID].includes(msg.author.id)) return true;
             if (msg.member.roles.cache.has(roleID)) return true;

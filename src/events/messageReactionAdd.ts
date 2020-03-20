@@ -37,7 +37,7 @@ export default class MessageReactionAdd extends Event {
         if (!channel || channel.type !== 'text') return;
 
         const messages = await channel.messages.fetch({ limit: 100 });
-        const boardMsg = messages.find(m => {
+        const boardMsg = messages.find((m) => {
             if (!m.embeds.length) return false;
             const [embed] = m.embeds;
             return !(!embed.footer ||

@@ -22,7 +22,7 @@ export default class extends Command {
         const page = number ? parseInt(number, 10) : 1;
         const lowerQuery = query.toLowerCase();
 
-        const list = message.guild.members.cache.filter(m =>
+        const list = message.guild.members.cache.filter((m) =>
             [
                 m.user.username.toLowerCase(),
                 m.nickname ? m.nickname.toLowerCase() : ''
@@ -37,7 +37,7 @@ export default class extends Command {
         const content = this.client.helpers.pagify.execute(
             message,
             list.map(
-                m =>
+                (m) =>
                     `${`${m.user.username}${
                         m.nickname ? ` (${m.nickname})` : ''
                     }`.padEnd(40)}: ${m.id}`

@@ -8,7 +8,7 @@ export default class extends Command {
 
     async execute(message: TypicalGuildMessage) {
         const data = await fetch('https://dog.ceo/api/breeds/image/random')
-            .then(res => res.json())
+            .then((res) => res.json())
             .catch(() =>
                 message.error(message.translate('common:REQUEST_ERROR'))
             );

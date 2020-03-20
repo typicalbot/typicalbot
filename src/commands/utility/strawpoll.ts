@@ -32,7 +32,7 @@ export default class extends Command {
                 multi: !!multi
             })
         })
-            .then(res => res.json())
+            .then((res) => res.json())
             .catch(() => null);
         if (!data)
             return message.error(message.translate('common:REQUEST_ERROR'));

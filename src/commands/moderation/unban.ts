@@ -43,7 +43,7 @@ export default class extends Command {
                     reason: reason || message.translate('common:NO_REASON')
                 })
             )
-            .catch(err => {
+            .catch((err) => {
                 if (err === "Error: Couldn't resolve the user ID to unban.")
                     return message.error(
                         message.translate('common:USER_NOT_FOUND')
@@ -66,7 +66,7 @@ export default class extends Command {
             .catch(() => [])) as TaskOptions[];
 
         const relevantTask = tasks.find(
-            task =>
+            (task) =>
                 task.type === 'unban' &&
                 (task.data as UnbanTaskData).userID === userID &&
                 (task.data as UnbanTaskData).guildID === message.guild.id

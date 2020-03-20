@@ -106,17 +106,17 @@ export default class extends Command {
             message.translate('moderation/ignore:IGNORING', {
                 type: message.translate('common:COMMANDS')
             }),
-            commands.length ? commands.map(id => `<#${id}>`) : NA,
+            commands.length ? commands.map((id) => `<#${id}>`) : NA,
             '',
             message.translate('moderation/ignore:IGNORING', {
                 type: message.translate('common:INVITES')
             }),
-            invites.length ? invites.map(id => `<#${id}>`) : NA,
+            invites.length ? invites.map((id) => `<#${id}>`) : NA,
             '',
             message.translate('moderation/ignore:IGNORING', {
                 type: message.translate('common:STARS')
             }),
-            stars.length ? stars.map(id => `<#${id}>`) : NA
+            stars.length ? stars.map((id) => `<#${id}>`) : NA
         ];
 
         return message.send(response.join('\n'));

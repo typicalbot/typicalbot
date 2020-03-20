@@ -98,7 +98,7 @@ export default class extends Command {
                     reason: reason || message.translate('common:NO_REASON')
                 })
             })
-            .catch(err => {
+            .catch((err) => {
                 if (err === "Error: Couldn't resolve the user ID to ban.")
                     return message.error(
                         message.translate('common:USER_NOT_FOUND')

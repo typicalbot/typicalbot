@@ -24,7 +24,7 @@ export default class extends Command {
         const data = await fetch(
             `http://api.urbandictionary.com/v0/define?term=${query}`
         )
-            .then(res => res.json())
+            .then((res) => res.json())
             .catch(() => null);
         if (!data)
             return message.error(message.translate('common:REQUEST_ERROR'));

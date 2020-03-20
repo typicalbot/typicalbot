@@ -22,7 +22,7 @@ class AnalyticHandler {
     public async publish(): Promise<void> {
         const event = this.events.shift();
 
-        await this.client.handlers.database.insert('analytics', event).catch(err => Sentry.captureException(err));
+        await this.client.handlers.database.insert('analytics', event).catch((err) => Sentry.captureException(err));
     }
 }
 

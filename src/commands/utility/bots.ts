@@ -19,7 +19,7 @@ export default class extends Command {
         const data = (await fetch(
             'https://www.carbonitex.net/discord/api/listedbots'
         )
-            .then(res => res.json())
+            .then((res) => res.json())
             .catch(() => null)) as CarboniteBots[] | null;
         if (!data) return message.error('common:REQUEST_ERROR');
 
@@ -27,7 +27,7 @@ export default class extends Command {
 
         const bots = data
             .filter(
-                bot =>
+                (bot) =>
                     parseInt(bot.botid, 10) > 10 &&
                     parseInt(bot.servercount, 10) > 0
             )
@@ -35,7 +35,7 @@ export default class extends Command {
                 (a, b) =>
                     parseInt(b.servercount, 10) - parseInt(a.servercount, 10)
             )
-            .map(bot => ({
+            .map((bot) => ({
                 ...bot,
                 name: bot.name
                     .replace(replaceFirstRegex, '')
@@ -46,7 +46,7 @@ export default class extends Command {
         const content = this.client.helpers.pagify.execute(
             message,
             bots.map(
-                bot =>
+                (bot) =>
                     `${bot.name.padEnd(20)}: ${bot.servercount}${
                         bot.compliant
                             ? message.translate('utility/bots:COMPLIANT')

@@ -12,7 +12,7 @@ export default class extends Command {
         const data = await fetch(
             `https://api.bunnies.io/v2/loop/random/?media=${type}`
         )
-            .then(res => res.json())
+            .then((res) => res.json())
             .catch(() =>
                 message.error(message.translate('common:REQUEST_ERROR'))
             );

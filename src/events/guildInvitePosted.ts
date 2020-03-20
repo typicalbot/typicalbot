@@ -128,6 +128,6 @@ export default class GuildInvitePosted extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(err => Sentry.captureException(err));
+            .catch((err) => Sentry.captureException(err));
     }
 }

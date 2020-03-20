@@ -12,7 +12,7 @@ export default class CommandHandler extends Collection<string, Command> {
         super();
         this.client = client;
 
-        this.init().catch(err => Sentry.captureException(err));
+        this.init().catch((err) => Sentry.captureException(err));
     }
 
     async init() {
@@ -20,11 +20,11 @@ export default class CommandHandler extends Collection<string, Command> {
         const start = Date.now();
 
         klaw(path)
-            .on('data', item => {
+            .on('data', (item) => {
                 const file = parse(item.path);
                 if (!file.ext || file.ext !== '.js') return;
 
-                const req = (r => r.default || r)(
+                const req = ((r) => r.default || r)(
                     // eslint-disable-next-line @typescript-eslint/no-var-requires
                     require(join(file.dir, file.base))
                 );
@@ -48,7 +48,7 @@ export default class CommandHandler extends Collection<string, Command> {
     fetch(name: string, settings: GuildSettings) {
         if (this.has(name)) return this.get(name) as Command;
 
-        const commandAlias = this.find(c => c.aliases.includes(name));
+        const commandAlias = this.find((c) => c.aliases.includes(name));
         if (commandAlias) return commandAlias;
 
         // if (
@@ -62,7 +62,7 @@ export default class CommandHandler extends Collection<string, Command> {
         //         settings.pcs.filter(pc => pc.command === name)[0]
         //     );
 
-        const alias = settings.aliases.find(x => x.alias === name);
+        const alias = settings.aliases.find((x) => x.alias === name);
         return alias ? (this.get(alias.command) as Command) : null;
     }
 

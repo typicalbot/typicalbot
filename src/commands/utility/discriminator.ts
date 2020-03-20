@@ -16,7 +16,7 @@ export default class extends Command {
         const page = number ? parseInt(number, 10) : 1;
 
         const list = this.client.users.cache.filter(
-            user => user.discriminator === discriminator
+            (user) => user.discriminator === discriminator
         );
         if (!list.size)
             return message.reply(
@@ -27,7 +27,7 @@ export default class extends Command {
 
         const content = this.client.helpers.pagify.execute(
             message,
-            list.map(u => `${u.tag.padEnd(30)} ${u.id}`),
+            list.map((u) => `${u.tag.padEnd(30)} ${u.id}`),
             page
         );
 

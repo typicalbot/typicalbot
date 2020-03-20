@@ -7,8 +7,8 @@ export default class extends Command {
 
     execute(message: TypicalGuildMessage) {
         fetch('https://api.yomomma.info')
-            .then(res => res.json())
-            .then(json => message.send(json.joke))
+            .then((res) => res.json())
+            .then((json) => message.send(json.joke))
             .catch(() =>
                 message.error(message.translate('common:REQUEST_ERROR'))
             );

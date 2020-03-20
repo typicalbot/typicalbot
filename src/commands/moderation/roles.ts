@@ -70,7 +70,7 @@ export default class extends Command {
             message,
             message.guild.roles.cache
                 .sort((a, b) => b.position - a.position)
-                .map(role => `${role.name.padEnd(30)} : ${role.id}`),
+                .map((role) => `${role.name.padEnd(30)} : ${role.id}`),
             parseInt(page, 10) || 1
         );
 
@@ -106,7 +106,7 @@ export default class extends Command {
                 ? message.guild.roles.cache.get(roleMention || roleID)
                 : roleName
                     ? message.guild.roles.cache.find(
-                        r => r.name.toLowerCase() === roleName.toLowerCase()
+                        (r) => r.name.toLowerCase() === roleName.toLowerCase()
                     )
                     : null;
         if (!role)
@@ -119,7 +119,7 @@ export default class extends Command {
         const content = this.client.helpers.pagify.execute(
             message,
             role.members.map(
-                member => `${member.user.username.padEnd(30)} : ${member.id}`
+                (member) => `${member.user.username.padEnd(30)} : ${member.id}`
             ),
             parseInt(page, 10) || 1
         );
@@ -180,7 +180,7 @@ export default class extends Command {
             ? message.guild.roles.cache.get(roleID)
             : roleName
                 ? message.guild.roles.cache.find(
-                    r => r.name.toLowerCase() === roleName.toLowerCase()
+                    (r) => r.name.toLowerCase() === roleName.toLowerCase()
                 )
                 : null;
 
@@ -232,7 +232,7 @@ export default class extends Command {
             ? message.guild.roles.cache.get(roleID)
             : roleName
                 ? message.guild.roles.cache.find(
-                    r => r.name.toLowerCase() === roleName.toLowerCase()
+                    (r) => r.name.toLowerCase() === roleName.toLowerCase()
                 )
                 : null;
 
@@ -267,7 +267,7 @@ export default class extends Command {
             message,
             roles
                 .sort((a, b) => b.position - a.position)
-                .map(role => `${role.name.padEnd(30)} : ${role.id}`),
+                .map((role) => `${role.name.padEnd(30)} : ${role.id}`),
             parseInt(page, 10) || 1
         );
 
@@ -304,7 +304,7 @@ export default class extends Command {
         if (!role)
             return message.error(message.translate('moderation/give:INVALID'));
 
-        const roleIDs = message.guild.settings.roles.public.filter(r =>
+        const roleIDs = message.guild.settings.roles.public.filter((r) =>
             message.guild.roles.cache.has(r)
         );
         if (subcommand === 'add') {

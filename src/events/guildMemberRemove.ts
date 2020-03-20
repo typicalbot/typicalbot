@@ -34,7 +34,7 @@ export default class GuildMemberRemove extends Event {
                         )
                         : guild.translate('help/logs:LEFT', { user: user.tag })
                 )
-                .catch(err => Sentry.captureException(err));
+                .catch((err) => Sentry.captureException(err));
 
         return channel
             .send(
@@ -47,6 +47,6 @@ export default class GuildMemberRemove extends Event {
                     .setFooter(guild.translate('help/logs:USER_LEFT'))
                     .setTimestamp()
             )
-            .catch(err => Sentry.captureException(err));
+            .catch((err) => Sentry.captureException(err));
     }
 }

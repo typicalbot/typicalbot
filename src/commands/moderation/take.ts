@@ -33,7 +33,7 @@ export default class extends Command {
             ? message.guild.roles.cache.get(roleID)
             : roleName
                 ? message.guild.roles.cache.find(
-                    r => r.name.toLowerCase() === roleName
+                    (r) => r.name.toLowerCase() === roleName
                 )
                 : null;
         if (!role)

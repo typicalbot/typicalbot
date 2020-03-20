@@ -52,7 +52,7 @@ export default class GuildMemberUpdate extends Event {
                             nickname: member.displayName
                         })
                 )
-                .catch(err => Sentry.captureException(err));
+                .catch((err) => Sentry.captureException(err));
 
         return channel
             .send(
@@ -69,6 +69,6 @@ export default class GuildMemberUpdate extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(err => Sentry.captureException(err));
+            .catch((err) => Sentry.captureException(err));
     }
 }

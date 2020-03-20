@@ -10,7 +10,7 @@ export default class DatabaseHandler {
     constructor(client: Cluster) {
         this.client = client;
 
-        this.init().catch(err => Sentry.captureException(err));
+        this.init().catch((err) => Sentry.captureException(err));
     }
 
     async init() {

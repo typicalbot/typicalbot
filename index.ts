@@ -17,7 +17,7 @@ else {
             console.log(`[IPC] Connected to: ${client.name}`);
         });
 
-    node.connectTo(config.nodePort).catch(error =>
+    node.connectTo(config.nodePort).catch((error) =>
         console.error('[IPC] Disconnected!', error)
     );
 

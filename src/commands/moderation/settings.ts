@@ -325,7 +325,7 @@ export default class extends Command {
         const list = settings
             .splice((page - 1) * 10, 10)
             .map(
-                k =>
+                (k) =>
                     ` • **${k}:** ${
                         view
                             ? settingsData[k].value
@@ -464,7 +464,7 @@ export default class extends Command {
 
         if (setting.path.endsWith('language')) {
             const selectedLanguage = possibleLanguages.find(
-                data =>
+                (data) =>
                     data.name === value.toLowerCase() ||
                     data.aliases.includes(value.toLowerCase())
             );
@@ -519,7 +519,7 @@ export default class extends Command {
                 const role = roleID
                     ? message.guild.roles.cache.get(roleID)
                     : message.guild.roles.cache.find(
-                        r => r.name.toLowerCase() === roleName.toLowerCase()
+                        (r) => r.name.toLowerCase() === roleName.toLowerCase()
                     );
 
                 if (!role)
@@ -540,7 +540,7 @@ export default class extends Command {
 
                 const newValue = isAdd
                     ? [...(setting.value as string[]), role.id]
-                    : (setting.value as string[]).filter(id => id !== role.id);
+                    : (setting.value as string[]).filter((id) => id !== role.id);
 
                 payload = this.stringToObject(setting.path, newValue);
             }
@@ -565,7 +565,7 @@ export default class extends Command {
                 const role = roleID
                     ? message.guild.roles.cache.get(roleID)
                     : message.guild.roles.cache.find(
-                        r => r.name.toLowerCase() === roleName.toLowerCase()
+                        (r) => r.name.toLowerCase() === roleName.toLowerCase()
                     );
 
                 if (!role)
@@ -625,7 +625,7 @@ export default class extends Command {
                 const channel = channelID
                     ? message.guild.channels.cache.get(channelID)
                     : message.guild.channels.cache.find(
-                        r =>
+                        (r) =>
                             r.name.toLowerCase() === channelName.toLowerCase()
                     );
 

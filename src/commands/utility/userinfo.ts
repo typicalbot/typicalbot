@@ -28,7 +28,7 @@ export default class extends Command {
             member.roles.cache.size > 1
                 ? member.roles.cache
                     .sort((a, b) => b.position - a.position)
-                    .map(role => role.name)
+                    .map((role) => role.name)
                     .slice(0, -1)
                     .join(', ')
                 : message.translate('common:NONE');

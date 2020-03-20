@@ -64,6 +64,6 @@ export default class GuildBanRemove extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(err => Sentry.captureException(err));
+            .catch((err) => Sentry.captureException(err));
     }
 }

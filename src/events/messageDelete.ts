@@ -43,7 +43,7 @@ export default class MessageDelete extends Event {
                             }
                         )
                 )
-                .catch(err => Sentry.captureException(err));
+                .catch((err) => Sentry.captureException(err));
 
         return channel
             .send(
@@ -67,6 +67,6 @@ export default class MessageDelete extends Event {
                     )
                     .setTimestamp()
             )
-            .catch(err => Sentry.captureException(err));
+            .catch((err) => Sentry.captureException(err));
     }
 }

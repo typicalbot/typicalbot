@@ -36,6 +36,7 @@ interface TypicalHandlers {
     permissions: PermissionsHandler;
     moderationLog: ModerationLogHandler;
 }
+
 export default class Cluster extends Client {
     public node: VezaClient | undefined;
     public config = config;
@@ -76,7 +77,7 @@ export default class Cluster extends Client {
 
         this.node = node;
 
-        this.login(this.config.token).catch(err => Sentry.captureException(err));
+        this.login(this.config.token).catch((err) => Sentry.captureException(err));
     }
 
     public async login(token: string): Promise<string> {
@@ -136,11 +137,11 @@ export default class Cluster extends Client {
                 shardid: shardID,
                 shardcount: this.shardCount.toString(),
                 servercount: this.guilds.cache
-                    .filter(g => g.shardID === shardID)
+                    .filter((g) => g.shardID === shardID)
                     .size.toString(),
                 key: this.config.apis.carbonkey
             })
-        }).catch(err => {
+        }).catch((err) => {
             Sentry.captureException(err);
         });
 
@@ -158,11 +159,11 @@ export default class Cluster extends Client {
                     shard_count: this.shardCount.toString(),
                     // eslint-disable-next-line @typescript-eslint/camelcase
                     server_count: this.guilds.cache
-                        .filter(g => g.shardID === shardID)
+                        .filter((g) => g.shardID === shardID)
                         .size.toString()
                 })
             }
-        ).catch(err => {
+        ).catch((err) => {
             Sentry.captureException(err);
         });
     }
