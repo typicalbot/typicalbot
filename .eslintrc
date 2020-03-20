@@ -29,6 +29,10 @@
             2,
             "single",
             "avoid-escape"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
         ]
     }
 }
