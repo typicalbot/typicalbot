@@ -27,6 +27,7 @@ const possibleLanguages = [
         aliases: ['de', 'german', 'deutsch', 'deutsche']
     }
 ];
+
 export default class extends Command {
     aliases = ['set'];
     mode = Constants.Modes.STRICT;
@@ -275,10 +276,7 @@ export default class extends Command {
 
                 if (action === 'list')
                     return this.list(message, setting, settingsData);
-                if (
-                    action === 'view' &&
-                    (!setting || !isNaN(parseInt(setting, 10)))
-                )
+                if (action === 'view' && (!setting || !isNaN(parseInt(setting, 10))))
                     return this.list(message, setting, settingsData, true);
                 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
@@ -296,12 +294,11 @@ export default class extends Command {
 
         return null;
     }
-    list(message: TypicalGuildMessage,
-        setting: string,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        settingsData,
-        view = false) {
+
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    list(message: TypicalGuildMessage, setting: string, settingsData, view = false) {
         let page = parseInt(setting, 10) || 1;
         const settings = Object.keys(settingsData);
         const count = Math.ceil(settings.length / 10);
@@ -405,10 +402,7 @@ export default class extends Command {
         }));
     }
 
-    async edit(message: TypicalGuildMessage,
-        setting: SettingsData,
-        value: string,
-        type: string) {
+    async edit(message: TypicalGuildMessage, setting: SettingsData, value: string, type: string) {
         let payload = {};
         const ENABLE = message.translate('common:ENABLE').toLowerCase();
         const DISABLE = message.translate('common:DISABLE').toLowerCase();
@@ -422,7 +416,7 @@ export default class extends Command {
         if (setting.path.endsWith('language')) {
             const selectedLanguage = possibleLanguages.find((data) =>
                 data.name === value.toLowerCase() ||
-                    data.aliases.includes(value.toLowerCase()));
+                data.aliases.includes(value.toLowerCase()));
             if (!selectedLanguage)
                 return message.error(message.translate('moderation/settings:INVALID_OPTION'));
 
@@ -433,9 +427,7 @@ export default class extends Command {
         }
 
         if (setting.type === 'boolean') {
-            if (
-                ![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase())
-            )
+            if (![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase()))
                 return message.translate('moderation/settings:INVALID_OPTION');
 
             const enableSetting = ['enable', ENABLE].includes(value.toLowerCase());
@@ -444,13 +436,9 @@ export default class extends Command {
         }
 
         if (setting.type === 'roles') {
-            if (
-                [DISABLE, 'disable', CLEAR, 'clear'].includes(value.toLowerCase())
-            ) {
+            if ([DISABLE, 'disable', CLEAR, 'clear'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, []);
-            } else if (
-                [ADD, 'add', REMOVE, 'remove'].includes(value.toLowerCase())
-            ) {
+            } else if (type && [ADD, 'add', REMOVE, 'remove'].includes(type.toLowerCase())) {
                 const args = roleRegex.exec(value);
                 if (!args)
                     return message.error(message.translate('misc:USAGE_ERROR', {
@@ -480,6 +468,11 @@ export default class extends Command {
                     : (setting.value as string[]).filter((id) => id !== role.id);
 
                 payload = this.stringToObject(setting.path, newValue);
+            } else {
+                return message.error(message.translate('misc:USAGE_ERROR', {
+                    name: this.name,
+                    prefix: this.client.config.prefix
+                }));
             }
         }
 
@@ -509,9 +502,7 @@ export default class extends Command {
         }
 
         if (setting.type === 'ms') {
-            if (
-                [DISABLE, 'disable', DEFAULT, 'default'].includes(value.toLowerCase())
-            ) {
+            if ([DISABLE, 'disable', DEFAULT, 'default'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, null);
             } else {
                 const args = msRegex.exec(value);
@@ -565,9 +556,7 @@ export default class extends Command {
 
             if ([DISABLE, 'disable'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, '--disabled');
-            } else if (
-                [DEFAULT, 'default', ENABLE, 'enable'].includes(value.toLowerCase())
-            ) {
+            } else if ([DEFAULT, 'default', ENABLE, 'enable'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, null);
             } else if ([EMBED, 'embed'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, '--embed');
