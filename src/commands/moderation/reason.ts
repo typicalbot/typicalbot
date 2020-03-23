@@ -35,7 +35,7 @@ export default class extends Command {
             return message.error(message.translate('moderation/reason:ERROR'));
 
         const response = await message
-            .reply('moderation/reason:EDITED')
+            .reply(message.translate('moderation/reason:EDITED'))
             .catch(() => null);
         if (!response) return null;
 
