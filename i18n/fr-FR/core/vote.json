@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Votez pour TypicalBot sur top.gg",
+    "USAGE": "votez",
+    "TEXT": "Vous pouvez voter pour TypicalBot à <{{link}}>",
+    "TITLE": "Votez pour TypicalBot"
+}
