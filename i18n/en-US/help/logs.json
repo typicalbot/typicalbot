@@ -43,7 +43,7 @@
     "WELCOME_ALERT": "**{{name}}'s Join Message:**",
     "AUTOROLE": "**{{user}}** was given the **{{role}}**.",
     "USER_LEFT": "User Left.",
-    "LEFT": "**{{user}} has left the server.",
+    "LEFT": "**{{user}}** has left the server.",
     "NICKNAMED": "**{{user}}** changed their nickname to **{{nickname}}**.",
     "CHANGED_NICK": "Changed nickname to {{nickname}}.",
     "DELETED": "**{{user}}**'s message was deleted.",
