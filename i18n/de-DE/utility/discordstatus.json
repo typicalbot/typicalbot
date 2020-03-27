@@ -1,6 +1,0 @@
-{
-  "DESCRIPTION": "Überprüfe den Status von Discord.",
-  "USAGE": "discordstatus",
-  "OPERATIONAL": "Alle System sind funktionsfähig.",
-  "INCIDENT": "**Vorfall** um **{{time}}**"
-}
