@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Récupère une liste des serveurs du fragment actuel.",
-  "USAGE": "Page Web Serveur",
-  "CLUSTER": "**__Serveurs sur le cluster {{cluster}} / {{count}}:__**"
-}
