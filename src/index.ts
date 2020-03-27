@@ -22,7 +22,6 @@ import Logger from './utility/Logger';
 import config from '../config.json';
 import pkg from '../package.json';
 
-
 interface TypicalHandlers {
     database: DatabaseHandler;
     tasks: TaskHandler;
@@ -53,6 +52,7 @@ export default class Cluster extends Client {
     };
     public translate: Map<string, TFunction> = new Map();
     public logger = new Logger();
+    public version = pkg.version;
 
     public constructor(node: VezaClient | undefined) {
         super({
@@ -65,7 +65,7 @@ export default class Cluster extends Client {
 
         Sentry.init({
             dsn: this.config.apis.sentry,
-            release: pkg.version
+            release: this.version
         });
 
         this.node = node;
