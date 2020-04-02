@@ -31,6 +31,8 @@ export default class EventHandler extends Collection<string, Event> {
 
                     this.set(file.name, event);
 
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                    // @ts-ignore
                     this.client[event.once ? 'once' : 'on'](event.name, (...args: unknown[]) => event.execute(...args));
                 }
             })
