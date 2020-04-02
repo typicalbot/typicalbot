@@ -76,7 +76,7 @@ export default class extends Command {
         member.send().catch(() => null);
 
         const unmuted = await member.roles.remove(role).catch(() => null);
-        if (!unmuted) return message.error('moderation/unmute:ERROR');
+        if (!unmuted) return message.error(message.translate('moderation/unmute:ERROR'));
 
         if (message.guild.settings.logs.moderation) {
             const newCase = await message.guild.buildModerationLog();

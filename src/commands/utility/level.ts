@@ -14,7 +14,7 @@ export default class extends Command {
         args.shift();
         const [id, username, discriminator] = args;
         const member = await this.client.helpers.resolveMember.execute(message, id, username, discriminator);
-        if (!member) return message.error('common:USER_NOT_FOUND');
+        if (!member) return message.error(message.translate('common:USER_NOT_FOUND'));
 
         const permissionsHere = await this.client.handlers.permissions.fetch(message.guild, member.id, true);
         const permissions = await this.client.handlers.permissions.fetch(message.guild, member.id);
