@@ -60,7 +60,8 @@ export default class Cluster extends Client {
             messageCacheLifetime: 1800,
             messageSweepInterval: 300,
             disableMentions: 'everyone',
-            partials: ['MESSAGE']
+            partials: ['MESSAGE'],
+            presence: { activity: { name: `${config.prefix}help — typicalbot.com`, type: 'WATCHING' } }
         });
 
         Sentry.init({
