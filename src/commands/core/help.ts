@@ -16,12 +16,14 @@ export default class extends Command {
                 server: Constants.Links.SERVER
             });
 
-            if (!message.embeddable) return message.send(response);
+            if (!message.embeddable) return message.send(`${response}\n\nTerms of Service: <https://sylke.co/terms>\nPrivacy Policy: <https://sylke.co/privacy>`);
 
             return message.send(new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('core/help:TYPICAL_INFO'))
                 .setDescription(response)
+                .addField('Terms of Service', 'https://sylke.co/terms', true)
+                .addField('Privacy Policy', 'https://sylke.co/privacy', true)
                 .setFooter('TypicalBot', Constants.Links.ICON)
                 .setTimestamp());
         }
