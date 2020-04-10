@@ -11,19 +11,21 @@ export default class ModerationLogHandler {
         this.client = client;
     }
 
-    async fetchChannel(guild: Guild) {
+    async fetchChannel(guild: Guild): Promise<TextChannel | null> {
         const settings = await this.client.settings.fetch(guild.id);
 
         if (!settings.logs.moderation)
-            throw 'No moderation log channel is set.';
+            return null;
         if (!guild.channels.cache.has(settings.logs.moderation))
-            throw 'Channel does not exist.';
+            return null;
 
         return guild.channels.cache.get(settings.logs.moderation) as TextChannel;
     }
 
     async fetchCase(guild: Guild, id = 'latest') {
         const channel = await this.fetchChannel(guild);
+
+        if (!channel) return;
 
         const messages = await channel.messages
             .fetch({ limit: 100 })

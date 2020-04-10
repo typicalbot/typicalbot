@@ -101,6 +101,8 @@ export default class ModerationLog {
     async send() {
         const channel = await this.client.handlers.moderationLog.fetchChannel(this.guild);
 
+        if (!channel) return;
+
         const latest = await this.client.handlers.moderationLog.fetchCase(this.guild, 'latest');
 
         if (!this.id) {
