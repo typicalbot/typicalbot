@@ -8,7 +8,6 @@ export default class extends Command {
     aliases = ['aliases'];
     permission = Constants.PermissionsLevels.SERVER_ADMINISTRATOR;
     mode = Constants.Modes.STRICT;
-    access = Constants.AccessLevels.DONOR;
 
     async execute(message: TypicalGuildMessage, parameters?: string) {
         const usageError = message.translate('misc:USAGE_ERROR', {
