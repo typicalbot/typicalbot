@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Пырнуть другого пользователя на сервере.",
+    "USAGE": "пырнуть [@user]",
+    "SELF": "только что пырнул себя! :dagger::scream:",
+    "SELF_POLICE": "только что пырнул себя! :dagger::scream: Кто-нибудь, вызовите скорую!",
+    "RESPONSE": "только что пырнул {{user}}! :dagger::scream:",
+    "RESPONSE_POLICE": "только что пырнул {{user}}! :dagger::scream: Кто-нибудь, вызовите полицию!"
+}

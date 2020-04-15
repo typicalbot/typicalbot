@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Сгенерировать и просмотреть API ключи.",
+	"USAGE": "api <view|generate>",
+	"NONE": "Нет API ключей. Используйте `$api generate`, чтобы сгенерировать один.",
+	"SUCCESS": "API ключ успешно сгенерирован.",
+	"KEY": "API ключ {{guild}}: `{{key}}`"
+}
