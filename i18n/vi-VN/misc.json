@@ -1,0 +1,10 @@
+{
+	"PREFIX": "Tiền tố của máy chủ này là {{prefix}}.",
+	"MULTIPLE_PREFIXES": "'{{default}}' hoặc '{{custom}}'",
+	"PTB_ONLY": "Câu lệnh này đang ở trong chế độ thử nghiệm, nên không thể sử dụng trong phiên bản TypicalBot ổn định.",
+	"DISABLED": "Câu lệnh này không được kích hoạt trong máy chủ này.",
+	"MISSING_PERMS": "Bạn không có quyền để thực thi câu lệnh đó. Câu lệnh đó yêu cầu quyền hạn {{requiredLevel}} ({{requiredTitle}}) và bạn đang ở cấp {{userLevel}} ({{userTitle}}).",
+	"MISSING_ACCESS": "Người sở hữu máy chủ có quyền hạn quá thấp để thực thi câu lệnh đó. Câu lệnh này cần quyền cao hơn {{command}}, nhưng người sở hữu chỉ đạt cấp độ {{level}} ({{title}}). Người sở hữu có thể tăng quyền truy cập bằng cách donate $5 hoặc nhiều hơn cho TypicalBot.",
+	"USAGE_ERROR": "Câu lệnh không hợp lệ. Xem '{{prefix}}help{{name}}' để biết thêm thông tin.",
+	"PAGIFY": "Trang {{page}} / {{pages}} | {{total}} Tổng\n{{content}}"
+}

@@ -1,0 +1,12 @@
+{
+	"DESCRIPTION": "Nhận OAuth2 authorization link cho TypicalBot.",
+	"USAGE": "mời",
+	"TEXT": "Bạn có thể thêm tôi vào máy chủ tại <{{link}}>.",
+	"TYPICAL_INVITE": "Mời TypicalBot",
+	"PROHIBITED": "Máy chủ này cấm gửi lời mời. Tin nhắn của bạn đã bị xoá.",
+	"REASON": "{{action}} tự động: Người dùng đã gửi {{type}} trong {{channel}}",
+	"INVITE": "lời mời",
+	"CONSECUTIVE": "{{amount}} lời mời liên tiếp",
+	"SENT": "**{{user}}** đã gửi 1 lời mời trong {{channel}}.",
+	"SENT_IN": "Lời mời đã được gửi trong {{channel}}"
+}

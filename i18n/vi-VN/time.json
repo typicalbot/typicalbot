@@ -1,0 +1,10 @@
+{
+	"ONE_DAY": "1 ngày",
+	"DAYS": "{{amount}} ngày",
+	"ONE_HOUR": "1 giờ",
+	"HOURS": "{{amount}} giờ",
+	"ONE_MINUTE": "1 phút",
+	"MINUTES": "{{amount}} phút",
+	"ONE_SECOND": "1 giây",
+	"SECONDS": "{{amount}} giây"
+}
