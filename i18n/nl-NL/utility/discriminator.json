@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Geeft een lijst van gebruikers op basis van een ingevoerde discriminator.",
+    "USAGE": "discriminator [discriminator]",
+    "NONE": "Er zijn geen gebruikers met de discriminator **{{discriminator}}** gevonden.",
+    "USERS": "**__Gebruikers met Discriminator:__** {{discriminator}}"
+}

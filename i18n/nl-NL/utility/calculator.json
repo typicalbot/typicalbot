@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Evalueer mathematische expressies.",
+  "USAGE": "math <expressie>",
+  "INPUT": "**INVOER:**",
+  "OUTPUT": "**UITVOER:**",
+  "FAILED": "Er is een fout opgetreden bij het evalueren van de mathematische expressie."
+}
