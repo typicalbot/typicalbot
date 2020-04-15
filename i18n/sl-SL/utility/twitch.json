@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Preverite podatke uporabnikov twitch iz Twitch API-ja.",
+    "USAGE": "twitch <uporabnik>",
+    "STATS": "**__Twitch Statistika:__** {{name}}",
+    "ID": "ID: {{id}}",
+    "DISPLAY": "Prikazno ime: {{name}}",
+    "DESC": "Opis: {{description}}",
+    "STATUS": "Stanje: {{type}}",
+    "PROFILE": "Profilna slika: {{url}}",
+    "VIEWS": "Skupaj ogledov: {{amount}}",
+    "TITLE": "Twitch Statistika"
+}

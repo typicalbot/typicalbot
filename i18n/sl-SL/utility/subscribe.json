@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Pridobite naročniški rank strežnika.",
+  "USAGE": "naročise",
+  "NONE": "Za ta strežnik ni nastavljenega nobenega naročniškega ranka.",
+  "SUBSCRIBED": "Zdaj ste naročeni."
+}

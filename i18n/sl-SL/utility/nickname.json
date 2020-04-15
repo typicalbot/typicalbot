@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Spremenite ali počistite svoj vzdevek ali vzdevek drugega uporabnika.",
+    "USAGE": "vzdevek [@uporabnik] [nickname]",
+    "DISABLED": "Ta ukaz je trenutno onemogočen. Če želite omogočiti ta ukaz, onemogočite nastavitev \"nonickname\".",
+    "ERROR": "Pojavila se je napaka. To najverjetneje pomeni, da ne morem upravljati vzdevka člana.",
+    "SELF_ERROR": "Pojavila se je napaka. To najverjetneje pomeni, da ne morem upravljati tvojega vzdevka.",
+    "SUCCESS": "Članov vzdevek {{type}} je bil uspešno spremenjen.",
+    "SELF_SUCCESS": "Tvoj vzdevek {{type}} je bil uspešno spremenjen."
+}

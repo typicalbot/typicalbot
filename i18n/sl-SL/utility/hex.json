@@ -1,0 +1,4 @@
+{
+  "DESCRIPTION": "Pošlje predogled hex barve.",
+  "USAGE": "hex <hex-barva:0-9a-fA-F>"
+}

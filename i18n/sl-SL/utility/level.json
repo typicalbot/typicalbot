@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Navaja bodisi vašo stopnjo dovoljenja bodisi stopnjo drugega uporabnika.",
+  "USAGE": "stopnja [@uporabnik|id-uporabnika|oznaka-uporabnika]",
+  "TEXT": "**__{{user}}'ova stopnja dovoljenja je:__** {{level}}",
+  "TITLE": "{{user}}'ova stopnja dovoljenja",
+  "EMBED": "Stopnja {{level}}"
+}

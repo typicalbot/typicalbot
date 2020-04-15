@@ -1,0 +1,13 @@
+{
+    "DESCRIPTION": "Pridobite seznam ukazov TypicalBot-a.",
+    "USAGE": "ukazi",
+    "CHECK_DM": "Seznam ukazov bi moral prispeti v vaša Direktna Sporočila.",
+    "TYPICAL_COMMANDS": "TypicalBot Ukazi",
+    "TEXT": "Uporabi `{{prefix}}pomoč <ukaz> `, da dobite več informacij o določenem ukazu.",
+    "OWNER": "» Lastnik strežnika (4. Stopnja)",
+    "ADMIN": "» Administrator strežnika (3. Stopnja)",
+    "MOD": "» Moderator strežnika (2. Stopnja)",
+    "DJ": "» DJ strežnika (1. Stopnja)",
+    "MEMBER": "» Član strežnika (0. Stopnja)",
+    "NONE": "Ni ukazov za prikaz."
+}

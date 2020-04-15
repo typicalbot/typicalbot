@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Vrzite člana iz glasovnega kanala.",
+    "USAGE": "glasovnimet <@uporabnik> [reason]",
+    "NO_VOICE": "Zahtevani uporabnik ni v glasovnem kanalu.",
+    "SUCCESS": "Uspešno sem iz glasovnega kanal vrgel {{user}}**."
+}

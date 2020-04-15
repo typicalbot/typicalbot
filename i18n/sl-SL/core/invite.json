@@ -1,0 +1,12 @@
+{
+	"DESCRIPTION": "Prejmite povezavo za avtorizacijo OAuth2 za TypicalBot.",
+	"USAGE": "vabilo",
+	"TEXT": "Lahko me dodate v vaš strežnik na povezavi <{{link}}>.",
+	"TYPICAL_INVITE": "TypicalBot Vabilo",
+	"PROHIBITED": "Pošiljanje vabil na tem strežniku ni dovoljeno. Vaše sporočilo je bilo izbrisano.",
+	"REASON": "Samodejno {{action}}: Uporabnik poslal {{type}} v {{channel}}",
+	"INVITE": "vabilo",
+	"CONSECUTIVE": "{{amount}} zaporednih vabil",
+	"SENT": "**{{user}}** je poslal vabilo v {{channel}}.",
+	"SENT_IN": "Vabilo poslano v {{channel}}"
+}

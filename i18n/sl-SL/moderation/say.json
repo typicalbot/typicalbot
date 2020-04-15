@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Bot pošlje sporočilo z uporabljeno vsebino.",
+	"USAGE": "reci [#kanal] <vsebina>",
+	"MISSING_SEND": "V zahtevanem kanalu pogrešam dovoljenje SEND_MESSAGES.",
+	"INVALID": "Podani JSON je neveljaven.",
+	"SENT": "Sporočilo je odmevalo",
+	"TEXT": "**{{user}}** je poslal sporočilo v {{channel}} z uporabo TypicalBot-a."
+}

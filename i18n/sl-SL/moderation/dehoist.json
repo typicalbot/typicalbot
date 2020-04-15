@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Preverite, ali ima kdo od članov strežnika v svojem uporabniškem imenu posebne znake.",
+    "USAGE": "dehoist",
+    "NONE": "Noben uporabnik ni bila dehoistan.",
+    "FOUND": "{{amount}} uporabnikov je bilo dehoistanih:",
+    "ONE": "je 1 uporabnik",
+    "MULTIPLE": "so {{amount}} uporabniki"
+}

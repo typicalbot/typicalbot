@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Preveri, ali ima kdo od članov strežnika vabilo v nek strežnik v svojem igralnem statusu.",
+    "USAGE": "preverjanje_reklam",
+    "NONE": "Ni uporabnikov, ki bi imeli vabilo v svojih statusih.",
+    "FOUND": "Tukaj je {{amount}} z vabilom v svojem statusu:\n\n",
+    "ONE": "je 1 uporabnik",
+    "MULTIPLE": "so {{amount}} uporabniki",
+    "TITLE": "Uporabniki z vabilom v svojih igralnih statusih"
+}

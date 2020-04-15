@@ -1,0 +1,10 @@
+{
+	"PREFIX": "Predpona tega strežnika je {{prefix}}.",
+	"MULTIPLE_PREFIXES": "`{{default}}` ali `{{custom}}`",
+	"PTB_ONLY": "Ta ukaz je v načinu PTB, kar pomeni, da ga ni mogoče uporabiti na stabilnem TypicalBot-u.",
+	"DISABLED": "Ta ukaz ni omogočen v tem strežniku.",
+	"MISSING_PERMS": "Stopnja dovoljenja je prenizka, da bi lahko izvedli ta ukaz. Ukaz zahteva stopnjo dovoljenja {{requiredLevel}} ({{requiredTitle}}) vi pa ste stopnje {{userLevel}} ({{userTitle}}).",
+	"MISSING_ACCESS": "Stopnja dostopa lastnika strežnika je prenizka za izvajanje tega ukaza. Ukaz potrebuje stopnjo dostopa {{command}}, vendar ima lastnik samo stopnjo {{level}} ({{title}}). Lastnik lahko zviša svojo stopnjo dostopa tako, da donira $5 ali več TypicalBot-u.",
+	"USAGE_ERROR": "Neveljavna uporaba ukazov. Preverite `{{prefix}}pomoč {{name}}` za več informacij.",
+	"PAGIFY": "Stran {{page}} / {{pages}} | {{total}} Skupaj\n\n{{content}}"
+}

@@ -1,0 +1,10 @@
+{
+	"DESCRIPTION": "Neutiša člana v strežniku.",
+	"USAGE": "neutišaj <@uporabnik> [reason]",
+	"NOT_MUTED": "Zahtevani uporabnik ni utišan.",
+	"TOO_LOW": "Uporabnika z istim ali višjim najvišjim rankom ne morete neutišati.",
+	"UNMUTED": "Neutišan si bil v **{{name}}**.",
+	"ERROR": "Pri poskusu neutišanja zahtevanega uporabnika je prišlo do napake.",
+	"SUCCESS": "Uspešno sem neutišal uporabnika {{user}}**.",
+	"TASK_REASON": "Samodejno Neutišanje: Uporabnikov čas utišanja je minil."
+}

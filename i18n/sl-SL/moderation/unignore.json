@@ -1,0 +1,9 @@
+{
+	"DESCRIPTION": "Naredi, da bot ne ignorira več ukazov, vabil ter zvezd v kanalu.",
+	"USAGE": "neignoriraj [ukazi|vabila|zvezde",
+	"COMMANDS": "Ta kanal ne ignorira ukazov.",
+	"INVITES": "Ta kanal ne ignorira vabil.",
+	"DISABLED": "Zvezdna tabela ni omogočena.",
+	"STARBOARD": "Ta kanal ne ignorira zvezd.",
+	"SUCCESS": "Sedaj poslušam le {{type}}."
+}

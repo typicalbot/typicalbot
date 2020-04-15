@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Pošljite obvestilo v kanal za objave. Pred svojo vsebino uporabite zastavico '-e', da sporočilo vdelate. Če je rank za obvestila nastavljen, ga bo vedno uporabil.",
+    "USAGE": "objavi [-e] <vsebina>",
+    "INVALID": "Vsebina objave ni bila podana.",
+    "INVALID_CHANNEL": "Če želite naredit objavo, morate najprej nastaviti kanal za objave tako, da vtipkate `$set uredi obvestila #ime-kanala`",
+    "TEXT": "**__Obvestilo od {{usertag}}:__** {{role}}",
+    "TITLE": "Obvestilo"
+}

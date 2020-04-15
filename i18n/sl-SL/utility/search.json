@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Poišče uporabniško ime ali vzdevek na seznamu uporabnikov.",
+  "USAGE": "iskanje <poizvedba> [page-number]",
+  "NONE": "Za poizvedbo ni nobenih zadetkov **{{query}}**.",
+  "RESULTS": "**__Rezultati za poizvedbo:__** {{query}}"
+}

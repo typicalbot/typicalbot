@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Prekliči izključitev člana iz strežnika.",
+	"USAGE": "unban <id-uporabnika> [reason]",
+	"REASON": "Za preklic izključitve je odgovoren {{mod}} | Razlog: {{reason}}",
+	"UNBANNED": "Uspešno je bila preklicana izključitev uporabnika {{user}}.",
+	"USER_UNBAN": "**{{user}}** je bila izključitev iz strežnika preklicana.",
+	"USER_UNBANNED": "Uporabnikova izključitev je bila preklicana"
+}

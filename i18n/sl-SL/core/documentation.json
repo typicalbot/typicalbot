@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Zgrabite povezavo do dokumentacije TypicalBot-a.",
+	"USAGE": "dokumentacija",
+	"TEXT": "Dokumentacijo za vse ukaze in nastavitve najdete na **<{{link}}>**.",
+	"TYPICAL_DOCS": "Dokumentacija TypicalBot-a"
+}

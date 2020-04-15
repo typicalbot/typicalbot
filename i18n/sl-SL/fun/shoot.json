@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Ustrelite drugega uporabnika v strežniku.",
+    "USAGE": "ustreli [@uporabnik]",
+    "SELF": "je pravkar ustrelil samega sebe! :scream:",
+    "POLICE": "Nekdo naj pokliče policijo!",
+    "MISSED": "Počakaj! Zgrešili so!",
+    "HEADSHOT": "Bum! Zadetek v glavo!",
+    "RESPONSE": "je pravkar ustrelil v {{user}}! :scream:"
+}

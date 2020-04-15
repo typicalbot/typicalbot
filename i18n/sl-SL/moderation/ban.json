@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Izključi člana iz servera.",
+    "USAGE": "izključi <@uporabnik> [čas:x(dnevi) x(ure) x(minute) x(sekunde)] [purge-days] [reason]",
+    "WEEk": "Uporabnika ne moreš izključiti za več kot en teden.",
+    "TOO_LOW": "Uporabnika z istim ali višjim rankom ne morete izključiti.",
+    "UNBANNABLE": "Za izpolnitev zahteve potrebujem ** BAN_MEMBERS ** dovoljenje in moja najvišja vloga mora biti višja od najvišje vloge zaprošenega uporabnika.",
+    "BANNED": "Izključili so te iz strežnika **{{name}}**.",
+    "REASON": "Za izključitev je odgovoren {{mod}} | Razlog: {{reason}}",
+    "ERROR": "Pri izključevanju uporabnika je prišlo do napake.",
+    "BAN_SUCCESS": "Uspešno sem izključil {{user}}.",
+    "USER_BANNED": "Uporabnik je bil izključen."
+}

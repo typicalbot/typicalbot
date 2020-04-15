@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Upravljanje ali ogled rankov na strežniku.",
+    "USAGE": "Preverite `$roles pomoč` za uporabo tega ukaza.",
+    "HELP_LIST": "seznam rankov",
+    "HELP_FIRST": "ranki <daj|vzemi> <@uporabnik> <ime-ranka>",
+    "HELP_SECOND": "javni ranki <seznam|počisti|dodaj|odstrani> <ime-ranka>",
+    "LIST": "**__{{name}} Rankov:__**",
+    "MEMBERS": "**__{{name}} Članov:__**",
+    "PUBLIC": "**__{{name}} Javni Ranki:__**",
+    "GIVE": "Samemu sebi ali drugemu uporabniku ne morete dati svojega najvišjega ranka ali katerega koli drugega višjega ranka.",
+    "TAKE": "Samemu sebi ali drugemu uporabniku ne moreš vzeti ranka, ko je vaš najvišji rank nižji od ranka, ki ga želite vzeti.",
+    "NONE_PUBLIC": "Na tem strežniku ni nobenih javnih rankov.",
+    "ALREADY_PUBLIC": "Zahtevan rank je že na seznamu javnih rankov.",
+    "NOT_PUBLIC": "Zahtevan rank ni na seznamu javnih rankov."
+}

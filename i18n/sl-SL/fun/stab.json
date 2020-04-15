@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Zabodite drugega uporabnika v strežniku.",
+    "USAGE": "zabodi [@uporabnik]",
+    "SELF": "je zabodel samega sebe! :dagger::scream:",
+    "SELF_POLICE": "je zabodel samega sebe! :dagger::scream: Nekdo naj pokliče policijo!",
+    "RESPONSE": "je zabodel {{user}}! :dagger::scream:",
+    "RESPONSE_POLICE": "je zabodel {{user}}! :dagger::scream: Nekdo naj pokliče policijo!"
+}

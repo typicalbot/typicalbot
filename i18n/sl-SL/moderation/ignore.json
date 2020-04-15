@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Nastavi, da bot ne upošteva ukazov, povabil in zvezd v določenem kanalu.",
+	"USAGE": "ignoriraj [poglej|ukazi|vabila|zvezde]",
+	"IGNORING": "Naslednji kanali ne upoštevajo **{{type}}**:",
+	"ALREADY_IGNORING": "Ta kanal že ignorira {{type}}.",
+	"STARBOARD": "Zvezdna tabla ni omogočena.",
+	"ADDED": "Sedaj ignoriram {{type}}."
+}

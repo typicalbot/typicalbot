@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Pobrišite sporočila v kanalu.",
+    "USAGE": "brisanje [@uporabnik|#kanal|@rank|jaz|ti|boti] <število-sporočil>",
+    "TOO_LITTLE": "Število sporočil, ki jih želite izbrisati od 2 do 100.",
+    "MISSING_PERMS": "Pojavila se je napaka. To najverjetneje pomeni, da nimam dovoljenj za upravljanje sporočil.",
+    "NONE": "Nobeno sporočilo ni bilo izbrisano. To verjetno pomeni, da nimam dovoljenja za branje zgodovine sporočil ali pa so sporočila stara več kot dva tedna.",
+    "PURGED": "Uspešno je bilo izbrisano **{{amount}}** sporočilo.",
+    "PURGED_MULTIPLE": "Uspešno je bilo izbrisano **{{amount}}** sporočil."
+}

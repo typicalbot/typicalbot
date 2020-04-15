@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Ustvarite drugo ime za ta ukaz.",
+    "USAGE": "drugo ime <seznam|dodaj|odstrani|počisti><dodaj/odstrani:ukaz><dodaj:novo-drugo ime>",
+    "CURRENT": "Trenutna druga imena:",
+    "INVALID_COMMAND": "Navedeni ukaz ne obstaja.",
+    "ALIAS_EXISTS": "Navedeno drugo ime že kaže na ukaz `{{name}}`.",
+    "LONG": "Ne morete ustvariti drugega imena, daljšega od 10 znakov.",
+    "ADDED": "Drugo ime je bilo uspešno dodano.",
+    "ADD_ERROR": "Pri dodajanju drugega imena je prišlo do napake.",
+    "INVALID_ALIAS": "Zahtevano drugo ime ne obstaja.",
+    "REMOVED": "Drugo ime je bilo uspešno odstranjeno.",
+    "REMOVE_ERROR": "Pri odstranjevanju drugega imena je prišlo do napake.",
+    "CLEARED": "Druga imena so bila uspešno odstranjena.",
+    "CLEAR_ERROR": "Pri čiščenju drugih imen je prišlo do napake."
+}

@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Opozori člana v strežniku.",
+    "USAGE": "opozori <@uporabnik> [reason]",
+    "TOO_LOW": "Uporabnika z istim ali višjim rankom ne morete opozoriti.",
+    "WARNED": "Opozorili si dobil v **{{name}}**.",
+    "SUCCESS": "Uspešno sem opozoril uporabnika: {{user}}`."
+}

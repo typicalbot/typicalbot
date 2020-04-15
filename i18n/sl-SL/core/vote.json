@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Glasujte za TypicalBot-a na top.gg",
+    "USAGE": "glasujte",
+    "TEXT": "Za TypicalBot-a lahko glasujete na <{{link}}>",
+    "TITLE": "Glasujte za TypicalBot-a"
+}

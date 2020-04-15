@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Ustvarjanje in ogled API ključev.",
+	"USAGE": "api <ogled|ustvarjanje>",
+	"NONE": "Noben ključ API ne obstaja. Uporabi `$api ustvari`, da ustvariš enega.",
+	"SUCCESS": "API ključ uspešno ustvarjen.",
+	"KEY": "{{guild}}'s API Ključ: `{{key}}`"
+}

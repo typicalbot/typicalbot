@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Prejmite rank s seznama javnih rankov.",
+	"USAGE": "daj <ime-ranka>",
+	"INVALID": "Neveljavni rank. Prepričajte se, da je črkovanje pravilno in ali ta rank dejansko obstaja.",
+	"UNEDITABLE": "Premalo dovoljenj, danih botu. Prepričajte se, da je moj najvišji rank nad rankom, ki ga poskušate dati, in da imam Dovoljenje Za Upravljanje Rankov.",
+	"NOT_PUBLIC": "Zahtevan rank ni na seznamu javnih rankov."
+}

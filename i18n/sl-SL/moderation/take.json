@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Vzemi javni rank stran od sebe.",
+    "USAGE": "vzemi <ime-ranka>",
+    "UNEDITABLE": "Premalo dovoljenj, danih botu. Prepričajte se, da je moj najvišji rank nad rankom, ki ga poskušate dati, in da imam Dovoljenje Za Upravljanje Rankov."
+}

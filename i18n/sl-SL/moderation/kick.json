@@ -1,0 +1,10 @@
+{
+    "DESCRIPTION": "Vrzite člana iz strežnika.",
+    "USAGE": "vrzi <@uporabnik> [reason]",
+    "TOO_LOW": "Uporabnika z istim ali višjim najvišjim rankom ne morete vreči iz strežnika.",
+    "KICKABLE": "Za izpolnitev zahteve potrebujem ** KICK_MEMBERS ** dovoljenje in moj najvišji rank mora biti višji od najvišjega ranka zaprošenega uporabnika.",
+    "KICKED": "Vrgli so te s strežnika **{{name}}**.",
+    "REASON": "Vrgel ga je {{mod}} | Reason: {{reason}}",
+    "ERROR": "Pri metanju uporabnika iz strežnika je prišlo do napake.",
+    "KICK_SUCCESS": "Uspešno sem iz strežnika vrgel {{user}}**."
+}

@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Ustvari strawpoll anketo. Za več možnosti uporabite zastavico '-m'.",
+  "USAGE": "strawpoll ['-m'] <vprašanje> | Izbira1; Izbira2; Izbira+",
+  "INVALID": "Za izdelavo strawpoll ankete mora biti med 2 in 30 izbir na voljo.",
+  "CREATED": "Vaša anketa strawpoll je bila uspešno ustvarjena! <https://strawpoll.me/{{id}}>"
+}

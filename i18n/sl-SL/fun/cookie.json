@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Drugemu uporabniku dajte piškotek ali pa ga zadržite zase.",
+    "USAGE": "piškotek [@uporabnik]",
+    "SELF_LAUGH": "se je smejal kot norček, medtem ko je počasi jedel piškote, ki jih je obdržal zase pred vsemi ostalimi.",
+    "SELF_KEPT": "se je odločil, da bo vse piškotke zadržal zase! Kakšen bedak! : angry:",
+    "GIVEN": "pravkar sem dal {{user}} piškotek. : cookie:"
+}

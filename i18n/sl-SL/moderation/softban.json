@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Mehka izključitev člana iz servera.",
+	"USAGE": "mehkoizkljuci <@uporabnik> [purge-days] [reason]",
+	"REASON": "Za mehko izključitev je odgovoren {{mod}} | Razlog: {{reason}}",
+	"BANNED": "Uspešno je bil mehko izključen uporabnik **{{user}}**."
+}

@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Zvrne n-stransko kocko.",
+	"USAGE": "kocka [sides]",
+	"RESPONSE": "Dobil sem **__{{amount}}__**.",
+	"INVALID": "Neveljavno število strani. Število mora biti celo število večje od 1 in največ 100."
+}

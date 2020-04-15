@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Pokaže seznam vseh uporabnikov z določenim diskriminatorjem.",
+    "USAGE": "diskriminator [discriminator]",
+    "NONE": "Ni uporabnikov z diskriminatorjem **{{discriminator}}** v evidenci.",
+    "USERS": "**__Uporabniki z Diskriminatorjem:__** {{discriminator}}"
+}

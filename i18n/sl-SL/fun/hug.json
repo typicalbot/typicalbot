@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Objemite drugega uporabnika v strežniku.",
+    "USAGE": "objemi [@uporabnik]",
+    "SELF": "je samega sebe objel. :hugging: *To sploh ni čudno.* :eyes:",
+    "RESPONSE": "je pravkar dal {{user}} objem. :hugging:",
+    "RESPONSE_AWW": "je pravkar dal {{user}} objem. :hugging: Aww!"
+}

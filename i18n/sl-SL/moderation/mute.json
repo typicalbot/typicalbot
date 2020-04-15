@@ -1,0 +1,16 @@
+{
+    "DESCRIPTION": "Utišaj člana uz strežnika.",
+    "USAGE": "utišaj <@uporabnik> [čas:x(dnevi) x(ure) x(minute) x(sekunde)] [reason]",
+    "NO_ROLE": "Noben rank za utišanje ni bil nastavljen. Poizkusite z ukazom `$set uredi utišanjerank <ime-ranka>`",
+    "INVALID_CHANNEL": "Navedeni kanal ne obstaja.",
+    "MISSING_PERMS": "Ne morem upravljati dovoljenj za ta kanal.",
+    "DENYING": "Zavrnitev dovoljenj, za govor utišanih uporabnikov.",
+    "DENY_ERROR": "Zavrnitev dovoljenj, za govor utišanih uporabnikov ni bila mogoča.",
+    "TOO_LONG": "Uporabnika ne moreš utišati za več kot en teden.",
+    "ALREADY_MUTED": "Zahtevani uporabnik je že utišan.",
+    "TOO_LOW": "Uporabnika z istim ali višjim najvišjim rankom ne morete utišati.",
+    "UNEDITABLE": "Za izpolnitev zahteve potrebujem ** MANAGE ROLES ** dovoljenje pa še moj najvišji rank mora biti višji od najvišjega ranka zaprošenega uporabnika ter ranka za utišanje.",
+    "MUTED": "Utiašli so te na strežniku **{{name}}**.",
+    "SUCCESS": "Uspešno sem utišal uporabnika {{user}}.",
+    "ERROR": "Pri poskusu utišanja zahtevanega uporabnika je prišlo do napake."
+}
