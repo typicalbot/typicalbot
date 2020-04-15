@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Stellt eine Liste aller Nutzer mit einem Diskriminator bereit.",
+    "USAGE": "discriminator [Diskriminator]",
+    "NONE": "Es gibt keine aufgezeichneten Nutzer mit dem Diskriminator **{{discriminator}}**.",
+    "USERS": "**__Benutzer mit Diskriminator:__** {{discriminator}}"
+}

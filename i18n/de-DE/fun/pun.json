@@ -1,4 +1,4 @@
 {
-	"DESCRIPTION": "Gibt dir einen zufälligen Scherz.",
-	"USAGE": "joke"
+    "DESCRIPTION": "Gibt dir einen zufälligen Scherz.",
+    "USAGE": "pun"
 }
