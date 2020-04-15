@@ -25,6 +25,12 @@ const possibleLanguages = [
         canonical: 'German',
         complete: false,
         aliases: ['de', 'german', 'deutsch', 'deutsche']
+    },
+    {
+        name: 'sl-SL',
+        canonical: 'Slovenian',
+        complete: true,
+        aliases: ['sl', 'slovenian']
     }
 ];
 
