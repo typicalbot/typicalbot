@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Ban a member from the server.",
+    "DESCRIPTION": "Unban a member from the server.",
     "USAGE": "unban <user-id> [reason]",
     "REASON": "Unbanned by {{mod}} | Reason: {{reason}}",
     "UNBANNED": "Successfully unbanned user {{user}}.",
