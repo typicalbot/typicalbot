@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "生成并查看API密钥。",
+	"USAGE": "api <视图|生成>",
+	"NONE": "不存在API密钥。 使用$ api生成来生成一个。",
+	"SUCCESS": "API密钥已成功生成。",
+	"KEY": "{{guild}}的API密钥:`{{key}}`"
+}
