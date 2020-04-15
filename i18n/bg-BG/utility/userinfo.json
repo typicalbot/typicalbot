@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Информация на потребителя.",
+    "USAGE": "userinfo [@user|user-id|user-tag]",
+    "ID": "ID: {{id}}",
+    "STATUS": "Статус: {{status}}",
+    "AVATAR": "Снимка: {{avatar}}",
+    "JOINED": "Дата на влизане: {{time}}",
+    "REGISTERED": "Регистриран в дискорд: {{time}}",
+    "ROLES": "Роли: {{roles}}",
+    "ROLE_FIELD": "Роли: ({{amount}})"
+}
