@@ -143,7 +143,8 @@ export default class Cluster extends Client {
         fetch(`https://top.gg/api/bots/${this.config.id}/stats`, {
             method: 'post',
             headers: {
-                Authorization: this.config.apis.topgg
+                Authorization: this.config.apis.topgg,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 // eslint-disable-next-line @typescript-eslint/camelcase
