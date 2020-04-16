@@ -10,11 +10,11 @@
     "TEXT_6": "=> RAM (Used): {{usedRAM}}MB",
     "TEXT_7": "=> RAM (Total): {{totalRAM}}MB",
     "TYPICAL_STATS": "TypicalBot Statistics",
-    "UPTIME": "\u00bb Uptime",
-    "SERVERS": "\u00bb Servers",
+    "UPTIME": "Uptime",
+    "SERVERS": "Servers",
     "SERVERS_VALUE": "{{guilds}} ({{count}} Shards)",
-    "USERS": "\u00bb Users",
-    "CPU": "\u00bb CPU Usage",
-    "RAM": "\u00bb RAM (Used)",
-    "RAM_TOTAL": "\u00bb RAM (Total)"
+    "USERS": "Users",
+    "CPU": "CPU Usage",
+    "RAM": "RAM (Used)",
+    "RAM_TOTAL": "RAM (Total)"
 }

@@ -5,7 +5,7 @@
     "TEXT": "**__{{query}}:__** {{definition}}",
     "AMOUNT": "Definition 1 out of {{amount}}",
     "RATING": "Rating",
-    "RATING_VALUE": "\u200B    \\👍  {{up}}    |    \\👎  {{down}}{{rating}}",
-    "RATING_PERCENT": "    |    {{rating}}% of {{total}} like this definition.",
+    "RATING_VALUE": "\\👍 {{up}} | \\👎 {{down}}{{rating}}",
+    "RATING_PERCENT": "\u200B{{amount}}% of {{total}} like this definition.",
     "DICTIONARY": "Urban Dictionary Definition"
 }
