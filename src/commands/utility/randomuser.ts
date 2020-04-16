@@ -12,8 +12,8 @@ export default class extends Command {
         const args = regex.exec(parameters);
 
         const members = args
-            ? message.guild.members.cache.filter((m) => m.presence.status !== 'offline')
-            : message.guild.members.cache;
+            ? message.guild.members.cache.filter((m) => m.presence.status !== 'offline' && !m.user.bot)
+            : message.guild.members.cache.filter((m) => !m.user.bot);
         if (!members.size) return null;
 
         const member = members.random();
