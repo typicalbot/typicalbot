@@ -67,7 +67,7 @@ export default class GuildMemberAdd extends Event {
                 .add(autorole.id)
                 .catch((err) => Sentry.captureException(err));
 
-            if (!settings.auto.role.silent) return null;
+            if (settings.auto.role.silent) return null;
 
             if (!added || !settings.logs.id) return null;
 
