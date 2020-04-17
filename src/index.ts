@@ -19,7 +19,7 @@ import TaskHandler from './handlers/TaskHandler';
 import i18n from './i18n';
 import { TypicalDonor, HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utility/Logger';
-import config from '../config.json';
+import config from '../etc/config.json';
 import pkg from '../package.json';
 
 interface TypicalHandlers {

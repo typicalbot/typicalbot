@@ -19,7 +19,7 @@ jobs:
       - name: yarn
         run: yarn install
       - name: config
-        run: cp config.example.json config.json
+        run: cp etc/config.example.json etc/config.json
       - name: tsc
         uses: icrawl/action-tsc@v1
         env:

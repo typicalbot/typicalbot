@@ -19,7 +19,7 @@ pids
 node_modules
 
 # Custom
-config.json
+etc/config.json
 .env
 production/
 rethinkdb_data/

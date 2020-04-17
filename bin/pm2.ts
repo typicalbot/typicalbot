@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Util } from 'discord.js';
 import pm2 from 'pm2';
-import config from '../config.json';
+import config from '../etc/config.json';
 
 async function generateClusters() {
     const shardCount = await Util.fetchRecommendedShards(config.token);
