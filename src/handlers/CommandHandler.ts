@@ -2,9 +2,9 @@ import { join, parse } from 'path';
 import * as Sentry from '@sentry/node';
 import { Collection } from 'discord.js';
 import klaw from 'klaw';
+import Cluster from '..';
 import Command from '../structures/Command';
 import { GuildSettings } from '../types/typicalbot';
-import Cluster from '..';
 
 export default class CommandHandler extends Collection<string, Command> {
     client: Cluster;

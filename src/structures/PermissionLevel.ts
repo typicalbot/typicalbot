@@ -1,7 +1,7 @@
 import { Guild, GuildMember } from 'discord.js';
+import Cluster from '..';
 import { PermissionLevelOptions } from '../types/typicalbot';
 import Constants from '../utility/Constants';
-import Cluster from '..';
 
 export default class PermissionLevel {
     title: string;
