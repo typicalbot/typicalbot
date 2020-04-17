@@ -59,7 +59,7 @@ export default class extends Command {
                 },
                 {
                     name: message.translate('core/stats:CPU'),
-                    value: `${Math.round(loadavg()[0] * 10000) / 100}%`,
+                    value: `${loadavg().map((c) => Math.round(c * 10000) / 100).join('%, ')}%`,
                     inline: true
                 },
                 {
