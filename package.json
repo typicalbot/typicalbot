@@ -31,7 +31,7 @@
     },
     "homepage": "https://github.com/sylkellc/typicalbot#readme",
     "dependencies": {
-        "@sentry/node": "^5.13.1",
+        "@sentry/node": "^5.15.4",
         "canvas": "^2.6.0",
         "canvas-constructor": "^3.1.0",
         "discord.js": "^12.1.1",
