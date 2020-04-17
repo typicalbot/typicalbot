@@ -68,212 +68,212 @@ export default class extends Command {
                 const settings = message.guild.settings;
                 const settingsData = {
                     embed: {
-                        description: 'moderation/settings:EMBED',
+                        description: 'administration/settings:EMBED',
                         value: settings.embed,
                         type: 'boolean',
                         path: 'embed'
                     },
                     adminrole: {
-                        description: 'moderation/settings:ADMINROLE',
+                        description: 'administration/settings:ADMINROLE',
                         value: settings.roles.administrator,
                         type: 'roles',
                         path: 'roles.administrator'
                     },
                     modrole: {
-                        description: 'moderation/settings:MODROLE',
+                        description: 'administration/settings:MODROLE',
                         value: settings.roles.moderator,
                         type: 'roles',
                         path: 'roles.moderator'
                     },
                     muterole: {
-                        description: 'moderation/settings:MUTEROLE',
+                        description: 'administration/settings:MUTEROLE',
                         value: settings.roles.mute,
                         type: 'role',
                         path: 'roles.mute'
                     },
                     blacklistrole: {
-                        description: 'moderation/settings:BLACKLISTROLE',
+                        description: 'administration/settings:BLACKLISTROLE',
                         value: settings.roles.blacklist,
                         type: 'roles',
                         path: 'roles.blacklist'
                     },
                     subscriberrole: {
-                        description: 'moderation/settings:SUBSCRIBERROLE',
+                        description: 'administration/settings:SUBSCRIBERROLE',
                         value: settings.subscriber,
                         type: 'role',
                         path: 'subscriber'
                     },
                     autorole: {
-                        description: 'moderation/settings:AUTOROLE',
+                        description: 'administration/settings:AUTOROLE',
                         value: settings.auto.role.id,
                         type: 'role',
                         path: 'auto.role.id'
                     },
                     'autorole-bots': {
-                        description: 'moderation/settings:AUTOROLE-BOTS',
+                        description: 'administration/settings:AUTOROLE-BOTS',
                         value: settings.auto.role.bots,
                         type: 'role',
                         path: 'auto.role.bots'
                     },
                     'autorole-delay': {
-                        description: 'moderation/settings:AUTOROLE-DELAY',
+                        description: 'administration/settings:AUTOROLE-DELAY',
                         value: settings.auto.role.delay,
                         type: 'ms',
                         path: 'auto.role.delay'
                     },
                     'autorole-silent': {
-                        description: 'moderation/settings:AUTOROLE-SILENT',
+                        description: 'administration/settings:AUTOROLE-SILENT',
                         value: settings.auto.role.silent,
                         type: 'boolean',
                         path: 'auto.role.silent'
                     },
                     announcements: {
-                        description: 'moderation/settings:ANNOUNCEMENTS',
+                        description: 'administration/settings:ANNOUNCEMENTS',
                         value: settings.announcements.id,
                         type: 'channel',
                         path: 'announcements.id'
                     },
                     'announcements-mention': {
                         description:
-                            'moderation/settings:ANNOUNCEMENTS-MENTION',
+                            'administration/settings:ANNOUNCEMENTS-MENTION',
                         value: settings.announcements.mention,
                         type: 'role',
                         path: 'announcements.mention'
                     },
                     logs: {
-                        description: 'moderation/settings:LOGS',
+                        description: 'administration/settings:LOGS',
                         value: settings.logs.id,
                         type: 'channel',
                         path: 'logs.id'
                     },
                     'logs-join': {
-                        description: 'moderation/settings:LOGS-JOIN',
+                        description: 'administration/settings:LOGS-JOIN',
                         value: settings.logs.join,
                         type: 'log',
                         path: 'logs.join'
                     },
                     'logs-leave': {
-                        description: 'moderation/settings:LOGS-LEAVE',
+                        description: 'administration/settings:LOGS-LEAVE',
                         value: settings.logs.leave,
                         type: 'log',
                         path: 'logs.leave'
                     },
                     'logs-ban': {
-                        description: 'moderation/settings:LOGS-BAN',
+                        description: 'administration/settings:LOGS-BAN',
                         value: settings.logs.ban,
                         type: 'log',
                         path: 'logs.ban'
                     },
                     'logs-unban': {
-                        description: 'moderation/settings:LOGS-UNBAN',
+                        description: 'administration/settings:LOGS-UNBAN',
                         value: settings.logs.unban,
                         type: 'log',
                         path: 'logs.unban'
                     },
                     'logs-nickname': {
-                        description: 'moderation/settings:LOGS-NICKNAME',
+                        description: 'administration/settings:LOGS-NICKNAME',
                         value: settings.logs.nickname,
                         type: 'log',
                         path: 'logs.nickname'
                     },
                     'logs-invite': {
-                        description: 'moderation/settings:LOGS-INVITE',
+                        description: 'administration/settings:LOGS-INVITE',
                         value: settings.logs.invite,
                         type: 'log',
                         path: 'logs.invite'
                     },
                     'logs-say': {
-                        description: 'moderation/settings:LOGS-SAY',
+                        description: 'administration/settings:LOGS-SAY',
                         value: settings.logs.say,
                         type: 'log',
                         path: 'logs.say'
                     },
                     modlogs: {
-                        description: 'moderation/settings:MODLOGS',
+                        description: 'administration/settings:MODLOGS',
                         value: settings.logs.moderation,
                         type: 'channel',
                         path: 'logs.moderation'
                     },
                     'modlogs-purge': {
-                        description: 'moderation/settings:MODLOGS-PURGE',
+                        description: 'administration/settings:MODLOGS-PURGE',
                         value: settings.logs.purge,
                         type: 'boolean',
                         path: 'logs.purge'
                     },
                     automessage: {
-                        description: 'moderation/settings:AUTOMESSAGE',
+                        description: 'administration/settings:AUTOMESSAGE',
                         value: settings.auto.message,
                         type: 'default',
                         path: 'auto.message'
                     },
                     autonickname: {
-                        description: 'moderation/settings:AUTONICKNAME',
+                        description: 'administration/settings:AUTONICKNAME',
                         value: settings.auto.nickname,
                         type: 'default',
                         path: 'auto.nickname'
                     },
                     mode: {
-                        description: 'moderation/settings:MODE',
+                        description: 'administration/settings:MODE',
                         value: settings.mode,
                         type: 'default',
                         path: 'mode'
                     },
                     customprefix: {
-                        description: 'moderation/settings:CUSTOMPREFIX',
+                        description: 'administration/settings:CUSTOMPREFIX',
                         value: settings.prefix.custom,
                         type: 'default',
                         path: 'prefix.custom'
                     },
                     defaultprefix: {
-                        description: 'moderation/settings:DEFAULTPREFIX',
+                        description: 'administration/settings:DEFAULTPREFIX',
                         value: settings.prefix.default,
                         type: 'default',
                         path: 'prefix.default'
                     },
                     antiinvite: {
-                        description: 'moderation/settings:ANTIINVITE',
+                        description: 'administration/settings:ANTIINVITE',
                         value: settings.automod.invite,
                         type: 'boolean',
                         path: 'automod.invite'
                     },
                     'antiinvite-action': {
-                        description: 'moderation/settings:ANTIINVITE-ACTION',
+                        description: 'administration/settings:ANTIINVITE-ACTION',
                         value: settings.automod.inviteaction,
                         type: 'boolean',
                         path: 'automod.inviteaction'
                     },
                     'antiinvite-warn': {
-                        description: 'moderation/settings:ANTIINVITE-WARN',
+                        description: 'administration/settings:ANTIINVITE-WARN',
                         value: settings.automod.invitewarn,
                         type: 'default',
                         path: 'automod.invitewarn'
                     },
                     'antiinvite-kick': {
-                        description: 'moderation/settings:ANTIINVITE-KICK',
+                        description: 'administration/settings:ANTIINVITE-KICK',
                         value: settings.automod.invitekick,
                         type: 'default',
                         path: 'automod.invitekick'
                     },
                     nonickname: {
-                        description: 'moderation/settings:NONICKNAME',
+                        description: 'administration/settings:NONICKNAME',
                         value: settings.nonickname,
                         type: 'boolean',
                         path: 'nonickname'
                     },
                     starboard: {
-                        description: 'moderation/settings:STARBOARD',
+                        description: 'administration/settings:STARBOARD',
                         value: settings.starboard.id,
                         type: 'channel',
                         path: 'starboard.id'
                     },
                     'starboard-stars': {
-                        description: 'moderation/settings: STARBOARD-STARS',
+                        description: 'administration/settings: STARBOARD-STARS',
                         value: settings.starboard.count,
                         type: 'default',
                         path: 'starboard.count'
                     },
                     language: {
-                        description: 'moderation/settings:LANGUAGE',
+                        description: 'administration/settings:LANGUAGE',
                         value: settings.language,
                         type: 'default',
                         path: 'language'
@@ -288,7 +288,7 @@ export default class extends Command {
                 // @ts-ignore
                 const selectedSetting = settingsData[setting];
                 if (!selectedSetting)
-                    return message.error(message.translate('moderation/settings:INVALID'));
+                    return message.error(message.translate('administration/settings:INVALID'));
 
                 if (action === 'view')
                     return this.view(message, selectedSetting);
@@ -320,9 +320,9 @@ export default class extends Command {
                 }`);
 
         return message.send([
-            message.translate('moderation/settings:AVAILABLE'),
+            message.translate('administration/settings:AVAILABLE'),
             '',
-            message.translate('moderation/settings:PAGE', { page, count }),
+            message.translate('administration/settings:PAGE', { page, count }),
             list.join('\n')
         ].join('\n'));
     }
@@ -335,15 +335,15 @@ export default class extends Command {
         this.client.settings.delete(message.guild.id);
 
         return deleted
-            ? message.reply(message.translate('moderation/settings:CLEARED'))
-            : message.error(message.translate('moderation/settings:CLEAR_ERROR'));
+            ? message.reply(message.translate('administration/settings:CLEARED'))
+            : message.error(message.translate('administration/settings:CLEAR_ERROR'));
     }
 
     view(message: TypicalGuildMessage, setting: SettingsData) {
         const NONE = message.translate('common:NONE');
 
         if (setting.type === 'boolean') {
-            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+            return message.reply(message.translate('administration/settings:CURRENT_VALUE', {
                 value: message.translate(setting.value ? 'common:ENABLED' : 'common:DISABLED')
             }));
         }
@@ -360,20 +360,20 @@ export default class extends Command {
                         : role.name
                 }*`);
             }
-            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+            return message.reply(message.translate('administration/settings:CURRENT_VALUE', {
                 value: list.length ? list.join(', ') : NONE
             }));
         }
 
         if (setting.type === 'role') {
             const role = message.guild.roles.cache.get(setting.value as string);
-            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+            return message.reply(message.translate('administration/settings:CURRENT_VALUE', {
                 value: role ? role.name : NONE
             }));
         }
 
         if (setting.type === 'ms') {
-            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+            return message.reply(message.translate('administration/settings:CURRENT_VALUE', {
                 value: setting.value
                     ? `${setting.value}ms`
                     : message.translate('common:DEFAULT')
@@ -382,7 +382,7 @@ export default class extends Command {
 
         if (setting.type === 'channel') {
             const channel = message.guild.channels.cache.get(setting.value as string);
-            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+            return message.reply(message.translate('administration/settings:CURRENT_VALUE', {
                 value: channel ? channel.toString() : NONE
             }));
         }
@@ -398,12 +398,12 @@ export default class extends Command {
                         ? message.translate('common:EMBED')
                         : ['```txt', '', setting.value, '```'].join('\n');
 
-            return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+            return message.reply(message.translate('administration/settings:CURRENT_VALUE', {
                 value: logText
             }));
         }
 
-        return message.reply(message.translate('moderation/settings:CURRENT_VALUE', {
+        return message.reply(message.translate('administration/settings:CURRENT_VALUE', {
             value: setting.value || NONE
         }));
     }
@@ -424,7 +424,7 @@ export default class extends Command {
                 data.name === value.toLowerCase() ||
                 data.aliases.includes(value.toLowerCase()));
             if (!selectedLanguage)
-                return message.error(message.translate('moderation/settings:INVALID_OPTION'));
+                return message.error(message.translate('administration/settings:INVALID_OPTION'));
 
             if (!selectedLanguage.complete)
                 await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <${Constants.Links.TRANSLATE}>`);
@@ -434,7 +434,7 @@ export default class extends Command {
 
         if (setting.type === 'boolean') {
             if (![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase()))
-                return message.translate('moderation/settings:INVALID_OPTION');
+                return message.translate('administration/settings:INVALID_OPTION');
 
             const enableSetting = ['enable', ENABLE].includes(value.toLowerCase());
 
@@ -465,9 +465,9 @@ export default class extends Command {
                 const isAdd = [ADD, 'add'].includes(type.toLowerCase());
 
                 if (isAdd && (setting.value as string[]).includes(role.id))
-                    return message.error(message.translate('moderation/settings:ROLE_EXISTS'));
+                    return message.error(message.translate('administration/settings:ROLE_EXISTS'));
                 if (!isAdd && !(setting.value as string[]).includes(role.id))
-                    return message.error(message.translate('moderation/settings:ROLE_NOT_SET'));
+                    return message.error(message.translate('administration/settings:ROLE_NOT_SET'));
 
                 const newValue = isAdd
                     ? [...(setting.value as string[]), role.id]
@@ -513,14 +513,14 @@ export default class extends Command {
             } else {
                 const args = msRegex.exec(value);
                 if (!args)
-                    return message.error(message.translate('moderation/settings:INVALID_MS'));
+                    return message.error(message.translate('administration/settings:INVALID_MS'));
                 args.shift();
 
                 const [ms] = args;
                 const amount = parseInt(ms, 10);
 
                 if (amount > 600000 || amount < 2000)
-                    return message.error(message.translate('moderation/settings:INVALID_MS'));
+                    return message.error(message.translate('administration/settings:INVALID_MS'));
 
                 payload = this.stringToObject(setting.path, amount);
             }
@@ -548,9 +548,9 @@ export default class extends Command {
                         r.name.toLowerCase() === channelName.toLowerCase());
 
                 if (!channel)
-                    return message.error(message.translate('moderation/settings:INVALID_CHANNEL'));
+                    return message.error(message.translate('administration/settings:INVALID_CHANNEL'));
                 if (channel.type !== 'text')
-                    return message.error(message.translate('moderation/settings:NOT_TEXT_CHANNEL'));
+                    return message.error(message.translate('administration/settings:NOT_TEXT_CHANNEL'));
 
                 payload = this.stringToObject(setting.path, channel.id);
             }
@@ -558,7 +558,7 @@ export default class extends Command {
 
         if (setting.type === 'log') {
             if (!message.guild.settings.logs.id)
-                return message.error(message.translate('moderation/settings:NEED_LOG'));
+                return message.error(message.translate('administration/settings:NEED_LOG'));
 
             if ([DISABLE, 'disable'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, '--disabled');
@@ -579,7 +579,7 @@ export default class extends Command {
 
         await this.client.settings.update(message.guild.id, payload);
 
-        return message.success(message.translate('moderation/settings:UPDATED'));
+        return message.success(message.translate('administration/settings:UPDATED'));
     }
 
     stringToObject(path: string, value: unknown): {} {
