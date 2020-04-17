@@ -70,7 +70,7 @@
         "all-contributors-cli": "^6.14.0",
         "eslint": "^6.1.0",
         "husky": "^4.2.5",
-        "lint-staged": "^10.0.8"
+        "lint-staged": "^10.1.4"
     },
     "husky": {
         "hooks": {
