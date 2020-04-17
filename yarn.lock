@@ -2758,10 +2758,10 @@ map-obj@^2.0.0:
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-2.0.0.tgz#a65cd29087a92598b8791257a523e021222ac1f9"
   integrity sha1-plzSkIepJZi4eRJXpSPgISIqwfk=
 
-mathjs@^6.6.1:
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-6.6.1.tgz#46675c9e97b8cb8cf9a66402b1360a6996abf103"
-  integrity sha512-RCFCYkf1IV3u0DAeqj2Rqqwyi302kFxHoYbfp/Bxm6kUg0ALYH7YT0bYzsO8qgCLv9RS3bWMZnAgUbLgiDjLcw==
+mathjs@^6.6.4:
+  version "6.6.4"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-6.6.4.tgz#f3217dc17eec9e7ebb7a3b2966c06a6061197ae7"
+  integrity sha512-fvmP89ujJbDAC8ths7FZh7PWdA71dfA5WJVAzJbQhSDCHK1aBk8WRf1XcTw51ERs+sKx9nYBGsRshqmb/oe8Ag==
   dependencies:
     complex.js "^2.0.11"
     decimal.js "^10.2.0"
