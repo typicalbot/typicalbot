@@ -60,7 +60,7 @@
         "@commitlint/cli": "^8.3.5",
         "@commitlint/config-conventional": "^8.3.4",
         "@types/i18next-node-fs-backend": "^2.1.0",
-        "@types/klaw": "^3.0.0",
+        "@types/klaw": "^3.0.1",
         "@types/mathjs": "^6.0.4",
         "@types/node": "^12.12.29",
         "@types/node-fetch": "^2.5.5",
