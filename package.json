@@ -7,11 +7,11 @@
     "scripts": {
         "build": "tsc",
         "build:watch": "tsc --watch",
-        "build:database": "tsc && node production/bin/setup.js",
-        "build:instance": "tsc && node production/bin/pm2.js",
+        "build:database": "tsc && node dist/bin/setup.js",
+        "build:instance": "tsc && node dist/bin/pm2.js",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
-        "start": "tsc && node production/index.js"
+        "start": "tsc && node dist/index.js"
     },
     "repository": {
         "type": "git",

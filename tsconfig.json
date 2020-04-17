@@ -10,7 +10,7 @@
         "noImplicitReturns": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "outDir": "./production",
+        "outDir": "./dist",
         "pretty": true,
         "removeComments": true,
         "resolveJsonModule": true,
