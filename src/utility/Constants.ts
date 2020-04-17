@@ -1,11 +1,11 @@
 export const Links = {
-    BASE: 'https://www.typicalbot.com/',
-    OAUTH: 'https://www.typicalbot.com/invite/',
-    SERVER: 'https://www.typicalbot.com/join-us/',
-    DONATE: 'https://www.typicalbot.com/donate/',
-    DOCUMENTATION: 'https://www.typicalbot.com/documentation/',
-    SETTINGS: 'https://www.typicalbot.com/documentation/#settings',
-    ICON: 'https://www.typicalbot.com/x/images/icon.png',
+    BASE: 'https://typicalbot.com/',
+    OAUTH: 'https://typicalbot.com/invite/',
+    SERVER: 'https://typicalbot.com/join-us/',
+    DONATE: 'https://typicalbot.com/donate/',
+    DOCUMENTATION: 'https://typicalbot.com/documentation/',
+    SETTINGS: 'https://typicalbot.com/documentation/#settings',
+    ICON: 'https://typicalbot.com/x/images/icon.png',
     TRANSLATE: 'https://translate.typicalbot.com/',
     VOTE: 'https://top.gg/bot/153613756348366849/vote'
 };
