@@ -9,9 +9,9 @@ export default class extends Command {
     mode = Constants.Modes.STRICT;
 
     async execute(message: TypicalMessage) {
-        const dm = message.guild ? message.guild.settings.dm.commands : true;
+        const dm = message.guild ? !message.embeddable || message.guild.settings.dm.commands : true;
 
-        if (message.channel.type === 'text' && !message.embeddable && dm)
+        if (message.channel.type === 'text' && dm)
             await message.respond(message.translate('core/commands:CHECK_DM'));
 
         const level0 = [];
