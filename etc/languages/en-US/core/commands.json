@@ -7,7 +7,6 @@
     "OWNER": "Server Owner (Level 4)",
     "ADMIN": "Server Administrator (Level 3)",
     "MOD": "Server Moderator (Level 2)",
-    "DJ": "Server DJ (Level 1)",
     "MEMBER": "Server Member (Level 0)",
     "NONE": "No commands to display."
 }
