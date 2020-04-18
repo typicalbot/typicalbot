@@ -1,6 +1,6 @@
 {
     "name": "typicalbot",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "description": "TypicalBot is open-source discord bot written in TypeScript, using the Discord.JS library.",
     "license": "Apache-2.0",
     "main": "index.js",
