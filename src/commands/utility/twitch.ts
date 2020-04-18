@@ -23,7 +23,7 @@ export default class extends Command {
             .then((res) => res.json())
             .catch(() => null);
 
-        if (!json)
+        if (!json || !json.data)
             return message.error(message.translate('common:REQUEST_ERROR'));
 
         const data = json.data[0];
