@@ -28,6 +28,9 @@ export interface GuildSettings {
     apikey?: string | null;
     id: string;
     language: string;
+    dm: {
+        commands: boolean;
+    };
     embed: boolean;
     roles: {
         administrator: string[];

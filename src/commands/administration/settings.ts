@@ -67,6 +67,12 @@ export default class extends Command {
             case 'edit': {
                 const settings = message.guild.settings;
                 const settingsData = {
+                    dmcommands: {
+                        description: 'administration/settings:DMCOMMANDS',
+                        value: settings.dm.commands,
+                        type: 'boolean',
+                        path: 'dm.commands'
+                    },
                     embed: {
                         description: 'administration/settings:EMBED',
                         value: settings.embed,
