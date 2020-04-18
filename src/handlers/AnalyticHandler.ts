@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node';
-import Cluster from '..';
 import { AnalyticEvent } from '../types/analytic';
+import Cluster from '..';
 
 class AnalyticHandler {
     private client: Cluster;

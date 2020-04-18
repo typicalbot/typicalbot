@@ -2,8 +2,8 @@ import { join, parse } from 'path';
 import * as Sentry from '@sentry/node';
 import { Collection } from 'discord.js';
 import klaw from 'klaw';
-import Cluster from '..';
 import TypicalFunction from '../structures/Function';
+import Cluster from '..';
 
 export default class FunctionHandler extends Collection<string, TypicalFunction> {
     client: Cluster;
