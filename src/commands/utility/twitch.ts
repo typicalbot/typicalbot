@@ -73,7 +73,7 @@ export default class extends Command {
                     inline: true
                 },
                 {
-                    name: message.translate('common:TOTALVIEWS_FIELD'),
+                    name: message.translate('common:TOTALVIEWS'),
                     value: data.view_count,
                     inline: true
                 }
