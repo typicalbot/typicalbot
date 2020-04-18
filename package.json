@@ -80,7 +80,7 @@
     },
     "lint-staged": {
         "*.ts": [
-            "eslint . --ext .ts --fix"
+            "eslint --fix"
         ]
     },
     "commitlint": {
