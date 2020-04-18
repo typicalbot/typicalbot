@@ -6,7 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### [3.1.0]
+## [3.2.0]
+### Added
+- `dmcommands` setting that controls whether to send commands to DM ([#154](https://github.com/sylkellc/typicalbot/pull/154))
+
+### Changed
+- `commands` command to change its behavior to send commands to the channel where the command is ran by default and honor the new "dmcommands" setting ([#154](https://github.com/sylkellc/typicalbot/pull/154))
+
+### Fixed
+- `twitch` command not responding when no arguments are provided ([#155](https://github.com/sylkellc/typicalbot/pull/155), closes [#152](https://github.com/sylkellc/typicalbot/issues/152))
+
+## [3.1.0]
 ### Added
  - Sentry error tracking ([e80a29a](https://github.com/sylkellc/typicalbot/commit/e80a29af42147f231df18049db17a23bd9cb265c))
  - Short codes to `lang` setting ([1e08bd9](https://github.com/sylkellc/typicalbot/commit/1e08bd9577a200c9060e07a8e8b6bfeebd8542e1))
@@ -173,8 +183,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.1.0...HEAD
-[3.1.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.0.1
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.0...HEAD
+[3.2.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.0
+[3.1.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.1.0
 [3.0.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.0.1
 [3.0.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.0.0
 [2.7.1]: https://github.com/typicalbot/typicalbot/releases/tag/2.7.1
