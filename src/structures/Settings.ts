@@ -1,6 +1,9 @@
 export default (id: string) => ({
     id,
     language: 'en-US',
+    dm: {
+        commands: false
+    },
     embed: false,
     roles: {
         administrator: [],

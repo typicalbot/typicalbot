@@ -9,7 +9,9 @@ export default class extends Command {
     mode = Constants.Modes.STRICT;
 
     async execute(message: TypicalMessage) {
-        if (message.channel.type === 'text')
+        const dm = message.guild ? message.guild.settings.dm.commands : true;
+
+        if (message.channel.type === 'text' && dm)
             await message.respond(message.translate('core/commands:CHECK_DM'));
 
         const level0 = [];
@@ -38,7 +40,9 @@ export default class extends Command {
 
         const NONE = message.translate('core/commands:NONE');
 
-        return message.author
+        const channel = dm ? message.author : message.channel;
+
+        return channel
             .send(new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle('TypicalBot Commands')
