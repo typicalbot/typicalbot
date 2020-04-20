@@ -4,7 +4,7 @@ export default (id: string) => ({
     dm: {
         commands: false
     },
-    embed: false,
+    embed: true,
     roles: {
         administrator: [],
         moderator: [],
