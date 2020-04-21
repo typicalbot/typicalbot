@@ -1,9 +1,9 @@
 {
     "name": "typicalbot",
     "version": "3.2.0",
-    "description": "TypicalBot is open-source discord bot written in TypeScript, using the Discord.JS library.",
+    "description": "TypicalBot is far from typical. It's stable, lightning fast, and easy to use— TypicalBot will seamlessly help you moderate your server and provide entertainment for its members, no problem at all!",
     "license": "Apache-2.0",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
         "build": "tsc",
         "build:watch": "tsc --watch",
@@ -67,7 +67,6 @@
         "@types/ws": "^7.2.4",
         "@typescript-eslint/eslint-plugin": "^2.28.0",
         "@typescript-eslint/parser": "^2.28.0",
-        "all-contributors-cli": "^6.14.2",
         "eslint": "^6.1.0",
         "husky": "^4.2.5",
         "lint-staged": "^10.1.6"
