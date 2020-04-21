@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import Cluster from '..';
+import Cluster from '../client';
 import {
     CommandOptions,
     TypicalGuildMessage,

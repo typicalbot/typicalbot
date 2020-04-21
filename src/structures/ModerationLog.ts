@@ -1,6 +1,6 @@
 import { MessageEmbed, User, TextChannel } from 'discord.js';
+import Cluster from '../client';
 import { TypicalGuild } from '../extensions/TypicalGuild';
-import Cluster from '../index';
 import { ModlogAction } from '../types/typicalbot';
 import Constants from '../utility/Constants';
 

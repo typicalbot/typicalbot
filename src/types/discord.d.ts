@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next';
 import { GuildSettings } from './typicalbot';
-import Cluster from '..';
+import Cluster from '../client';
 
 declare module 'discord.js' {
     interface Client {

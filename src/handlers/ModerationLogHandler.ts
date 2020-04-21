@@ -1,5 +1,5 @@
 import { Guild, TextChannel, User } from 'discord.js';
-import Cluster from '..';
+import Cluster from '../client';
 import { TypicalGuild } from '../extensions/TypicalGuild';
 import ModerationLog from '../structures/ModerationLog';
 import { TypicalGuildMessage } from '../types/typicalbot';

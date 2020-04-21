@@ -3,7 +3,7 @@
     "version": "3.2.0",
     "description": "TypicalBot is far from typical. It's stable, lightning fast, and easy to use— TypicalBot will seamlessly help you moderate your server and provide entertainment for its members, no problem at all!",
     "license": "Apache-2.0",
-    "main": "dist/index.js",
+    "main": "dist/src/index.js",
     "scripts": {
         "build": "tsc",
         "build:watch": "tsc --watch",
@@ -11,7 +11,7 @@
         "build:instance": "tsc && node dist/bin/pm2.js",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
-        "start": "tsc && node dist/index.js"
+        "start": "tsc && node dist/src/index.js"
     },
     "repository": {
         "type": "git",

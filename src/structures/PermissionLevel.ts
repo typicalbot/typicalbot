@@ -1,5 +1,5 @@
 import { Guild, GuildMember } from 'discord.js';
-import Cluster from '..';
+import Cluster from '../client';
 import { PermissionLevelOptions } from '../types/typicalbot';
 import Constants from '../utility/Constants';
 

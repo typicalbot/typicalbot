@@ -1,7 +1,7 @@
 import { join, parse } from 'path';
 import { Collection, Guild } from 'discord.js';
 import klaw from 'klaw';
-import Cluster from '../index';
+import Cluster from '../client';
 import PermissionLevel from '../structures/PermissionLevel';
 
 export default class PermissionsHandler {
