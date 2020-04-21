@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node';
 import { r, MasterPool } from 'rethinkdb-ts';
-import Cluster from '..';
+import Cluster from '../client';
 
 export default class DatabaseHandler {
     connection = r;

@@ -1,4 +1,4 @@
-import Cluster from '..';
+import Cluster from '../client';
 
 export default class Event {
     client: Cluster;

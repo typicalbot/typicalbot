@@ -21,5 +21,5 @@
         "esModuleInterop": true
     },
     "compileOnSave": true,
-    "include": ["./**/*.ts", "index.ts"]
+    "include": ["./**/*.ts"]
 }

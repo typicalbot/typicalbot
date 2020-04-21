@@ -8,7 +8,7 @@ import {
     TextChannel,
     User
 } from 'discord.js';
-import Cluster from '..';
+import Cluster from '../client';
 import Command from '../structures/Command';
 import ModerationLog from '../structures/ModerationLog';
 import PermLevel from '../structures/PermissionLevel';
