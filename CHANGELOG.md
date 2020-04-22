@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.2]
+### Fixed
+ - Correct string location for `$play` command
+ - Correct response number for `$8ball` command
+
 ## [3.2.1]
 ### Added
  - Security policy ([#167](https://github.com/sylkellc/typicalbot/pull/167))
@@ -194,7 +199,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.1...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.2...HEAD
+[3.2.2]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.2
 [3.2.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.1
 [3.2.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.0
 [3.1.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.1.0

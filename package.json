@@ -1,6 +1,6 @@
 {
     "name": "typicalbot",
-    "version": "3.2.1",
+    "version": "3.2.2",
     "description": "TypicalBot is far from typical. It's stable, lightning fast, and easy to use— TypicalBot will seamlessly help you moderate your server and provide entertainment for its members, no problem at all!",
     "license": "Apache-2.0",
     "main": "dist/src/index.js",
