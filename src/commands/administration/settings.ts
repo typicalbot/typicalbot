@@ -2,7 +2,7 @@ import Command from '../../structures/Command';
 import { TypicalGuildMessage, SettingsData } from '../../types/typicalbot';
 import Constants from '../../utility/Constants';
 
-const regex = /(list|view|edit)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
+const regex = /(list|view|edit|clear)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
 const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 const msRegex = /^(\d+)$/i;
 const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
