@@ -6,15 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.2.0]
+## [3.2.1]
 ### Added
-- `dmcommands` setting that controls whether to send commands to DM ([#154](https://github.com/sylkellc/typicalbot/pull/154))
+ - Security policy ([#167](https://github.com/sylkellc/typicalbot/pull/167))
 
 ### Changed
-- `commands` command to change its behavior to send commands to the channel where the command is ran by default and honor the new "dmcommands" setting ([#154](https://github.com/sylkellc/typicalbot/pull/154))
+ - Moved index.ts (root) into src directory; renamed the original index.ts to client.ts ([#173](https://github.com/sylkellc/typicalbot/pull/173))
+
+### Removed
+ - Unused strings in settings ([#171](https://github.com/sylkellc/typicalbot/pull/171))
+ - Carbonitex api typings ([#172](https://github.com/sylkellc/typicalbot/pull/172))
+
+## [3.2.0]
+### Added
+ - `dmcommands` setting that controls whether to send commands to DM ([#154](https://github.com/sylkellc/typicalbot/pull/154))
+
+### Changed
+ - `commands` command to change its behavior to send commands to the channel where the command is ran by default and honor the new "dmcommands" setting ([#154](https://github.com/sylkellc/typicalbot/pull/154))
 
 ### Fixed
-- `twitch` command not responding when no arguments are provided ([#155](https://github.com/sylkellc/typicalbot/pull/155), closes [#152](https://github.com/sylkellc/typicalbot/issues/152))
+ - `twitch` command not responding when no arguments are provided ([#155](https://github.com/sylkellc/typicalbot/pull/155), closes [#152](https://github.com/sylkellc/typicalbot/issues/152))
 
 ## [3.1.0]
 ### Added
@@ -183,7 +194,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.0...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.1...HEAD
+[3.2.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.1
 [3.2.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.0
 [3.1.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.1.0
 [3.0.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.0.1
