@@ -18,6 +18,6 @@ export default class extends Command {
     mode = Constants.Modes.LITE;
 
     async execute(message: TypicalMessage) {
-        return message.send(message.translate('music/play:DISCONTINUED'));
+        return message.send(message.translate('system/play:DISCONTINUED'));
     }
 }
