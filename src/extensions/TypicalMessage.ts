@@ -23,10 +23,10 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     async ask(question: string) {
-        await this.respond(question);
+        const questionMessage = await this.respond(question);
         const responses = await this.channel.awaitMessages((msg) => msg.author.id === this.author.id, { time: 15000, max: 1 });
-        const response = responses.first();
-        return response
+        questionMessage.delete().catch(() => undefined);
+        return responses.first();
     }
 
     async chooseOption(options: string[]) {
@@ -35,6 +35,8 @@ export class TypicalMessage extends Structures.get('Message') {
 
         const number = Number(response.content);
         if (number > options.length) return;
+
+        if (response.deletable) response.delete().catch(() => undefined)
 
         return options[Math.floor(number) - 1];
     }
