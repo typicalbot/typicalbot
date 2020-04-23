@@ -37,8 +37,8 @@ export default (id: string) => ({
     },
     auto: {
         role: {
-            bots: null,
-            id: null,
+            bots: [],
+            ids: [],
             delay: null,
             silent: true
         },

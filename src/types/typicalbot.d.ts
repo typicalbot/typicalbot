@@ -64,8 +64,8 @@ export interface GuildSettings {
     };
     auto: {
         role: {
-            bots: string | null;
-            id: string | null;
+            bots: string[];
+            ids: string[];
             delay: number | null;
             silent: boolean;
         };

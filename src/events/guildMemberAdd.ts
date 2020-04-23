@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/node';
 import { MessageEmbed, TextChannel } from 'discord.js';
+import { Role } from 'discord.js';
 import Event from '../structures/Event';
 import { TypicalGuildMember, TypicalGuild } from '../types/typicalbot';
 
@@ -54,17 +55,15 @@ export default class GuildMemberAdd extends Event {
                 .setNickname(await this.client.helpers.formatMessage.execute('autonick', guild, user, settings.auto.nickname))
                 .catch((err) => Sentry.captureException(err));
 
-        const autorole =
-            settings.auto.role.bots && member.user.bot
-                ? guild.roles.cache.get(settings.auto.role.bots)
-                : settings.auto.role.id
-                    ? guild.roles.cache.get(settings.auto.role.id)
-                    : null;
-        if (!autorole || !autorole.editable) return;
+        const relevantRoleIDs = member.user.bot ? settings.auto.role.bots : settings.auto.role.ids;
+        if (!relevantRoleIDs.length) return;
+
+        const autoroles = relevantRoleIDs.map((id) => guild.roles.cache.get(id)).filter((role) => role?.editable) as Role[];
+        if (!autoroles.length) return;
 
         setTimeout(async () => {
             const added = await member.roles
-                .add(autorole.id)
+                .add(autoroles)
                 .catch((err) => Sentry.captureException(err));
 
             if (settings.auto.role.silent) return null;
@@ -76,7 +75,7 @@ export default class GuildMemberAdd extends Event {
 
             return channel.send(guild.translate('help/logs:AUTOROLE', {
                 user: user.tag,
-                role: autorole.name
+                role: autoroles.map((role) => role.name).join(', ')
             }));
         }, settings.auto.role.delay || 2000);
     }

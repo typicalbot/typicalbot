@@ -111,14 +111,14 @@ export default class extends Command {
                     },
                     autorole: {
                         description: 'administration/settings:AUTOROLE',
-                        value: settings.auto.role.id,
-                        type: 'role',
-                        path: 'auto.role.id'
+                        value: settings.auto.role.ids,
+                        type: 'roles',
+                        path: 'auto.role.ids'
                     },
                     'autorole-bots': {
                         description: 'administration/settings:AUTOROLE-BOTS',
                         value: settings.auto.role.bots,
-                        type: 'role',
+                        type: 'roles',
                         path: 'auto.role.bots'
                     },
                     'autorole-delay': {
