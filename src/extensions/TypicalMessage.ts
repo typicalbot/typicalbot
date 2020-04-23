@@ -36,7 +36,7 @@ export class TypicalMessage extends Structures.get('Message') {
         const number = Number(response.content);
         if (number > options.length) return;
 
-        return options[Math.floor(number)];
+        return options[Math.floor(number) - 1];
     }
 
     respond(content: string, embed?: MessageEmbed) {
