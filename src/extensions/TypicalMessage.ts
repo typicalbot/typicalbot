@@ -30,7 +30,7 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     async chooseOption(options: string[]) {
-        const response = await this.ask(this.translate('misc:CHOOSE_OPTION', { options: options.map((opt, index) => `**${index}** - ${opt}`) }));
+        const response = await this.ask(this.translate('misc:CHOOSE_OPTION', { options: options.map((opt, index) => `**${index + 1}** - ${opt}`).join('\n') }));
         if (!response) return;
 
         const number = Number(response.content);
