@@ -48,10 +48,12 @@ export default class extends Command {
 
         const languageToUse = possibleLanguages.find((language) => language.canonical === languageName)
         if (!languageToUse) return;
+        
+        const [alias] = languageToUse.aliases;
 
         const settingsCommand = this.client.commands.get('settings')
         if (!settingsCommand) return;
 
-        return settingsCommand.execute(message, `edit language ${languageToUse.name}`)
+        return settingsCommand.execute(message, `edit language ${alias}`)
     }
 }
