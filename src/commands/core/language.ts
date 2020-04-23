@@ -10,13 +10,13 @@ export default class extends Command {
         // No parameters were provided so use the menu style.
         if (!parameters) {
             const SET_LANGUAGE = message.translate('core/language:SET_LANGUAGE');
-            const VIEW_LANGUAGES = message.translate('core/language:VIEW_LANGUAGES')
+            const VIEW_LANGUAGES = message.translate('core/language:VIEW_LANGUAGES');
             const options = [
                 SET_LANGUAGE,
                 VIEW_LANGUAGES
-            ]
-            const selectedOption = await message.chooseOption(options)
-            if (!selectedOption) return message.error('common:INVALID_OPTION')
+            ];
+            const selectedOption = await message.chooseOption(options);
+            if (!selectedOption) return message.error('common:INVALID_OPTION');
 
             switch (selectedOption) {
                 case SET_LANGUAGE:
