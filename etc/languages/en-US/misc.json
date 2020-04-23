@@ -7,5 +7,7 @@
     "MISSING_ACCESS": "The server owner's access level is too low to execute that command. The command requires an access level of {{command}}, but the owner only has a level of {{level}} ({{title}}). The owner can raise their access level by donating $5 or more to TypicalBot.",
     "USAGE_ERROR": "Invalid command usage. Check `{{prefix}}help {{name}}` for more information.",
     "PAGIFY": "Page {{page}} / {{pages}} | {{total}} Total\n\n{{content}}",
-    "CHOOSE_OPTION": "Please choose an option by typing the number."
+    "CHOOSE_OPTION": "$t(core/language:CHOOSE_OPTION_1)\n\n$t(core/language:CHOOSE_OPTION_2)",
+    "CHOOSE_OPTION_1": "Please choose an option by typing the number.",
+    "CHOOSE_OPTION_2": "{{options}}"
 }
