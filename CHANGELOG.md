@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.3]
+### Fixed
+ - `$settings clear` responding with invalid usage ([#176](https://github.com/sylkellc/typicalbot/pull/176))
+
 ## [3.2.2]
 ### Fixed
  - Correct string location for `$play` command
@@ -199,7 +203,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.2...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.3...HEAD
+[3.2.3]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.3
 [3.2.2]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.2
 [3.2.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.1
 [3.2.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.0
