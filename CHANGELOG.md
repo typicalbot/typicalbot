@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.4]
+### Fixed
+ - `guild.settings` being undefined in guildMemberAdd and guildMemberRemove events ([#178](https://github.com/sylkellc/typicalbot/pull/178))
+
 ## [3.2.3]
 ### Fixed
  - `$settings clear` responding with invalid usage ([#176](https://github.com/sylkellc/typicalbot/pull/176))
@@ -203,7 +207,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.3...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.4...HEAD
+[3.2.4]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.4
 [3.2.3]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.3
 [3.2.2]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.2
 [3.2.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.1
