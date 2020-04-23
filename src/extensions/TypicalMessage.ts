@@ -22,6 +22,23 @@ export class TypicalMessage extends Structures.get('Message') {
         return perms.has('EMBED_LINKS');
     }
 
+    async ask(question: string) {
+        await this.respond(question);
+        const responses = await this.channel.awaitMessages((msg) => msg.author.id === this.author.id, { time: 15000, max: 1 });
+        const response = responses.first();
+        return response
+    }
+
+    async chooseOption(options: string[]) {
+        const response = await this.ask(this.translate('misc:CHOOSE_OPTION', { options: options.map((opt, index) => `**${index}** - ${opt}`) }));
+        if (!response) return;
+
+        const number = Number(response.content);
+        if (number > options.length) return;
+
+        return options[Math.floor(number)];
+    }
+
     respond(content: string, embed?: MessageEmbed) {
         return this.send(`${this.author} | ${content}`, embed);
     }

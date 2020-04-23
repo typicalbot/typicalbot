@@ -198,6 +198,8 @@ export interface AccessLevel {
 
 export interface TypicalMessage extends Message {
     embeddable: boolean;
+    ask(question: string): Promise<Message | undefined>;
+    chooseOption(options: string[]): Promise<string | undefined>;
 
     dm(
         content: string | MessageEmbed,
