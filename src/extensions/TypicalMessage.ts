@@ -33,6 +33,12 @@ export class TypicalMessage extends Structures.get('Message') {
         const response = await this.ask(this.translate('misc:CHOOSE_OPTION', { options: options.map((opt, index) => `**${index + 1}** - ${opt}`).join('\n') }));
         if (!response) return;
 
+        const CANCEL_OPTIONS = this.translate('misc:CANCEL_OPTIONS', { returnObjects: true })
+        if (CANCEL_OPTIONS.includes(response.content.toLowerCase())) {
+            if (response.deletable) response.delete().catch(() => undefined)
+            return this.respond('misc:CANCELLED').then(msg => msg.delete({ timeout: 10000 }).catch(() => undefined))
+        }
+
         const number = Number(response.content);
         if (number > options.length) return;
 

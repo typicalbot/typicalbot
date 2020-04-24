@@ -9,5 +9,7 @@
     "PAGIFY": "Page {{page}} / {{pages}} | {{total}} Total\n\n{{content}}",
     "CHOOSE_OPTION": "$t(misc:CHOOSE_OPTION_1)\n\n$t(misc:CHOOSE_OPTION_2)",
     "CHOOSE_OPTION_1": "Please choose an option by typing the number.",
-    "CHOOSE_OPTION_2": "{{options}}"
+    "CHOOSE_OPTION_2": "{{options}}",
+    "CANCEL_OPTIONS": ["cancel", "abort", "exit"],
+    "CANCELLED": "The menu has been cancelled."
 }
