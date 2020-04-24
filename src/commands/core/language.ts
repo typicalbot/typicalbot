@@ -20,7 +20,7 @@ export default class extends Command {
                 VIEW_LANGUAGES
             ];
             const selectedOption = await message.chooseOption(options);
-            if (!selectedOption) return message.error('common:INVALID_OPTION');
+            if (!selectedOption) return message.error(message.translate('common:INVALID_OPTION'));
 
             switch (selectedOption) {
                 case SET_LANGUAGE:
