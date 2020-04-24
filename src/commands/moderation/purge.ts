@@ -44,9 +44,8 @@ export default class extends Command {
         });
 
         messages = messages.filter((msg) => {
-            if (!msg.member) return false;
             if ([userMention, userID].includes(msg.author.id)) return true;
-            if (msg.member.roles.cache.has(roleID)) return true;
+            if (msg.member?.roles.cache.has(roleID)) return true;
             if (filter === 'me' && msg.author.id === message.author.id)
                 return true;
             if (filter === 'you' && msg.author.id === this.client.config.id)
