@@ -4,6 +4,7 @@ import Constants from '../../utility/Constants';
 import { possibleLanguages } from '../administration/settings';
 
 export default class extends Command {
+    aliases = ['lang'];
     mode = Constants.Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters?: string) {
