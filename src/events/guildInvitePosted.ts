@@ -6,9 +6,9 @@ import { TypicalGuildMessage } from '../types/typicalbot';
 import Constants from '../utility/Constants';
 
 export default class GuildInvitePosted extends Event {
-    async execute(message: TypicalGuildMessage) {
-        await message.delete();
-        await message.error(message.translate('core/invite:PROHIBITED'));
+    execute(message: TypicalGuildMessage) {
+        if (message.deletable) message.delete().catch(() => undefined);
+        message.error(message.translate('core/invite:PROHIBITED')).then((msg) => msg.delete({ timeout: 10000 }));
 
         const { settings } = message.guild;
 
@@ -29,7 +29,7 @@ export default class GuildInvitePosted extends Event {
                 cache.size === settings.automod.invitewarn
             ) {
                 if (settings.logs.moderation) {
-                    await this.client.handlers.moderationLog
+                    this.client.handlers.moderationLog
                         .buildCase(message.guild)
                         .setAction(Constants.ModerationLogTypes.WARN)
                         .setModerator(this.client.user as User)
@@ -60,10 +60,10 @@ export default class GuildInvitePosted extends Event {
                             }),
                     channel: message.channel.toString()
                 });
-                await message.member.kick(reason);
+                message.member.kick(reason);
 
                 if (settings.logs.moderation) {
-                    await this.client.handlers.moderationLog
+                    this.client.handlers.moderationLog
                         .buildCase(message.guild)
                         .setAction(Constants.ModerationLogTypes.KICK)
                         .setModerator(this.client.user as User)
@@ -85,7 +85,7 @@ export default class GuildInvitePosted extends Event {
                     user: message.author.tag,
                     channel: message.channel.toString()
                 })
-                : await this.client.helpers.formatMessage.execute('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
+                : this.client.helpers.formatMessage.execute('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
         }
 
         return channel
