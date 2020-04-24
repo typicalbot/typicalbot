@@ -1,11 +1,11 @@
+import { Modes } from '../../lib/utils/constants';
 import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
 
 const regex = /(\S+)(?:\s+(\d+))?/i;
 
 export default class extends Command {
-    mode = Constants.Modes.LITE;
+    mode = Modes.LITE;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);

@@ -1,8 +1,8 @@
 import { ClientUser } from 'discord.js';
 import { TypicalGuild } from '../extensions/TypicalGuild';
+import Constants from '../lib/utils/constants';
 import Task from '../structures/Task';
 import { UnmuteTaskData } from '../types/typicalbot';
-import Constants from '../utility/Constants';
 
 export default class extends Task {
     async execute(data: UnmuteTaskData): Promise<void> {

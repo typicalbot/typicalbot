@@ -1,5 +1,5 @@
 import { Collection } from 'discord.js';
-import Cluster from '../client';
+import Cluster from '../lib/TypicalClient';
 import DefaultSettings from '../structures/Settings';
 import { GuildSettings } from '../types/typicalbot';
 

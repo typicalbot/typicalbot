@@ -1,4 +1,5 @@
 import { MessageEmbed } from 'discord.js';
+import { Modes, PermissionsLevels, ModerationLogTypes, Links } from '../../lib/utils/constants';
 import Command from '../../structures/Command';
 import PermissionLevel from '../../structures/PermissionLevel';
 import {
@@ -6,13 +7,12 @@ import {
     TaskOptions,
     UnmuteTaskData
 } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage,
         parameters: string,
@@ -54,7 +54,7 @@ export default class extends Command {
 
         const embed = new MessageEmbed()
             .setColor(0xff9900)
-            .setFooter('TypicalBot', Constants.Links.ICON)
+            .setFooter('TypicalBot', Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(message.translate('moderation/unmute:UNMUTED', {
                 name: message.guild.name
@@ -81,7 +81,7 @@ export default class extends Command {
         if (message.guild.settings.logs.moderation) {
             const newCase = await message.guild.buildModerationLog();
             newCase
-                .setAction(Constants.ModerationLogTypes.UNMUTE)
+                .setAction(ModerationLogTypes.UNMUTE)
                 .setModerator(message.author)
                 .setUser(member.user);
             if (reason) newCase.setReason(reason);

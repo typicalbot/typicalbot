@@ -1,12 +1,12 @@
 import { MessageEmbed } from 'discord.js';
+import { Modes, Links } from '../../lib/utils/constants';
 import Command from '../../structures/Command';
 import { TypicalMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
 
 export default class extends Command {
     aliases = ['cmds'];
     dm = true;
-    mode = Constants.Modes.STRICT;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalMessage) {
         const dm = message.guild ? !message.embeddable || message.guild.settings.dm.commands : true;
@@ -67,7 +67,7 @@ export default class extends Command {
                         value: level0.length ? level0.join(', ') : NONE
                     }
                 ])
-                .setFooter('TypicalBot', Constants.Links.ICON)
+                .setFooter('TypicalBot', Links.ICON)
                 .setTimestamp())
             .catch(() => null);
     }

@@ -1,12 +1,12 @@
 import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
+import { Modes, Links } from '../../lib/utils/constants';
 import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
 
 export default class extends Command {
     aliases = ['sinfo'];
-    mode = Constants.Modes.STRICT;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage) {
         const guildOwner = await this.client.users
@@ -129,6 +129,6 @@ export default class extends Command {
                 }
             ])
             .setThumbnail(message.guild.iconURL({ format: 'png', size: 2048 }) || '')
-            .setFooter('TypicalBot', Constants.Links.ICON));
+            .setFooter('TypicalBot', Links.ICON));
     }
 }
