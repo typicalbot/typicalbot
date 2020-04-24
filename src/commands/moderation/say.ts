@@ -1,14 +1,14 @@
 import { TextChannel, MessageEmbed } from 'discord.js';
+import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
 
 const regex = /(?:(-j(?:son)?)\s+)?(?:<#(\d+)>\s+)?((?:.|[\r\n])+)?/i;
 
 export default class extends Command {
     aliases = ['speak'];
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);

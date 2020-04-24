@@ -2,7 +2,7 @@ import { join, parse } from 'path';
 import * as Sentry from '@sentry/node';
 import { Collection } from 'discord.js';
 import klaw from 'klaw';
-import Cluster from '../client';
+import Cluster from '../lib/TypicalClient';
 import Event from '../structures/Event';
 
 export default class EventHandler extends Collection<string, Event> {

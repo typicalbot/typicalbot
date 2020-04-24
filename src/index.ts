@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { TextChannel } from 'discord.js';
 import { Client, ClientSocket, NodeMessage } from 'veza';
-import Cluster from './client';
+import Cluster from './lib/TypicalClient';
 import config from '../etc/config.json';
 
 if (!config.clustered) {

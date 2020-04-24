@@ -1,12 +1,12 @@
 import { loadavg } from 'os';
 import { MessageEmbed } from 'discord.js';
+import { Modes, Links } from '../../lib/utils/constants';
 import Command from '../../structures/Command';
 import { TypicalMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
 
 export default class extends Command {
     dm = true;
-    mode = Constants.Modes.STRICT;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalMessage) {
         const paths = [
@@ -36,7 +36,7 @@ export default class extends Command {
 
         const embed = new MessageEmbed()
             .setColor(0x00adff)
-            .setThumbnail(Constants.Links.ICON)
+            .setThumbnail(Links.ICON)
             .setTitle(message.translate('core/stats:TYPICAL_STATS'))
             .addFields([
                 {
@@ -73,7 +73,7 @@ export default class extends Command {
                     inline: true
                 }
             ])
-            .setFooter('TypicalBot', Constants.Links.ICON)
+            .setFooter('TypicalBot', Links.ICON)
             .setTimestamp();
 
         return message.send(embed);

@@ -1,9 +1,9 @@
 import * as Sentry from '@sentry/node';
 import { Collection } from 'discord.js';
 import { MessageEmbed, TextChannel, User } from 'discord.js';
+import { ModerationLogTypes } from '../lib/utils/constants';
 import Event from '../structures/Event';
 import { TypicalGuildMessage } from '../types/typicalbot';
-import Constants from '../utility/Constants';
 
 export default class GuildInvitePosted extends Event {
     execute(message: TypicalGuildMessage) {
@@ -31,7 +31,7 @@ export default class GuildInvitePosted extends Event {
                 if (settings.logs.moderation) {
                     this.client.handlers.moderationLog
                         .buildCase(message.guild)
-                        .setAction(Constants.ModerationLogTypes.WARN)
+                        .setAction(ModerationLogTypes.WARN)
                         .setModerator(this.client.user as User)
                         .setUser(message.author)
                         .setReason(message.translate('core/invite:REASON', {
@@ -65,7 +65,7 @@ export default class GuildInvitePosted extends Event {
                 if (settings.logs.moderation) {
                     this.client.handlers.moderationLog
                         .buildCase(message.guild)
-                        .setAction(Constants.ModerationLogTypes.KICK)
+                        .setAction(ModerationLogTypes.KICK)
                         .setModerator(this.client.user as User)
                         .setUser(message.author)
                         .setReason(reason)

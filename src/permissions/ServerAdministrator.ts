@@ -1,10 +1,10 @@
 import { Guild, GuildMember } from 'discord.js';
+import { PermissionsLevels } from '../lib/utils/constants';
 import PermissionLevel from '../structures/PermissionLevel';
-import Constants from '../utility/Constants';
 
 export default class extends PermissionLevel {
     title = 'Server Administrator';
-    level = Constants.PermissionsLevels.SERVER_ADMINISTRATOR;
+    level = PermissionsLevels.SERVER_ADMINISTRATOR;
 
     check(guild: Guild, member: GuildMember) {
         if (member.permissions.has('ADMINISTRATOR')) return true;

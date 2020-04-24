@@ -1,13 +1,13 @@
+import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
 
 const regex = /(list|add|remove|clear)(?:\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?)?/i;
 
 export default class extends Command {
     aliases = ['aliases'];
-    permission = Constants.PermissionsLevels.SERVER_ADMINISTRATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_ADMINISTRATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters?: string) {
         const usageError = message.translate('misc:USAGE_ERROR', {

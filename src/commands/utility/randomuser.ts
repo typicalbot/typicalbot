@@ -1,12 +1,12 @@
+import { Modes } from '../../lib/utils/constants';
 import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
 
 const regex = /(-o(?:nline)?\s)?/i;
 
 export default class extends Command {
     aliases = ['ruser'];
-    mode = Constants.Modes.LITE;
+    mode = Modes.LITE;
 
     execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
