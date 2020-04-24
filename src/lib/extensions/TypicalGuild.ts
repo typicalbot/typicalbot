@@ -1,4 +1,5 @@
 import { Structures } from 'discord.js';
+import ModerationLog from '../../structures/ModerationLog';
 
 export class TypicalGuild extends Structures.get('Guild') {
     fetchSettings() {
@@ -9,7 +10,7 @@ export class TypicalGuild extends Structures.get('Guild') {
         return this.client.handlers.permissions.fetch(this, userID, ignoreStaff);
     }
 
-    async buildModerationLog() {
+    async buildModerationLog(): Promise<ModerationLog> {
         return this.client.handlers.moderationLog.buildCase(this);
     }
 

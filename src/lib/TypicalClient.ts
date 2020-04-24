@@ -1,6 +1,6 @@
-import '../extensions/TypicalGuild';
-import '../extensions/TypicalGuildMember';
-import '../extensions/TypicalMessage';
+import './extensions/TypicalGuild';
+import './extensions/TypicalGuildMember';
+import './extensions/TypicalMessage';
 
 import * as Sentry from '@sentry/node';
 import { Client, Collection, Intents } from 'discord.js';
