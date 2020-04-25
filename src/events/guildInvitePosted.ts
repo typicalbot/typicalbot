@@ -56,7 +56,7 @@ export default class GuildInvitePosted extends Event {
                         settings.automod.invitekick === 1
                             ? message.translate('core/invite:INVITE')
                             : message.translate('core/invite:CONSECUTIVE', {
-                                amount: settings.automod.invitewarn
+                                amount: cache.size
                             }),
                     channel: message.channel.toString()
                 });
