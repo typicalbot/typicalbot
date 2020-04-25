@@ -44,7 +44,7 @@ export class TypicalMessage extends Structures.get('Message') {
         }
 
         const number = Number(response.content);
-        if (number > options.length) return;
+        if (number > options.length) return this.menuResponse?.delete().catch(() => undefined);
 
         if (response.deletable) response.delete().catch(() => undefined)
 

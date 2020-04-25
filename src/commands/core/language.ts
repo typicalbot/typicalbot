@@ -20,7 +20,10 @@ export default class extends Command {
                 VIEW_LANGUAGES
             ];
             const selectedOption = await message.chooseOption(options);
-            if (!selectedOption) return message.error(message.translate('common:INVALID_OPTION'));
+            if (!selectedOption) {
+                message.menuResponse?.delete().catch(() => undefined);
+                return message.error(message.translate('common:INVALID_OPTION'));
+            }
 
             switch (selectedOption) {
                 case SET_LANGUAGE:
@@ -40,7 +43,7 @@ export default class extends Command {
     async setLanguage(message: TypicalGuildMessage, settingsCommand: Command) {
         const languageName = await message.chooseOption(possibleLanguages.map((language) => language.canonical))
         message.menuResponse?.delete().catch(() => undefined);
-        if (!languageName) return
+        if (!languageName) return message.error(message.translate('common:INVALID_OPTION'));
 
         const languageToUse = possibleLanguages.find((language) => language.canonical === languageName)
         if (!languageToUse) return;
