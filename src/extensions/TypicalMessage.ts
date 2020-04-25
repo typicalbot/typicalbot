@@ -8,6 +8,7 @@ import {
 
 export class TypicalMessage extends Structures.get('Message') {
     menuResponse?: Message = undefined;
+
     get embeddable() {
         if (
             !this.guild ||
