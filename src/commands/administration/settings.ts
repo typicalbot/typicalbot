@@ -440,7 +440,7 @@ export default class extends Command {
 
         if (setting.path === 'auto.role.id' || setting.path === 'auto.role.delay')
             if (message.guild.verificationLevel === 'VERY_HIGH')
-                return message.error(message.translate('administration/settings:VERIFICATION_LEVEL_HIGHEST'));
+                return message.error(message.translate('administration/settings:VERIFICATION_LEVEL_VERYHIGH'));
 
         if (setting.type === 'boolean') {
             if (![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase()))
@@ -531,7 +531,7 @@ export default class extends Command {
 
                 if (setting.path === 'auto.role.delay')
                     if (message.guild.verificationLevel === 'HIGH' && amount < 60000)
-                        return message.error(message.translate('administration/settings:VERIFICATION_LEVEL'));
+                        return message.error(message.translate('administration/settings:VERIFICATION_LEVEL_HIGH'));
 
                 if (amount > 600000 || amount < 2000)
                     return message.error(message.translate('administration/settings:INVALID_MS'));
