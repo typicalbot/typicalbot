@@ -1,17 +1,17 @@
 import { Message } from 'discord.js';
-import Command from '../../structures/Command';
+import Command from '../../lib/structures/Command';
 import {
     TypicalGuildMessage,
     TaskOptions,
     UnbanTaskData
-} from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+} from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);

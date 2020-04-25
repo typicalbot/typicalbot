@@ -1,19 +1,19 @@
 import { MessageEmbed } from 'discord.js';
-import Command from '../../structures/Command';
-import { TypicalMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalMessage } from '../../lib/types/typicalbot';
+import { Modes, Links } from '../../lib/utils/constants';
 
 export default class extends Command {
     aliases = ['info', 'support'];
     dm = true;
-    mode = Constants.Modes.STRICT;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalMessage, parameters: string) {
         if (!message.guild || !parameters) {
             const response = message.translate('core/help:NONE', {
                 prefix: this.client.config.prefix,
-                docs: Constants.Links.DOCUMENTATION,
-                server: Constants.Links.SERVER
+                docs: Links.DOCUMENTATION,
+                server: Links.SERVER
             });
 
             if (!message.embeddable) return message.send(`${response}\n\nTerms of Service: <https://sylke.co/terms>\nPrivacy Policy: <https://sylke.co/privacy>`);
@@ -24,7 +24,7 @@ export default class extends Command {
                 .setDescription(response)
                 .addField('Terms of Service', 'https://sylke.co/terms', true)
                 .addField('Privacy Policy', 'https://sylke.co/privacy', true)
-                .setFooter('TypicalBot', Constants.Links.ICON)
+                .setFooter('TypicalBot', Links.ICON)
                 .setTimestamp());
         }
 
@@ -39,7 +39,7 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle(message.translate('core/help:INVALID_INFO'))
                 .setDescription(response)
-                .setFooter('TypicalBot', Constants.Links.ICON)
+                .setFooter('TypicalBot', Links.ICON)
                 .setTimestamp());
         }
 
@@ -94,7 +94,7 @@ export default class extends Command {
                     value: USAGE
                 }
             ])
-            .setFooter('TypicalBot', Constants.Links.ICON)
+            .setFooter('TypicalBot', Links.ICON)
             .setTimestamp());
     }
 }

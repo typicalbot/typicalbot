@@ -1,8 +1,8 @@
 import * as Sentry from '@sentry/node';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Role } from 'discord.js';
-import Event from '../structures/Event';
-import { TypicalGuildMember, TypicalGuild } from '../types/typicalbot';
+import Event from '../lib/structures/Event';
+import { TypicalGuildMember, TypicalGuild } from '../lib/types/typicalbot';
 
 export default class GuildMemberAdd extends Event {
     async execute(member: TypicalGuildMember) {

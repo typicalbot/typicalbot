@@ -3,10 +3,10 @@ import PermissionLevel from '../lib/structures/PermissionLevel';
 import { PermissionsLevels } from '../lib/utils/constants';
 
 export default class extends PermissionLevel {
-    title = 'Server Owner';
-    level = PermissionsLevels.SERVER_OWNER;
+    title = 'Bot Owner';
+    level = PermissionsLevels.BOT_OWNER;
 
-    check(guild: Guild, member: GuildMember) {
-        return guild.ownerID === member.id;
+    check(_guild: Guild, member: GuildMember) {
+        return this.client.owners.includes(member.id);
     }
 }

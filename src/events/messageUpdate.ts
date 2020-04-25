@@ -1,7 +1,7 @@
 import { inspect } from 'util';
-import Event from '../structures/Event';
-import { TypicalGuildMessage } from '../types/typicalbot';
-import Constants from '../utility/Constants';
+import Event from '../lib/structures/Event';
+import { TypicalGuildMessage } from '../lib/types/typicalbot';
+import { PermissionsLevels } from '../lib/utils/constants';
 
 const regex = /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i;
 
@@ -26,7 +26,7 @@ export default class MessageUpdate extends Event {
 
         if (
             userPermissions.level <
-                Constants.PermissionsLevels.SERVER_MODERATOR &&
+                PermissionsLevels.SERVER_MODERATOR &&
             !settings.ignored.invites.includes(message.channel.id)
         ) {
             this.inviteCheck(message);

@@ -1,12 +1,12 @@
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels, ModerationLogTypes } from '../../lib/utils/constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
@@ -36,7 +36,7 @@ export default class extends Command {
         if (message.guild.settings.logs.moderation) {
             const newCase = await message.guild.buildModerationLog();
             newCase
-                .setAction(Constants.ModerationLogTypes.VOICE_KICK)
+                .setAction(ModerationLogTypes.VOICE_KICK)
                 .setModerator(message.author)
                 .setUser(member.user);
             if (reason) newCase.setReason(reason);

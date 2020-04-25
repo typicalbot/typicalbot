@@ -1,4 +1,4 @@
-import Cluster from '../client';
+import Cluster from '../TypicalClient';
 import { TaskOptions } from '../types/typicalbot';
 
 export default class Task {

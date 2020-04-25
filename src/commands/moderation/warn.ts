@@ -1,14 +1,14 @@
 import { MessageEmbed } from 'discord.js';
-import Command from '../../structures/Command';
-import PermissionLevel from '../../structures/PermissionLevel';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import PermissionLevel from '../../lib/structures/PermissionLevel';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels, Links, ModerationLogTypes } from '../../lib/utils/constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage,
         parameters: string,
@@ -41,15 +41,15 @@ export default class extends Command {
 
         const newCase = await message.guild.buildModerationLog();
         newCase
-            .setAction(Constants.ModerationLogTypes.WARN)
+            .setAction(ModerationLogTypes.WARN)
             .setModerator(message.author)
             .setUser(member.user);
         if (reason) newCase.setReason(reason);
         await newCase.send();
 
         const embed = new MessageEmbed()
-            .setColor(Constants.ModerationLogTypes.WARN.hex)
-            .setFooter('TypicalBot', Constants.Links.ICON)
+            .setColor(ModerationLogTypes.WARN.hex)
+            .setFooter('TypicalBot', Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(message.translate('moderation/warn:WARNED', {
                 name: message.guild.name

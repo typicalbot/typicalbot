@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 
 const regex = /(.*)/gi;
 

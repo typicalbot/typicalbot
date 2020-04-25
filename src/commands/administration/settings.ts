@@ -1,6 +1,6 @@
-import Command from '../../structures/Command';
-import { TypicalGuildMessage, SettingsData } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage, SettingsData } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
 
 const regex = /(list|view|edit|clear)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
 const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
@@ -36,7 +36,7 @@ const possibleLanguages = [
 
 export default class extends Command {
     aliases = ['set'];
-    mode = Constants.Modes.STRICT;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const usageError = message.translate('misc:USAGE_ERROR', {
@@ -57,7 +57,7 @@ export default class extends Command {
         const [action, setting, type, value] = args;
 
         if (['edit', 'clear'].includes(action) && permission.level < 3)
-            return message.error(this.client.helpers.permissionError.execute(message, this, permission, Constants.PermissionsLevels.SERVER_ADMINISTRATOR));
+            return message.error(this.client.helpers.permissionError.execute(message, this, permission, PermissionsLevels.SERVER_ADMINISTRATOR));
 
         switch (action) {
             case 'clear':
@@ -433,7 +433,7 @@ export default class extends Command {
                 return message.error(message.translate('administration/settings:INVALID_OPTION'));
 
             if (!selectedLanguage.complete)
-                await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <${Constants.Links.TRANSLATE}>`);
+                await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <${Links.TRANSLATE}>`);
 
             value = selectedLanguage.name;
         }

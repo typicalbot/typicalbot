@@ -1,12 +1,12 @@
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 
 const regex = /(commands|invites|stars)/i;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.SERVER_ADMINISTRATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_ADMINISTRATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);

@@ -1,14 +1,14 @@
 import { TextChannel } from 'discord.js';
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels, ModerationLogTypes } from '../../lib/utils/constants';
 
 const regex = /(?:(?:<@!?(\d{17,20})>|(\d{17,20})|<@&(\d{17,20})>|<#(\d{17,20})>|(you|me|bots))\s+)?(\d+)(?:\s+((?:.|[\r\n])+))?/i;
 
 export default class extends Command {
     aliases = ['prune'];
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
@@ -44,9 +44,8 @@ export default class extends Command {
         });
 
         messages = messages.filter((msg) => {
-            if (!msg.member) return false;
             if ([userMention, userID].includes(msg.author.id)) return true;
-            if (msg.member.roles.cache.has(roleID)) return true;
+            if (msg.member?.roles.cache.has(roleID)) return true;
             if (filter === 'me' && msg.author.id === message.author.id)
                 return true;
             if (filter === 'you' && msg.author.id === this.client.config.id)
@@ -75,7 +74,7 @@ export default class extends Command {
         ) {
             const newCase = await message.guild.buildModerationLog();
             newCase
-                .setAction(Constants.ModerationLogTypes.PURGE)
+                .setAction(ModerationLogTypes.PURGE)
                 .setModerator(message.author)
                 .setChannel(channelToUse);
             if (reason) newCase.setReason(reason);

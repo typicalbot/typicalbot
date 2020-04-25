@@ -1,6 +1,6 @@
-import Command from '../../structures/Command';
-import { TypicalMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalMessage } from '../../lib/types/typicalbot';
+import { Modes } from '../../lib/utils/constants';
 
 export default class extends Command {
     aliases = [
@@ -15,7 +15,7 @@ export default class extends Command {
         'vol',
         'volume'
     ];
-    mode = Constants.Modes.LITE;
+    mode = Modes.LITE;
 
     async execute(message: TypicalMessage) {
         return message.send(message.translate('system/play:DISCONTINUED'));

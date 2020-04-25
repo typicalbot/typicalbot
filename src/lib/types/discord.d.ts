@@ -1,6 +1,7 @@
+import { Message } from 'discord.js';
 import { TFunction } from 'i18next';
 import { GuildSettings } from './typicalbot';
-import Cluster from '../client';
+import Cluster from '../TypicalClient';
 
 declare module 'discord.js' {
     interface Client {
@@ -14,5 +15,9 @@ declare module 'discord.js' {
 
     interface GuildMember {
         client: Cluster;
+    }
+
+    interface ClientEvents {
+        guildInvitePosted: [Message];
     }
 }

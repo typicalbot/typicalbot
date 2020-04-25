@@ -1,8 +1,8 @@
 import { inspect } from 'util';
 import { Message, GuildMember, User } from 'discord.js';
-import Event from '../structures/Event';
-import { TypicalGuildMessage, GuildSettings } from '../types/typicalbot';
-import Constants from '../utility/Constants';
+import Event from '../lib/structures/Event';
+import { TypicalGuildMessage, GuildSettings } from '../lib/types/typicalbot';
+import { PermissionsLevels, Modes } from '../lib/utils/constants';
 
 export default class extends Event {
     async execute(message: Message | TypicalGuildMessage) {
@@ -47,19 +47,19 @@ export default class extends Event {
 
         if (
             userPermissions.level <
-            Constants.PermissionsLevels.SERVER_MODERATOR &&
+            PermissionsLevels.SERVER_MODERATOR &&
             !settings.ignored.invites.includes(message.channel.id)
         )
             this.inviteCheck(message);
         if (
             userPermissions.level <
-            Constants.PermissionsLevels.SERVER_MODERATOR &&
+            PermissionsLevels.SERVER_MODERATOR &&
             settings.ignored.commands.includes(message.channel.id)
         )
             return;
         if (
             userPermissions.level ===
-            Constants.PermissionsLevels.SERVER_BLACKLISTED
+            PermissionsLevels.SERVER_BLACKLISTED
         )
             return;
 
@@ -86,14 +86,14 @@ export default class extends Event {
         }
 
         if (
-            !this.client.config.maintainers.includes(message.author.id) &&
+            !this.client.owners.includes(message.author.id) &&
             message.author.id !== message.guild.ownerID &&
             command.mode <
             (settings.mode === 'free'
-                ? Constants.Modes.FREE
+                ? Modes.FREE
                 : settings.mode === 'lite'
-                    ? Constants.Modes.LITE
-                    : Constants.Modes.STRICT)
+                    ? Modes.LITE
+                    : Modes.STRICT)
         )
             return message.error(message.translate('misc:DISABLED'));
 
@@ -101,8 +101,8 @@ export default class extends Event {
             userPermissions.level < command.permission ||
             (actualUserPermissions.level < command.permission &&
                 actualUserPermissions.level !==
-                Constants.PermissionsLevels.SERVER_BLACKLISTED &&
-                command.permission <= Constants.PermissionsLevels.SERVER_OWNER)
+                PermissionsLevels.SERVER_BLACKLISTED &&
+                command.permission <= PermissionsLevels.SERVER_OWNER)
         ) {
             return message.error(this.client.helpers.permissionError.execute(message, command, actualUserPermissions));
         }
@@ -126,7 +126,7 @@ export default class extends Event {
     matchPrefix(user: User, settings: GuildSettings, command: string) {
         if (
             command.startsWith(this.client.config.prefix) &&
-            this.client.config.maintainers.includes(user.id)
+            this.client.owners.includes(user.id)
         )
             return this.client.config.prefix;
         if (
@@ -163,7 +163,7 @@ export default class extends Event {
         if (
             !command ||
             !command.dm ||
-            command.permission > Constants.PermissionsLevels.SERVER_MEMBER
+            command.permission > PermissionsLevels.SERVER_MEMBER
         )
             return;
 

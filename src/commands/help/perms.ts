@@ -1,16 +1,16 @@
 import { MessageEmbed } from 'discord.js';
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, Links } from '../../lib/utils/constants';
 
 export default class extends Command {
-    mode = Constants.Modes.STRICT;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage) {
         await message.send(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('help/perms:LEVELS'))
-            .setURL(Constants.Links.BASE)
+            .setURL(Links.BASE)
             .setDescription(message.translate('help/perms:VIEW_ALL', {
                 prefix: this.client.config.prefix
             }))
@@ -36,7 +36,7 @@ export default class extends Command {
                     value: message.translate('help/perms:OWNER_VALUE')
                 }
             ])
-            .setFooter('TypicalBot', Constants.Links.ICON)
+            .setFooter('TypicalBot', Links.ICON)
             .setTimestamp());
     }
 }

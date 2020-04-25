@@ -1,6 +1,6 @@
 {
     "name": "typicalbot",
-    "version": "3.2.3",
+    "version": "3.2.4",
     "description": "TypicalBot is far from typical. It's stable, lightning fast, and easy to use— TypicalBot will seamlessly help you moderate your server and provide entertainment for its members, no problem at all!",
     "license": "Apache-2.0",
     "main": "dist/src/index.js",
@@ -34,7 +34,7 @@
         "@sentry/node": "^5.15.4",
         "canvas": "^2.6.0",
         "canvas-constructor": "^3.2.0",
-        "discord.js": "^12.1.1",
+        "discord.js": "^12.2.0",
         "eslint-plugin-import": "^2.20.2",
         "fs": "0.0.2",
         "i18next": "^19.4.3",

@@ -1,5 +1,5 @@
-import Event from '../structures/Event';
-import { TypicalGuild } from '../types/typicalbot';
+import Event from '../lib/structures/Event';
+import { TypicalGuild } from '../lib/types/typicalbot';
 
 export default class GuildDelete extends Event {
     execute(guild: TypicalGuild) {

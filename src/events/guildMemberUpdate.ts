@@ -1,8 +1,7 @@
 import * as Sentry from '@sentry/node';
 import { TextChannel, MessageEmbed } from 'discord.js';
-import { TypicalGuild } from '../extensions/TypicalGuild';
-import { TypicalGuildMember } from '../extensions/TypicalGuildMember';
-import Event from '../structures/Event';
+import Event from '../lib/structures/Event';
+import { TypicalGuild, TypicalGuildMember } from '../lib/types/typicalbot';
 
 export default class GuildMemberUpdate extends Event {
     async execute(oldMember: TypicalGuildMember, member: TypicalGuildMember) {

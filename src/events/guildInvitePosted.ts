@@ -1,14 +1,14 @@
 import * as Sentry from '@sentry/node';
 import { Collection } from 'discord.js';
 import { MessageEmbed, TextChannel, User } from 'discord.js';
-import Event from '../structures/Event';
-import { TypicalGuildMessage } from '../types/typicalbot';
-import Constants from '../utility/Constants';
+import Event from '../lib/structures/Event';
+import { TypicalGuildMessage } from '../lib/types/typicalbot';
+import { ModerationLogTypes } from '../lib/utils/constants';
 
 export default class GuildInvitePosted extends Event {
-    async execute(message: TypicalGuildMessage) {
-        await message.delete();
-        await message.error(message.translate('core/invite:PROHIBITED'));
+    execute(message: TypicalGuildMessage) {
+        if (message.deletable) message.delete().catch(() => undefined);
+        message.error(message.translate('core/invite:PROHIBITED')).then((msg) => msg.delete({ timeout: 10000 }));
 
         const { settings } = message.guild;
 
@@ -29,9 +29,9 @@ export default class GuildInvitePosted extends Event {
                 cache.size === settings.automod.invitewarn
             ) {
                 if (settings.logs.moderation) {
-                    await this.client.handlers.moderationLog
+                    this.client.handlers.moderationLog
                         .buildCase(message.guild)
-                        .setAction(Constants.ModerationLogTypes.WARN)
+                        .setAction(ModerationLogTypes.WARN)
                         .setModerator(this.client.user as User)
                         .setUser(message.author)
                         .setReason(message.translate('core/invite:REASON', {
@@ -56,16 +56,16 @@ export default class GuildInvitePosted extends Event {
                         settings.automod.invitekick === 1
                             ? message.translate('core/invite:INVITE')
                             : message.translate('core/invite:CONSECUTIVE', {
-                                amount: settings.automod.invitewarn
+                                amount: cache.size
                             }),
                     channel: message.channel.toString()
                 });
-                await message.member.kick(reason);
+                message.member.kick(reason);
 
                 if (settings.logs.moderation) {
-                    await this.client.handlers.moderationLog
+                    this.client.handlers.moderationLog
                         .buildCase(message.guild)
-                        .setAction(Constants.ModerationLogTypes.KICK)
+                        .setAction(ModerationLogTypes.KICK)
                         .setModerator(this.client.user as User)
                         .setUser(message.author)
                         .setReason(reason)
@@ -85,7 +85,7 @@ export default class GuildInvitePosted extends Event {
                     user: message.author.tag,
                     channel: message.channel.toString()
                 })
-                : await this.client.helpers.formatMessage.execute('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
+                : this.client.helpers.formatMessage.execute('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
         }
 
         return channel
