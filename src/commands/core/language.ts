@@ -24,13 +24,16 @@ export default class extends Command {
 
             switch (selectedOption) {
                 case SET_LANGUAGE:
-                    return this.setLanguage(message, settingsCommand);
+                    this.setLanguage(message, settingsCommand);
+                    break;
                 case VIEW_LANGUAGES:
-                    return message.send(possibleLanguages.map((language) => language.canonical).join('\n'));
+                    message.send(possibleLanguages.map((language) => language.canonical).join('\n'));
+                    break;
                 default:
-                    return;
+                    break;
             }
 
+            return message.menuResponse?.delete().catch(() => undefined);
         }
 
         // Parameters were provided by the user so we handle as necessary.
