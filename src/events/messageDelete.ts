@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node';
 import { TextChannel, MessageEmbed } from 'discord.js';
 import Event from '../lib/structures/Event';
-import { TypicalGuild, TypicalGuildMessage } from '../types/typicalbot';
+import { TypicalGuild, TypicalGuildMessage } from '../lib/types/typicalbot';
 
 export default class MessageDelete extends Event {
     async execute(message: TypicalGuildMessage) {

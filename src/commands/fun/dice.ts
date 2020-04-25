@@ -1,5 +1,5 @@
 import Command from '../../lib/structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 
 export default class extends Command {
     aliases = ['die'];

@@ -1,6 +1,6 @@
 import Command from '../../lib/structures/Command';
+import { TypicalMessage } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
-import { TypicalMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = [

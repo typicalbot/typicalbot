@@ -1,7 +1,7 @@
 import { TextChannel } from 'discord.js';
 import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels, ModerationLogTypes } from '../../lib/utils/constants';
-import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /(?:(?:<@!?(\d{17,20})>|(\d{17,20})|<@&(\d{17,20})>|<#(\d{17,20})>|(you|me|bots))\s+)?(\d+)(?:\s+((?:.|[\r\n])+))?/i;
 

@@ -1,11 +1,11 @@
 import { Message } from 'discord.js';
 import Command from '../../lib/structures/Command';
-import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 import {
     TypicalGuildMessage,
     TaskOptions,
     UnbanTaskData
-} from '../../types/typicalbot';
+} from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 

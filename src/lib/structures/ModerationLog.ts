@@ -1,6 +1,6 @@
 import { MessageEmbed, User, TextChannel } from 'discord.js';
-import { ModlogAction, TypicalGuild } from '../../types/typicalbot';
 import Cluster from '../TypicalClient';
+import { ModlogAction, TypicalGuild } from '../types/typicalbot';
 import { ModerationLogTypes, ModerationLogRegex, Links } from '../utils/constants';
 
 export default class ModerationLog {

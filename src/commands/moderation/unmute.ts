@@ -1,12 +1,12 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import PermissionLevel from '../../lib/structures/PermissionLevel';
-import { Modes, PermissionsLevels, ModerationLogTypes, Links } from '../../lib/utils/constants';
 import {
     TypicalGuildMessage,
     TaskOptions,
     UnmuteTaskData
-} from '../../types/typicalbot';
+} from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels, ModerationLogTypes, Links } from '../../lib/utils/constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 

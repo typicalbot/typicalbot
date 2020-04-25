@@ -1,7 +1,7 @@
 import { User } from 'discord.js';
 import moment from 'moment';
 import Function from '../lib/structures/Function';
-import { TypicalGuild, FormatMessageOptions } from '../types/typicalbot';
+import { TypicalGuild, FormatMessageOptions } from '../lib/types/typicalbot';
 
 export default class FormatMessage extends Function {
     async execute(type: string,

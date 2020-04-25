@@ -1,8 +1,8 @@
 import { inspect } from 'util';
 import { Message, GuildMember, User } from 'discord.js';
 import Event from '../lib/structures/Event';
+import { TypicalGuildMessage, GuildSettings } from '../lib/types/typicalbot';
 import { PermissionsLevels, Modes } from '../lib/utils/constants';
-import { TypicalGuildMessage, GuildSettings } from '../types/typicalbot';
 
 export default class extends Event {
     async execute(message: Message | TypicalGuildMessage) {

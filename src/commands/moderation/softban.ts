@@ -1,7 +1,7 @@
 import Command from '../../lib/structures/Command';
 import PermissionLevel from '../../lib/structures/PermissionLevel';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels, ModerationLogTypes } from '../../lib/utils/constants';
-import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(\d+))?(?:\s+(.+))?/i;
 

@@ -1,8 +1,8 @@
 import * as Sentry from '@sentry/node';
 import { User, TextChannel, MessageEmbed } from 'discord.js';
 import Event from '../lib/structures/Event';
+import { TypicalGuild } from '../lib/types/typicalbot';
 import { ModerationLogTypes } from '../lib/utils/constants';
-import { TypicalGuild } from '../types/typicalbot';
 
 export default class GuildBanAdd extends Event {
     async execute(guild: TypicalGuild, user: User) {

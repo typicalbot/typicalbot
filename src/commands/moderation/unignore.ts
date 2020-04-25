@@ -1,6 +1,6 @@
 import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
-import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /(commands|invites|stars)/i;
 

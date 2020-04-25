@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
+import { TypicalMessage } from '../../lib/types/typicalbot';
 import { Modes, Links } from '../../lib/utils/constants';
-import { TypicalMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = ['cmds'];

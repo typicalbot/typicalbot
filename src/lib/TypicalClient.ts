@@ -7,6 +7,7 @@ import { Client, Collection, Intents } from 'discord.js';
 import { TFunction } from 'i18next';
 import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
+import { TypicalDonor, HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import config from '../../etc/config.json';
 import pkg from '../../package.json';
@@ -20,7 +21,6 @@ import PermissionsHandler from '../handlers/PermissionsHandler';
 import SettingHandler from '../handlers/SettingHandler';
 import TaskHandler from '../handlers/TaskHandler';
 import i18n from '../i18n';
-import { TypicalDonor, HelperFunctions, BanLog, UnbanLog } from '../types/typicalbot';
 
 interface TypicalHandlers {
     database: DatabaseHandler;

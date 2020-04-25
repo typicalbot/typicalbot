@@ -1,7 +1,7 @@
 import { Role } from 'discord.js';
 import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
-import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
 
 const regex = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i;
 const infoRegex = /(?:(members)\s+)?(?:(?:(?:<@&)?(\d{17,20})>?|(.+))\s+(\d+)|(?:(?:<@&)?(\d{17,20})>?|(.+)))/i;

@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import Command from '../../lib/structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 
 const regex = /(?:(-m)\s+)?(.+)\s+\|\s+(.+)/i;
 const splitRegex = /\s*;\s*/i;

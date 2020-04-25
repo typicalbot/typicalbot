@@ -1,7 +1,7 @@
 import math from 'mathjs';
 import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
-import { TypicalGuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = ['calc', 'math'];

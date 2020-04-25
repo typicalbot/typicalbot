@@ -3,7 +3,7 @@ import { Collection, TextChannel, MessageEmbed } from 'discord.js';
 import moment from 'moment';
 import fetch from 'node-fetch';
 import Event from '../lib/structures/Event';
-import { TypicalGuildMessage } from '../types/typicalbot';
+import { TypicalGuildMessage } from '../lib/types/typicalbot';
 
 async function hastebin(input: string) {
     const options = { url: 'https://www.hastebin.com', extension: 'js' };

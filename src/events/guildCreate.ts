@@ -1,5 +1,5 @@
 import Event from '../lib/structures/Event';
-import { TypicalGuild } from '../types/typicalbot';
+import { TypicalGuild } from '../lib/types/typicalbot';
 
 export default class GuildCreate extends Event {
     async execute(guild: TypicalGuild) {

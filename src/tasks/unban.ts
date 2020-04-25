@@ -1,6 +1,6 @@
 import { User } from 'discord.js';
 import Task from '../lib/structures/Task';
-import { UnbanTaskData } from '../types/typicalbot';
+import { UnbanTaskData } from '../lib/types/typicalbot';
 
 export default class extends Task {
     async execute(data: UnbanTaskData): Promise<void> {

@@ -1,8 +1,8 @@
 import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
 import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, Links } from '../../lib/utils/constants';
-import { TypicalGuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {
     aliases = ['sinfo'];

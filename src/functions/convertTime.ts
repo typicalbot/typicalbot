@@ -1,5 +1,5 @@
 import TypicalFunction from '../lib/structures/Function';
-import { TypicalGuild, TypicalMessage } from '../types/typicalbot';
+import { TypicalGuild, TypicalMessage } from '../lib/types/typicalbot';
 
 export default class ConvertTime extends TypicalFunction {
     execute(guild: TypicalMessage | TypicalGuild, time: number) {

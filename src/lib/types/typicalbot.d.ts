@@ -8,10 +8,10 @@ import {
     TextChannel,
     User
 } from 'discord.js';
-import Cluster from '../lib/TypicalClient';
-import Command from '../lib/structures/Command';
-import ModerationLog from '../lib/structures/ModerationLog';
-import PermLevel from '../lib/structures/PermissionLevel';
+import Cluster from '../TypicalClient';
+import Command from '../structures/Command';
+import ModerationLog from '../structures/ModerationLog';
+import PermLevel from '../structures/PermissionLevel';
 
 export interface CommandOptions {
     description?: string;

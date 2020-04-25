@@ -1,6 +1,6 @@
 import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage, SettingsData } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
-import { TypicalGuildMessage, SettingsData } from '../../types/typicalbot';
 
 const regex = /(list|view|edit|clear)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
 const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;

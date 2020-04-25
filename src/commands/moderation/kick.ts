@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels, ModerationLogTypes, Links } from '../../lib/utils/constants';
-import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 export default class extends Command {
