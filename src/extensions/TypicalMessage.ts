@@ -39,6 +39,7 @@ export class TypicalMessage extends Structures.get('Message') {
         const CANCEL_OPTIONS = this.translate('misc:CANCEL_OPTIONS', { returnObjects: true })
         if (CANCEL_OPTIONS.includes(response.content.toLowerCase())) {
             if (response.deletable) response.delete().catch(() => undefined)
+            this.menuResponse?.delete().catch(() => undefined)
             return this.respond(this.translate('misc:CANCELLED')).then((msg) => msg.delete({ timeout: 10000 }).catch(() => undefined))
         }
 
