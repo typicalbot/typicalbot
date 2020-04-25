@@ -1,11 +1,13 @@
 import {
-    Structures,
+    DMChannel,
+    Message,
     MessageEmbed,
     MessageOptions,
-    DMChannel
+    Structures,
 } from 'discord.js';
 
 export class TypicalMessage extends Structures.get('Message') {
+    menuResponse?: Message = undefined;
     get embeddable() {
         if (
             !this.guild ||
@@ -23,9 +25,9 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     async ask(question: string) {
-        const questionMessage = await this.respond(question);
+        this.menuResponse = this.menuResponse ? await this.menuResponse.edit(question) : await this.respond(question);
+
         const responses = await this.channel.awaitMessages((msg) => msg.author.id === this.author.id, { time: 15000, max: 1 });
-        questionMessage.delete().catch(() => undefined);
         return responses.first();
     }
 
