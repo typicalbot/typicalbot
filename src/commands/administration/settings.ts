@@ -525,6 +525,10 @@ export default class extends Command {
                 const [ms] = args;
                 const amount = parseInt(ms, 10);
 
+                if (setting.path === 'auto.role.delay')
+                    if (message.guild.verificationLevel === 'HIGH' && amount < 60000)
+                        return message.error(message.translate('administration/settings:VERIFICATION_LEVEL'));
+
                 if (amount > 600000 || amount < 2000)
                     return message.error(message.translate('administration/settings:INVALID_MS'));
 
