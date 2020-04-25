@@ -438,6 +438,10 @@ export default class extends Command {
             value = selectedLanguage.name;
         }
 
+        if (setting.path === 'auto.role.id' || setting.path === 'auto.role.delay')
+            if (message.guild.verificationLevel === 'VERY_HIGH')
+                return message.error(message.translate('administration/settings:VERIFICATION_LEVEL_HIGHEST'));
+
         if (setting.type === 'boolean') {
             if (![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase()))
                 return message.translate('administration/settings:INVALID_OPTION');
