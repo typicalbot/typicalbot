@@ -24,16 +24,13 @@ export default class extends Command {
 
             switch (selectedOption) {
                 case SET_LANGUAGE:
-                    this.setLanguage(message, settingsCommand);
-                    break;
+                    return this.setLanguage(message, settingsCommand);
                 case VIEW_LANGUAGES:
-                    message.send(possibleLanguages.map((language) => language.canonical).join('\n'));
-                    break;
+                    message.menuResponse?.delete().catch(() => undefined);
+                    return message.send(possibleLanguages.map((language) => language.canonical).join('\n'));
                 default:
-                    break;
+                    return;
             }
-
-            return message.menuResponse?.delete().catch(() => undefined);
         }
 
         // Parameters were provided by the user so we handle as necessary.
@@ -42,6 +39,7 @@ export default class extends Command {
 
     async setLanguage(message: TypicalGuildMessage, settingsCommand: Command) {
         const languageName = await message.chooseOption(possibleLanguages.map((language) => language.canonical))
+        message.menuResponse?.delete().catch(() => undefined);
         if (!languageName) return
 
         const languageToUse = possibleLanguages.find((language) => language.canonical === languageName)
