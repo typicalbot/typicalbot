@@ -86,7 +86,7 @@ export default class extends Event {
         }
 
         if (
-            !this.client.config.maintainers.includes(message.author.id) &&
+            !this.client.owners.includes(message.author.id) &&
             message.author.id !== message.guild.ownerID &&
             command.mode <
             (settings.mode === 'free'
@@ -126,7 +126,7 @@ export default class extends Event {
     matchPrefix(user: User, settings: GuildSettings, command: string) {
         if (
             command.startsWith(this.client.config.prefix) &&
-            this.client.config.maintainers.includes(user.id)
+            this.client.owners.includes(user.id)
         )
             return this.client.config.prefix;
         if (
