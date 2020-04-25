@@ -2,7 +2,7 @@ import { join, parse } from 'path';
 import { Collection } from 'discord.js';
 import klaw from 'klaw';
 import Cluster from '../lib/TypicalClient';
-import Task from '../structures/Task';
+import Task from '../lib/structures/Task';
 import { TaskOptions } from '../types/typicalbot';
 
 export default class TaskHandler {

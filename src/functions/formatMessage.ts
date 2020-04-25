@@ -1,6 +1,6 @@
 import { User } from 'discord.js';
 import moment from 'moment';
-import Function from '../structures/Function';
+import Function from '../lib/structures/Function';
 import { TypicalGuild, FormatMessageOptions } from '../types/typicalbot';
 
 export default class FormatMessage extends Function {

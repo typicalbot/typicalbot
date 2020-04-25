@@ -1,5 +1,5 @@
+import Command from '../../lib/structures/Command';
 import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage, SettingsData } from '../../types/typicalbot';
 
 const regex = /(list|view|edit|clear)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;

@@ -1,5 +1,5 @@
+import Command from '../../lib/structures/Command';
 import { Modes } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalMessage } from '../../types/typicalbot';
 
 export default class extends Command {

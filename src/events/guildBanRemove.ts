@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node';
 import { MessageEmbed, User, TextChannel } from 'discord.js';
+import Event from '../lib/structures/Event';
 import { ModerationLogTypes } from '../lib/utils/constants';
-import Event from '../structures/Event';
 import { TypicalGuild } from '../types/typicalbot';
 
 export default class GuildBanRemove extends Event {

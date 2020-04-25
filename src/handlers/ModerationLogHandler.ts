@@ -1,6 +1,6 @@
 import { Guild, TextChannel, User } from 'discord.js';
 import Cluster from '../lib/TypicalClient';
-import ModerationLog from '../structures/ModerationLog';
+import ModerationLog from '../lib/structures/ModerationLog';
 import { TypicalGuildMessage , TypicalGuild } from '../types/typicalbot';
 
 export default class ModerationLogHandler {

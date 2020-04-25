@@ -1,8 +1,8 @@
 import { inspect } from 'util';
 import { MessageEmbed } from 'discord.js';
 import { VM } from 'vm2';
+import Command from '../../lib/structures/Command';
 import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /^(-(?:u|unsafe)\s+)?([\W\w]+)/;

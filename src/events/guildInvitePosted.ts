@@ -1,8 +1,8 @@
 import * as Sentry from '@sentry/node';
 import { Collection } from 'discord.js';
 import { MessageEmbed, TextChannel, User } from 'discord.js';
+import Event from '../lib/structures/Event';
 import { ModerationLogTypes } from '../lib/utils/constants';
-import Event from '../structures/Event';
 import { TypicalGuildMessage } from '../types/typicalbot';
 
 export default class GuildInvitePosted extends Event {

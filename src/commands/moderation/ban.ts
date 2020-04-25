@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
+import Command from '../../lib/structures/Command';
 import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)d(?:ays?)?)?\s?(?:(\d+)h(?:ours?|rs?)?)?\s?(?:(\d+)m(?:inutes?|in)?)?\s?(?:(\d+)s(?:econds?|ec)?)?)?(?:\s*(\d+))?(?:\s*(.+))?/i;

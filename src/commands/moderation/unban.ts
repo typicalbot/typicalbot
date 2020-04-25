@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
+import Command from '../../lib/structures/Command';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import {
     TypicalGuildMessage,
     TaskOptions,

@@ -1,9 +1,8 @@
-import Cluster from '../lib/TypicalClient';
+import Cluster from '../TypicalClient';
 
-export default class Event {
+export default class TypicalFunction {
     client: Cluster;
     name: string;
-    once = false;
 
     constructor(client: Cluster, name: string) {
         this.client = client;
@@ -11,7 +10,7 @@ export default class Event {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    execute(..._args: unknown[]) {
-        throw 'So Silly of you. How can you make an event and never have an execute function.';
+    execute(..._args: unknown[]): unknown {
+        throw 'Silly tsk tsk tsk. Your function does not have a execute method.';
     }
 }

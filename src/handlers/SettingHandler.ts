@@ -1,6 +1,6 @@
 import { Collection } from 'discord.js';
 import Cluster from '../lib/TypicalClient';
-import DefaultSettings from '../structures/Settings';
+import DefaultSettings from '../lib/structures/Settings';
 import { GuildSettings } from '../types/typicalbot';
 
 export default class SettingHandler extends Collection<string, GuildSettings> {

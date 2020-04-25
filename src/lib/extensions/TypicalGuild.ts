@@ -1,5 +1,5 @@
 import { Structures } from 'discord.js';
-import ModerationLog from '../../structures/ModerationLog';
+import ModerationLog from '../structures/ModerationLog';
 
 export class TypicalGuild extends Structures.get('Guild') {
     fetchSettings() {

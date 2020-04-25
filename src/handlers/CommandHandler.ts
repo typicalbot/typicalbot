@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/node';
 import { Collection } from 'discord.js';
 import klaw from 'klaw';
 import Cluster from '../lib/TypicalClient';
-import Command from '../structures/Command';
+import Command from '../lib/structures/Command';
 import { GuildSettings } from '../types/typicalbot';
 
 export default class CommandHandler extends Collection<string, Command> {
@@ -11,6 +11,7 @@ export default class CommandHandler extends Collection<string, Command> {
 
     constructor(client: Cluster) {
         super();
+
         this.client = client;
 
         this.init().catch((err) => Sentry.captureException(err));

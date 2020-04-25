@@ -1,4 +1,4 @@
-import TypicalFunction from '../structures/Function';
+import TypicalFunction from '../lib/structures/Function';
 import { TypicalGuild, TypicalMessage } from '../types/typicalbot';
 
 export default class ConvertTime extends TypicalFunction {

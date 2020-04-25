@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/node';
 import { Collection } from 'discord.js';
 import klaw from 'klaw';
 import Cluster from '../lib/TypicalClient';
-import TypicalFunction from '../structures/Function';
+import TypicalFunction from '../lib/structures/Function';
 
 export default class FunctionHandler extends Collection<string, TypicalFunction> {
     client: Cluster;

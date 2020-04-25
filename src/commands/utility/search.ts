@@ -1,5 +1,5 @@
+import Command from '../../lib/structures/Command';
 import { Modes } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /(\S+)(?:\s+(\d+))?/i;

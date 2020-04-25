@@ -1,11 +1,11 @@
 import { Message } from 'discord.js';
-import Cluster from '../lib/TypicalClient';
-import { PermissionsLevels, Modes, AccessLevels } from '../lib/utils/constants';
 import {
     CommandOptions,
     TypicalGuildMessage,
     PermissionLevel
-} from '../types/typicalbot';
+} from '../../types/typicalbot';
+import Cluster from '../TypicalClient';
+import { PermissionsLevels, Modes, AccessLevels } from '../utils/constants';
 
 export default class Command {
     client: Cluster;

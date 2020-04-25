@@ -1,5 +1,5 @@
 import { User } from 'discord.js';
-import Task from '../structures/Task';
+import Task from '../lib/structures/Task';
 import { UnbanTaskData } from '../types/typicalbot';
 
 export default class extends Task {

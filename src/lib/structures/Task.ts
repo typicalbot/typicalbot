@@ -1,5 +1,5 @@
-import Cluster from '../lib/TypicalClient';
-import { TaskOptions } from '../types/typicalbot';
+import { TaskOptions } from '../../types/typicalbot';
+import Cluster from '../TypicalClient';
 
 export default class Task {
     id: number;

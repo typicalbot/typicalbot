@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/node';
 import { Collection, TextChannel, MessageEmbed } from 'discord.js';
 import moment from 'moment';
 import fetch from 'node-fetch';
-import Event from '../structures/Event';
+import Event from '../lib/structures/Event';
 import { TypicalGuildMessage } from '../types/typicalbot';
 
 async function hastebin(input: string) {

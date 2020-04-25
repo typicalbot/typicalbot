@@ -1,5 +1,5 @@
+import Command from '../../lib/structures/Command';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /(list|add|remove|clear)(?:\s+([A-Za-z]+)(?:\s+([A-Za-z]+))?)?/i;

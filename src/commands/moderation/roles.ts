@@ -1,6 +1,6 @@
 import { Role } from 'discord.js';
+import Command from '../../lib/structures/Command';
 import { Modes } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
 
 const regex = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i;

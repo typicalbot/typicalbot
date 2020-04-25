@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
+import Command from '../../lib/structures/Command';
+import PermissionLevel from '../../lib/structures/PermissionLevel';
 import { Modes, PermissionsLevels, ModerationLogTypes, Links } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
-import PermissionLevel from '../../structures/PermissionLevel';
 import {
     TypicalGuildMessage,
     TaskOptions,

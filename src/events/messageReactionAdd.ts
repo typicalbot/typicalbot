@@ -1,5 +1,5 @@
 import { MessageEmbed, MessageReaction, TextChannel } from 'discord.js';
-import Event from '../structures/Event';
+import Event from '../lib/structures/Event';
 import { TypicalGuildMessage } from '../types/typicalbot';
 
 export default class MessageReactionAdd extends Event {

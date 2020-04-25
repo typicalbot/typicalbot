@@ -1,6 +1,6 @@
-import Command from '../structures/Command';
-import TypicalFunction from '../structures/Function';
-import PermissionLevel from '../structures/PermissionLevel';
+import Command from '../lib/structures/Command';
+import TypicalFunction from '../lib/structures/Function';
+import PermissionLevel from '../lib/structures/PermissionLevel';
 import { TypicalGuildMessage } from '../types/typicalbot';
 
 export default class PermissionError extends TypicalFunction {

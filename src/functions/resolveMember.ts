@@ -1,4 +1,4 @@
-import Function from '../structures/Function';
+import Function from '../lib/structures/Function';
 import { TypicalGuildMessage } from '../types/typicalbot';
 
 export default class ResolveMember extends Function {

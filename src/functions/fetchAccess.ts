@@ -1,5 +1,5 @@
+import Function from '../lib/structures/Function';
 import { AccessTitles } from '../lib/utils/constants';
-import Function from '../structures/Function';
 import { TypicalGuild } from '../types/typicalbot';
 
 export default class FetchAccess extends Function {

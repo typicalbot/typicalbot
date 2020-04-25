@@ -1,6 +1,6 @@
 import { Guild, GuildMember } from 'discord.js';
+import PermissionLevel from '../lib/structures/PermissionLevel';
 import { PermissionsLevels } from '../lib/utils/constants';
-import PermissionLevel from '../structures/PermissionLevel';
 
 export default class extends PermissionLevel {
     title = 'TypicalBot Maintainer';

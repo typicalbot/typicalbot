@@ -1,5 +1,5 @@
+import Command from '../../lib/structures/Command';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
 
 export default class extends Command {

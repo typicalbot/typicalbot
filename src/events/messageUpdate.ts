@@ -1,6 +1,6 @@
 import { inspect } from 'util';
+import Event from '../lib/structures/Event';
 import { PermissionsLevels } from '../lib/utils/constants';
-import Event from '../structures/Event';
 import { TypicalGuildMessage } from '../types/typicalbot';
 
 const regex = /(https:\/\/)?(www\.)?(?:discord\.(?:gg|io|me|li)|discordapp\.com\/invite)\/([a-z0-9-.]+)?/i;

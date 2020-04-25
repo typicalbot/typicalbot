@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import Command from '../../structures/Command';
+import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /(?:(-m)\s+)?(.+)\s+\|\s+(.+)/i;

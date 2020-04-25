@@ -1,4 +1,4 @@
-import Event from '../structures/Event';
+import Event from '../lib/structures/Event';
 
 export default class Ready extends Event {
     once = true;

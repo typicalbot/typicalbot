@@ -1,7 +1,7 @@
 import { Canvas } from 'canvas-constructor';
 import { MessageAttachment, MessageEmbed } from 'discord.js';
+import Command from '../../lib/structures/Command';
 import { Modes } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /#?([0-9a-fA-F]{6}|random)/i;

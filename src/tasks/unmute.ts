@@ -1,6 +1,6 @@
 import { ClientUser } from 'discord.js';
+import Task from '../lib/structures/Task';
 import Constants from '../lib/utils/constants';
-import Task from '../structures/Task';
 import { UnmuteTaskData, TypicalGuild } from '../types/typicalbot';
 
 export default class extends Task {

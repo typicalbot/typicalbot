@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
+import Command from '../../lib/structures/Command';
 import { Modes } from '../../lib/utils/constants';
-import Command from '../../structures/Command';
 import { TypicalGuildMessage } from '../../types/typicalbot';
 
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i;
