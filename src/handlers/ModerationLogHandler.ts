@@ -1,8 +1,7 @@
 import { Guild, TextChannel, User } from 'discord.js';
-import Cluster from '../client';
-import { TypicalGuild } from '../extensions/TypicalGuild';
-import ModerationLog from '../structures/ModerationLog';
-import { TypicalGuildMessage } from '../types/typicalbot';
+import Cluster from '../lib/TypicalClient';
+import ModerationLog from '../lib/structures/ModerationLog';
+import { TypicalGuildMessage , TypicalGuild } from '../lib/types/typicalbot';
 
 export default class ModerationLogHandler {
     client: Cluster;
@@ -55,7 +54,7 @@ export default class ModerationLogHandler {
         return null;
     }
 
-    buildCase(guild: TypicalGuild) {
+    buildCase(guild: TypicalGuild): ModerationLog {
         return new ModerationLog(this.client, guild);
     }
 

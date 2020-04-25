@@ -1,4 +1,5 @@
 import { Structures } from 'discord.js';
+import ModerationLog from '../structures/ModerationLog';
 
 export class TypicalGuild extends Structures.get('Guild') {
     fetchSettings() {
@@ -9,12 +10,12 @@ export class TypicalGuild extends Structures.get('Guild') {
         return this.client.handlers.permissions.fetch(this, userID, ignoreStaff);
     }
 
-    async buildModerationLog() {
+    async buildModerationLog(): Promise<ModerationLog> {
         return this.client.handlers.moderationLog.buildCase(this);
     }
 
     translate(key: string, args?: object) {
-        const language = this.client.translate.get(typeof this.settings.language === 'undefined' ? 'en-US' : this.settings.language);
+        const language = this.client.translate.get(this.settings?.language || 'en-US');
 
         if (!language) throw 'Guild: Invalid language set in settings.';
 

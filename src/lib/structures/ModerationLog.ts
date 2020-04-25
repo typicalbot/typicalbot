@@ -1,8 +1,7 @@
 import { MessageEmbed, User, TextChannel } from 'discord.js';
-import Cluster from '../client';
-import { TypicalGuild } from '../extensions/TypicalGuild';
-import { ModlogAction } from '../types/typicalbot';
-import Constants from '../utility/Constants';
+import Cluster from '../TypicalClient';
+import { ModlogAction, TypicalGuild } from '../types/typicalbot';
+import { ModerationLogTypes, ModerationLogRegex, Links } from '../utils/constants';
 
 export default class ModerationLog {
     client: Cluster;
@@ -10,7 +9,7 @@ export default class ModerationLog {
     id = '';
     _id = '';
     action = '';
-    _action: ModlogAction = Constants.ModerationLogTypes.WARN;
+    _action: ModlogAction = ModerationLogTypes.WARN;
     moderator = {
         display: '',
         icon: ''
@@ -86,10 +85,10 @@ export default class ModerationLog {
     get embed() {
         const embed = new MessageEmbed()
             .setColor(this._action.hex)
-            .setURL(Constants.Links.BASE)
+            .setURL(Links.BASE)
             .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason ||
                 `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
-            .setFooter(this.id, Constants.Links.ICON)
+            .setFooter(this.id, Links.ICON)
             .setTimestamp();
 
         if (this.moderator)
@@ -108,10 +107,10 @@ export default class ModerationLog {
         if (!this.id) {
             let id = 1;
 
-            if (latest && latest.embeds[0] && latest.embeds[0].footer && latest.embeds[0].footer.text && latest.embeds[0].footer.text.match(Constants.ModerationLogRegex.CASE)) {
+            if (latest && latest.embeds[0] && latest.embeds[0].footer && latest.embeds[0].footer.text && latest.embeds[0].footer.text.match(ModerationLogRegex.CASE)) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
-                id = Number(latest.embeds[0].footer.text.match(Constants.ModerationLogRegex.CASE)[1]) + 1;
+                id = Number(latest.embeds[0].footer.text.match(ModerationLogRegex.CASE)[1]) + 1;
             }
 
             this.setId(id || 1);

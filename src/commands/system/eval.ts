@@ -1,20 +1,20 @@
 import { inspect } from 'util';
 import { MessageEmbed } from 'discord.js';
 import { VM } from 'vm2';
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
 
 const regex = /^(-(?:u|unsafe)\s+)?([\W\w]+)/;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.TYPICALBOT_MAINTAINER;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.BOT_OWNER;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const embed = new MessageEmbed()
             .setColor(0x00ff00)
-            .setFooter('TypicalBot Eval', Constants.Links.ICON);
+            .setFooter('TypicalBot Eval', Links.ICON);
         try {
             const args = regex.exec(parameters);
             if (!args) return;

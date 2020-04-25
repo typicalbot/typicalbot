@@ -1,6 +1,6 @@
 import { MessageReaction, TextChannel } from 'discord.js';
-import Event from '../structures/Event';
-import { TypicalGuildMessage } from '../types/typicalbot';
+import Event from '../lib/structures/Event';
+import { TypicalGuildMessage } from '../lib/types/typicalbot';
 
 export default class MessageReactionRemove extends Event {
     async execute(messageReaction: MessageReaction) {

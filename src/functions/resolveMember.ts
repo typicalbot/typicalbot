@@ -1,5 +1,5 @@
-import Function from '../structures/Function';
-import { TypicalGuildMessage } from '../types/typicalbot';
+import Function from '../lib/structures/Function';
+import { TypicalGuildMessage } from '../lib/types/typicalbot';
 
 export default class ResolveMember extends Function {
     async execute(message: TypicalGuildMessage,

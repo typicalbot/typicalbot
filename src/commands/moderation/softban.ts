@@ -1,13 +1,13 @@
-import Command from '../../structures/Command';
-import PermissionLevel from '../../structures/PermissionLevel';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import PermissionLevel from '../../lib/structures/PermissionLevel';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels, ModerationLogTypes } from '../../lib/utils/constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(\d+))?(?:\s+(.+))?/i;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage,
         parameters: string,
@@ -59,7 +59,7 @@ export default class extends Command {
             if (!message.guild.settings.logs.moderation) {
                 const newCase = await message.guild.buildModerationLog();
                 newCase
-                    .setAction(Constants.ModerationLogTypes.SOFTBAN)
+                    .setAction(ModerationLogTypes.SOFTBAN)
                     .setModerator(message.author)
                     .setUser(member.user);
                 if (reason) newCase.setReason(reason);

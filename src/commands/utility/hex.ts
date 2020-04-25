@@ -1,13 +1,13 @@
 import { Canvas } from 'canvas-constructor';
 import { MessageAttachment, MessageEmbed } from 'discord.js';
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes } from '../../lib/utils/constants';
 
 const regex = /#?([0-9a-fA-F]{6}|random)/i;
 
 export default class extends Command {
-    mode = Constants.Modes.LITE;
+    mode = Modes.LITE;
 
     execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);

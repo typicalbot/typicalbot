@@ -19,8 +19,5 @@
             "password": "Password",
             "db": "Database Name"
         }
-    },
-    "maintainers": [
-        "187342661060001792"
-    ]
+    }
 }

@@ -1,4 +1,4 @@
-import Function from '../structures/Function';
+import Function from '../lib/structures/Function';
 
 export default class Lengthen extends Function {
     execute(text: string, length: number) {

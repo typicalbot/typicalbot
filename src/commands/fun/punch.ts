@@ -1,5 +1,5 @@
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 
 export default class extends Command {
     execute(message: TypicalGuildMessage) {

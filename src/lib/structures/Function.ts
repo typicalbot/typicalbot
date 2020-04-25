@@ -1,4 +1,4 @@
-import Cluster from '../client';
+import Cluster from '../TypicalClient';
 
 export default class TypicalFunction {
     client: Cluster;

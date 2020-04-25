@@ -1,7 +1,7 @@
 import { Collection } from 'discord.js';
-import Cluster from '../client';
-import DefaultSettings from '../structures/Settings';
-import { GuildSettings } from '../types/typicalbot';
+import Cluster from '../lib/TypicalClient';
+import DefaultSettings from '../lib/structures/Settings';
+import { GuildSettings } from '../lib/types/typicalbot';
 
 export default class SettingHandler extends Collection<string, GuildSettings> {
     client: Cluster;

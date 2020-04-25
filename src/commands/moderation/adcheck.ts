@@ -1,13 +1,13 @@
 import { MessageEmbed } from 'discord.js';
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 
 const regex = /(discord\.(gg|io|me|li)\/.+|discordapp\.com\/invite\/.+)/i;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     execute(message: TypicalGuildMessage) {
         const list = [];

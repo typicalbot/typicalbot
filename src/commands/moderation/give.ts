@@ -1,11 +1,11 @@
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?(?:\s+)?(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 
 export default class extends Command {
-    mode = Constants.Modes.STRICT;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
@@ -34,9 +34,9 @@ export default class extends Command {
         if (member) {
             if (
                 permissions.level <
-                Constants.PermissionsLevels.SERVER_ADMINISTRATOR
+                PermissionsLevels.SERVER_ADMINISTRATOR
             ) {
-                return message.error(this.client.helpers.permissionError.execute(message, this, permissions, Constants.PermissionsLevels.SERVER_ADMINISTRATOR));
+                return message.error(this.client.helpers.permissionError.execute(message, this, permissions, PermissionsLevels.SERVER_ADMINISTRATOR));
             }
 
             const added = await member.roles.add(role).catch(() => null);

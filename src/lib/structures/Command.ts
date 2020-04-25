@@ -1,11 +1,11 @@
 import { Message } from 'discord.js';
-import Cluster from '../client';
+import Cluster from '../TypicalClient';
 import {
     CommandOptions,
     TypicalGuildMessage,
     PermissionLevel
 } from '../types/typicalbot';
-import Constants from '../utility/Constants';
+import { PermissionsLevels, Modes, AccessLevels } from '../utils/constants';
 
 export default class Command {
     client: Cluster;
@@ -26,10 +26,10 @@ export default class Command {
         this.dm = (options && options.dm) || false;
         this.permission =
             (options && options.permission) ||
-            Constants.PermissionsLevels.SERVER_MEMBER;
-        this.mode = (options && options.mode) || Constants.Modes.FREE;
+            PermissionsLevels.SERVER_MEMBER;
+        this.mode = (options && options.mode) || Modes.FREE;
         this.access =
-            (options && options.access) || Constants.AccessLevels.DEFAULT;
+            (options && options.access) || AccessLevels.DEFAULT;
         this.ptb = (options && options.ptb) || false;
     }
 

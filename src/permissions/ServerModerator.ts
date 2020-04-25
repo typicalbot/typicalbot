@@ -1,10 +1,10 @@
 import { Guild, GuildMember } from 'discord.js';
-import PermissionLevel from '../structures/PermissionLevel';
-import Constants from '../utility/Constants';
+import PermissionLevel from '../lib/structures/PermissionLevel';
+import { PermissionsLevels } from '../lib/utils/constants';
 
 export default class extends PermissionLevel {
     title = 'Server Moderator';
-    level = Constants.PermissionsLevels.SERVER_MODERATOR;
+    level = PermissionsLevels.SERVER_MODERATOR;
 
     check(guild: Guild, member: GuildMember) {
         const roleIDs = this.fetchRoles(guild, 'moderator');

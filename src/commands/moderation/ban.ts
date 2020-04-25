@@ -1,13 +1,13 @@
 import { MessageEmbed } from 'discord.js';
-import Command from '../../structures/Command';
-import { TypicalGuildMessage, PermissionLevel } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
+import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)d(?:ays?)?)?\s?(?:(\d+)h(?:ours?|rs?)?)?\s?(?:(\d+)m(?:inutes?|in)?)?\s?(?:(\d+)s(?:econds?|ec)?)?)?(?:\s*(\d+))?(?:\s*(.+))?/i;
 
 export default class extends Command {
-    permission = Constants.PermissionsLevels.SERVER_MODERATOR;
-    mode = Constants.Modes.STRICT;
+    permission = PermissionsLevels.SERVER_MODERATOR;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage,
         parameters?: string,
@@ -63,7 +63,7 @@ export default class extends Command {
 
         const embed = new MessageEmbed()
             .setColor(0xff0000)
-            .setFooter('TypicalBot', Constants.Links.ICON)
+            .setFooter('TypicalBot', Links.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(message.translate('moderation/ban:BANNED', {
                 name: message.guild.name

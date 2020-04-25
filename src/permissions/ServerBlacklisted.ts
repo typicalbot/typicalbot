@@ -1,10 +1,10 @@
 import { Guild, GuildMember } from 'discord.js';
-import PermissionLevel from '../structures/PermissionLevel';
-import Constants from '../utility/Constants';
+import PermissionLevel from '../lib/structures/PermissionLevel';
+import { PermissionsLevels } from '../lib/utils/constants';
 
 export default class extends PermissionLevel {
     title = 'Server Blacklisted';
-    level = Constants.PermissionsLevels.SERVER_BLACKLISTED;
+    level = PermissionsLevels.SERVER_BLACKLISTED;
 
     check(guild: Guild, member: GuildMember) {
         const roleIDs = this.fetchRoles(guild, 'blacklist');
