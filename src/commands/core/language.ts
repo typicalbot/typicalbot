@@ -1,11 +1,11 @@
-import Command from '../../structures/Command';
-import { TypicalGuildMessage } from '../../types/typicalbot';
-import Constants from '../../utility/Constants';
+import Command from '../../lib/structures/Command';
+import { TypicalGuildMessage } from '../../lib/types/typicalbot';
+import { Modes } from '../../lib/utils/constants';
 import { possibleLanguages } from '../administration/settings';
 
 export default class extends Command {
     aliases = ['lang'];
-    mode = Constants.Modes.STRICT;
+    mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters?: string) {
         const settingsCommand = this.client.commands.get('settings');
