@@ -3,10 +3,10 @@ import PermissionLevel from '../lib/structures/PermissionLevel';
 import { PermissionsLevels } from '../lib/utils/constants';
 
 export default class extends PermissionLevel {
-    title = 'TypicalBot Maintainer';
-    level = PermissionsLevels.TYPICALBOT_MAINTAINER;
+    title = 'Bot Owner';
+    level = PermissionsLevels.BOT_OWNER;
 
     check(_guild: Guild, member: GuildMember) {
-        return this.client.config.maintainers.includes(member.id);
+        return this.client.owners.includes(member.id);
     }
 }

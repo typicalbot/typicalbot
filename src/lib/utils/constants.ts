@@ -34,7 +34,7 @@ export enum PermissionsLevels {
     SERVER_MODERATOR = 2,
     SERVER_ADMINISTRATOR = 3,
     SERVER_OWNER = 4,
-    TYPICALBOT_MAINTAINER = 10
+    BOT_OWNER = 10
 }
 
 export const PermissionsRoleTitles = {

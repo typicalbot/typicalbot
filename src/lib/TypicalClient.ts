@@ -53,6 +53,7 @@ export default class Cluster extends Client {
     public translate: Map<string, TFunction> = new Map();
     public logger = new Logger();
     public version = pkg.version;
+    public owners: string[] = [];
 
     public constructor(node: VezaClient | undefined) {
         super({

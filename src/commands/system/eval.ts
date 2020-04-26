@@ -8,7 +8,7 @@ import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
 const regex = /^(-(?:u|unsafe)\s+)?([\W\w]+)/;
 
 export default class extends Command {
-    permission = PermissionsLevels.TYPICALBOT_MAINTAINER;
+    permission = PermissionsLevels.BOT_OWNER;
     mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
