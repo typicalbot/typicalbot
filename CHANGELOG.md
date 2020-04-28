@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.0]
+### Changed
+ - `$randomuser` command to pick user by role ([#197](https://github.com/sylkellc/typicalbot/pull/197))
+ - `autorole` will honor the verification level and adjust `autorole-delay` automatically ([#192](https://github.com/sylkellc/typicalbot/pull/192))
+ - Use application owner(s) instead of config option ([#193](https://github.com/sylkellc/typicalbot/pull/193))
+ - Automatically delete invite warning messages after a few seconds ([#186](https://github.com/sylkellc/typicalbot/pull/186)) 
+
+### Fixed
+ - Webhook messages not being purged ([#183](https://github.com/sylkellc/typicalbot/pull/183))
+ - Custom event typings ([#189](https://github.com/sylkellc/typicalbot/pull/189))
+ - Use cache size for automod ([#188](https://github.com/sylkellc/typicalbot/pull/188))
+
 ## [3.2.4]
 ### Fixed
  - `guild.settings` being undefined in guildMemberAdd and guildMemberRemove events ([#178](https://github.com/sylkellc/typicalbot/pull/178))
@@ -207,7 +219,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.2.4...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.3.0...HEAD
+[3.3.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.3.0
 [3.2.4]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.4
 [3.2.3]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.3
 [3.2.2]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.2
