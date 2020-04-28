@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Change or set a reason for a case in moderation logs.",
     "USAGE": "reason <case-id|latest> [reason]",
-    "DISABLED": "You must have moderation logs enabled to use this command. To set up moderation logs, use this command: `$set edit modlogs #channel-name`",
+    "DISABLED": "You must have moderation logs enabled to use this command. To set up moderation logs, use this command: `$set edit modlogs #channel-name`.",
     "NONE": "There are no moderation logs under the given case ID.",
     "ERROR": "An error occurred while updating the given case.",
     "EDITED": "Successfully updated the case."
