@@ -55,6 +55,8 @@ export default class GuildMemberAdd extends Event {
                 .setNickname(await this.client.helpers.formatMessage.execute('autonick', guild, user, settings.auto.nickname))
                 .catch((err) => Sentry.captureException(err));
 
+        if (guild.verificationLevel === 'VERY_HIGH') return
+
         const relevantRoleIDs = member.user.bot ? settings.auto.role.bots : settings.auto.role.ids;
         if (!relevantRoleIDs.length) return;
 
@@ -77,6 +79,6 @@ export default class GuildMemberAdd extends Event {
                 user: user.tag,
                 role: autoroles.map((role) => role.name).join(', ')
             }));
-        }, settings.auto.role.delay || 2000);
+        }, guild.verificationLevel === 'HIGH' ? 60000 : settings.auto.role.delay || 2000);
     }
 }
