@@ -18,6 +18,8 @@
     "INVALID_CHANNEL": "Invalid channel. Please make sure your spelling is correct, and that the channel actually exists.",
     "NOT_TEXT_CHANNEL": "The channel must be a text channel.",
     "NEED_LOG": "You must have a logs channel set up before changing this setting.",
+    "VERIFICATION_LEVEL_HIGH": "The moderation level for this server requires a delay of at least 10 minutes.",
+    "VERIFICATION_LEVEL_VERYHIGH": "The autorole feature is unavailable when the moderation level is set to the highest setting.",
     "ADMINROLE": "Administrator role that will grant users with this role permission level 3.",
     "MODROLE": "Moderator role that will grant users with this role permission level 2.",
     "DJROLE": "DJ role that will grant users with this role permission level 1.",
