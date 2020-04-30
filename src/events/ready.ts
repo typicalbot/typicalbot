@@ -25,7 +25,5 @@ export default class Ready extends Event {
                 await this.client.analytics.publish();
             }
         }, 1000);
-
-        processAutoRole()
     }
 }
