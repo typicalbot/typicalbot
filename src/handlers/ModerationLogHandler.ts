@@ -1,7 +1,9 @@
-import { Guild, TextChannel, User } from 'discord.js';
+import * as Sentry from '@sentry/node';
+import { Guild, GuildMember, TextChannel, User, Role } from 'discord.js';
 import Cluster from '../lib/TypicalClient';
 import ModerationLog from '../lib/structures/ModerationLog';
-import { TypicalGuildMessage , TypicalGuild } from '../lib/types/typicalbot';
+import { TypicalGuildMessage , TypicalGuild, GuildSettings } from '../lib/types/typicalbot';
+
 
 export default class ModerationLogHandler {
     client: Cluster;
@@ -73,5 +75,41 @@ export default class ModerationLogHandler {
                     reason
                 })
             ]));
+    }
+
+    processAutoRoles() {
+        this.client.guilds.cache.forEach(async (guild) => {
+            const settings = await this.client.settings.fetch(guild.id);
+            if (!settings.auto.role.bots && !settings.auto.role.ids) return;
+
+            guild.members.cache.forEach((member) => this.grantAutoRole(member, settings))
+        })
+
+    }
+
+    grantAutoRole(member: GuildMember, settings: GuildSettings) {
+        const relevantRoleIDs = member.user.bot ? settings.auto.role.bots : settings.auto.role.ids;
+        if (!relevantRoleIDs.length) return;
+
+        const autoroles = relevantRoleIDs.map((id) => member.guild.roles.cache.get(id)).filter((role) => role?.editable && !member.roles.cache.has(role.id)) as Role[];
+        if (!autoroles.length) return;
+
+        setTimeout(async () => {
+            const added = await member.roles
+                .add(autoroles)
+                .catch((err) => Sentry.captureException(err));
+
+            if (settings.auto.role.silent) return;
+
+            if (!added || !settings.logs.id) return;
+
+            const channel = member.guild.channels.cache.get(settings.logs.id) as TextChannel;
+            if (!channel || channel.type !== 'text') return;
+
+            return channel.send((member.guild as TypicalGuild).translate('help/logs:AUTOROLE', {
+                user: member.user.tag,
+                role: autoroles.map((role) => role.name).join(', ')
+            }));
+        }, settings.auto.role.delay || 2000);
     }
 }
