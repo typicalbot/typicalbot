@@ -94,22 +94,24 @@ export default class ModerationLogHandler {
         const autoroles = relevantRoleIDs.map((id) => member.guild.roles.cache.get(id)).filter((role) => role?.editable && !member.roles.cache.has(role.id)) as Role[];
         if (!autoroles.length) return;
 
-        setTimeout(async () => {
-            const added = await member.roles
-                .add(autoroles)
-                .catch((err) => Sentry.captureException(err));
+        if (member.guild.verificationLevel !== 'VERY_HIGH') {
+            setTimeout(async () => {
+                const added = await member.roles
+                    .add(autoroles)
+                    .catch((err) => Sentry.captureException(err));
 
-            if (settings.auto.role.silent) return;
+                if (settings.auto.role.silent) return;
 
-            if (!added || !settings.logs.id) return;
+                if (!added || !settings.logs.id) return;
 
-            const channel = member.guild.channels.cache.get(settings.logs.id) as TextChannel;
-            if (!channel || channel.type !== 'text') return;
+                const channel = member.guild.channels.cache.get(settings.logs.id) as TextChannel;
+                if (!channel || channel.type !== 'text') return;
 
-            return channel.send((member.guild as TypicalGuild).translate('help/logs:AUTOROLE', {
-                user: member.user.tag,
-                role: autoroles.map((role) => role.name).join(', ')
-            }));
-        }, settings.auto.role.delay || 2000);
+                return channel.send((member.guild as TypicalGuild).translate('help/logs:AUTOROLE', {
+                    user: member.user.tag,
+                    role: autoroles.map((role) => role.name).join(', ')
+                }));
+            }, member.guild.verificationLevel === 'HIGH' ? 60000 : settings.auto.role.delay || 2000);
+        }
     }
 }
