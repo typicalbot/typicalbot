@@ -438,6 +438,10 @@ export default class extends Command {
             value = selectedLanguage.name;
         }
 
+        if (setting.path === 'auto.role.id' || setting.path === 'auto.role.delay')
+            if (message.guild.verificationLevel === 'VERY_HIGH')
+                return message.error(message.translate('administration/settings:VERIFICATION_LEVEL_VERYHIGH'));
+
         if (setting.type === 'boolean') {
             if (![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase()))
                 return message.translate('administration/settings:INVALID_OPTION');
@@ -524,6 +528,10 @@ export default class extends Command {
 
                 const [ms] = args;
                 const amount = parseInt(ms, 10);
+
+                if (setting.path === 'auto.role.delay')
+                    if (message.guild.verificationLevel === 'HIGH' && amount < 60000)
+                        return message.error(message.translate('administration/settings:VERIFICATION_LEVEL_HIGH'));
 
                 if (amount > 600000 || amount < 2000)
                     return message.error(message.translate('administration/settings:INVALID_MS'));
