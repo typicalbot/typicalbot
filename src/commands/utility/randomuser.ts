@@ -12,10 +12,11 @@ export default class extends Command {
         const args = regex.exec(parameters);
         const role = parameters ? message.guild.roles.cache.get(parameters) || message.guild.roles.cache.find((role) => role.name.toLowerCase() === parameters.toLowerCase()) : message.mentions.roles.first()
 
-        const members = args
-            ? message.guild.members.cache.filter((m) => m.presence.status !== 'offline' && !m.user.bot)
-            : role ? role.members.filter((m) => !m.user.bot) : message.guild.members.cache.filter((m) => !m.user.bot);
-        if (!members.size) return null;
+        const members = role
+            ? role.members.filter((m) => !m.user.bot)
+            : args
+                ? message.guild.members.cache.filter((m) => m.presence.status !== 'offline' && !m.user.bot)
+                : message.guild.members.cache.filter((m) => !m.user.bot);
 
         const member = members.random();
 
