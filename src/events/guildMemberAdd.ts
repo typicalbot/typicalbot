@@ -62,22 +62,24 @@ export default class GuildMemberAdd extends Event {
                     : null;
         if (!autorole || !autorole.editable) return;
 
-        setTimeout(async () => {
-            const added = await member.roles
-                .add(autorole.id)
-                .catch((err) => Sentry.captureException(err));
+        if (guild.verificationLevel !== 'VERY_HIGH') {
+            setTimeout(async () => {
+                const added = await member.roles
+                    .add(autorole.id)
+                    .catch((err) => Sentry.captureException(err));
 
-            if (settings.auto.role.silent) return null;
+                if (settings.auto.role.silent) return null;
 
-            if (!added || !settings.logs.id) return null;
+                if (!added || !settings.logs.id) return null;
 
-            const channel = guild.channels.cache.get(settings.logs.id) as TextChannel;
-            if (!channel || channel.type !== 'text') return null;
+                const channel = guild.channels.cache.get(settings.logs.id) as TextChannel;
+                if (!channel || channel.type !== 'text') return null;
 
-            return channel.send(guild.translate('help/logs:AUTOROLE', {
-                user: user.tag,
-                role: autorole.name
-            }));
-        }, settings.auto.role.delay || 2000);
+                return channel.send(guild.translate('help/logs:AUTOROLE', {
+                    user: user.tag,
+                    role: autorole.name
+                }));
+            }, guild.verificationLevel === 'HIGH' ? 60000 : settings.auto.role.delay || 2000);
+        }
     }
 }
