@@ -1,4 +1,4 @@
-name: Lint
+name: Build
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   node12:
-    name: node v12 - eslint
+    name: node v12 - tsc
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,16 +16,18 @@ jobs:
           node-version: 12
       - name: install build tools
         run: sudo apt-get install libcairo2-dev libgif-dev libjpeg-dev libpango1.0-dev librsvg2-dev -y
-      - name: yarn install
+      - name: yarn
         run: yarn install
-      - name: eslint
-        uses: icrawl/action-eslint@v1
+      - name: config
+        run: cp etc/config.example.json etc/config.json
+      - name: tsc
+        uses: icrawl/action-tsc@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          job-name: eslint
+          job-name: tsc
   node14:
-    name: node v14 - eslint
+    name: node v14 - tsc
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,11 +37,13 @@ jobs:
           node-version: 14
       - name: install build tools
         run: sudo apt-get install libcairo2-dev libgif-dev libjpeg-dev libpango1.0-dev librsvg2-dev -y
-      - name: yarn install
+      - name: yarn
         run: yarn install
-      - name: eslint
-        uses: icrawl/action-eslint@v1
+      - name: config
+        run: cp etc/config.example.json etc/config.json
+      - name: tsc
+        uses: icrawl/action-tsc@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          job-name: eslint
+          job-name: tsc
