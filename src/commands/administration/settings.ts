@@ -233,7 +233,7 @@ export default class extends Command {
                     defaultprefix: {
                         description: 'administration/settings:DEFAULTPREFIX',
                         value: settings.prefix.default,
-                        type: 'default',
+                        type: 'boolean',
                         path: 'prefix.default'
                     },
                     antiinvite: {
@@ -326,15 +326,24 @@ export default class extends Command {
                 let response = ` • **${k}:** `
                 const type = settingsData[k].type
                 const value = settingsData[k].value
+
+                console.log(k, type, value)
                 if (type === 'channel') {
                     if (value && message.guild.channels.cache.has(value)) response += `<#${value}>`
+                    else response += NA
+                } else if (type === 'channels') {
+                    if (value.length) response += value.map((id: string) => `<#${id}>`)
                     else response += NA
                 } else if (type === 'role') {
                     const role = message.guild.roles.cache.get(value)
                     if (role) response += role.name
                     else response += NA
-                } else if (!value && type !== 'boolean') response += NA
-                else response += value
+                } else if (type === 'roles') {
+                    if (value.length) response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role').join(', ')
+                    else response += NA
+                } else if (type === 'boolean') response += message.translate(value ? 'common:ENABLED' : 'common:DISABLED')
+                else if (type === 'log' && value === '--embed') response += 'Embed'
+                else response += value || NA
 
                 return response
             });
