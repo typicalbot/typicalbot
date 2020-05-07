@@ -31,6 +31,24 @@ const possibleLanguages = [
         canonical: 'Slovenian',
         complete: true,
         aliases: ['sl', 'slovenian']
+    },
+    {
+        name: 'ru-RU',
+        canonical: 'Russian',
+        complete: false,
+        aliases: ['ru', 'русский']
+    },
+    {
+        name: 'sv-SE',
+        canonical: 'Swedish',
+        complete: false,
+        aliases: ['se', 'svenska']
+    },
+    {
+        name: 'tr-TR',
+        canonical: 'Turkish',
+        complete: false,
+        aliases: ['tr', 'Türk']
     }
 ];
 
