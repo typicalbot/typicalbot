@@ -22,6 +22,7 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle(message.translate('core/help:TYPICAL_INFO'))
                 .setDescription(response)
+                .addField('Version', this.client.version, false)
                 .addField('Terms of Service', 'https://sylke.co/terms', true)
                 .addField('Privacy Policy', 'https://sylke.co/privacy', true)
                 .setFooter('TypicalBot', Links.ICON)
