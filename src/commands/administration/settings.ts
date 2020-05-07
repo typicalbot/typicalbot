@@ -462,7 +462,7 @@ export default class extends Command {
 
         if (setting.type === 'boolean') {
             if (![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase()))
-                return message.translate('administration/settings:INVALID_OPTION');
+                return message.error(message.translate('administration/settings:INVALID_OPTION'));
 
             const enableSetting = ['enable', ENABLE].includes(value.toLowerCase());
 
