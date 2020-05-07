@@ -316,14 +316,28 @@ export default class extends Command {
         const count = Math.ceil(settings.length / 10);
         if (page < 1 || page > count) page = 1;
 
+        const NA = message.translate('common:NA').toUpperCase()
+
         const list = settings
             .splice((page - 1) * 10, 10)
-            .map((k) =>
-                ` • **${k}:** ${
-                    view
-                        ? settingsData[k].value
-                        : message.translate(settingsData[k].description)
-                }`);
+            .map((k) => {
+                if (!view) return message.translate(settingsData[k].description)
+
+                let response = ` • **${k}:** `
+                const type = settingsData[k].type
+                const value = settingsData[k].value
+                if (type === 'channel') {
+                    if (value && message.guild.channels.cache.has(value)) response += `<#${value}>`
+                    else response += NA
+                } else if (type === 'role') {
+                    const role = message.guild.roles.cache.get(value)
+                    if (role) response += role.name
+                    else response += NA
+                } else if (!value && type !== 'boolean') response += NA
+                else response += value
+
+                return response
+            });
 
         return message.send([
             message.translate('administration/settings:AVAILABLE'),
