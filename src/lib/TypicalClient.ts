@@ -9,6 +9,7 @@ import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
 import { TypicalDonor, HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
+import i18n from './utils/i18n';
 import config from '../../etc/config.json';
 import pkg from '../../package.json';
 import AnalyticHandler from '../handlers/AnalyticHandler';
@@ -20,7 +21,6 @@ import ModerationLogHandler from '../handlers/ModerationLogHandler';
 import PermissionsHandler from '../handlers/PermissionsHandler';
 import SettingHandler from '../handlers/SettingHandler';
 import TaskHandler from '../handlers/TaskHandler';
-import i18n from '../i18n';
 
 interface TypicalHandlers {
     database: DatabaseHandler;
