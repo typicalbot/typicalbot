@@ -1,11 +1,11 @@
 {
-	"DESCRIPTION": "Zagrabi definicijo iz Urbanega Slovarja za določeno besedo.",
-	"USAGE": "urbana <poizvedba>",
-	"NONE": "Za poizvedbo ni nobenih zadetkov **{{query}}**.",
-	"TEXT": "**__{{query}}:__** {{definition}}",
-	"AMOUNT": "Obrazložitev 1 od {{amount}}",
-	"RATING": "Ocena",
-	"RATING_VALUE": "\\👍  {{up}}    |    \\👎  {{down}}{{rating}}",
-	"RATING_PERCENT": "    |    {{rating}}% od {{total}} je ta definicija všeč.",
-	"DICTIONARY": "Obrazložitev iz Urbanega Slovarja"
+    "DESCRIPTION": "Zagrabi definicijo iz Urbanega Slovarja za določeno besedo.",
+    "USAGE": "urbana <poizvedba>",
+    "NONE": "Za poizvedbo ni nobenih zadetkov **{{query}}**.",
+    "TEXT": "**__{{query}}:__** {{definition}}",
+    "AMOUNT": "Obrazložitev 1 od {{amount}}",
+    "RATING": "Ocena",
+    "RATING_VALUE": "👍 {{up}} | \\👎 {{down}}{{rating}}",
+    "RATING_PERCENT": "​{{amount}}% od {{total}} je ta definicija všeč.",
+    "DICTIONARY": "Obrazložitev iz Urbanega Slovarja"
 }
