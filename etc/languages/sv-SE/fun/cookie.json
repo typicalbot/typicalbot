@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Ge en annan användare en kaka eller behåll alla själv.",
+    "USAGE": "kaka [@user]",
+    "SELF_LAUGH": "skrattade som en galning medan de sakta åt de kakor de höll för sig själva framför alla.",
+    "SELF_KEPT": "bestämde sig för att behålla alla kakor för sig själva! Vilken idiot! :angry:",
+    "GIVEN": "gav precis {{user}} en kaka. :cookie:"
+}

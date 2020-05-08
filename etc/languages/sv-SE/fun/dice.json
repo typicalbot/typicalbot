@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Rullar en n-sidig tärning.",
+	"USAGE": "tärning [sides]",
+	"RESPONSE": "Jag slog en **__{{amount}}__**.",
+	"INVALID": "Ogiltigt antal sidor. Antalet måste vara ett heltal större än 1 och högst 100."
+}

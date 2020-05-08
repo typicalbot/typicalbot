@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Kontrollera om någon medlem på servern har en serverinbjudan i sin spelstatus.",
+    "USAGE": "adcheck",
+    "NONE": "Det finns inga användare med en inbjudan i sin status.",
+    "FOUND": "Det finns {{amount}} med en inbjudan i deras status:\n\n",
+    "ONE": "är 1 användare",
+    "MULTIPLE": "är {{amount}} användare",
+    "TITLE": "Användare med inbjudan till spelstatus"
+}

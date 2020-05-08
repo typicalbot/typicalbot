@@ -1,0 +1,12 @@
+{
+	"DESCRIPTION": "Motta OAuth2-auktoriseringslänken för TypicalBot.",
+	"USAGE": "inbjudan",
+	"TEXT": "Du kan lägga till mig till din server på <{{link}}>.",
+	"TYPICAL_INVITE": "TypicalBot inbjudan",
+	"PROHIBITED": "Servern förbjuder inbjudningar att skickas. Ditt meddelande har tagits bort.",
+	"REASON": "Automatisk {{action}}: Användaren skickade {{type}} i {{channel}}",
+	"INVITE": "en inbjudan",
+	"CONSECUTIVE": "{{amount}} på varandra följande inbjudningar",
+	"SENT": "**{{user}}** skickade en inbjudan i {{channel}}.",
+	"SENT_IN": "Inbjudan skickad i {{channel}}"
+}

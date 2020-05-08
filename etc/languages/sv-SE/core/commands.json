@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Få en lista på TypicalBots kommandon.",
+    "USAGE": "kommandon",
+    "CHECK_DM": "En lista på kommandon bör ha hamnat i dina direktmeddelanden.",
+    "TYPICAL_COMMANDS": "TypicalBot kommandon",
+    "TEXT": "Använd `{{prefix}}hjälp <command>` för att få mer information om ett specifikt kommando.",
+    "OWNER": "Serverägare (nivå 4)",
+    "ADMIN": "Serveradministratör (nivå 3)",
+    "MOD": "Servermoderatör (nivå 2)",
+    "MEMBER": "Servermedlem (nivå 0)",
+    "NONE": "Inga kommandon att visa."
+}

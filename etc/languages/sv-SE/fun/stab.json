@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Hugg en annan användare på servern.",
+    "USAGE": "hugg [@user]",
+    "SELF": "högg precis sig själv! :dagger::scream:",
+    "SELF_POLICE": "högg precis sig själv! :dagger::scream: Någon ring polisen!",
+    "RESPONSE": "högg precis {{user}}! :dagger::scream:",
+    "RESPONSE_POLICE": "högg {{user}}! :dagger::scream: Någon ring polisen!"
+}

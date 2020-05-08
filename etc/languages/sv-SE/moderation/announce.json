@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Skicka ett tillkännagivande till tillkännagivandekanalen. Använd flaggan '-e' innan ditt innehåll för att göra meddelandet inbäddad. Om de tillkännagivanden som nämns är satta, kommer det alltid att använda det.",
+    "USAGE": "tillkännage [-e] <content>",
+    "INVALID": "Inget innehåll för tillkännagivandet levererades.",
+    "INVALID_CHANNEL": "För att tillkännage, vänligen ställ in en tillkännagivandekanal genom att skriva: `$set redigera tillkännagivanden #channel-name`",
+    "TEXT": "**__Tillkännagivande från {{usertag}}:__** {{role}}",
+    "TITLE": "Tillkännagivandet"
+}

@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Kontrollera om någon medlem på servern har några specialtecken i sitt användarnamn.",
+    "USAGE": "dehoist",
+    "NONE": "Det finns inga användare som kan bli dehoisted.",
+    "FOUND": "{{amount}} som kan bli dehoisted:",
+    "ONE": "är 1 användare",
+    "MULTIPLE": "är {{amount}} användare"
+}

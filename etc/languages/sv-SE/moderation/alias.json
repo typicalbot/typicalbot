@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Skapa ett alias för kommandon.",
+    "USAGE": "alias <list|add|remove|clear> <add/remove:command> <add:new-alias>",
+    "CURRENT": "Nuvarande alias:",
+    "INVALID_COMMAND": "Det angivna kommandot finns inte.",
+    "ALIAS_EXISTS": "Det angivna aliaset pekar redan på kommandot `{{name}}`.",
+    "LONG": "Du kan inte skapa ett alias som är längre än 10 tecken.",
+    "ADDED": "La till alias.",
+    "ADD_ERROR": "Ett fel inträffade när aliaset skulle läggas till.",
+    "INVALID_ALIAS": "Det begärda aliaset finns inte.",
+    "REMOVED": "Tog bort alias.",
+    "REMOVE_ERROR": "Ett fel inträffade när aliaset skulle tas bort.",
+    "CLEARED": "Tog bort alias.",
+    "CLEAR_ERROR": "Ett fel inträffade när alias skulle rensas."
+}

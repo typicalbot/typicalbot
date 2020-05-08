@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Skjut en annan användare på servern.",
+    "USAGE": "skjut [@user]",
+    "SELF": "sköt precis sig själv! :scream:",
+    "POLICE": "Någon ring polisen!",
+    "MISSED": "Vänta! De missade!",
+    "HEADSHOT": "Bam! Huvudskott!",
+    "RESPONSE": "sköt precis {{user}}! :scream:"
+}

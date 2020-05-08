@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Få en roll från listan av offentliga roller.",
+	"USAGE": "ge <role-name>",
+	"INVALID": "Ogiltig roll. Kontrollera att din stavning är korrekt, och att rollen existerar.",
+	"UNEDITABLE": "Otillräckliga behörigheter har givits till boten. Se till att högsta rollen jag har är över den roll du försöker ge och att jag har behörigheten Hantera Roller.",
+	"NOT_PUBLIC": "Den begärda rollen finns inte med på listan av offentliga roller."
+}

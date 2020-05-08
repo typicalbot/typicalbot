@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Krama en annan användare på servern.",
+    "USAGE": "kram [@användare]",
+    "SELF": "gav precis sig själv en kram. :hugging: *Det är inte konstigt alls.* :eyes:",
+    "RESPONSE": "gav precis {{user}} en kram. :hugging:",
+    "RESPONSE_AWW": "gav precis {{user}} en kram. :hugging: Aww!"
+}

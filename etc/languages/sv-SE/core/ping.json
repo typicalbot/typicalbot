@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "En kontroll för att se om TypicalBot kan svara.",
+	"USAGE": "ping",
+	"CALCULATING": "Beräknar kommandots exekveringstid och Discord API-latens...",
+	"RESPONSE": "Kommandoutförandetid : {{command}}ms <unk> Discord API Latency : {{api}}ms"
+}
