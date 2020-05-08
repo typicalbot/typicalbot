@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Belirtilen kelimenin anlamını Urban Dictionary'den alır.",
+    "USAGE": "urban <kelime>",
+    "NONE": "**{{query}}** kelmesi için eşleşme yok.",
+    "TEXT": "**__{{query}}:__** {{definition}}",
+    "AMOUNT": "{{amount}} tanımdan 1 numara",
+    "RATING": "Değerlendirme",
+    "RATING_VALUE": "\\👍 {{up}} | \\👎 {{down}}{{rating}}",
+    "RATING_PERCENT": "{{total}} kişiden %{{amount}} kişi bu tanımı beğendi.",
+    "DICTIONARY": "Urban Dictionary Tanımı"
+}

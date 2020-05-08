@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Kendinin veya başka bir oyuncunun adını değiştir veya temizle.",
+    "USAGE": "nickname [@user] [takma ad]",
+    "DISABLED": "Bu komut şuan devre dışı. Bu komudu aktive etmek için `nonickname` ayarını kapatın.",
+    "ERROR": "Bir hata oluştu. Bu muhtemelen üyelerin takma adlarını yönetemem anlamına geliyor.",
+    "SELF_ERROR": "Bir hata oluştu. Bu muhtemelen senin takma adını yönetemem anlamına geliyor.",
+    "SUCCESS": "Başarıyla üyenin adı {{type}}.",
+    "SELF_SUCCESS": "Başarıyla takma adın {{type}}."
+}

@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Sunucuda başka bir kullanıcıyı vur.",
+    "USAGE": "shoot [@kullanıcı]",
+    "SELF": "az önce kendilerini vurdular! :scream:",
+    "POLICE": "Bir polisi arasın!",
+    "MISSED": "Bekle! Iskaladılar!",
+    "HEADSHOT": "Bam! Kafa Vuruşu!",
+    "RESPONSE": "az önce {{user}} kullanıcısını vurdu! :scream:"
+}

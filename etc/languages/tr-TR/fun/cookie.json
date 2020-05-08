@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Başka bir kullanıcıya kurabiye ver veya hepsini kendine sakla.",
+    "USAGE": "cookie [@user]",
+    "SELF_LAUGH": "yavaşça kurabiyeleri yerken deli gibi güldü ve onları herkesin önünde kendine sakladı.",
+    "SELF_KEPT": "bütün kurabiyeleri kendine saklamaya karar verdi! Ne pislik ama! :angry:",
+    "GIVEN": "az önce {{user}} kullanıcısına bir kurabiye verdi. :cookie:"
+}

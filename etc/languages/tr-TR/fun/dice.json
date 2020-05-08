@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "n taraflı bir zar atar.",
+	"USAGE": "dice [taraflar]",
+	"RESPONSE": "Ben **__{{amount}}__** attım.",
+	"INVALID": "Geçersiz sayıda taraf. Sayı tamsayı ve 1'den büyük olmalı ve 100'den fazla olmamalıdır."
+}

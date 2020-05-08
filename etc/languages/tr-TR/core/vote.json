@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "top.gg sitesinden TypicalBot'a oy ver",
+    "USAGE": "vote",
+    "TEXT": "<{{link}}> adresinden TypicalBot'a oy ver",
+    "TITLE": "TypicalBot'a oy ver"
+}

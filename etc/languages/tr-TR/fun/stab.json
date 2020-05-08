@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Sunucuda başka bir kullanıcıyı bıçakla.",
+    "USAGE": "stab [@kullanıcı]",
+    "SELF": "az önce kendilerini bıçakladı! :dagger::scream:",
+    "SELF_POLICE": "az önce kendilerini bıçakladı! :dagger::scream: Biri polisi arasın!",
+    "RESPONSE": "az önce {{user}} kullanıcısını bıçakladı! :dagger::scream:",
+    "RESPONSE_POLICE": "az önce {{user}} kullanıcısını bıçakladı! :dagger::scream: Biri polisi arasın!"
+}

@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Senin veya başka bir oyuncunun izinlerini sağlar.",
+  "USAGE": "level [@kullanıcı|kullanıcı-id|kullanıcı-tag]",
+  "TEXT": "**__{{user}} kullanıcısının İzin Seviyesi:__** {{level}}",
+  "TITLE": "{{user}} kullanıcısının İzin Seviyesi",
+  "EMBED": "{{level}} Seviye"
+}

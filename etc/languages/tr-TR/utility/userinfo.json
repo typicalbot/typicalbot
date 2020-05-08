@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Bir kullanıcının bilgilerini gösterir.",
+    "USAGE": "userinfo [@kullanıcı|kullanıcı-id|kullanıcı-tag]",
+    "ID": "ID: {{id}}",
+    "STATUS": "Durum: {{status}}",
+    "AVATAR": "Avatar: {{avatar}}",
+    "JOINED": "Katıldı: {{time}}",
+    "REGISTERED": "Kaydoldu: {{time}}",
+    "ROLES": "Roller: {{roles}}",
+    "ROLE_FIELD": "Roller ({{amount}})"
+}

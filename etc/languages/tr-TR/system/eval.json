@@ -1,0 +1,4 @@
+{
+  "DESCRIPTION": "Yaratıcı için bir değerlendirme komudu.",
+  "USAGE": "eval <kod>"
+}

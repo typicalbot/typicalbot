@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Bir ayırt edici verilen tüm kullanıcıların bir listesini sağlar.",
+    "USAGE": "discriminator [discriminator]",
+    "NONE": "**{{discriminator}}** ayırt edicisi ile kayıtlı kullanıcı yok.",
+    "USERS": "**__Ayırt Edicili Kullanıcılar:__** {{discriminator}}"
+}

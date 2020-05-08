@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Sunucunun abone rolünü al.",
+  "USAGE": "subscribe",
+  "NONE": "Bu sunucu için ayarlanmış bir abone rolü yok.",
+  "SUBSCRIBED": "Şimdi abonesin."
+}

@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Sunucuda başka bir kullanıcıya tokat at.",
+    "USAGE": "slap [@user]",
+    "SELF": ", kendine vurmayı kes! :dizzy_face::wave::skin-tone-2:",
+    "RESPONSE": "az önce {{user}} kullanıcısını tokatladı! :dizzy_face::wave::skin-tone-2:",
+    "RESPONSE_HURT": "az önce {{user}} kullanıcısını tokatladı! :dizzy_face::wave::skin-tone-2: Lanet olsun! Acıtmış olmalı!`"
+}

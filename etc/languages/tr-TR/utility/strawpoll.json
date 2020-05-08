@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Bir oylama oluştur. Birden fazla seçenek için `-m` bayrağını kullan.",
+  "USAGE": "strawpoll [`-m`] <soru> | Seçim1; Seçim2; Seçim+",
+  "INVALID": "Anketin oluşturulması için 2 ile 30 arasında seçim olmalı.",
+  "CREATED": "Anketin oluşturuldu! <https://strawpoll.me/{{id}}>"
+}

@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Sunucudaki başka bir kullanıcıya sarıl.",
+    "USAGE": "hug [@user]",
+    "SELF": "az önce kendilerine sarıldı. :hugging: *Bu hiçte tuhaf değil.* :eyes:",
+    "RESPONSE": "az önce {{user}} kullanıcısına sarıldı. :hugging:",
+    "RESPONSE_AWW": "az önce {{user}} kullanıcısına sarıldı. :hugging: Aww!"
+}

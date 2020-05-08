@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Matematik ifadelerini değerlendirir.",
+  "USAGE": "matematik <ifade>",
+  "INPUT": "**GİRDİ:**",
+  "OUTPUT": "**ÇIKTI:**",
+  "FAILED": "Matematik ifadesi değerlendirilemedi."
+}

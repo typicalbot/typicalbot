@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Twitch API'dan bir kullanıcının verilerini kontrol et.",
+    "USAGE": "twitch <kullanıcı>",
+    "STATS": "**__Twitch İstatistikleri:__** {{name}}",
+    "ID": "ID: {{id}}",
+    "DISPLAY": "Görünen Ad: {{name}}",
+    "DESC": "Açıklama: {{description}}",
+    "STATUS": "Durum: {{type}}",
+    "PROFILE": "Profil Resmi: {{url}}",
+    "VIEWS": "Toplam İzlenmeler: {{amount}}",
+    "TITLE": "Twitch İstatistikleri"
+}

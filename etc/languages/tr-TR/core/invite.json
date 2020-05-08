@@ -1,0 +1,12 @@
+{
+	"DESCRIPTION": "TypicalBot için OAuth2 yetkilendirmesi için bir link al.",
+	"USAGE": "invite",
+	"TEXT": "Beni sunucuna <{{link}}> adresinden ekleyebilirsin.",
+	"TYPICAL_INVITE": "TypicalBot Daveti",
+	"PROHIBITED": "Bu sunucu davet atmayı yasaklamış. Mesajın silindi.",
+	"REASON": "Otomatik {{action}}: Kullanıcı {{channel}} kanalına {{type}} mesajını gönerdi",
+	"INVITE": "bir davet",
+	"CONSECUTIVE": "{{amount}} ardışık davet",
+	"SENT": "**{{user}}** {{channel}} kanalına bir davet gönderdi.",
+	"SENT_IN": "Davet {{channel}} kanalına gönderildi"
+}

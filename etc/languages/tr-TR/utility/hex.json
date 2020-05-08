@@ -1,0 +1,4 @@
+{
+  "DESCRIPTION": "Hex renginin bir önizlemesini gösterir.",
+  "USAGE": "hex <hex-rengi:0-9a-fA-F>"
+}

@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "TypicalBot'un komut listesini alın.",
+    "USAGE": "commands",
+    "CHECK_DM": "Direkt Mesajlarınıza gelmesi gereken komutların bir listesi.",
+    "TYPICAL_COMMANDS": "TypicalBot Komutları",
+    "TEXT": "Belli bir komut üzerinde daha fazla bilgi edinmek için `{{prefix}}help <komut>` yaz.",
+    "OWNER": "Sunucu Sahibi (Seviye 4)",
+    "ADMIN": "Sunucu Yöneticisi (Seviye 3)",
+    "MOD": "Sunucu Moderatörü (Seviye 2)",
+    "MEMBER": "Sunucu Üyesi (Seviye 0)",
+    "NONE": "Gösterecek komut yok."
+}

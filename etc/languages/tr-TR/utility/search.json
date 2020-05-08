@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Kullanıcı listesinde bir kullanıcı adı veya takma ad arar.",
+  "USAGE": "search <sorgu> [page-number]",
+  "NONE": "**{{query}}** sorgusu için eşleşme yok.",
+  "RESULTS": "**__Sorgu için Sonuçlar:__** {{query}}"
+}

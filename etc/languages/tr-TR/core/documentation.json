@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "TypicalBot'un belgelerine bir bağlantı al.",
+	"USAGE": "documentation",
+	"TEXT": "Tüm komutların ve ayarların belgelerine **<{{link}}>** adresinde bulunabilir.",
+	"TYPICAL_DOCS": "TypicalBot Belgeleri"
+}

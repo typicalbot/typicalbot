@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Kendinden sunucunun abone rolünü kaldır.",
+    "USAGE": "unsubscribe",
+    "UNSUBBED": "Şimdi abonelikten çıktın."
+}
