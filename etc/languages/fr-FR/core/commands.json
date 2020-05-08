@@ -4,10 +4,9 @@
     "CHECK_DM": "Une liste de commandes devrait être arrivée dans vos messages directs.",
     "TYPICAL_COMMANDS": "Commandes TypicalBot",
     "TEXT": "Utilisez `{{prefix}}aide <command>` pour obtenir plus d'informations sur une commande spécifique.",
-    "OWNER": "» Propriétaire du serveur (niveau 4)",
-    "ADMIN": "» Administrateur du serveur (Level 3)",
-    "MOD": "» Modérateur de serveur (Level 2)",
-    "DJ": "» DJ du serveur (niveau 1)",
-    "MEMBER": "» Membre du serveur (niveau 0)",
+    "OWNER": "Propriétaire du serveur (niveau 4)",
+    "ADMIN": "Administrateur du serveur (Level 3)",
+    "MOD": "Modérateur de serveur (Level 2)",
+    "MEMBER": "Membre du serveur (niveau 0)",
     "NONE": "Aucune commande à afficher."
 }

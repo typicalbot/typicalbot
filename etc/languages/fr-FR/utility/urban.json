@@ -1,11 +1,11 @@
 {
-	"DESCRIPTION": "Saisit la définition de Urban Dictionary pour le mot spécifié.",
-	"USAGE": "ville <query>",
-	"NONE": "Il n'y a pas de correspondance pour la requête **{{query}}**.",
-	"TEXT": "**__{{query}}:__** {{definition}}",
-	"AMOUNT": "Définition 1 sur {{amount}}",
-	"RATING": "Note :",
-	"RATING_VALUE": "<unk> \\<unk>  {{up}}    | \\<unk>  {{down}}{{rating}}",
-	"RATING_PERCENT": "    |    {{rating}}% de {{total}} aiment cette définition.",
-	"DICTIONARY": "Définition du dictionnaire urbain"
+    "DESCRIPTION": "Saisit la définition de Urban Dictionary pour le mot spécifié.",
+    "USAGE": "ville <query>",
+    "NONE": "Il n'y a pas de correspondance pour la requête **{{query}}**.",
+    "TEXT": "**__{{query}}:__** {{definition}}",
+    "AMOUNT": "Définition 1 sur {{amount}}",
+    "RATING": "Note :",
+    "RATING_VALUE": "\\👍 {{up}} | \\👎 {{down}}{{rating}}",
+    "RATING_PERCENT": "​{{amount}}% de {{total}} aiment cette définition.",
+    "DICTIONARY": "Définition du dictionnaire urbain"
 }
