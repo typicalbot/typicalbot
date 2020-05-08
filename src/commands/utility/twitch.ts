@@ -52,6 +52,8 @@ export default class extends Command {
                 '```'
             ].join('\n'));
 
+        const NA = message.translate('common:NA');
+
         return message.send(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle('Twitch Statistics')
@@ -59,22 +61,22 @@ export default class extends Command {
             .addFields([
                 {
                     name: message.translate('common:ID_FIELD'),
-                    value: data.id,
+                    value: data.id || NA,
                     inline: true
                 },
                 {
                     name: message.translate('common:DISPLAYNAME_FIELD'),
-                    value: data.display_name,
+                    value: data.display_name || NA,
                     inline: true
                 },
                 {
                     name: message.translate('common:STATUS_FIELD'),
-                    value: data.broadcaster_type,
+                    value: data.broadcaster_type || NA,
                     inline: true
                 },
                 {
                     name: message.translate('common:TOTALVIEWS'),
-                    value: data.view_count,
+                    value: data.view_count || NA,
                     inline: true
                 }
             ])
