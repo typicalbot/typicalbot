@@ -104,8 +104,6 @@ export default class extends Command {
             message.translate('moderation/roles:MEMBERS', {
                 name: message.guild.name
             }),
-            '',
-            '',
             '```autohotkey',
             content,
             '',
