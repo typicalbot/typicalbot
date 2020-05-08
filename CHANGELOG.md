@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.0]
+### Added
+ - Version number to `$help` command ([#215](https://github.com/sylkellc/typicalbot/pull/215))
+ - `discord.com/invite/your-server` to invite regex
+ - Jump url in starboard messages
+
+### Changed
+ - CI to build against both Node 12 and Node 14 ([#213](https://github.com/sylkellc/typicalbot/pull/213))
+ - `$reason` error response to indicate how to setup modlogs ([#206](https://github.com/sylkellc/typicalbot/pull/206))
+ - `$set view` responses to be more clear than returning blank, null, undefined, and unresolved channels/roles ([#222](https://github.com/sylkellc/typicalbot/pull/222))
+
+### Fixed
+ - `$randomuser` not filtering roles properly ([#214](https://github.com/sylkellc/typicalbot/pull/214))
+ - No response on boolean-type settings with invalid value ([#207](https://github.com/sylkellc/typicalbot/pull/207))
+ - `$twitch` response being empty ([#224](https://github.com/sylkellc/typicalbot/pull/224))
+ - `$roles info members [role]` showing guild name instead of role name
+
 ## [3.3.0]
 ### Changed
  - `$randomuser` command to pick user by role ([#197](https://github.com/sylkellc/typicalbot/pull/197))
@@ -219,7 +236,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.3.0...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.4.0...HEAD
+[3.4.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.4.0
 [3.3.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.3.0
 [3.2.4]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.4
 [3.2.3]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.3
