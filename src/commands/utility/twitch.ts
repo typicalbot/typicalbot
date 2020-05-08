@@ -3,20 +3,9 @@ import fetch from 'node-fetch';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 
-const regex = /(.*)/gi;
-
 export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
-        const args = regex.exec(parameters);
-        if (!args)
-            return message.error(message.translate('misc:USAGE_ERROR', {
-                name: this.name,
-                prefix: this.client.config.prefix
-            }));
-        args.shift();
-        const [name] = args;
-
-        const json = await fetch(`https://api.twitch.tv/helix/users?login=${name}`, {
+        const json = await fetch(`https://api.twitch.tv/helix/users?login=${parameters}`, {
             method: 'get',
             headers: { 'Client-ID': this.client.config.apis.twitch }
         })
