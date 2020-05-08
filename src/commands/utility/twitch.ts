@@ -3,30 +3,25 @@ import fetch from 'node-fetch';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 
-const regex = /(.*)/gi;
-
 export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
-        const args = regex.exec(parameters);
-        if (!args)
+        if (!parameters)
             return message.error(message.translate('misc:USAGE_ERROR', {
                 name: this.name,
                 prefix: this.client.config.prefix
             }));
-        args.shift();
-        const [name] = args;
 
-        const json = await fetch(`https://api.twitch.tv/helix/users?login=${name}`, {
+        const json = await fetch(`https://api.twitch.tv/helix/users?login=${parameters}`, {
             method: 'get',
             headers: { 'Client-ID': this.client.config.apis.twitch }
         })
             .then((res) => res.json())
             .catch(() => null);
 
-        if (!json || !json.data)
+        if (!json || !json.data?.length)
             return message.error(message.translate('common:REQUEST_ERROR'));
 
-        const data = json.data[0];
+        const [data] = json.data;
         if (!message.embeddable)
             return message.reply([
                 message.translate('utility/twitch:STATS', {
@@ -52,6 +47,8 @@ export default class extends Command {
                 '```'
             ].join('\n'));
 
+        const NA = message.translate('common:NA');
+
         return message.send(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle('Twitch Statistics')
@@ -59,22 +56,22 @@ export default class extends Command {
             .addFields([
                 {
                     name: message.translate('common:ID_FIELD'),
-                    value: data.id,
+                    value: data.id || NA,
                     inline: true
                 },
                 {
                     name: message.translate('common:DISPLAYNAME_FIELD'),
-                    value: data.display_name,
+                    value: data.display_name || NA,
                     inline: true
                 },
                 {
                     name: message.translate('common:STATUS_FIELD'),
-                    value: data.broadcaster_type,
+                    value: data.broadcaster_type || NA,
                     inline: true
                 },
                 {
                     name: message.translate('common:TOTALVIEWS'),
-                    value: data.view_count,
+                    value: data.view_count || NA,
                     inline: true
                 }
             ])
