@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Проверьте информацию о пользователе twitch по Twitch API.",
+    "USAGE": "twitch <user>",
+    "STATS": "**__Статистика Twitch:__** {{name}}",
+    "ID": "ID: {{id}}",
+    "DISPLAY": "Отображаемое имя: {{name}}",
+    "DESC": "Описание: {{description}}",
+    "STATUS": "Статус: {{type}}",
+    "PROFILE": "Изображение профиля: {{url}}",
+    "VIEWS": "Всего просмотров: {{amount}}",
+    "TITLE": "Статистика Twitch"
+}
