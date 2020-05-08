@@ -5,6 +5,12 @@ import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 
 export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
+        if (!parameters)
+            return message.error(message.translate('misc:USAGE_ERROR', {
+                name: this.name,
+                prefix: this.client.config.prefix
+            }));
+
         const json = await fetch(`https://api.twitch.tv/helix/users?login=${parameters}`, {
             method: 'get',
             headers: { 'Client-ID': this.client.config.apis.twitch }
