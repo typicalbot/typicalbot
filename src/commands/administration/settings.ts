@@ -251,7 +251,7 @@ export default class extends Command {
                     defaultprefix: {
                         description: 'administration/settings:DEFAULTPREFIX',
                         value: settings.prefix.default,
-                        type: 'default',
+                        type: 'boolean',
                         path: 'prefix.default'
                     },
                     antiinvite: {
@@ -334,14 +334,37 @@ export default class extends Command {
         const count = Math.ceil(settings.length / 10);
         if (page < 1 || page > count) page = 1;
 
+        const NA = message.translate('common:NA').toUpperCase()
+
         const list = settings
             .splice((page - 1) * 10, 10)
-            .map((k) =>
-                ` • **${k}:** ${
-                    view
-                        ? settingsData[k].value
-                        : message.translate(settingsData[k].description)
-                }`);
+            .map((k) => {
+                if (!view) return message.translate(settingsData[k].description)
+
+                let response = ` • **${k}:** `
+                const type = settingsData[k].type
+                const value = settingsData[k].value
+
+                console.log(k, type, value)
+                if (type === 'channel') {
+                    if (value && message.guild.channels.cache.has(value)) response += `<#${value}>`
+                    else response += NA
+                } else if (type === 'channels') {
+                    if (value.length) response += value.map((id: string) => `<#${id}>`)
+                    else response += NA
+                } else if (type === 'role') {
+                    const role = message.guild.roles.cache.get(value)
+                    if (role) response += role.name
+                    else response += NA
+                } else if (type === 'roles') {
+                    if (value.length) response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role').join(', ')
+                    else response += NA
+                } else if (type === 'boolean') response += message.translate(value ? 'common:ENABLED' : 'common:DISABLED')
+                else if (type === 'log' && value === '--embed') response += 'Embed'
+                else response += value || NA
+
+                return response
+            });
 
         return message.send([
             message.translate('administration/settings:AVAILABLE'),
