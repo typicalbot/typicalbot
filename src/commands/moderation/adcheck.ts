@@ -3,7 +3,7 @@ import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
 
-const regex = /(discord\.(gg|io|me|li)\/.+|discordapp\.com\/invite\/.+)/i;
+const regex = /(discord\.(gg|io|me|li)\/.+|(discord|discordapp)\.com\/invite\/.+)/i;
 
 export default class extends Command {
     permission = PermissionsLevels.SERVER_MODERATOR;
