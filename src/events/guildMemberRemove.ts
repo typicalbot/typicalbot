@@ -8,6 +8,7 @@ export default class GuildMemberRemove extends Event {
         if (!member.guild.available) return;
 
         const guild = member.guild as TypicalGuild;
+        if (!guild.me?.permissions.has('BAN_MEMBERS')) return;
 
         const bans = await guild.fetchBans().catch(() => null);
         if (bans && bans.has(member.id)) return;
