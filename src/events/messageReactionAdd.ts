@@ -66,8 +66,9 @@ export default class MessageReactionAdd extends Event {
                     inline: true
                 },
                 {
-                    name: message.channel.toString(),
-                    value: true
+                    name: 'Original',
+                    value: `[Jump](https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`,
+                    inline: true
                 }
             ])
             .setThumbnail(message.author.displayAvatarURL({ format: 'png', size: 2048 }))
