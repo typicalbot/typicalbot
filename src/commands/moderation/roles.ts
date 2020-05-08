@@ -102,7 +102,7 @@ export default class extends Command {
 
         return message.send([
             message.translate('moderation/roles:MEMBERS', {
-                name: message.guild.name
+                name: role.name
             }),
             '```autohotkey',
             content,
