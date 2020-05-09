@@ -370,6 +370,7 @@ export default class extends Command {
             '',
             message.translate('administration/settings:PAGE', { page, count }),
             list.join('\n'),
+            '',
             message.translate('administration/settings:USAGE_LIST', { prefix: this.client.config.prefix })
         ].join('\n'));
     }
