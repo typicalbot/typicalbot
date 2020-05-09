@@ -339,7 +339,7 @@ export default class extends Command {
         const list = settings
             .splice((page - 1) * 10, 10)
             .map((k) => {
-                if (!view) return message.translate(settingsData[k].description)
+                if (!view) return `• **${k}:** ${message.translate(settingsData[k].description)}`;
 
                 let response = ` • **${k}:** `
                 const type = settingsData[k].type
