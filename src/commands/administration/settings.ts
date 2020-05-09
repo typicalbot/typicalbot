@@ -291,7 +291,7 @@ export default class extends Command {
                         path: 'starboard.id'
                     },
                     'starboard-stars': {
-                        description: 'administration/settings: STARBOARD-STARS',
+                        description: 'administration/settings:STARBOARD-STARS',
                         value: settings.starboard.count,
                         type: 'default',
                         path: 'starboard.count'
@@ -339,37 +339,39 @@ export default class extends Command {
         const list = settings
             .splice((page - 1) * 10, 10)
             .map((k) => {
-                if (!view) return message.translate(settingsData[k].description)
+                if (!view) return `• **${k}:** ${message.translate(settingsData[k].description)}`;
 
-                let response = ` • **${k}:** `
-                const type = settingsData[k].type
-                const value = settingsData[k].value
+                let response = ` • **${k}:** `;
+                const type = settingsData[k].type;
+                const value = settingsData[k].value;
 
                 if (type === 'channel') {
-                    if (value && message.guild.channels.cache.has(value)) response += `<#${value}>`
-                    else response += NA
+                    if (value && message.guild.channels.cache.has(value)) response += `<#${value}>`;
+                    else response += NA;
                 } else if (type === 'channels') {
-                    if (value.length) response += value.map((id: string) => `<#${id}>`)
-                    else response += NA
+                    if (value.length) response += value.map((id: string) => `<#${id}>`);
+                    else response += NA;
                 } else if (type === 'role') {
-                    const role = message.guild.roles.cache.get(value)
-                    if (role) response += role.name
-                    else response += NA
+                    const role = message.guild.roles.cache.get(value);
+                    if (role) response += role.name;
+                    else response += NA;
                 } else if (type === 'roles') {
-                    if (value.length) response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role').join(', ')
-                    else response += NA
-                } else if (type === 'boolean') response += message.translate(value ? 'common:ENABLED' : 'common:DISABLED')
-                else if (type === 'log' && value === '--embed') response += 'Embed'
-                else response += value || NA
+                    if (value.length) response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role').join(', ');
+                    else response += NA;
+                } else if (type === 'boolean') response += message.translate(value ? 'common:ENABLED' : 'common:DISABLED');
+                else if (type === 'log' && value === '--embed') response += 'Embed';
+                else response += value || NA;
 
-                return response
+                return response;
             });
 
         return message.send([
             message.translate('administration/settings:AVAILABLE'),
             '',
             message.translate('administration/settings:PAGE', { page, count }),
-            list.join('\n')
+            list.join('\n'),
+            '',
+            message.translate('administration/settings:USAGE_LIST', { prefix: this.client.config.prefix })
         ].join('\n'));
     }
 
