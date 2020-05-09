@@ -345,7 +345,6 @@ export default class extends Command {
                 const type = settingsData[k].type
                 const value = settingsData[k].value
 
-                console.log(k, type, value)
                 if (type === 'channel') {
                     if (value && message.guild.channels.cache.has(value)) response += `<#${value}>`
                     else response += NA
