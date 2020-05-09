@@ -291,7 +291,7 @@ export default class extends Command {
                         path: 'starboard.id'
                     },
                     'starboard-stars': {
-                        description: 'administration/settings: STARBOARD-STARS',
+                        description: 'administration/settings:STARBOARD-STARS',
                         value: settings.starboard.count,
                         type: 'default',
                         path: 'starboard.count'

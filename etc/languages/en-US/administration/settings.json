@@ -51,7 +51,7 @@
     "ANTIINVITE-ACTION": "Enable warning and kicking when sending invites. AntiInvite must be enabled for this to work.",
     "ANTIINVITE-WARN": "A user will receive a warning if they send this exact number of invites. AntiInvite and AntiInvite Action must be enabled for this to work.",
     "ANTIINVITE-KICK": "A user will be kicked if they send this number or more invites. AntiInvite and AntiInvite Action must be enabled for this to work.",
-    "NONNICKNAME": "A way to disable the `nickname` command from being used.",
+    "NONICKNAME": "A way to disable the `nickname` command from being used.",
     "STARBOARD": "A channel to send starred messages in, i.e. a starboard.",
     "STARBOARD-STARS": "Change the required stars count for messages to appear in the starboard.",
     "LANGUAGE": "Change the language of the bot in your server."
