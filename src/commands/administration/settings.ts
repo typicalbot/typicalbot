@@ -341,28 +341,28 @@ export default class extends Command {
             .map((k) => {
                 if (!view) return `• **${k}:** ${message.translate(settingsData[k].description)}`;
 
-                let response = ` • **${k}:** `
-                const type = settingsData[k].type
-                const value = settingsData[k].value
+                let response = ` • **${k}:** `;
+                const type = settingsData[k].type;
+                const value = settingsData[k].value;
 
                 if (type === 'channel') {
-                    if (value && message.guild.channels.cache.has(value)) response += `<#${value}>`
-                    else response += NA
+                    if (value && message.guild.channels.cache.has(value)) response += `<#${value}>`;
+                    else response += NA;
                 } else if (type === 'channels') {
-                    if (value.length) response += value.map((id: string) => `<#${id}>`)
-                    else response += NA
+                    if (value.length) response += value.map((id: string) => `<#${id}>`);
+                    else response += NA;
                 } else if (type === 'role') {
-                    const role = message.guild.roles.cache.get(value)
-                    if (role) response += role.name
-                    else response += NA
+                    const role = message.guild.roles.cache.get(value);
+                    if (role) response += role.name;
+                    else response += NA;
                 } else if (type === 'roles') {
-                    if (value.length) response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role').join(', ')
-                    else response += NA
-                } else if (type === 'boolean') response += message.translate(value ? 'common:ENABLED' : 'common:DISABLED')
-                else if (type === 'log' && value === '--embed') response += 'Embed'
-                else response += value || NA
+                    if (value.length) response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role').join(', ');
+                    else response += NA;
+                } else if (type === 'boolean') response += message.translate(value ? 'common:ENABLED' : 'common:DISABLED');
+                else if (type === 'log' && value === '--embed') response += 'Embed';
+                else response += value || NA;
 
-                return response
+                return response;
             });
 
         return message.send([
