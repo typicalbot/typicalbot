@@ -1,6 +1,7 @@
 {
     "DESCRIPTION": "View or customize your servers setting and enable/disable specific features.",
     "USAGE": "settings <list|clear|view|edit> [setting] [add|remove] [value]",
+    "USAGE_LIST": "Use `{{prefix}}settings list [page]` to view other pages.",
     "AVAILABLE": "**__Available settings to use with TypicalBot:__**",
     "PAGE": "**Page {{page}} / {{count}}**",
     "CLEARED": "Settings cleared.",

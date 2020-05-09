@@ -369,7 +369,8 @@ export default class extends Command {
             message.translate('administration/settings:AVAILABLE'),
             '',
             message.translate('administration/settings:PAGE', { page, count }),
-            list.join('\n')
+            list.join('\n'),
+            message.translate('administration/settings:USAGE_LIST')
         ].join('\n'));
     }
 
