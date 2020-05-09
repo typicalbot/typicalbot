@@ -8,9 +8,12 @@ export default class GuildMemberRemove extends Event {
         if (!member.guild.available) return;
 
         const guild = member.guild as TypicalGuild;
+        // If bot has ban perms check if this was a ban and if so cancel out
+        if (guild.me?.permissions.has('BAN_MEMBERS')) {
+            const bans = await guild.fetchBans().catch(() => null);
+            if (bans && bans.has(member.id)) return;
+        }
 
-        const bans = await guild.fetchBans().catch(() => null);
-        if (bans && bans.has(member.id)) return;
 
         const settings = await this.client.settings.fetch(guild.id);
         if (!settings.logs.id || settings.logs.leave === '--disabled') return;
