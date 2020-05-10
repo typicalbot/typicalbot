@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Softbanna en medlem från servern.",
+	"USAGE": "softban <@user> [purge-days] [reason]",
+	"REASON": "Softbannad av {{mod}} | Anledning {{reason}}",
+	"BANNED": "Softbannat användare **{{user}}**."
+}

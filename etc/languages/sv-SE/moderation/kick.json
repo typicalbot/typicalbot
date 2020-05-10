@@ -1,0 +1,10 @@
+{
+    "DESCRIPTION": "Kicka en medlem från servern.",
+    "USAGE": "kicka <@user> [reason]",
+    "TOO_LOW": "Du kan inte kicka en användare med antingen samma eller en högre högsta roll.",
+    "KICKABLE": "För att kunna slutföra begäran behöver jag behörigheten **KICK_MEMBERS** och min högsta roll måste vara högre än den efterfrågade användarens högsta roll.",
+    "KICKED": "Du har blivit kickad från **{{name}}**.",
+    "REASON": "Kickad av {{mod}} | Orsak: {{reason}}",
+    "ERROR": "Ett fel inträffade när den efterfrågade användaren skulle kickas.",
+    "KICK_SUCCESS": "Kickade användare **{{user}}**."
+}

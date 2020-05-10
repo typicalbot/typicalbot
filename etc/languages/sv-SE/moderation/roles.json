@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Hantera eller visa roller i en server.",
+    "USAGE": "Kontrollera `$roles hjälp` för detta kommandos användning.",
+    "HELP_LIST": "rolllista",
+    "HELP_FIRST": "roller <give|take> <@user> <role-name>",
+    "HELP_SECOND": "offentliga roller <list|clear|add|remove> <role-name>",
+    "LIST": "**__{{name}}'s Roller: __**",
+    "MEMBERS": "**__{{name}}'s Medlemmar:__**",
+    "PUBLIC": "**__{{name}}'s Offentliga Roller: __**",
+    "GIVE": "Du kan inte ge dig själv eller en annan användare din högsta roll eller högre roller.",
+    "TAKE": "Du kan inte ta en roll från dig själv eller en annan användare när din högsta roll är lägre än den roll du ska ta.",
+    "NONE_PUBLIC": "Det finns inga offentliga roller i den här servern.",
+    "ALREADY_PUBLIC": "Den den efterfrågade rollen finns redan med i listan med offentliga roller.",
+    "NOT_PUBLIC": "Den efterfrågade rollen finns inte i listan med offentliga roller."
+}

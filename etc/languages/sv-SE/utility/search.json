@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Söker i användarlistan efter ett användarnamn eller smeknamn.",
+  "USAGE": "sökning <query> [page-number]",
+  "NONE": "Det finns inga matchningar för frågan **{{query}}**.",
+  "RESULTS": "**__Resultat för Query:__** {{query}}"
+}

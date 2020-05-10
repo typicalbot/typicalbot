@@ -1,0 +1,9 @@
+{
+	"DESCRIPTION": "Gör att boten slutar ignorerar kommandon, inbjudningar och stjärnor i en kanal.",
+	"USAGE": "o-ignorera [commands|invites|stars]",
+	"COMMANDS": "Denna kanal ignorerar inte kommandon.",
+	"INVITES": "Denna kanal ignorerar inte inbjudningar.",
+	"DISABLED": "Styrbord är inte aktiverat.",
+	"STARBOARD": "Denna kanal ignorerar inte stjärnor.",
+	"SUCCESS": "Lyssnar nu på {{type}}."
+}

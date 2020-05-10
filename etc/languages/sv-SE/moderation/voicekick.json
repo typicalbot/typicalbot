@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Kicka en medlem från en röstkanal.",
+    "USAGE": "röstkicka <@user> [reason]",
+    "NO_VOICE": "Den efterfrågade användaren är inte i en röstkanal.",
+    "SUCCESS": "Röstkickade användare **{{user}}**."
+}

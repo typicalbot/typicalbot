@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Varna en medlem på servern.",
+    "USAGE": "varna <@user> [reason]",
+    "TOO_LOW": "Du kan inte varna en användare med vare sig samma eller en högre högsta roll.",
+    "WARNED": "Du har blivit varnad i **{{name}}**.",
+    "SUCCESS": "Varnade användare: `{{user}}`."
+}

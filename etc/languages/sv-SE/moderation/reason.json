@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Ändra eller ange en anledning för ett fall i modereringsloggar.",
+    "USAGE": "skäl <case-id|latest> [reason]",
+    "DISABLED": "Du måste ha modereringsloggar aktiverade för att använda detta kommando. För att konfigurera modereringsloggar använder du detta kommando: `$set redigera modloggar #channel-name`.",
+    "NONE": "Det finns inga modereringsloggar under det angivna fall-ID: t.",
+    "ERROR": "Ett fel uppstod under uppdateringen av det angivna fallet.",
+    "EDITED": "Uppdaterade ärendet."
+}

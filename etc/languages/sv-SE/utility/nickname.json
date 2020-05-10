@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Ändra eller rensa antingen ditt smeknamn eller en annan användares smeknamn. ",
+    "USAGE": "smeknamn [@user] [nickname]",
+    "DISABLED": "Detta kommando är inaktiverat. Inaktivera inställningen `nonickname` för att aktivera detta kommando.",
+    "ERROR": "Ett fel uppstod. Detta troligtvis betyder att jag inte kan hantera medlemmens smeknamn.",
+    "SELF_ERROR": "Ett fel uppstod. Detta troligtvis betyder att jag inte kan hantera ditt smeknamn.",
+    "SUCCESS": "{{type}} medlems smeknamn.",
+    "SELF_SUCCESS": "{{type}} ditt smeknamn."
+}

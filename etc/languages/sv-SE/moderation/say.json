@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Gör att boten skickar ett meddelande med det innehåll som används.",
+	"USAGE": "säg [#kanal] <content>",
+	"MISSING_SEND": "Jag saknar SEND_MESSAGES tillstånd i den begärda kanalen.",
+	"INVALID": "Ogiltig JSON gavs.",
+	"SENT": "Meddelandet ekade",
+	"TEXT": "**{{user}}** skickade ett meddelande i {{channel}} med hjälp av TypicalBot."
+}

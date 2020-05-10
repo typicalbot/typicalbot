@@ -1,0 +1,10 @@
+{
+	"DESCRIPTION": "Unmutear en medlem på servern.",
+	"USAGE": "unmutear <@user> [reason]",
+	"NOT_MUTED": "Den efterfrågade användaren är inte mutead.",
+	"TOO_LOW": "Du kan inte unmutea en användare med antingen samma eller en högre högsta roll.",
+	"UNMUTED": "Du har blivit unmutead i **{{name}}**.",
+	"ERROR": "Ett fel inträffade när den efterfrågade användaren skulle unmuteas.",
+	"SUCCESS": "Unmuteade användare **{{user}}**.",
+	"TASK_REASON": "Automatisk unmute: Användarens mute tid har passerat."
+}

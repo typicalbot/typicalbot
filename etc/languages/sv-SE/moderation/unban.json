@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Unbanna en medlem från servern.",
+    "USAGE": "unbanna <user-id> [reason]",
+    "REASON": "Unbannad av {{mod}} | Orsak: {{reason}}",
+    "UNBANNED": "Lyckad unban av användaren {{user}}.",
+    "USER_UNBAN": "**{{user}}** har blivit unbannad från servern.",
+    "USER_UNBANNED": "Användare unbannad"
+}

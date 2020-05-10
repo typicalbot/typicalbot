@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Rensa meddelanden i en kanal.",
+    "USAGE": "rensa [@user | #channel | @role | me | you | bots] <message-count>",
+    "TOO_LITTLE": "Ange ett antal meddelanden att ta bort från 2 till 100.",
+    "MISSING_PERMS": "Ett fel har inträffat. Detta betyder förmodligen att jag inte har behörighet att hantera meddelanden.",
+    "NONE": "Inga meddelanden har tagits bort. Detta betyder förmodligen att jag saknar behörighet att läsa meddelandehistorik eller att meddelandena är över två veckor gamla.",
+    "PURGED": "Tog bort **{{amount}}** meddelande.",
+    "PURGED_MULTIPLE": "Tog bort **{{amount}}** meddelanden."
+}

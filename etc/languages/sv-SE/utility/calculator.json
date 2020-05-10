@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Utvärdera matematiska uttryck.",
+  "USAGE": "matte <expression>",
+  "INPUT": "**INPUT:**",
+  "OUTPUT": "**OUTPUT:**",
+  "FAILED": "Det gick inte att utvärdera matematiskt uttryck."
+}

@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Ger antingen din tillståndsnivå eller en annan användares nivå.",
+  "USAGE": "nivå [@user | user-id | user-tag]",
+  "TEXT": "**__{{user}}'s Behörighetsnivå: __** {{level}}",
+  "TITLE": "{{user}}'s Behörighetsnivå",
+  "EMBED": "Nivå {{level}}"
+}

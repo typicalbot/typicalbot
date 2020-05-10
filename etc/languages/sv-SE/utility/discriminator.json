@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Ger en lista över alla användare med en given diskriminator.",
+    "USAGE": "diskriminator [discriminator]",
+    "NONE": "Det finns inga användare med diskriminatorn **{{discriminator}}** på posten.",
+    "USERS": "**__Användare med Diskriminator:__** {{discriminator}}"
+}
