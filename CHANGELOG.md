@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.1]
+### Fixed
+ - Leave messages not being sent due to permission check error ([#223](https://github.com/sylkellc/typicalbot/pull/223))
+ - `NONICKNAME` and `STARBOARD-STARS` strings not being properly translated, closes [#221](https://github.com/sylkellc/typicalbot/pull/221) ([#225](https://github.com/sylkellc/typicalbot/pull/225))
+ - No indication on how to get to the second page on `$settings` command, closes [#212](https://github.com/sylkellc/typicalbot/pull/212) ([#225](https://github.com/sylkellc/typicalbot/pull/225))
+ - Settings list was missing keys ([#225](https://github.com/sylkellc/typicalbot/pull/225))
+
 ## [3.4.0]
 ### Added
  - Version number to `$help` command ([#215](https://github.com/sylkellc/typicalbot/pull/215))
@@ -236,7 +243,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.4.0...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.4.1...HEAD
+[3.4.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.4.1
 [3.4.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.4.0
 [3.3.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.3.0
 [3.2.4]: https://github.com/typicalbot/typicalbot/releases/tag/3.2.4
