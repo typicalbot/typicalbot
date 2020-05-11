@@ -43,7 +43,7 @@ export class TypicalMessage extends Structures.get('Message') {
         if (CANCEL_OPTIONS.includes(response.content.toLowerCase())) {
             if (response.deletable) response.delete().catch(() => undefined)
             this.menuResponse?.delete().catch(() => undefined)
-            this.respond(this.translate('misc:CANCELLED'))
+            await this.respond(this.translate('misc:CANCELLED'))
             return;
         }
 
