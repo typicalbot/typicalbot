@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.0]
+### Added
+ - `$language` to change TypicalBot language ([#182](https://github.com/sylkellc/typicalbot/pull/182))
+
 ## [3.4.1]
 ### Fixed
  - Leave messages not being sent due to permission check error ([#223](https://github.com/sylkellc/typicalbot/pull/223))
@@ -243,7 +247,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.4.1...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.5.0...HEAD
+[3.5.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.5.0
 [3.4.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.4.1
 [3.4.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.4.0
 [3.3.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.3.0
