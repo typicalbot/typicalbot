@@ -1,6 +1,6 @@
 {
 	"DESCRIPTION": "Set a language to be used by your server. If you use this command in a direct message to the bot, it will set the language for your user account directly.",
-	"USAGE": "language [language name]",
+	"USAGE": "language [locale]",
 	"SET_LANGUAGE": "Change the default language for this server.",
 	"VIEW_LANGUAGES": "View a list of all available languages that are supported by the bot."
 }
