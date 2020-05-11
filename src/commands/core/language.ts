@@ -30,7 +30,7 @@ export default class extends Command {
                     return this.setLanguage(message, settingsCommand);
                 case VIEW_LANGUAGES:
                     message.menuResponse?.delete().catch(() => undefined);
-                    return message.send(possibleLanguages.map((language) => language.canonical).join('\n'));
+                    return message.send(possibleLanguages.map((language, index) => `**${index + 1}** - ${language.canonical}`).join('\n'));
                 default:
                     return;
             }
