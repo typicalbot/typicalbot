@@ -7,7 +7,7 @@ const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 const msRegex = /^(\d+)$/i;
 const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
 
-const possibleLanguages = [
+export const possibleLanguages = [
     {
         name: 'en-US',
         canonical: 'English',
