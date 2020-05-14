@@ -18,13 +18,13 @@ export const possibleLanguages = [
         name: 'fr-FR',
         canonical: 'French',
         complete: true,
-        aliases: ['fr', 'french', 'française', 'français']
+        aliases: ['fr', 'french']
     },
     {
         name: 'de-DE',
         canonical: 'German',
         complete: false,
-        aliases: ['de', 'german', 'deutsch', 'deutsche']
+        aliases: ['de', 'german']
     },
     {
         name: 'sl-SL',
@@ -36,19 +36,19 @@ export const possibleLanguages = [
         name: 'ru-RU',
         canonical: 'Russian',
         complete: false,
-        aliases: ['ru', 'русский']
+        aliases: ['ru', 'russian']
     },
     {
         name: 'sv-SE',
         canonical: 'Swedish',
         complete: false,
-        aliases: ['se', 'svenska']
+        aliases: ['se', 'swedish']
     },
     {
         name: 'tr-TR',
         canonical: 'Turkish',
-        complete: false,
-        aliases: ['tr', 'Türk']
+        complete: true,
+        aliases: ['tr', 'turkish']
     }
 ];
 
