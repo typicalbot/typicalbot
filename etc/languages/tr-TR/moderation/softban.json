@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Sunucudan bir kullanıcıyı softbanla.",
+	"USAGE": "softban <@kullanıcı> [purge-days] [sebep]",
+	"REASON": "{{mod}} tarafından softbanlandı. | Sebep: {{reason}}",
+	"BANNED": "**{{user}}** kullanıcısı başarıyla softbanlandı."
+}

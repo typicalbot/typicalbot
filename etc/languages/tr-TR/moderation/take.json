@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Herkese açık roller listesinden bir rol alın.",
+    "USAGE": "take <rol-adı>",
+    "UNEDITABLE": "Bota yetersiz yetki verilmiş. Sahip olduğum en yüksek rolün vermeye çalıştığınızdan daha yüksek olduğundan ve Rolleri Yönet yetkim olduğundan emin olun."
+}

@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Komutlar için takma adlar oluştur.",
+    "USAGE": "alias <list|add|remove|clear> <add/remove:komut> <add:yeni-ad>",
+    "CURRENT": "Mevcut Takma Adlar:",
+    "INVALID_COMMAND": "Sağlanan komut yok.",
+    "ALIAS_EXISTS": "Verilen takma ad çoktan `{{name}}` komudunu gösteriyor.",
+    "LONG": "10 karakterden uzun bir takma ad oluşturamazsın.",
+    "ADDED": "Takma ad başarıyla eklendi.",
+    "ADD_ERROR": "Takma ad eklenirken bir hata meydana geldi.",
+    "INVALID_ALIAS": "İstenen takma ad yok.",
+    "REMOVED": "Takma ad başarıyla kaldırıldı.",
+    "REMOVE_ERROR": "Takma ad kaldırılırken bir hata meydana geldi.",
+    "CLEARED": "Takma adlar başarıyla kaldırıldı.",
+    "CLEAR_ERROR": "Takma adlar temizlenirken bir hata meydana geldi."
+}

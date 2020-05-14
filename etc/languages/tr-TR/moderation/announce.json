@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Duyurular kanalına bir duyuru gönder. Mesajı bir embed yapmak için içeriğinden önce `-e` ifadesini kullan. Eğer duyurular rolü ayarlandıysa, her zaman onu kullanacaktır.",
+    "USAGE": "announce [-e] <içerik>",
+    "INVALID": "Duyuru içeriği sağlanmamış.",
+    "INVALID_CHANNEL": "Duyuru yapmak için, lütfen `$set edit announcements #kanal-adı` komuduyla bir duyuru kanalı kurun.",
+    "TEXT": "**__{{usertag}} Kullanıcısından Duyuru:__** {{role}}",
+    "TITLE": "Duyuru"
+}

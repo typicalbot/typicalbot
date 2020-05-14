@@ -1,0 +1,16 @@
+{
+    "DESCRIPTION": "Sunucuda bir kullanıcıyı sustur.",
+    "USAGE": "mute <@kullanıcı> [time:xd(gün) xh(saat) xm(dakika) xs(saniye)] [sebep]",
+    "NO_ROLE": "Susturma rolü ayarlanmamış. `$set edit mutrole <rol-adı>` komudunu deneyin.",
+    "INVALID_CHANNEL": "Verilen kanal yok.",
+    "MISSING_PERMS": "Bu kanal için izinleri yönetemem.",
+    "DENYING": "Susturulmuş kullanıcıların konuşma izinleri reddediliyor.",
+    "DENY_ERROR": "Susturulmuş kullanıcıların konuşma izinleri reddedilemiyor.",
+    "TOO_LONG": "Bir kullanıcıyı bir haftadan fazla susturamazsın.",
+    "ALREADY_MUTED": "İstenen kullanıcı çokta susturulmuş.",
+    "TOO_LOW": "Seninle aynı veya daha yüksek rollü bir kullanıcıyı susturamazsın.",
+    "UNEDITABLE": "İsteği gerçekleştirmek için **ROLLERİ_YÖNET** adlı yetkiye ihtiyacım var ve ve en yüksek rolümsusturmam istenen kullanıcının rolünden ve susturulmuş rolünden yüksek olmalı.",
+    "MUTED": "**{{name}}** sunucusunda susturuldunuz.",
+    "SUCCESS": "{{user}} kullanıcısı başarıyla susturuldu.",
+    "ERROR": "İstenen kullanıcıyı susturmaya çalışırken bir hata meydana geldi."
+}

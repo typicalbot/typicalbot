@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Sunucudan bir kullanıcıyı geri banla.",
+    "USAGE": "unban <kullanıcı-id> [sebep]",
+    "REASON": "{{mod}} tarafından geri banlandı. | Sebep: {{reason}}",
+    "UNBANNED": "{{user}} kullanıcısı başarıyla geri banlandı.",
+    "USER_UNBAN": "{{user}} kullanıcısı sunucudan geri banlandı.",
+    "USER_UNBANNED": "Kullanıcı Geri Banlandı"
+}

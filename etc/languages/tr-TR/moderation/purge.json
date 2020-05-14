@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Bir kanaldaki mesajları temizle.",
+    "USAGE": "purge [@kullanıcı|#kanal|@rol|me|you|bots] <mesaj-sayısı>",
+    "TOO_LITTLE": "Lütfen silmek için 2 ile 100 arasında bir sayı sağlayın.",
+    "MISSING_PERMS": "Bir hata meydana geldi. Bunun anlamı genel olarak mesajları yönetme yetkim yok demek.",
+    "NONE": "Hiç mesaj silinmedi. Bu muhtemelen mesaj geçmişini okuma iznim olmadığı anlamına geliyor veya mesajlar iki haftadan eski.",
+    "PURGED": "Başarıyla **{{amount}}** mesaj silindi.",
+    "PURGED_MULTIPLE": "Başarıyla **{{amount}}** mesaj silindi."
+}

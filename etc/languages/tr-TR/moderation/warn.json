@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Sunucudaki bir kullanıcıyı uyar.",
+    "USAGE": "warn <@kullanıcı> [sebep]",
+    "TOO_LOW": "Seninle aynı role veya üstüne sahip bir kullanıcıyı uyaramazsın.",
+    "WARNED": "**{{name}}** sunucusunda uyarıldınız.",
+    "SUCCESS": "`{{user}}` kullanıcısı başarıyla uyarıldı."
+}

@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Herkese açık roller listesinden bir rol al.",
+	"USAGE": "give <rol-adı>",
+	"INVALID": "Geçersiz rol. Lütfen yazımının doğru olduğundan ve rolün gerçekten var olduğundan emin  ol.",
+	"UNEDITABLE": "Bota yetersiz yetki verilmiş. Sahip olduğum en yüksek rolün vermeye çalıştığınızdan daha yüksek olduğundan ve Rolleri Yönet yetkim olduğundan emin olun.",
+	"NOT_PUBLIC": "İstenen rol herkese açık roller listesinde yok."
+}

@@ -1,0 +1,9 @@
+{
+	"DESCRIPTION": "Botun bir kanaldaki komutları, davetleri ve yıldızları yok saymamasını sağlar.",
+	"USAGE": "unignore [commands|invites|stars]",
+	"COMMANDS": "Bu kanal komutları yok saymıyor.",
+	"INVITES": "Bu kanal davetleri yok saymıyor.",
+	"DISABLED": "Yıldız tablosu aktif değil.",
+	"STARBOARD": "Bu kanal yıldızları yok saymıyor.",
+	"SUCCESS": "Şimdi {{type}} dinleniyor."
+}

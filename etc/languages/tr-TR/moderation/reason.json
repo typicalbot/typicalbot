@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Moderasyon günlüklerindeki bir vaka için sebep ayarla veya değiştir.",
+    "USAGE": "reason <vaka-id|latest> [sebep]",
+    "DISABLED": "Bu komudu kullanmak için moderasyon günlükleri aktif olmalı. Moderasyon günlüğü ayarlamak için `$set edit modlogs #kanal-adı` komudunu kullan.",
+    "NONE": "Verilen vaka ID'si altında moderasyon günlüğü yok.",
+    "ERROR": "Verilen vaka güncellenirken bir hata meydana geldi.",
+    "EDITED": "Vaka başarıyla güncellendi."
+}

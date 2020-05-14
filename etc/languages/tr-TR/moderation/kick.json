@@ -1,0 +1,10 @@
+{
+    "DESCRIPTION": "Sunucudan bir üye at.",
+    "USAGE": "kick <@kullanıcı> [sebep]",
+    "TOO_LOW": "Seninle aynı veya daha yüksek role sahip kullanıcıları atamazsın.",
+    "KICKABLE": "İsteği tamamlamak için **OYUNCULARI_AT** iznine ihtiyacım var ve en yüksek rolüm istenen kullanıcının en yüksek rolünden daha yüksek olmalı.",
+    "KICKED": "**{{name}}** sunucusundan atıldın.",
+    "REASON": "{{mod}} tarafından atıldı. |Sebep: {{reason}}",
+    "ERROR": "İstenen kullanıcıyı atmaya çalışırken bir hata meydana geldi.",
+    "KICK_SUCCESS": "**{{user}}** kullanıcısı başarıyla atıldı."
+}

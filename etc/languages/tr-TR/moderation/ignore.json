@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Botun bir kanalda komutları, davetleri ve yıldızları görmezden gelmesini sağlar.",
+	"USAGE": "ignore[view|commmands|invites|stars]",
+	"IGNORING": "Sıradaki kanallar {{type}} mesajlarını görmezden geliyor:",
+	"ALREADY_IGNORING": "Kanal çoktan {{type}} mesajlarını görmezden geliyor.",
+	"STARBOARD": "Yıldız tablosu açık değil.",
+	"ADDED": "Şimdi {{type}} görmezden geliniyor."
+}

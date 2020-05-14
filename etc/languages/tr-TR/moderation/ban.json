@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Bir üyeyi sunucudan banla.",
+    "USAGE": "ban <@kullanıcı> [time:xd(saat) xm(dakika) xs(saniye)] [purge-days] [sebep]",
+    "WEEk": "Bir kullanıcıyı 1 haftadan fazla banlayamazsın.",
+    "TOO_LOW": "Seninle aynı role veya üstüne sahip bir kullanıcıyı banlayamazsın.",
+    "UNBANNABLE": "İsteği gerçekleştirmek için **KULLANICILARI_BANLA** adlı yetkiye ihtiyacım var ve ve en yüksek rolüm banlamam istenen kullanıcının rolünden yüksek olmalı.",
+    "BANNED": "**{{name}}** sunucusundan banlandın.",
+    "REASON": "{{mod}} tarafından banlandı. | Sebep: {{reason}}",
+    "ERROR": "İstenen kullanıcıyı banlamaya çalışırken bir hata meydana geldi.",
+    "BAN_SUCCESS": "{{user}} kullanıcısı başarıyla banlandı.",
+    "USER_BANNED": "Kullanıcı Banlandı."
+}

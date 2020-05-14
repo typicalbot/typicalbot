@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Üyelerinin oyun durumlarında sunucu daveti var mı kontrol et.",
+    "USAGE": "adcheck",
+    "NONE": "Durumlarında davet olan kullanıcı yok.",
+    "FOUND": "Durumlarında davet olan {{amount}} kullanıcı var:\n\n",
+    "ONE": "1 kullanıcı",
+    "MULTIPLE": "{{amount}} kullanıcı",
+    "TITLE": "Oyun Durumuna Davet Olan Oyuncular"
+}

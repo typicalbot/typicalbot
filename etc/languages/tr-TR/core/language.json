@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Sunucun tarafından kullanılacak dili ayarla. Eğer bu komutu DM'de kullanırsan dili sadece kendi kullanıcı hesabın için ayarlamış olursun.",
+	"USAGE": "language [yerel ayar]",
+	"SET_LANGUAGE": "Bu sunucu için varsayılan dili değiştir.",
+	"VIEW_LANGUAGES": "Bot tarafından desteklenen tüm dillerin bir listesini gör."
+}

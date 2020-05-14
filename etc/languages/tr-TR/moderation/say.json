@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Kullanılan içerikle bota bir mesaj göndertir.",
+	"USAGE": "say [#kanal] <içerik>",
+	"MISSING_SEND": "İstenen kanalda MESAJ_GÖNDER yetkim eksik.",
+	"INVALID": "Geçersiz JSON sağlanmış.",
+	"SENT": "Mesaj Yankılandı",
+	"TEXT": "**{{user}}** kullanıcısı {{channel}} kanalına TypicalBot ile bir mesaj gönderdi."
+}

@@ -1,0 +1,7 @@
+{
+	"CASE_ID": "Vaka {{id}}",
+	"ACTION": "**Aksiyon:** {{display}} {{expiration}}",
+	"USER": "**Kullanıcı:** {{tag}} ({{id}})",
+	"CHANNEL": "**Kanal:** {{name}} {{channel}}",
+	"REASON": "**Sebep:** {{reason}}"
+}

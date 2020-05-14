@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Bir kullanıcıyı ses kanalından at.",
+    "USAGE": "voicekick <@kullanıcı> [sebep]",
+    "NO_VOICE": "İstenen kullanıcı ses kanalında değil.",
+    "SUCCESS": "**{{user}}** kullanıcısı başarıyla ses kanalından atıldı."
+}

@@ -1,0 +1,10 @@
+{
+	"DESCRIPTION": "Sunucudaki bir kullanıcıyı geri susturur.",
+	"USAGE": "unmute <@kullanıcı> [sebep]",
+	"NOT_MUTED": "İstenen kullanıcı susturulmamış.",
+	"TOO_LOW": "Seninle aynı veya daha yüksek rollü bir kullanıcıyı geri susturamazsın.",
+	"UNMUTED": "**{{name}}** sunucusunda geri susturuldunuz.",
+	"ERROR": "İstenen kullanıcıyı geri susturmaya çalışırken bir hata meydana geldi.",
+	"SUCCESS": "{{user}} kullanıcısı başarıyla geri susturuldu**.",
+	"TASK_REASON": "Otomatik Geri Susturma: Kullanıcının susturulma süresi bitti."
+}

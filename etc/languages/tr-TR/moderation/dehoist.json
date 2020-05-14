@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Sunucundaki üyelerin isimlerinde özel karakter var mı kontrol et.",
+    "USAGE": "dehoist",
+    "NONE": "Dehoistlenecek kullanıcı yok.",
+    "FOUND": "Dehoistlenebilecek {{amount}} kullanıcı var:",
+    "ONE": "1 kullanıcı",
+    "MULTIPLE": "{{amount}} kullanıcı"
+}

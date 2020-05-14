@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Bir sunucudaki rolleri yönet veya görüntüle.",
+    "USAGE": "Komudun kullanımı için `$roles help` komudunu kullan.",
+    "HELP_LIST": "roles list",
+    "HELP_FIRST": "roles <give|take> <@kullanıcı> <rol-adı>",
+    "HELP_SECOND": "roles public <list|clear|add|remove> <rol-adı>",
+    "LIST": "**__{{name}} Kullanıcısının Rolleri:__**",
+    "MEMBERS": "**__{{name}} Sunucusunun Üyeleri:__**",
+    "PUBLIC": "**__{{name}} Kullanıcısının Herkese Açık Rolleri:__**",
+    "GIVE": "Kendine veya başka bir kullanıcıya kendinin en yüksek rolünü veya daha yüksek bir rol veremezsin.",
+    "TAKE": "En yüksek rolünüz alınacak rolden daha düşük olduğunda kendinizden veya başka bir kullanıcıdan rol alamazsınız.",
+    "NONE_PUBLIC": "Bu sunucu içinkurulmuş herkese açık roller yok.",
+    "ALREADY_PUBLIC": "İstenen rol çoktan herkese açık roller listesinde.",
+    "NOT_PUBLIC": "İstenen rol herkese açık roller listesinde yok."
+}
