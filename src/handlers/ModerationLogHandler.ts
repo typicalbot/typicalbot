@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/node';
-import { Guild, GuildMember, TextChannel, User, Role } from 'discord.js';
+import { Guild, GuildMember, TextChannel, User } from 'discord.js';
 import Cluster from '../lib/TypicalClient';
 import ModerationLog from '../lib/structures/ModerationLog';
 import { TypicalGuildMessage , TypicalGuild, GuildSettings } from '../lib/types/typicalbot';
