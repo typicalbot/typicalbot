@@ -43,6 +43,7 @@ export default class extends Event {
         }
 
         const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author.id);
+        // eslint-disable-next-line max-len
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
 
         if (

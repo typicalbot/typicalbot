@@ -86,7 +86,8 @@ export default class extends Command {
                 },
                 {
                     name: message.translate('common:CREATED_FIELD'),
-                    value: `${moment(message.guild.createdAt).format('dddd MMMM Do, YYYY')}\n${moment(message.guild.createdAt).format('hh:mm A')}`,
+                    value: `${moment(message.guild.createdAt)
+                        .format('dddd MMMM Do, YYYY')}\n${moment(message.guild.createdAt).format('hh:mm A')}`,
                     inline: true
                 },
                 {

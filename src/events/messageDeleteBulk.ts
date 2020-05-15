@@ -41,7 +41,8 @@ export default class MessageBulkDelete extends Event {
 
         const haste = await hastebin(messages
             .map((m) =>
-                `${moment(m.createdAt).format('dddd MMMM Do, YYYY, hh:mm A')} | ${m.author.tag} (${m.author.id}):\n${m.content}`)
+                `${moment(m.createdAt)
+                    .format('dddd MMMM Do, YYYY, hh:mm A')} | ${m.author.tag} (${m.author.id}):\n${m.content}`)
             .join('\n\n--  --  --  --  --\n\n'));
 
         if (settings.logs.delete !== '--embed')

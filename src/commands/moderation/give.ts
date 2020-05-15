@@ -32,10 +32,8 @@ export default class extends Command {
             return message.error(message.translate('moderation/give:UNEDITABLE'));
 
         if (member) {
-            if (
-                permissions.level <
-                PermissionsLevels.SERVER_ADMINISTRATOR
-            ) {
+            if (permissions.level < PermissionsLevels.SERVER_ADMINISTRATOR) {
+                // eslint-disable-next-line max-len
                 return message.error(this.client.helpers.permissionError.execute(message, this, permissions, PermissionsLevels.SERVER_ADMINISTRATOR));
             }
 

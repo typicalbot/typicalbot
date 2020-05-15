@@ -51,6 +51,7 @@ export default class GuildMemberAdd extends Event {
 
         if (settings.auto.nickname)
             member
+                // eslint-disable-next-line max-len
                 .setNickname(await this.client.helpers.formatMessage.execute('autonick', guild, user, settings.auto.nickname))
                 .catch((err) => Sentry.captureException(err));
 

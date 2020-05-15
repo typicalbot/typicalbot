@@ -21,7 +21,8 @@ export default class extends Command {
                 discriminator
             }));
 
-        const content = this.client.helpers.pagify.execute(message, list.map((u) => `${u.tag.padEnd(30)} ${u.id}`), page);
+        const content = this.client.helpers.pagify.execute(message, list
+            .map((u) => `${u.tag.padEnd(30)} ${u.id}`), page);
 
         return message.send([
             message.translate('utility/discriminator:USERS', {

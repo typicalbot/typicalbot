@@ -8,6 +8,9 @@ export default class extends Command {
 
         if (!mention || mention.id === message.author.id)
             return message.reply(message.translate(randomAddon ? 'fun/stab:SELF_POLICE' : 'fun/stab:SELF'));
-        return message.reply(message.translate(randomAddon ? 'fun/stab:RESPONSE_POLICE' : 'fun/stab:RESPONSE', { user: mention.toString() }));
+
+        return message.reply(message.translate(randomAddon
+            ? 'fun/stab:RESPONSE_POLICE'
+            : 'fun/stab:RESPONSE', { user: mention.toString() }));
     }
 }

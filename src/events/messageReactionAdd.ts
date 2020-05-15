@@ -57,6 +57,8 @@ export default class MessageReactionAdd extends Event {
                 ? message.attachments.array()[0].url
                 : null;
 
+        const jump = `https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`;
+
         const embed = new MessageEmbed()
             .setColor(0xffa500)
             .addFields([
@@ -67,7 +69,7 @@ export default class MessageReactionAdd extends Event {
                 },
                 {
                     name: 'Original',
-                    value: `[Jump](https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id})`,
+                    value: `[Jump](${jump})`,
                     inline: true
                 }
             ])

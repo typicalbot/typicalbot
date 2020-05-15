@@ -16,7 +16,12 @@ export default class extends Command {
                 server: Links.SERVER
             });
 
-            if (!message.embeddable) return message.send(`${response}\n\nTerms of Service: <https://sylke.co/terms>\nPrivacy Policy: <https://sylke.co/privacy>`);
+            if (!message.embeddable) {
+                const appendixA = 'Terms of Service: <https://sylke.co/terms>';
+                const appendixB = 'Privacy Policy: <https://sylke.co/privacy>';
+
+                return message.send(`${response}\n\n${appendixA}\n${appendixB}`);
+            }
 
             return message.send(new MessageEmbed()
                 .setColor(0x00adff)

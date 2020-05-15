@@ -107,6 +107,7 @@ export default class ModerationLog {
         if (!this.id) {
             let id = 1;
 
+            // eslint-disable-next-line max-len
             if (latest && latest.embeds[0] && latest.embeds[0].footer && latest.embeds[0].footer.text && latest.embeds[0].footer.text.match(ModerationLogRegex.CASE)) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore

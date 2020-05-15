@@ -24,6 +24,7 @@ export default class FormatMessage extends Function {
                     : user.username);
         }
         if (type === 'logs-invite') {
+            // eslint-disable-next-line max-len
             const formatted = this.logs(content, guild, user).replace(/{user.nick}|{user.nickname}/gi, member ? member.displayName : user.username);
             if (!options.channel) return formatted;
 
@@ -33,6 +34,7 @@ export default class FormatMessage extends Function {
                 .replace(/{channel.id}/gi, options.channel.id);
         }
         if (type === 'logs-msgdel') {
+            // eslint-disable-next-line max-len
             let formatted = this.logs(content, guild, user).replace(/{user.nick}|{user.nickname}/gi, member ? member.displayName : user.username);
             if (options.channel) {
                 formatted = formatted
@@ -44,6 +46,7 @@ export default class FormatMessage extends Function {
 
             return formatted
                 .replace(/{message.content}|{message.text}/gi, options.message.content)
+                // eslint-disable-next-line max-len
                 .replace(/{message.content:short}|{message.text:short}/gi, this.client.helpers.lengthen.execute(options.message.content, 100));
         }
         if (type === 'automessage') {

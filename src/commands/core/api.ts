@@ -17,7 +17,10 @@ export default class extends Command {
         }
 
         if (parameters === 'generate') {
-            const newApiKey = `${Buffer.from(message.guild.id.toString()).toString('base64')}.${Buffer.from(Date.now().toString()).toString('base64')}`;
+            const guildIdBase64 = Buffer.from(message.guild.id.toString()).toString('base64');
+            const dateBase64 = Buffer.from(Date.now().toString()).toString('base64');
+
+            const newApiKey = `${guildIdBase64}.${dateBase64}`;
 
             this.client.settings
                 .update(message.guild.id, {

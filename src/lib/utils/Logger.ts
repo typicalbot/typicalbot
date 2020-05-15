@@ -5,9 +5,11 @@ export default class Logger {
 
     public constructor() {
         this.#logger = createLogger({
+            // eslint-disable-next-line max-len
             format: format.combine(format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), format.printf((info: any): string => {
                 const { timestamp, level, message, ...rest } = info;
-                return `[${timestamp}] ${level}: ${message}${Object.keys(rest).length ? `\n${JSON.stringify(rest, null, 2)}` : ''}`;
+                const msg = `[${timestamp}] ${level}: ${message}`;
+                return `${msg}${Object.keys(rest).length ? `\n${JSON.stringify(rest, null, 2)}` : ''}`;
             })),
             transports: [
                 new transports.Console({

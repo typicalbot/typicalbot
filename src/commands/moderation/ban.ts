@@ -3,6 +3,7 @@ import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
 
+// eslint-disable-next-line max-len
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)d(?:ays?)?)?\s?(?:(\d+)h(?:ours?|rs?)?)?\s?(?:(\d+)m(?:inutes?|in)?)?\s?(?:(\d+)s(?:econds?|ec)?)?)?(?:\s*(\d+))?(?:\s*(.+))?/i;
 
 export default class extends Command {

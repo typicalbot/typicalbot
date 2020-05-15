@@ -28,6 +28,7 @@ export default class MessageDelete extends Event {
                     ? message.translate('help/logs:DELETED', {
                         user: user.tag
                     })
+                    // eslint-disable-next-line max-len
                     : await this.client.helpers.formatMessage.execute('logs-msgdel', message.guild as TypicalGuild, user, settings.logs.delete, {
                         message,
                         channel: message.channel as TextChannel

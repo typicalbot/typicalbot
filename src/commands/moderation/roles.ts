@@ -98,7 +98,8 @@ export default class extends Command {
 
         await message.guild.members.fetch().catch(console.error);
 
-        const content = this.client.helpers.pagify.execute(message, role.members.map((member) => `${member.user.username.padEnd(30)} : ${member.id}`), parseInt(page, 10) || 1);
+        const content = this.client.helpers.pagify.execute(message, role.members
+            .map((member) => `${member.user.username.padEnd(30)} : ${member.id}`), parseInt(page, 10) || 1);
 
         return message.send([
             message.translate('moderation/roles:MEMBERS', {

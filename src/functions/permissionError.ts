@@ -8,6 +8,7 @@ export default class PermissionError extends TypicalFunction {
         command: Command,
         userLevel: PermissionLevel,
         permission?: 0 | 1 | -1 | 2 | 3 | 4 | 10) {
+        // eslint-disable-next-line max-len
         const requiredLevel = this.client.handlers.permissions.levels.get(permission ? permission : command.permission) as PermissionLevel;
 
         return message.translate('misc:MISSING_PERMS', {

@@ -85,6 +85,7 @@ export default class GuildInvitePosted extends Event {
                     user: message.author.tag,
                     channel: message.channel.toString()
                 })
+                // eslint-disable-next-line max-len
                 : this.client.helpers.formatMessage.execute('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
         }
 

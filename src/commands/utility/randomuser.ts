@@ -10,7 +10,10 @@ export default class extends Command {
 
     execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
-        const role = parameters ? message.guild.roles.cache.get(parameters) || message.guild.roles.cache.find((role) => role.name.toLowerCase() === parameters.toLowerCase()) : message.mentions.roles.first();
+        const role = parameters
+            ? message.guild.roles.cache.get(parameters)
+                || message.guild.roles.cache.find((role) => role.name.toLowerCase() === parameters.toLowerCase())
+            : message.mentions.roles.first();
 
         const members = role
             ? role.members.filter((m) => !m.user.bot)

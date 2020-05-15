@@ -31,6 +31,7 @@ export default class GuildMemberUpdate extends Event {
         if (settings.logs.nickname !== '--embed')
             return channel
                 .send(settings.logs.nickname !== '--enabled'
+                    // eslint-disable-next-line max-len
                     ? await this.client.helpers.formatMessage.execute('logs-nick', guild, user, settings.logs.nickname, { oldMember })
                     : guild.translate('help/logs:NICKNAMED', {
                         user: user.tag,

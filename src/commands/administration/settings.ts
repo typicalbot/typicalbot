@@ -75,6 +75,7 @@ export default class extends Command {
         const [action, setting, type, value] = args;
 
         if (['edit', 'clear'].includes(action) && permission.level < 3)
+            // eslint-disable-next-line max-len
             return message.error(this.client.helpers.permissionError.execute(message, this, permission, PermissionsLevels.SERVER_ADMINISTRATOR));
 
         switch (action) {
@@ -356,9 +357,12 @@ export default class extends Command {
                     if (role) response += role.name;
                     else response += NA;
                 } else if (type === 'roles') {
-                    if (value.length) response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role').join(', ');
+                    if (value.length)
+                        response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role')
+                            .join(', ');
                     else response += NA;
-                } else if (type === 'boolean') response += message.translate(value ? 'common:ENABLED' : 'common:DISABLED');
+                } else if (type === 'boolean')
+                    response += message.translate(value ? 'common:ENABLED' : 'common:DISABLED');
                 else if (type === 'log' && value === '--embed') response += 'Embed';
                 else response += value || NA;
 
@@ -474,8 +478,10 @@ export default class extends Command {
             if (!selectedLanguage)
                 return message.error(message.translate('administration/settings:INVALID_OPTION'));
 
-            if (!selectedLanguage.complete)
+            if (!selectedLanguage.complete) {
+                // eslint-disable-next-line max-len
                 await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <${Links.TRANSLATE}>`);
+            }
 
             value = selectedLanguage.name;
         }
