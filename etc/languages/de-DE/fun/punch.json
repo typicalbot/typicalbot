@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Schlage einen andern Nutzer auf dem Server.",
     "USAGE": "punch [@Nutzer]",
-    "SELF": " hör auf dich selber zu schlagen! :punch::skin-tone-2:",
-    "RESPONSE": "hat gerade {{user}} geschlagen! :punch::skin-tone-2:",
-    "RESPONSE_JAW": "hat gerade {{user}} geschlagen! :punch::skin-tone-2: Oh, dang! Gerade ins Kinn! Das muss weh getan haben!'"
+    "SELF": " hör auf dich selber zu schlagen! :punch:",
+    "RESPONSE": "hat gerade {{user}} geschlagen! :punch:",
+    "RESPONSE_JAW": "hat gerade {{user}} geschlagen! :punch: Oh, dang! Gerade ins Kinn! Das muss weh getan haben!'"
 }

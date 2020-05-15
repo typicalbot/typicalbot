@@ -2,6 +2,6 @@
     "DESCRIPTION": "Frappez un autre utilisateur sur le serveur.",
     "USAGE": "gifle [@user]",
     "SELF": ", arrêtez de vous frapper ! :dizzy_face::wave:",
-    "RESPONSE": "vient de s'emparer de {{user}}! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE_HURT": "vient de claquer {{user}}! :dizzy_face::wave::skin-tone-2: Oh, danger ! Ça doit faire mal !`"
+    "RESPONSE": "vient de s'emparer de {{user}}! :dizzy_face::wave:",
+    "RESPONSE_HURT": "vient de claquer {{user}}! :dizzy_face::wave: Oh, danger ! Ça doit faire mal !`"
 }

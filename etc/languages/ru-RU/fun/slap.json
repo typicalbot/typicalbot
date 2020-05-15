@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Шлёпнуть другого пользователя на сервере.",
     "USAGE": "шлёпнуть [@user]",
-    "SELF": ", хватит бить себя! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE": "только что шлёпнул {{user}}! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE_HURT": "только что шлёпнул {{user}}! :dizzy_face::wave::skin-tone-2: Чёрт! Должно быть, это больно!`"
+    "SELF": ", хватит бить себя! :dizzy_face::wave:",
+    "RESPONSE": "только что шлёпнул {{user}}! :dizzy_face::wave:",
+    "RESPONSE_HURT": "только что шлёпнул {{user}}! :dizzy_face::wave: Чёрт! Должно быть, это больно!`"
 }

@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Örfila en annan användare på servern.",
     "USAGE": "örfila [@användare]",
-    "SELF": ", sluta slå dig själv! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE": "örfilade just {{user}}! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE_HURT": "örfilade just {{user}}! :dizzy_face::wave::skin-tone-2: Åh, gud! Det måste ha gjort ont!`"
+    "SELF": ", sluta slå dig själv! :dizzy_face::wave:",
+    "RESPONSE": "örfilade just {{user}}! :dizzy_face::wave:",
+    "RESPONSE_HURT": "örfilade just {{user}}! :dizzy_face::wave: Åh, gud! Det måste ha gjort ont!`"
 }
