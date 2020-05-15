@@ -52,5 +52,5 @@
     "PURGED": "{{amount}} messages were purged: {{url}}",
     "MESSAGE_PURGED": "Messages Purged in #{{channel}} ({{id}})",
     "USER_AGE": "**Account Age:** {{age}}",
-    "NEW_ACCOUNT": "**Account Age:** {{age}} (New Account)"
+    "NEW_ACCOUNT": "(New Account)"
 }
