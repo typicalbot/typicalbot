@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Prismolite klofuto drugemu uporabniku v strežniku.",
     "USAGE": "klofuta [@uporabnik]",
-    "SELF": ",nehaj se udarjati! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE": "je prismolil klofuto {{user}}! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE_HURT": "je prismolil klofuto {{user}}! :dizzy_face::wave::skin-tone-2: O, šment! To pa je moralo boleti!`"
+    "SELF": ",nehaj se udarjati! :dizzy_face::wave:",
+    "RESPONSE": "je prismolil klofuto {{user}}! :dizzy_face::wave:",
+    "RESPONSE_HURT": "je prismolil klofuto {{user}}! :dizzy_face::wave: O, šment! To pa je moralo boleti!`"
 }

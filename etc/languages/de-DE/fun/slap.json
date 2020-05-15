@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Schlage einen andern Nutzer auf dem Server.",
     "USAGE": "slap [@Nutzer]",
-    "SELF": ", hör auf dich selber zu schlagen! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE": "hat gerade {{user}} geschlagen! :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE_HURT": "hat gerade {{user}} geschlagen! :dizzy_face::wave::skin-tone-2: Oh, dang! Das muss wehgetan haben!`"
+    "SELF": ", hör auf dich selber zu schlagen! :dizzy_face::wave:",
+    "RESPONSE": "hat gerade {{user}} geschlagen! :dizzy_face::wave:",
+    "RESPONSE_HURT": "hat gerade {{user}} geschlagen! :dizzy_face::wave: Oh, dang! Das muss wehgetan haben!`"
 }
