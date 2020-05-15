@@ -18,6 +18,6 @@ export default class Task {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     execute(_data?: unknown): Promise<void> {
-        throw new Error('Silly you, how did you forget to create an execute method in a task file hehehehe. Tsk Tsk Tsk!');
+        throw new Error('Unsupported operation.');
     }
 }

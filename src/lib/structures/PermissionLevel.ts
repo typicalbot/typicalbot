@@ -44,6 +44,6 @@ export default class PermissionLevel {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     check(_guild: Guild, _member: GuildMember): boolean {
-        throw new Error('So silly of you. One of your permissions do not have a check function. What is the point of having a permission if you never check it?');
+        throw new Error('Unsupported operation.');
     }
 }

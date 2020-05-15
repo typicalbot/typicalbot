@@ -35,6 +35,6 @@ export default class Command {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     execute(_message: Message | TypicalGuildMessage, _params?: string, _permissions?: PermissionLevel) {
-        throw 'Silly you, how does your command execute without an execute method?';
+        throw 'Unsupported operation.';
     }
 }

@@ -12,6 +12,6 @@ export default class Event {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     execute(..._args: unknown[]) {
-        throw 'So Silly of you. How can you make an event and never have an execute function.';
+        throw 'Unsupported operation.';
     }
 }
