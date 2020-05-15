@@ -9,7 +9,7 @@ export default class extends Command {
 
     async execute(message: TypicalGuildMessage, parameters?: string) {
         const settingsCommand = this.client.commands.get('settings');
-        if (!settingsCommand) return
+        if (!settingsCommand) return;
 
         // No parameters were provided so use the menu style.
         if (!parameters) {
@@ -41,14 +41,14 @@ export default class extends Command {
     }
 
     async setLanguage(message: TypicalGuildMessage, settingsCommand: Command) {
-        const languageName = await message.chooseOption(possibleLanguages.map((language) => language.canonical))
+        const languageName = await message.chooseOption(possibleLanguages.map((language) => language.canonical));
         message.menuResponse?.delete().catch(() => undefined);
         if (!languageName) return message.error(message.translate('common:INVALID_OPTION'));
 
-        const languageToUse = possibleLanguages.find((language) => language.canonical === languageName)
+        const languageToUse = possibleLanguages.find((language) => language.canonical === languageName);
         if (!languageToUse) return;
 
         const [alias] = languageToUse.aliases;
-        return settingsCommand.execute(message, `edit language ${alias}`)
+        return settingsCommand.execute(message, `edit language ${alias}`);
     }
 }

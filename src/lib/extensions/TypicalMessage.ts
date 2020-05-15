@@ -39,11 +39,11 @@ export class TypicalMessage extends Structures.get('Message') {
             return;
         }
 
-        const CANCEL_OPTIONS = this.translate('misc:CANCEL_OPTIONS', { returnObjects: true })
+        const CANCEL_OPTIONS = this.translate('misc:CANCEL_OPTIONS', { returnObjects: true });
         if (CANCEL_OPTIONS.includes(response.content.toLowerCase())) {
-            if (response.deletable) response.delete().catch(() => undefined)
-            this.menuResponse?.delete().catch(() => undefined)
-            await this.respond(this.translate('misc:CANCELLED'))
+            if (response.deletable) response.delete().catch(() => undefined);
+            this.menuResponse?.delete().catch(() => undefined);
+            await this.respond(this.translate('misc:CANCELLED'));
             return;
         }
 
@@ -53,7 +53,7 @@ export class TypicalMessage extends Structures.get('Message') {
             return;
         }
 
-        if (response.deletable) response.delete().catch(() => undefined)
+        if (response.deletable) response.delete().catch(() => undefined);
 
         return options[Math.floor(number) - 1];
     }

@@ -334,7 +334,7 @@ export default class extends Command {
         const count = Math.ceil(settings.length / 10);
         if (page < 1 || page > count) page = 1;
 
-        const NA = message.translate('common:NA').toUpperCase()
+        const NA = message.translate('common:NA').toUpperCase();
 
         const list = settings
             .splice((page - 1) * 10, 10)
