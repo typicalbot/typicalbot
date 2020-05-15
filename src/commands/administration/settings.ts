@@ -151,6 +151,12 @@ export default class extends Command {
                         type: 'boolean',
                         path: 'auto.role.silent'
                     },
+                    'autorole-sync': {
+                        description: 'administration/settings:AUTOROLE-SYNC',
+                        value: settings.auto.role.sync,
+                        type: 'boolean',
+                        path: 'auto.role.sync'
+                    },
                     announcements: {
                         description: 'administration/settings:ANNOUNCEMENTS',
                         value: settings.announcements.id,

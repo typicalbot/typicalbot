@@ -68,6 +68,7 @@ export interface GuildSettings {
             id: string | null;
             delay: number | null;
             silent: boolean;
+            sync: boolean;
         };
         message: string | null;
         nickname: string | null;

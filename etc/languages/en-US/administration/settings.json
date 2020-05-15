@@ -30,6 +30,7 @@
     "AUTOROLE-BOTS": "Bots joining the server will automatically be given this role.",
     "AUTOROLE-DELAY": "The amount of time to wait before giving the autorole to allow for security levels to work.",
     "AUTOROLE-SILENT": "If not silent, a message will be sent in the logs channel stating a member was given the autorole.",
+    "AUTOROLE-SYNC": "If sync is enabled, the bot will always try and provide the autorole whenever it reboots after an update or API crash.",
     "SUBSCRIBERROLE": "A role that will be given when a user uses the `subscribe` command.",
     "ANNOUNCEMENTS": "A channel for announcements to be posted, used with the `announce` command.",
     "ANNOUNCEMENTS-MENTION": "A mention to be put in the announcement when posted, such as a Subscriber role.",

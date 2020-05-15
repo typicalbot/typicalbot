@@ -40,7 +40,8 @@ export default (id: string) => ({
             bots: null,
             id: null,
             delay: null,
-            silent: true
+            silent: true,
+            sync: true
         },
         message: null,
         nickname: null
