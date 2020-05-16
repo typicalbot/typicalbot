@@ -1,4 +1,4 @@
 {
-	"DESCRIPTION": "Recibe una foto al azar de un perro.",
+	"DESCRIPTION": "Te da una imagen aleatoria de un perro.",
 	"USAGE": "perro"
 }

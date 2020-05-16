@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Apuñala a otro usuario del servidor.",
+    "USAGE": "stab [@usuario]",
+    "SELF": "acaba de apuñalarse a si mismo :dagger::scream:",
+    "SELF_POLICE": "acaba de apuñalarse a si mismo :dagger::scream: ¡Alguien llame a la policia!",
+    "RESPONSE": "acaba de apuñalar a {{user}} :dagger::scream:",
+    "RESPONSE_POLICE": "acaba de apuñalar a {{user}} :dagger::scream: ¡Alguien llame a la policia!"
+}

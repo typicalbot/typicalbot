@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Dale a otro usuario una galleta o guárdalas todas para ti mismo.",
+    "USAGE": "cookie [@usuario]",
+    "SELF_LAUGH": "se ríe como un loco mientras come lentamente las galletas que guardaban para sí mismos frente a todos.",
+    "SELF_KEPT": "decidio guardar todas las galletas para sí mismo! Que imbecil! :angry:",
+    "GIVEN": "acaba de darle una galleta a {{user}} . :cookie:"
+}

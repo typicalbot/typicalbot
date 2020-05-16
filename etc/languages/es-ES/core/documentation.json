@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "Recibe un enlace por la documentación de TypicalBot.",
+	"DESCRIPTION": "Toma un enlace a la documentación de TypicalBot.",
 	"USAGE": "documentación",
-	"TEXT": "La documentación por los comandos y configuraciones esta a **<{{link}}>**.",
+	"TEXT": "La documentación para todos los comandos y ajustes puede encontrarse en **<{{link}}>**.",
 	"TYPICAL_DOCS": "Documentación de TypicalBot"
 }

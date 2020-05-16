@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Establece un idioma para ser usado por tu servidor. Si utilizas este comando en un mensaje directo al bot, se establecerá directamente el idioma de tu cuenta de usuario.",
+	"USAGE": "idioma [lugar]",
+	"SET_LANGUAGE": "Cambiar el idioma predeterminado para este servidor.",
+	"VIEW_LANGUAGES": "Ver una lista de todos los idiomas disponibles soportados por el bot."
+}

@@ -1,0 +1,7 @@
+{
+  "DESCRIPTION": "Evalúa expresiones matemáticas.",
+  "USAGE": "math <expresion>",
+  "INPUT": "**ENTRADA:**",
+  "OUTPUT": "**SALIDA:**",
+  "FAILED": "Fallo al evaluar la expresión matemática."
+}

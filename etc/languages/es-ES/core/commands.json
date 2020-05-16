@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Recibe una lista de los comandos de TypicalBot.",
+    "USAGE": "comandos",
+    "CHECK_DM": "Debería haber llegado una lista de comandos a tus mensajes directos.",
+    "TYPICAL_COMMANDS": "Comandos de TypicalBot",
+    "TEXT": "Usa `{{prefix}}help <comando>` para recibir más información acerca de un comando específico.",
+    "OWNER": "Propietario del servidor (Nivel 4)",
+    "ADMIN": "Administrador del servidor (Nivel 3)",
+    "MOD": "Moderador del Servidor (Nivel 2)",
+    "MEMBER": "Miembro del servidor (Nivel 0)",
+    "NONE": "No hay comandos para mostrar."
+}

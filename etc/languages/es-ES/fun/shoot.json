@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Dispara a otro usuario del servidor.",
+    "USAGE": "shoot [@usuario]",
+    "SELF": "se disparó a si mismo! :scream:",
+    "POLICE": "¡Alguien llame a la policía!",
+    "MISSED": "¡Espera! ¡Ha errado!",
+    "HEADSHOT": "¡Bam! ¡Disparo a la cabeza!",
+    "RESPONSE": "le disparó a {{user}} :scream:"
+}
