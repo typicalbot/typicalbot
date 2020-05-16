@@ -22,7 +22,7 @@ export default class GuildMemberAdd extends Event {
 
                 if (settings.logs.join === '--embed') {
                     const age = Date.now() - member.user.createdTimestamp
-                    const ACCOUNT_AGE = `${guild.translate('help/logs:USER_AGE', { age: guild.client.helpers.convertTime.execute(guild, age) })} ${age < 60000 * 15 ? guild.translate('help/logs:NEW_ACCOUNT') : ''}`
+                    const ACCOUNT_AGE = `${guild.translate('help/logs:USER_AGE', { age: guild.client.helpers.convertTime.execute(guild, age, true) })} ${age < 60000 * 15 ? guild.translate('help/logs:NEW_ACCOUNT') : ''}`
                     channel
                         .send(new MessageEmbed()
                             .setColor(0x00ff00)
