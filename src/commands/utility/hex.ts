@@ -1,5 +1,6 @@
-import { Canvas } from 'canvas-constructor';
+import fs from 'fs';
 import { MessageAttachment, MessageEmbed } from 'discord.js';
+import fetch from 'node-fetch';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
@@ -9,7 +10,7 @@ const regex = /#?([0-9a-fA-F]{6}|random)/i;
 export default class extends Command {
     mode = Modes.LITE;
 
-    execute(message: TypicalGuildMessage, parameters: string) {
+    async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
         if (!args)
             return message.error(message.translate('misc:USAGE_ERROR', {
@@ -24,37 +25,24 @@ export default class extends Command {
                 ? Math.floor(Math.random() * 16777215).toString(16)
                 : color;
 
-        const buffer = new Canvas(200, 100)
-            .setColor(`#${hex}`)
-            .addRect(0, 0, 200, 100)
-            .setColor(this.bw(hex))
-            .setTextFont('20px Impact')
-            .setTextAlign('left')
-            .addText(`#${hex}`.toUpperCase(), 5, 95)
-            .toBuffer();
+        const json = await fetch(`https://canvas.typicalbot.com/api/v1/color?hex=${hex}`).then((body) => body.json());
+
+        fs.writeFile('data/image.png', json.image.split(';base64,').pop(), { encoding: 'base64' }, (err) => {
+            if (err) console.error(err);
+        });
 
         if (!message.embeddable)
-            return message.channel.send(new MessageAttachment(buffer));
+            return message.channel.send(new MessageAttachment('data/image.png'));
 
         return message.send(new MessageEmbed()
             .attachFiles([
                 {
-                    attachment: buffer,
+                    attachment: 'data/image.png',
                     name: 'color.png'
                 }
             ])
             .setColor(parseInt(hex, 16))
             .setImage('attachment://color.png')
             .setFooter(`#${hex}`));
-    }
-
-    bw(hexcolor: string) {
-        const r = parseInt(hexcolor.substr(0, 2), 16);
-        const g = parseInt(hexcolor.substr(2, 2), 16);
-        const b = parseInt(hexcolor.substr(4, 2), 16);
-
-        const value = (r * 299 + g * 587 + b * 114) / 1000;
-
-        return value >= 128 ? '#000000' : '#ffffff';
     }
 }
