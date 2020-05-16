@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.0]
+### Added
+ - Server count posting to discordextremelist.xyz ([17f9394](https://github.com/sylkellc/typicalbot/commit/17f939484e698e265174326d9fd3503c54385476))
+ - Server count posting to botlist.space ([93938b9](https://github.com/sylkellc/typicalbot/commit/93938b99896076b6d5fdf9a7cbb6c494a510f286))
+
+### Fixed
+ - Issue with Android users not being able to see skin-tone emojis ([#230](https://github.com/sylkellc/typicalbot/pull/230))
+ 
+### Changed
+ - `$hex` to use `canvas.typicalbot.com` api instead of bot process ([#233](https://github.com/sylkellc/typicalbot/pull/233))
+ - Join log to include account age and include `New Account` when account is less than 15 minutes old ([#231](https://github.com/sylkellc/typicalbot/pull/231))
+
 ## [3.5.0]
 ### Added
  - `$language` to change TypicalBot language ([#182](https://github.com/sylkellc/typicalbot/pull/182))
@@ -247,7 +259,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.5.0...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.6.0...HEAD
+[3.6.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.6.0
 [3.5.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.5.0
 [3.4.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.4.1
 [3.4.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.4.0
