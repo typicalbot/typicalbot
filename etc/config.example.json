@@ -10,6 +10,7 @@
     "apis": {
         "topgg": "",
         "carbonkey": "",
+        "del": "",
         "twitch": "",
         "sentry": ""
     },

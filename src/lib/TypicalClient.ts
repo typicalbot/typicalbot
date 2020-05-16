@@ -161,5 +161,20 @@ export default class Cluster extends Client {
         }).catch((err) => {
             Sentry.captureException(err);
         });
+
+        const guildCount = await this.fetchData('guilds.cache.size');
+
+        fetch(`https://api.discordextremelist.xyz/v1/bot/${this.config.id}`, {
+            method: 'post',
+            headers: {
+                Authorization: this.config.apis.del,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                guildCount: guildCount
+            })
+        }).catch((err) => {
+            Sentry.captureException(err);
+        });
     }
 }
