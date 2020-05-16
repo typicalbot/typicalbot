@@ -176,5 +176,19 @@ export default class Cluster extends Client {
         }).catch((err) => {
             Sentry.captureException(err);
         });
+
+        fetch(`https://api.botlist.space/v1/bots/${this.config.id}`, {
+            method: 'post',
+            headers: {
+                Authorization: this.config.apis.bls,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                // eslint-disable-next-line @typescript-eslint/camelcase
+                server_count: guildCount
+            })
+        }).catch((err) => {
+            Sentry.captureException(err);
+        });
     }
 }
