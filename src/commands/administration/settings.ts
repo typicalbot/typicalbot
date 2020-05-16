@@ -9,6 +9,12 @@ const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
 
 export const possibleLanguages = [
     {
+        name: 'de-DE',
+        canonical: 'German',
+        complete: false,
+        aliases: ['de', 'german']
+    },
+    {
         name: 'en-US',
         canonical: 'English',
         complete: true,
@@ -27,22 +33,16 @@ export const possibleLanguages = [
         aliases: ['fr', 'french']
     },
     {
-        name: 'de-DE',
-        canonical: 'German',
+        name: 'ru-RU',
+        canonical: 'Russian',
         complete: false,
-        aliases: ['de', 'german']
+        aliases: ['ru', 'russian']
     },
     {
         name: 'sl-SL',
         canonical: 'Slovenian',
         complete: true,
         aliases: ['sl', 'slovenian']
-    },
-    {
-        name: 'ru-RU',
-        canonical: 'Russian',
-        complete: false,
-        aliases: ['ru', 'russian']
     },
     {
         name: 'sv-SE',
