@@ -27,7 +27,9 @@ export default class extends Command {
 
         const json = await fetch(`https://canvas.typicalbot.com/api/v1/color?hex=${hex}`).then((body) => body.json());
 
-        fs.writeFile('image.png', json.image.split(';base64,').pop(), { encoding: 'base64' }, console.error);
+        fs.writeFile('image.png', json.image.split(';base64,').pop(), { encoding: 'base64' }, (err) => {
+            if (err) console.error(err);
+        });
 
         if (!message.embeddable)
             return message.channel.send(new MessageAttachment('image.png'));
