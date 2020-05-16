@@ -16,8 +16,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: install build tools
-        run: sudo apt-get install libcairo2-dev libgif-dev libjpeg-dev libpango1.0-dev librsvg2-dev -y
       - name: yarn install
         run: yarn install
       - name: eslint
@@ -35,8 +33,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: install build tools
-        run: sudo apt-get install libcairo2-dev libgif-dev libjpeg-dev libpango1.0-dev librsvg2-dev -y
       - name: yarn install
         run: yarn install
       - name: eslint
