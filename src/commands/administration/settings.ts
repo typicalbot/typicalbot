@@ -15,6 +15,12 @@ export const possibleLanguages = [
         aliases: ['en', 'english']
     },
     {
+        name: 'es-ES',
+        canonical: 'Spanish',
+        complete: false,
+        aliases: ['es', 'spanish']
+    },
+    {
         name: 'fr-FR',
         canonical: 'French',
         complete: true,
