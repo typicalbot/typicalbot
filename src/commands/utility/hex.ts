@@ -27,9 +27,9 @@ export default class extends Command {
 
         const json = await fetch(`https://canvas.typicalbot.com/api/v1/color?hex=${hex}`).then((body) => body.json());
 
-        fs.mkdir('data', (err) => {
-            if (err) console.error(err);
-        });
+        if (!fs.existsSync('data')) {
+            fs.mkdirSync('data');
+        }
 
         fs.writeFile('data/image.png', json.image.split(';base64,').pop(), { encoding: 'base64' }, (err) => {
             if (err) console.error(err);
