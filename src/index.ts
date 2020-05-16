@@ -1,8 +1,13 @@
 /* eslint-disable no-console */
+import fs from 'fs';
 import { TextChannel } from 'discord.js';
 import { Client, ClientSocket, NodeMessage } from 'veza';
 import Cluster from './lib/TypicalClient';
 import config from '../etc/config.json';
+
+fs.mkdir('data', (err) => {
+    if (err && err.code !== 'EEXIST') console.error(err);
+});
 
 if (!config.clustered) {
     new Cluster(undefined);
