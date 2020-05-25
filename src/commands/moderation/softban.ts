@@ -20,6 +20,11 @@ export default class extends Command {
             }));
         args.shift();
 
+        if (message.guild.me?.permissions.has('BAN_MEMBERS'))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'BAN_MEMBERS'
+            }));
+
         const [userID, days, reason] = args;
 
         const member = await message.guild.members

@@ -119,6 +119,11 @@ export default class extends Command {
         if (permissions.level < 3)
             return message.error(this.client.helpers.permissionError.execute(message, this, permissions));
 
+        if (message.guild.me?.permissions.has('MANAGE_ROLES'))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'MANAGE_ROLES'
+            }));
+
         const args = manageRegex.exec(argument);
         if (!args)
             return message.error(message.translate('moderation/roles:USAGE', {
@@ -227,6 +232,11 @@ export default class extends Command {
         subcommand = 'add') {
         if (permission.level < 3)
             return message.error(this.client.helpers.permissionError.execute(message, this, permission));
+
+        if (message.guild.me?.permissions.has('MANAGE_ROLES'))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'MANAGE_ROLES'
+            }));
 
         if (!role)
             return message.error(message.translate('moderation/give:INVALID'));

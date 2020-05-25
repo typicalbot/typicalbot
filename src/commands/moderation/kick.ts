@@ -19,6 +19,11 @@ export default class extends Command {
             }));
         args.shift();
 
+        if (message.guild.me?.permissions.has('KICK_MEMBERS'))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'KICK_MEMBERS'
+            }));
+
         const [userID, reason] = args;
 
         const member = await message.guild.members
