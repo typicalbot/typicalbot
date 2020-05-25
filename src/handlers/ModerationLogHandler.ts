@@ -66,7 +66,7 @@ export default class ModerationLogHandler {
             : '';
 
         return message.edit(embed
-            .setAuthor(moderator.tag, moderator.displayAvatarURL())
+            .setAuthor(`${moderator.tag} (${moderator.id})`, moderator.displayAvatarURL())
             .setDescription([
                 start,
                 message.translate('moderation/modlog:REASON', {
