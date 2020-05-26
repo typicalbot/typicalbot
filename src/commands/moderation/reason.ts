@@ -20,11 +20,6 @@ export default class extends Command {
             }));
         args.shift();
 
-        if (message.guild.me?.permissions.has('MANAGE_MESSAGES'))
-            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
-                permission: 'MANAGE_MESSAGES'
-            }));
-
         const [id, reason] = args;
 
         const log = (await this.client.handlers.moderationLog.fetchCase(message.guild, id)) as TypicalGuildMessage;

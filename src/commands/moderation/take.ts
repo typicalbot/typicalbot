@@ -18,7 +18,7 @@ export default class extends Command {
 
         if (message.guild.me?.permissions.has('MANAGE_ROLES'))
             return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
-                permission: 'MANAGE_ROLES'
+                permission: 'Manage Roles'
             }));
 
         const [id, username, discriminator, roleID, roleName] = args;

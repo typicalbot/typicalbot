@@ -19,7 +19,7 @@ export default class extends Command {
 
         if (message.guild.me?.permissions.has('MOVE_MEMBERS'))
             return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
-                permission: 'MOVE_MEMBERS'
+                permission: 'Move Members'
             }));
 
         const [userID, reason] = args;

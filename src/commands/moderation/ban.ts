@@ -21,7 +21,7 @@ export default class extends Command {
 
         if (message.guild.me?.permissions.has('BAN_MEMBERS'))
             return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
-                permission: 'BAN_MEMBERS'
+                permission: 'Ban Members'
             }));
 
         const args = regex.exec(parameters);

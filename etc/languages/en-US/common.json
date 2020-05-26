@@ -52,5 +52,5 @@
     "KICK": "Kick",
     "AUTHOR": "Author",
     "MESSAGE": "Message",
-    "INSUFFICIENT_PERMISSIONS": "TypicalBot is missing the `{permission}` permission."
+    "INSUFFICIENT_PERMISSIONS": "TypicalBot is missing the `{{permission}}` permission."
 }
