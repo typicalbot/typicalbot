@@ -19,6 +19,11 @@ export default class extends Command {
         });
         if (!parameters || !permissionLevel) return message.error(usageError);
 
+        if (message.guild.me?.permissions.has('BAN_MEMBERS'))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'Ban Members'
+            }));
+
         const args = regex.exec(parameters);
         if (!args) return message.error(usageError);
         args.shift();
