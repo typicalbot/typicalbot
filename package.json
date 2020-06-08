@@ -32,7 +32,7 @@
     },
     "homepage": "https://github.com/sylkellc/typicalbot#readme",
     "dependencies": {
-        "@sentry/node": "^5.15.5",
+        "@sentry/node": "^5.16.1",
         "discord.js": "^12.2.0",
         "fs": "0.0.2",
         "i18next": "^19.4.4",
