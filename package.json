@@ -68,7 +68,7 @@
         "eslint": "^6.1.0",
         "eslint-plugin-import": "^2.21.1",
         "husky": "^4.2.5",
-        "lint-staged": "^10.2.6"
+        "lint-staged": "^10.2.9"
     },
     "husky": {
         "hooks": {
