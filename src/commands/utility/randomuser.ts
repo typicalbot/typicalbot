@@ -2,14 +2,11 @@ import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
 
-const regex = /(-o(?:nline)?\s)?/i;
-
 export default class extends Command {
     aliases = ['ruser'];
     mode = Modes.LITE;
 
     execute(message: TypicalGuildMessage, parameters: string) {
-        const args = regex.exec(parameters);
         const role = parameters
             ? message.guild.roles.cache.get(parameters)
                 || message.guild.roles.cache.find((role) => role.name.toLowerCase() === parameters.toLowerCase())
@@ -17,7 +14,7 @@ export default class extends Command {
 
         const members = role
             ? role.members.filter((m) => !m.user.bot)
-            : args
+            : ['-o', '-online'].includes(parameters)
                 ? message.guild.members.cache.filter((m) => m.presence.status !== 'offline' && !m.user.bot)
                 : message.guild.members.cache.filter((m) => !m.user.bot);
 
