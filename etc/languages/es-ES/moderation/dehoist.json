@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Compruebe si algún miembro del servidor tiene algún carácter especial en su nombre de usuario.",
+    "USAGE": "dehoist",
+    "NONE": "No hay ningún correo para ser eliminado.",
+    "FOUND": "No hay ningún correo para ser eliminado:",
+    "ONE": "es 1 usuario",
+    "MULTIPLE": "son usuarios de {{amount}}"
+}

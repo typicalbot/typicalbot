@@ -1,10 +1,20 @@
 {
-	"ONE_DAY": "1 día",
-	"DAYS": "{{amount}} días",
-	"ONE_HOUR": "1 hora",
-	"HOURS": "{{amount}} horas",
-	"ONE_MINUTE": "1 minuto",
-	"MINUTES": "{{amount}} minutos",
-	"ONE_SECOND": "1 segundo",
-	"SECONDS": "{{amount}} segundos"
+    "ONE_YEAR": "1 año",
+    "YEARS": "{{amount}} años",
+    "SHORT_YEAR": "{{amount}}años",
+    "ONE_MONTH": "1 mes",
+    "MONTHS": "{{amount}} meses",
+    "SHORT_MONTH": "{{amount}}mes",
+    "ONE_DAY": "1 día",
+    "DAYS": "{{amount}} días",
+    "SHORT_DAY": "{{amount}}d",
+    "ONE_HOUR": "1 hora",
+    "HOURS": "{{amount}} horas",
+    "SHORT_HOUR": "{{amount}}h",
+    "ONE_MINUTE": "1 minuto",
+    "MINUTES": "{{amount}} minutos",
+    "SHORT_MINUTE": "{{amount}}m",
+    "ONE_SECOND": "1 segundo",
+    "SECONDS": "{{amount}} segundos",
+    "SHORT_SECOND": "{{amount}}s"
 }

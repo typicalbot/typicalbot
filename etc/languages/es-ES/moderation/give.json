@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Recibir un rol fuera de la lista de roles públicos.",
+	"USAGE": "dar <role-name>",
+	"INVALID": "Canal invalido. Por favor asegurese de que su ortografia es correcta y que el canal realmente existe.",
+	"UNEDITABLE": "Permisos insuficientes para el bot. Asegúrese de que el rol más alto que tengo está por encima del papel que está intentando dar y que tengo el permiso de Gestionar Roles.",
+	"NOT_PUBLIC": "El rol solicitado no está en la lista de roles públicos."
+}

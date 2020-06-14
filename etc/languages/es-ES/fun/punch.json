@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Golpea a otro usuario del servidor.",
     "USAGE": "punch [@usuario]",
-    "SELF": " ¡deja de golpearte a ti mismo! :punch::skin-tone-2:",
-    "RESPONSE": "acaba de golpear a {{user}} :punch::skin-tone-2:",
-    "RESPONSE_JAW": "acaba de golpear a {{user}} :punch::skin-tone-2: ¡Oh, dios! ¡Justo en la mandibula! ¡Eso debe doler!'"
+    "SELF": " deja de golpearte! :puñetazo:",
+    "RESPONSE": "acaba de golpear {{usuario}}! :puñetazo:",
+    "RESPONSE_JAW": "acaba de golpear {{usuario}}! : golpe: ¡Oh, dang! Derecho a la mandíbula! ¡Eso debe haber dolido"
 }

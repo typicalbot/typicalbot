@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Abofetea a otro usuario del servidor.",
     "USAGE": "slap [@usuario]",
-    "SELF": ", deja de golpearte a ti mismo :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE": "acaba de abofetear a {{user}} :dizzy_face::wave::skin-tone-2:",
-    "RESPONSE_HURT": "acaba de abofetear a {{user}} :dizzy_face::wave::skin-tone-2: ¡Oh, dios! ¡Eso debio doler!`"
+    "SELF": ", deja de golpearte! : dizzy_face :: wave:",
+    "RESPONSE": "¡acabo de abofetear a {{usuario}}! : dizzy_face :: wave:",
+    "RESPONSE_HURT": "¡acabo de abofetear a {{usuario}}! : dizzy_face :: wave: ¡Oh, dang! ¡Eso debe haber dolido"
 }

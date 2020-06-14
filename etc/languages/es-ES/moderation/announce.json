@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Envía un anuncio al canal de anuncios. Usa la bandera '-e' antes de tu contenido para hacer el mensaje un incrustado. Si los anuncios mencionan el rol se establece, siempre lo utilizará.",
+    "USAGE": "anunciar [-e] <contenido>",
+    "INVALID": "No se ha proporcionado ningún contenido de anuncio.",
+    "INVALID_CHANNEL": "Para anunciar, por favor configure un canal de anuncio escribiendo: `$set edite los anuncios #nombre-canal`",
+    "TEXT": "** __ Anuncio de {{usertag}}: __ ** {{role}}",
+    "TITLE": "Noticia"
+}

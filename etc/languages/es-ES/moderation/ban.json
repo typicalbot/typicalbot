@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Banea un miembro de este servidor.",
+    "USAGE": "prohibir <@usuario> [tiempo: xd (ays) xh (nuestro) xm (minutos) xs (econds)] [días de purga] [razón]",
+    "WEEk": "No puedes banear a un usuario por más de una semana.",
+    "TOO_LOW": "No puedes banear a un usuario con el mismo o mayor rol.",
+    "UNBANNABLE": "Para completar la solicitud, necesito el permiso **BAN_MEMBERS** y mi rol más alto necesita ser mayor que el rol más alto del usuario solicitado.",
+    "BANNED": "Has sido baneado de {0}.",
+    "REASON": "Baneado por {{mod}} | Razón: {{reason}}",
+    "ERROR": "Ocurrió un error al intentar obtener el usuario solicitado.",
+    "BAN_SUCCESS": "Usuario {{user}} baneado con éxito.",
+    "USER_BANNED": "Usuario Baneado"
+}

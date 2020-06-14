@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Compruebe si algún miembro del servidor tiene una invitación de servidor en su estado de juego.",
+    "USAGE": "adcheck",
+    "NONE": "No hay usuarios con una invitación en su estado.",
+    "FOUND": "Hay {{Cantidad }} con una invitación en su estado:\n",
+    "ONE": "es 1 usuario",
+    "MULTIPLE": "son usuarios de {{amount}}",
+    "TITLE": "Usuarios con invitación en estado de reproducción"
+}

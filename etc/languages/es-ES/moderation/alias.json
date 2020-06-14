@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Crear un alias para comandos.",
+    "USAGE": "alias <list|add|remove|clear> <add/remove:command> <add:new-alias>",
+    "CURRENT": "Alias actuales:",
+    "INVALID_COMMAND": "Este comando no existe.",
+    "ALIAS_EXISTS": "El alias dado ya apunta al comando `{{name}}.",
+    "LONG": "No puedes crear un alias de más de 10 caracteres.",
+    "ADDED": "Alias ​​agregado con éxito.",
+    "ADD_ERROR": "Se ha producido un error al añadir el estado.",
+    "INVALID_ALIAS": "La entidad solicitada no existe",
+    "REMOVED": "Alias ​​agregado con éxito.",
+    "REMOVE_ERROR": "Ocurrió un error mientras se removía el plugin.",
+    "CLEARED": "Alias ​​agregado con éxito.",
+    "CLEAR_ERROR": "Se ha producido un error al añadir el estado."
+}
