@@ -21,11 +21,6 @@ export default class extends Command {
             }));
         args.shift();
 
-        if (message.guild.me?.permissions.has('MANAGE_ROLES'))
-            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
-                permission: 'Manage Roles'
-            }));
-
         const [
             userID,
             days,

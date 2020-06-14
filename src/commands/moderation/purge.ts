@@ -20,11 +20,6 @@ export default class extends Command {
             }));
         args.shift();
 
-        if (message.guild.me?.permissions.has('MANAGE_MESSAGES'))
-            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
-                permission: 'Manage Messages'
-            }));
-
         const [
             userMention,
             userID,
