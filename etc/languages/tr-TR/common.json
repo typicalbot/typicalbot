@@ -51,5 +51,6 @@
     "WARN": "Uyar",
     "KICK": "At",
     "AUTHOR": "Yaratıcı",
-    "MESSAGE": "Mesaj"
+    "MESSAGE": "Mesaj",
+    "INSUFFICIENT_PERMISSIONS": "TypicalBot'ta `{{permission}}` izni eksik."
 }

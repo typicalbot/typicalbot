@@ -1,10 +1,20 @@
 {
-	"ONE_DAY": "1 gün",
-	"DAYS": "{{amount}} gün",
-	"ONE_HOUR": "1 saat",
-	"HOURS": "{{amount}} saat",
-	"ONE_MINUTE": "1 dakika",
-	"MINUTES": "{{amount}} dakika",
-	"ONE_SECOND": "1 saniye",
-	"SECONDS": "{{amount}} saniye"
+    "ONE_YEAR": "1 yıl",
+    "YEARS": "{{amount}} yıl",
+    "SHORT_YEAR": "{{amount}}y",
+    "ONE_MONTH": "1 ay",
+    "MONTHS": "{{amount}} ay",
+    "SHORT_MONTH": "{{amount}}a",
+    "ONE_DAY": "1 gün",
+    "DAYS": "{{amount}} gün",
+    "SHORT_DAY": "{{amount}}g",
+    "ONE_HOUR": "1 saat",
+    "HOURS": "{{amount}} saat",
+    "SHORT_HOUR": "{{amount}}sa",
+    "ONE_MINUTE": "1 dakika",
+    "MINUTES": "{{amount}} dakika",
+    "SHORT_MINUTE": "{{amount}}dk",
+    "ONE_SECOND": "1 saniye",
+    "SECONDS": "{{amount}} saniye",
+    "SHORT_SECOND": "{{amount}}sn"
 }

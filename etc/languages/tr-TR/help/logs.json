@@ -50,5 +50,7 @@
     "MESSAGE_DELETED": "{{channel}} ({{id}}) kanalında mesaj silindi",
     "BULK_DELETED": "{{channel}} ({{id}}) kanalında {{amount}} mesaj temizlendi: {{url}}",
     "PURGED": "{{amount}} mesaj temzlendi: {{url}}",
-    "MESSAGE_PURGED": "#{{channel}} ({{id}}) kanalında mesaj temizlendi"
+    "MESSAGE_PURGED": "#{{channel}} ({{id}}) kanalında mesaj temizlendi",
+    "USER_AGE": "**Hesap Yaşı:** {{age}}",
+    "NEW_ACCOUNT": "(Yeni Hesap)"
 }

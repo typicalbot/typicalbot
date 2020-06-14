@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Sunucuda başka bir kullanıcıya yumruk at.",
     "USAGE": "punch [@kullanıcı]",
-    "SELF": " kendine yumruk atmayı kes! :punch:",
+    "SELF": " kendine vurmayı kes! :punch:",
     "RESPONSE": "az önce {{user}} kullanıcısına yumruk attı! :punch:",
     "RESPONSE_JAW": "az önce {{user}} kullanıcısına yumruk attı! :punch: Lanet olsun! Direkt çeneye doğru! Acıtmış olmalı!`"
 }
