@@ -50,5 +50,7 @@
     "MESSAGE_DELETED": "Sporočilo je bilo izbrisano v {{channel}} ({{id}})",
     "BULK_DELETED": "{{amount}} sporočila so bila izbrisana v {{channel}} ({{id}}): {{url}}",
     "PURGED": "{{amount}} sporočil je bilo izbrisanih: {{url}}",
-    "MESSAGE_PURGED": "Sporočila so bila izbrisana v {{channel}} ({{id}})"
+    "MESSAGE_PURGED": "Sporočila so bila izbrisana v {{channel}} ({{id}})",
+    "USER_AGE": "**Starost računa:** {{age}}",
+    "NEW_ACCOUNT": "(Nov račun)"
 }

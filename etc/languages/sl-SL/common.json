@@ -51,5 +51,6 @@
     "WARN": "Opozori",
     "KICK": "VrziVen",
     "AUTHOR": "Avtor",
-    "MESSAGE": "Sporočilo"
+    "MESSAGE": "Sporočilo",
+    "INSUFFICIENT_PERMISSIONS": "TypicalBot-u manjka dovoljenje `{{permission}}`."
 }

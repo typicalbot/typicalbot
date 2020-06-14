@@ -1,6 +1,7 @@
 {
     "DESCRIPTION": "Oglejte si ali prilagodite nastavitve strežnikov in omogočite / onemogočite določene funkcije.",
     "USAGE": "nastavitve <seznam|počisti|poglej|uredi> [setting] [dodaj|odstrani] [value]",
+    "USAGE_LIST": "Uporabi `{{prefix}}nastavitve seznam [page]` za ogled drugih strani.",
     "AVAILABLE": "**__Razpoložljive nastavitve za uporabo TypicalBot-a so:__**",
     "PAGE": "**Stran {{page}} / {{count}}**",
     "CLEARED": "Nastavitve so bile počiščene.",
@@ -51,7 +52,7 @@
     "ANTIINVITE-ACTION": "Omogoči opozarjanje in metanje uporabnikov pri pošiljanju vabil. Za to mora biti funkcija AntiInvite omogočena.",
     "ANTIINVITE-WARN": "Uporabnik prejme opozorilo, če pošlje točno število vabil. Da bi to delovalo, morata biti omogočeni funkciji AntiInvite in AntiInvite Action.",
     "ANTIINVITE-KICK": "Uporabnik bo vržen iz strežnika, če pošlje točno toliko ali več vabil. Da bi to delovalo, morata biti omogočeni funkciji AntiInvite in AntiInvite Action.",
-    "NONNICKNAME": "Način za onemogočanje uporabe ukaza \"vzdevek\".",
+    "NONICKNAME": "Način za onemogočanje uporabe ukaza `vzdevek`.",
     "STARBOARD": "Kanal za pošiljanje sporočil z zvezdico v t.i. zvezdnih tabel.",
     "STARBOARD-STARS": "Spremenite želeno število zvezd, da se sporočila prikažejo v tabeli zvezd.",
     "LANGUAGE": "Spremenite jezik bota v vašem strežniku."

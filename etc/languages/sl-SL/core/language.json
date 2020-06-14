@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Nastavite jezik, ki ga bo uporabljal vaš strežnik. Če ta ukaz uporabite v neposrednem sporočilu botu, bo ta neposredno nastavil jezik za vaš uporabniški račun.",
+	"USAGE": "jezik [locale]",
+	"SET_LANGUAGE": "Spremenite privzeti jezik za ta strežnik.",
+	"VIEW_LANGUAGES": "Oglejte si seznam vseh razpoložljivih jezikov, ki jih bot podpira."
+}

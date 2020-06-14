@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "Spremenite ali nastavite razlog za primer v dnevnikih moderiranja.",
     "USAGE": "razlog <primer-id|zadnje> [reason]",
-    "DISABLED": "Za uporabo tega ukaza morate imeti omogočene dnevnike moderiranja.",
+    "DISABLED": "Za uporabo tega ukaza morate imeti omogočene dnevnike moderiranja. Za nastavitev dnevnikov moderiranja uporabite naslednji ukaz: `$set uredi modlogs #ime-kanala`.",
     "NONE": "V tem ID-ju primera ni nobenih dnevnikov moderiranja.",
     "ERROR": "Pri posodabljanju danega primera je prišlo do napake.",
     "EDITED": "Primer je bil uspešno posodobljen."
