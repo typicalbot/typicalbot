@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Legen Sie eine Sprache fest, die von Ihrem Server verwendet werden soll. Wenn Sie diesen Befehl in einer direkten Nachricht an den Bot verwenden, wird die Sprache für Ihr Benutzerkonto direkt gesetzt.",
+	"USAGE": "Eigene Sprache",
+	"SET_LANGUAGE": "Ändern Sie die Standardsprache für diesen Server.",
+	"VIEW_LANGUAGES": "Eine Liste aller verfügbaren Sprachen anzeigen, die vom Bot unterstützt werden."
+}
