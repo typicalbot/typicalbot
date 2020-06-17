@@ -1,0 +1,14 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: '11:00'
+  open-pull-requests-limit: 99
+  reviewers:
+  - nsylke
+  ignore:
+  - dependency-name: "@types/node"
+    versions:
+    - "> 12.12.30"
