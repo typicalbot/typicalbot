@@ -52,7 +52,7 @@
         "bufferutil": "^4.0.1",
         "erlpack": "github:discord/erlpack",
         "utf-8-validate": "^5.0.2",
-        "zlib-sync": "^0.1.5"
+        "zlib-sync": "^0.1.7"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.3.5",
