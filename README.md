@@ -29,7 +29,7 @@ TypicalBot is far from typical. It's stable, lightning fast, and easy to use— 
 
 | Project | Description |
 |---------|-------------|
-| [typicalbot-cluster-manager](https://github.com/sylkellc/typicalbot-cluster-manager) | Inter-process communication manager |
+| [typicalbot-cluster-manager](https://github.com/typicalbot/typicalbot-cluster-manager) | Inter-process communication manager |
 
 ## Getting Started
 
@@ -62,7 +62,7 @@ If you like what we do, consider supporting us on [Patreon](https://patreon.com/
 
 ## Security Vulnerabilities
 
-Please review our [security policy](https://github.com/sylkellc/typicalbot/security/policy) on how to report security vulnerabilities.
+Please review our [security policy](https://github.com/typicalbot/typicalbot/security/policy) on how to report security vulnerabilities.
 
 ## License
 
