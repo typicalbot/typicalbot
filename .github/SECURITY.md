@@ -11,4 +11,4 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within TypicalBot, please email Sylke LLC at [security@sylke.co](mailto:security@sylke.co). All security vulnerabilities will be promptly addressed. 
+If you discover a security vulnerability within TypicalBot, please email TypicalBot LLC at [security@typicalbot.com](mailto:security@typicalbot.com). All security vulnerabilities will be promptly addressed. 

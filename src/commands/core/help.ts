@@ -17,8 +17,8 @@ export default class extends Command {
             });
 
             if (!message.embeddable) {
-                const appendixA = 'Terms of Service: <https://sylke.co/terms>';
-                const appendixB = 'Privacy Policy: <https://sylke.co/privacy>';
+                const appendixA = 'Terms of Service: <https://typicalbot.com/terms>';
+                const appendixB = 'Privacy Policy: <https://typicalbot.com/privacy>';
 
                 return message.send(`${response}\n\n${appendixA}\n${appendixB}`);
             }
@@ -28,8 +28,8 @@ export default class extends Command {
                 .setTitle(message.translate('core/help:TYPICAL_INFO'))
                 .setDescription(response)
                 .addField('Version', this.client.version, false)
-                .addField('Terms of Service', 'https://sylke.co/terms', true)
-                .addField('Privacy Policy', 'https://sylke.co/privacy', true)
+                .addField('Terms of Service', 'https://typicalbot.com/terms', true)
+                .addField('Privacy Policy', 'https://typicalbot.com/privacy', true)
                 .setFooter('TypicalBot', Links.ICON)
                 .setTimestamp());
         }

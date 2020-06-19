@@ -8,63 +8,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.6.0]
 ### Added
- - Server count posting to discordextremelist.xyz ([17f9394](https://github.com/sylkellc/typicalbot/commit/17f939484e698e265174326d9fd3503c54385476))
- - Server count posting to botlist.space ([93938b9](https://github.com/sylkellc/typicalbot/commit/93938b99896076b6d5fdf9a7cbb6c494a510f286))
+ - Server count posting to discordextremelist.xyz ([17f9394](https://github.com/typicalbot/typicalbot/commit/17f939484e698e265174326d9fd3503c54385476))
+ - Server count posting to botlist.space ([93938b9](https://github.com/typicalbot/typicalbot/commit/93938b99896076b6d5fdf9a7cbb6c494a510f286))
 
 ### Fixed
- - Issue with Android users not being able to see skin-tone emojis ([#230](https://github.com/sylkellc/typicalbot/pull/230))
+ - Issue with Android users not being able to see skin-tone emojis ([#230](https://github.com/typicalbot/typicalbot/pull/230))
  
 ### Changed
- - `$hex` to use `canvas.typicalbot.com` api instead of bot process ([#233](https://github.com/sylkellc/typicalbot/pull/233))
- - Join log to include account age and include `New Account` when account is less than 15 minutes old ([#231](https://github.com/sylkellc/typicalbot/pull/231))
+ - `$hex` to use `canvas.typicalbot.com` api instead of bot process ([#233](https://github.com/typicalbot/typicalbot/pull/233))
+ - Join log to include account age and include `New Account` when account is less than 15 minutes old ([#231](https://github.com/typicalbot/typicalbot/pull/231))
 
 ## [3.5.0]
 ### Added
- - `$language` to change TypicalBot language ([#182](https://github.com/sylkellc/typicalbot/pull/182))
+ - `$language` to change TypicalBot language ([#182](https://github.com/typicalbot/typicalbot/pull/182))
 
 ## [3.4.1]
 ### Fixed
- - Leave messages not being sent due to permission check error ([#223](https://github.com/sylkellc/typicalbot/pull/223))
- - `NONICKNAME` and `STARBOARD-STARS` strings not being properly translated, closes [#221](https://github.com/sylkellc/typicalbot/pull/221) ([#225](https://github.com/sylkellc/typicalbot/pull/225))
- - No indication on how to get to the second page on `$settings` command, closes [#212](https://github.com/sylkellc/typicalbot/pull/212) ([#225](https://github.com/sylkellc/typicalbot/pull/225))
- - Settings list was missing keys ([#225](https://github.com/sylkellc/typicalbot/pull/225))
+ - Leave messages not being sent due to permission check error ([#223](https://github.com/typicalbot/typicalbot/pull/223))
+ - `NONICKNAME` and `STARBOARD-STARS` strings not being properly translated, closes [#221](https://github.com/typicalbot/typicalbot/pull/221) ([#225](https://github.com/typicalbot/typicalbot/pull/225))
+ - No indication on how to get to the second page on `$settings` command, closes [#212](https://github.com/typicalbot/typicalbot/pull/212) ([#225](https://github.com/typicalbot/typicalbot/pull/225))
+ - Settings list was missing keys ([#225](https://github.com/typicalbot/typicalbot/pull/225))
 
 ## [3.4.0]
 ### Added
- - Version number to `$help` command ([#215](https://github.com/sylkellc/typicalbot/pull/215))
+ - Version number to `$help` command ([#215](https://github.com/typicalbot/typicalbot/pull/215))
  - `discord.com/invite/your-server` to invite regex
  - Jump url in starboard messages
 
 ### Changed
- - CI to build against both Node 12 and Node 14 ([#213](https://github.com/sylkellc/typicalbot/pull/213))
- - `$reason` error response to indicate how to setup modlogs ([#206](https://github.com/sylkellc/typicalbot/pull/206))
- - `$set view` responses to be more clear than returning blank, null, undefined, and unresolved channels/roles ([#222](https://github.com/sylkellc/typicalbot/pull/222))
+ - CI to build against both Node 12 and Node 14 ([#213](https://github.com/typicalbot/typicalbot/pull/213))
+ - `$reason` error response to indicate how to setup modlogs ([#206](https://github.com/typicalbot/typicalbot/pull/206))
+ - `$set view` responses to be more clear than returning blank, null, undefined, and unresolved channels/roles ([#222](https://github.com/typicalbot/typicalbot/pull/222))
 
 ### Fixed
- - `$randomuser` not filtering roles properly ([#214](https://github.com/sylkellc/typicalbot/pull/214))
- - No response on boolean-type settings with invalid value ([#207](https://github.com/sylkellc/typicalbot/pull/207))
- - `$twitch` response being empty ([#224](https://github.com/sylkellc/typicalbot/pull/224))
+ - `$randomuser` not filtering roles properly ([#214](https://github.com/typicalbot/typicalbot/pull/214))
+ - No response on boolean-type settings with invalid value ([#207](https://github.com/typicalbot/typicalbot/pull/207))
+ - `$twitch` response being empty ([#224](https://github.com/typicalbot/typicalbot/pull/224))
  - `$roles info members [role]` showing guild name instead of role name
 
 ## [3.3.0]
 ### Changed
- - `$randomuser` command to pick user by role ([#197](https://github.com/sylkellc/typicalbot/pull/197))
- - `autorole` will honor the verification level and adjust `autorole-delay` automatically ([#192](https://github.com/sylkellc/typicalbot/pull/192))
- - Use application owner(s) instead of config option ([#193](https://github.com/sylkellc/typicalbot/pull/193))
- - Automatically delete invite warning messages after a few seconds ([#186](https://github.com/sylkellc/typicalbot/pull/186)) 
+ - `$randomuser` command to pick user by role ([#197](https://github.com/typicalbot/typicalbot/pull/197))
+ - `autorole` will honor the verification level and adjust `autorole-delay` automatically ([#192](https://github.com/typicalbot/typicalbot/pull/192))
+ - Use application owner(s) instead of config option ([#193](https://github.com/typicalbot/typicalbot/pull/193))
+ - Automatically delete invite warning messages after a few seconds ([#186](https://github.com/typicalbot/typicalbot/pull/186)) 
 
 ### Fixed
- - Webhook messages not being purged ([#183](https://github.com/sylkellc/typicalbot/pull/183))
- - Custom event typings ([#189](https://github.com/sylkellc/typicalbot/pull/189))
- - Use cache size for automod ([#188](https://github.com/sylkellc/typicalbot/pull/188))
+ - Webhook messages not being purged ([#183](https://github.com/typicalbot/typicalbot/pull/183))
+ - Custom event typings ([#189](https://github.com/typicalbot/typicalbot/pull/189))
+ - Use cache size for automod ([#188](https://github.com/typicalbot/typicalbot/pull/188))
 
 ## [3.2.4]
 ### Fixed
- - `guild.settings` being undefined in guildMemberAdd and guildMemberRemove events ([#178](https://github.com/sylkellc/typicalbot/pull/178))
+ - `guild.settings` being undefined in guildMemberAdd and guildMemberRemove events ([#178](https://github.com/typicalbot/typicalbot/pull/178))
 
 ## [3.2.3]
 ### Fixed
- - `$settings clear` responding with invalid usage ([#176](https://github.com/sylkellc/typicalbot/pull/176))
+ - `$settings clear` responding with invalid usage ([#176](https://github.com/typicalbot/typicalbot/pull/176))
 
 ## [3.2.2]
 ### Fixed
@@ -73,41 +73,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.2.1]
 ### Added
- - Security policy ([#167](https://github.com/sylkellc/typicalbot/pull/167))
+ - Security policy ([#167](https://github.com/typicalbot/typicalbot/pull/167))
 
 ### Changed
- - Moved index.ts (root) into src directory; renamed the original index.ts to client.ts ([#173](https://github.com/sylkellc/typicalbot/pull/173))
+ - Moved index.ts (root) into src directory; renamed the original index.ts to client.ts ([#173](https://github.com/typicalbot/typicalbot/pull/173))
 
 ### Removed
- - Unused strings in settings ([#171](https://github.com/sylkellc/typicalbot/pull/171))
- - Carbonitex api typings ([#172](https://github.com/sylkellc/typicalbot/pull/172))
+ - Unused strings in settings ([#171](https://github.com/typicalbot/typicalbot/pull/171))
+ - Carbonitex api typings ([#172](https://github.com/typicalbot/typicalbot/pull/172))
 
 ## [3.2.0]
 ### Added
- - `dmcommands` setting that controls whether to send commands to DM ([#154](https://github.com/sylkellc/typicalbot/pull/154))
+ - `dmcommands` setting that controls whether to send commands to DM ([#154](https://github.com/typicalbot/typicalbot/pull/154))
 
 ### Changed
- - `commands` command to change its behavior to send commands to the channel where the command is ran by default and honor the new "dmcommands" setting ([#154](https://github.com/sylkellc/typicalbot/pull/154))
+ - `commands` command to change its behavior to send commands to the channel where the command is ran by default and honor the new "dmcommands" setting ([#154](https://github.com/typicalbot/typicalbot/pull/154))
 
 ### Fixed
- - `twitch` command not responding when no arguments are provided ([#155](https://github.com/sylkellc/typicalbot/pull/155), closes [#152](https://github.com/sylkellc/typicalbot/issues/152))
+ - `twitch` command not responding when no arguments are provided ([#155](https://github.com/typicalbot/typicalbot/pull/155), closes [#152](https://github.com/typicalbot/typicalbot/issues/152))
 
 ## [3.1.0]
 ### Added
- - Sentry error tracking ([e80a29a](https://github.com/sylkellc/typicalbot/commit/e80a29af42147f231df18049db17a23bd9cb265c))
- - Short codes to `lang` setting ([1e08bd9](https://github.com/sylkellc/typicalbot/commit/1e08bd9577a200c9060e07a8e8b6bfeebd8542e1))
+ - Sentry error tracking ([e80a29a](https://github.com/typicalbot/typicalbot/commit/e80a29af42147f231df18049db17a23bd9cb265c))
+ - Short codes to `lang` setting ([1e08bd9](https://github.com/typicalbot/typicalbot/commit/1e08bd9577a200c9060e07a8e8b6bfeebd8542e1))
 
 ### Changed
- - Removed unnecessary information from `stats` command ([88eb179](https://github.com/sylkellc/typicalbot/commit/88eb1798307712d786cb910858ce285e2ace4f91))
- - Updated french localization strings ([59b0f05](https://github.com/sylkellc/typicalbot/commit/59b0f05134380d608b2f20a333ff8f066b9154a6))
+ - Removed unnecessary information from `stats` command ([88eb179](https://github.com/typicalbot/typicalbot/commit/88eb1798307712d786cb910858ce285e2ace4f91))
+ - Updated french localization strings ([59b0f05](https://github.com/typicalbot/typicalbot/commit/59b0f05134380d608b2f20a333ff8f066b9154a6))
 
 ### Fixed
- - Mute typings ([4e56c5f](https://github.com/sylkellc/typicalbot/commit/4e56c5f67335cdd3caf85d6c66eab837790861d0))
- - Permission showing [Object object] instead of permission title in help command ([#116](https://github.com/sylkellc/typicalbot/pull/116))
+ - Mute typings ([4e56c5f](https://github.com/typicalbot/typicalbot/commit/4e56c5f67335cdd3caf85d6c66eab837790861d0))
+ - Permission showing [Object object] instead of permission title in help command ([#116](https://github.com/typicalbot/typicalbot/pull/116))
 
 ### Removed
- - Music functionality and localization ([b982529](https://github.com/sylkellc/typicalbot/commit/b9825291bfd517b2cb7a9fb5f1b38d7dfcbab243), [3228503](https://github.com/sylkellc/typicalbot/commit/32285031bab870bdfb61b67ab53ef67d41878928), [e4a33a2](https://github.com/sylkellc/typicalbot/commit/e4a33a227015e8302470492f9924fc7b8c3ec3e2), [c09b1b1](https://github.com/sylkellc/typicalbot/commit/c09b1b1c6b50016f2b67a51c85d0c3ed69b0b21f), [81a2924](https://github.com/sylkellc/typicalbot/commit/81a2924b20496cfd6f4ae68859dee676db41e0be), [3c941f5](https://github.com/sylkellc/typicalbot/commit/3c941f5daaff6d40b809819d5b04e79a8399ff12))
- - `update` and `restart` command ([b7e27fa](https://github.com/sylkellc/typicalbot/commit/b7e27fa38b0aade3842ea2db2b64225ae23326d6))
+ - Music functionality and localization ([b982529](https://github.com/typicalbot/typicalbot/commit/b9825291bfd517b2cb7a9fb5f1b38d7dfcbab243), [3228503](https://github.com/typicalbot/typicalbot/commit/32285031bab870bdfb61b67ab53ef67d41878928), [e4a33a2](https://github.com/typicalbot/typicalbot/commit/e4a33a227015e8302470492f9924fc7b8c3ec3e2), [c09b1b1](https://github.com/typicalbot/typicalbot/commit/c09b1b1c6b50016f2b67a51c85d0c3ed69b0b21f), [81a2924](https://github.com/typicalbot/typicalbot/commit/81a2924b20496cfd6f4ae68859dee676db41e0be), [3c941f5](https://github.com/typicalbot/typicalbot/commit/3c941f5daaff6d40b809819d5b04e79a8399ff12))
+ - `update` and `restart` command ([b7e27fa](https://github.com/typicalbot/typicalbot/commit/b7e27fa38b0aade3842ea2db2b64225ae23326d6))
 
 ## [3.0.1]
 ### Fixed
