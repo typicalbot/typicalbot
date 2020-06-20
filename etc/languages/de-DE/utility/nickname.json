@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Ändere oder setze deinen oder den Nicknamen von einem andere Nutzer zurück.",
+    "USAGE": "nickname [@Nutzer] [Nickname]",
+    "DISABLED": "Dieser Befehl ist zurzeit deaktiviert. Deaktiviere die `nonickname` Einstellung um diesen Befehl zu ändern.",
+    "ERROR": "Ein Fehler ist aufgetreten. Wahrscheinlich kann ich den Nicknamen des Mitglieds nicht verwalten.",
+    "SELF_ERROR": "Ein Fehler ist aufgetreten. Wahrscheinlich kann ich deinen Nicknamen nicht verwalten.",
+    "SUCCESS": "Erfolgreich Nicknamen des Mitglieds {{type}}.",
+    "SELF_SUCCESS": "Erfolgreich deinen Nicknamen {{type}}."
+}

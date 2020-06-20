@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Überprüfe die Twitch-Nutzerdaten von der Twitch API.",
+    "USAGE": "twitch <Nutzer>",
+    "STATS": "**__Twitch Statistiken:__** {{name}}",
+    "ID": "ID: {{id}}",
+    "DISPLAY": "Anzeigename: {{name}}",
+    "DESC": "Beschreibung: {{description}}",
+    "STATUS": "Status: {{type}}",
+    "PROFILE": "Profilbild: {{url}}",
+    "VIEWS": "Gesamte Aufrufe: {{amount}}",
+    "TITLE": "Twitch Statistiken"
+}

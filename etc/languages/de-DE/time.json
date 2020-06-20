@@ -1,0 +1,20 @@
+{
+    "ONE_YEAR": "1 Jahr",
+    "YEARS": "{{amount}} Jahre",
+    "SHORT_YEAR": "{{amount}}y",
+    "ONE_MONTH": "1 Monat",
+    "MONTHS": "{{amount}} Monate",
+    "SHORT_MONTH": "{{amount}}Monat",
+    "ONE_DAY": "1 Tag",
+    "DAYS": "{{amount}} Tage",
+    "SHORT_DAY": "{{amount}}d",
+    "ONE_HOUR": "1 Stunde",
+    "HOURS": "{{amount}} Stunden",
+    "SHORT_HOUR": "{{amount}}h",
+    "ONE_MINUTE": "1 Minute",
+    "MINUTES": "{{amount}} Minuten",
+    "SHORT_MINUTE": "{{amount}}m",
+    "ONE_SECOND": "1 Sekunde",
+    "SECONDS": "{{amount}} Sekunden",
+    "SHORT_SECOND": "{{amount}}s"
+}

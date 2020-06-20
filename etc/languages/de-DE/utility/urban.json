@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Nimmt die Definition aus dem Urban Diktionär für das angegebene Wort.",
+    "USAGE": "urban <Query>",
+    "NONE": "Keine Treffer für die Query **{{query}}**.",
+    "TEXT": "**__{{query}}:__** {{definition}}",
+    "AMOUNT": "Definition 1 von {{amount}}",
+    "RATING": "Bewertung",
+    "RATING_VALUE": "\\👍 {{up}} | \\👎 {{down}}{{rating}}",
+    "RATING_PERCENT": "{{amount}}% von {{total}} gefällt diese Definition.",
+    "DICTIONARY": "Urban Diktionär Definition"
+}

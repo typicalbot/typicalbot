@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Für TypicalBot auf top.gg stimmen",
+    "USAGE": "Abstimmen",
+    "TEXT": "Du kannst für den Typischen Bot stimmen unter <{{link}}>",
+    "TITLE": "Für Typenbot stimmen"
+}
