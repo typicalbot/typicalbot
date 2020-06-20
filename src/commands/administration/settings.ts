@@ -617,7 +617,7 @@ export default class extends Command {
 
                 if (!channel)
                     return message.error(message.translate('administration/settings:INVALID_CHANNEL'));
-                if (channel.type !== 'text')
+                if (channel.type !== 'text' && channel.type !== 'news')
                     return message.error(message.translate('administration/settings:NOT_TEXT_CHANNEL'));
 
                 payload = this.stringToObject(setting.path, channel.id);
