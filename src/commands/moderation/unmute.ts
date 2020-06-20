@@ -24,6 +24,12 @@ export default class extends Command {
                 prefix: this.client.config.prefix
             }));
         args.shift();
+
+        if (!message.guild.me?.permissions.has('MANAGE_ROLES', true))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'Manage Roles'
+            }));
+
         const [userID, reason] = args;
 
         const member = await message.guild.members
@@ -43,7 +49,7 @@ export default class extends Command {
 
         if (
             message.member.roles.highest.position <=
-                member.roles.highest.position &&
+            member.roles.highest.position &&
             permissionLevel.level !== 4 &&
             permissionLevel.level < 9
         )
@@ -92,9 +98,9 @@ export default class extends Command {
                 .catch(() => [])) as TaskOptions[];
             const releventTask = tasks.find((task) =>
                 task.type === 'unmute' &&
-                    (task.data as UnmuteTaskData).guildID ===
-                        message.guild.id &&
-                    (task.data as UnmuteTaskData).memberID === member.id);
+                (task.data as UnmuteTaskData).guildID ===
+                message.guild.id &&
+                (task.data as UnmuteTaskData).memberID === member.id);
             if (releventTask)
                 await this.client.handlers.tasks.delete(releventTask.id);
         }

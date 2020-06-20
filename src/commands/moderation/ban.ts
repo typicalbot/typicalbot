@@ -19,6 +19,11 @@ export default class extends Command {
         });
         if (!parameters || !permissionLevel) return message.error(usageError);
 
+        if (!message.guild.me?.permissions.has('BAN_MEMBERS', true))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'Ban Members'
+            }));
+
         const args = regex.exec(parameters);
         if (!args) return message.error(usageError);
         args.shift();
@@ -45,7 +50,7 @@ export default class extends Command {
         if (
             member &&
             message.member.roles.highest.position <=
-                member.roles.highest.position &&
+            member.roles.highest.position &&
             permissionLevel.level !== 4 &&
             permissionLevel.level < 9
         )

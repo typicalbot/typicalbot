@@ -22,6 +22,11 @@ export default class extends Command {
             }));
         args.shift();
 
+        if (!message.guild.me?.permissions.has('BAN_MEMBERS', true))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'Ban Members'
+            }));
+
         const [userID, reason] = args;
 
         const user = await this.client.users.fetch(userID).catch(() => null);
@@ -56,8 +61,8 @@ export default class extends Command {
 
         const relevantTask = tasks.find((task) =>
             task.type === 'unban' &&
-                (task.data as UnbanTaskData).userID === userID &&
-                (task.data as UnbanTaskData).guildID === message.guild.id);
+            (task.data as UnbanTaskData).userID === userID &&
+            (task.data as UnbanTaskData).guildID === message.guild.id);
         if (!relevantTask) return null;
 
         return this.client.handlers.tasks.delete(relevantTask.id);
