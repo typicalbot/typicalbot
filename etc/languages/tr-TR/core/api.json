@@ -1,6 +1,6 @@
 {
 	"DESCRIPTION": "API anahtarları oluştur ve görüntüle.",
-	"USAGE": "api <view|generate>",
+	"USAGE": "There is not a command named music. Try searching something else",
 	"NONE": "API anahtarı yok. Bir tane oluşturmak için `$api generate` komudunu kullan.",
 	"SUCCESS": "API anahtarı başarıyla oluşturuldu.",
 	"KEY": "{{guild}}'in API Anahtarı: `{{key}}`"
