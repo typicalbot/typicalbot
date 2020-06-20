@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.0]
+### Added
+ - `$thouart` to return random Elizabethan insult
+
+### Fixed
+ - Missing permission checks in various moderation commands
+ - `announcements` setting not checking for `news` channel type
+
+### Changed
+ - References of `Sylke` or `Sylke LLC` to `TypicalBot LLC`
+ - References of `@sylke.co` emails to `@typicalbot.com`
+
 ## [3.6.0]
 ### Added
  - Server count posting to discordextremelist.xyz ([17f9394](https://github.com/typicalbot/typicalbot/commit/17f939484e698e265174326d9fd3503c54385476))
