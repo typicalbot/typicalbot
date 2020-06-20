@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Définissez une langue à utiliser par votre serveur. Si vous utilisez cette commande en message privé avec le bot, elle définira directement la langue de votre compte.",
+	"USAGE": "language [localisation]",
+	"SET_LANGUAGE": "Changer la langue par défaut pour ce serveur.",
+	"VIEW_LANGUAGES": "Voir une liste de toutes les langues disponibles qui sont supportées par le bot."
+}
