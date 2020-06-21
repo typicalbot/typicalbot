@@ -28,7 +28,6 @@ export default class FunctionHandler extends Collection<string, TypicalFunction>
 
                 count++;
 
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
                 const Function = ((r) => r.default || r)(require(join(file.dir, file.base)));
                 const newReq = new Function(this.client, file.name);
 

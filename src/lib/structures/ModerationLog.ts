@@ -14,6 +14,7 @@ export default class ModerationLog {
         display: '',
         icon: ''
     };
+
     user = '';
     channel = '';
     reason = '';
@@ -65,7 +66,7 @@ export default class ModerationLog {
     setChannel(data: TextChannel) {
         this.channel = this.guild.translate('moderation/modlog:CHANNEL', {
             name: data.name,
-            channel: data.toString()
+            channel: `<#${data.id}>`
         });
         return this;
     }
@@ -108,7 +109,7 @@ export default class ModerationLog {
             let id = 1;
 
             // eslint-disable-next-line max-len
-            if (latest && latest.embeds[0] && latest.embeds[0].footer && latest.embeds[0].footer.text && latest.embeds[0].footer.text.match(ModerationLogRegex.CASE)) {
+            if (latest?.embeds[0]?.footer?.text?.match(ModerationLogRegex.CASE)) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 id = Number(latest.embeds[0].footer.text.match(ModerationLogRegex.CASE)[1]) + 1;

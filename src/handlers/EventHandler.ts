@@ -25,7 +25,6 @@ export default class EventHandler extends Collection<string, Event> {
                 const file = parse(item.path);
 
                 if (file.ext && file.ext === '.js') {
-                    // eslint-disable-next-line @typescript-eslint/no-var-requires
                     const Event = ((r) => r.default || r)(require(join(file.dir, file.base)));
                     const event: Event = new Event(this.client, file.name, join(file.dir, file.base));
 

@@ -26,7 +26,6 @@ export default class CommandHandler extends Collection<string, Command> {
                 const file = parse(item.path);
                 if (!file.ext || file.ext !== '.js') return;
 
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
                 const req = ((r) => r.default || r)(require(join(file.dir, file.base)));
                 const newReq = new req(this.client, file.name, join(file.dir, file.base));
 

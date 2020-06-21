@@ -1,25 +1,35 @@
 {
     "compilerOptions": {
-        "declaration": false,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "incremental": true,
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "noEmitOnError": true,
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "outDir": "./dist",
-        "pretty": true,
-        "removeComments": true,
-        "resolveJsonModule": true,
-        "sourceMap": true,
         "strict": true,
-        "types": ["node"],
-        "target": "es2019",
+        "moduleResolution": "Node",
+        "module": "CommonJS",
+        "target": "ES2020",
+        "lib": [
+            "ESNext",
+            "ESNext.Array",
+            "ESNext.AsyncIterable",
+            "ESNext.Intl",
+            "ESNext.Symbol",
+            "ESNext.BigInt"
+        ],
+        "declaration": true,
+        "sourceMap": true,
+        "removeComments": false,
+        "alwaysStrict": true,
+        "pretty": true,
+        "outDir": "dist",
+        "incremental": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
         "esModuleInterop": true
     },
-    "compileOnSave": true,
-    "include": ["./**/*.ts", "./**/*.json"]
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "**/*.ts",
+        "**/*.json"
+    ]
 }

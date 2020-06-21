@@ -1,7 +1,7 @@
 import { Guild, TextChannel, User } from 'discord.js';
 import Cluster from '../lib/TypicalClient';
 import ModerationLog from '../lib/structures/ModerationLog';
-import { TypicalGuildMessage , TypicalGuild } from '../lib/types/typicalbot';
+import { TypicalGuildMessage, TypicalGuild } from '../lib/types/typicalbot';
 
 export default class ModerationLogHandler {
     client: Cluster;
@@ -29,13 +29,13 @@ export default class ModerationLogHandler {
         const messages = await channel.messages
             .fetch({ limit: 100 })
             .catch(() => {
-                throw "Couldn't fetch messages.";
+                throw new Error("Couldn't fetch messages.");
             });
 
         for (const message of messages.values()) {
             if (
                 message.author.id !==
-                    (this.client.user && this.client.user.id) ||
+                (this.client.user && this.client.user.id) ||
                 !message.embeds.length
             )
                 continue;

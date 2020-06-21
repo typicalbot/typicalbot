@@ -22,6 +22,7 @@ export default class extends Command {
         for (const [name, command] of this.client.commands.entries()) {
             const commandName = `${this.client.config.prefix}${name}`;
 
+            // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
             switch (command.permission) {
                 case 0:
                     level0.push(commandName);

@@ -20,7 +20,7 @@ export default class extends Command {
         args.shift();
 
         const [json, channelID, content] = args;
-        const channel = (message.guild.channels.cache.get(channelID) ||
+        const channel = (message.guild.channels.cache.get(channelID) ??
             message.channel) as TextChannel;
 
         if (json) {

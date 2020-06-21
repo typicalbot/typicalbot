@@ -10,7 +10,7 @@ export default class extends Command {
     mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
-        const args = regex.exec(parameters) || [];
+        const args = regex.exec(parameters) ?? [];
         args.shift();
         const [id, username, discriminator] = args;
         const member = await this.client.helpers.resolveMember.execute(message, id, username, discriminator);

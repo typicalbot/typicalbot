@@ -9,7 +9,7 @@ export default class extends Command {
     mode = Modes.LITE;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
-        const args = regex.exec(parameters) || [];
+        const args = regex.exec(parameters) ?? [];
         args.shift();
 
         const [userID, nickname] = args;

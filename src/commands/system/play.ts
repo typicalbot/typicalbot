@@ -15,6 +15,7 @@ export default class extends Command {
         'vol',
         'volume'
     ];
+
     mode = Modes.LITE;
 
     async execute(message: TypicalMessage) {
