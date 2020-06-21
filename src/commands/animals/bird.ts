@@ -4,7 +4,7 @@ import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 
 export default class extends Command {
-    aliases = ['birb']
+    aliases = ['birb'];
 
     async execute(message: TypicalGuildMessage) {
         const data = await fetch('https://some-random-api.ml/img/birb')

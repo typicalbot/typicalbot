@@ -364,7 +364,7 @@ export default class extends Command {
                     else response += NA;
                 } else if (type === 'roles') {
                     if (value.length)
-                        response += value.map((id: string) => message.guild.roles.cache.get(id)?.name || 'Unknown Role')
+                        response += value.map((id: string) => message.guild.roles.cache.get(id)?.name ?? 'Unknown Role')
                             .join(', ');
                     else response += NA;
                 } else if (type === 'boolean')

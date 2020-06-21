@@ -33,7 +33,7 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
     async update(id: string, payload: object = {}) {
         const updated = await this.client.handlers.database.update('guilds', id, payload);
 
-        if (updated.changes != undefined && updated.changes?.length > 0)
+        if (updated.changes != undefined && updated.changes.length > 0)
             this.set(id, updated.changes[0].new_val);
 
         return true;

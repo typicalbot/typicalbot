@@ -49,7 +49,7 @@ export default class MessageBulkDelete extends Event {
             return logsChannel
                 .send(message.translate('help/logs:BULK_DELETED', {
                     amount: messages.size,
-                    channel: message.channel.toString(),
+                    channel: `<#${message.channel.id}>`,
                     id: message.channel.id,
                     url: haste
                 }))
@@ -63,7 +63,7 @@ export default class MessageBulkDelete extends Event {
                     url: haste
                 }))
                 .setFooter(message.translate('help/logs:MESSAGES_PURGED', {
-                    channel: message.channel.toString(),
+                    channel: `<#${message.channel.id}>`,
                     id: message.channel.id
                 }))
                 .setTimestamp())

@@ -33,12 +33,14 @@ export default class Cluster extends Client {
     public node: VezaClient | undefined;
     public config = config;
     public build = config.build;
-    public shards: number[] = JSON.parse(process.env.SHARDS || '[1]');
-    public shardCount = process.env.TOTAL_SHARD_COUNT || '1';
+    public shards: number[] = JSON.parse(process.env.SHARDS ?? '[1]');
+    public shardCount = process.env.TOTAL_SHARD_COUNT ?? '1';
     public cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     public handlers = {} as TypicalHandlers;
     public settings = new SettingHandler(this);
     public functions = new FunctionHandler(this);
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     public helpers = {} as HelperFunctions;
     public commands = new CommandHandler(this);
     public events = new EventHandler(this);
@@ -50,6 +52,7 @@ export default class Cluster extends Client {
         softbans: new Collection(),
         invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
+
     public translate: Map<string, TFunction> = new Map();
     public logger = new Logger();
     public version = pkg.version;

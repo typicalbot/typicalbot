@@ -12,7 +12,7 @@ fs.mkdir('data', (err) => {
 if (!config.clustered) {
     new Cluster(undefined);
 } else {
-    const node = new Client(process.env.CLUSTER || 'TypicalBot')
+    const node = new Client(process.env.CLUSTER ?? 'TypicalBot')
         .on('error', (error: Error, client: ClientSocket) =>
             console.error(`[IPC] Error from ${client.name}:`, error))
         .on('disconnect', (client: ClientSocket) =>

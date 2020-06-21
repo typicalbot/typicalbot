@@ -3,7 +3,7 @@ import Cluster from '../lib/TypicalClient';
 import { AnalyticEvent } from '../lib/types/analytic';
 
 class AnalyticHandler {
-    private client: Cluster;
+    private readonly client: Cluster;
     private readonly events: AnalyticEvent[];
 
     public constructor(client: Cluster) {

@@ -42,7 +42,7 @@ export default class extends Command {
                             message.guild.iconURL({
                                 format: 'png',
                                 size: 2048
-                            }) || message.translate('common:NONE')
+                            }) ?? message.translate('common:NONE')
                 }),
                 message.translate('utility/serverinfo:CHANNELS', {
                     amount: message.guild.channels.cache.size
@@ -58,7 +58,7 @@ export default class extends Command {
                 }),
                 message.translate('utility/serverinfo:BOOSTED', {
                     level: message.guild.premiumTier,
-                    amount: message.guild.premiumSubscriptionCount || 0
+                    amount: message.guild.premiumSubscriptionCount ?? 0
                 }),
                 '```'
             ].join('\n'));
@@ -125,11 +125,11 @@ export default class extends Command {
                     value: message.translate('utility/serverinfo:BOOSTERS', {
                         level: message.guild.premiumTier,
                         amount:
-                                    message.guild.premiumSubscriptionCount || 0
+                                    message.guild.premiumSubscriptionCount ?? 0
                     })
                 }
             ])
-            .setThumbnail(message.guild.iconURL({ format: 'png', size: 2048 }) || '')
+            .setThumbnail(message.guild.iconURL({ format: 'png', size: 2048 }) ?? '')
             .setFooter('TypicalBot', Links.ICON));
     }
 }

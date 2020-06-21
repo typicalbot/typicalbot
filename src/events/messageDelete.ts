@@ -41,7 +41,7 @@ export default class MessageDelete extends Event {
                 .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
                 .setDescription(this.client.helpers.lengthen.execute(message.content, 100))
                 .setFooter(message.translate('help/logs:MESSAGE_DELETED', {
-                    channel: message.channel.toString(),
+                    channel: `<#${message.channel.id}>`,
                     id: message.channel.id
                 }))
                 .setTimestamp())

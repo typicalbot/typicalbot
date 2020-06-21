@@ -24,7 +24,6 @@ export default class TaskHandler {
 
                 if (!file.ext || file.ext !== '.js') return;
 
-                // eslint-disable-next-line @typescript-eslint/no-var-requires
                 const req = ((r) => r.default || r)(require(join(file.dir, file.base)));
 
                 this.taskTypes.set(file.name, req);

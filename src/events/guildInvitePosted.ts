@@ -37,12 +37,12 @@ export default class GuildInvitePosted extends Event {
                         .setReason(message.translate('core/invite:REASON', {
                             action: message.translate('common:WARN'),
                             type:
-                                    settings.automod.invitewarn === 1
-                                        ? message.translate('core/invite:INVITE')
-                                        : message.translate('core/invite:CONSECUTIVE', {
-                                            amount: settings.automod.invitewarn
-                                        }),
-                            channel: message.channel.toString()
+                                settings.automod.invitewarn === 1
+                                    ? message.translate('core/invite:INVITE')
+                                    : message.translate('core/invite:CONSECUTIVE', {
+                                        amount: settings.automod.invitewarn
+                                    }),
+                            channel: `<#${message.channel.id}>`
                         }))
                         .send();
                 }
@@ -58,7 +58,7 @@ export default class GuildInvitePosted extends Event {
                             : message.translate('core/invite:CONSECUTIVE', {
                                 amount: cache.size
                             }),
-                    channel: message.channel.toString()
+                    channel: `<#${message.channel.id}>`
                 });
                 message.member.kick(reason);
 
@@ -83,7 +83,7 @@ export default class GuildInvitePosted extends Event {
             return channel.send(settings.logs.invite === '--enabled'
                 ? message.translate('core/invite:SENT', {
                     user: message.author.tag,
-                    channel: message.channel.toString()
+                    channel: `<#${message.channel.id}>`
                 })
                 // eslint-disable-next-line max-len
                 : this.client.helpers.formatMessage.execute('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
@@ -94,7 +94,7 @@ export default class GuildInvitePosted extends Event {
                 .setColor(0x00ff00)
                 .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
                 .setFooter(message.translate('core/invite:SENT_IN', {
-                    channel: message.channel.toString()
+                    channel: `<#${message.channel.id}>`
                 }))
                 .setTimestamp())
             .catch((err) => Sentry.captureException(err));

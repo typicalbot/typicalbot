@@ -22,7 +22,7 @@ export default class extends Command {
             totalRAM
         ] = await Promise.all(paths.map((path) => this.client.fetchData(path)));
 
-        const uptime = this.client.helpers.convertTime.execute(message, this.client.uptime || 0);
+        const uptime = this.client.helpers.convertTime.execute(message, this.client.uptime ?? 0);
         if (!message.embeddable)
             return message.send(message.translate('core/stats:TEXT', {
                 uptime,

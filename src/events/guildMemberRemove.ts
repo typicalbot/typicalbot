@@ -11,7 +11,7 @@ export default class GuildMemberRemove extends Event {
         // If bot has ban perms check if this was a ban and if so cancel out
         if (guild.me?.permissions.has('BAN_MEMBERS')) {
             const bans = await guild.fetchBans().catch(() => null);
-            if (bans && bans.has(member.id)) return;
+            if (bans?.has(member.id)) return;
         }
 
 

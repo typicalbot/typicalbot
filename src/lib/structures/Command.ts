@@ -22,19 +22,19 @@ export default class Command {
         this.client = client;
         this.name = name;
         this.path = path;
-        this.aliases = (options && options.aliases) || [];
-        this.dm = (options && options.dm) || false;
+        this.aliases = (options?.aliases) ?? [];
+        this.dm = (options?.dm) ?? false;
         this.permission =
-            (options && options.permission) ||
+            (options?.permission) ??
             PermissionsLevels.SERVER_MEMBER;
-        this.mode = (options && options.mode) || Modes.FREE;
+        this.mode = (options?.mode) ?? Modes.FREE;
         this.access =
-            (options && options.access) || AccessLevels.DEFAULT;
-        this.ptb = (options && options.ptb) || false;
+            (options?.access) ?? AccessLevels.DEFAULT;
+        this.ptb = (options?.ptb) ?? false;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     execute(_message: Message | TypicalGuildMessage, _params?: string, _permissions?: PermissionLevel) {
-        throw 'Unsupported operation.';
+        throw new Error('Unsupported operation.');
     }
 }

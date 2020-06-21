@@ -9,7 +9,7 @@ export default class extends Command {
     execute(message: TypicalGuildMessage, parameters: string) {
         const role = parameters
             ? message.guild.roles.cache.get(parameters)
-                || message.guild.roles.cache.find((role) => role.name.toLowerCase() === parameters.toLowerCase())
+                ?? message.guild.roles.cache.find((role) => role.name.toLowerCase() === parameters.toLowerCase())
             : message.mentions.roles.first();
 
         const members = role

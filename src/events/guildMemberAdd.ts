@@ -85,7 +85,7 @@ export default class GuildMemberAdd extends Event {
                     user: user.tag,
                     role: autorole.name
                 }));
-            }, guild.verificationLevel === 'HIGH' ? 60000 : settings.auto.role.delay || 2000);
+            }, guild.verificationLevel === 'HIGH' ? 60000 : settings.auto.role.delay ?? 2000);
         }
     }
 }

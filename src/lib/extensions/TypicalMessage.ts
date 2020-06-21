@@ -95,7 +95,7 @@ export class TypicalMessage extends Structures.get('Message') {
     translate(key: string, args?: object) {
         const language = this.client.translate.get(this.guild ? this.guild.settings.language : 'en-US');
 
-        if (!language) throw 'Message: Invalid language set in settings.';
+        if (!language) throw new Error('Message: Invalid language set in settings.');
 
         return language(key, args);
     }
