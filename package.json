@@ -55,7 +55,7 @@
         "zlib-sync": "^0.1.7"
     },
     "devDependencies": {
-        "@commitlint/cli": "^8.3.5",
+        "@commitlint/cli": "^9.0.1",
         "@commitlint/config-conventional": "^8.3.4",
         "@types/i18next-node-fs-backend": "^2.1.0",
         "@types/klaw": "^3.0.1",
