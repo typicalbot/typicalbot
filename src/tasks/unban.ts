@@ -7,6 +7,8 @@ export default class extends Task {
         const guild = this.client.guilds.cache.get(data.guildID);
         if (!guild) return;
 
+        if (!guild.me?.permissions.has('BAN_MEMBERS', true)) return;
+
         this.client.caches.unbans.set(data.userID, {
             moderator: this.client.user as User,
             reason: "Automatic Unban: User's ban time has passed."

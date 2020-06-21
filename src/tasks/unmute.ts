@@ -8,6 +8,8 @@ export default class extends Task {
         const guild = this.client.guilds.cache.get(data.guildID) as TypicalGuild;
         if (!guild) return;
 
+        if (!guild.me?.permissions.has('MANAGE_ROLES', true)) return;
+
         const member = await guild.members
             .fetch(data.memberID)
             .catch(() => null);
