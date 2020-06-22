@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.2]
+### Build
+ - Overwrite issues when excluding node_modules
+
 ## [3.7.1]
 ### Fixed
  - Missing permissions in automated tasks (unban, unmute)
@@ -277,7 +281,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.7.1...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.7.2...HEAD
+[3.7.2]: https://github.com/typicalbot/typicalbot/releases/tag/3.7.2
 [3.7.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.7.1
 [3.7.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.7.0
 [3.6.0]: https://github.com/typicalbot/typicalbot/releases/tag/3.6.0
