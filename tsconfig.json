@@ -25,11 +25,8 @@
         "resolveJsonModule": true,
         "esModuleInterop": true
     },
-    "exclude": [
-        "node_modules"
-    ],
     "include": [
-        "**/*.ts",
-        "**/*.json"
+        "./**/*.ts",
+        "./**/*.json"
     ]
 }
