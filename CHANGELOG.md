@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.4]
+### Fixed
+ - Property `language` undefined
+
 ## [3.7.3]
 ### Fixed
  - `language` property being undefined in Guild structure
@@ -285,7 +289,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
  - Fix typos in music commands ([#25](https://github.com/typicalbot/typicalbot/pull/25)).
 
-[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.7.3...HEAD
+[Unreleased]: https://github.com/typicalbot/typicalbot/compare/3.7.4...HEAD
+[3.7.4]: https://github.com/typicalbot/typicalbot/releases/tag/3.7.4
 [3.7.3]: https://github.com/typicalbot/typicalbot/releases/tag/3.7.3
 [3.7.2]: https://github.com/typicalbot/typicalbot/releases/tag/3.7.2
 [3.7.1]: https://github.com/typicalbot/typicalbot/releases/tag/3.7.1
