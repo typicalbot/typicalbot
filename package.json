@@ -46,7 +46,7 @@
         "typescript": "^3.9.5",
         "veza": "^1.1.0",
         "vm2": "^3.9.2",
-        "winston": "^3.3.2"
+        "winston": "^3.3.3"
     },
     "optionalDependencies": {
         "bufferutil": "^4.0.1",
