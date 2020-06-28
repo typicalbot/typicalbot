@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Flip a coin.",
+    "USAGE": "coinflip",
+    "RESPONSE_1": "Heads",
+    "RESPONSE_2": "Tails"
+}
