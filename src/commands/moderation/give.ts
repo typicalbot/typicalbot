@@ -6,6 +6,7 @@ const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?(?:\s+)?(?:(?:<@&
 
 export default class extends Command {
     mode = Modes.STRICT;
+    aliases = ['iam'];
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
