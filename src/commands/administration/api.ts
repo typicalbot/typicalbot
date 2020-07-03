@@ -9,11 +9,11 @@ export default class extends Command {
     execute(message: TypicalGuildMessage, parameters: string) {
         if (parameters === 'view') {
             return message.dm(message.guild.settings.apikey
-                ? message.translate('core/api:KEY', {
+                ? message.translate('administration/api:KEY', {
                     guild: message.guild.name,
                     key: message.guild.settings.apikey
                 })
-                : message.translate('core/api:NONE'));
+                : message.translate('administration/api:NONE'));
         }
 
         if (parameters === 'generate') {
@@ -27,9 +27,9 @@ export default class extends Command {
                     apikey: newApiKey
                 })
                 .then(() =>
-                    message.success(message.translate('core/api:SUCCESS')));
+                    message.success(message.translate('administration/api:SUCCESS')));
 
-            return message.dm(message.translate('core/api:KEY', {
+            return message.dm(message.translate('administration/api:KEY', {
                 guild: message.guild.name,
                 key: newApiKey
             }));
