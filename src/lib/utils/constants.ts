@@ -3,7 +3,7 @@ export const Links = {
     OAUTH: 'https://typicalbot.com/invite',
     SERVER: 'https://typicalbot.com/join-us',
     DONATE: 'https://typicalbot.com/donate',
-    DOCUMENTATION: 'https://typicalbot.com/documentation',
+    DOCUMENTATION: 'https://old.typicalbot.com/documentation',
     SETTINGS: 'https://typicalbot.com/documentation#settings',
     ICON: 'https://typicalbot.com/img/icon.png',
     TRANSLATE: 'https://translate.typicalbot.com',
