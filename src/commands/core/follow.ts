@@ -28,6 +28,6 @@ export default class extends Command {
         // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/camelcase
         this.client.api.channels(isStatus ? '621817852726607882' : '268559149175013376').followers.post({ data: { webhook_channel_id: channel.id } });
-        return message.success(message.translate(isStatus ? 'moderation/follow:FOLLOWED_STATUS' : 'moderation/follow:FOLLOWED'));
+        return message.success(message.translate(isStatus ? 'core/follow:FOLLOWED_STATUS' : 'core/follow:FOLLOWED'));
     }
 }
