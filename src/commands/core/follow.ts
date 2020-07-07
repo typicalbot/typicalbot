@@ -11,7 +11,6 @@ export default class extends Command {
         const channel = message.mentions.channels.first() ?? message.guild.channels.cache.get(id) ?? message.channel;
         const isStatus = type?.toLowerCase() === 'status';
 
-        console.log('test this', parameters, type, isStatus);
         // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/camelcase
         this.client.api.channels(isStatus ? '621817852726607882' : '268559149175013376').followers.post({ data: { webhook_channel_id: channel.id } });
