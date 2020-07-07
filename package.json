@@ -65,7 +65,7 @@
     "@types/ws": "^7.2.6",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
-    "eslint": "^6.1.0",
+    "eslint": "^7.4.0",
     "eslint-plugin-import": "^2.22.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11"
