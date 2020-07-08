@@ -9,7 +9,7 @@ export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
         const [type, id] = parameters.split(' ');
         const channel = message.mentions.channels.first() ?? message.guild.channels.cache.get(id) ?? message.channel;
-        if (!message.guild.me?.permissions.has('MANAGE_WEBHOOKS'))
+        if (!message.guild.me?.permissions.has('MANAGE_WEBHOOKS', true))
             return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
                 permission: 'Manage Webhooks'
             }));
