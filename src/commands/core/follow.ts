@@ -14,6 +14,9 @@ export default class extends Command {
                 permission: 'Manage Webhooks'
             }));
 
+        const webhooks = await message.channel.fetchWebhooks();
+        if (webhooks.size === 10) return message.error(message.translate('core/follow:MAX_WEBHOOK_LIMIT'));
+
         const isStatus = type?.toLowerCase() === 'status';
 
         // @ts-ignore
