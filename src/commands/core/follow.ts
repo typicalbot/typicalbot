@@ -7,8 +7,6 @@ export default class extends Command {
     permission = PermissionsLevels.SERVER_ADMINISTRATOR;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
-        if (!message.member.guild.me) return;
-
         const [type, id] = parameters.split(' ');
         const channel = message.mentions.channels.first() ?? message.guild.channels.cache.get(id) ?? message.channel;
         if (!message.guild.me?.permissions.has('MANAGE_WEBHOOKS'))
