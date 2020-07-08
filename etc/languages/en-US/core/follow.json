@@ -2,6 +2,5 @@
 	"DESCRIPTION": "Follow the bot's news, updates, security issues and more! Get the latest news right on your server.",
 	"USAGE": "follow [status or updates] [#channel]",
 	"FOLLOWED": "All the latest information will now be provided to this server.",
-	"FOLLOWED_STATUS": "All the latest status updated will now be posted here.",
-	"MISSING_PERM": "In order to follow the updates, {{channel}} requires the **MANAGE WEBHOOKS** permission."
+	"FOLLOWED_STATUS": "All the latest status updated will now be posted here."
 }
