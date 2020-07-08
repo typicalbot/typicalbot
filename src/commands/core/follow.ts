@@ -13,7 +13,10 @@ export default class extends Command {
 
         const [type, id] = parameters.split(' ');
         const channel = message.mentions.channels.first() ?? message.guild.channels.cache.get(id) ?? message.channel;
-        if (!channel.permissionsFor(message.member.guild.me)?.has(Permissions.FLAGS.MANAGE_WEBHOOKS)) return message.error(message.translate('core/follow:MISSING_PERM', { channel: channel.toString()}));
+        if (!message.guild.me?.permissions.has('MANAGE_WEBHOOKS', true))
+    return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+            permission: 'Manage Webhooks'
+        }));
 
         const isStatus = type?.toLowerCase() === 'status';
 
