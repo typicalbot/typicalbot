@@ -1,7 +1,6 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
-import { Permissions } from 'discord.js';
 
 export default class extends Command {
     mode = Modes.STRICT;
@@ -10,13 +9,12 @@ export default class extends Command {
     async execute(message: TypicalGuildMessage, parameters: string) {
         if (!message.member.guild.me) return;
 
-
         const [type, id] = parameters.split(' ');
         const channel = message.mentions.channels.first() ?? message.guild.channels.cache.get(id) ?? message.channel;
-        if (!message.guild.me?.permissions.has('MANAGE_WEBHOOKS', true))
-    return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
-            permission: 'Manage Webhooks'
-        }));
+        if (!message.guild.me?.permissions.has('MANAGE_WEBHOOKS'))
+            return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
+                permission: 'Manage Webhooks'
+            }));
 
         const isStatus = type?.toLowerCase() === 'status';
 
