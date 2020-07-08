@@ -7,7 +7,7 @@ import { Client, Collection, Intents } from 'discord.js';
 import { TFunction } from 'i18next';
 import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
-import { TypicalDonor, HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
+import { HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import i18n from './utils/i18n';
 import config from '../../etc/config.json';
@@ -46,7 +46,6 @@ export default class Cluster extends Client {
     public events = new EventHandler(this);
     public analytics = new AnalyticHandler(this);
     public caches = {
-        donors: new Collection<string, TypicalDonor>(),
         bans: new Collection<string, BanLog>(),
         unbans: new Collection<string, UnbanLog>(),
         softbans: new Collection(),
@@ -93,8 +92,6 @@ export default class Cluster extends Client {
         this.handlers.permissions = new PermissionsHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);
 
-        // Fetch donors
-        await this.fetchDonors();
         // Setup translation i18n before login to client
         this.translate = await i18n();
         this.logger.info('Loaded i18n Languages');
@@ -109,14 +106,6 @@ export default class Cluster extends Client {
             event: 'collectData',
             data: property
         }, { receptive: true });
-    }
-
-    private async fetchDonors(): Promise<void> {
-        const donors = await this.handlers.database.get('donors');
-
-        donors.forEach((donor: TypicalDonor) => {
-            if (donor.id.length > 5) this.caches.donors.set(donor.id, donor);
-        });
     }
 
     public get usedRAM(): number {
