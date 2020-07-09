@@ -15,7 +15,7 @@ export default class extends Command {
             }));
 
         const webhooks = await message.channel.fetchWebhooks();
-        if (webhooks.size === 10) return message.error(message.translate('core/follow:MAX_WEBHOOK_LIMIT'));
+        if (webhooks.size >= 10) return message.error(message.translate('core/follow:MAX_WEBHOOK_LIMIT'));
 
         const isStatus = type?.toLowerCase() === 'status';
 
