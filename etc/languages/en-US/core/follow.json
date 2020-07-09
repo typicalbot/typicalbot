@@ -2,5 +2,6 @@
 	"DESCRIPTION": "Follow the bot's news, updates, security issues and more! Get the latest news right on your server.",
 	"USAGE": "follow [status or updates] [#channel]",
 	"FOLLOWED": "All the latest information will now be provided to this server.",
-	"FOLLOWED_STATUS": "All the latest status updated will now be posted here."
+	"FOLLOWED_STATUS": "All the latest status updates will now be posted here.",
+	"MAX_WEBHOOK_LIMIT": "This channel has already reached the maximum amount of webhooks allowed. Please remove one of the existing webhooks in the channel or try another channel."
 }
