@@ -156,14 +156,15 @@ export default class Cluster extends Client {
 
         const guildCount = await this.fetchData('guilds.cache.size');
 
-        fetch(`https://api.discordextremelist.xyz/v1/bot/${this.config.id}`, {
+        fetch(`https://api.discordextremelist.xyz/v2/bot/${this.config.id}/stats`, {
             method: 'post',
             headers: {
                 Authorization: this.config.apis.del,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                guildCount: guildCount
+                guildCount: guildCount,
+                shardCount: this.shardCount
             })
         }).catch((err) => {
             Sentry.captureException(err);
