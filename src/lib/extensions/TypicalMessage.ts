@@ -82,8 +82,8 @@ export class TypicalMessage extends Structures.get('Message') {
         return this.channel.send(`${this.author} | ✔️ | ${content}`, embed);
     }
 
-    error(content: string, embed?: MessageEmbed) {
-        return this.channel.send(`${this.author} | ❌ | ${content}`, embed);
+    error(content: string, embed?: MessageEmbed, options?: MessageOptions) {
+        return this.channel.send(`${this.author} | ❌ | ${content}`, {...options, embed });
     }
 
     dm(content: string | MessageEmbed,
