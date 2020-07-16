@@ -39,7 +39,7 @@ export default class extends Command {
             const response = message.translate('core/help:INVALID', {
                 name: parameters
             });
-            if (!message.embeddable) return message.error(response);
+            if (!message.embeddable) return message.error(response, undefined, { allowedMentions: { users: [message.author.id]}});
 
             return message.send(new MessageEmbed()
                 .setColor(0x00adff)
