@@ -141,11 +141,6 @@ export interface TypicalCommandAlias {
     command: string;
 }
 
-export interface TypicalDonor {
-    id: string;
-    amount: number;
-}
-
 export interface HelperFunctions {
     convertTime: {
         execute(guild: TypicalGuild | TypicalMessage, time: number, short?: boolean): string;

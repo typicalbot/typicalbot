@@ -18,13 +18,11 @@ export const Colors = {
 
 export enum AccessLevels {
     DEFAULT = 0,
-    DONOR = 1,
     STAFF = 3
 }
 
 export const AccessTitles = {
     DEFAULT: { level: 0, title: 'Default' },
-    DONOR: { level: 1, title: 'TypicalBot Donor' },
     STAFF: { level: 3, title: 'TypicalBot Staff' }
 };
 
