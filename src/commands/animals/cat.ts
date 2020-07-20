@@ -7,12 +7,12 @@ export default class extends Command {
     aliases = ['kitty', 'kitten'];
 
     async execute(message: TypicalGuildMessage) {
-        const data = await fetch('https://aws.random.cat/meow')
+        const data = await fetch('https://some-random-api.ml/img/cat')
             .then((res) => res.json())
             .catch(() =>
                 message.error(message.translate('common:REQUEST_ERROR')));
-        if (!message.embeddable) return message.send(data.file);
+        if (!message.embeddable) return message.send(data.link);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.file));
+        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.link).setFooter('Powered by some-random-api.ml'));
     }
 }
