@@ -12,6 +12,6 @@ export default class extends Command {
 
         if (!message.embeddable) return message.send(data.link);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.link));
+        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.link).setFooter('Powered by some-random-api.ml'));
     }
 }

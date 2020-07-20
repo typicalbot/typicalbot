@@ -14,6 +14,6 @@ export default class extends Command {
 
         if (!message.embeddable) return message.send(data.message);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.message));
+        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.message).setFooter('Powered by dog.ceo'));
     }
 }
