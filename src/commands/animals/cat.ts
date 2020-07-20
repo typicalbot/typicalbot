@@ -13,6 +13,6 @@ export default class extends Command {
                 message.error(message.translate('common:REQUEST_ERROR')));
         if (!message.embeddable) return message.send(data.link);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.link).setFooter('Powered by some-random-api.ml'));
+        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.link).setFooter(message.translate('common:POWERED_BY', { service: 'some-random-api.ml' })));
     }
 }

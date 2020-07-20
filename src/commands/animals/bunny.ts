@@ -16,6 +16,6 @@ export default class extends Command {
 
         if (!message.embeddable) return message.send(data.media[type]);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.media[type]).setFooter('Powered by bunnies.io'));
+        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.media[type]).setFooter(message.translate('common:POWERED_BY', { service: 'bunnies.io' })));
     }
 }
