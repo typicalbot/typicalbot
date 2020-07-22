@@ -5,7 +5,7 @@ export const Links = {
     DONATE: 'https://typicalbot.com/donate',
     DOCUMENTATION: 'https://old.typicalbot.com/documentation',
     SETTINGS: 'https://typicalbot.com/documentation#settings',
-    ICON: 'https://typicalbot.com/img/icon.png',
+    ICON: 'https://typicalbot.com/img/icon-transparent-blue.png',
     TRANSLATE: 'https://translate.typicalbot.com',
     VOTE: 'https://top.gg/bot/153613756348366849/vote'
 };
