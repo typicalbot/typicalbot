@@ -1,9 +1,9 @@
 export const Links = {
     BASE: 'https://typicalbot.com',
     OAUTH: 'https://typicalbot.com/invite',
-    SERVER: 'https://typicalbot.com/join-us',
+    SERVER: 'https://typicalbot.com/support',
     DONATE: 'https://typicalbot.com/donate',
-    DOCUMENTATION: 'https://old.typicalbot.com/documentation',
+    DOCUMENTATION: 'https://typicalbot.com/docs',
     SETTINGS: 'https://typicalbot.com/documentation#settings',
     ICON: 'https://typicalbot.com/img/icon-transparent-blue.png',
     TRANSLATE: 'https://translate.typicalbot.com',
