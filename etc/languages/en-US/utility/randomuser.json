@@ -3,5 +3,5 @@
     "USAGE": "randomuser [-o]",
     "RANDOM": "Your random pick is: **{{tag}}** ({{id}}).",
     "MULTIPLE_RANDOM": "Your random picks are:",
-    "MAXED": "Note: You can only select maximum of 10 users at random."
+    "MAXED": "Note: You can only select up to 10 users at random."
 }
