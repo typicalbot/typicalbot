@@ -36,7 +36,7 @@ export default class extends Command {
         const userIDs = new Set<string>();
         const details: string[] = [];
         if (amount > 10) {
-            message.error(message.translate('utility/randomuser:MAXED'));
+            return message.error(message.translate('utility/randomuser:MAXED'));
         }
         // Max we allow is 10 random users
         while (details.length < amount && details.length < 10) {
