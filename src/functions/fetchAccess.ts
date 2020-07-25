@@ -7,9 +7,6 @@ export default class FetchAccess extends Function {
         if ((await guild.fetchPermissions(guild.ownerID)).level > 5)
             return AccessTitles.STAFF;
 
-        const donor = this.client.caches.donors.get(guild.ownerID);
-        if (donor && donor.amount >= 5) return AccessTitles.DONOR;
-
         return AccessTitles.DEFAULT;
     }
 }

@@ -12,6 +12,6 @@ export default class extends Command {
 
         if (!message.embeddable) return message.send(data.url);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.url).setFooter(data.message));
+        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.url).setFooter(data.message).setFooter(message.translate('common:POWERED_BY', { service: 'random-d.uk' })));
     }
 }
