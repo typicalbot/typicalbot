@@ -59,9 +59,9 @@ export default class Cluster extends Client {
 
     public constructor(node: VezaClient | undefined) {
         super({
-            messageCacheMaxSize: 150,
-            messageCacheLifetime: 1800,
-            messageSweepInterval: 300,
+            messageCacheMaxSize: 300,
+            messageCacheLifetime: 900,
+            messageSweepInterval: 180,
             disableMentions: 'everyone',
             partials: ['MESSAGE'],
             presence: { activity: { name: `${config.prefix}help — typicalbot.com`, type: 'WATCHING' } },
