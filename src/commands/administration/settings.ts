@@ -74,10 +74,6 @@ export default class extends Command {
 
         const permission = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
 
-        // const accessLevel = await this.client.helpers.fetchAccess.execute(
-        //     message.guild
-        // );
-
         const [action, setting, type, value] = args;
 
         if (['edit', 'clear'].includes(action) && permission.level < 3)

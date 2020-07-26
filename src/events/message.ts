@@ -3,6 +3,7 @@ import { Message, GuildMember, User } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuildMessage, GuildSettings } from '../lib/types/typicalbot';
 import { PermissionsLevels, Modes } from '../lib/utils/constants';
+import { fetchAccess } from '../lib/utils/util';
 
 export default class extends Event {
     async execute(message: Message | TypicalGuildMessage) {
@@ -77,7 +78,7 @@ export default class extends Event {
         if (command.ptb && this.client.build !== 'ptb')
             return message.error(message.translate('misc:PTB_ONLY'));
 
-        const accessLevel = await this.client.helpers.fetchAccess.execute(message.guild);
+        const accessLevel = await fetchAccess(message.guild);
         if (command.access && accessLevel.level < command.access) {
             return message.error(message.translate('misc:MISSING_ACCESS', {
                 command: command.access,

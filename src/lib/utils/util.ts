@@ -1,4 +1,5 @@
 import { TypicalGuild, TypicalMessage } from '../types/typicalbot';
+import { AccessTitles } from './constants';
 
 export const convertTime = (guild: TypicalGuild | TypicalMessage, time: number, short = false) => {
     const absoluteSeconds = Math.floor((time / 1000) % 60);
@@ -48,4 +49,11 @@ export const convertTime = (guild: TypicalGuild | TypicalMessage, time: number, 
     if (s) absoluteTime.push(s);
 
     return absoluteTime.join(', ');
+};
+
+export const fetchAccess = async (guild: TypicalGuild) => {
+    if ((await guild.fetchPermissions(guild.ownerID)).level > 5)
+        return AccessTitles.STAFF;
+
+    return AccessTitles.DEFAULT;
 };

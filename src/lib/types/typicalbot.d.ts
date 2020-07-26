@@ -142,9 +142,6 @@ export interface TypicalCommandAlias {
 }
 
 export interface HelperFunctions {
-    fetchAccess: {
-        execute(guild: Guild): Promise<AccessLevel>;
-    };
     formatMessage: {
         execute(
             type: string,
