@@ -7,15 +7,15 @@ export default class extends Command {
         const randomAddonNum = Math.random();
         let randomAddon = '';
         if (randomAddonNum <= 0.1)
-            randomAddon = message.translate('fun/shoot:POLICE');
+            randomAddon = message.translate('interaction/shoot:POLICE');
         else if (randomAddonNum <= 0.2 && randomAddonNum > 0.1)
-            randomAddon = message.translate('fun/shoot:MISSED');
+            randomAddon = message.translate('interaction/shoot:MISSED');
         else if (randomAddonNum <= 0.3 && randomAddonNum > 0.2)
-            randomAddon = message.translate('fun/shoot:HEADSHOT');
+            randomAddon = message.translate('interaction/shoot:HEADSHOT');
 
         if (!mention || mention.id === message.author.id)
-            return message.reply(`${message.translate('fun/shoot:SELF')} ${randomAddon}`);
-        return message.reply(`${message.translate('fun/shoot:RESPONSE', {
+            return message.reply(`${message.translate('interaction/shoot:SELF')} ${randomAddon}`);
+        return message.reply(`${message.translate('interaction/shoot:RESPONSE', {
             user: mention.toString()
         })} ${randomAddon}`);
     }

@@ -4,14 +4,12 @@ import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 export default class extends Command {
     execute(message: TypicalGuildMessage) {
         const mention = message.mentions.users.first();
-
         const randomAddon = Math.random() <= 0.25;
 
         if (!mention || mention.id === message.author.id)
-            return message.reply(message.translate('fun/punch:SELF'));
-
-        return message.reply(message.translate(randomAddon ? 'fun/punch:RESPONSE_JAW' : 'fun/punch:RESPONSE', {
-            user: mention.toString()
-        }));
+            return message.reply(message.translate(randomAddon
+                ? 'interaction/cookie:SELF_LAUGH'
+                : 'interaction/cookie:SELF_KEPT'));
+        return message.reply(message.translate('interaction/cookie:GIVEN', { user: mention.toString() }));
     }
 }
