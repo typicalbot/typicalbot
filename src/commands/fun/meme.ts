@@ -5,7 +5,7 @@ import { MessageEmbed } from 'discord.js';
 
 export default class extends Command {
     async execute(message: TypicalGuildMessage) {
-        const { data: { children } } = await fetch('https://www.reddit.com/r/dankmemes/top.json?sort=top&t=day&limit=500')
+        const { data: { children } } = await fetch('https://www.reddit.com/r/memes/top.json?sort=top&t=day&limit=500')
             .then(res => res.json());
         const meme = children[Math.floor(Math.random() * children.length)].data;
 
