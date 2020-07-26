@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Kickt ein Mitglied aus einem Sprachkanal.",
+    "USAGE": "voicekick <@Benutzer> [Grund]",
+    "NO_VOICE": "Der angeforderte Benutzer ist nicht in einem Sprachkanal.",
+    "SUCCESS": "Benutzer **{{user}}** wurde erfolgreich aus dem Sprachkanal gekickt."
+}

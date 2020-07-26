@@ -1,6 +1,6 @@
 {
 	"DESCRIPTION": "Den OAuth2 Autorisierungslink für TypicalBot erhalten.",
-	"USAGE": "Einladung",
+	"USAGE": "invite",
 	"TEXT": "Du kannst mich unter <{{link}}> zu deinem Server hinzufügen.",
 	"TYPICAL_INVITE": "TypicalBot Einladung",
 	"PROHIBITED": "Dieser Server verbietet das Verschicken von Einladungen. Deine Nachricht wurde gelöscht.",

@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Проверете данните на потрепващите потребители от API на Twitch.",
+    "USAGE": "twitch <user>",
+    "STATS": "** __ Twitch Статистика: __ ** {{name}}",
+    "ID": "ID: {{id}}",
+    "DISPLAY": "Показвано име: {{name}}",
+    "DESC": "Описание: {{description}}",
+    "STATUS": "Статус: {{type}}",
+    "PROFILE": "Снимка на профила: {{url}}",
+    "VIEWS": "Общ брой показвания: {{amount}}",
+    "TITLE": "Статистика на Twitch"
+}

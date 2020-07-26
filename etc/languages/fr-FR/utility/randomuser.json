@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Sélectionne un membre aléatoire sur le serveur.",
-  "USAGE": "utilisateur aléatoire [-o]",
-  "RANDOM": "Votre choix aléatoire est : **{{tag}}** ({{id}})."
-}

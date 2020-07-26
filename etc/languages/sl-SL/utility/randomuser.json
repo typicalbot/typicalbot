@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Izbere naključnega člana v strežniku.",
-  "USAGE": "naključniuporabnik [-o]",
-  "RANDOM": "Vaš naključni izbor je: **{{tag}}** ({{id}})."
-}

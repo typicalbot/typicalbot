@@ -1,5 +1,0 @@
-{
-  "DESCRIPTION": "Sunucudaki rasgele bir üyeyi seçer.",
-  "USAGE": "randomuser [-o]",
-  "RANDOM": "Rasgele seçimin: **{{tag}}** ({{id}})."
-}
