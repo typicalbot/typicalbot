@@ -1,4 +1,4 @@
-import { TypicalGuild, TypicalMessage } from '../types/typicalbot';
+import { TypicalGuild, TypicalMessage, TypicalGuildMessage } from '../types/typicalbot';
 import { AccessTitles } from './constants';
 
 export const convertTime = (guild: TypicalGuild | TypicalMessage, time: number, short = false) => {
@@ -62,4 +62,25 @@ export const lengthen = (text: string, length: number) => {
     return text.length > length
         ? `${text.substring(0, length - 3)}...`
         : text;
+};
+
+export const pagify = (message: TypicalGuildMessage, list: string[], page = 1) => {
+    const listSize = list.length;
+    const pageCount = Math.ceil(listSize / 10);
+
+    page = page > pageCount ? 0 : page - 1;
+
+    const currentPage = list.splice(page * 10, 10);
+
+    const pageContent = currentPage
+        .map((item, index) =>
+            `• ${String(index + 1 + 10 * page).padStart(String(10 + 10 * page).length)}: ${item}`)
+        .join('\n');
+
+    return message.translate('misc:PAGIFY', {
+        page: page + 1,
+        pages: pageCount,
+        total: listSize.toLocaleString(),
+        content: pageContent
+    });
 };

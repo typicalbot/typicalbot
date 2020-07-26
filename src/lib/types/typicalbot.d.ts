@@ -151,13 +151,6 @@ export interface HelperFunctions {
             options?: FormatMessageOptions
         ): Promise<string>;
     };
-    pagify: {
-        execute(
-            message: TypicalGuildMessage,
-            list: string[],
-            page?: number
-        ): string;
-    };
     permissionError: {
         execute(
             message: TypicalGuildMessage,

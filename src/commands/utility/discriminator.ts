@@ -1,6 +1,7 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
+import { pagify } from '../../lib/utils/util';
 
 const regex = /#?(\d{4})(?:\s+(\d+))?/i;
 
@@ -21,7 +22,7 @@ export default class extends Command {
                 discriminator
             }));
 
-        const content = this.client.helpers.pagify.execute(message, list
+        const content = pagify(message, list
             .map((u) => `${u.tag.padEnd(30)} ${u.id}`), page);
 
         return message.send([

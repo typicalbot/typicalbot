@@ -2,6 +2,7 @@ import { Role } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
+import { pagify } from '../../lib/utils/util';
 
 const regex = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i;
 const infoRegex = /(?:(members)\s+)?(?:(?:(?:<@&)?(\d{17,20})>?|(.+))\s+(\d+)|(?:(?:<@&)?(\d{17,20})>?|(.+)))/i;
@@ -58,7 +59,7 @@ export default class extends Command {
     }
 
     list(message: TypicalGuildMessage, page: string) {
-        const content = this.client.helpers.pagify.execute(message, message.guild.roles.cache
+        const content = pagify(message, message.guild.roles.cache
             .sort((a, b) => b.position - a.position)
             .map((role) => `${role.name.padEnd(30)} : ${role.id}`), parseInt(page, 10) || 1);
 
@@ -98,7 +99,7 @@ export default class extends Command {
 
         await message.guild.members.fetch().catch(console.error);
 
-        const content = this.client.helpers.pagify.execute(message, role.members
+        const content = pagify(message, role.members
             .map((member) => `${member.user.username.padEnd(30)} : ${member.id}`), parseInt(page, 10) || 1);
 
         return message.send([
@@ -209,7 +210,7 @@ export default class extends Command {
         if (!roles.length)
             return message.reply(message.translate('moderation/roles:NONE_PUBLIC'));
 
-        const content = this.client.helpers.pagify.execute(message, roles
+        const content = pagify(message, roles
             .sort((a, b) => b.position - a.position)
             .map((role) => `${role.name.padEnd(30)} : ${role.id}`), parseInt(page, 10) || 1);
 
