@@ -140,18 +140,6 @@ export interface TypicalCommandAlias {
     command: string;
 }
 
-export interface HelperFunctions {
-    formatMessage: {
-        execute(
-            type: string,
-            guild: TypicalGuild,
-            user: User,
-            content: string,
-            options?: FormatMessageOptions
-        ): Promise<string>;
-    };
-}
-
 export interface AccessLevel {
     level: 0 | 1 | 3;
     title: 'Default' | 'TypicalBot Staff' | 'TypicalBot Donor';

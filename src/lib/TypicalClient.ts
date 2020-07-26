@@ -7,7 +7,7 @@ import { Client, Collection, Intents } from 'discord.js';
 import { TFunction } from 'i18next';
 import fetch from 'node-fetch';
 import { Client as VezaClient } from 'veza';
-import { HelperFunctions, BanLog, UnbanLog } from './types/typicalbot';
+import { BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import i18n from './utils/i18n';
 import config from '../../etc/config.json';
@@ -16,7 +16,6 @@ import AnalyticHandler from '../handlers/AnalyticHandler';
 import CommandHandler from '../handlers/CommandHandler';
 import DatabaseHandler from '../handlers/DatabaseHandler';
 import EventHandler from '../handlers/EventHandler';
-import FunctionHandler from '../handlers/FunctionHandler';
 import ModerationLogHandler from '../handlers/ModerationLogHandler';
 import PermissionsHandler from '../handlers/PermissionsHandler';
 import SettingHandler from '../handlers/SettingHandler';
@@ -39,9 +38,6 @@ export default class Cluster extends Client {
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     public handlers = {} as TypicalHandlers;
     public settings = new SettingHandler(this);
-    public functions = new FunctionHandler(this);
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    public helpers = {} as HelperFunctions;
     public commands = new CommandHandler(this);
     public events = new EventHandler(this);
     public analytics = new AnalyticHandler(this);

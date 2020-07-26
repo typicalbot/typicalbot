@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/node';
 import { TextChannel, MessageEmbed } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuildMember, TypicalGuild } from '../lib/types/typicalbot';
+import { formatMessage } from '../lib/utils/util';
 
 export default class GuildMemberRemove extends Event {
     async execute(member: TypicalGuildMember) {
@@ -26,7 +27,7 @@ export default class GuildMemberRemove extends Event {
         if (settings.logs.leave !== '--embed')
             return channel
                 .send(settings.logs.leave
-                    ? await this.client.helpers.formatMessage.execute('logs', guild, user, settings.logs.leave)
+                    ? await formatMessage('logs', guild, user, settings.logs.leave)
                     : guild.translate('help/logs:LEFT', { user: user.tag }))
                 .catch((err) => Sentry.captureException(err));
 

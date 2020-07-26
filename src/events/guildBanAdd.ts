@@ -3,6 +3,7 @@ import { User, TextChannel, MessageEmbed } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuild } from '../lib/types/typicalbot';
 import { ModerationLogTypes } from '../lib/utils/constants';
+import { formatMessage } from '../lib/utils/util';
 
 export default class GuildBanAdd extends Event {
     async execute(guild: TypicalGuild, user: User) {
@@ -45,7 +46,7 @@ export default class GuildBanAdd extends Event {
 
         return channel
             .send(settings.logs.ban
-                ? await this.client.helpers.formatMessage.execute('logs', guild, user, settings.logs.ban)
+                ? await formatMessage('logs', guild, user, settings.logs.ban)
                 : `**${user.tag}** has been banned from the server.`)
             .catch((err) => Sentry.captureException(err));
     }

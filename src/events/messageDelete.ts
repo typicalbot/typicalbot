@@ -3,6 +3,7 @@ import { TextChannel, MessageEmbed } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuild, TypicalGuildMessage } from '../lib/types/typicalbot';
 import { lengthen } from '../lib/utils/util';
+import { formatMessage } from '../lib/utils/util';
 
 export default class MessageDelete extends Event {
     async execute(message: TypicalGuildMessage) {
@@ -30,7 +31,7 @@ export default class MessageDelete extends Event {
                         user: user.tag
                     })
                     // eslint-disable-next-line max-len
-                    : await this.client.helpers.formatMessage.execute('logs-msgdel', message.guild as TypicalGuild, user, settings.logs.delete, {
+                    : await formatMessage('logs-msgdel', message.guild as TypicalGuild, user, settings.logs.delete, {
                         message,
                         channel: message.channel as TextChannel
                     }))

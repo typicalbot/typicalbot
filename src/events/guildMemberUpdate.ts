@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/node';
 import { TextChannel, MessageEmbed } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuild, TypicalGuildMember } from '../lib/types/typicalbot';
+import { formatMessage } from '../lib/utils/util';
 
 export default class GuildMemberUpdate extends Event {
     async execute(oldMember: TypicalGuildMember, member: TypicalGuildMember) {
@@ -24,7 +25,7 @@ export default class GuildMemberUpdate extends Event {
         if (
             settings.auto.nickname &&
             nickname ===
-                (await this.client.helpers.formatMessage.execute('autonick', guild, user, settings.auto.nickname))
+            (await formatMessage('autonick', guild, user, settings.auto.nickname))
         )
             return;
 
@@ -32,7 +33,7 @@ export default class GuildMemberUpdate extends Event {
             return channel
                 .send(settings.logs.nickname !== '--enabled'
                     // eslint-disable-next-line max-len
-                    ? await this.client.helpers.formatMessage.execute('logs-nick', guild, user, settings.logs.nickname, { oldMember })
+                    ? await formatMessage('logs-nick', guild, user, settings.logs.nickname, { oldMember })
                     : guild.translate('help/logs:NICKNAMED', {
                         user: user.tag,
                         nickname: member.displayName
