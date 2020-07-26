@@ -1,7 +1,0 @@
-{
-    "DESCRIPTION": "Frappez un autre utilisateur sur le serveur.",
-    "USAGE": "punch [@user]",
-    "SELF": " arrêtez de vous frapper ! :punch:",
-    "RESPONSE": "vient de frapper {{user}}! :punch:",
-    "RESPONSE_JAW": "vient de frapper {{user}}! :punch: Oh, danger ! Droit à la mâchoire ! Ça doit avoir fait mal !\""
-}

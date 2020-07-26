@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Nimmt eine Rolle von der öffentlichen Rollenliste.",
+    "USAGE": "take <Rollenname>",
+    "UNEDITABLE": "Ungenügende Berechtigungen für den Bot. Stelle sicher, dass er die höchste Rolle hat und die Rollen verwalten Berechtigung hat."
+}

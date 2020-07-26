@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Wirf eine Münze.",
+    "USAGE": "coinflip",
+    "RESPONSE_1": "Kopf",
+    "RESPONSE_2": "Zahl"
+}

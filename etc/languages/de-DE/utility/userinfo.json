@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Zeigt Nutzer Informationen an.",
+    "DESCRIPTION": "Zeigt Nutzerinformationen an.",
     "USAGE": "userinfo [@Nutzer|Nutzer-ID|Nutzer-Tag]",
     "ID": "ID: {{id}}",
     "STATUS": "Status: {{status}}",
