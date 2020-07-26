@@ -1,7 +1,0 @@
-{
-	"CASE_ID": "Ärende {{id}}",
-	"ACTION": "**Handling:** {{display}} {{expiration}}",
-	"USER": "**Användare:** {{tag}} ({{id}})",
-	"CHANNEL": "**Kanal:** {{name}} {{channel}}",
-	"REASON": "**Anledning:** {{reason}}"
-}

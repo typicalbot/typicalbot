@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Schickt eine Ankündigung im Ankündigungskanal. Füge '-e' vor dem Inhalt hinzu, um die Nachricht einzubetten. Falls die Ankündigungsmentionrolle angegeben ist, wird sie benutzt.",
+    "USAGE": "announce [-e] <Inhalt>",
+    "INVALID": "Es wurde kein Ankündigungsinhalt angegeben.",
+    "INVALID_CHANNEL": "Um etwas anzukündigen, konfiguriere bitte einen Ankündigungskanal indem du folgendes eingibst: `$set edit announcements #kanal-name`",
+    "TEXT": "**__Ankündigung von {{usertag}}:__** {{role}}",
+    "TITLE": "Ankündigung"
+}

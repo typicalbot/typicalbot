@@ -1,7 +1,0 @@
-{
-    "DESCRIPTION": "Slå en annan användare på servern.",
-    "USAGE": "slå [@user]",
-    "SELF": " sluta slå dig själv! :punch:",
-    "RESPONSE": "slog precis {{user}}! :punch:",
-    "RESPONSE_JAW": "slog just {{user}}! :punch: Åh, gud! Rätt på käken! Det måste ha gjort ont!'"
-}

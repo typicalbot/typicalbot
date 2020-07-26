@@ -1,7 +1,7 @@
 {
-	"CASE_ID": "Primer {{id}}",
-	"ACTION": "**Ukrep:** {{display}} {{expiration}}",
-	"USER": "**Uporabnik:** {{tag}} ({{id}})",
-	"CHANNEL": "**Kanal:** {{name}} {{channel}}",
-	"REASON": "**Razlog:** {{reason}}"
+    "CASE_ID": "Primer {{id}}",
+    "ACTION": "**Ukrep:** {{display}} {{expiration}}",
+    "USER": "**Uporabnik:** {{tag}} ({{id}})",
+    "CHANNEL": "**Kanal:** {{name}} ({{channel}})",
+    "REASON": "**Razlog:** {{reason}}"
 }
