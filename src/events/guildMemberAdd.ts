@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/node';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuildMember, TypicalGuild } from '../lib/types/typicalbot';
+import { convertTime } from '../lib/utils/util';
 
 export default class GuildMemberAdd extends Event {
     async execute(member: TypicalGuildMember) {
@@ -23,7 +24,7 @@ export default class GuildMemberAdd extends Event {
                 if (settings.logs.join === '--embed') {
                     const age = Date.now() - member.user.createdTimestamp;
                     const ACCOUNT_AGE = `${guild.translate('help/logs:USER_AGE', {
-                        age: guild.client.helpers.convertTime.execute(guild, age, true)
+                        age: convertTime(guild, age, true)
                     })} ${age < 60000 * 15 ? guild.translate('help/logs:NEW_ACCOUNT') : ''}`;
                     channel
                         .send(new MessageEmbed()

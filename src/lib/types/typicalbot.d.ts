@@ -142,9 +142,6 @@ export interface TypicalCommandAlias {
 }
 
 export interface HelperFunctions {
-    convertTime: {
-        execute(guild: TypicalGuild | TypicalMessage, time: number, short?: boolean): string;
-    };
     fetchAccess: {
         execute(guild: Guild): Promise<AccessLevel>;
     };
