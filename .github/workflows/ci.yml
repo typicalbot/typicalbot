@@ -51,4 +51,4 @@ jobs:
       - name: Run ESLint
         uses: icrawl/action-eslint@v1
         with:
-          custom-glob: "scripts src"
+          custom-glob: "bin src"
