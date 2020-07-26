@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 3.x
+      - 4.x
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Restore Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile --ignore-scripts
+      - name: Copy Configuration
+        run: cp etc/config.example.json etc/config.json
+      - name: Run TypeScript Compiler
+        uses: icrawl/action-tsc@v1
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Restore Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile --ignore-scripts
+      - name: Run ESLint
+        uses: icrawl/action-eslint@v1
+        with:
+          custom-glob: "bin src"
