@@ -57,3 +57,9 @@ export const fetchAccess = async (guild: TypicalGuild) => {
 
     return AccessTitles.DEFAULT;
 };
+
+export const lengthen = (text: string, length: number) => {
+    return text.length > length
+        ? `${text.substring(0, length - 3)}...`
+        : text;
+};

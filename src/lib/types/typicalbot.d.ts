@@ -151,9 +151,6 @@ export interface HelperFunctions {
             options?: FormatMessageOptions
         ): Promise<string>;
     };
-    lengthen: {
-        execute(text: string, length: number): string;
-    };
     pagify: {
         execute(
             message: TypicalGuildMessage,

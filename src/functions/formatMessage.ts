@@ -2,6 +2,7 @@ import { User } from 'discord.js';
 import moment from 'moment';
 import Function from '../lib/structures/Function';
 import { TypicalGuild, FormatMessageOptions } from '../lib/types/typicalbot';
+import { lengthen } from '../lib/utils/util';
 
 export default class FormatMessage extends Function {
     async execute(type: string,
@@ -47,7 +48,7 @@ export default class FormatMessage extends Function {
             return formatted
                 .replace(/{message.content}|{message.text}/gi, options.message.content)
                 // eslint-disable-next-line max-len
-                .replace(/{message.content:short}|{message.text:short}/gi, this.client.helpers.lengthen.execute(options.message.content, 100));
+                .replace(/{message.content:short}|{message.text:short}/gi, lengthen(options.message.content, 100));
         }
         if (type === 'automessage') {
             return content
