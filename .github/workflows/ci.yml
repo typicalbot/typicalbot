@@ -49,6 +49,4 @@ jobs:
       - name: Install Dependencies
         run: yarn --frozen-lockfile --ignore-scripts
       - name: Run ESLint
-        uses: icrawl/action-eslint@v1
-        with:
-          custom-glob: "bin src"
+        run: yarn run lint
