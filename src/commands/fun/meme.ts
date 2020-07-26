@@ -11,6 +11,12 @@ export default class extends Command {
         const raw = children.filter((c: any) => c.data.over_18 === false);
         const meme = raw[Math.floor(Math.random() * raw.length)].data;
 
+        if (!message.embeddable)
+            return message.send([
+                meme.title,
+                meme.url
+            ].join('\n'));
+
         return message.send(new MessageEmbed()
             .setTitle(meme.title)
             .setImage(meme.url)
