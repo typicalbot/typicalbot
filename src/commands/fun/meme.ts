@@ -8,9 +8,7 @@ export default class extends Command {
         const { data: { children } } = await fetch('https://www.reddit.com/r/memes/top.json?sort=top&t=day&limit=500')
             .then(res => res.json());
 
-        console.log(children.length);
         const raw = children.filter((c: any) => c.data.over_18 === false);
-        console.log(raw.length);
         const meme = raw[Math.floor(Math.random() * raw.length)].data;
 
         return message.send(new MessageEmbed()
