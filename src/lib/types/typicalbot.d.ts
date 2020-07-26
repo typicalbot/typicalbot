@@ -9,7 +9,6 @@ import {
     User
 } from 'discord.js';
 import Cluster from '../TypicalClient';
-import Command from '../structures/Command';
 import ModerationLog from '../structures/ModerationLog';
 import PermLevel from '../structures/PermissionLevel';
 
@@ -150,14 +149,6 @@ export interface HelperFunctions {
             content: string,
             options?: FormatMessageOptions
         ): Promise<string>;
-    };
-    permissionError: {
-        execute(
-            message: TypicalGuildMessage,
-            command: Command,
-            userLevel: PermissionLevel,
-            permission?: 0 | 1 | -1 | 2 | 3 | 4 | 10
-        ): string;
     };
     resolveMember: {
         execute(

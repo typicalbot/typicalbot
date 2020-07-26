@@ -1,6 +1,7 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
+import { permissionError } from '../../lib/utils/util';
 
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?(?:\s+)?(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 
@@ -42,7 +43,7 @@ export default class extends Command {
                 permissions.level <
                 PermissionsLevels.SERVER_ADMINISTRATOR
             ) {
-                return message.error(this.client.helpers.permissionError.execute(message, this, permissions));
+                return message.error(permissionError(this.client, message, this, permissions));
             }
 
             const removed = await member.roles.remove(role).catch(() => null);

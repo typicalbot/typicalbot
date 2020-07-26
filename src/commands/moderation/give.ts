@@ -1,6 +1,7 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
+import { permissionError } from '../../lib/utils/util';
 
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?(?:\s+)?(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 
@@ -40,7 +41,7 @@ export default class extends Command {
         if (member) {
             if (permissions.level < PermissionsLevels.SERVER_ADMINISTRATOR) {
                 // eslint-disable-next-line max-len
-                return message.error(this.client.helpers.permissionError.execute(message, this, permissions, PermissionsLevels.SERVER_ADMINISTRATOR));
+                return message.error(permissionError(this.client, message, this, permissions, PermissionsLevels.SERVER_ADMINISTRATOR));
             }
 
             const added = await member.roles.add(role).catch(() => null);

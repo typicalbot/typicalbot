@@ -4,6 +4,7 @@ import Event from '../lib/structures/Event';
 import { TypicalGuildMessage, GuildSettings } from '../lib/types/typicalbot';
 import { PermissionsLevels, Modes } from '../lib/utils/constants';
 import { fetchAccess } from '../lib/utils/util';
+import { permissionError } from '../lib/utils/util';
 
 export default class extends Event {
     async execute(message: Message | TypicalGuildMessage) {
@@ -106,7 +107,7 @@ export default class extends Event {
                 PermissionsLevels.SERVER_BLACKLISTED &&
                 command.permission <= PermissionsLevels.SERVER_OWNER)
         ) {
-            return message.error(this.client.helpers.permissionError.execute(message, command, actualUserPermissions));
+            return message.error(permissionError(this.client, message, command, actualUserPermissions));
         }
 
         this.client.analytics.addEvent({

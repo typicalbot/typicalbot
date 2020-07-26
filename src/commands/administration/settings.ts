@@ -1,6 +1,7 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, SettingsData } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
+import { permissionError } from '../../lib/utils/util';
 
 const regex = /(list|view|edit|clear)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
 const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
@@ -78,7 +79,7 @@ export default class extends Command {
 
         if (['edit', 'clear'].includes(action) && permission.level < 3)
             // eslint-disable-next-line max-len
-            return message.error(this.client.helpers.permissionError.execute(message, this, permission, PermissionsLevels.SERVER_ADMINISTRATOR));
+            return message.error(permissionError(this.client, message, this, permission, PermissionsLevels.SERVER_ADMINISTRATOR));
 
         switch (action) {
             case 'clear':

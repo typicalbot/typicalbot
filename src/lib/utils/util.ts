@@ -1,4 +1,6 @@
-import { TypicalGuild, TypicalMessage, TypicalGuildMessage } from '../types/typicalbot';
+import TypicalClient from '../TypicalClient';
+import { TypicalGuild, TypicalMessage, TypicalGuildMessage, PermissionLevel } from '../types/typicalbot';
+import Command from '../structures/Command';
 import { AccessTitles } from './constants';
 
 export const convertTime = (guild: TypicalGuild | TypicalMessage, time: number, short = false) => {
@@ -82,5 +84,17 @@ export const pagify = (message: TypicalGuildMessage, list: string[], page = 1) =
         pages: pageCount,
         total: listSize.toLocaleString(),
         content: pageContent
+    });
+};
+
+export const permissionError = (client: TypicalClient, message: TypicalGuildMessage, command: Command, userLevel: PermissionLevel, permission?: 0 | 1 | -1 | 2 | 3 | 4 | 10) => {
+    // eslint-disable-next-line max-len
+    const requiredLevel = client.handlers.permissions.levels.get(permission ? permission : command.permission) as PermissionLevel;
+
+    return message.translate('misc:MISSING_PERMS', {
+        requiredLevel: requiredLevel.level,
+        requiredTitle: requiredLevel.title,
+        userLevel: userLevel.level,
+        userTitle: userLevel.title
     });
 };
