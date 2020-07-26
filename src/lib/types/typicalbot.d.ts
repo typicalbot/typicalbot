@@ -150,15 +150,6 @@ export interface HelperFunctions {
             options?: FormatMessageOptions
         ): Promise<string>;
     };
-    resolveMember: {
-        execute(
-            message: TypicalGuildMessage,
-            id?: string,
-            username?: string,
-            discriminator?: string,
-            returnSelf?: boolean
-        ): Promise<GuildMember | null>;
-    };
 }
 
 export interface AccessLevel {

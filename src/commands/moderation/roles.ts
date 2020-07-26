@@ -2,7 +2,7 @@ import { Role } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
-import { pagify, permissionError } from '../../lib/utils/util';
+import { pagify, permissionError, resolveMember } from '../../lib/utils/util';
 
 const regex = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i;
 const infoRegex = /(?:(members)\s+)?(?:(?:(?:<@&)?(\d{17,20})>?|(.+))\s+(\d+)|(?:(?:<@&)?(\d{17,20})>?|(.+)))/i;
@@ -135,7 +135,7 @@ export default class extends Command {
 
         const [id, username, discriminator, roleID, roleName] = args;
 
-        const member = await this.client.helpers.resolveMember.execute(message, id, username, discriminator, false);
+        const member = await resolveMember(this.client, message, id, username, discriminator, false);
         if (!member)
             return message.error(message.translate('common:USER_FETCH_ERROR'));
 
