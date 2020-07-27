@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Softbannt ein Mitglied aus dem Server.",
+	"USAGE": "softban <@Benutzer> [Anzahl Tage] [Grund]",
+	"REASON": "Softgebannt von {{mod}} | Grund {{reason}}",
+	"BANNED": "Benutzer **{{user}}** wurde erfolgreich gesoftbannt."
+}

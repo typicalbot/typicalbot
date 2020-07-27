@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Erstellt einen Alias für einen Befehl.",
+    "USAGE": "alias <list|add|remove|clear> <add/remove:command> <add:new-alias>",
+    "CURRENT": "Aktuelle Aliase:",
+    "INVALID_COMMAND": "Dieser Befehl existiert nicht.",
+    "ALIAS_EXISTS": "Der angegebene Alias verweist bereits auf den `{{name}}` Befehl.",
+    "LONG": "Du kannst keinen Alias erstellen, der länger als 10 Zeichen ist.",
+    "ADDED": "Alias erfolgreich hinzugefügt.",
+    "ADD_ERROR": "Beim Hinzufügen des Alias ist ein Fehler aufgetreten.",
+    "INVALID_ALIAS": "Der angeforderte Alias existiert nicht.",
+    "REMOVED": "Alias erfolgreich entfernt.",
+    "REMOVE_ERROR": "Beim Entfernen des Alias ist ein Fehler aufgetreten.",
+    "CLEARED": "Aliase erfolgreich entfernt.",
+    "CLEAR_ERROR": "Beim Löschen der Aliase ist ein Fehler aufgetreten."
+}

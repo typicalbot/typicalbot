@@ -1,6 +1,7 @@
 {
     "DESCRIPTION": "Visa eller anpassa din servers inställning och aktivera/inaktivera specifika funktioner.",
-    "USAGE": "inställningar <list|clear|view|edit> [setting] [add<unk> remove] [value]",
+    "USAGE": "inställningar <list|clear|view|edit> [setting] [add|remove] [value]",
+    "USAGE_LIST": "Använd `{{prefix}}settings list [page]` för att se andra sidor.",
     "AVAILABLE": "**__Tillängliga inställningar att använda med TypicalBot:__**",
     "PAGE": "**Sida {{page}} / {{count}}**",
     "CLEARED": "Rensade inställningar.",
@@ -51,7 +52,7 @@
     "ANTIINVITE-ACTION": "Aktivera varning och kick när du skickar inbjudningar. AntiInvite måste vara aktiverat för att detta ska fungera.",
     "ANTIINVITE-WARN": "En användare kommer att få en varning om de skickar ett exakt antal inbjudningar. AntiInvite och AntiInvite Action måste aktiveras för att detta ska fungera.",
     "ANTIINVITE-KICK": "En användare kommer att sparkas om de skickar detta antal eller fler inbjudningar. AntiInvite och AntiInvite action måste aktiveras för att detta ska fungera.",
-    "NONNICKNAME": "Ett sätt att inaktivera `nickname`-kommandot från att användas.",
+    "NONICKNAME": "Ett sätt att inaktivera `nickname`-kommandot från att användas.",
     "STARBOARD": "En kanal för att skicka stjärnmärkta meddelanden, dvs en styrbord.",
     "STARBOARD-STARS": "Ändra antalet stjärnor som krävs för att meddelanden ska visas i styrbord.",
     "LANGUAGE": "Ändra språket på boten i din server."

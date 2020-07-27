@@ -52,5 +52,6 @@
     "KICK": "At",
     "AUTHOR": "Yaratıcı",
     "MESSAGE": "Mesaj",
-    "INSUFFICIENT_PERMISSIONS": "TypicalBot'ta `{{permission}}` izni eksik."
+    "INSUFFICIENT_PERMISSIONS": "TypicalBot'ta `{{permission}}` izni eksik.",
+    "POWERED_BY": "{{service}} tarafından desteklenmektedir"
 }

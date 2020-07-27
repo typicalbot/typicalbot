@@ -1,8 +1,0 @@
-{
-    "DESCRIPTION": "Changer ou définir une raison pour un cas dans les journaux de modération.",
-    "USAGE": "raison <case-id|latest> [reason]",
-    "DISABLED": "Vous devez avoir l’autorisation d'exclure les membres pour pouvoir utiliser cette commande.",
-    "NONE": "Il n'y a pas de journal de modération sous l'ID de cas donné.",
-    "ERROR": "Une erreur s'est produite pendant la mise à jour du nom.",
-    "EDITED": "Mise à jour de la bannière avec succès"
-}

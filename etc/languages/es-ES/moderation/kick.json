@@ -1,0 +1,10 @@
+{
+    "DESCRIPTION": "Explusa a uno o varios miembros del servidor.",
+    "USAGE": "expulsar a <@user> [reason]",
+    "TOO_LOW": "No puedes expulsar a un usuario con un rol igual o mayor al tuyo.",
+    "KICKABLE": "Para completar la solicitud, necesito el permiso **KICK_MEMBERS** y mi rol más alto tiene que ser superior al rol más alto del usuario solicitado.",
+    "KICKED": "Has sido expulsado de **{{name}}**.",
+    "REASON": "Expulsado por {{mod}} | Motivo: {{reason}}",
+    "ERROR": "Ocurrió un error mientras se trataba de expulsar al usuario solicitado.",
+    "KICK_SUCCESS": "Usuario expulsado con éxito **{{user}}**."
+}

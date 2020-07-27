@@ -1,11 +1,11 @@
 export const Links = {
     BASE: 'https://typicalbot.com',
     OAUTH: 'https://typicalbot.com/invite',
-    SERVER: 'https://typicalbot.com/join-us',
+    SERVER: 'https://typicalbot.com/support',
     DONATE: 'https://typicalbot.com/donate',
-    DOCUMENTATION: 'https://old.typicalbot.com/documentation',
+    DOCUMENTATION: 'https://typicalbot.com/docs',
     SETTINGS: 'https://typicalbot.com/documentation#settings',
-    ICON: 'https://typicalbot.com/img/icon.png',
+    ICON: 'https://typicalbot.com/img/icon-transparent-blue.png',
     TRANSLATE: 'https://translate.typicalbot.com',
     VOTE: 'https://top.gg/bot/153613756348366849/vote'
 };
@@ -18,13 +18,11 @@ export const Colors = {
 
 export enum AccessLevels {
     DEFAULT = 0,
-    DONOR = 1,
     STAFF = 3
 }
 
 export const AccessTitles = {
     DEFAULT: { level: 0, title: 'Default' },
-    DONOR: { level: 1, title: 'TypicalBot Donor' },
     STAFF: { level: 3, title: 'TypicalBot Staff' }
 };
 

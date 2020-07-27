@@ -1,5 +1,7 @@
 {
     "DESCRIPTION": "Selects a random member in the server.",
     "USAGE": "randomuser [-o]",
-    "RANDOM": "Your random pick is: **{{tag}}** ({{id}})."
+    "RANDOM": "Your random pick is: **{{tag}}** ({{id}}).",
+    "MULTIPLE_RANDOM": "Your random picks are:",
+    "MAXED": "You can only select up to 10 users at random."
 }
