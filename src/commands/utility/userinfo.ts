@@ -3,6 +3,7 @@ import moment from 'moment';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
+import { resolveMember } from '../../lib/utils/util';
 
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i;
 
@@ -14,7 +15,7 @@ export default class extends Command {
         const args = regex.exec(parameters) ?? [];
         args.shift();
         const [id, username, discriminator] = args;
-        const member = await this.client.helpers.resolveMember.execute(message, id, username, discriminator);
+        const member = await resolveMember(this.client, message, id, username, discriminator);
         if (!member) return message.translate('common:USER_NOT_FOUND');
 
         const user = member.user;
