@@ -9,6 +9,10 @@ export default class extends Command {
             .then(res => res.json());
 
         const raw = children.filter((c: any) => c.data.over_18 === false);
+
+        if (raw.length === 0)
+            return message.error(message.translate('fun/meme:MEME_ERROR'));
+
         const meme = raw[Math.floor(Math.random() * raw.length)].data;
 
         if (!message.embeddable)
