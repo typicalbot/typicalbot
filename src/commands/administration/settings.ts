@@ -10,6 +10,12 @@ const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
 
 export const possibleLanguages = [
     {
+        name: 'bg-BG',
+        canonical: 'Bulgarian',
+        complete: false,
+        aliases: ['bg', 'bulgarian']
+    },
+    {
         name: 'de-DE',
         canonical: 'German',
         complete: false,
