@@ -5,6 +5,10 @@
     <a target="_blank" href="https://discord.gg/typicalbot"><img src="https://discordapp.com/api/guilds/163038706117115906/embed.png?style=shield" alt="Discord"></a>
     <a target="_blank" href="https://translate.typicalbot.com/project/typicalbot"><img src="https://badges.crowdin.net/typicalbot/localized.svg" alt="Crowdin"></a>
 </p>
+<p align="center">
+    <a target="_blank" href="https://discord.gg/typicalbot"><img src="https://discordapp.com/api/guilds/163038706117115906/embed.png?style=banner2" alt="TypicalBot Support"/></a>
+    <a target="_blank" href="https://discord.gg/BDj4sAV"><img src="https://discordapp.com/api/guilds/736369721817038939/embed.png?style=banner2" alt="TypicalBot Development"/></a>
+</p>
 
 ## About TypicalBot
 
