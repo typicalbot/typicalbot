@@ -43,6 +43,7 @@
     "node-fetch": "^2.6.0",
     "pg": "^8.3.0",
     "pm2": "^4.4.0",
+    "reflect-metadata": "^0.1.13",
     "rethinkdb-ts": "^2.4.2",
     "typeorm": "^0.2.25",
     "typescript": "^3.9.7",

@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 /* eslint-disable no-console */
 import fs from 'fs';
 import { TextChannel } from 'discord.js';
