@@ -3,7 +3,6 @@ import { TypicalGuildMessage, SettingsData } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
 import { permissionError } from '../../lib/utils/util';
 
-const regex = /(list|view|edit|clear)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
 const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 const msRegex = /^(\d+)$/i;
 const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
@@ -66,273 +65,258 @@ export const possibleLanguages = [
 ];
 
 export default class extends Command {
-    aliases = ['set'];
+    aliases = ['set', 'settings'];
     mode = Modes.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
-        const usageError = message.translate('misc:USAGE_ERROR', {
-            name: this.name,
-            prefix: this.client.config.prefix
-        });
-
-        const args = regex.exec(parameters);
-        if (!args) return message.error(usageError);
-        args.shift();
-
+        const [setting, value] = parameters;
         const permission = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
 
-        const [action, setting, type, value] = args;
-
-        if (['edit', 'clear'].includes(action) && permission.level < 3)
+        if (value && permission.level < PermissionsLevels.SERVER_ADMINISTRATOR)
             // eslint-disable-next-line max-len
             return message.error(permissionError(this.client, message, this, permission, PermissionsLevels.SERVER_ADMINISTRATOR));
 
-        switch (action) {
-            case 'clear':
-                return this.clear(message);
-            case 'view':
-            case 'list':
-            case 'edit': {
-                const settings = message.guild.settings;
-                const settingsData = {
-                    dmcommands: {
-                        description: 'administration/settings:DMCOMMANDS',
-                        value: settings.dm.commands,
-                        type: 'boolean',
-                        path: 'dm.commands'
-                    },
-                    embed: {
-                        description: 'administration/settings:EMBED',
-                        value: settings.embed,
-                        type: 'boolean',
-                        path: 'embed'
-                    },
-                    adminrole: {
-                        description: 'administration/settings:ADMINROLE',
-                        value: settings.roles.administrator,
-                        type: 'roles',
-                        path: 'roles.administrator'
-                    },
-                    modrole: {
-                        description: 'administration/settings:MODROLE',
-                        value: settings.roles.moderator,
-                        type: 'roles',
-                        path: 'roles.moderator'
-                    },
-                    muterole: {
-                        description: 'administration/settings:MUTEROLE',
-                        value: settings.roles.mute,
-                        type: 'role',
-                        path: 'roles.mute'
-                    },
-                    blacklistrole: {
-                        description: 'administration/settings:BLACKLISTROLE',
-                        value: settings.roles.blacklist,
-                        type: 'roles',
-                        path: 'roles.blacklist'
-                    },
-                    subscriberrole: {
-                        description: 'administration/settings:SUBSCRIBERROLE',
-                        value: settings.subscriber,
-                        type: 'role',
-                        path: 'subscriber'
-                    },
-                    autorole: {
-                        description: 'administration/settings:AUTOROLE',
-                        value: settings.auto.role.id,
-                        type: 'role',
-                        path: 'auto.role.id'
-                    },
-                    'autorole-bots': {
-                        description: 'administration/settings:AUTOROLE-BOTS',
-                        value: settings.auto.role.bots,
-                        type: 'role',
-                        path: 'auto.role.bots'
-                    },
-                    'autorole-delay': {
-                        description: 'administration/settings:AUTOROLE-DELAY',
-                        value: settings.auto.role.delay,
-                        type: 'ms',
-                        path: 'auto.role.delay'
-                    },
-                    'autorole-silent': {
-                        description: 'administration/settings:AUTOROLE-SILENT',
-                        value: settings.auto.role.silent,
-                        type: 'boolean',
-                        path: 'auto.role.silent'
-                    },
-                    announcements: {
-                        description: 'administration/settings:ANNOUNCEMENTS',
-                        value: settings.announcements.id,
-                        type: 'channel',
-                        path: 'announcements.id'
-                    },
-                    'announcements-mention': {
-                        description:
+        const settings = message.guild.settings;
+        const settingsData = {
+            dmcommands: {
+                description: 'administration/settings:DMCOMMANDS',
+                value: settings.dm.commands,
+                type: 'boolean',
+                path: 'dm.commands'
+            },
+            embed: {
+                description: 'administration/settings:EMBED',
+                value: settings.embed,
+                type: 'boolean',
+                path: 'embed'
+            },
+            adminrole: {
+                description: 'administration/settings:ADMINROLE',
+                value: settings.roles.administrator,
+                type: 'roles',
+                path: 'roles.administrator'
+            },
+            modrole: {
+                description: 'administration/settings:MODROLE',
+                value: settings.roles.moderator,
+                type: 'roles',
+                path: 'roles.moderator'
+            },
+            muterole: {
+                description: 'administration/settings:MUTEROLE',
+                value: settings.roles.mute,
+                type: 'role',
+                path: 'roles.mute'
+            },
+            blacklistrole: {
+                description: 'administration/settings:BLACKLISTROLE',
+                value: settings.roles.blacklist,
+                type: 'roles',
+                path: 'roles.blacklist'
+            },
+            subscriberrole: {
+                description: 'administration/settings:SUBSCRIBERROLE',
+                value: settings.subscriber,
+                type: 'role',
+                path: 'subscriber'
+            },
+            autorole: {
+                description: 'administration/settings:AUTOROLE',
+                value: settings.auto.role.id,
+                type: 'role',
+                path: 'auto.role.id'
+            },
+            'autorole-bots': {
+                description: 'administration/settings:AUTOROLE-BOTS',
+                value: settings.auto.role.bots,
+                type: 'role',
+                path: 'auto.role.bots'
+            },
+            'autorole-delay': {
+                description: 'administration/settings:AUTOROLE-DELAY',
+                value: settings.auto.role.delay,
+                type: 'ms',
+                path: 'auto.role.delay'
+            },
+            'autorole-silent': {
+                description: 'administration/settings:AUTOROLE-SILENT',
+                value: settings.auto.role.silent,
+                type: 'boolean',
+                path: 'auto.role.silent'
+            },
+            announcements: {
+                description: 'administration/settings:ANNOUNCEMENTS',
+                value: settings.announcements.id,
+                type: 'channel',
+                path: 'announcements.id'
+            },
+            'announcements-mention': {
+                description:
                             'administration/settings:ANNOUNCEMENTS-MENTION',
-                        value: settings.announcements.mention,
-                        type: 'role',
-                        path: 'announcements.mention'
-                    },
-                    logs: {
-                        description: 'administration/settings:LOGS',
-                        value: settings.logs.id,
-                        type: 'channel',
-                        path: 'logs.id'
-                    },
-                    'logs-join': {
-                        description: 'administration/settings:LOGS-JOIN',
-                        value: settings.logs.join,
-                        type: 'log',
-                        path: 'logs.join'
-                    },
-                    'logs-leave': {
-                        description: 'administration/settings:LOGS-LEAVE',
-                        value: settings.logs.leave,
-                        type: 'log',
-                        path: 'logs.leave'
-                    },
-                    'logs-ban': {
-                        description: 'administration/settings:LOGS-BAN',
-                        value: settings.logs.ban,
-                        type: 'log',
-                        path: 'logs.ban'
-                    },
-                    'logs-unban': {
-                        description: 'administration/settings:LOGS-UNBAN',
-                        value: settings.logs.unban,
-                        type: 'log',
-                        path: 'logs.unban'
-                    },
-                    'logs-nickname': {
-                        description: 'administration/settings:LOGS-NICKNAME',
-                        value: settings.logs.nickname,
-                        type: 'log',
-                        path: 'logs.nickname'
-                    },
-                    'logs-invite': {
-                        description: 'administration/settings:LOGS-INVITE',
-                        value: settings.logs.invite,
-                        type: 'log',
-                        path: 'logs.invite'
-                    },
-                    'logs-say': {
-                        description: 'administration/settings:LOGS-SAY',
-                        value: settings.logs.say,
-                        type: 'log',
-                        path: 'logs.say'
-                    },
-                    modlogs: {
-                        description: 'administration/settings:MODLOGS',
-                        value: settings.logs.moderation,
-                        type: 'channel',
-                        path: 'logs.moderation'
-                    },
-                    'modlogs-purge': {
-                        description: 'administration/settings:MODLOGS-PURGE',
-                        value: settings.logs.purge,
-                        type: 'boolean',
-                        path: 'logs.purge'
-                    },
-                    automessage: {
-                        description: 'administration/settings:AUTOMESSAGE',
-                        value: settings.auto.message,
-                        type: 'default',
-                        path: 'auto.message'
-                    },
-                    autonickname: {
-                        description: 'administration/settings:AUTONICKNAME',
-                        value: settings.auto.nickname,
-                        type: 'default',
-                        path: 'auto.nickname'
-                    },
-                    mode: {
-                        description: 'administration/settings:MODE',
-                        value: settings.mode,
-                        type: 'default',
-                        path: 'mode'
-                    },
-                    customprefix: {
-                        description: 'administration/settings:CUSTOMPREFIX',
-                        value: settings.prefix.custom,
-                        type: 'default',
-                        path: 'prefix.custom'
-                    },
-                    defaultprefix: {
-                        description: 'administration/settings:DEFAULTPREFIX',
-                        value: settings.prefix.default,
-                        type: 'boolean',
-                        path: 'prefix.default'
-                    },
-                    antiinvite: {
-                        description: 'administration/settings:ANTIINVITE',
-                        value: settings.automod.invite,
-                        type: 'boolean',
-                        path: 'automod.invite'
-                    },
-                    'antiinvite-action': {
-                        description: 'administration/settings:ANTIINVITE-ACTION',
-                        value: settings.automod.inviteaction,
-                        type: 'boolean',
-                        path: 'automod.inviteaction'
-                    },
-                    'antiinvite-warn': {
-                        description: 'administration/settings:ANTIINVITE-WARN',
-                        value: settings.automod.invitewarn,
-                        type: 'default',
-                        path: 'automod.invitewarn'
-                    },
-                    'antiinvite-kick': {
-                        description: 'administration/settings:ANTIINVITE-KICK',
-                        value: settings.automod.invitekick,
-                        type: 'default',
-                        path: 'automod.invitekick'
-                    },
-                    nonickname: {
-                        description: 'administration/settings:NONICKNAME',
-                        value: settings.nonickname,
-                        type: 'boolean',
-                        path: 'nonickname'
-                    },
-                    starboard: {
-                        description: 'administration/settings:STARBOARD',
-                        value: settings.starboard.id,
-                        type: 'channel',
-                        path: 'starboard.id'
-                    },
-                    'starboard-stars': {
-                        description: 'administration/settings:STARBOARD-STARS',
-                        value: settings.starboard.count,
-                        type: 'default',
-                        path: 'starboard.count'
-                    },
-                    language: {
-                        description: 'administration/settings:LANGUAGE',
-                        value: settings.language,
-                        type: 'default',
-                        path: 'language'
-                    }
-                };
-
-                if (action === 'list')
-                    return this.list(message, setting, settingsData);
-                if (action === 'view' && (!setting || !isNaN(parseInt(setting, 10))))
-                    return this.list(message, setting, settingsData, true);
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                // @ts-ignore
-                const selectedSetting = settingsData[setting];
-                if (!selectedSetting)
-                    return message.error(message.translate('administration/settings:INVALID'));
-
-                if (action === 'view')
-                    return this.view(message, selectedSetting);
-
-                if (!value) return message.error(usageError);
-                return this.edit(message, selectedSetting, value, type);
+                value: settings.announcements.mention,
+                type: 'role',
+                path: 'announcements.mention'
+            },
+            logs: {
+                description: 'administration/settings:LOGS',
+                value: settings.logs.id,
+                type: 'channel',
+                path: 'logs.id'
+            },
+            'logs-join': {
+                description: 'administration/settings:LOGS-JOIN',
+                value: settings.logs.join,
+                type: 'log',
+                path: 'logs.join'
+            },
+            'logs-leave': {
+                description: 'administration/settings:LOGS-LEAVE',
+                value: settings.logs.leave,
+                type: 'log',
+                path: 'logs.leave'
+            },
+            'logs-ban': {
+                description: 'administration/settings:LOGS-BAN',
+                value: settings.logs.ban,
+                type: 'log',
+                path: 'logs.ban'
+            },
+            'logs-unban': {
+                description: 'administration/settings:LOGS-UNBAN',
+                value: settings.logs.unban,
+                type: 'log',
+                path: 'logs.unban'
+            },
+            'logs-nickname': {
+                description: 'administration/settings:LOGS-NICKNAME',
+                value: settings.logs.nickname,
+                type: 'log',
+                path: 'logs.nickname'
+            },
+            'logs-invite': {
+                description: 'administration/settings:LOGS-INVITE',
+                value: settings.logs.invite,
+                type: 'log',
+                path: 'logs.invite'
+            },
+            'logs-say': {
+                description: 'administration/settings:LOGS-SAY',
+                value: settings.logs.say,
+                type: 'log',
+                path: 'logs.say'
+            },
+            modlogs: {
+                description: 'administration/settings:MODLOGS',
+                value: settings.logs.moderation,
+                type: 'channel',
+                path: 'logs.moderation'
+            },
+            'modlogs-purge': {
+                description: 'administration/settings:MODLOGS-PURGE',
+                value: settings.logs.purge,
+                type: 'boolean',
+                path: 'logs.purge'
+            },
+            automessage: {
+                description: 'administration/settings:AUTOMESSAGE',
+                value: settings.auto.message,
+                type: 'default',
+                path: 'auto.message'
+            },
+            autonickname: {
+                description: 'administration/settings:AUTONICKNAME',
+                value: settings.auto.nickname,
+                type: 'default',
+                path: 'auto.nickname'
+            },
+            mode: {
+                description: 'administration/settings:MODE',
+                value: settings.mode,
+                type: 'default',
+                path: 'mode'
+            },
+            customprefix: {
+                description: 'administration/settings:CUSTOMPREFIX',
+                value: settings.prefix.custom,
+                type: 'default',
+                path: 'prefix.custom'
+            },
+            defaultprefix: {
+                description: 'administration/settings:DEFAULTPREFIX',
+                value: settings.prefix.default,
+                type: 'boolean',
+                path: 'prefix.default'
+            },
+            antiinvite: {
+                description: 'administration/settings:ANTIINVITE',
+                value: settings.automod.invite,
+                type: 'boolean',
+                path: 'automod.invite'
+            },
+            'antiinvite-action': {
+                description: 'administration/settings:ANTIINVITE-ACTION',
+                value: settings.automod.inviteaction,
+                type: 'boolean',
+                path: 'automod.inviteaction'
+            },
+            'antiinvite-warn': {
+                description: 'administration/settings:ANTIINVITE-WARN',
+                value: settings.automod.invitewarn,
+                type: 'default',
+                path: 'automod.invitewarn'
+            },
+            'antiinvite-kick': {
+                description: 'administration/settings:ANTIINVITE-KICK',
+                value: settings.automod.invitekick,
+                type: 'default',
+                path: 'automod.invitekick'
+            },
+            nonickname: {
+                description: 'administration/settings:NONICKNAME',
+                value: settings.nonickname,
+                type: 'boolean',
+                path: 'nonickname'
+            },
+            starboard: {
+                description: 'administration/settings:STARBOARD',
+                value: settings.starboard.id,
+                type: 'channel',
+                path: 'starboard.id'
+            },
+            'starboard-stars': {
+                description: 'administration/settings:STARBOARD-STARS',
+                value: settings.starboard.count,
+                type: 'default',
+                path: 'starboard.count'
+            },
+            language: {
+                description: 'administration/settings:LANGUAGE',
+                value: settings.language,
+                type: 'default',
+                path: 'language'
             }
+        };
+
+        // List the settings
+        if (!setting) {
+            return this.list(message, setting, settingsData);
         }
 
-        return null;
+        // Resets all settings
+        if (setting === 'clear') {
+            return this.clear(message);
+        }
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        const selectedSetting = settingsData[setting];
+        if (!selectedSetting)
+            return message.error(message.translate('administration/settings:INVALID'));
+
+        if (setting && !value)
+            return this.view(message, selectedSetting);
+
+        return this.edit(message, selectedSetting, value);
     }
 
 
@@ -469,16 +453,16 @@ export default class extends Command {
         }));
     }
 
-    async edit(message: TypicalGuildMessage, setting: SettingsData, value: string, type: string) {
+    async edit(message: TypicalGuildMessage, setting: SettingsData, value: string) {
         let payload = {};
-        const ENABLE = message.translate('common:ENABLE').toLowerCase();
-        const DISABLE = message.translate('common:DISABLE').toLowerCase();
-        const ADD = message.translate('common:ADD').toLowerCase();
-        const CLEAR = message.translate('common:CLEAR').toLowerCase();
-        const REMOVE = message.translate('common:REMOVE').toLowerCase();
-        const DEFAULT = message.translate('common:DEFAULT');
         const HERE = message.translate('common:HERE');
         const EMBED = message.translate('common:EMBED');
+
+        const english = this.client.translate.get('en-US');
+        const ENABLE_OPTIONS = message.translate('common:ENABLE_OPTIONS', { returnObjects: true });
+        const ENGLISH_ENABLE_OPTIONS = english!('common:ENABLE_OPTIONS', { returnObjects: true });
+        const DISABLE_OPTIONS = message.translate('common:DISABLE_OPTIONS', { returnObjects: true });
+        const ENGLISH_DISABLE_OPTIONS = english!('common:DISABLE_OPTIONS', { returnObjects: true });
 
         if (setting.path.endsWith('language')) {
             const selectedLanguage = possibleLanguages.find((data) =>
@@ -500,18 +484,19 @@ export default class extends Command {
                 return message.error(message.translate('administration/settings:VERIFICATION_LEVEL_VERYHIGH'));
 
         if (setting.type === 'boolean') {
-            if (![DISABLE, ENABLE, 'enable', 'disable'].includes(value.toLowerCase()))
+            if (![...ENABLE_OPTIONS, ...ENGLISH_ENABLE_OPTIONS, ...DISABLE_OPTIONS, ...ENGLISH_DISABLE_OPTIONS].includes(value.toLowerCase())) {
                 return message.error(message.translate('administration/settings:INVALID_OPTION'));
+            }
 
-            const enableSetting = ['enable', ENABLE].includes(value.toLowerCase());
+            const enableSetting = [...ENGLISH_ENABLE_OPTIONS, ...ENABLE_OPTIONS].includes(value.toLowerCase());
 
             payload = this.stringToObject(setting.path, enableSetting);
         }
 
         if (setting.type === 'roles') {
-            if ([DISABLE, 'disable', CLEAR, 'clear'].includes(value.toLowerCase())) {
+            if ([...DISABLE_OPTIONS, ...ENGLISH_DISABLE_OPTIONS].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, []);
-            } else if (type && [ADD, 'add', REMOVE, 'remove'].includes(type.toLowerCase())) {
+            } else {
                 const args = roleRegex.exec(value);
                 if (!args)
                     return message.error(message.translate('misc:USAGE_ERROR', {
@@ -529,28 +514,17 @@ export default class extends Command {
                 if (!role)
                     return message.error(message.translate('moderation/give:INVALID'));
 
-                const isAdd = [ADD, 'add'].includes(type.toLowerCase());
-
-                if (isAdd && (setting.value as string[]).includes(role.id))
-                    return message.error(message.translate('administration/settings:ROLE_EXISTS'));
-                if (!isAdd && !(setting.value as string[]).includes(role.id))
-                    return message.error(message.translate('administration/settings:ROLE_NOT_SET'));
-
-                const newValue = isAdd
-                    ? [...(setting.value as string[]), role.id]
-                    : (setting.value as string[]).filter((id) => id !== role.id);
+                const currentValue = setting.value as string[];
+                const newValue = currentValue.includes(role.id)
+                    ? [...currentValue, role.id]
+                    : currentValue.filter((id) => id !== role.id);
 
                 payload = this.stringToObject(setting.path, newValue);
-            } else {
-                return message.error(message.translate('misc:USAGE_ERROR', {
-                    name: this.name,
-                    prefix: this.client.config.prefix
-                }));
             }
         }
 
         if (setting.type === 'role') {
-            if ([DISABLE, 'disable'].includes(value.toLowerCase())) {
+            if ([...DISABLE_OPTIONS, ...ENGLISH_DISABLE_OPTIONS].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, null);
             } else {
                 const args = roleRegex.exec(value);
@@ -575,7 +549,7 @@ export default class extends Command {
         }
 
         if (setting.type === 'ms') {
-            if ([DISABLE, 'disable', DEFAULT, 'default'].includes(value.toLowerCase())) {
+            if ([...DISABLE_OPTIONS, ...ENGLISH_DISABLE_OPTIONS].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, null);
             } else {
                 const args = msRegex.exec(value);
@@ -598,7 +572,7 @@ export default class extends Command {
         }
 
         if (setting.type === 'channel') {
-            if ([DISABLE, 'disable'].includes(value.toLowerCase())) {
+            if ([...DISABLE_OPTIONS, ...ENGLISH_DISABLE_OPTIONS].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, null);
             } else if ([HERE, 'here'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, message.channel.id);
@@ -631,9 +605,9 @@ export default class extends Command {
             if (!message.guild.settings.logs.id)
                 return message.error(message.translate('administration/settings:NEED_LOG'));
 
-            if ([DISABLE, 'disable'].includes(value.toLowerCase())) {
+            if ([...DISABLE_OPTIONS, ...ENGLISH_DISABLE_OPTIONS].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, '--disabled');
-            } else if ([DEFAULT, 'default', ENABLE, 'enable'].includes(value.toLowerCase())) {
+            } else if ([...ENABLE_OPTIONS, ...ENGLISH_ENABLE_OPTIONS].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, null);
             } else if ([EMBED, 'embed'].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, '--embed');
@@ -643,7 +617,7 @@ export default class extends Command {
         }
 
         if (setting.type === 'default') {
-            payload = this.stringToObject(setting.path, [DISABLE, 'disable'].includes(value.toLowerCase())
+            payload = this.stringToObject(setting.path, [...DISABLE_OPTIONS, ...ENGLISH_DISABLE_OPTIONS].includes(value.toLowerCase())
                 ? null
                 : value);
         }
