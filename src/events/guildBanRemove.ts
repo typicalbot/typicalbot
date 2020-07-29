@@ -3,6 +3,7 @@ import { MessageEmbed, User, TextChannel } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuild } from '../lib/types/typicalbot';
 import { ModerationLogTypes } from '../lib/utils/constants';
+import { formatMessage } from '../lib/utils/util';
 
 export default class GuildBanRemove extends Event {
     async execute(guild: TypicalGuild, user: User) {
@@ -35,7 +36,7 @@ export default class GuildBanRemove extends Event {
         if (settings.logs.unban !== '--embed') {
             channel
                 .send(settings.logs.unban
-                    ? await this.client.helpers.formatMessage.execute('logs', guild, user, settings.logs.unban)
+                    ? await formatMessage('logs', guild, user, settings.logs.unban)
                     : guild.translate('moderation/unban:USER_UNBAN', {
                         user: user.tag
                     }))

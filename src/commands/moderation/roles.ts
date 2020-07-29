@@ -2,6 +2,7 @@ import { Role } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
+import { pagify, permissionError, resolveMember } from '../../lib/utils/util';
 
 const regex = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i;
 const infoRegex = /(?:(members)\s+)?(?:(?:(?:<@&)?(\d{17,20})>?|(.+))\s+(\d+)|(?:(?:<@&)?(\d{17,20})>?|(.+)))/i;
@@ -58,7 +59,7 @@ export default class extends Command {
     }
 
     list(message: TypicalGuildMessage, page: string) {
-        const content = this.client.helpers.pagify.execute(message, message.guild.roles.cache
+        const content = pagify(message, message.guild.roles.cache
             .sort((a, b) => b.position - a.position)
             .map((role) => `${role.name.padEnd(30)} : ${role.id}`), parseInt(page, 10) || 1);
 
@@ -98,7 +99,7 @@ export default class extends Command {
 
         await message.guild.members.fetch().catch(console.error);
 
-        const content = this.client.helpers.pagify.execute(message, role.members
+        const content = pagify(message, role.members
             .map((member) => `${member.user.username.padEnd(30)} : ${member.id}`), parseInt(page, 10) || 1);
 
         return message.send([
@@ -117,7 +118,7 @@ export default class extends Command {
         permissions: PermissionLevel,
         subcommand = 'give') {
         if (permissions.level < 3)
-            return message.error(this.client.helpers.permissionError.execute(message, this, permissions));
+            return message.error(permissionError(this.client, message, this, permissions));
 
         if (!message.guild.me?.permissions.has('MANAGE_ROLES', true))
             return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
@@ -134,7 +135,7 @@ export default class extends Command {
 
         const [id, username, discriminator, roleID, roleName] = args;
 
-        const member = await this.client.helpers.resolveMember.execute(message, id, username, discriminator, false);
+        const member = await resolveMember(this.client, message, id, username, discriminator, false);
         if (!member)
             return message.error(message.translate('common:USER_FETCH_ERROR'));
 
@@ -209,7 +210,7 @@ export default class extends Command {
         if (!roles.length)
             return message.reply(message.translate('moderation/roles:NONE_PUBLIC'));
 
-        const content = this.client.helpers.pagify.execute(message, roles
+        const content = pagify(message, roles
             .sort((a, b) => b.position - a.position)
             .map((role) => `${role.name.padEnd(30)} : ${role.id}`), parseInt(page, 10) || 1);
 
@@ -231,7 +232,7 @@ export default class extends Command {
         permission: PermissionLevel,
         subcommand = 'add') {
         if (permission.level < 3)
-            return message.error(this.client.helpers.permissionError.execute(message, this, permission));
+            return message.error(permissionError(this.client, message, this, permission));
 
         if (!message.guild.me?.permissions.has('MANAGE_ROLES', true))
             return message.error(message.translate('common:INSUFFICIENT_PERMISSIONS', {
@@ -267,7 +268,7 @@ export default class extends Command {
     async clearPublic(message: TypicalGuildMessage,
         permission: PermissionLevel) {
         if (permission.level < 3)
-            return message.error(this.client.helpers.permissionError.execute(message, this, permission));
+            return message.error(permissionError(this.client, message, this, permission));
 
         const updated = await this.client.settings
             .update(message.guild.id, { roles: { public: [] } })

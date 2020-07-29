@@ -4,6 +4,7 @@ import { MessageEmbed, TextChannel, User } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuildMessage } from '../lib/types/typicalbot';
 import { ModerationLogTypes } from '../lib/utils/constants';
+import { formatMessage } from '../lib/utils/util';
 
 export default class GuildInvitePosted extends Event {
     execute(message: TypicalGuildMessage) {
@@ -86,7 +87,7 @@ export default class GuildInvitePosted extends Event {
                     channel: `<#${message.channel.id}>`
                 })
                 // eslint-disable-next-line max-len
-                : this.client.helpers.formatMessage.execute('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
+                : formatMessage('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
         }
 
         return channel

@@ -2,6 +2,8 @@ import * as Sentry from '@sentry/node';
 import { TextChannel, MessageEmbed } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuild, TypicalGuildMessage } from '../lib/types/typicalbot';
+import { lengthen } from '../lib/utils/util';
+import { formatMessage } from '../lib/utils/util';
 
 export default class MessageDelete extends Event {
     async execute(message: TypicalGuildMessage) {
@@ -29,7 +31,7 @@ export default class MessageDelete extends Event {
                         user: user.tag
                     })
                     // eslint-disable-next-line max-len
-                    : await this.client.helpers.formatMessage.execute('logs-msgdel', message.guild as TypicalGuild, user, settings.logs.delete, {
+                    : await formatMessage('logs-msgdel', message.guild as TypicalGuild, user, settings.logs.delete, {
                         message,
                         channel: message.channel as TextChannel
                     }))
@@ -39,7 +41,7 @@ export default class MessageDelete extends Event {
             .send(new MessageEmbed()
                 .setColor(0x3ea7ed)
                 .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
-                .setDescription(this.client.helpers.lengthen.execute(message.content, 100))
+                .setDescription(lengthen(message.content, 100))
                 .setFooter(message.translate('help/logs:MESSAGE_DELETED', {
                     channel: `<#${message.channel.id}>`,
                     id: message.channel.id

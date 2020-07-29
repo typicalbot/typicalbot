@@ -2,6 +2,7 @@ import { MessageEmbed, User, TextChannel } from 'discord.js';
 import Cluster from '../TypicalClient';
 import { ModlogAction, TypicalGuild } from '../types/typicalbot';
 import { ModerationLogTypes, ModerationLogRegex, Links } from '../utils/constants';
+import { convertTime } from '../utils/util';
 
 export default class ModerationLog {
     client: Cluster;
@@ -38,7 +39,7 @@ export default class ModerationLog {
         this.action = this.guild.translate('moderation/modlog:ACTION', {
             display: data.display,
             expiration: this.expiration
-                ? ` (${this.client.helpers.convertTime.execute(this.guild, this.expiration)})`
+                ? ` (${convertTime(this.guild, this.expiration)})`
                 : ''
         });
         return this;

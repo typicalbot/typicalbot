@@ -1,6 +1,7 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, SettingsData } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
+import { permissionError } from '../../lib/utils/util';
 
 const regex = /(list|view|edit|clear)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
 const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
@@ -8,6 +9,12 @@ const msRegex = /^(\d+)$/i;
 const channelRegex = /(?:(?:<#)?(\d{17,20})>?|(.+))/i;
 
 export const possibleLanguages = [
+    {
+        name: 'bg-BG',
+        canonical: 'Bulgarian',
+        complete: false,
+        aliases: ['bg', 'bulgarian']
+    },
     {
         name: 'de-DE',
         canonical: 'German',
@@ -74,15 +81,11 @@ export default class extends Command {
 
         const permission = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
 
-        // const accessLevel = await this.client.helpers.fetchAccess.execute(
-        //     message.guild
-        // );
-
         const [action, setting, type, value] = args;
 
         if (['edit', 'clear'].includes(action) && permission.level < 3)
             // eslint-disable-next-line max-len
-            return message.error(this.client.helpers.permissionError.execute(message, this, permission, PermissionsLevels.SERVER_ADMINISTRATOR));
+            return message.error(permissionError(this.client, message, this, permission, PermissionsLevels.SERVER_ADMINISTRATOR));
 
         switch (action) {
             case 'clear':
