@@ -12,7 +12,7 @@ export default class extends Command {
         const dm = message.guild ? !message.embeddable || message.guild.settings.dm.commands : true;
 
         if (message.channel.type === 'text' && dm)
-            await message.respond(message.translate('core/commands:CHECK_DM'));
+            await message.respond(message.translate('general/commands:CHECK_DM'));
 
         const level0 = [];
         const level2 = [];
@@ -39,7 +39,7 @@ export default class extends Command {
             }
         }
 
-        const NONE = message.translate('core/commands:NONE');
+        const NONE = message.translate('general/commands:NONE');
 
         const channel = dm ? message.author : message.channel;
 
@@ -47,24 +47,24 @@ export default class extends Command {
             .send(new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle('TypicalBot Commands')
-                .setDescription(message.translate('core/commands:TEXT', {
+                .setDescription(message.translate('general/commands:TEXT', {
                     prefix: this.client.config.prefix
                 }))
                 .addFields([
                     {
-                        name: message.translate('core/commands:OWNER'),
+                        name: message.translate('general/commands:OWNER'),
                         value: level4.length ? level4.join(', ') : NONE
                     },
                     {
-                        name: message.translate('core/commands:ADMIN'),
+                        name: message.translate('general/commands:ADMIN'),
                         value: level3.length ? level3.join(', ') : NONE
                     },
                     {
-                        name: message.translate('core/commands:MOD'),
+                        name: message.translate('general/commands:MOD'),
                         value: level2.length ? level2.join(', ') : NONE
                     },
                     {
-                        name: message.translate('core/commands:MEMBER'),
+                        name: message.translate('general/commands:MEMBER'),
                         value: level0.length ? level0.join(', ') : NONE
                     }
                 ])
