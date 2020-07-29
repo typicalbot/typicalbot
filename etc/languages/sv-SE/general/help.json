@@ -5,7 +5,7 @@
     "TYPICAL_INFO": "TypicalBot Information",
     "INVALID": "Det finns inte ett kommando som heter `{{name}}`. Prova att söka på något annat.",
     "INVALID_INFO": "Ogiltig kommandoinmatning",
-    "TEXT": "$t(core/help:TEXT_1)\n$t(core/help:TEXT_2)\n$t(core/help:TEXT_3)\n\n```\n$t(core/help:TEXT_4)\n$t(core/help:TEXT_5)\n$t(core/help:TEXT_6)\n$t(core/help:TEXT_7)\n$t(core/help:TEXT_8)\n```",
+    "TEXT": "$t(general/help:TEXT_1)\n$t(general/help:TEXT_2)\n$t(general/help:TEXT_3)\n\n```\n$t(general/help:TEXT_4)\n$t(general/help:TEXT_5)\n$t(general/help:TEXT_6)\n$t(general/help:TEXT_7)\n$t(general/help:TEXT_8)\n```",
     "TEXT_1": "**__Användning för:__** {{name}}",
     "TEXT_2": "**[Param]** betyder att en parameter är valfri.",
     "TEXT_3": "**<Param>** betyder att en parameter krävs.",
