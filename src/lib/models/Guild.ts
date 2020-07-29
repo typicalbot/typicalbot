@@ -23,6 +23,18 @@ class Guild {
      */
     @Column()
     locale?: string;
+
+    /**
+     * Terms of Service version accepted
+     */
+    @Column()
+    tosVersion?: number;
+
+    /**
+     * Privacy Policy version accepted
+     */
+    @Column()
+    ppVersion?: number;
 }
 
 export default Guild;
