@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalMessage } from '../../lib/types/typicalbot';
-import { Modes, Links } from '../../lib/utils/constants';
+import { Modes, Links, PermissionsLevels } from '../../lib/utils/constants';
 
 export default class extends Command {
     aliases = ['info', 'support'];
@@ -35,7 +35,7 @@ export default class extends Command {
         }
 
         const command = this.client.commands.fetch(parameters, message.guild.settings);
-        if (!command) {
+        if (!command || command.permission === PermissionsLevels.BOT_OWNER) {
             const response = message.translate('general/help:INVALID', {
                 name: parameters
             });
