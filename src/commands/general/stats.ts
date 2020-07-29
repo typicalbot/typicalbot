@@ -25,15 +25,17 @@ export default class extends Command {
 
         const uptime = convertTime(message, this.client.uptime ?? 0);
         if (!message.embeddable)
-            return message.send(message.translate('general/stats:TEXT', {
-                uptime,
-                guilds: guilds.toLocaleString(),
-                count: this.client.shardCount,
-                users: users.toLocaleString(),
-                cpu: Math.round(loadavg()[0] * 10000) / 100,
-                usedRAM,
-                totalRAM
-            }));
+            return message.send([
+                message.translate('general/stats:TEXT_1'),
+                '```autohotkey',
+                message.translate('general/stats:TEXT_2', { uptime }),
+                message.translate('general/stats:TEXT_3', { guilds: guilds.toLocaleString(), count: this.client.shardCount }),
+                message.translate('general/stats:TEXT_4', { users: users.toLocaleString() }),
+                message.translate('general/stats:TEXT_5', { cpu: Math.round(loadavg()[0] * 10000) / 100 }),
+                message.translate('general/stats:TEXT_6', { usedRAM }),
+                message.translate('general/stats:TEXT_7', { totalRAM }),
+                '```'
+            ].join('\n'));
 
         const embed = new MessageEmbed()
             .setColor(0x00adff)
