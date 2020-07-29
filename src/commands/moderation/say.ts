@@ -36,7 +36,7 @@ export default class extends Command {
             }
         } else {
             channel
-                .send(content, { disableMentions: 'everyone' })
+                .send(content, { allowedMentions: { parse: [] } })
                 .catch(() =>
                     message.error(message.translate('moderation/say:MISSING_SEND')));
         }
@@ -75,7 +75,7 @@ export default class extends Command {
                         '```',
                         content,
                         '```'
-                    ].join('\n'))
+                    ].join('\n'), { allowedMentions: { parse: [] } })
                     .catch(() => null);
             }
         }
