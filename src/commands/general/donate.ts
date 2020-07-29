@@ -4,21 +4,20 @@ import { TypicalMessage } from '../../lib/types/typicalbot';
 import { Modes, Links } from '../../lib/utils/constants';
 
 export default class extends Command {
-    aliases = ['docs'];
     dm = true;
     mode = Modes.STRICT;
 
     execute(message: TypicalMessage) {
         if (!message.embeddable)
-            return message.send(message.translate('core/documentation:TEXT', {
-                link: Links.DOCUMENTATION
+            return message.send(message.translate('general/donate:TEXT', {
+                link: Links.DONATE
             }));
 
         return message.send(new MessageEmbed()
             .setColor(0x00adff)
-            .setTitle(message.translate('core/documentation:TYPICAL_DOCS'))
-            .setDescription(message.translate('core/documentation:TEXT', {
-                link: Links.DOCUMENTATION
+            .setTitle(message.translate('general/donate:SUPPORT'))
+            .setDescription(message.translate('general/donate:TEXT', {
+                link: Links.DONATE
             }))
             .setFooter('TypicalBot', Links.ICON)
             .setTimestamp());

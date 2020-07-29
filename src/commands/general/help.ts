@@ -10,7 +10,7 @@ export default class extends Command {
 
     async execute(message: TypicalMessage, parameters: string) {
         if (!message.guild || !parameters) {
-            const response = message.translate('core/help:NONE', {
+            const response = message.translate('general/help:NONE', {
                 prefix: this.client.config.prefix,
                 docs: Links.DOCUMENTATION,
                 server: Links.SERVER
@@ -25,7 +25,7 @@ export default class extends Command {
 
             return message.send(new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('core/help:TYPICAL_INFO'))
+                .setTitle(message.translate('general/help:TYPICAL_INFO'))
                 .setDescription(response)
                 .addField('Version', this.client.version, false)
                 .addField('Terms of Service', 'https://typicalbot.com/legal/terms', true)
@@ -36,14 +36,14 @@ export default class extends Command {
 
         const command = this.client.commands.fetch(parameters, message.guild.settings);
         if (!command || command.permission === PermissionsLevels.BOT_OWNER) {
-            const response = message.translate('core/help:INVALID', {
+            const response = message.translate('general/help:INVALID', {
                 name: parameters
             });
             if (!message.embeddable) return message.error(response, undefined, { allowedMentions: { users: [message.author.id] } });
 
             return message.send(new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('core/help:INVALID_INFO'))
+                .setTitle(message.translate('general/help:INVALID_INFO'))
                 .setDescription(response)
                 .setFooter('TypicalBot', Links.ICON)
                 .setTimestamp());
@@ -58,7 +58,7 @@ export default class extends Command {
             : message.translate('common:NONE');
 
         if (!message.embeddable)
-            return message.send(message.translate('core/help:TEXT', {
+            return message.send(message.translate('general/help:TEXT', {
                 name: parameters,
                 commandName: command.name,
                 aliases: ALIASES,
@@ -71,32 +71,32 @@ export default class extends Command {
 
         return message.send(new MessageEmbed()
             .setColor(0x00adff)
-            .setTitle(message.translate('core/help:COMMAND_USAGE', {
+            .setTitle(message.translate('general/help:COMMAND_USAGE', {
                 name: command.name
             }))
-            .setDescription(message.translate('core/help:PARAMETERS'))
+            .setDescription(message.translate('general/help:PARAMETERS'))
             .addFields([
                 {
-                    name: message.translate('core/help:COMMAND'),
+                    name: message.translate('general/help:COMMAND'),
                     value: command.name,
                     inline: true
                 },
                 {
-                    name: message.translate('core/help:ALIASES'),
+                    name: message.translate('general/help:ALIASES'),
                     value: ALIASES
                 },
                 {
-                    name: message.translate('core/help:PERMISSION'),
+                    name: message.translate('general/help:PERMISSION'),
                     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                     // @ts-ignore
                     value: this.client.handlers.permissions.levels.get(command.permission).title
                 },
                 {
-                    name: message.translate('core/help:DESC'),
+                    name: message.translate('general/help:DESC'),
                     value: DESCRIPTION
                 },
                 {
-                    name: message.translate('core/help:USE'),
+                    name: message.translate('general/help:USE'),
                     value: USAGE
                 }
             ])

@@ -15,13 +15,13 @@ export default class extends Command {
             }));
 
         const webhooks = await message.channel.fetchWebhooks();
-        if (webhooks.size >= 10) return message.error(message.translate('core/follow:MAX_WEBHOOK_LIMIT'));
+        if (webhooks.size >= 10) return message.error(message.translate('general/follow:MAX_WEBHOOK_LIMIT'));
 
         const isStatus = type?.toLowerCase() === 'status';
 
         // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/camelcase
         this.client.api.channels(isStatus ? '621817852726607882' : '268559149175013376').followers.post({ data: { webhook_channel_id: channel.id } });
-        return message.success(message.translate(isStatus ? 'core/follow:FOLLOWED_STATUS' : 'core/follow:FOLLOWED'));
+        return message.success(message.translate(isStatus ? 'general/follow:FOLLOWED_STATUS' : 'general/follow:FOLLOWED'));
     }
 }

@@ -9,15 +9,15 @@ export default class extends Command {
 
     execute(message: TypicalMessage) {
         if (!message.embeddable)
-            return message.reply(message.translate('core/invite:TEXT', {
-                link: Links.OAUTH
+            return message.send(message.translate('general/vote:TEXT', {
+                link: Links.VOTE
             }));
 
-        return message.reply(new MessageEmbed()
+        return message.send(new MessageEmbed()
             .setColor(0x00adff)
-            .setTitle(message.translate('core/invite:TYPICAL_INVITE'))
-            .setDescription(message.translate('core/invite:TEXT', {
-                link: Links.OAUTH
+            .setTitle(message.translate('general/vote:TITLE'))
+            .setDescription(message.translate('general/vote:TEXT', {
+                link: Links.VOTE
             }))
             .setFooter('TypicalBot', Links.ICON)
             .setTimestamp());

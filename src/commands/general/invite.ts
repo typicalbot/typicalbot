@@ -9,15 +9,15 @@ export default class extends Command {
 
     execute(message: TypicalMessage) {
         if (!message.embeddable)
-            return message.send(message.translate('core/donate:TEXT', {
-                link: Links.DONATE
+            return message.reply(message.translate('general/invite:TEXT', {
+                link: Links.OAUTH
             }));
 
-        return message.send(new MessageEmbed()
+        return message.reply(new MessageEmbed()
             .setColor(0x00adff)
-            .setTitle(message.translate('core/donate:SUPPORT'))
-            .setDescription(message.translate('core/donate:TEXT', {
-                link: Links.DONATE
+            .setTitle(message.translate('general/invite:TYPICAL_INVITE'))
+            .setDescription(message.translate('general/invite:TEXT', {
+                link: Links.OAUTH
             }))
             .setFooter('TypicalBot', Links.ICON)
             .setTimestamp());

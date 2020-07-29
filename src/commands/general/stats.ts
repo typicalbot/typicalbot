@@ -25,7 +25,7 @@ export default class extends Command {
 
         const uptime = convertTime(message, this.client.uptime ?? 0);
         if (!message.embeddable)
-            return message.send(message.translate('core/stats:TEXT', {
+            return message.send(message.translate('general/stats:TEXT', {
                 uptime,
                 guilds: guilds.toLocaleString(),
                 count: this.client.shardCount,
@@ -38,38 +38,38 @@ export default class extends Command {
         const embed = new MessageEmbed()
             .setColor(0x00adff)
             .setThumbnail(Links.ICON)
-            .setTitle(message.translate('core/stats:TYPICAL_STATS'))
+            .setTitle(message.translate('general/stats:TYPICAL_STATS'))
             .addFields([
                 {
-                    name: message.translate('core/stats:UPTIME'),
+                    name: message.translate('general/stats:UPTIME'),
                     value: uptime,
                     inline: true
                 },
                 {
-                    name: message.translate('core/stats:SERVERS'),
-                    value: message.translate('core/stats:SERVERS_VALUE', {
+                    name: message.translate('general/stats:SERVERS'),
+                    value: message.translate('general/stats:SERVERS_VALUE', {
                         guilds: guilds.toLocaleString(),
                         count: this.client.shardCount
                     }),
                     inline: true
                 },
                 {
-                    name: message.translate('core/stats:USERS'),
+                    name: message.translate('general/stats:USERS'),
                     value: users.toLocaleString(),
                     inline: true
                 },
                 {
-                    name: message.translate('core/stats:CPU'),
+                    name: message.translate('general/stats:CPU'),
                     value: `${loadavg().map((c) => Math.round(c * 10000) / 100).join('%, ')}%`,
                     inline: true
                 },
                 {
-                    name: message.translate('core/stats:RAM'),
+                    name: message.translate('general/stats:RAM'),
                     value: `${usedRAM}MB`,
                     inline: true
                 },
                 {
-                    name: message.translate('core/stats:RAM_TOTAL'),
+                    name: message.translate('general/stats:RAM_TOTAL'),
                     value: `${totalRAM}MB`,
                     inline: true
                 }
