@@ -16,7 +16,6 @@ export default class Command {
     permission: -1 | 0 | 2 | 3 | 4 | 10;
     mode: 0 | 1 | 2;
     access: 0 | 1 | 3;
-    ptb = false;
 
     constructor(client: Cluster, name: string, path: string, options?: CommandOptions) {
         this.client = client;
@@ -30,7 +29,6 @@ export default class Command {
         this.mode = (options?.mode) ?? Modes.FREE;
         this.access =
             (options?.access) ?? AccessLevels.DEFAULT;
-        this.ptb = (options?.ptb) ?? false;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

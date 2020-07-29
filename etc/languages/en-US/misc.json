@@ -1,7 +1,6 @@
 {
     "PREFIX": "This server's prefix is {{prefix}}.",
     "MULTIPLE_PREFIXES": "`{{default}}` or `{{custom}}`",
-    "PTB_ONLY": "This command in is PTB mode, meaning it cannot be used on TypicalBot stable.",
     "DISABLED": "That command is not enabled on this server.",
     "MISSING_PERMS": "Your permission level is too low to execute that command. The command requires permission level {{requiredLevel}} ({{requiredTitle}}) and you are level {{userLevel}} ({{userTitle}}).",
     "MISSING_ACCESS": "The server owner's access level is too low to execute that command. The command requires an access level of {{command}}, but the owner only has a level of {{level}} ({{title}}). The owner can raise their access level by donating $5 or more to TypicalBot.",
@@ -10,6 +9,11 @@
     "CHOOSE_OPTION": "$t(misc:CHOOSE_OPTION_1)\n\n$t(misc:CHOOSE_OPTION_2)",
     "CHOOSE_OPTION_1": "Please choose an option by typing the number.",
     "CHOOSE_OPTION_2": "{{options}}",
-    "CANCEL_OPTIONS": ["cancel", "abort", "exit", "quit"],
+    "CANCEL_OPTIONS": [
+        "cancel",
+        "abort",
+        "exit",
+        "quit"
+    ],
     "CANCELLED": "The menu has been cancelled."
 }
