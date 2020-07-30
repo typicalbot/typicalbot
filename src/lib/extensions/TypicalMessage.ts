@@ -34,9 +34,12 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     async chooseOption(options: string[]) {
-        const response = await this.ask(this.translate('misc:CHOOSE_OPTION', {
-            options: options.map((opt, index) => `**${index + 1}** - ${opt}`).join('\n')
-        }));
+        const response = await this.ask([
+            this.translate('misc:CHOOSE_OPTION_1'),
+            '\n',
+            this.translate('misc:CHOOSE_OPTION_2', { options: options.map((opt, index) => `**${index + 1}** - ${opt}`).join('\n') })
+        ].join('\n'));
+
         if (!response) {
             this.menuResponse?.delete().catch(() => undefined);
             return;

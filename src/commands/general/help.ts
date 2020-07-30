@@ -58,16 +58,19 @@ export default class extends Command {
             : message.translate('common:NONE');
 
         if (!message.embeddable)
-            return message.send(message.translate('general/help:TEXT', {
-                name: parameters,
-                commandName: command.name,
-                aliases: ALIASES,
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-                // @ts-ignore
-                permission: this.client.handlers.permissions.levels.get(command.permission).title,
-                description: DESCRIPTION,
-                usage: USAGE
-            }));
+            return message.send([
+                message.translate('general/help:TEXT_1', { name: parameters }),
+                message.translate('general/help:TEXT_2'),
+                message.translate('general/help:TEXT_3'),
+                '\n',
+                '```',
+                message.translate('general/help:TEXT_4', { commandName: command.name }),
+                message.translate('general/help:TEXT_5', { aliases: ALIASES }),
+                message.translate('general/help:TEXT_6', { permission: this.client.handlers.permissions.levels.get(command.permission)?.title }),
+                message.translate('general/help:TEXT_7', { description: DESCRIPTION }),
+                message.translate('general/help:TEXT_8', { usage: USAGE }),
+                '```'
+            ].join('\n'));
 
         return message.send(new MessageEmbed()
             .setColor(0x00adff)
