@@ -26,13 +26,11 @@ export default class extends Command {
 
     async execute(message: TypicalGuildMessage, parameters?: string) {
         if (parameters === 'snapshot')
-            return heapdump.writeSnapshot(`${__dirname}/${Date.now()}.heapsnapshot`, (err, filename) => {
+            return heapdump.writeSnapshot(`${__dirname}/${Date.now()}.heapsnapshot`, (err) => {
                 if (err) {
-                    console.error(err);
                     return message.error('Failed to create heap snapshot.');
                 }
 
-                console.log(`Created heap snapshot to ${filename}`);
                 message.send('Successfully created heap snapshot.');
             });
 
