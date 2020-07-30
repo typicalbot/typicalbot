@@ -1,7 +1,7 @@
 {
     "DESCRIPTION": "TypicalBot'un güncel istatistiklerini alın.",
     "USAGE": "stats",
-    "TEXT": "$t(core/stats:TEXT_1)\n```autohotkey\n$t(core/stats:TEXT_2)\n$t(core/stats:TEXT_3)\n$t(core/stats:TEXT_4)\n$t(core/stats:TEXT_5)\n$t(core/stats:TEXT_6)\n$t(core/stats:TEXT_7)\n```",
+    "TEXT": "$t(general/stats:TEXT_1)\n```autohotkey\n$t(general/stats:TEXT_2)\n$t(general/stats:TEXT_3)\n$t(general/stats:TEXT_4)\n$t(general/stats:TEXT_5)\n$t(general/stats:TEXT_6)\n$t(general/stats:TEXT_7)\n```",
     "TEXT_1": "**__TypicalBot'un İstatistikleri:__**",
     "TEXT_2": "=> Çalışma Süresi: {{uptime}}",
     "TEXT_3": "=> Sunucular: {{guilds}} ({{count}} Parça)",

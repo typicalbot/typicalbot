@@ -5,7 +5,7 @@
     "TYPICAL_INFO": "Invitation TypicalBot",
     "INVALID": "Il n'y a pas de commande nommée `{{name}}`. Essayez de chercher autre chose.",
     "INVALID_INFO": "Invalide Command",
-    "TEXT": "$t(core/help:TEXT_1)\n$t(core/help:TEXT_2)\n$t(core/help:TEXT_3)\n\n```\n$t(core/help:TEXT_4)\n$t(core/help:TEXT_5)\n$t(core/help:TEXT_6)\n$t(core/help:TEXT_7)\n$t(core/help:TEXT_8)\n```",
+    "TEXT": "$t(general/help:TEXT_1)\n$t(general/help:TEXT_2)\n$t(general/help:TEXT_3)\n\n```\n$t(general/help:TEXT_4)\n$t(general/help:TEXT_5)\n$t(general/help:TEXT_6)\n$t(general/help:TEXT_7)\n$t(general/help:TEXT_8)\n```",
     "TEXT_1": "**__Usage pour:__** {{name}}",
     "TEXT_2": "**[Param]** signifie qu'un paramètre est optionnel.",
     "TEXT_3": "**<Param>** signifie qu'un paramètre est requis.",
