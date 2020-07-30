@@ -46,9 +46,9 @@ export default class extends Command {
 
     help(message: TypicalGuildMessage) {
         return message.send([
-            message.translate('core/help:TEXT_1', { name: this.name }),
-            message.translate('core/help:TEXT_2'),
-            message.translate('core/help:TEXT_3'),
+            message.translate('general/help:TEXT_1', { name: this.name }),
+            message.translate('general/help:TEXT_2'),
+            message.translate('general/help:TEXT_3'),
             '```',
             message.translate('moderation/roles:HELP_LIST'),
             message.translate('moderation/roles:HELP_FIRST'),
