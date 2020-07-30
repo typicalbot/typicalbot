@@ -9,7 +9,7 @@ import { formatMessage } from '../lib/utils/util';
 export default class GuildInvitePosted extends Event {
     execute(message: TypicalGuildMessage) {
         if (message.deletable) message.delete().catch(() => undefined);
-        message.error(message.translate('core/invite:PROHIBITED')).then((msg) => msg.delete({ timeout: 10000 }));
+        message.error(message.translate('general/invite:PROHIBITED')).then((msg) => msg.delete({ timeout: 10000 }));
 
         const { settings } = message.guild;
 
@@ -35,12 +35,12 @@ export default class GuildInvitePosted extends Event {
                         .setAction(ModerationLogTypes.WARN)
                         .setModerator(this.client.user as User)
                         .setUser(message.author)
-                        .setReason(message.translate('core/invite:REASON', {
+                        .setReason(message.translate('general/invite:REASON', {
                             action: message.translate('common:WARN'),
                             type:
                                 settings.automod.invitewarn === 1
-                                    ? message.translate('core/invite:INVITE')
-                                    : message.translate('core/invite:CONSECUTIVE', {
+                                    ? message.translate('general/invite:INVITE')
+                                    : message.translate('general/invite:CONSECUTIVE', {
                                         amount: settings.automod.invitewarn
                                     }),
                             channel: `<#${message.channel.id}>`
@@ -51,12 +51,12 @@ export default class GuildInvitePosted extends Event {
                 settings.automod.invitekick !== 0 &&
                 cache.size >= settings.automod.invitekick
             ) {
-                const reason = message.translate('core/invite:REASON', {
+                const reason = message.translate('general/invite:REASON', {
                     action: message.translate('common:KICK'),
                     type:
                         settings.automod.invitekick === 1
-                            ? message.translate('core/invite:INVITE')
-                            : message.translate('core/invite:CONSECUTIVE', {
+                            ? message.translate('general/invite:INVITE')
+                            : message.translate('general/invite:CONSECUTIVE', {
                                 amount: cache.size
                             }),
                     channel: `<#${message.channel.id}>`
@@ -82,7 +82,7 @@ export default class GuildInvitePosted extends Event {
 
         if (settings.logs.invite !== '--embed') {
             return channel.send(settings.logs.invite === '--enabled'
-                ? message.translate('core/invite:SENT', {
+                ? message.translate('general/invite:SENT', {
                     user: message.author.tag,
                     channel: `<#${message.channel.id}>`
                 })
@@ -94,7 +94,7 @@ export default class GuildInvitePosted extends Event {
             .send(new MessageEmbed()
                 .setColor(0x00ff00)
                 .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
-                .setFooter(message.translate('core/invite:SENT_IN', {
+                .setFooter(message.translate('general/invite:SENT_IN', {
                     channel: `<#${message.channel.id}>`
                 }))
                 .setTimestamp())

@@ -1,0 +1,20 @@
+{
+    "DESCRIPTION": "Erhalte die aktuellen Statistiken von TypicalBot.",
+    "USAGE": "Statistiken",
+    "TEXT": "$t(general/stats:TEXT_1)\n```autohotkey\n$t(general/stats:TEXT_2)\n$t(general/stats:TEXT_3)\n$t(general/stats:TEXT_4)\n$t(general/stats:TEXT_5)\n$t(general/stats:TEXT_6)\n$t(general/stats:TEXT_7)\n```",
+    "TEXT_1": "**__TypicalBots Statistiken:__**",
+    "TEXT_2": "=> Betriebszeit: {{uptime}}",
+    "TEXT_3": "=> Server: {{guilds}} ({{count}} Shards)",
+    "TEXT_4": "=> Benutzer: {{users}}",
+    "TEXT_5": "=> CPU: {{cpu}}%",
+    "TEXT_6": "=> RAM (Used): {{usedRAM}}MB",
+    "TEXT_7": "=> RAM (Gesamt): {{totalRAM}}MB",
+    "TYPICAL_STATS": "TypicalBots Statistiken",
+    "UPTIME": "Betriebszeit",
+    "SERVERS": "Server",
+    "SERVERS_VALUE": "{{guilds}} ({{count}} Shards)",
+    "USERS": "Benutzer",
+    "CPU": "CPU Auslastung",
+    "RAM": "RAM (verwendet)",
+    "RAM_TOTAL": "RAM (gesamt)"
+}

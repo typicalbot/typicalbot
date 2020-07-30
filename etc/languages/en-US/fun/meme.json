@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Get a random meme from /r/memes",
+    "USAGE": "meme",
+    "MEME_ERROR": "Unable to find meme."
+}
