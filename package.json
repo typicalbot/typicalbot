@@ -43,7 +43,6 @@
     "moment": "^2.27.0",
     "node-fetch": "^2.6.0",
     "pm2": "^4.4.0",
-    "release": "^6.3.0",
     "rethinkdb-ts": "^2.4.2",
     "typescript": "^3.9.7",
     "veza": "^1.1.0",
@@ -71,7 +70,8 @@
     "eslint": "^7.5.0",
     "eslint-plugin-import": "^2.22.0",
     "husky": "^4.2.5",
-    "lint-staged": "^10.2.11"
+    "lint-staged": "^10.2.11",
+    "release": "^6.3.0"
   },
   "husky": {
     "hooks": {
