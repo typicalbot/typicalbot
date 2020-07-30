@@ -104,14 +104,6 @@ export default class Cluster extends Client {
         }, { receptive: true });
     }
 
-    public get usedRAM(): number {
-        return Math.round(process.memoryUsage().heapUsed / 1048576);
-    }
-
-    public get totalRAM(): number {
-        return Math.round(process.memoryUsage().heapTotal / 1048576);
-    }
-
     public async sendStatistics(shardID: number): Promise<void> {
         fetch('https://www.carbonitex.net/discord/data/botdata.php', {
             method: 'post',
