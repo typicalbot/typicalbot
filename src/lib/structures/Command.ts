@@ -30,7 +30,7 @@ export default class Command {
         this.mode = (options?.mode) ?? Modes.FREE;
         this.access =
             (options?.access) ?? AccessLevels.DEFAULT;
-        this.cooldown = (options?.cooldown) ?? 5;
+        this.cooldown = (options?.cooldown) ?? 3;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
