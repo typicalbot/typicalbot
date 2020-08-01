@@ -1,15 +1,15 @@
 {
-    "DESCRIPTION": "Create an alias for commands.",
-    "USAGE": "alias <list|add|remove|clear> <add/remove:command> <add:new-alias>",
-    "CURRENT": "Current Aliases:",
-    "INVALID_COMMAND": "The provided command doesn't exist.",
-    "ALIAS_EXISTS": "The given alias already points to the `{{name}}` command.",
-    "LONG": "You cannot create an alias longer than 10 characters.",
-    "ADDED": "Successfully added alias.",
-    "ADD_ERROR": "An error occurred while adding the alias.",
-    "INVALID_ALIAS": "The requested alias does not exist.",
-    "REMOVED": "Successfully removed alias.",
-    "REMOVE_ERROR": "An error occurred while removed the alias.",
-    "CLEARED": "Successfully removed aliases.",
-    "CLEAR_ERROR": "An error occurred while clearing the aliases."
+  "DESCRIPTION": "Create an alias for commands.",
+  "USAGE": "alias <list|add|remove|clear> <add/remove:command> <add:new-alias>",
+  "CURRENT": "Current Aliases:",
+  "INVALID_COMMAND": "The provided command doesn't exist.",
+  "ALIAS_EXISTS": "The given alias already points to the `{{name}}` command.",
+  "LONG": "You cannot create an alias longer than 10 characters.",
+  "ADDED": "Successfully added alias.",
+  "ADD_ERROR": "An error occurred while adding the alias.",
+  "INVALID_ALIAS": "The requested alias does not exist.",
+  "REMOVED": "Successfully removed alias.",
+  "REMOVE_ERROR": "An error occurred while removed the alias.",
+  "CLEARED": "Successfully removed aliases.",
+  "CLEAR_ERROR": "An error occurred while clearing the aliases."
 }

@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Generate and view API keys.",
-    "USAGE": "api <view|generate>",
-    "NONE": "No API key exists. Use `$api generate` to generate one.",
-    "SUCCESS": "API key successfully generated.",
-    "KEY": "{{guild}}'s API Key: `{{key}}`"
+  "DESCRIPTION": "Generate and view API keys.",
+  "USAGE": "api <view|generate>",
+  "NONE": "No API key exists. Use `$api generate` to generate one.",
+  "SUCCESS": "API key successfully generated.",
+  "KEY": "{{guild}}'s API Key: `{{key}}`"
 }

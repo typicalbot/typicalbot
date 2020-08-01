@@ -1,15 +1,15 @@
 {
-    "DESCRIPTION": "Manage or view roles in a server.",
-    "USAGE": "Check `$roles help` for this command's usage.",
-    "HELP_LIST": "roles list",
-    "HELP_FIRST": "roles <give|take> <@user> <role-name>",
-    "HELP_SECOND": "roles public <list|clear|add|remove> <role-name>",
-    "LIST": "**__{{name}}'s Roles:__**",
-    "MEMBERS": "**__{{name}}'s Members:__**",
-    "PUBLIC": "**__{{name}}'s Public Roles:__**",
-    "GIVE": "You cannot give yourself or another user your highest role or any role higher.",
-    "TAKE": "You cannot take a role from yourself or another user when your highest role is lower than the role to take.",
-    "NONE_PUBLIC": "There are no public roles set up for this server.",
-    "ALREADY_PUBLIC": "The request role is already in the list of public roles.",
-    "NOT_PUBLIC": "The request role isn't in the list of public roles."
+  "DESCRIPTION": "Manage or view roles in a server.",
+  "USAGE": "Check `$roles help` for this command's usage.",
+  "HELP_LIST": "roles list",
+  "HELP_FIRST": "roles <give|take> <@user> <role-name>",
+  "HELP_SECOND": "roles public <list|clear|add|remove> <role-name>",
+  "LIST": "**__{{name}}'s Roles:__**",
+  "MEMBERS": "**__{{name}}'s Members:__**",
+  "PUBLIC": "**__{{name}}'s Public Roles:__**",
+  "GIVE": "You cannot give yourself or another user your highest role or any role higher.",
+  "TAKE": "You cannot take a role from yourself or another user when your highest role is lower than the role to take.",
+  "NONE_PUBLIC": "There are no public roles set up for this server.",
+  "ALREADY_PUBLIC": "The request role is already in the list of public roles.",
+  "NOT_PUBLIC": "The request role isn't in the list of public roles."
 }

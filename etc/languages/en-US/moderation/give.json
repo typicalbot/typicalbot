@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Receive a role off of the public roles list.",
-    "USAGE": "give <role-name>",
-    "INVALID": "Invalid role. Please make sure your spelling is correct, and that the role actually exists.",
-    "UNEDITABLE": "Insufficient permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give and that I have the Manage Roles permission.",
-    "NOT_PUBLIC": "The requested role isn't on the list of public roles."
+  "DESCRIPTION": "Receive a role off of the public roles list.",
+  "USAGE": "give <role-name>",
+  "INVALID": "Invalid role. Please make sure your spelling is correct, and that the role actually exists.",
+  "UNEDITABLE": "Insufficient permissions given to the bot. Make sure that the highest role I have is above the role you are attempting to give and that I have the Manage Roles permission.",
+  "NOT_PUBLIC": "The requested role isn't on the list of public roles."
 }

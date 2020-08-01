@@ -1,8 +1,8 @@
 {
-    "DESCRIPTION": "Makes the bot send a message with the content used.",
-    "USAGE": "say [#channel] <content>",
-    "MISSING_SEND": "I am missing the SEND_MESSAGES permission in the channel requested.",
-    "INVALID": "Invalid JSON was provided.",
-    "SENT": "Message Echoed",
-    "TEXT": "**{{user}}** sent a message in {{channel}} using TypicalBot."
+  "DESCRIPTION": "Makes the bot send a message with the content used.",
+  "USAGE": "say [#channel] <content>",
+  "MISSING_SEND": "I am missing the SEND_MESSAGES permission in the channel requested.",
+  "INVALID": "Invalid JSON was provided.",
+  "SENT": "Message Echoed",
+  "TEXT": "**{{user}}** sent a message in {{channel}} using TypicalBot."
 }
