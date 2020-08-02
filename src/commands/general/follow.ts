@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes, PermissionsLevels } from '../../lib/utils/constants';
@@ -20,7 +21,6 @@ export default class extends Command {
         const isStatus = type?.toLowerCase() === 'status';
 
         // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/camelcase
         this.client.api.channels(isStatus ? '621817852726607882' : '268559149175013376').followers.post({ data: { webhook_channel_id: channel.id } });
         return message.success(message.translate(isStatus ? 'general/follow:FOLLOWED_STATUS' : 'general/follow:FOLLOWED'));
     }

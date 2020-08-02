@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import './extensions/TypicalGuild';
 import './extensions/TypicalGuildMember';
 import './extensions/TypicalMessage';
@@ -129,11 +130,8 @@ export default class Cluster extends Client {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 shard_id: shardID,
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 shard_count: this.shardCount.toString(),
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 server_count: this.guilds.cache
                     .filter((g) => g.shardID === shardID)
                     .size.toString()
@@ -165,7 +163,6 @@ export default class Cluster extends Client {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                // eslint-disable-next-line @typescript-eslint/camelcase
                 server_count: guildCount
             })
         }).catch((err) => {

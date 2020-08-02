@@ -1,6 +1,6 @@
 {
-    "DESCRIPTION": "Vote for TypicalBot on top.gg",
-    "USAGE": "vote",
-    "TEXT": "You can vote for TypicalBot at <{{link}}>",
-    "TITLE": "Vote for TypicalBot"
+  "DESCRIPTION": "Vote for TypicalBot on top.gg",
+  "USAGE": "vote",
+  "TEXT": "You can vote for TypicalBot at <{{link}}>",
+  "TITLE": "Vote for TypicalBot"
 }

@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Punch another user in the server.",
-    "USAGE": "punch [@user]",
-    "SELF": " stop hitting yourself! :punch:",
-    "RESPONSE": "just punched {{user}}! :punch:",
-    "RESPONSE_JAW": "just punched {{user}}! :punch: Oh, dang! Right to the jaw! That must've hurt!'"
+  "DESCRIPTION": "Punch another user in the server.",
+  "USAGE": "punch [@user]",
+  "SELF": " stop hitting yourself! :punch:",
+  "RESPONSE": "just punched {{user}}! :punch:",
+  "RESPONSE_JAW": "just punched {{user}}! :punch: Oh, dang! Right to the jaw! That must've hurt!'"
 }

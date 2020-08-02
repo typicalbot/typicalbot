@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Warn a member in the server.",
-    "USAGE": "warn <@user> [reason]",
-    "TOO_LOW": "You cannot warn a user with either the same or higher highest role.",
-    "WARNED": "You have been warned in **{{name}}**.",
-    "SUCCESS": "Successfully warned user: `{{user}}`."
+  "DESCRIPTION": "Warn a member in the server.",
+  "USAGE": "warn <@user> [reason]",
+  "TOO_LOW": "You cannot warn a user with either the same or higher highest role.",
+  "WARNED": "You have been warned in **{{name}}**.",
+  "SUCCESS": "Successfully warned user: `{{user}}`."
 }

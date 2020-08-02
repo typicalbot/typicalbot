@@ -35,7 +35,7 @@ export default class ModerationLogHandler {
         for (const message of messages.values()) {
             if (
                 message.author.id !==
-                (this.client.user && this.client.user.id) ||
+                (this.client.user?.id) ||
                 !message.embeds.length
             )
                 continue;
