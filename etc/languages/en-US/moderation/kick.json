@@ -1,10 +1,10 @@
 {
-    "DESCRIPTION": "Kick a member from the server.",
-    "USAGE": "kick <@user> [reason]",
-    "TOO_LOW": "You cannot kick a user with either the same or higher highest role.",
-    "KICKABLE": "In order to complete the request, I need the **KICK_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.",
-    "KICKED": "You have been kicked from **{{name}}**.",
-    "REASON": "Kicked by {{mod}} | Reason: {{reason}}",
-    "ERROR": "An error occurred while trying to kick the requested user.",
-    "KICK_SUCCESS": "Successfully kicked user **{{user}}**."
+  "DESCRIPTION": "Kick a member from the server.",
+  "USAGE": "kick <@user> [reason]",
+  "TOO_LOW": "You cannot kick a user with either the same or higher highest role.",
+  "KICKABLE": "In order to complete the request, I need the **KICK_MEMBERS** permission and my highest role needs to be higher than the requested user's highest role.",
+  "KICKED": "You have been kicked from **{{name}}**.",
+  "REASON": "Kicked by {{mod}} | Reason: {{reason}}",
+  "ERROR": "An error occurred while trying to kick the requested user.",
+  "KICK_SUCCESS": "Successfully kicked user **{{user}}**."
 }
