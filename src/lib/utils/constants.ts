@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export const Links = {
     BASE: 'https://typicalbot.com',
     OAUTH: 'https://typicalbot.com/invite',

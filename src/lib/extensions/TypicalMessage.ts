@@ -86,16 +86,16 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     error(content: string, embed?: MessageEmbed, options?: MessageOptions) {
-        return this.channel.send(`${this.author} | ❌ | ${content}`, {...options, embed });
+        return this.channel.send(`${this.author} | ❌ | ${content}`, { ...options, embed });
     }
 
     dm(content: string | MessageEmbed,
         embed?: MessageEmbed,
         options?: MessageOptions) {
-        return this.author && this.author.send(content, { ...options, embed });
+        return this.author?.send(content, { ...options, embed });
     }
 
-    translate(key: string, args?: object) {
+    translate(key: string, args?: Record<string, unknown>) {
         const language = this.client.translate.get(this.guild ? this.guild.settings.language : 'en-US');
 
         if (!language) throw new Error('Message: Invalid language set in settings.');
