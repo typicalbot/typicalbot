@@ -46,6 +46,7 @@ export interface GuildSettings {
     announcements: {
         id: string | null;
         mention: string | null;
+        crosspost: boolean;
     };
     aliases: TypicalCommandAlias[];
     logs: {

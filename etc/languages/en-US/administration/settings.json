@@ -33,6 +33,7 @@
     "SUBSCRIBERROLE": "A role that will be given when a user uses the `subscribe` command.",
     "ANNOUNCEMENTS": "A channel for announcements to be posted, used with the `announce` command.",
     "ANNOUNCEMENTS-MENTION": "A mention to be put in the announcement when posted, such as a Subscriber role.",
+    "ANNOUNCEMENTS-CROSSPOST": "Automatically crosspost announcements in news channels.",
     "LOGS": "A channel for activity logs to be posted.",
     "LOGS-JOIN": "A custom set message to be posted when a user joins the server.",
     "LOGS-LEAVE": "A custom set message to be posted when a user leaves the server.",

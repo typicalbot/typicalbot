@@ -19,7 +19,8 @@ export default (id: string) => ({
     },
     announcements: {
         id: null,
-        mention: null
+        mention: null,
+        crosspost: false
     },
     aliases: [],
     logs: {

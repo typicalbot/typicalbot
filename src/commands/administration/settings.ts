@@ -174,6 +174,12 @@ export default class extends Command {
                         type: 'role',
                         path: 'announcements.mention'
                     },
+                    'announcements-crosspost': {
+                        description: 'administration/settings:ANNOUNCEMENTS-CROSSPOST',
+                        value: settings.announcements.crosspost,
+                        type: 'boolean',
+                        path: 'announcements.crosspost'
+                    },
                     logs: {
                         description: 'administration/settings:LOGS',
                         value: settings.logs.id,
