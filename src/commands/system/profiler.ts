@@ -10,7 +10,7 @@ const formatSize = (size: number) => {
     const mb = kb / 1024;
     const gb = mb / 1024;
 
-    if (kb) {
+    if (kb < 1024) {
         return `${kb.toFixed(0)}KB`;
     } else if (kb > 1024 && mb < 1024) {
         return `${mb.toFixed(0)}MB`;
