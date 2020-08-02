@@ -33,6 +33,7 @@ export default class DatabaseHandler {
             .run();
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     insert(table: string, data: object = {}) {
         return this.connection
             .table(table)
@@ -40,6 +41,7 @@ export default class DatabaseHandler {
             .run();
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     update(table: string, key: string, data: object = {}) {
         return this.connection
             .table(table)

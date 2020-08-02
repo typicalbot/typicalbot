@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Util } from 'discord.js';
 import pm2 from 'pm2';
 import config from '../etc/config.json';

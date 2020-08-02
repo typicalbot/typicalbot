@@ -30,7 +30,7 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
         return payload;
     }
 
-    async update(id: string, payload: object = {}) {
+    async update(id: string, payload: Record<string, unknown> = {}) {
         const updated = await this.client.handlers.database.update('guilds', id, payload);
 
         if (updated.changes != undefined && updated.changes.length > 0)
