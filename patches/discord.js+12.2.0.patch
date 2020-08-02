@@ -1,0 +1,64 @@
+diff --git a/node_modules/discord.js/src/managers/GuildMemberManager.js b/node_modules/discord.js/src/managers/GuildMemberManager.js
+index e1387e8..06dac71 100644
+--- a/node_modules/discord.js/src/managers/GuildMemberManager.js
++++ b/node_modules/discord.js/src/managers/GuildMemberManager.js
+@@ -177,12 +177,12 @@ class GuildMemberManager extends BaseManager {
+    *   .catch(console.error);
+    */
+   ban(user, options = { days: 0 }) {
+-    if (options.days) options['delete-message-days'] = options.days;
++    if (options.days) options.delete_message_days = options.days;
+     const id = this.client.users.resolveID(user);
+     if (!id) return Promise.reject(new Error('BAN_RESOLVE_ID', true));
+     return this.client.api
+       .guilds(this.guild.id)
+-      .bans[id].put({ query: options })
++      .bans[id].put({ data: options })
+       .then(() => {
+         if (user instanceof GuildMember) return user;
+         const _user = this.client.users.resolve(id);
+diff --git a/node_modules/discord.js/src/structures/Message.js b/node_modules/discord.js/src/structures/Message.js
+index 06ed12a..09f9a29 100644
+--- a/node_modules/discord.js/src/structures/Message.js
++++ b/node_modules/discord.js/src/structures/Message.js
+@@ -450,6 +450,27 @@ class Message extends Base {
+       .then(() => this);
+   }
+ 
++  crosspost() {
++    return this.client.api
++      .channels(this.channel.id)
++      .messages(this.id)
++      .crosspost
++      .post()
++      .then(() => this);
++  }
++
++  /**
++   * Follows a channel
++   * @param {string} channel
++   */
++  followers(channel) {
++    return this.client.api
++      .channels(channel)
++      .followers
++      .post({ data: { webhook_channel_id: this.channel.id } })
++      .then(() => this);
++  }
++
+   /**
+    * Adds a reaction to the message.
+    * @param {EmojiIdentifierResolvable} emoji The emoji to react with
+diff --git a/node_modules/discord.js/typings/index.d.ts b/node_modules/discord.js/typings/index.d.ts
+index 0470ca6..6b7f5dd 100644
+--- a/node_modules/discord.js/typings/index.d.ts
++++ b/node_modules/discord.js/typings/index.d.ts
+@@ -952,6 +952,8 @@ declare module 'discord.js' {
+     public equals(message: Message, rawData: object): boolean;
+     public fetchWebhook(): Promise<Webhook>;
+     public fetch(): Promise<Message>;
++    public crosspost(): Promise<Message>;
++    public followers(channel: string): Promise<Message>;
+     public pin(): Promise<Message>;
+     public react(emoji: EmojiIdentifierResolvable): Promise<MessageReaction>;
+     public reply(

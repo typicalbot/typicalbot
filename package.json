@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "main": "dist/src/index.js",
   "scripts": {
+    "postinstall": "patch-package",
     "build": "tsc",
     "build:clean": "git clean -d -x -e node_modules -e etc/config.json -f && tsc",
     "build:watch": "tsc --watch",
@@ -42,7 +43,9 @@
     "mathjs": "^7.1.0",
     "moment": "^2.27.0",
     "node-fetch": "^2.6.0",
+    "patch-package": "^6.2.2",
     "pm2": "^4.4.0",
+    "postinstall-postinstall": "^2.1.0",
     "rethinkdb-ts": "^2.4.2",
     "typescript": "^3.9.7",
     "veza": "^1.1.0",
