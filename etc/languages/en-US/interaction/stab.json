@@ -1,8 +1,8 @@
 {
-    "DESCRIPTION": "Stab another user in the server.",
-    "USAGE": "stab [@user]",
-    "SELF": "just stabbed themselves! :dagger::scream:",
-    "SELF_POLICE": "just stabbed themselves! :dagger::scream: Someone call the police!",
-    "RESPONSE": "just stabbed {{user}}! :dagger::scream:",
-    "RESPONSE_POLICE": "just stabbed {{user}}! :dagger::scream: Someone call the police!"
+  "DESCRIPTION": "Stab another user in the server.",
+  "USAGE": "stab [@user]",
+  "SELF": "just stabbed themselves! :dagger::scream:",
+  "SELF_POLICE": "just stabbed themselves! :dagger::scream: Someone call the police!",
+  "RESPONSE": "just stabbed {{user}}! :dagger::scream:",
+  "RESPONSE_POLICE": "just stabbed {{user}}! :dagger::scream: Someone call the police!"
 }

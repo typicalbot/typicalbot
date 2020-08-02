@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Gives you a random cat fact.",
-    "USAGE": "catfact",
-    "TITLE": "Cat Fact"
+  "DESCRIPTION": "Gives you a random cat fact.",
+  "USAGE": "catfact",
+  "TITLE": "Cat Fact"
 }

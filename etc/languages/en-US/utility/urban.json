@@ -1,11 +1,11 @@
 {
-    "DESCRIPTION": "Grabs the definition from Urban Dictionary for the specified word.",
-    "USAGE": "urban <query>",
-    "NONE": "No matches for the query **{{query}}**.",
-    "TEXT": "**__{{query}}:__** {{definition}}",
-    "AMOUNT": "Definition 1 out of {{amount}}",
-    "RATING": "Rating",
-    "RATING_VALUE": "\\👍 {{up}} | \\👎 {{down}}{{rating}}",
-    "RATING_PERCENT": "\u200B{{amount}}% of {{total}} like this definition.",
-    "DICTIONARY": "Urban Dictionary Definition"
+  "DESCRIPTION": "Grabs the definition from Urban Dictionary for the specified word.",
+  "USAGE": "urban <query>",
+  "NONE": "No matches for the query **{{query}}**.",
+  "TEXT": "**__{{query}}:__** {{definition}}",
+  "AMOUNT": "Definition 1 out of {{amount}}",
+  "RATING": "Rating",
+  "RATING_VALUE": "\\👍 {{up}} | \\👎 {{down}}{{rating}}",
+  "RATING_PERCENT": "\u200B{{amount}}% of {{total}} like this definition.",
+  "DICTIONARY": "Urban Dictionary Definition"
 }
