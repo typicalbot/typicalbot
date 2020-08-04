@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { join, parse } from 'path';
 import { Collection } from 'discord.js';
 import klaw from 'klaw';

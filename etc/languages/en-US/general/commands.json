@@ -1,12 +1,12 @@
 {
-    "DESCRIPTION": "Receive a list of TypicalBot's commands.",
-    "USAGE": "commands",
-    "CHECK_DM": "A list of commands should have arrived in your Direct Messages.",
-    "TYPICAL_COMMANDS": "TypicalBot Commands",
-    "TEXT": "Use `{{prefix}}help <command>` to get more information on a specific command.",
-    "OWNER": "Server Owner (Level 4)",
-    "ADMIN": "Server Administrator (Level 3)",
-    "MOD": "Server Moderator (Level 2)",
-    "MEMBER": "Server Member (Level 0)",
-    "NONE": "No commands to display."
+  "DESCRIPTION": "Receive a list of TypicalBot's commands.",
+  "USAGE": "commands",
+  "CHECK_DM": "A list of commands should have arrived in your Direct Messages.",
+  "TYPICAL_COMMANDS": "TypicalBot Commands",
+  "TEXT": "Use `{{prefix}}help <command>` to get more information on a specific command.",
+  "OWNER": "Server Owner (Level 4)",
+  "ADMIN": "Server Administrator (Level 3)",
+  "MOD": "Server Moderator (Level 2)",
+  "MEMBER": "Server Member (Level 0)",
+  "NONE": "No commands to display."
 }

@@ -8,7 +8,7 @@ import { permissionError } from '../lib/utils/util';
 
 export default class extends Event {
     async execute(message: Message | TypicalGuildMessage) {
-        if (message.partial || (message.author && message.author.bot)) return;
+        if (message.partial || (message.author?.bot)) return;
 
         if (message.channel.type === 'dm')
             return this.handleDM(message as Message);

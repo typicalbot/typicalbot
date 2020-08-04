@@ -1,9 +1,9 @@
 {
-    "DESCRIPTION": "Change or clear either your nickname or another user's nickname.",
-    "USAGE": "nickname [@user] [nickname]",
-    "DISABLED": "This command is currently disabled. Disable the `nonickname` setting to enable this command.",
-    "ERROR": "An error occurred. This most likely means I cannot manage member's nickname.",
-    "SELF_ERROR": "An error occurred. This most likely means I cannot manage your nickname.",
-    "SUCCESS": "Successfully {{type}} member's nickname.",
-    "SELF_SUCCESS": "Successfully {{type}} your nickname."
+  "DESCRIPTION": "Change or clear either your nickname or another user's nickname.",
+  "USAGE": "nickname [@user] [nickname]",
+  "DISABLED": "This command is currently disabled. Disable the `nonickname` setting to enable this command.",
+  "ERROR": "An error occurred. This most likely means I cannot manage member's nickname.",
+  "SELF_ERROR": "An error occurred. This most likely means I cannot manage your nickname.",
+  "SUCCESS": "Successfully {{type}} member's nickname.",
+  "SELF_SUCCESS": "Successfully {{type}} your nickname."
 }

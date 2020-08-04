@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Remove the server's subscriber role from yourself.",
-    "USAGE": "unsubscribe",
-    "UNSUBBED": "You are now unsubscribed."
+  "DESCRIPTION": "Remove the server's subscriber role from yourself.",
+  "USAGE": "unsubscribe",
+  "UNSUBBED": "You are now unsubscribed."
 }

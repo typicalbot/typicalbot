@@ -1,4 +1,4 @@
 {
-    "DESCRIPTION": "Gives you a random chuck norris fact.",
-    "USAGE": "chucknorris"
+  "DESCRIPTION": "Gives you a random chuck norris fact.",
+  "USAGE": "chucknorris"
 }
