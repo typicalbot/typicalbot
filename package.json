@@ -10,8 +10,8 @@
     "build:watch": "tsc --watch",
     "build:database": "tsc && node dist/bin/setup.js",
     "build:instance": "tsc && node dist/bin/pm2.js",
-    "lint": "eslint src bin --ext .ts",
-    "lint:fix": "eslint src bin --ext .ts --fix",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
     "start": "tsc && node dist/src/index.js"
   },
   "repository": {
