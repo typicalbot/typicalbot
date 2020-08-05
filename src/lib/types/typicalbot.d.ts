@@ -176,7 +176,7 @@ export interface TypicalMessage extends Message {
         embed?: MessageEmbed,
         options?: MessageOptions
     ): Promise<Message>;
-    translate(key: string, args?: object): string;
+    translate(key: string, args?: Record<string, unknown>): string;
 }
 
 export interface TypicalGuildMessage extends TypicalMessage {
@@ -194,7 +194,7 @@ export interface TypicalGuild extends Guild {
     client: Cluster;
     settings: GuildSettings;
     buildModerationLog(): Promise<ModerationLog>;
-    translate(key: string, args?: object): string;
+    translate(key: string, args?: Record<string, unknown>): string;
     fetchPermissions(userID: string, ignoreStaff?: boolean): Promise<PermLevel>;
     fetchSettings(): Promise<GuildSettings>;
 }

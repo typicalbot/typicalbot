@@ -90,7 +90,6 @@ export default class extends Command {
                 },
                 {
                     name: message.translate('general/help:PERMISSION'),
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                     // @ts-ignore
                     value: this.client.handlers.permissions.levels.get(command.permission).title
                 },

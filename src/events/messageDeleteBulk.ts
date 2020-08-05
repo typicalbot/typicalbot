@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import * as Sentry from '@sentry/node';
 import { Collection, TextChannel, MessageEmbed } from 'discord.js';
 import moment from 'moment';

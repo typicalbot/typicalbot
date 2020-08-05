@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import fetch from 'node-fetch';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';

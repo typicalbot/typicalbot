@@ -318,7 +318,6 @@ export default class extends Command {
                     return this.list(message, setting, settingsData);
                 if (action === 'view' && (!setting || !isNaN(parseInt(setting, 10))))
                     return this.list(message, setting, settingsData, true);
-                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 const selectedSetting = settingsData[setting];
                 if (!selectedSetting)
@@ -335,8 +334,6 @@ export default class extends Command {
         return null;
     }
 
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     list(message: TypicalGuildMessage, setting: string, settingsData, view = false) {
         let page = parseInt(setting, 10) || 1;
@@ -653,11 +650,11 @@ export default class extends Command {
         return message.success(message.translate('administration/settings:UPDATED'));
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-types
     stringToObject(path: string, value: unknown): {} {
         if (!path.includes('.')) return { [path]: value };
         const parts = path.split('.');
         return {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             [parts.shift()]: this.stringToObject(parts.join('.'), value)
         };

@@ -1,6 +1,6 @@
 {
-    "DESCRIPTION": "Rolls a n-sided die.",
-    "USAGE": "dice [sides]",
-    "RESPONSE": "I rolled a **__{{amount}}__**.",
-    "INVALID": "Invalid number of sides. The number must be an integer greater than 1 and no more than 100."
+  "DESCRIPTION": "Rolls a n-sided die.",
+  "USAGE": "dice [sides]",
+  "RESPONSE": "I rolled a **__{{amount}}__**.",
+  "INVALID": "Invalid number of sides. The number must be an integer greater than 1 and no more than 100."
 }

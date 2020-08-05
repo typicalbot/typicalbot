@@ -1,7 +1,7 @@
 {
-    "DESCRIPTION": "Slap another user in the server.",
-    "USAGE": "slap [@user]",
-    "SELF": ", stop hitting yourself! :dizzy_face::wave:",
-    "RESPONSE": "just slapped {{user}}! :dizzy_face::wave:",
-    "RESPONSE_HURT": "just slapped {{user}}! :dizzy_face::wave: Oh, dang! That must've hurt!`"
+  "DESCRIPTION": "Slap another user in the server.",
+  "USAGE": "slap [@user]",
+  "SELF": ", stop hitting yourself! :dizzy_face::wave:",
+  "RESPONSE": "just slapped {{user}}! :dizzy_face::wave:",
+  "RESPONSE_HURT": "just slapped {{user}}! :dizzy_face::wave: Oh, dang! That must've hurt!`"
 }

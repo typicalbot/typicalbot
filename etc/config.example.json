@@ -1,25 +1,25 @@
 {
-    "build": "stable",
-    "prefix": "$",
-    "clustered": true,
-    "clusterServer": "Primula",
-    "clusterBuild": "",
-    "nodePort": 4000,
-    "id": "Bot ID",
-    "token": "Bot Token",
-    "apis": {
-        "topgg": "",
-        "carbonkey": "",
-        "del": "",
-        "bls": "",
-        "twitch": "",
-        "sentry": ""
-    },
-    "database": {
-        "credentials": {
-            "user": "Username",
-            "password": "Password",
-            "db": "Database Name"
-        }
+  "build": "stable",
+  "prefix": "$",
+  "clustered": true,
+  "clusterServer": "Primula",
+  "clusterBuild": "",
+  "nodePort": 4000,
+  "id": "Bot ID",
+  "token": "Bot Token",
+  "apis": {
+    "topgg": "",
+    "carbonkey": "",
+    "del": "",
+    "bls": "",
+    "twitch": "",
+    "sentry": ""
+  },
+  "database": {
+    "credentials": {
+      "user": "Username",
+      "password": "Password",
+      "db": "Database Name"
     }
+  }
 }
