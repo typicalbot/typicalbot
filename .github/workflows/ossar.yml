@@ -2,27 +2,28 @@ name: OSSAR
 
 on:
   push:
-    - 4.x
+    branches:
+      - 4.x
   pull_request:
 
 jobs:
-  OSSAR-Scan:
+ scan:
     runs-on: windows-latest
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 2
     - run: git checkout HEAD^2
       if: ${{ github.event_name == 'pull_request' }}
-    - name: Install .NET
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.201'
     - name: Run OSSAR
       uses: github/ossar-action@v1
       id: ossar
-    - name: Upload OSSAR results
+    - name: Upload Results
       uses: github/codeql-action/upload-sarif@v1
       with:
         sarif_file: ${{ steps.ossar.outputs.sarifFile }}
