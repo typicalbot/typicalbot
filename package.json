@@ -33,7 +33,7 @@
   "homepage": "https://github.com/typicalbot/typicalbot#readme",
   "dependencies": {
     "@sentry/node": "^5.20.1",
-    "discord.js": "^12.2.0",
+    "discord.js": "^12.3.1",
     "fs": "0.0.2",
     "heapdump": "^0.3.15",
     "i18next": "^19.6.3",
