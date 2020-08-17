@@ -49,3 +49,24 @@ jobs:
         run: yarn --frozen-lockfile --ignore-scripts
       - name: Run ESLint
         run: yarn run lint
+  scan:
+    name: Scan
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - run: git checkout HEAD^2
+      if: ${{ github.event_name == 'pull_request' }}
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.201'
+    - name: Run Code Scan
+      uses: github/ossar-action@v1
+      id: ossar
+    - name: Upload Results
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: ${{ steps.ossar.outputs.sarifFile }}
