@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Util } from 'discord.js';
 import pm2 from 'pm2';
-import config from '../etc/config.json';
 
 async function generateClusters() {
-    const shardCount = await Util.fetchRecommendedShards(config.token);
+    const shardCount = await Util.fetchRecommendedShards(process.env.TOKEN!);
     const shards = Array.from({ length: shardCount }, (_a, b) => b);
     const clusterCount = Math.ceil(shardCount / 10);
     const clusters = [];
@@ -13,15 +12,15 @@ async function generateClusters() {
         const clusterShards = shards.splice(0, 10);
 
         clusters.push({
-            name: `${config.clusterServer}-${
-                config.clusterBuild ? `${config.clusterBuild}-` : ''
+            name: `${process.env.CLUSTER_SERVER}-${
+                process.env.CLUSTER_BUILD ? `${process.env.CLUSTER_BUILD}-` : ''
             }${i}`,
             script: './dist/src/index.js',
             autorestart: true,
             watch: false,
             env: {
-                CLUSTER: `${config.clusterServer} ${
-                    config.clusterBuild ? `${config.clusterBuild} ` : ''
+                CLUSTER: `${process.env.CLUSTER_SERVER} ${
+                    process.env.CLUSTER_BUILD ? `${process.env.CLUSTER_BUILD} ` : ''
                 }${i}`,
                 CLUSTER_COUNT: clusterCount.toString(),
                 SHARDS: `[${clusterShards.join(',')}]`,

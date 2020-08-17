@@ -14,7 +14,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('misc:USAGE_ERROR', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
         const [query] = args;
@@ -57,7 +57,7 @@ export default class extends Command {
                             ? message.translate('utility/urban:RATING_PERCENT', {
                                 amount: rating,
                                 total:
-                                              resp.thumbs_up + resp.thumbs_down
+                                    resp.thumbs_up + resp.thumbs_down
                             })
                             : ''
                     })

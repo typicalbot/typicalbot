@@ -19,7 +19,7 @@ export default class extends Event {
     async handleGuild(message: TypicalGuildMessage) {
         if (!message.guild.available) return;
         if (!message.guild.me)
-            await message.guild.members.fetch(this.client.config.id);
+            await message.guild.members.fetch(process.env.ID!);
 
         const botMember = message.guild.me as GuildMember;
         const botSendPerms = message.channel.permissionsFor(botMember);
@@ -28,18 +28,18 @@ export default class extends Event {
         const settings = (message.guild.settings = await message.guild.fetchSettings());
 
         const possibleBotMentions = [
-            `<@${this.client.config.id}>`,
-            `<@!${this.client.config.id}>`
+            `<@${process.env.ID}>`,
+            `<@!${process.env.ID}>`
         ];
         if (possibleBotMentions.includes(message.content)) {
             const prefix = settings.prefix.custom
                 ? settings.prefix.default
                     ? message.translate('misc:MULTIPLE_PREFIXES', {
-                        default: this.client.config.prefix,
+                        default: process.env.PREFIX,
                         custom: settings.prefix.custom
                     })
                     : `\`${settings.prefix.custom}\``
-                : `\`${this.client.config.prefix}\``;
+                : `\`${process.env.PREFIX}\``;
 
             return message.reply(message.translate('misc:PREFIX', { prefix }));
         }
@@ -76,7 +76,7 @@ export default class extends Event {
         if (!message.member)
             await message.guild.members.fetch(message.author.id);
 
-        if (command.ptb && this.client.build !== 'ptb')
+        if (command.ptb && process.env.BUILD !== 'ptb')
             return message.error(message.translate('misc:PTB_ONLY'));
 
         const accessLevel = await fetchAccess(message.guild);
@@ -128,10 +128,10 @@ export default class extends Event {
 
     matchPrefix(user: User, settings: GuildSettings, command: string) {
         if (
-            command.startsWith(this.client.config.prefix) &&
+            command.startsWith(process.env.PREFIX!) &&
             this.client.owners.includes(user.id)
         )
-            return this.client.config.prefix;
+            return process.env.PREFIX;
         if (
             settings.prefix.custom &&
             command.startsWith(settings.prefix.custom)
@@ -139,9 +139,9 @@ export default class extends Event {
             return settings.prefix.custom;
         if (
             settings.prefix.default &&
-            command.startsWith(this.client.config.prefix)
+            command.startsWith(process.env.PREFIX!)
         )
-            return this.client.config.prefix;
+            return process.env.PREFIX;
 
         return null;
     }
@@ -157,11 +157,11 @@ export default class extends Event {
     }
 
     handleDM(message: Message) {
-        if (!message.content.startsWith(this.client.config.prefix)) return;
+        if (!message.content.startsWith(process.env.PREFIX!)) return;
 
         const command = this.client.commands.get(message.content
             .split(' ')[0]
-            .slice(this.client.config.prefix.length));
+            .slice(process.env.PREFIX!.length));
 
         if (
             !command ||

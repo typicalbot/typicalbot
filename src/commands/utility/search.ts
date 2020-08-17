@@ -13,7 +13,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('misc:USAGE_ERROR', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
 
@@ -28,7 +28,7 @@ export default class extends Command {
             ].includes(lowerQuery));
 
         if (!list.size)
-            return message.reply(message.translate('utility/search:NONE', { query }), { allowedMentions: { parse: [] }});
+            return message.reply(message.translate('utility/search:NONE', { query }), { allowedMentions: { parse: [] } });
 
         const content = pagify(message, list.map((m) =>
             `${`${m.user.username}${
@@ -41,6 +41,6 @@ export default class extends Command {
             '```autohotkey',
             content,
             '```'
-        ].join('\n'), undefined, { allowedMentions: { parse: [] }});
+        ].join('\n'), undefined, { allowedMentions: { parse: [] } });
     }
 }

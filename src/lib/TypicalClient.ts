@@ -11,7 +11,6 @@ import { Client as VezaClient } from 'veza';
 import { BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import i18n from './utils/i18n';
-import config from '../../etc/config.json';
 import pkg from '../../package.json';
 import AnalyticHandler from '../handlers/AnalyticHandler';
 import CommandHandler from '../handlers/CommandHandler';
@@ -31,8 +30,6 @@ interface TypicalHandlers {
 
 export default class Cluster extends Client {
     public node: VezaClient | undefined;
-    public config = config;
-    public build = config.build;
     public shards: number[] = JSON.parse(process.env.SHARDS ?? '[1]');
     public shardCount = process.env.TOTAL_SHARD_COUNT ?? '1';
     public cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
@@ -61,7 +58,7 @@ export default class Cluster extends Client {
             messageSweepInterval: 180,
             disableMentions: 'everyone',
             partials: ['MESSAGE'],
-            presence: { activity: { name: `${config.prefix}help — typicalbot.com`, type: 'WATCHING' } },
+            presence: { activity: { name: `${process.env.PREFIX!}help — typicalbot.com`, type: 'WATCHING' } },
             ws: {
                 intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MEMBERS | Intents.FLAGS.GUILD_BANS |
                     Intents.FLAGS.GUILD_INVITES | Intents.FLAGS.GUILD_PRESENCES | Intents.FLAGS.GUILD_MESSAGES |
@@ -71,13 +68,13 @@ export default class Cluster extends Client {
         });
 
         Sentry.init({
-            dsn: this.config.apis.sentry,
+            dsn: process.env.API_SENTRY,
             release: this.version
         });
 
         this.node = node;
 
-        this.login(this.config.token).catch((err) => Sentry.captureException(err));
+        this.login(process.env.TOKEN!).catch((err) => Sentry.captureException(err));
     }
 
     public async login(token: string): Promise<string> {
@@ -117,16 +114,16 @@ export default class Cluster extends Client {
                 servercount: this.guilds.cache
                     .filter((g) => g.shardID === shardID)
                     .size.toString(),
-                key: this.config.apis.carbonkey
+                key: process.env.API_CARBON
             })
         }).catch((err) => {
             Sentry.captureException(err);
         });
 
-        fetch(`https://top.gg/api/bots/${this.config.id}/stats`, {
+        fetch(`https://top.gg/api/bots/${process.env.ID}/stats`, {
             method: 'post',
             headers: {
-                Authorization: this.config.apis.topgg,
+                Authorization: process.env.API_TOPGG!,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -142,10 +139,10 @@ export default class Cluster extends Client {
 
         const guildCount = await this.fetchData('guilds.cache.size');
 
-        fetch(`https://api.discordextremelist.xyz/v2/bot/${this.config.id}/stats`, {
+        fetch(`https://api.discordextremelist.xyz/v2/bot/${process.env.ID}/stats`, {
             method: 'post',
             headers: {
-                Authorization: this.config.apis.del,
+                Authorization: process.env.API_DEL!,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -156,10 +153,10 @@ export default class Cluster extends Client {
             Sentry.captureException(err);
         });
 
-        fetch(`https://api.botlist.space/v1/bots/${this.config.id}`, {
+        fetch(`https://api.botlist.space/v1/bots/${process.env.ID}`, {
             method: 'post',
             headers: {
-                Authorization: this.config.apis.bls,
+                Authorization: process.env.API_BLS!,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({

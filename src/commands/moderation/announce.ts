@@ -12,7 +12,7 @@ export default class extends Command {
     execute(message: TypicalGuildMessage, parameters?: string) {
         const usageError = message.translate('misc:USAGE_ERROR', {
             name: this.name,
-            prefix: this.client.config.prefix
+            prefix: process.env.PREFIX
         });
         if (!parameters) return message.error(usageError);
 

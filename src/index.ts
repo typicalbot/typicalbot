@@ -1,15 +1,17 @@
 /* eslint-disable no-console */
+import dotenv from 'dotenv';
 import fs from 'fs';
 import { TextChannel } from 'discord.js';
 import { Client, ClientSocket, NodeMessage } from 'veza';
 import Cluster from './lib/TypicalClient';
-import config from '../etc/config.json';
+
+dotenv.config();
 
 fs.mkdir('data', (err) => {
     if (err && err.code !== 'EEXIST') console.error(err);
 });
 
-if (!config.clustered) {
+if (!process.env.CLUSTERED) {
     new Cluster(undefined);
 } else {
     const node = new Client(process.env.CLUSTER ?? 'TypicalBot')
@@ -21,7 +23,7 @@ if (!config.clustered) {
             console.log(`[IPC] Connected to: ${client.name}`);
         });
 
-    node.connectTo(config.nodePort).catch((error) =>
+    node.connectTo(process.env.NODE_PORT!).catch((error) =>
         console.error('[IPC] Disconnected!', error));
 
     const client = new Cluster(node);
@@ -53,7 +55,7 @@ if (!config.clustered) {
 
             const trueChannel = trueGuild.channels.cache.get(channel);
             if (trueChannel instanceof TextChannel) {
-                const botPerms = trueChannel.permissionsFor(config.id);
+                const botPerms = trueChannel.permissionsFor(process.env.ID!);
                 if (
                     !botPerms ||
                     !botPerms.has(['VIEW_CHANNEL', 'SEND_MESSAGES'])
