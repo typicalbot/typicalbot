@@ -21,7 +21,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('misc:USAGE_ERROR', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
 

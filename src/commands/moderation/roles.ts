@@ -18,7 +18,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('moderation/roles:USAGE', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
 
@@ -80,7 +80,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('moderation/roles:USAGE', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
 
@@ -129,7 +129,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('moderation/roles:USAGE', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
 
@@ -173,7 +173,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('moderation/roles:USAGE', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
 

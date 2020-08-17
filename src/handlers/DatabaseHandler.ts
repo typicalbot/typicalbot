@@ -14,7 +14,11 @@ export default class DatabaseHandler {
     }
 
     async init() {
-        this.pool = await r.connectPool(this.client.config.database.credentials);
+        this.pool = await r.connectPool({
+            user: process.env.DATABASE_USERNAME,
+            password: process.env.DATABASE_PASSWORD,
+            db: process.env.DATABASE_NAME
+        });
     }
 
     get(table: string, key?: string) {

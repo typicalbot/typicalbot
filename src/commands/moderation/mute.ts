@@ -17,7 +17,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('misc:USAGE_ERROR', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
 
@@ -51,7 +51,7 @@ export default class extends Command {
             if (!channel)
                 return message.error(message.translate('moderation/mute:INVALID_CHANNEL'));
 
-            const permissions = channel.permissionsFor(message.guild.me || this.client.config.id);
+            const permissions = channel.permissionsFor(message.guild.me || process.env.ID);
 
             if (permissions && !permissions.has('MANAGE_ROLES'))
                 return message.error(message.translate('moderation/mute:MISSING_PERMS'));

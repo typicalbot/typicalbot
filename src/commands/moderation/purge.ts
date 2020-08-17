@@ -16,7 +16,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('misc:USAGE_ERROR', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
 
@@ -54,7 +54,7 @@ export default class extends Command {
             if (msg.member?.roles.cache.has(roleID)) return true;
             if (filter === 'me' && msg.author.id === message.author.id)
                 return true;
-            if (filter === 'you' && msg.author.id === this.client.config.id)
+            if (filter === 'you' && msg.author.id === process.env.ID)
                 return true;
             if (filter === 'bots' && msg.author.bot) return true;
             return !userMention &&

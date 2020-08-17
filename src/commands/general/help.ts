@@ -11,7 +11,7 @@ export default class extends Command {
     async execute(message: TypicalMessage, parameters: string) {
         if (!message.guild || !parameters) {
             const response = message.translate('general/help:NONE', {
-                prefix: this.client.config.prefix,
+                prefix: process.env.PREFIX,
                 docs: Links.DOCUMENTATION,
                 server: Links.SERVER
             });

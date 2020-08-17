@@ -20,7 +20,7 @@ export default class extends Command {
         if (!args)
             return message.error(message.translate('misc:USAGE_ERROR', {
                 name: this.name,
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }));
         args.shift();
         const [userID, reason] = args;
@@ -33,7 +33,7 @@ export default class extends Command {
 
         if (
             message.member.roles.highest.position <=
-                member.roles.highest.position &&
+            member.roles.highest.position &&
             permissionLevel.level !== 4 &&
             permissionLevel.level < 9
         )

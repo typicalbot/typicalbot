@@ -15,7 +15,7 @@ export default class extends Command {
         permissionLevel?: PermissionLevel) {
         const usageError = message.translate('misc:USAGE_ERROR', {
             name: this.name,
-            prefix: this.client.config.prefix
+            prefix: process.env.PREFIX
         });
         if (!parameters || !permissionLevel) return message.error(usageError);
 

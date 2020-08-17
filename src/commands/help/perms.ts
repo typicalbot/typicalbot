@@ -12,7 +12,7 @@ export default class extends Command {
             .setTitle(message.translate('help/perms:LEVELS'))
             .setURL(Links.BASE)
             .setDescription(message.translate('help/perms:VIEW_ALL', {
-                prefix: this.client.config.prefix
+                prefix: process.env.PREFIX
             }))
             .addFields([
                 {

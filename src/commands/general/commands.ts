@@ -20,7 +20,7 @@ export default class extends Command {
         const level4 = [];
 
         for (const [name, command] of this.client.commands.entries()) {
-            const commandName = `${this.client.config.prefix}${name}`;
+            const commandName = `${process.env.PREFIX}${name}`;
 
             // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
             switch (command.permission) {
@@ -48,7 +48,7 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle('TypicalBot Commands')
                 .setDescription(message.translate('general/commands:TEXT', {
-                    prefix: this.client.config.prefix
+                    prefix: process.env.PREFIX
                 }))
                 .addFields([
                     {
