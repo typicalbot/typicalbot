@@ -1,6 +1,6 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 
 const characters = [
     '!',
@@ -23,8 +23,8 @@ const characters = [
 ];
 
 export default class extends Command {
-    permission = PermissionsLevels.SERVER_ADMINISTRATOR;
-    mode = Modes.STRICT;
+    permission = PERMISSION_LEVEL.SERVER_ADMINISTRATOR;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage) {
         const list = [];

@@ -2,7 +2,7 @@ import { inspect } from 'util';
 import { Message, GuildMember, User } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuildMessage, GuildSettings } from '../lib/types/typicalbot';
-import { PermissionsLevels, Modes } from '../lib/utils/constants';
+import { PERMISSION_LEVEL, MODE } from '../lib/utils/constants';
 import { fetchAccess } from '../lib/utils/util';
 import { permissionError } from '../lib/utils/util';
 
@@ -50,19 +50,19 @@ export default class extends Event {
 
         if (
             userPermissions.level <
-            PermissionsLevels.SERVER_MODERATOR &&
+            PERMISSION_LEVEL.SERVER_MODERATOR &&
             !settings.ignored.invites.includes(message.channel.id)
         )
             this.inviteCheck(message);
         if (
             userPermissions.level <
-            PermissionsLevels.SERVER_MODERATOR &&
+            PERMISSION_LEVEL.SERVER_MODERATOR &&
             settings.ignored.commands.includes(message.channel.id)
         )
             return;
         if (
             userPermissions.level ===
-            PermissionsLevels.SERVER_BLACKLISTED
+            PERMISSION_LEVEL.SERVER_BLACKLISTED
         )
             return;
 
@@ -93,10 +93,10 @@ export default class extends Event {
             message.author.id !== message.guild.ownerID &&
             command.mode <
             (settings.mode === 'free'
-                ? Modes.FREE
+                ? MODE.FREE
                 : settings.mode === 'lite'
-                    ? Modes.LITE
-                    : Modes.STRICT)
+                    ? MODE.LITE
+                    : MODE.STRICT)
         )
             return message.error(message.translate('misc:DISABLED'));
 
@@ -104,8 +104,8 @@ export default class extends Event {
             userPermissions.level < command.permission ||
             (actualUserPermissions.level < command.permission &&
                 actualUserPermissions.level !==
-                PermissionsLevels.SERVER_BLACKLISTED &&
-                command.permission <= PermissionsLevels.SERVER_OWNER)
+                PERMISSION_LEVEL.SERVER_BLACKLISTED &&
+                command.permission <= PERMISSION_LEVEL.SERVER_OWNER)
         ) {
             return message.error(permissionError(this.client, message, command, actualUserPermissions));
         }
@@ -166,7 +166,7 @@ export default class extends Event {
         if (
             !command ||
             !command.dm ||
-            command.permission > PermissionsLevels.SERVER_MEMBER
+            command.permission > PERMISSION_LEVEL.SERVER_MEMBER
         )
             return;
 

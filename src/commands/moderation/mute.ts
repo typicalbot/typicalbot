@@ -1,14 +1,14 @@
 import { PermissionOverwrites, MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels, ModerationLogTypes, Links } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL, MODERATION_LOG_TYPE, LINK } from '../../lib/utils/constants';
 
 // eslint-disable-next-line max-len
 const regex = /(?:(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)d(?:ays?)?)?\s?(?:(\d+)h(?:ours?|rs?)?)?\s?(?:(\d+)m(?:inutes?|in)?)?\s?(?:(\d+)s(?:econds?|ec)?)?)?(?:\s*(.+))?|(deny)\s+(?:(here)|(?:(?:<#)?(\d{17,20})>?)))/i;
 
 export default class extends Command {
-    permission = PermissionsLevels.SERVER_MODERATOR;
-    mode = Modes.STRICT;
+    permission = PERMISSION_LEVEL.SERVER_MODERATOR;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage,
         parameters: string,
@@ -105,8 +105,8 @@ export default class extends Command {
             return message.error(message.translate('moderation/mute:UNEDITABLE'));
 
         const embed = new MessageEmbed()
-            .setColor(ModerationLogTypes.MUTE.hex)
-            .setFooter('TypicalBot', Links.ICON)
+            .setColor(MODERATION_LOG_TYPE.MUTE.hex)
+            .setFooter('TypicalBot', LINK.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(message.translate('moderation/mute:MUTED', {
                 name: message.guild.name
@@ -134,7 +134,7 @@ export default class extends Command {
             const newCase = await message.guild.buildModerationLog();
             newCase
                 .setExpiration(time)
-                .setAction(ModerationLogTypes.MUTE)
+                .setAction(MODERATION_LOG_TYPE.MUTE)
                 .setModerator(message.author)
                 .setUser(member.user);
             if (reason) newCase.setReason(reason);

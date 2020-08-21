@@ -1,13 +1,13 @@
 import { TextChannel, MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 
 const regex = /(?:(-e)\s+)?((?:.|[\r\n])+)/i;
 
 export default class extends Command {
-    permission = PermissionsLevels.SERVER_ADMINISTRATOR;
-    mode = Modes.STRICT;
+    permission = PERMISSION_LEVEL.SERVER_ADMINISTRATOR;
+    mode = MODE.STRICT;
 
     execute(message: TypicalGuildMessage, parameters?: string) {
         const usageError = message.translate('misc:USAGE_ERROR', {

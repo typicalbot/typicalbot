@@ -1,14 +1,14 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL, LINK } from '../../lib/utils/constants';
 
 // eslint-disable-next-line max-len
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(?:(\d+)d(?:ays?)?)?\s?(?:(\d+)h(?:ours?|rs?)?)?\s?(?:(\d+)m(?:inutes?|in)?)?\s?(?:(\d+)s(?:econds?|ec)?)?)?(?:\s*(\d+))?(?:\s*(.+))?/i;
 
 export default class extends Command {
-    permission = PermissionsLevels.SERVER_MODERATOR;
-    mode = Modes.STRICT;
+    permission = PERMISSION_LEVEL.SERVER_MODERATOR;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage,
         parameters?: string,
@@ -69,7 +69,7 @@ export default class extends Command {
 
         const embed = new MessageEmbed()
             .setColor(0xff0000)
-            .setFooter('TypicalBot', Links.ICON)
+            .setFooter('TypicalBot', LINK.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(message.translate('moderation/ban:BANNED', {
                 name: message.guild.name

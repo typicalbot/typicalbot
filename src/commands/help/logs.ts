@@ -1,18 +1,18 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, Links } from '../../lib/utils/constants';
+import { MODE, LINK, WEBSITE } from '../../lib/utils/constants';
 
 export default class extends Command {
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage) {
         await message.send(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('help/logs:POSSIBLE'))
-            .setURL(Links.BASE)
+            .setURL(WEBSITE)
             .setDescription(message.translate('help/logs:VIEW_ALL', {
-                link: Links.SETTINGS
+                link: LINK.SETTINGS
             }))
             .addFields([
                 {
@@ -55,7 +55,7 @@ export default class extends Command {
                     inline: false
                 }
             ])
-            .setFooter('TypicalBot', Links.ICON)
+            .setFooter('TypicalBot', LINK.ICON)
             .setTimestamp());
     }
 }

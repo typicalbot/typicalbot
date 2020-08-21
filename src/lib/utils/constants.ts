@@ -1,33 +1,28 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-export const Links = {
-    BASE: 'https://typicalbot.com',
-    OAUTH: 'https://typicalbot.com/invite',
-    SERVER: 'https://typicalbot.com/support',
-    DONATE: 'https://typicalbot.com/donate',
-    DOCUMENTATION: 'https://typicalbot.com/docs',
-    SETTINGS: 'https://typicalbot.com/documentation#settings',
-    ICON: 'https://typicalbot.com/img/icon-transparent-blue.png',
+export const WEBSITE = 'https://typicalbot.com';
+
+export const LINK = {
+    OAUTH: `${WEBSITE}/invite`,
+    SERVER: `${WEBSITE}/support`,
+    DONATE: `${WEBSITE}/donate`,
+    DOCUMENTATION: `${WEBSITE}/docs`,
+    SETTINGS: `${WEBSITE}/docs`,
+    ICON: `${WEBSITE}/img/icon-transparent-blue.png`,
     TRANSLATE: 'https://translate.typicalbot.com',
     VOTE: 'https://top.gg/bot/153613756348366849/vote'
 };
 
-export const Colors = {
-    DEFAULT: 0x00adff,
-    SUCCESS: 0x00ff00,
-    ERROR: 0xff0000
-};
-
-export enum AccessLevels {
+export enum ACCESS_LEVEL {
     DEFAULT = 0,
     STAFF = 3
 }
 
-export const AccessTitles = {
+export const ACCESS_TITLE = {
     DEFAULT: { level: 0, title: 'Default' },
     STAFF: { level: 3, title: 'TypicalBot Staff' }
 };
 
-export enum PermissionsLevels {
+export enum PERMISSION_LEVEL {
     SERVER_BLACKLISTED = -1,
     SERVER_MEMBER = 0,
     SERVER_MODERATOR = 2,
@@ -36,19 +31,19 @@ export enum PermissionsLevels {
     BOT_OWNER = 10
 }
 
-export const PermissionsRoleTitles = {
+export const PERMISSION_ROLE_TITLE = {
     ADMINISTRATOR: 'TypicalBot Administrator',
     MODERATOR: 'TypicalBot Moderator',
     BLACKLIST: 'TypicalBot Blacklist'
 };
 
-export enum Modes {
+export enum MODE {
     FREE = 0,
     LITE = 1,
     STRICT = 2
 }
 
-export const ModerationLogTypes = {
+export const MODERATION_LOG_TYPE = {
     WARN: { hex: 0xffff00, display: 'Warn' },
     PURGE: { hex: 0xffff00, display: 'Message Purge' },
     TEMP_MUTE: { hex: 0xff9900, display: 'Temporary Mute' },
@@ -64,21 +59,9 @@ export const ModerationLogTypes = {
     UNBAN: { hex: 0x006699, display: 'Unban' }
 };
 
-export const ModerationLogRegex = {
+export const MODERATION_LOG_REGEX = {
     CASE: /Case\s(\d+)/i,
     ACTION: /\*\*Action:\*\*\s.+/i,
     USER: /\*\*(?:User|Channel):\*\*\s.+/i,
     REASON: /\*\*Reason:\*\*\s.+/i
-};
-
-export default {
-    Links,
-    Colors,
-    AccessLevels,
-    AccessTitles,
-    PermissionsLevels,
-    PermissionsRoleTitles,
-    Modes,
-    ModerationLogTypes,
-    ModerationLogRegex
 };

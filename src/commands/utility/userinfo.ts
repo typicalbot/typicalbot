@@ -2,14 +2,14 @@ import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes } from '../../lib/utils/constants';
+import { MODE } from '../../lib/utils/constants';
 import { resolveMember } from '../../lib/utils/util';
 
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i;
 
 export default class extends Command {
     aliases = ['uinfo', 'whois'];
-    mode = Modes.LITE;
+    mode = MODE.LITE;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters) ?? [];

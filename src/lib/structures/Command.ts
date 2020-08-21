@@ -5,7 +5,7 @@ import {
     TypicalGuildMessage,
     PermissionLevel
 } from '../types/typicalbot';
-import { PermissionsLevels, Modes, AccessLevels } from '../utils/constants';
+import { PERMISSION_LEVEL, MODE, ACCESS_LEVEL } from '../utils/constants';
 
 export default class Command {
     client: Cluster;
@@ -26,10 +26,10 @@ export default class Command {
         this.dm = (options?.dm) ?? false;
         this.permission =
             (options?.permission) ??
-            PermissionsLevels.SERVER_MEMBER;
-        this.mode = (options?.mode) ?? Modes.FREE;
+            PERMISSION_LEVEL.SERVER_MEMBER;
+        this.mode = (options?.mode) ?? MODE.FREE;
         this.access =
-            (options?.access) ?? AccessLevels.DEFAULT;
+            (options?.access) ?? ACCESS_LEVEL.DEFAULT;
         this.ptb = (options?.ptb) ?? false;
     }
 

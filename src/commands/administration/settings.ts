@@ -1,6 +1,6 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, SettingsData } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels, Links } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL, LINK } from '../../lib/utils/constants';
 import { permissionError } from '../../lib/utils/util';
 
 const regex = /(list|view|edit|clear)(?:\s+([\w-]+)\s*(?:(add|remove)\s+)?((?:.|[\r\n])+)?)?/i;
@@ -67,7 +67,7 @@ export const possibleLanguages = [
 
 export default class extends Command {
     aliases = ['set'];
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const usageError = message.translate('misc:USAGE_ERROR', {
@@ -85,7 +85,7 @@ export default class extends Command {
 
         if (['edit', 'clear'].includes(action) && permission.level < 3)
             // eslint-disable-next-line max-len
-            return message.error(permissionError(this.client, message, this, permission, PermissionsLevels.SERVER_ADMINISTRATOR));
+            return message.error(permissionError(this.client, message, this, permission, PERMISSION_LEVEL.SERVER_ADMINISTRATOR));
 
         switch (action) {
             case 'clear':
@@ -486,7 +486,7 @@ export default class extends Command {
 
             if (!selectedLanguage.complete) {
                 // eslint-disable-next-line max-len
-                await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <${Links.TRANSLATE}>`);
+                await message.reply(`${selectedLanguage.canonical} is not fully translated yet. You can help translate TypicalBot at <${LINK.TRANSLATE}>`);
             }
 
             value = selectedLanguage.name;

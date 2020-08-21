@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 
 export default class extends Command {
-    mode = Modes.STRICT;
-    permission = PermissionsLevels.SERVER_ADMINISTRATOR;
+    mode = MODE.STRICT;
+    permission = PERMISSION_LEVEL.SERVER_ADMINISTRATOR;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const [type, id] = parameters.split(' ');

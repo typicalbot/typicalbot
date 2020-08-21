@@ -1,12 +1,12 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels, ModerationLogTypes, Links } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL, MODERATION_LOG_TYPE, LINK } from '../../lib/utils/constants';
 
 const regex = /(?:<@!?)?(\d{17,20})>?(?:\s+(.+))?/i;
 export default class extends Command {
-    permission = PermissionsLevels.SERVER_MODERATOR;
-    mode = Modes.STRICT;
+    permission = PERMISSION_LEVEL.SERVER_MODERATOR;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage,
         parameters: string,
@@ -45,7 +45,7 @@ export default class extends Command {
 
         const embed = new MessageEmbed()
             .setColor(0xff0000)
-            .setFooter('TypicalBot', Links.ICON)
+            .setFooter('TypicalBot', LINK.ICON)
             .setTitle(message.translate('common:ALERT_SYSTEM'))
             .setDescription(message.translate('moderation/kick:KICKED', {
                 name: message.guild.name
@@ -79,7 +79,7 @@ export default class extends Command {
             const newCase = await message.guild.buildModerationLog();
 
             newCase
-                .setAction(ModerationLogTypes.KICK)
+                .setAction(MODERATION_LOG_TYPE.KICK)
                 .setModerator(message.author)
                 .setUser(member.user);
             if (reason) newCase.setReason(reason);

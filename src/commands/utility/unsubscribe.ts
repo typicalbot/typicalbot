@@ -1,10 +1,10 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, Links } from '../../lib/utils/constants';
+import { MODE, LINK } from '../../lib/utils/constants';
 
 export default class extends Command {
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage) {
         const role = message.guild.settings.subscriber
@@ -27,7 +27,7 @@ export default class extends Command {
             .setColor(0x00adff)
             .setTitle(message.translate('common:SUCCESS'))
             .setDescription(message.translate('utility/unsubscribe:UNSUBBED'))
-            .setFooter('TypicalBot', Links.ICON)
+            .setFooter('TypicalBot', LINK.ICON)
             .setTimestamp());
     }
 }

@@ -1,7 +1,7 @@
 import TypicalClient from '../TypicalClient';
 import { TypicalGuild, TypicalMessage, TypicalGuildMessage, PermissionLevel, FormatMessageOptions } from '../types/typicalbot';
 import Command from '../structures/Command';
-import { AccessTitles } from './constants';
+import { ACCESS_TITLE } from './constants';
 import { User } from 'discord.js';
 import moment from 'moment';
 
@@ -57,9 +57,9 @@ export const convertTime = (guild: TypicalGuild | TypicalMessage, time: number, 
 
 export const fetchAccess = async (guild: TypicalGuild) => {
     if ((await guild.fetchPermissions(guild.ownerID)).level > 5)
-        return AccessTitles.STAFF;
+        return ACCESS_TITLE.STAFF;
 
-    return AccessTitles.DEFAULT;
+    return ACCESS_TITLE.DEFAULT;
 };
 
 export const lengthen = (text: string, length: number) => {

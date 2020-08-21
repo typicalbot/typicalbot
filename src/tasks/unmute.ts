@@ -1,7 +1,7 @@
 import { ClientUser } from 'discord.js';
 import Task from '../lib/structures/Task';
 import { UnmuteTaskData, TypicalGuild } from '../lib/types/typicalbot';
-import Constants from '../lib/utils/constants';
+import { MODERATION_LOG_TYPE } from '../lib/utils/constants';
 
 export default class extends Task {
     async execute(data: UnmuteTaskData): Promise<void> {
@@ -30,7 +30,7 @@ export default class extends Task {
 
         const newCase = this.client.handlers.moderationLog
             .buildCase(guild)
-            .setAction(Constants.ModerationLogTypes.UNMUTE)
+            .setAction(MODERATION_LOG_TYPE.UNMUTE)
             .setModerator(this.client.user as ClientUser)
             .setUser(member.user)
             .setReason(reason);

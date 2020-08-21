@@ -1,11 +1,11 @@
 import math from 'mathjs';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes } from '../../lib/utils/constants';
+import { MODE } from '../../lib/utils/constants';
 
 export default class extends Command {
     aliases = ['calc', 'math'];
-    mode = Modes.LITE;
+    mode = MODE.LITE;
 
     execute(message: TypicalGuildMessage, parameters: string) {
         if (!parameters)

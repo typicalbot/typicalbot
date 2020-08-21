@@ -1,10 +1,10 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes } from '../../lib/utils/constants';
+import { MODE } from '../../lib/utils/constants';
 
 export default class extends Command {
     aliases = ['ruser'];
-    mode = Modes.LITE;
+    mode = MODE.LITE;
 
     execute(message: TypicalGuildMessage, parameters: string) {
         const args = parameters.split(' ');
@@ -15,7 +15,7 @@ export default class extends Command {
         const roleInfo = args.join(' ').toLowerCase();
         const role = roleInfo
             ? message.guild.roles.cache.get(roleInfo)
-                ?? message.guild.roles.cache.find((role) => role.name.toLowerCase() === roleInfo)
+            ?? message.guild.roles.cache.find((role) => role.name.toLowerCase() === roleInfo)
             : message.mentions.roles.first();
 
         const members = role
