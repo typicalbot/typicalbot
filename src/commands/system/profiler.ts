@@ -3,7 +3,6 @@ import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 import { MessageEmbed } from 'discord.js';
 import v8 from 'v8';
-import heapdump from 'heapdump';
 
 const formatSize = (size: number) => {
     const kb = size / 1024;
@@ -17,23 +16,14 @@ const formatSize = (size: number) => {
     }
 
 
-    return `${gb.toFixed(0)}GB`;
+    return `${gb.toFixed(2)}GB`;
 };
 
 export default class extends Command {
     permission = PERMISSION_LEVEL.BOT_OWNER;
     mode = MODE.STRICT;
 
-    async execute(message: TypicalGuildMessage, parameters?: string) {
-        if (parameters === 'snapshot')
-            return heapdump.writeSnapshot(`${__dirname}/${Date.now()}.heapsnapshot`, (err) => {
-                if (err) {
-                    return message.error('Failed to create heap snapshot.');
-                }
-
-                message.send('Successfully created heap snapshot.');
-            });
-
+    async execute(message: TypicalGuildMessage) {
         const heap = v8.getHeapStatistics();
         const heapContent = [
             `Allocated Memory : ${formatSize(heap.malloced_memory)}`,
