@@ -2,11 +2,13 @@
     "parser": "@typescript-eslint/parser",
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:security/recommended"
     ],
     "plugins": [
         "@typescript-eslint",
-        "import"
+        "import",
+        "security"
     ],
     "parserOptions": {
         "ecmaVersion": 2020,
