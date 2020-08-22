@@ -1,12 +1,12 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 import { permissionError, resolveMember } from '../../lib/utils/util';
 
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?(?:\s+)?(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 
 export default class extends Command {
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
     aliases = ['iam'];
 
     async execute(message: TypicalGuildMessage, parameters: string) {
@@ -39,9 +39,9 @@ export default class extends Command {
             return message.error(message.translate('moderation/give:UNEDITABLE'));
 
         if (member) {
-            if (permissions.level < PermissionsLevels.SERVER_ADMINISTRATOR) {
+            if (permissions.level < PERMISSION_LEVEL.SERVER_ADMINISTRATOR) {
                 // eslint-disable-next-line max-len
-                return message.error(permissionError(this.client, message, this, permissions, PermissionsLevels.SERVER_ADMINISTRATOR));
+                return message.error(permissionError(this.client, message, this, permissions, PERMISSION_LEVEL.SERVER_ADMINISTRATOR));
             }
 
             const added = await member.roles.add(role).catch(() => null);

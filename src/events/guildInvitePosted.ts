@@ -3,7 +3,7 @@ import { Collection } from 'discord.js';
 import { MessageEmbed, TextChannel, User } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuildMessage } from '../lib/types/typicalbot';
-import { ModerationLogTypes } from '../lib/utils/constants';
+import { MODERATION_LOG_TYPE } from '../lib/utils/constants';
 import { formatMessage } from '../lib/utils/util';
 
 export default class GuildInvitePosted extends Event {
@@ -32,7 +32,7 @@ export default class GuildInvitePosted extends Event {
                 if (settings.logs.moderation) {
                     this.client.handlers.moderationLog
                         .buildCase(message.guild)
-                        .setAction(ModerationLogTypes.WARN)
+                        .setAction(MODERATION_LOG_TYPE.WARN)
                         .setModerator(this.client.user as User)
                         .setUser(message.author)
                         .setReason(message.translate('general/invite:REASON', {
@@ -66,7 +66,7 @@ export default class GuildInvitePosted extends Event {
                 if (settings.logs.moderation) {
                     this.client.handlers.moderationLog
                         .buildCase(message.guild)
-                        .setAction(ModerationLogTypes.KICK)
+                        .setAction(MODERATION_LOG_TYPE.KICK)
                         .setModerator(this.client.user as User)
                         .setUser(message.author)
                         .setReason(reason)

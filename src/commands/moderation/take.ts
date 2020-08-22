@@ -1,12 +1,12 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 import { permissionError, resolveMember } from '../../lib/utils/util';
 
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?(?:\s+)?(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 
 export default class extends Command {
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
     aliases = ['iamnot'];
 
     async execute(message: TypicalGuildMessage, parameters: string) {
@@ -41,7 +41,7 @@ export default class extends Command {
         if (member) {
             if (
                 permissions.level <
-                PermissionsLevels.SERVER_ADMINISTRATOR
+                PERMISSION_LEVEL.SERVER_ADMINISTRATOR
             ) {
                 return message.error(permissionError(this.client, message, this, permissions));
             }

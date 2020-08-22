@@ -1,7 +1,7 @@
 import { Guild, GuildMember } from 'discord.js';
 import Cluster from '../TypicalClient';
 import { PermissionLevelOptions } from '../types/typicalbot';
-import Constants from '../utils/constants';
+import { PERMISSION_ROLE_TITLE } from '../utils/constants';
 
 export default class PermissionLevel {
     title: string;
@@ -27,13 +27,13 @@ export default class PermissionLevel {
         let roleName: string;
         switch (permission) {
             case 'blacklist':
-                roleName = Constants.PermissionsRoleTitles.BLACKLIST.toLowerCase();
+                roleName = PERMISSION_ROLE_TITLE.BLACKLIST.toLowerCase();
                 break;
             case 'administrator':
-                roleName = Constants.PermissionsRoleTitles.ADMINISTRATOR.toLowerCase();
+                roleName = PERMISSION_ROLE_TITLE.ADMINISTRATOR.toLowerCase();
                 break;
             default:
-                roleName = Constants.PermissionsRoleTitles.MODERATOR.toLowerCase();
+                roleName = PERMISSION_ROLE_TITLE.MODERATOR.toLowerCase();
         }
 
         const permRole = guild.roles.cache.find((role) => role.name.toLowerCase() === roleName);

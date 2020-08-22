@@ -1,10 +1,10 @@
 import Command from '../../lib/structures/Command';
 import { TypicalMessage } from '../../lib/types/typicalbot';
-import { Modes } from '../../lib/utils/constants';
+import { MODE } from '../../lib/utils/constants';
 
 export default class extends Command {
     dm = true;
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalMessage) {
         const ping = await message.send(message.translate('general/ping:CALCULATING'));

@@ -1,19 +1,19 @@
 import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalMessage } from '../../lib/types/typicalbot';
-import { Modes, Links, PermissionsLevels } from '../../lib/utils/constants';
+import { MODE, LINK, PERMISSION_LEVEL } from '../../lib/utils/constants';
 
 export default class extends Command {
     aliases = ['info', 'support'];
     dm = true;
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalMessage, parameters: string) {
         if (!message.guild || !parameters) {
             const response = message.translate('general/help:NONE', {
                 prefix: process.env.PREFIX,
-                docs: Links.DOCUMENTATION,
-                server: Links.SERVER
+                docs: LINK.DOCUMENTATION,
+                server: LINK.SERVER
             });
 
             if (!message.embeddable) {
@@ -30,12 +30,12 @@ export default class extends Command {
                 .addField('Version', this.client.version, false)
                 .addField('Terms of Service', 'https://typicalbot.com/legal/terms', true)
                 .addField('Privacy Policy', 'https://typicalbot.com/legal/privacy', true)
-                .setFooter('TypicalBot', Links.ICON)
+                .setFooter('TypicalBot', LINK.ICON)
                 .setTimestamp());
         }
 
         const command = this.client.commands.fetch(parameters, message.guild.settings);
-        if (!command || command.permission === PermissionsLevels.BOT_OWNER) {
+        if (!command || command.permission === PERMISSION_LEVEL.BOT_OWNER) {
             const response = message.translate('general/help:INVALID', {
                 name: parameters
             });
@@ -45,7 +45,7 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle(message.translate('general/help:INVALID_INFO'))
                 .setDescription(response)
-                .setFooter('TypicalBot', Links.ICON)
+                .setFooter('TypicalBot', LINK.ICON)
                 .setTimestamp());
         }
 
@@ -102,7 +102,7 @@ export default class extends Command {
                     value: USAGE
                 }
             ])
-            .setFooter('TypicalBot', Links.ICON)
+            .setFooter('TypicalBot', LINK.ICON)
             .setTimestamp());
     }
 }

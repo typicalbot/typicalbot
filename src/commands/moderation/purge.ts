@@ -1,15 +1,15 @@
 import { TextChannel } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels, ModerationLogTypes } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL, MODERATION_LOG_TYPE } from '../../lib/utils/constants';
 
 // eslint-disable-next-line max-len
 const regex = /(?:(?:<@!?(\d{17,20})>|(\d{17,20})|<@&(\d{17,20})>|<#(\d{17,20})>|(you|me|bots))\s+)?(\d+)(?:\s+((?:.|[\r\n])+))?/i;
 
 export default class extends Command {
     aliases = ['prune'];
-    permission = PermissionsLevels.SERVER_MODERATOR;
-    mode = Modes.STRICT;
+    permission = PERMISSION_LEVEL.SERVER_MODERATOR;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);
@@ -80,7 +80,7 @@ export default class extends Command {
         ) {
             const newCase = await message.guild.buildModerationLog();
             newCase
-                .setAction(ModerationLogTypes.PURGE)
+                .setAction(MODERATION_LOG_TYPE.PURGE)
                 .setModerator(message.author)
                 .setChannel(channelToUse);
             if (reason) newCase.setReason(reason);

@@ -3,12 +3,12 @@ import { MessageAttachment, MessageEmbed } from 'discord.js';
 import fetch from 'node-fetch';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes } from '../../lib/utils/constants';
+import { MODE } from '../../lib/utils/constants';
 
 const regex = /#?([0-9a-fA-F]{6}|random)/i;
 
 export default class extends Command {
-    mode = Modes.LITE;
+    mode = MODE.LITE;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);

@@ -1,13 +1,13 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes } from '../../lib/utils/constants';
+import { MODE } from '../../lib/utils/constants';
 import { permissionError } from '../../lib/utils/util';
 
 const regex = /(?:<@!?(\d{17,20})>\s+)?(?:(.{1,32}))?/i;
 
 export default class extends Command {
     aliases = ['nick'];
-    mode = Modes.LITE;
+    mode = MODE.LITE;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters) ?? [];

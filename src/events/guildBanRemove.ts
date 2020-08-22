@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/node';
 import { MessageEmbed, User, TextChannel } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuild } from '../lib/types/typicalbot';
-import { ModerationLogTypes } from '../lib/utils/constants';
+import { MODERATION_LOG_TYPE } from '../lib/utils/constants';
 import { formatMessage } from '../lib/utils/util';
 
 export default class GuildBanRemove extends Event {
@@ -18,7 +18,7 @@ export default class GuildBanRemove extends Event {
             const cachedLog = this.client.caches.unbans.get(user.id);
 
             const newCase = await guild.buildModerationLog();
-            newCase.setAction(ModerationLogTypes.UNBAN).setUser(user);
+            newCase.setAction(MODERATION_LOG_TYPE.UNBAN).setUser(user);
             if (cachedLog) {
                 newCase.setModerator(cachedLog.moderator);
                 if (cachedLog.reason) newCase.setReason(cachedLog.reason);

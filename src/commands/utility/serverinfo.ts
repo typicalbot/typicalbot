@@ -2,11 +2,11 @@ import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, Links } from '../../lib/utils/constants';
+import { MODE, LINK } from '../../lib/utils/constants';
 
 export default class extends Command {
     aliases = ['sinfo'];
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage) {
         const guildOwner = await this.client.users
@@ -39,10 +39,10 @@ export default class extends Command {
                 }),
                 message.translate('utility/serverinfo:ICON', {
                     url:
-                            message.guild.iconURL({
-                                format: 'png',
-                                size: 2048
-                            }) ?? message.translate('common:NONE')
+                        message.guild.iconURL({
+                            format: 'png',
+                            size: 2048
+                        }) ?? message.translate('common:NONE')
                 }),
                 message.translate('utility/serverinfo:CHANNELS', {
                     amount: message.guild.channels.cache.size
@@ -125,11 +125,11 @@ export default class extends Command {
                     value: message.translate('utility/serverinfo:BOOSTERS', {
                         level: message.guild.premiumTier,
                         amount:
-                                    message.guild.premiumSubscriptionCount ?? 0
+                            message.guild.premiumSubscriptionCount ?? 0
                     })
                 }
             ])
             .setThumbnail(message.guild.iconURL({ format: 'png', size: 2048 }) ?? '')
-            .setFooter('TypicalBot', Links.ICON));
+            .setFooter('TypicalBot', LINK.ICON));
     }
 }

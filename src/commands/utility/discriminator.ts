@@ -1,13 +1,13 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes } from '../../lib/utils/constants';
+import { MODE } from '../../lib/utils/constants';
 import { pagify } from '../../lib/utils/util';
 
 const regex = /#?(\d{4})(?:\s+(\d+))?/i;
 
 export default class extends Command {
     aliases = ['discrim'];
-    mode = Modes.LITE;
+    mode = MODE.LITE;
 
     execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters) ?? [];

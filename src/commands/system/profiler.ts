@@ -1,6 +1,6 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { Modes, PermissionsLevels } from '../../lib/utils/constants';
+import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 import { MessageEmbed } from 'discord.js';
 import v8 from 'v8';
 import heapdump from 'heapdump';
@@ -21,8 +21,8 @@ const formatSize = (size: number) => {
 };
 
 export default class extends Command {
-    permission = PermissionsLevels.BOT_OWNER;
-    mode = Modes.STRICT;
+    permission = PERMISSION_LEVEL.BOT_OWNER;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters?: string) {
         if (parameters === 'snapshot')

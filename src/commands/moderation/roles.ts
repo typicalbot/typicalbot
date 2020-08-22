@@ -1,7 +1,7 @@
 import { Role } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
-import { Modes } from '../../lib/utils/constants';
+import { MODE } from '../../lib/utils/constants';
 import { pagify, permissionError, resolveMember } from '../../lib/utils/util';
 
 const regex = /(help|list|give|take|public|info|information)(?:\s+(.+))?/i;
@@ -11,7 +11,7 @@ const publicRegex = /(list|add|remove|clear)(?:\s+(?:(?:<@&)?(\d{17,20})>?|(.+))
 
 export default class extends Command {
     aliases = ['role'];
-    mode = Modes.STRICT;
+    mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const args = regex.exec(parameters);

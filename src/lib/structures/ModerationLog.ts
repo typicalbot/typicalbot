@@ -1,7 +1,7 @@
 import { MessageEmbed, User, TextChannel } from 'discord.js';
 import Cluster from '../TypicalClient';
 import { ModlogAction, TypicalGuild } from '../types/typicalbot';
-import { ModerationLogTypes, ModerationLogRegex, Links } from '../utils/constants';
+import { MODERATION_LOG_TYPE, MODERATION_LOG_REGEX, LINK, WEBSITE } from '../utils/constants';
 import { convertTime } from '../utils/util';
 
 export default class ModerationLog {
@@ -10,7 +10,7 @@ export default class ModerationLog {
     id = '';
     _id = '';
     action = '';
-    _action: ModlogAction = ModerationLogTypes.WARN;
+    _action: ModlogAction = MODERATION_LOG_TYPE.WARN;
     moderator = {
         display: '',
         icon: ''
@@ -87,10 +87,10 @@ export default class ModerationLog {
     get embed() {
         const embed = new MessageEmbed()
             .setColor(this._action.hex)
-            .setURL(Links.BASE)
+            .setURL(WEBSITE)
             .setDescription(`${this.action}\n${this.channel || this.user}\n${this.reason ||
                 `**Reason:** Awaiting moderator's input. Use \`$reason ${this.id} <reason>\`.`}`)
-            .setFooter(this.id, Links.ICON)
+            .setFooter(this.id, LINK.ICON)
             .setTimestamp();
 
         if (this.moderator)
@@ -110,9 +110,9 @@ export default class ModerationLog {
             let id = 1;
 
             // eslint-disable-next-line max-len
-            if (latest?.embeds[0]?.footer?.text?.match(ModerationLogRegex.CASE)) {
+            if (latest?.embeds[0]?.footer?.text?.match(MODERATION_LOG_REGEX.CASE)) {
                 // @ts-ignore
-                id = Number(latest.embeds[0].footer.text.match(ModerationLogRegex.CASE)[1]) + 1;
+                id = Number(latest.embeds[0].footer.text.match(MODERATION_LOG_REGEX.CASE)[1]) + 1;
             }
 
             this.setId(id || 1);
