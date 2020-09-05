@@ -15,7 +15,7 @@ export default class extends Command {
             }));
 
         try {
-            const result = math.evaluate(parameters);
+            const result = evaluate(parameters);
 
             return message.send([
                 message.translate('utility/calculator:INPUT'),
