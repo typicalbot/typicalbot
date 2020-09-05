@@ -1,4 +1,4 @@
-import * as math from 'mathjs';
+import { evaluate } from 'mathjs';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { Modes } from '../../lib/utils/constants';
