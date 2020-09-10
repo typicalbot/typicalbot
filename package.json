@@ -41,7 +41,7 @@
     "klaw": "^3.0.0",
     "mathjs": "^7.2.0",
     "moment": "^2.27.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "pm2": "^4.4.1",
     "rethinkdb-ts": "^2.4.5",
     "veza": "^1.1.0",
