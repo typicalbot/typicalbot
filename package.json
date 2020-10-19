@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/typicalbot/typicalbot#readme",
   "dependencies": {
-    "@sentry/node": "^5.25.0",
+    "@sentry/node": "^5.26.0",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "fs": "0.0.2",
@@ -60,7 +60,7 @@
     "@types/i18next-node-fs-backend": "^2.1.0",
     "@types/klaw": "^3.0.1",
     "@types/mathjs": "^6.0.5",
-    "@types/node": "^14.11.8",
+    "@types/node": "^14.11.10",
     "@types/node-fetch": "^2.5.7",
     "@types/ws": "^7.2.7",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
@@ -68,7 +68,7 @@
     "eslint": "^7.11.0",
     "eslint-plugin-import": "^2.22.1",
     "husky": "^4.3.0",
-    "lint-staged": "^10.4.0",
+    "lint-staged": "^10.4.2",
     "release": "^6.3.0",
     "typescript": "^4.0.3"
   },
