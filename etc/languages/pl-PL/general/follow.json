@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Śledź wiadomości, aktualizacje, problemy bezpieczeństwa, i więcej! Otrzymaj najnowsze wiadomości bezpośrednio na swoim serwerze.",
+	"USAGE": "śledź [status lub aktualizacje] [#kanał]",
+	"FOLLOWED": "Wszystkie najnowsze informacje zostaną wysłane na ten serwer.",
+	"FOLLOWED_STATUS": "Wszystkie najnowsze aktualizacje statusu będą wysyłane tutaj.",
+	"MAX_WEBHOOK_LIMIT": "Ten kanał osiągnął maksymalną liczbę webhooków. Usuń jeden z istniejących webhooków w kanale, lub spróbuj na innym kanale."
+}

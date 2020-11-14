@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Toma un rol de la lista de roles públicos.",
+    "USAGE": "tomar <role-name>",
+    "UNEDITABLE": "Permisos insuficientes para el bot. Asegúrese de que el rol más alto que tengo está por encima del papel que está intentando dar y que tengo el permiso de Gestionar Roles."
+}

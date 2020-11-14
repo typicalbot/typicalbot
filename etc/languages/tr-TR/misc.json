@@ -7,7 +7,6 @@
     "MISSING_ACCESS": "Sunucu sahibinin erişim seviyesi o komudu kullanmak için çok düşük. Komut {{command}} seviyesinde bir erişim seviyesi gerektirir, ancak sahibin erişim seviyesi {{level}} ({{title}}). Sahip TypicalBot'a 5$ veya daha fazla bağış yaparak erişim seviyesini yükseltebilir.",
     "USAGE_ERROR": "Geçersiz komut kullanımı. Daha fazla bilgi için `{{prefix}}help {{name}}` yazarak kontrol et.",
     "PAGIFY": "Sayfa {{page}} / {{pages}} | {{total}} Toplam\n\n{{content}}",
-    "CHOOSE_OPTION": "$t(misc:CHOOSE_OPTION_1)\n\n$t(misc:CHOOSE_OPTION_2)",
     "CHOOSE_OPTION_1": "Lütfen numara girerek bir seçeneği seçin.",
     "CHOOSE_OPTION_2": "{{options}}",
     "CANCEL_OPTIONS": [

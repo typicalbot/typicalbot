@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Sprawdź, czy TypicalBot może odpowiedzieć.",
+	"USAGE": "ping",
+	"CALCULATING": "Obliczanie czasu wykonania komendy i latencję Discord API...",
+	"RESPONSE": "Czas Wykonania Komendy: {{command}}ms | Latencja Discord API : {{api}}ms"
+}

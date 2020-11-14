@@ -1,0 +1,12 @@
+{
+    "DESCRIPTION": "Otrzymaj listę komend TypicalBot.",
+    "USAGE": "komendy",
+    "CHECK_DM": "Lista komend powinna była trafić do twoich Prywatnych Wiadomości.",
+    "TYPICAL_COMMANDS": "Komendy TypicalBot",
+    "TEXT": "Skorzystaj z `{{prefix}}pomoc <command>` aby uzyskać więcej informacji o danej komendzie.",
+    "OWNER": "Właściciel Serwera (Poziom 4)",
+    "ADMIN": "Administrator Serwera (Poziom 3)",
+    "MOD": "Moderator Serwera (Poziom 2)",
+    "MEMBER": "Członek Serwera (Poziom 0)",
+    "NONE": "Brak komend do wyświetlenia."
+}

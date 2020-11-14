@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Proporciona una lista de todos los usuarios con un discriminador determinado.",
+    "USAGE": "discriminador [discriminator]",
+    "NONE": "No hay usuarios con el discriminador **{{discriminator}}** en el registro.",
+    "USERS": "**__Usuarios con Discriminador:__** {{discriminator}}"
+}

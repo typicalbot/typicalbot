@@ -7,7 +7,6 @@
     "MISSING_ACCESS": "Stopnja dostopa lastnika strežnika je prenizka za izvajanje tega ukaza. Ukaz potrebuje stopnjo dostopa {{command}}, vendar ima lastnik samo stopnjo {{level}} ({{title}}). Lastnik lahko zviša svojo stopnjo dostopa tako, da donira $5 ali več TypicalBot-u.",
     "USAGE_ERROR": "Neveljavna uporaba ukazov. Preverite `{{prefix}}pomoč {{name}}` za več informacij.",
     "PAGIFY": "Stran {{page}} / {{pages}} | {{total}} Skupaj\n\n{{content}}",
-    "CHOOSE_OPTION": "$t(misc:CHOOSE_OPTION_1)\n\n$t(misc:CHOOSE_OPTION_2)",
     "CHOOSE_OPTION_1": "Izberite opcijo tako, da vtipkate številko.",
     "CHOOSE_OPTION_2": "{{options}}",
     "CANCEL_OPTIONS": [

@@ -5,7 +5,6 @@
     "TYPICAL_INFO": "TypicalBot Bilgi",
     "INVALID": "`{{name}}` adında bir komut yok. Başka bir şey aramayı deneyin.",
     "INVALID_INFO": "Geçersiz Komut Girdisi",
-    "TEXT": "$t(general/help:TEXT_1)\n$t(general/help:TEXT_2)\n$t(general/help:TEXT_3)\n\n```\n$t(general/help:TEXT_4)\n$t(general/help:TEXT_5)\n$t(general/help:TEXT_6)\n$t(general/help:TEXT_7)\n$t(general/help:TEXT_8)\n```",
     "TEXT_1": "**__Şunun İçin Kullanım:__** {{name}}",
     "TEXT_2": "**[Param]** bir parametrenin isteğe bağlı olduğu anlamına gelir.",
     "TEXT_3": "**<Param>** bir parametrenin gerekli olduğu anlamına gelir.",

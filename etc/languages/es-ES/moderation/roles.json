@@ -1,0 +1,15 @@
+{
+    "DESCRIPTION": "Administrar o ver roles en un servidor.",
+    "USAGE": "Revisa la ayuda de `$roles para el uso de este comando.",
+    "HELP_LIST": "lista de roles",
+    "HELP_FIRST": "roles <give|take> <@usuario> <role-name>",
+    "HELP_SECOND": "roles públicos <list|clear|add|remove> <role-name>",
+    "LIST": "**__ Rol de{{name}}:__**",
+    "MEMBERS": "**__ Miembros de{{name}}:__**",
+    "PUBLIC": "**__{{name}} roles públicos:__**",
+    "GIVE": "No puedes darte a ti mismo o a otro usuario tu rol más alto o cualquier rol más alto.",
+    "TAKE": "No puedes tomar un rol de ti mismo o de otro usuario cuando tu rol más alto es menor que el que debes tomar.",
+    "NONE_PUBLIC": "No hay roles públicos configurados para este servidor.",
+    "ALREADY_PUBLIC": "El rol solicitado ya está en la lista de roles públicos.",
+    "NOT_PUBLIC": "El rol solicitado no está en la lista de roles públicos."
+}

@@ -7,7 +7,6 @@
     "MISSING_ACCESS": "El nivel de acceso del propietario del servidor es demasiado bajo para ejecutar ese comando. El comando requiere un nivel de acceso de {{command}}, pero el propietario solo tiene un nivel de {{level}} ({{title}}). El propietario puede aumentar su nivel de acceso donando $5 o más a TypicalBot.",
     "USAGE_ERROR": "Uso de comando no válido Consulte `{{prefijo}} ayuda {{nombre}}` para obtener más información.",
     "PAGIFY": "Página {{page}} / {{pages}} | {{total}} Total\n\n{{content}}",
-    "CHOOSE_OPTION": "$t(misc:CHOOSE_OPTION_1)\n\n$t(misc:CHOOSE_OPTION_2)",
     "CHOOSE_OPTION_1": "Por favor, elija una opción escribiendo el número.",
     "CHOOSE_OPTION_2": "{{options}}",
     "CANCEL_OPTIONS": [

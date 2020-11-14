@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Desbanea a un usuario del servidor.",
+    "USAGE": "desbanear <user-id> [reason]",
+    "REASON": "Desbaneado por {{mod}} | Razón: {{reason}}",
+    "UNBANNED": "Usuario {{user}} desbaneado con éxito.",
+    "USER_UNBAN": "**{{user}}** ha sido desbaneado del servidor.",
+    "USER_UNBANNED": "Usuario desbaneado"
+}

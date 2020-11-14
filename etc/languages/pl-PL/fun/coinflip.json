@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Rzuć monetą.",
+    "USAGE": "moneta",
+    "RESPONSE_1": "Orzeł",
+    "RESPONSE_2": "Reszka"
+}

@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Lanza una moneda al aire.",
+    "USAGE": "coinflip",
+    "RESPONSE_1": "Cara",
+    "RESPONSE_2": "Seca"
+}

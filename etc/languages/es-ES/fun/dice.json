@@ -1,6 +1,6 @@
 {
 	"DESCRIPTION": "Tiró un dado de n-lados.",
-	"USAGE": "dice [lados]",
+	"USAGE": "dado [sides]",
 	"RESPONSE": "Tire un **__{{amount}}__**.",
 	"INVALID": "Número de lados inválido. El número debe ser un entero mayor a 1 y no superior a 100."
 }

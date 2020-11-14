@@ -1,0 +1,9 @@
+{
+	"DESCRIPTION": "Hace que el bot deje de ignorar comandos, invitaciones y estrellas en un canal.",
+	"USAGE": "designorar [comandos|invitaciones|estrellas]",
+	"COMMANDS": "Este canal no está ignorando comandos.",
+	"INVITES": "Este canal no está ignorando las invitaciones.",
+	"DISABLED": "El tablero de estrellas no está habilitado.",
+	"STARBOARD": "Este canal no ignora las estrellas.",
+	"SUCCESS": "Ahora escuchando a {{type}}."
+}

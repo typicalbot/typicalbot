@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Cambie o establezca una razón para un caso en los registros de moderación.",
+    "USAGE": "razón <case-id|latest> [reason]",
+    "DISABLED": "Debes tener habilitados los registros de moderación para usar este comando. Para configurar los registros de moderación, usa este comando: `$set edite modlogs #channel-name`.",
+    "NONE": "No hay registros de moderación en el caso dado ID.",
+    "ERROR": "Se ha producido un error mientras se actualizaba el estado.",
+    "EDITED": "La página fue actualizada."
+}

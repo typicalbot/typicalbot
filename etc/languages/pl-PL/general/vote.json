@@ -1,6 +1,6 @@
 {
-    "DESCRIPTION": "Głosować na TypicalBot na top.gg",
-    "USAGE": "vote",
-    "TEXT": "Możesz głosować na TypicalBot na <{{link}}>",
-    "TITLE": "Głosować na TypicalBot"
+    "DESCRIPTION": "Głosuj na TypicalBot na top.gg",
+    "USAGE": "głosuj",
+    "TEXT": "Możesz zagłosować na TypicalBot pod <{{link}}>",
+    "TITLE": "Głosuj na TypicalBot"
 }

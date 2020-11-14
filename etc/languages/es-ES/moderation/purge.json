@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Purgar mensajes en un canal.",
+    "USAGE": "purge [@usuario|#canal|@role|yo|tú|bots] <message-count>",
+    "TOO_LITTLE": "Por favor, proporcione un número de mensajes a eliminar de 2 a 100.",
+    "MISSING_PERMS": "Se ha producido un error. Esto probablemente significa que no tengo permisos para administrar mensajes.",
+    "NONE": "No se eliminaron mensajes. Esto probablemente significa que no tengo permiso para leer el historial de mensajes o que los mensajes tienen más de dos semanas de antigüedad.",
+    "PURGED": "Se han eliminado correctamente **{{amount}}** mensajes.",
+    "PURGED_MULTIPLE": "Se han eliminado correctamente **{{amount}}** mensajes."
+}

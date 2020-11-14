@@ -5,7 +5,6 @@
     "TYPICAL_INFO": "Información de TypicalBot",
     "INVALID": "No hay un comando llamado `{{name}}`. Intenta buscar otra cosa.",
     "INVALID_INFO": "El comando ingresado es inválido",
-    "TEXT": "$t(general/help:TEXT_1)\n$t(general/help:TEXT_2)\n$t(general/help:TEXT_3)\n\n```\n$t(general/help:TEXT_4)\n$t(general/help:TEXT_5)\n$t(general/help:TEXT_6)\n$t(general/help:TEXT_7)\n$t(general/help:TEXT_8)\n```",
     "TEXT_1": "**__Uso Para:__** {{name}}",
     "TEXT_2": "**[Parametro]** significa que un parametro es opcional.",
     "TEXT_3": "**<Parametro>** significa que un parametro es requerido.",

@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Link do dokumentacji TypicalBot.",
+	"USAGE": "dokumentacja",
+	"TEXT": "Dokumentacja wszystkich komend i ustawień jest dostępna pod linkiem **<{{link}}>**.",
+	"TYPICAL_DOCS": "Dokumentacja TypicalBot"
+}

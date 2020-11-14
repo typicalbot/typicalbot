@@ -1,7 +1,0 @@
-{
-	"DESCRIPTION": "Generuj i przeglądać klucze API.",
-	"USAGE": "api <view|generate>",
-	"NONE": "Nie istnieją klucze API. Użyj `$api generate` aby je wygenerować.",
-	"SUCCESS": "Klucz API został wygenerowany.",
-	"KEY": "{{guild}}'s klucz API: `{{key}}`"
-}

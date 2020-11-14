@@ -1,0 +1,16 @@
+{
+    "DESCRIPTION": "Silencia a un miembro del servidor.",
+    "USAGE": "silencia <@user> [time:xd(ays) xh(ours) xm(inutes) xs(seconds)] [reason]",
+    "NO_ROLE": "No se ha establecido ningún rol de silencio. Prueba `$set editar muterole <role-name>`",
+    "INVALID_CHANNEL": "El canal indicado no existe.",
+    "MISSING_PERMS": "No puedo administrar permisos para este canal.",
+    "DENYING": "Denegando permisos a usuarios silenciados para hablar.",
+    "DENY_ERROR": "No se pudo denegar el permiso para que hablaran los usuarios silenciados.",
+    "TOO_LONG": "No puede silenciar a un usuario durante más de una semana.",
+    "ALREADY_MUTED": "El usuario solicitado ya está silenciado.",
+    "TOO_LOW": "No se puede silenciar a un usuario con el mismo o mayor rol.",
+    "UNEDITABLE": "Para completar la solicitud, necesito el permiso **MANAGE ROLES**. Además, mi rol más alto tiene que ser mayor que el rol más alto del usuario solicitado y el rol de silencio.",
+    "MUTED": "Has sido silenciado en **{{name}}**.",
+    "SUCCESS": "Usuario {{user}} silenciado correctamente.",
+    "ERROR": "Ocurrió un error mientras se trataba de silenciar al usuario solicitado."
+}

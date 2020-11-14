@@ -1,8 +1,8 @@
 {
-	"DESCRIPTION": "Hazle una pregunta a la mágica 8ball.",
+	"DESCRIPTION": "Hazle una pregunta a la bola 8 mágica.",
 	"USAGE": "8ball <pregunta>",
 	"INVALID": "¿Estás tratando de preguntarme nada?",
-	"RESPONSE_1": "Es certero.",
+	"RESPONSE_1": "Eso es cierto.",
 	"RESPONSE_2": "No cabe duda de que sí.",
 	"RESPONSE_3": "Sin lugar a dudas.",
 	"RESPONSE_4": "Sí, definitivamente.",

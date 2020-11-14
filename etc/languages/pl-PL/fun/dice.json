@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Rzuć n-stronną kostką.",
+	"USAGE": "kostka [strony]",
+	"RESPONSE": "Rzuciłem **__{{amount}}__**.",
+	"INVALID": "Niewłaściwa liczba stron. Liczba musi być liczbą całkowita między 1 a 100."
+}

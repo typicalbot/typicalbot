@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Hace que el bot envíe un mensaje con el contenido utilizado.",
+	"USAGE": "decir [#canal] <content>",
+	"MISSING_SEND": "Me falta el permiso SEND_MESSAGES en el canal solicitado.",
+	"INVALID": "Argumentos no válidos.",
+	"SENT": "Mensaje copiado",
+	"TEXT": "**{{user}}** envió un mensaje en {{channel}} usando TypicalBot."
+}

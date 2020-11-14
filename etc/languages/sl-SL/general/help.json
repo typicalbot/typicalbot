@@ -5,7 +5,6 @@
     "TYPICAL_INFO": "TypicalBot Informacije",
     "INVALID": "Ukaz imenovan `{{name}}` ne obstaja. Prosimo poizkusite poiskati kaj drugega.",
     "INVALID_INFO": "Neveljaven Vnos Ukaza",
-    "TEXT": "$t(general/help:TEXT_1)\n$t(general/help:TEXT_2)\n$t(general/help:TEXT_3)\n\n```\n$t(general/help:TEXT_4)\n$t(general/help:TEXT_5)\n$t(general/help:TEXT_6)\n$t(general/help:TEXT_7)\n$t(general/help:TEXT_8)\n```",
     "TEXT_1": "**__Uporaba za:__** {{name}}",
     "TEXT_2": "**[Param]** pomeni, da ta parameter ni obvezen.",
     "TEXT_3": "**<Param>** pomeni, da je ta parameter obvezen.",

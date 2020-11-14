@@ -7,7 +7,6 @@
     "MISSING_ACCESS": "Das Zugriffslevel des Serverbesitzers ist zu tief um diesen Befehl auszuführen. Der Befehl benötigt ein Zugriffslevel von {{command}} aber der Besitzer hat zurzeit nur ein Level von {{level}} ({{title}}). Der Besitzer kann das Zugriffslevel erhöhen, indem er TypicalBot $5 oder mehr spendet.",
     "USAGE_ERROR": "Ungültige Befehlsverwendung. Überprüfe `{{prefix}}help {{name}}` für mehr Informationen.",
     "PAGIFY": "Seite {{page}} / {{pages}} | {{total}} Total\n\n{{content}}",
-    "CHOOSE_OPTION": "$t(misc:CHOOSE_OPTION_1)\n\n$t(misc:CHOOSE_OPTION_2)",
     "CHOOSE_OPTION_1": "Bitte wählen Sie eine Option, indem Sie die Nummer eingeben.",
     "CHOOSE_OPTION_2": "{{options}}",
     "CANCEL_OPTIONS": [

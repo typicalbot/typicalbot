@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Expulsar a un miembro de un canal de voz.",
+    "USAGE": "expulsar a <@user> [reason]",
+    "NO_VOICE": "El usuario solicitado no está en un canal de voz.",
+    "SUCCESS": "Usuario expulsado con éxito **{{user}}**."
+}

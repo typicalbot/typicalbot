@@ -1,0 +1,12 @@
+{
+	"DESCRIPTION": "Otrzymaj link autoryzacji OAuth2 dla TypicalBot.",
+	"USAGE": "zaproszenie",
+	"TEXT": "Możesz dodać mnie do twojego serwera pod <{{link}}>.",
+	"TYPICAL_INVITE": "Zaproszenie TypicalBot",
+	"PROHIBITED": "Ten serwer zabrania wysyłania zaproszeń. Twoja wiadomość została usunięta.",
+	"REASON": "Automatyczne {{action}}: użytkownik wysłał {{type}} w {{channel}}",
+	"INVITE": "zaproszenie",
+	"CONSECUTIVE": "{{amount}} zaproszeń z rzędu",
+	"SENT": "**{{user}}** wysłał zaproszenie w {{channel}}.",
+	"SENT_IN": "Wysłano zaproszenie w {{channel}}"
+}

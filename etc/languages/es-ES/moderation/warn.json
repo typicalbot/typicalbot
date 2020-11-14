@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Advertir a un miembro en el servidor.",
+    "USAGE": "advertir a <@user> [reason]",
+    "TOO_LOW": "No puedes advertir a un usuario con el mismo o mayor rol.",
+    "WARNED": "Has sido advertido en **{{name}}**.",
+    "SUCCESS": "Usuario avisado con éxito: `{{user}}`."
+}

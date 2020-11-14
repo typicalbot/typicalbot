@@ -1,0 +1,6 @@
+{
+	"DESCRIPTION": "Banea temporalmente un miembro de este servidor.",
+	"USAGE": "softban <@user> [purge-days] [reason]",
+	"REASON": "Baneado temporalmente por {{mod}} | Razón {{reason}}",
+	"BANNED": "Correctamente baneado temporalmente **{{user}}**"
+}

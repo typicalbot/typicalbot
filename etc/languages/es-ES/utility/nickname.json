@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Cambia o quita tu apodo o el apodo de otro usuario.",
+    "USAGE": "nickname [@user] [nickname]",
+    "DISABLED": "Este comando está actualmente deshabilitado. Deshabilita la opción `nonickname` para activar este comando.",
+    "ERROR": "Se ha producido un error. Esto probablemente significa que no puedo administrar el apodo de miembro.",
+    "SELF_ERROR": "Se ha producido un error. Esto probablemente significa que no puedo administrar tu apodo.",
+    "SUCCESS": "Nombre del miembro {{type}} exitosamente.",
+    "SELF_SUCCESS": "{{type}} tu apodo con éxito."
+}

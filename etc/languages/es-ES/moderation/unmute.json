@@ -1,0 +1,10 @@
+{
+	"DESCRIPTION": "Dessilenciar un miembro en el servidor.",
+	"USAGE": "quitar silencio a <@usuario> [reason]",
+	"NOT_MUTED": "El usuario solicitado no está silenciado.",
+	"TOO_LOW": "No se puede quitar el silencio de un usuario con el mismo o mayor rol.",
+	"UNMUTED": "Ya no estas silenciado en **{{name}}**.",
+	"ERROR": "Ocurrió un error mientras se trataba de quitar el silencio al usuario solicitado.",
+	"SUCCESS": "Usuario desmuteado con éxito **{{user}}**.",
+	"TASK_REASON": "Desmutear automáticamente: Ha pasado el tiempo de silencio del usuario."
+}

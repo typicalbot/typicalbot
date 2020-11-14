@@ -1,0 +1,8 @@
+{
+	"DESCRIPTION": "Hace que el bot ignore comandos, invitaciones y estrellas en un canal.",
+	"USAGE": "ignorar [vista|comandos|invitaciones|estrellas]",
+	"IGNORING": "Los siguientes canales están ignorando **{{type}}**:",
+	"ALREADY_IGNORING": "Este canal ya está ignorando a {{type}}.",
+	"STARBOARD": "El starboard no está habilitado.",
+	"ADDED": "Ahora ignorando {{type}}."
+}
