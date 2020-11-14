@@ -40,6 +40,12 @@ export const possibleLanguages = [
         aliases: ['fr', 'french']
     },
     {
+        name: 'pl-PL',
+        canonical: 'Polish',
+        complete: false,
+        aliases: ['pl', 'polish']
+    },
+    {
         name: 'ru-RU',
         canonical: 'Russian',
         complete: false,
