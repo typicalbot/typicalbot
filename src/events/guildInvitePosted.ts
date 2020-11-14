@@ -7,7 +7,7 @@ import { MODERATION_LOG_TYPE } from '../lib/utils/constants';
 import { formatMessage } from '../lib/utils/util';
 
 export default class GuildInvitePosted extends Event {
-    execute(message: TypicalGuildMessage) {
+    async execute(message: TypicalGuildMessage) {
         if (message.deletable) message.delete().catch(() => undefined);
         message.error(message.translate('general/invite:PROHIBITED')).then((msg) => msg.delete({ timeout: 10000 }));
 
@@ -87,7 +87,7 @@ export default class GuildInvitePosted extends Event {
                     channel: `<#${message.channel.id}>`
                 })
                 // eslint-disable-next-line max-len
-                : formatMessage('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
+                : await formatMessage('logs-invite', message.guild, message.author, settings.logs.invite, { channel: message.channel }));
         }
 
         return channel
