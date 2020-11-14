@@ -1,4 +1,4 @@
-import math from 'mathjs';
+import { evaluate } from 'mathjs';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { MODE } from '../../lib/utils/constants';
@@ -15,7 +15,7 @@ export default class extends Command {
             }));
 
         try {
-            const result = math.evaluate(parameters);
+            const result = evaluate(parameters);
 
             return message.send([
                 message.translate('utility/calculator:INPUT'),
