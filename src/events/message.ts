@@ -148,7 +148,7 @@ export default class extends Event {
 
     inviteCheck(message: TypicalGuildMessage) {
         if (!message.guild.settings.automod.invite) return;
-        const inviteRegex = /(discord\.(gg|io|me|li)\/.+|(discord|discordapp)\.com\/invite\/.+)/i;
+        const inviteRegex = /(discord\.(gg|io|me|li|plus|link)\/.+|discord(?:app)?\.com\/invite\/.+)/i;
         if (
             inviteRegex.test(message.content) ||
             inviteRegex.test(inspect(message.embeds, { depth: 4 }))
