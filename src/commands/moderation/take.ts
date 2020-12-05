@@ -31,7 +31,7 @@ export default class extends Command {
         const role = roleID
             ? message.guild.roles.cache.get(roleID)
             : roleName
-                ? message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName)
+                ? message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase())
                 : null;
         if (!role)
             return message.error(message.translate('moderation/give:INVALID'));
