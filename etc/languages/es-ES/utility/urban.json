@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Toma la definición de Urban Dictionary para la palabra especificada.",
+    "USAGE": "urbano <query>",
+    "NONE": "No hay coincidencias para la consulta **{{query}}**.",
+    "TEXT": "**__{{query}}:__** {{definition}}",
+    "AMOUNT": "Definición 1 de {{amount}}",
+    "RATING": "Clasificación",
+    "RATING_VALUE": "\\👍 {{up}} | \\👎 {{down}}{{rating}}",
+    "RATING_PERCENT": "​{{amount}}% de {{total}} como esta definición.",
+    "DICTIONARY": "Definición de diccionario urbano"
+}

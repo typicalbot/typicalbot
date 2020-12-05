@@ -1,0 +1,11 @@
+{
+    "DESCRIPTION": "Muestra la información de un usuario.",
+    "USAGE": "userinfo [@user|user-id|user-tag]",
+    "ID": "ID: {{id}}",
+    "STATUS": "Estado: {{status}}",
+    "AVATAR": "Avatar: {{avatar}}",
+    "JOINED": "Unido: {{time}}",
+    "REGISTERED": "Registrado: {{time}}",
+    "ROLES": "Roles: {{roles}}",
+    "ROLE_FIELD": "Roles ({{amount}})"
+}

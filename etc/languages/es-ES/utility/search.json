@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Busca en la lista de usuarios un nombre de usuario o apodo.",
+  "USAGE": "buscar <query> [page-number]",
+  "NONE": "No hay coincidencias para la consulta  **{{query}}**.",
+  "RESULTS": "**__Resultados de la consulta:__** {{query}}"
+}

@@ -1,5 +1,5 @@
 {
-    "DESCRIPTION": "Envía una ayuda incrustada con respecto a los registros.",
+    "DESCRIPTION": "Envía una ayuda para insertar con respecto a los registros.",
     "USAGE": "registros",
     "POSSIBLE": "Posibles registros",
     "VIEW_ALL": "$t(help/logs:VIEW_ALL_1)\n\n$t(help/logs:VIEW_ALL_2)",

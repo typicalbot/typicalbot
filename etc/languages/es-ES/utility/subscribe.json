@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Obtenga el rol de suscriptor del servidor.",
+  "USAGE": "suscribir",
+  "NONE": "No se configura ningún rol de suscriptor para este servidor.",
+  "SUBSCRIBED": "Ahora estás suscrito."
+}

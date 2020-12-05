@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Selecciona un miembro aleatorio en el servidor.",
+    "USAGE": "randomuser [-o]",
+    "RANDOM": "Tu elección aleatoria es: **{{tag}}** ({{id}}).",
+    "MULTIPLE_RANDOM": "Tus selecciones aleatorias son:",
+    "MAXED": "Solo puede seleccionar hasta 10 usuarios al azar."
+}

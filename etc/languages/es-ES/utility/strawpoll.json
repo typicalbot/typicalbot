@@ -1,0 +1,6 @@
+{
+  "DESCRIPTION": "Crea un strawpoll. Utilice la bandera '-m' para opciones múltiples.",
+  "USAGE": "strawpoll ['-m'] <question> | Choice1; Choice2; Elección +",
+  "INVALID": "Debe haber entre 2 y 30 opciones para la que se creó el StrawPoll.",
+  "CREATED": "¡Tu strawpoll ha sido creado! <https://strawpoll.me/{{id}}>"
+}
