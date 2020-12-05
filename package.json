@@ -6,7 +6,7 @@
   "main": "dist/src/index.js",
   "scripts": {
     "build": "tsc",
-    "build:clean": "git clean -d -x -e node_modules -e etc/config.json -f && tsc",
+    "build:clean": "git clean -d -x -e node_modules -e .env -f && tsc",
     "build:watch": "tsc --watch",
     "build:database": "tsc && node dist/bin/setup.js",
     "build:instance": "tsc && node dist/bin/pm2.js",
