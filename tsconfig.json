@@ -1,32 +1,32 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "moduleResolution": "Node",
-    "module": "CommonJS",
-    "target": "ES2020",
-    "lib": [
-      "ESNext",
-      "ESNext.Array",
-      "ESNext.AsyncIterable",
-      "ESNext.Intl",
-      "ESNext.Symbol",
-      "ESNext.BigInt"
-    ],
-    "declaration": true,
-    "sourceMap": true,
-    "removeComments": false,
-    "alwaysStrict": true,
-    "pretty": true,
-    "outDir": "dist",
-    "incremental": true,
-    "noEmitHelpers": true,
-    "importHelpers": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true
-  },
-  "include": [
-    "./**/*.ts",
-    "./**/*.json"
-  ]
+    "compilerOptions": {
+        "strict": true,
+        "moduleResolution": "Node",
+        "module": "CommonJS",
+        "target": "ES2020",
+        "lib": [
+            "ESNext",
+            "ESNext.Array",
+            "ESNext.AsyncIterable",
+            "ESNext.Intl",
+            "ESNext.Symbol",
+            "ESNext.BigInt"
+        ],
+        "declaration": true,
+        "sourceMap": true,
+        "removeComments": false,
+        "alwaysStrict": true,
+        "pretty": true,
+        "outDir": "dist",
+        "incremental": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true
+    },
+    "include": [
+        "./**/*.ts",
+        "./**/*.json"
+    ]
 }
