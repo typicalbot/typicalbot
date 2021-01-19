@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Obtenir un meme aléatoire de /r/memes",
+    "USAGE": "meme",
+    "MEME_ERROR": "Impossible de trouver un meme."
+}

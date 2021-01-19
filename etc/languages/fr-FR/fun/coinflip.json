@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Lancer une pièce.",
+    "USAGE": "pileouface",
+    "RESPONSE_1": "Face",
+    "RESPONSE_2": "Pile"
+}

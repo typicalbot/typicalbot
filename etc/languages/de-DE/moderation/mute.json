@@ -1,0 +1,16 @@
+{
+    "DESCRIPTION": "Stumme ein Mitglied im Server.",
+    "USAGE": "mute <@Mitglied> [zeit:x(tage) x(stunden) x(minuten) x(sekunden)] [grund]",
+    "NO_ROLE": "Es wurde keine \"Mute\"-Rolle gesetzt. Versuche \"$set edit muterole <role-name>\"",
+    "INVALID_CHANNEL": "Der angegebene Channel exestiert nicht.",
+    "MISSING_PERMS": "Ich kann keine Berechtigungen für den Channel verwalten.",
+    "DENYING": "Berechtigung, für gestummten Benutzer zu reden, wurde entzogen.",
+    "DENY_ERROR": "Berechtigung, für gestummten Benutzer zu reden, konnte nicht entzogen werden.",
+    "TOO_LONG": "Du kannst einen Benutzer nicht länger als eine Woche stummschalten.",
+    "ALREADY_MUTED": "Der angegebene Benutzer ist bereits stummgeschaltet.",
+    "TOO_LOW": "Du kannst keinen Benutzer mit der gleicher oder höheren Rolle stummschalten.",
+    "UNEDITABLE": "Um die Anfrage zu vervollständigen, benötige ich die **MANAGE ROLES** Genehmigung. Außerdem muss meine höchste Rolle höher sein als die höchste Rolle des erbetenen Benutzers und die stumme Rolle.",
+    "MUTED": "Du wurdest in **{{name}}** gemutet.",
+    "SUCCESS": "Benutzer {{user}} wurde erfolgreich gemuted.",
+    "ERROR": "Beim Versuch, den angeforderten Benutzer zu muten, ist ein Fehler aufgetreten."
+}

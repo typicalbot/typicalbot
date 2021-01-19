@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Frappez un autre utilisateur sur le serveur.",
+    "USAGE": "gifle [@user]",
+    "SELF": ", arrêtez de vous frapper ! :dizzy_face::wave:",
+    "RESPONSE": "vient de frapper {{user}}! :dizzy_face::wave:",
+    "RESPONSE_HURT": "vient de frapper {{user}}! :dizzy_face::wave: Oh, danger ! Ça a dû faire mal !`"
+}

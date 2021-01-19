@@ -1,0 +1,8 @@
+{
+    "DESCRIPTION": "Changer ou définir une raison pour un cas dans les journaux de modération.",
+    "USAGE": "raison <case-id|latest> [reason]",
+    "DISABLED": "Vous devez avoir activé les logs de modération pour utiliser cette commande. Pour configurer les logs de modération, utilisez cette commande : `$set modifier les modlogs #channel-name`.",
+    "NONE": "Il n'y a pas de journal de modération sous l'ID de cas donné.",
+    "ERROR": "Une erreur s'est produite pendant la mise à jour du nom.",
+    "EDITED": "Mise à jour de la bannière avec succès"
+}

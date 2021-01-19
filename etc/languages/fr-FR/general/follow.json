@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Suivez les actualités du bot, les mises à jour, les problèmes de sécurité et bien plus encore ! Obtenez les dernières nouvelles directement sur votre serveur.",
+	"USAGE": "suivre [status or updates] [#channel]",
+	"FOLLOWED": "Toutes les dernières informations seront maintenant fournies à ce serveur.",
+	"FOLLOWED_STATUS": "Toutes les dernières mises à jour de statut seront maintenant affichées ici.",
+	"MAX_WEBHOOK_LIMIT": "Ce salon a déjà atteint le nombre maximum de webhooks autorisés. Veuillez supprimer l'un des webhooks existants dans le canal ou essayez un autre canal."
+}

@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Lösche Nachrichten in einem Channel.",
+    "USAGE": "purge [@Nutzer|#Channel|@Rolle|me|you|bots] <anzahl-der-nachrichten>",
+    "TOO_LITTLE": "Bitte geben Sie eine Anzahl von Nachrichten an, die von 2 bis 100 gelöscht werden sollen.",
+    "MISSING_PERMS": "Ein Fehler ist aufgetreten. Dies bedeutet wahrscheinlich, dass ich keine Berechtigung zum Verwalten von Nachrichten habe.",
+    "NONE": "Es wurden keine Nachrichten gelöscht. Dies bedeutet wahrscheinlich, dass mir die Berechtigung zum Lesen von Nachrichten fehlt oder die Nachrichten älter als zwei Wochen sind.",
+    "PURGED": "**{{amount}}** Nachricht wurde erfolgreich gelöscht.",
+    "PURGED_MULTIPLE": "**{{amount}}** Nachrichten wurden erfolgreich gelöscht."
+}

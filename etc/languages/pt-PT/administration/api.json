@@ -1,0 +1,7 @@
+{
+	"DESCRIPTION": "Gerar e visualizar chaves da API.",
+	"USAGE": "api <visualizar|gerar>",
+	"NONE": "Nenhuma chave da API existe. Utilize `$api gerar` para gerar uma.",
+	"SUCCESS": "Chave da API gerada com sucesso.",
+	"KEY": "Chave da API de {{guild}}: `{{key}}`"
+}

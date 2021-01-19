@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Хвърли монета.",
+    "USAGE": "coinflip",
+    "RESPONSE_1": "Ези",
+    "RESPONSE_2": "Тура"
+}
