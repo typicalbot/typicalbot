@@ -33,7 +33,7 @@ async function generateClusters() {
     return clusters;
 }
 
-pm2.connect(async (err: Error) => {
+pm2.connect(async (err) => {
     if (err) {
         console.error(err);
         process.exit(2);
@@ -44,7 +44,7 @@ pm2.connect(async (err: Error) => {
     console.log('Generating Clusters\n', clusters);
 
     clusters.forEach((cluster, i) => {
-        pm2.start(cluster, (e: Error) => {
+        pm2.start(cluster, (e) => {
             if (i === clusters.length - 1) {
                 console.log('Generation Complete.\nExiting.');
                 pm2.disconnect();

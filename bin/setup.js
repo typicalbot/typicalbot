@@ -6,10 +6,10 @@ import { r } from 'rethinkdb-ts';
         password: process.env.DATABASE_PASSWORD,
     });
     await r
-        .branch(r.dbList().contains(process.env.DATABASE_NAME!), null, r.dbCreate(process.env.DATABASE_NAME!))
+        .branch(r.dbList().contains(process.env.DATABASE_NAME), null, r.dbCreate(process.env.DATABASE_NAME))
         .run();
 
-    const db = r.db(process.env.DATABASE_NAME!);
+    const db = r.db(process.env.DATABASE_NAME);
     const dbTables = db.tableList();
 
     const tables = ['guilds', 'mutes', 'tasks', 'analytics'];
