@@ -76,9 +76,6 @@ export default class extends Event {
         if (!message.member)
             await message.guild.members.fetch(message.author.id);
 
-        if (command.ptb && process.env.BUILD !== 'ptb')
-            return message.error(message.translate('misc:PTB_ONLY'));
-
         const accessLevel = await fetchAccess(message.guild);
         if (command.access && accessLevel.level < command.access) {
             return message.error(message.translate('misc:MISSING_ACCESS', {
