@@ -5,7 +5,7 @@ export default class GuildCreate extends Event {
     async execute(guild: TypicalGuild) {
         if (!guild.available) return;
 
-        if (process.env.BUILD === 'stable')
+        if (process.env.NODE_ENV === 'production')
             await this.client.sendStatistics(guild.shardID);
 
         this.client.analytics.addEvent({
