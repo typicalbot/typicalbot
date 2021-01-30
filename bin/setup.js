@@ -1,4 +1,7 @@
-import { r } from 'rethinkdb-ts';
+const { r } = require('rethinkdb-ts');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 (async () => {
     await r.connectPool({

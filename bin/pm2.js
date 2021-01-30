@@ -1,9 +1,11 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { Util } from 'discord.js';
-import pm2 from 'pm2';
+const { Util } = require('discord.js')
+const pm2 = require('pm2');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 async function generateClusters() {
-    const shardCount = await Util.fetchRecommendedShards(process.env.TOKEN!);
+    const shardCount = await Util.fetchRecommendedShards(process.env.TOKEN);
     const shards = Array.from({ length: shardCount }, (_a, b) => b);
     const clusterCount = Math.ceil(shardCount / 10);
     const clusters = [];
