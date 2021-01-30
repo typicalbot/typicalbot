@@ -1,4 +1,4 @@
-const { Util } = require('discord.js')
+const { Util } = require('discord.js');
 const pm2 = require('pm2');
 const dotenv = require('dotenv');
 
