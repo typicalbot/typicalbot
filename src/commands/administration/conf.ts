@@ -308,8 +308,6 @@ export default class extends Command {
             return this.list(message, setting, settingsData);
         }
 
-        console.log(setting, value);
-
         if (setting === 'clear') {
             return this.clear(message);
         }
