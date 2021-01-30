@@ -8,7 +8,7 @@ import { resolveMember } from '../../lib/utils/util';
 const regex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))?/i;
 
 export default class extends Command {
-    aliases = ['uinfo', 'whois'];
+    aliases = ['userinfo', 'uinfo', 'whois'];
     mode = MODE.LITE;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
@@ -33,23 +33,23 @@ export default class extends Command {
             return message.reply([
                 `**__${user.tag}__**`,
                 '```',
-                message.translate('utility/userinfo:ID', { id: member.id }),
-                message.translate('utility/userinfo:STATUS', {
+                message.translate('information/user:ID', { id: member.id }),
+                message.translate('information/user:STATUS', {
                     status: member.user.presence.status
                 }),
-                message.translate('utility/userinfo:AVATAR', {
+                message.translate('information/user:AVATAR', {
                     avatar: member.user.displayAvatarURL({
                         format: 'png',
                         size: 2048
                     })
                 }),
-                message.translate('utility/userinfo:JOINED', {
+                message.translate('information/user:JOINED', {
                     time: moment(member.joinedAt as Date).format('MMM DD, YYYY hh:mm A')
                 }),
-                message.translate('utility/userinfo:REGISTERED', {
+                message.translate('information/user:REGISTERED', {
                     time: moment(member.user.createdAt).format('')
                 }),
-                message.translate('utility/userinfo:ROLES', {
+                message.translate('information/user:ROLES', {
                     roles: ROLES
                 }),
                 '```'
@@ -80,7 +80,7 @@ export default class extends Command {
                     inline: true
                 },
                 {
-                    name: message.translate('utility/userinfo:ROLE_FIELD', {
+                    name: message.translate('information/user:ROLE_FIELD', {
                         amount: member.roles.cache.size - 1
                     }),
                     value: ROLES

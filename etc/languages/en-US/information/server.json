@@ -1,6 +1,6 @@
 {
   "DESCRIPTION": "Display information about the server.",
-  "USAGE": "serverinfo",
+  "USAGE": "server",
   "SERVER": "**__Server Information For:__** {{name}}",
   "NAME": "Name: {{name}} ({{id}})",
   "OWNER": "Owner: {{user}} ({{id}})",

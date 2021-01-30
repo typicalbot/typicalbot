@@ -1,6 +1,6 @@
 {
   "DESCRIPTION": "Display information about you or another user.",
-  "USAGE": "userinfo [@user|user-id|user-tag]",
+  "USAGE": "user [@user|user-id|user-tag]",
   "ID": "ID: {{id}}",
   "STATUS": "Status: {{status}}",
   "AVATAR": "Avatar: {{avatar}}",
