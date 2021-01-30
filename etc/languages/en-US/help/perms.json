@@ -21,7 +21,7 @@
   "MODERATOR_VALUE_4": "**Default Role:** `TypicalBot Moderator`",
   "ADMIN": "Server Administrator [3]",
   "ADMIN_VALUE": "$t(help/perms:ADMIN_VALUE_1)\n$t(help/perms:ADMIN_VALUE_2)\n$t(help/perms:ADMIN_VALUE_3)\n$t(help/perms:ADMIN_VALUE_4)",
-  "ADMIN_VALUE_1": "**Description:** Users with this role are able to use the `$settings` command",
+  "ADMIN_VALUE_1": "**Description:** Users with this role are able to use the `$conf` command",
   "ADMIN_VALUE_2": "**Inherits From:** `Server Moderator`",
   "ADMIN_VALUE_3": "**Setup Command:** `$conf adminrole <add/remove> <role-name>`",
   "ADMIN_VALUE_4": "**Default Role:** `TypicalBot Administrator`",
