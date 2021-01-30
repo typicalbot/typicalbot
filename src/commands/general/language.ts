@@ -1,7 +1,7 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
 import { MODE } from '../../lib/utils/constants';
-import { possibleLanguages } from '../administration/settings';
+import { possibleLanguages } from '../administration/conf';
 
 export default class extends Command {
     aliases = ['lang'];

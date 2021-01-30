@@ -53,5 +53,7 @@
   "AUTHOR": "Author",
   "MESSAGE": "Message",
   "INSUFFICIENT_PERMISSIONS": "TypicalBot is missing the `{{permission}}` permission.",
-  "POWERED_BY": "Powered by {{service}}"
+  "POWERED_BY": "Powered by {{service}}",
+  "ENABLE_OPTIONS": ["enable", "true", "1", "permit"],
+  "DISABLE_OPTIONS": ["disable", "false", "0", "reject"]
 }
