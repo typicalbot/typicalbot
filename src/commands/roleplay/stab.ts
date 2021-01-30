@@ -7,9 +7,10 @@ export default class extends Command {
         const randomAddon = Math.random() <= 0.25;
 
         if (!mention || mention.id === message.author.id)
-            return message.reply(message.translate(randomAddon
-                ? 'interaction/cookie:SELF_LAUGH'
-                : 'interaction/cookie:SELF_KEPT'));
-        return message.reply(message.translate('interaction/cookie:GIVEN', { user: mention.toString() }));
+            return message.reply(message.translate(randomAddon ? 'roleplay/stab:SELF_POLICE' : 'roleplay/stab:SELF'));
+
+        return message.reply(message.translate(randomAddon
+            ? 'roleplay/stab:RESPONSE_POLICE'
+            : 'roleplay/stab:RESPONSE', { user: mention.toString() }));
     }
 }
