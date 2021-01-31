@@ -9,14 +9,14 @@ export default class extends Command {
 
     execute(message: TypicalMessage) {
         if (!message.embeddable)
-            return message.send(message.translate('general/vote:TEXT', {
+            return message.send(message.translate('utility/vote:TEXT', {
                 link: LINK.VOTE
             }));
 
         return message.send(new MessageEmbed()
             .setColor(0x00adff)
-            .setTitle(message.translate('general/vote:TITLE'))
-            .setDescription(message.translate('general/vote:TEXT', {
+            .setTitle(message.translate('utility/vote:TITLE'))
+            .setDescription(message.translate('utility/vote:TEXT', {
                 link: LINK.VOTE
             }))
             .setFooter('TypicalBot', LINK.ICON)
