@@ -20,7 +20,6 @@ export interface CommandOptions {
     permission?: -1 | 0 | 2 | 3 | 4 | 10;
     mode?: 0 | 1 | 2;
     access?: 0 | 1 | 3;
-    ptb?: boolean;
 }
 
 export interface GuildSettings {
