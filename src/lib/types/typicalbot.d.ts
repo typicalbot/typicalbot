@@ -23,7 +23,6 @@ export interface CommandOptions {
 }
 
 export interface GuildSettings {
-    apikey?: string | null;
     id: string;
     language: string;
     dm: {
