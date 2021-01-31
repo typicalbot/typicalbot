@@ -4,13 +4,12 @@ import { TypicalMessage } from '../../lib/types/typicalbot';
 import { MODE, LINK, PERMISSION_LEVEL } from '../../lib/utils/constants';
 
 export default class extends Command {
-    aliases = ['info', 'support'];
     dm = true;
     mode = MODE.STRICT;
 
     async execute(message: TypicalMessage, parameters: string) {
         if (!message.guild || !parameters) {
-            const response = message.translate('general/help:NONE', {
+            const response = message.translate('utility/help:NONE', {
                 prefix: process.env.PREFIX,
                 docs: LINK.DOCUMENTATION,
                 server: LINK.SERVER
@@ -25,7 +24,7 @@ export default class extends Command {
 
             return message.send(new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('general/help:TYPICAL_INFO'))
+                .setTitle(message.translate('utility/help:TYPICAL_INFO'))
                 .setDescription(response)
                 .addField('Version', this.client.version, false)
                 .addField('Terms of Service', LINK.TERMS_OF_SERVICE, true)
@@ -36,14 +35,14 @@ export default class extends Command {
 
         const command = this.client.commands.fetch(parameters, message.guild.settings);
         if (!command || command.permission === PERMISSION_LEVEL.BOT_OWNER) {
-            const response = message.translate('general/help:INVALID', {
+            const response = message.translate('utility/help:INVALID', {
                 name: parameters
             });
             if (!message.embeddable) return message.error(response, undefined, { allowedMentions: { users: [message.author.id] } });
 
             return message.send(new MessageEmbed()
                 .setColor(0x00adff)
-                .setTitle(message.translate('general/help:INVALID_INFO'))
+                .setTitle(message.translate('utility/help:INVALID_INFO'))
                 .setDescription(response)
                 .setFooter('TypicalBot', LINK.ICON)
                 .setTimestamp());
@@ -63,46 +62,46 @@ export default class extends Command {
 
         if (!message.embeddable)
             return message.send([
-                message.translate('general/help:TEXT_1', { name: parameters }),
-                message.translate('general/help:TEXT_2'),
-                message.translate('general/help:TEXT_3'),
+                message.translate('utility/help:TEXT_1', { name: parameters }),
+                message.translate('utility/help:TEXT_2'),
+                message.translate('utility/help:TEXT_3'),
                 '\n',
                 '```',
-                message.translate('general/help:TEXT_4', { commandName: command.name }),
-                message.translate('general/help:TEXT_5', { aliases: ALIASES }),
-                message.translate('general/help:TEXT_6', { permission: this.client.handlers.permissions.levels.get(command.permission)?.title }),
-                message.translate('general/help:TEXT_7', { description: DESCRIPTION }),
-                message.translate('general/help:TEXT_8', { usage: USAGE }),
+                message.translate('utility/help:TEXT_4', { commandName: command.name }),
+                message.translate('utility/help:TEXT_5', { aliases: ALIASES }),
+                message.translate('utility/help:TEXT_6', { permission: this.client.handlers.permissions.levels.get(command.permission)?.title }),
+                message.translate('utility/help:TEXT_7', { description: DESCRIPTION }),
+                message.translate('utility/help:TEXT_8', { usage: USAGE }),
                 '```'
             ].join('\n'));
 
         return message.send(new MessageEmbed()
             .setColor(0x00adff)
-            .setTitle(message.translate('general/help:COMMAND_USAGE', {
+            .setTitle(message.translate('utility/help:COMMAND_USAGE', {
                 name: command.name
             }))
-            .setDescription(message.translate('general/help:PARAMETERS'))
+            .setDescription(message.translate('utility/help:PARAMETERS'))
             .addFields([
                 {
-                    name: message.translate('general/help:COMMAND'),
+                    name: message.translate('utility/help:COMMAND'),
                     value: command.name,
                     inline: true
                 },
                 {
-                    name: message.translate('general/help:ALIASES'),
+                    name: message.translate('utility/help:ALIASES'),
                     value: ALIASES
                 },
                 {
-                    name: message.translate('general/help:PERMISSION'),
+                    name: message.translate('utility/help:PERMISSION'),
                     // @ts-ignore
                     value: this.client.handlers.permissions.levels.get(command.permission).title
                 },
                 {
-                    name: message.translate('general/help:DESC'),
+                    name: message.translate('utility/help:DESC'),
                     value: DESCRIPTION
                 },
                 {
-                    name: message.translate('general/help:USE'),
+                    name: message.translate('utility/help:USE'),
                     value: USAGE
                 }
             ])
