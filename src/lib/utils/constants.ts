@@ -9,7 +9,9 @@ export const LINK = {
     SETTINGS: `${WEBSITE}/docs`,
     ICON: `${WEBSITE}/img/icon-transparent-blue.png`,
     TRANSLATE: 'https://translate.typicalbot.com',
-    VOTE: 'https://top.gg/bot/153613756348366849/vote'
+    VOTE: 'https://top.gg/bot/153613756348366849/vote',
+    TERMS_OF_SERVICE: `${WEBSITE}/legal/terms`,
+    PRIVACY_POLICY: `${WEBSITE}/legal/privacy`
 };
 
 export enum ACCESS_LEVEL {
