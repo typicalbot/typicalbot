@@ -17,11 +17,13 @@ export default class Command {
     mode: 0 | 1 | 2;
     access: 0 | 1 | 3;
     ptb = false;
+    category: string;
 
     constructor(client: Cluster, name: string, path: string, options?: CommandOptions) {
         this.client = client;
         this.name = name;
         this.path = path;
+        this.category = path.substring(path.indexOf(process.platform === 'win32' ? 'commands\\' : 'commands/') + 9, path.length - (name.length + 4));
         this.aliases = (options?.aliases) ?? [];
         this.dm = (options?.dm) ?? false;
         this.permission =
