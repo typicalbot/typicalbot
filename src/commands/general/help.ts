@@ -49,7 +49,11 @@ export default class extends Command {
                 .setTimestamp());
         }
 
-        const path = command.path.substring(command.path.indexOf('commands/') + 9, command.path.length - 3);
+        let path = command.path.substring(command.path.indexOf('commands/') + 9, command.path.length - 3);
+
+        if (process.platform === 'win32') {
+            path = command.path.substring(command.path.indexOf('commands\\') + 9, command.path.length - 3).replace('\\', '/');
+        }
 
         const DESCRIPTION = message.translate(`${path}:DESCRIPTION`);
         const USAGE = message.translate(`${path}:USAGE`);
