@@ -10,7 +10,6 @@ const manageRegex = /(?:(?:(?:<@!?)?(\d{17,20})>?)|(?:(.+)#(\d{4})))\s+(?:(?:<@&
 const publicRegex = /(list|add|remove|clear)(?:\s+(?:(?:<@&)?(\d{17,20})>?|(.+)))?/i;
 
 export default class extends Command {
-    aliases = ['role'];
     mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
