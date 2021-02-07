@@ -1,0 +1,11 @@
+{
+  "DESCRIPTION": "Afficher des informations à propos de vous ou d'un autre utilisateur.",
+  "USAGE": "utilisateur [@utilisateur|id utilisateur|tag utilisateur]",
+  "ID": "ID : {{id}}",
+  "STATUS": "Statut : {{status}}",
+  "AVATAR": "Avatar : {{avatar}}",
+  "JOINED": "Date de création : {{time}}",
+  "REGISTERED": "Inscrit: {{time}}",
+  "ROLES": "Volume : {{roles}}",
+  "ROLE_FIELD": "Volume : ({{amount}})"
+}
