@@ -1,7 +1,7 @@
 {
   "DESCRIPTION": "Mute a member in the server.",
   "USAGE": "mute <@user> [time:xd(ays) xh(ours) xm(inutes) xs(seconds)] [reason]",
-  "NO_ROLE": "No mute role has been set. Try `$set edit muterole <role-name>`",
+  "NO_ROLE": "No mute role has been set. Try `$conf muterole <role-name>`",
   "INVALID_CHANNEL": "The channel given doesn't exist.",
   "MISSING_PERMS": "I cannot manage permissions for this channel.",
   "DENYING": "Denying permissions for muted users to speak.",

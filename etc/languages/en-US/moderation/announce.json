@@ -2,7 +2,7 @@
   "DESCRIPTION": "Send an announcement to the announcements channel. Use the flag '-e' before your content to make the message an embed. If the announcements mention role is set, it will always use it.",
   "USAGE": "announce [-e] <content>",
   "INVALID": "No announcement content was supplied.",
-  "INVALID_CHANNEL": "To announce, please set up an announcement channel by typing: `$set edit announcements #channel-name`",
+  "INVALID_CHANNEL": "To announce, please set up an announcement channel by typing: `$conf announcements #channel-name`",
   "TEXT": "**__Announcement from {{usertag}}:__** {{role}}",
   "TITLE": "Announcement"
 }
