@@ -9,7 +9,7 @@
         "build:clean": "git clean -d -x -e node_modules -e .env -f && tsc",
         "build:watch": "tsc --watch",
         "build:database": "node bin/setup.js",
-        "build:instance": "node bin/pm2.js",
+        "build:instance": "tsc && node bin/pm2.js",
         "lint": "eslint src --ext .ts",
         "lint:fix": "eslint src --ext .ts --fix",
         "start": "tsc && node dist/src/index.js"
