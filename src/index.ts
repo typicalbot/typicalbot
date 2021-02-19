@@ -10,7 +10,7 @@ fs.mkdir('data', (err) => {
     if (err && err.code !== 'EEXIST') console.error(err);
 });
 
-if (!process.env.CLUSTERED) {
+if (process.env.CLUSTERED !== 'true') {
     new Cluster(undefined);
 } else {
     const node = new Client(process.env.CLUSTER ?? 'TypicalBot')
