@@ -11,7 +11,7 @@ import { Client as VezaClient } from 'veza';
 import { BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import i18n from './utils/i18n';
-import pkg from '../../package.json';
+import pkg from '../../../../package.json';
 import AnalyticHandler from '../handlers/AnalyticHandler';
 import CommandHandler from '../handlers/CommandHandler';
 import DatabaseHandler from '../handlers/DatabaseHandler';

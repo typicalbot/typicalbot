@@ -7,7 +7,7 @@ import {
     MessageOptions,
     TextChannel,
     User
-} from 'discord.js';
+} from 'packages/bot/src/lib/types/discord.js';
 import Cluster from '../TypicalClient';
 import ModerationLog from '../structures/ModerationLog';
 import PermLevel from '../structures/PermissionLevel';

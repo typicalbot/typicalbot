@@ -1,9 +1,9 @@
-import { Message } from 'discord.js';
+import { Message } from 'packages/bot/src/lib/types/discord.js';
 import { TFunction } from 'i18next';
 import { GuildSettings } from './typicalbot';
 import Cluster from '../TypicalClient';
 
-declare module 'discord.js' {
+declare module 'packages/bot/src/lib/types/discord.js' {
     interface Client {
         translate: Map<string, TFunction>;
     }
