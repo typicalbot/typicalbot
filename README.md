@@ -29,7 +29,9 @@ TypicalBot is far from typical. It's stable, lightning fast, and easy to use— 
 
 | Project | Description |
 |---------|-------------|
-| [typicalbot-cluster-manager](https://github.com/typicalbot/typicalbot-cluster-manager) | Inter-process communication manager |
+| [typicalbot](https://github.com/typicalbot/typicalbot/tree/4.x/packages/bot) | Bot process |
+| [typicalbot crypto](https://github.com/typicalbot/typicalbot/tree/4.x/packages/crypto) | Encryption library |
+| [typicalbot ipc-server](https://github.com/typicalbot/typicalbot/tree/4.x/packages/ipc-server) | Inter-process communication server | 
 
 ## Getting Started
 
