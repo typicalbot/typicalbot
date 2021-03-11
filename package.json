@@ -4,7 +4,9 @@
     "description": "TypicalBot is far from typical. It's stable, lightning fast, and easy to use— TypicalBot will seamlessly help you moderate your server and provide entertainment for its members, no problem at all!",
     "license": "Apache-2.0",
     "main": "dist/src/index.js",
+    "private": true,
     "scripts": {
+        "postinstall": "husky install",
         "build": "tsc",
         "build:clean": "git clean -d -x -e node_modules -e .env -f && tsc",
         "build:watch": "tsc --watch",
