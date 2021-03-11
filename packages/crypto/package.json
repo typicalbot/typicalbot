@@ -1,0 +1,23 @@
+{
+    "name": "@typicalbot/crypto",
+    "version": "4.0.0",
+    "description": "Encryption library",
+    "main": "dist/src/index.js",
+    "types": "typings/src/index.d.ts",
+    "scripts": {
+        "build": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/typicalbot/typicalbot.git"
+    },
+    "author": {
+        "name": "TypicalBot LLC",
+        "email": "opensource@typicalbot.com"
+    },
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/typicalbot/typicalbot/isssues"
+    },
+    "homepage": "https://github.com/typicalbot/typicalbot#readme"
+}
