@@ -80,7 +80,7 @@ export default class extends Command {
             }
         }
 
-        if (message.deletable) await message.delete({ timeout: 500 });
+        if (message.deletable) await message.delete();
 
         return null;
     }

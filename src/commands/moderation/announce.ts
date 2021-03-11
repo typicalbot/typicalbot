@@ -42,7 +42,7 @@ export default class extends Command {
             return channel.send(`${message.translate('moderation/announce:TEXT', {
                 usertag: message.author.tag,
                 role: mentionRole ? mentionRole.toString() : ''
-            })}\n\n${content}`, { disableMentions: 'everyone' });
+            })}\n\n${content}`);
         }
 
         return channel.send(mentionRole ? mentionRole.toString() : '', {
@@ -50,8 +50,7 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle(message.translate('moderation/announce:TITLE'))
                 .setDescription(content)
-                .setFooter(message.author.tag, message.author.displayAvatarURL()),
-            disableMentions: 'everyone'
+                .setFooter(message.author.tag, message.author.displayAvatarURL())
         });
     }
 }

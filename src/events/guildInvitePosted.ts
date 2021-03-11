@@ -9,7 +9,7 @@ import { formatMessage } from '../lib/utils/util';
 export default class GuildInvitePosted extends Event {
     async execute(message: TypicalGuildMessage) {
         if (message.deletable) message.delete().catch(() => undefined);
-        message.error(message.translate('general/invite:PROHIBITED')).then((msg) => msg.delete({ timeout: 10000 }));
+        message.error(message.translate('general/invite:PROHIBITED')).then((msg) => msg.delete());
 
         const { settings } = message.guild;
 

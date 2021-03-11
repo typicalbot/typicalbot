@@ -39,7 +39,7 @@ export default class extends Command {
             .catch(() => null);
         if (!response) return null;
 
-        if (message.deletable) await message.delete({ timeout: 2500 });
-        return response.delete({ timeout: 2500 });
+        if (message.deletable) await message.delete();
+        return response.delete();
     }
 }

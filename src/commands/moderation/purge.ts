@@ -93,9 +93,9 @@ export default class extends Command {
             const response = await message.reply(message.translate(purged.size === 1
                 ? 'moderation/purge:PURGED'
                 : 'moderation/purge:PURGED_MULTIPLE', { amount: purged.size }));
-            response.delete({ timeout: 2500 }).catch(() => null);
+            response.delete().catch(() => null);
         }
 
-        return message.delete({ timeout: 2500 }).catch(() => null);
+        return message.delete().catch(() => null);
     }
 }
