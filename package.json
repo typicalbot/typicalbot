@@ -90,5 +90,8 @@
         "extends": [
             "@commitlint/config-conventional"
         ]
+    },
+    "engines": {
+        "node": ">=14"
     }
 }
