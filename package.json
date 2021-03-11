@@ -2,6 +2,7 @@
     "name": "@typicalbot/root",
     "version": "4.0.0",
     "scripts": {
+        "postinstall": "husky install",
         "build": "tsc --build packages/bot packages/crypto packages/ipc-server --force",
         "lint": "eslint packages --ext .ts",
         "lint:fix": "eslint packages --ext .ts --fix"
