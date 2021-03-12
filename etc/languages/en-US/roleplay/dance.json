@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Dance with another user in the server.",
+    "USAGE": "dance [@user]",
+    "SELF": "just busted some out moves by themselves! :dancer:",
+    "RESPONSE": "just danced {{user}}! :dancers:"
+}
