@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Reprocess users through autorole, check if any user is missing the autorole.",
+    "USAGE": "autorole",
+    "SYNC": "Successfully resynced all users with the autorole."
+}
