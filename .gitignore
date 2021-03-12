@@ -21,7 +21,8 @@ node_modules
 # Custom
 etc/config.json
 .env
-dist/
+dist
+typings
 target/
 rethinkdb_data/
 data/
