@@ -42,4 +42,4 @@ server.on('message', async (message: NodeMessage) => {
     }
 });
 
-server.listen(process.env.IPC_SERVER_PORT || 4000).catch(console.error);
+server.listen(process.env.IPC_SERVER_PORT ?? 4000).catch(console.error);

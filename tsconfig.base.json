@@ -1,15 +1,28 @@
 {
     "compilerOptions": {
-        "composite": true,
-        "declaration": true,
-        "declarationMap": true,
-        "sourceMap": true,
-        "module": "CommonJS",
-        "moduleResolution": "Node",
-        "target": "ESNext",
         "strict": true,
+        "moduleResolution": "Node",
+        "module": "CommonJS",
+        "target": "ESNext",
+        "lib": [
+            "ESNext",
+            "ESNext.Array",
+            "ESNext.AsyncIterable",
+            "ESNext.Intl",
+            "ESNext.Symbol",
+            "ESNext.BigInt"
+        ],
+        "declaration": true,
+        "sourceMap": true,
         "removeComments": false,
-        "skipLibCheck": true
+        "alwaysStrict": true,
+        "pretty": true,
+        "incremental": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true
     },
     "files": [],
     "references": [
