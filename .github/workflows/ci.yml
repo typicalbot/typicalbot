@@ -26,7 +26,7 @@ jobs:
       - name: Install Dependencies
         run: yarn --frozen-lockfile --ignore-scripts
       - name: Run TypeScript Compiler
-        uses: icrawl/action-tsc@v1
+        run: yarn run build
   lint:
     name: Lint
     runs-on: ubuntu-latest
