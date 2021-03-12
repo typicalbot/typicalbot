@@ -132,6 +132,7 @@ pub async fn delete(path: Path<(String, )>, pool: Data<DBPool>) -> HttpResponse 
         .unwrap()
 }
 
+#[get("/announcements/{id}")]
 pub async fn get(path: Path<(String, )>, pool: Data<DBPool>) -> HttpResponse {
     let conn = pool.get().expect("Unable to connect database pool");
 
