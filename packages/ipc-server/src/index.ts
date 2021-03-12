@@ -1,24 +1,29 @@
 import { NetworkError, NodeMessage, Server, ServerSocket } from 'veza';
 
-const node = new Server('manager');
+const server = new Server(process.env.IPC_SERVER_NAME!);
 
-node.on('connect', (client: ServerSocket) => {
+server.on('connect', (client: ServerSocket) => {
+    // Discount clients that do not match our specified client name.
+    if (!client.name?.startsWith(process.env.IPC_CLIENT_NAME!)) {
+        client.disconnect(true);
+    }
+
     console.log(`[IPC] Client connected: ${client.name}`);
 });
 
-node.on('disconnect', (client: ServerSocket) => {
+server.on('disconnect', (client: ServerSocket) => {
     console.log(`[IPC] Client disconnected: ${client.name}`);
 });
 
-node.on('error', (error: Error | NetworkError, client: ServerSocket | null) => {
+server.on('error', (error: Error | NetworkError, client: ServerSocket | null) => {
     console.error(`[IPC] Client error: ${client?.name ?? 'unknown'}`, error);
 });
 
-node.on('message', async (message: NodeMessage) => {
+server.on('message', async (message: NodeMessage) => {
     const { event, data } = message.data;
 
     if (event === 'collectData') {
-        const sockets = Array.from(node.sockets);
+        const sockets = Array.from(server.sockets);
         const results = await Promise.all(
             sockets.filter(c => /\d+$/.test(c[0]))
                 .map(s => s[1].send({
@@ -31,10 +36,10 @@ node.on('message', async (message: NodeMessage) => {
     }
 
     if (event === 'sendTo') {
-        const reply = await node.sendTo(message.data.to, data, { receptive: true });
+        const reply = await server.sendTo(message.data.to, data, { receptive: true });
 
         message.reply(reply);
     }
 });
 
-node.listen(process.env.PORT ?? 4000).catch(console.error);
+server.listen(process.env.IPC_SERVER_PORT || 4000).catch(console.error);
