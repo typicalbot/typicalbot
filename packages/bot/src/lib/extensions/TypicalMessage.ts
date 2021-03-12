@@ -65,7 +65,7 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     respond(content: string, embed?: MessageEmbed) {
-        return this.channel.send(`${this.author} | ${content}`, {embed});
+        return this.channel.send(`${this.author} | ${content}`, { embed });
     }
 
     send(content: string | MessageEmbed,
