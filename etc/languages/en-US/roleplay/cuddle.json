@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Cuddle another user in the server.",
+    "USAGE": "cuddle [@user]",
+    "SELF": "just cuddled themselves! :hugging:",
+    "RESPONSE": "just cuddled {{user}}! :hugging:"
+}
