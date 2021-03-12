@@ -1,7 +1,8 @@
-import { Guild, TextChannel, User } from 'discord.js';
+import { Guild, GuildMember, TextChannel, User } from 'discord.js';
 import Cluster from '../lib/TypicalClient';
 import ModerationLog from '../lib/structures/ModerationLog';
-import { TypicalGuildMessage, TypicalGuild } from '../lib/types/typicalbot';
+import { TypicalGuildMessage, TypicalGuild, GuildSettings } from '../lib/types/typicalbot';
+import * as Sentry from '@sentry/node';
 
 export default class ModerationLogHandler {
     client: Cluster;
@@ -73,5 +74,43 @@ export default class ModerationLogHandler {
                     reason
                 })
             ]));
+    }
+
+    processAutoRoles() {
+        this.client.guilds.cache.forEach(async (guild) => {
+            const settings = await this.client.settings.fetch(guild.id);
+            if (!settings.auto.role.bots && !settings.auto.role.id) return;
+
+            guild.members.cache.forEach((member) => this.grantAutoRole(member, settings));
+        });
+    }
+
+    grantAutoRole(member: GuildMember, settings: GuildSettings) {
+        const autorole =
+            settings.auto.role.bots && member.user.bot
+                ? member.guild.roles.cache.get(settings.auto.role.bots)
+                : settings.auto.role.id
+                    ? member.guild.roles.cache.get(settings.auto.role.id)
+                    : undefined;
+
+        if (!autorole || !autorole.editable || member.roles.cache.has(autorole.id) || member.guild.verificationLevel === 'VERY_HIGH') return;
+
+        setTimeout(async () => {
+            const added = await member.roles
+                .add(autorole.id)
+                .catch((err) => Sentry.captureException(err));
+
+            if (settings.auto.role.silent) return;
+
+            if (!added || !settings.logs.id) return;
+
+            const channel = member.guild.channels.cache.get(settings.logs.id) as TextChannel;
+            if (!channel || channel.type !== 'text') return;
+
+            return channel.send((member.guild as TypicalGuild).translate('help/logs:AUTOROLE', {
+                user: member.user.tag,
+                role: autorole.name
+            }));
+        }, member.guild.verificationLevel === 'HIGH' ? 60000 : settings.auto.role.delay ?? 2000);
     }
 }
