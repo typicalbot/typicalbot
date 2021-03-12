@@ -32,6 +32,7 @@ TypicalBot is far from typical. It's stable, lightning fast, and easy to use— 
 | [typicalbot](https://github.com/typicalbot/typicalbot/tree/4.x/packages/bot) | Bot process |
 | [typicalbot crypto](https://github.com/typicalbot/typicalbot/tree/4.x/packages/crypto) | Encryption library |
 | [typicalbot ipc-server](https://github.com/typicalbot/typicalbot/tree/4.x/packages/ipc-server) | Inter-process communication server | 
+| [typicalbot internal-api](https://github.com/typicalbot/typicalbot/tree/4.x/services/internal-api) | Internal API used by the bot and website | 
 
 ## Getting Started
 
