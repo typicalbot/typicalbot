@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Poke another user in the server.",
+    "USAGE": "poke [@user]",
+    "SELF": "just poked themselves! :point_left:",
+    "RESPONSE": "just poked {{user}}! :point_right:"
+}
