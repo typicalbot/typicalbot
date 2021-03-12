@@ -1,0 +1,19 @@
+[package]
+name = "internal-api"
+version = "0.1.0"
+authors = ["TypicalBot LLC <opensource@typicalbot.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "3.3.2"
+actix-rt = "2.1.0"
+serde = "1.0.124"
+serde_json = "1.0.64"
+chrono = { version = "0.4.19", features = ["serde"] }
+uuid = { version = "0.8.2", features = ["serde", "v4"] }
+env_logger = "0.8.3"
+diesel = { version = "1.4.6", features = ["postgres", "r2d2", "chrono", "uuid"] }
+r2d2 = "0.8.9"
+r2d2-diesel = "1.0.0"

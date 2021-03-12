@@ -22,6 +22,7 @@ node_modules
 etc/config.json
 .env
 dist/
+target/
 rethinkdb_data/
 data/
 package-lock.json
