@@ -1,0 +1,6 @@
+{
+    "DESCRIPTION": "Tickle another user in the server.",
+    "USAGE": "tickle [@user]",
+    "SELF": "just tickled themselves! :face_with_hand_over_mouth:",
+    "RESPONSE": "just tickled {{user}}! :face_with_hand_over_mouth: "
+}
