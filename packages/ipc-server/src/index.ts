@@ -3,7 +3,7 @@ import { NetworkError, NodeMessage, Server, ServerSocket } from 'veza';
 const server = new Server(process.env.IPC_SERVER_NAME!);
 
 server.on('connect', (client: ServerSocket) => {
-    // Discount clients that do not match our specified client name.
+    // Disconnect clients that do not match our specified client name.
     if (!client.name?.startsWith(process.env.IPC_CLIENT_NAME!)) {
         client.disconnect(true);
     }
