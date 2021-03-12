@@ -1,6 +1,6 @@
 {
   "DESCRIPTION": "Grabs the definition from Urban Dictionary for the specified word.",
-  "USAGE": "urban <query>",
+  "USAGE": "define <query>",
   "NONE": "No matches for the query **{{query}}**.",
   "TEXT": "**__{{query}}:__** {{definition}}",
   "AMOUNT": "Definition 1 out of {{amount}}",

@@ -19,7 +19,7 @@ export default class extends Command {
         args.shift();
         const [query] = args;
 
-        const data = await fetch(`http://api.urbandictionary.com/v0/define?term=${query}`)
+        const data = await fetch(`https://api.urbandictionary.com/v0/define?term=${query}`)
             .then((res) => res.json())
             .catch(() => null);
         if (!data)
@@ -27,10 +27,10 @@ export default class extends Command {
 
         const [resp] = data.list;
         if (!resp)
-            return message.error(message.translate('utility/urban:NONE', { query }));
+            return message.error(message.translate('search/define:NONE', { query }));
 
         if (!message.embeddable)
-            return message.reply(message.translate('utility/urban:TEXT', {
+            return message.reply(message.translate('search/define:TEXT', {
                 query,
                 definition: resp.definition
             }));
@@ -43,18 +43,18 @@ export default class extends Command {
             .setURL(resp.permalink)
             .addFields([
                 {
-                    name: message.translate('utility/urban:AMOUNT', {
+                    name: message.translate('search/define:AMOUNT', {
                         amount: data.length
                     }),
                     value: `\n\u200B    ${resp.definition}`
                 },
                 {
-                    name: message.translate('utility/urban:RATING'),
-                    value: message.translate('utility/urban:RATING_VALUE', {
+                    name: message.translate('search/define:RATING'),
+                    value: message.translate('search/define:RATING_VALUE', {
                         up: resp.thumbs_up,
                         down: resp.thumbs_down,
                         rating: !isNaN(rating)
-                            ? message.translate('utility/urban:RATING_PERCENT', {
+                            ? message.translate('search/define:RATING_PERCENT', {
                                 amount: rating,
                                 total:
                                     resp.thumbs_up + resp.thumbs_down
@@ -63,7 +63,7 @@ export default class extends Command {
                     })
                 }
             ])
-            .setThumbnail('http://i.imgur.com/CcIZZsa.png')
-            .setFooter(message.translate('utility/urban:DICTIONARY')));
+            .setThumbnail('https://g.udimg.com/assets/logo-1b439b7fa6572b659fbef161d8946372f472ef8e7169db1e47d21c91b410b918.svg')
+            .setFooter(message.translate('search/define:DICTIONARY')));
     }
 }
