@@ -15,6 +15,11 @@
         "name": "TypicalBot LLC",
         "email": "opensource@typicalbot.com"
     },
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/typicalbot/typicalbot/isssues"
+    },
+    "homepage": "https://github.com/typicalbot/typicalbot#readme",
     "dependencies": {
         "@sentry/node": "^6.2.2",
         "discord.js": "github:discordjs/discord.js#master",
