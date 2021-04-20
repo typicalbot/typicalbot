@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node';
 import Cluster from '../lib/TypicalClient';
-import {MongoClient, Db} from 'mongodb';
+import { MongoClient, Db } from 'mongodb';
 
 export default class DatabaseHandler {
     client: Cluster;

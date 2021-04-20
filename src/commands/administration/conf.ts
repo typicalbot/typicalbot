@@ -378,7 +378,7 @@ export default class extends Command {
 
     async clear(message: TypicalGuildMessage) {
         const deleted = await this.client.handlers.database
-            .delete('guilds', {id: message.guild.id});
+            .delete('guilds', { id: message.guild.id });
 
         this.client.settings.delete(message.guild.id);
 

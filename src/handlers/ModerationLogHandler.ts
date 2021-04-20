@@ -90,8 +90,8 @@ export default class ModerationLogHandler {
             settings.auto.role.bots && member.user.bot
                 ? member.guild.roles.cache.get(settings.auto.role.bots)
                 : settings.auto.role.id
-                ? member.guild.roles.cache.get(settings.auto.role.id)
-                : undefined;
+                    ? member.guild.roles.cache.get(settings.auto.role.id)
+                    : undefined;
 
         if (!autorole || !autorole.editable || member.roles.cache.has(autorole.id) || member.guild.verificationLevel === 'VERY_HIGH') return;
 

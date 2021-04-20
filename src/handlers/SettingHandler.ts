@@ -13,7 +13,7 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
     async fetch(id: string) {
         if (this.has(id)) return this.get(id) as GuildSettings;
 
-        const row = (await this.client.handlers.database.get('guilds', {id: id})) as GuildSettings;
+        const row = (await this.client.handlers.database.get('guilds', { id: id })) as GuildSettings;
 
         if (!row) return this.create(id);
 
@@ -31,7 +31,7 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
     }
 
     async update(id: string, payload: Record<string, unknown> = {}) {
-        await this.client.handlers.database.update('guilds', {id: id}, payload);
+        await this.client.handlers.database.update('guilds', { id: id }, payload);
         return true;
     }
 }

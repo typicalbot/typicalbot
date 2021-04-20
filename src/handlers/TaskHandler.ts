@@ -72,7 +72,7 @@ export default class TaskHandler {
     }
 
     async delete(id: number) {
-        await this.client.handlers.database.delete('tasks', {id: id.toString()});
+        await this.client.handlers.database.delete('tasks', { id: id.toString() });
         this.collection.delete(id);
     }
 }
