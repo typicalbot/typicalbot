@@ -42,6 +42,12 @@ export default class Cluster extends Client {
      */
     public dev: boolean = process.env.NODE_ENV !== 'production';
 
+    /**
+     * The logger used to emit messages to the console and output into combined.log file.
+     * @since 3.1.0
+     */
+    public logger: Logger;
+
     public node: VezaClient | undefined;
     public shards: number[] = JSON.parse(process.env.SHARDS ?? '[1]');
     public shardCount = process.env.TOTAL_SHARD_COUNT ?? '1';
@@ -59,7 +65,6 @@ export default class Cluster extends Client {
     };
 
     public translate: Map<string, TFunction> = new Map();
-    public logger = new Logger();
     public version = pkg.version;
     public owners: string[] = [];
 
@@ -90,6 +95,8 @@ export default class Cluster extends Client {
                 new RewriteFrames({ root: join(__dirname, '..', '..') })
             ]
         });
+
+        this.logger = new Logger();
 
         this.node = node;
 
