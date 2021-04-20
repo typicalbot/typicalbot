@@ -25,60 +25,36 @@ export default class DatabaseHandler {
         this.db = this.mongo.db(process.env.MONGO_DATABASE!);
     }
 
-    get(table: string, key?: object) {
+    get(table: string, key?: Record<string, unknown>) {
         return key
             ? this.db
                 ?.collection(table)
                 .findOne(key)
             : this.db
                 ?.collection(table);
-        // return key
-        //     ? this.connection
-        //         .table(table)
-        //         .get(key)
-        //         .run()
-        //     : this.connection.table(table).run();
     }
 
-    has(table: string, key: object) {
+    has(table: string, key: Record<string, unknown>) {
         return !!this.db
             ?.collection(table)
             .findOne(key);
-        // return !!this.connection
-        //     .table(table)
-        //     .get(key)
-        //     .run();
     }
 
-    insert(table: string, data: object = {}) {
+    insert(table: string, data: Record<string, unknown> = {}) {
         return this.db
             ?.collection(table)
             .insertOne(data);
-        // return this.connection
-        //     .table(table)
-        //     .insert(data)
-        //     .run();
     }
 
-    update(table: string, key: object, data: object = {}) {
+    update(table: string, key: Record<string, unknown>, data: Record<string, unknown> = {}) {
         return this.db
             ?.collection(table)
-            .updateOne(key, {$set: data});
-        // return this.connection
-        //     .table(table)
-        //     .get(key)
-        //     .update(data, {returnChanges: true})
-        //     .run();
+            .updateOne(key, { $set: data });
     }
 
-    delete(table: string, key: object) {
+    delete(table: string, key: Record<string, unknown>) {
         return this.db
             ?.collection(table)
             .deleteOne(key);
-        // return this.connection
-        //     .table(table)
-        //     .get(key)
-        //     .delete()
-        //     .run();
     }
 }
