@@ -19,6 +19,8 @@ import ModerationLogHandler from '../handlers/ModerationLogHandler';
 import PermissionsHandler from '../handlers/PermissionsHandler';
 import SettingHandler from '../handlers/SettingHandler';
 import TaskHandler from '../handlers/TaskHandler';
+import { RewriteFrames } from '@sentry/integrations';
+import { join } from 'path';
 
 interface TypicalHandlers {
     database: DatabaseHandler;
@@ -66,7 +68,15 @@ export default class Cluster extends Client {
 
         Sentry.init({
             dsn: process.env.API_SENTRY,
-            release: this.version
+            release: this.version,
+            integrations: [
+                new Sentry.Integrations.Modules(),
+                new Sentry.Integrations.FunctionToString(),
+                new Sentry.Integrations.LinkedErrors(),
+                new Sentry.Integrations.Console(),
+                new Sentry.Integrations.Http({ breadcrumbs: true, tracing: true }),
+                new RewriteFrames({ root: join(__dirname, '..', '..') })
+            ]
         });
 
         this.node = node;
