@@ -75,7 +75,7 @@ export default class extends Command {
     mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
-        const [setting, value] = parameters.split(' ');
+        const [setting, value] = parameters.split(/(?<=^\S+)\s/);
 
         const permission = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
 
@@ -499,7 +499,7 @@ export default class extends Command {
             if ([...DISABLE_OPTIONS, ...ENGLISH_DISABLE_OPTIONS].includes(value.toLowerCase())) {
                 payload = this.stringToObject(setting.path, []);
             } else {
-                const args = roleRegex.exec(value);
+                const args = roleRegex.exec(value.split(/(?<=^\S+)\s/)[1]);
                 if (!args)
                     return message.error(message.translate('misc:USAGE_ERROR', {
                         name: this.name,
@@ -517,7 +517,7 @@ export default class extends Command {
                     return message.error(message.translate('moderation/give:INVALID'));
 
                 const currentValue = setting.value as string[];
-                const newValue = currentValue.includes(role.id)
+                const newValue = !currentValue.includes(role.id)
                     ? [...currentValue, role.id]
                     : currentValue.filter((id) => id !== role.id);
 

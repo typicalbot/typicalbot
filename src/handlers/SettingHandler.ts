@@ -30,8 +30,13 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
         return payload;
     }
 
-    async update(id: string, payload: Record<string, unknown> = {}) {
-        await this.client.handlers.database.update('guilds', { id: id }, payload);
+    async update(id: string, payload = {}) {
+        // TODO: Refactor this to remove extra query
+        this.client.handlers.database.update('guilds', { id: id }, payload);
+
+        const row = (await this.client.handlers.database.get('guilds', { id: id })) as GuildSettings;
+        this.set(id, row);
+
         return true;
     }
 }
