@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - 4.x
+      - canary
   pull_request:
 
 jobs:
