@@ -36,6 +36,12 @@ export default class Cluster extends Client {
      */
     public id: string | null = null;
 
+    /**
+     * The client is in a development environment.
+     * @since 4.0.1
+     */
+    public dev: boolean = process.env.NODE_ENV !== 'production';
+
     public node: VezaClient | undefined;
     public shards: number[] = JSON.parse(process.env.SHARDS ?? '[1]');
     public shardCount = process.env.TOTAL_SHARD_COUNT ?? '1';
