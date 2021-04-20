@@ -11,7 +11,6 @@ import { Client as VezaClient } from 'veza';
 import { BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import i18n from './utils/i18n';
-import pkg from '../../package.json';
 import CommandHandler from '../handlers/CommandHandler';
 import DatabaseHandler from '../handlers/DatabaseHandler';
 import EventHandler from '../handlers/EventHandler';
@@ -21,6 +20,7 @@ import SettingHandler from '../handlers/SettingHandler';
 import TaskHandler from '../handlers/TaskHandler';
 import { RewriteFrames } from '@sentry/integrations';
 import { join } from 'path';
+import { version } from '../../package.json';
 
 interface TypicalHandlers {
     database: DatabaseHandler;
@@ -65,7 +65,6 @@ export default class Cluster extends Client {
     };
 
     public translate: Map<string, TFunction> = new Map();
-    public version = pkg.version;
     public owners: string[] = [];
 
     public constructor(node: VezaClient | undefined) {
@@ -85,7 +84,7 @@ export default class Cluster extends Client {
 
         Sentry.init({
             dsn: process.env.API_SENTRY,
-            release: this.version,
+            release: version,
             integrations: [
                 new Sentry.Integrations.Modules(),
                 new Sentry.Integrations.FunctionToString(),

@@ -2,6 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalMessage } from '../../lib/types/typicalbot';
 import { MODE, LINK, PERMISSION_LEVEL } from '../../lib/utils/constants';
+import { version } from '../../../package.json';
 
 export default class extends Command {
     dm = true;
@@ -26,7 +27,7 @@ export default class extends Command {
                 .setColor(0x00adff)
                 .setTitle(message.translate('utility/help:TYPICAL_INFO'))
                 .setDescription(response)
-                .addField('Version', this.client.version, false)
+                .addField('Version', version, false)
                 .addField('Terms of Service', LINK.TERMS_OF_SERVICE, true)
                 .addField('Privacy Policy', LINK.PRIVACY_POLICY, true)
                 .setFooter('TypicalBot', LINK.ICON)
