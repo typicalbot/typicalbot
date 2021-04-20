@@ -25,7 +25,8 @@ export default class DatabaseHandler {
         this.db = this.mongo.db(process.env.MONGO_DATABASE!);
     }
 
-    get(table: string, key?: Record<string, unknown>) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    get(table: string, key?: object) {
         return key
             ? this.db
                 ?.collection(table)
@@ -34,25 +35,29 @@ export default class DatabaseHandler {
                 ?.collection(table);
     }
 
-    has(table: string, key: Record<string, unknown>) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    has(table: string, key: object) {
         return !!this.db
             ?.collection(table)
             .findOne(key);
     }
 
-    insert(table: string, data: Record<string, unknown> = {}) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    insert(table: string, data: object = {}) {
         return this.db
             ?.collection(table)
             .insertOne(data);
     }
 
-    update(table: string, key: Record<string, unknown>, data: Record<string, unknown> = {}) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    update(table: string, key: object, data: object = {}) {
         return this.db
             ?.collection(table)
             .updateOne(key, { $set: data });
     }
 
-    delete(table: string, key: Record<string, unknown>) {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    delete(table: string, key: object) {
         return this.db
             ?.collection(table)
             .deleteOne(key);
