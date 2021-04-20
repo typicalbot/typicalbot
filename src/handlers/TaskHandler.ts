@@ -4,7 +4,6 @@ import { Collection } from 'discord.js';
 import klaw from 'klaw';
 import Cluster from '../lib/TypicalClient';
 import Task from '../lib/structures/Task';
-import { TaskOptions } from '../lib/types/typicalbot';
 
 export default class TaskHandler {
     client: Cluster;

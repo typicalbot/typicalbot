@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/node';
 import Cluster from '../lib/TypicalClient';
 import { AnalyticEvent } from '../lib/types/analytic';
 
