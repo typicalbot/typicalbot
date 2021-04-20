@@ -1,5 +1,5 @@
 import { inspect } from 'util';
-import { Message, GuildMember, User } from 'discord.js';
+import { Message, User, TextChannel, NewsChannel, Permissions } from 'discord.js';
 import Event from '../lib/structures/Event';
 import { TypicalGuildMessage, GuildSettings } from '../lib/types/typicalbot';
 import { PERMISSION_LEVEL, MODE } from '../lib/utils/constants';
@@ -7,23 +7,25 @@ import { fetchAccess } from '../lib/utils/util';
 import { permissionError } from '../lib/utils/util';
 
 export default class extends Event {
+    readonly requiredPermissions = new Permissions(['VIEW_CHANNEL', 'SEND_MESSAGES']).freeze();
+
     async execute(message: Message | TypicalGuildMessage) {
-        if (message.partial || (message.author?.bot)) return;
+        if (message.author.bot || message.webhookID || message.partial) return;
 
         if (message.channel.type === 'dm')
             return this.handleDM(message as Message);
+
+        const me = message.guild!.me ?? await message.guild!.members.fetch(process.env.ID!);
+        if (!me) return;
+
+        const channel = message.channel as TextChannel | NewsChannel;
+        if (!channel.permissionsFor(me)!.has(this.requiredPermissions, false)) return;
 
         return this.handleGuild(message as TypicalGuildMessage);
     }
 
     async handleGuild(message: TypicalGuildMessage) {
         if (!message.guild.available) return;
-        if (!message.guild.me)
-            await message.guild.members.fetch(process.env.ID!);
-
-        const botMember = message.guild.me as GuildMember;
-        const botSendPerms = message.channel.permissionsFor(botMember);
-        if (!botSendPerms || !botSendPerms.has('SEND_MESSAGES')) return;
 
         const settings = (message.guild.settings = await message.guild.fetchSettings());
 
