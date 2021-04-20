@@ -7,6 +7,8 @@ export default class Ready extends Event {
     async execute() {
         this.client.logger.info(`Client Connected | Cluster ${this.client.cluster}`);
 
+        this.client.id ??= this.client.user?.id ?? null;
+
         this.client.fetchApplication()
             .then((application) => {
                 if (application.owner instanceof Team) {

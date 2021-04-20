@@ -30,6 +30,12 @@ interface TypicalHandlers {
 }
 
 export default class Cluster extends Client {
+    /**
+     * The client identifier.
+     * @since 4.0.1
+     */
+    public id: string | null = null;
+
     public node: VezaClient | undefined;
     public shards: number[] = JSON.parse(process.env.SHARDS ?? '[1]');
     public shardCount = process.env.TOTAL_SHARD_COUNT ?? '1';
@@ -127,7 +133,7 @@ export default class Cluster extends Client {
             Sentry.captureException(err);
         });
 
-        fetch(`https://top.gg/api/bots/${process.env.ID}/stats`, {
+        fetch(`https://top.gg/api/bots/${this.id}/stats`, {
             method: 'post',
             headers: {
                 Authorization: process.env.API_TOPGG!,
@@ -146,7 +152,7 @@ export default class Cluster extends Client {
 
         const guildCount = await this.fetchData('guilds.cache.size');
 
-        fetch(`https://api.discordextremelist.xyz/v2/bot/${process.env.ID}/stats`, {
+        fetch(`https://api.discordextremelist.xyz/v2/bot/${this.id}/stats`, {
             method: 'post',
             headers: {
                 Authorization: process.env.API_DEL!,
@@ -160,7 +166,7 @@ export default class Cluster extends Client {
             Sentry.captureException(err);
         });
 
-        fetch(`https://api.botlist.space/v1/bots/${process.env.ID}`, {
+        fetch(`https://api.botlist.space/v1/bots/${this.id}`, {
             method: 'post',
             headers: {
                 Authorization: process.env.API_BLS!,

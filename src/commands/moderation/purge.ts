@@ -54,7 +54,7 @@ export default class extends Command {
             if (msg.member?.roles.cache.has(roleID)) return true;
             if (filter === 'me' && msg.author.id === message.author.id)
                 return true;
-            if (filter === 'you' && msg.author.id === process.env.ID)
+            if (filter === 'you' && msg.author.id === this.client.id)
                 return true;
             if (filter === 'bots' && msg.author.bot) return true;
             return !userMention &&

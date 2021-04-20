@@ -51,7 +51,7 @@ export default class extends Command {
             if (!channel)
                 return message.error(message.translate('moderation/mute:INVALID_CHANNEL'));
 
-            const permissions = channel.permissionsFor(message.guild.me || process.env.ID);
+            const permissions = channel.permissionsFor(message.guild.me || this.client.id);
 
             if (permissions && !permissions.has('MANAGE_ROLES'))
                 return message.error(message.translate('moderation/mute:MISSING_PERMS'));

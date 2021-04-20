@@ -15,7 +15,7 @@ export default class extends Event {
         if (message.channel.type === 'dm')
             return this.handleDM(message as Message);
 
-        const me = message.guild!.me ?? await message.guild!.members.fetch(process.env.ID!);
+        const me = message.guild!.me ?? await message.guild!.members.fetch(this.client.id!);
         if (!me) return;
 
         const channel = message.channel as TextChannel | NewsChannel;
@@ -30,8 +30,8 @@ export default class extends Event {
         const settings = (message.guild.settings = await message.guild.fetchSettings());
 
         const possibleBotMentions = [
-            `<@${process.env.ID}>`,
-            `<@!${process.env.ID}>`
+            `<@${this.client.id!}>`,
+            `<@!${this.client.id!}>`
         ];
 
         if (possibleBotMentions.includes(message.content)) {
