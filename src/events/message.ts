@@ -109,19 +109,6 @@ export default class extends Event {
             return message.error(permissionError(this.client, message, command, actualUserPermissions));
         }
 
-        this.client.analytics.addEvent({
-            userId: message.author.id,
-            eventType: 'COMMAND_CREATE',
-            eventProperties: {
-                messageId: message.id,
-                channelId: message.channel.id,
-                guildId: message.guild.id,
-                timestamp: message.createdTimestamp,
-                command: command.name,
-                commandArgs: params
-            }
-        });
-
         return command.execute(message, params.join(' '), userPermissions);
     }
 

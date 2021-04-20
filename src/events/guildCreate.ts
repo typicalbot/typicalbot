@@ -7,14 +7,5 @@ export default class GuildCreate extends Event {
 
         if (process.env.NODE_ENV === 'production')
             await this.client.sendStatistics(guild.shardID);
-
-        this.client.analytics.addEvent({
-            userId: guild.ownerID,
-            eventType: 'GUILD_CREATE',
-            eventProperties: {
-                guildId: guild.id,
-                timestamp: Date.now(),
-            }
-        });
     }
 }

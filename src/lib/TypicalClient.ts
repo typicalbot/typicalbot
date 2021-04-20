@@ -12,7 +12,6 @@ import { BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import i18n from './utils/i18n';
 import pkg from '../../package.json';
-import AnalyticHandler from '../handlers/AnalyticHandler';
 import CommandHandler from '../handlers/CommandHandler';
 import DatabaseHandler from '../handlers/DatabaseHandler';
 import EventHandler from '../handlers/EventHandler';
@@ -38,7 +37,6 @@ export default class Cluster extends Client {
     public settings = new SettingHandler(this);
     public commands = new CommandHandler(this);
     public events = new EventHandler(this);
-    public analytics = new AnalyticHandler(this);
     public caches = {
         bans: new Collection<string, BanLog>(),
         unbans: new Collection<string, UnbanLog>(),
