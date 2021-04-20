@@ -33,6 +33,7 @@ export default class extends Event {
             `<@${process.env.ID}>`,
             `<@!${process.env.ID}>`
         ];
+
         if (possibleBotMentions.includes(message.content)) {
             const prefix = settings.prefix.custom
                 ? settings.prefix.default
@@ -50,22 +51,13 @@ export default class extends Event {
         // eslint-disable-next-line max-len
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
 
-        if (
-            userPermissions.level <
-            PERMISSION_LEVEL.SERVER_MODERATOR &&
-            !settings.ignored.invites.includes(message.channel.id)
-        )
+        if (userPermissions.level < PERMISSION_LEVEL.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id))
             this.inviteCheck(message);
-        if (
-            userPermissions.level <
-            PERMISSION_LEVEL.SERVER_MODERATOR &&
-            settings.ignored.commands.includes(message.channel.id)
-        )
+
+        if (userPermissions.level < PERMISSION_LEVEL.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id))
             return;
-        if (
-            userPermissions.level ===
-            PERMISSION_LEVEL.SERVER_BLACKLISTED
-        )
+
+        if (userPermissions.level === PERMISSION_LEVEL.SERVER_BLACKLISTED)
             return;
 
         const [split, ...params] = message.content.split(' ');
@@ -74,11 +66,14 @@ export default class extends Event {
         if (!prefix || !message.content.startsWith(prefix)) return;
 
         const command = this.client.commands.fetch(split.slice(prefix.length).toLowerCase(), settings);
+
         if (!command) return;
+
         if (!message.member)
             await message.guild.members.fetch(message.author.id);
 
         const accessLevel = await fetchAccess(message.guild);
+
         if (command.access && accessLevel.level < command.access) {
             return message.error(message.translate('misc:MISSING_ACCESS', {
                 command: command.access,
@@ -87,25 +82,10 @@ export default class extends Event {
             }));
         }
 
-        if (
-            !this.client.owners.includes(message.author.id) &&
-            message.author.id !== message.guild.ownerID &&
-            command.mode <
-            (settings.mode === 'free'
-                ? MODE.FREE
-                : settings.mode === 'lite'
-                    ? MODE.LITE
-                    : MODE.STRICT)
-        )
+        if (!this.client.owners.includes(message.author.id) && message.author.id !== message.guild.ownerID && command.mode < (settings.mode === 'free' ? MODE.FREE : settings.mode === 'lite' ? MODE.LITE : MODE.STRICT))
             return message.error(message.translate('misc:DISABLED'));
 
-        if (
-            userPermissions.level < command.permission ||
-            (actualUserPermissions.level < command.permission &&
-                actualUserPermissions.level !==
-                PERMISSION_LEVEL.SERVER_BLACKLISTED &&
-                command.permission <= PERMISSION_LEVEL.SERVER_OWNER)
-        ) {
+        if (userPermissions.level < command.permission || (actualUserPermissions.level < command.permission && actualUserPermissions.level !== PERMISSION_LEVEL.SERVER_BLACKLISTED && command.permission <= PERMISSION_LEVEL.SERVER_OWNER)) {
             return message.error(permissionError(this.client, message, command, actualUserPermissions));
         }
 
@@ -113,20 +93,13 @@ export default class extends Event {
     }
 
     matchPrefix(user: User, settings: GuildSettings, command: string) {
-        if (
-            command.startsWith(process.env.PREFIX!) &&
-            this.client.owners.includes(user.id)
-        )
+        if (command.startsWith(process.env.PREFIX!) && this.client.owners.includes(user.id))
             return process.env.PREFIX;
-        if (
-            settings.prefix.custom &&
-            command.startsWith(settings.prefix.custom)
-        )
+
+        if (settings.prefix.custom && command.startsWith(settings.prefix.custom))
             return settings.prefix.custom;
-        if (
-            settings.prefix.default &&
-            command.startsWith(process.env.PREFIX!)
-        )
+
+        if (settings.prefix.default && command.startsWith(process.env.PREFIX!))
             return process.env.PREFIX;
 
         return null;
@@ -134,11 +107,10 @@ export default class extends Event {
 
     inviteCheck(message: TypicalGuildMessage) {
         if (!message.guild.settings.automod.invite) return;
+
         const inviteRegex = /(discord\.(gg|io|me|li|plus|link)\/.+|discord(?:app)?\.com\/invite\/.+)/i;
-        if (
-            inviteRegex.test(message.content) ||
-            inviteRegex.test(inspect(message.embeds, { depth: 4 }))
-        )
+
+        if (inviteRegex.test(message.content) || inviteRegex.test(inspect(message.embeds, { depth: 4 })))
             this.client.emit('guildInvitePosted', message);
     }
 
@@ -149,11 +121,7 @@ export default class extends Event {
             .split(' ')[0]
             .slice(process.env.PREFIX!.length));
 
-        if (
-            !command ||
-            !command.dm ||
-            command.permission > PERMISSION_LEVEL.SERVER_MEMBER
-        )
+        if (!command || !command.dm || command.permission > PERMISSION_LEVEL.SERVER_MEMBER)
             return;
 
         command.execute(message);
