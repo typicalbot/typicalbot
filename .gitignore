@@ -18,13 +18,10 @@ pids
 # Dependency directories
 node_modules
 
-# Output directories
-dist
-typings
-target
-
 # Custom
+etc/config.json
 .env
-rethinkdb_data
-data
+dist/
+rethinkdb_data/
+data/
 package-lock.json

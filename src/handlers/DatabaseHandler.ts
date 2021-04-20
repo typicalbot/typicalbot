@@ -1,0 +1,84 @@
+import * as Sentry from '@sentry/node';
+import Cluster from '../lib/TypicalClient';
+import {MongoClient, Db} from 'mongodb';
+
+export default class DatabaseHandler {
+    client: Cluster;
+
+    mongo: MongoClient | null = null;
+    db: Db | null = null;
+
+    constructor(client: Cluster) {
+        this.client = client;
+
+        this.init().catch((err) => Sentry.captureException(err));
+    }
+
+    async init() {
+        this.mongo = new MongoClient(process.env.MONGO_URI!, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+
+        await this.mongo.connect();
+
+        this.db = this.mongo.db(process.env.MONGO_DATABASE!);
+    }
+
+    get(table: string, key?: object) {
+        return key
+            ? this.db
+                ?.collection(table)
+                .findOne(key)
+            : this.db
+                ?.collection(table);
+        // return key
+        //     ? this.connection
+        //         .table(table)
+        //         .get(key)
+        //         .run()
+        //     : this.connection.table(table).run();
+    }
+
+    has(table: string, key: object) {
+        return !!this.db
+            ?.collection(table)
+            .findOne(key);
+        // return !!this.connection
+        //     .table(table)
+        //     .get(key)
+        //     .run();
+    }
+
+    insert(table: string, data: object = {}) {
+        return this.db
+            ?.collection(table)
+            .insertOne(data);
+        // return this.connection
+        //     .table(table)
+        //     .insert(data)
+        //     .run();
+    }
+
+    update(table: string, key: object, data: object = {}) {
+        return this.db
+            ?.collection(table)
+            .updateOne(key, {$set: data});
+        // return this.connection
+        //     .table(table)
+        //     .get(key)
+        //     .update(data, {returnChanges: true})
+        //     .run();
+    }
+
+    delete(table: string, key: object) {
+        return this.db
+            ?.collection(table)
+            .deleteOne(key);
+        // return this.connection
+        //     .table(table)
+        //     .get(key)
+        //     .delete()
+        //     .run();
+    }
+}

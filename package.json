@@ -1,33 +1,80 @@
 {
-    "name": "@typicalbot/root",
-    "version": "4.0.0",
-    "scripts": {
-        "build": "tsc --build packages/bot packages/crypto packages/ipc-server --force",
-        "lint": "eslint packages --ext .ts",
-        "lint:fix": "eslint packages --ext .ts --fix"
-    },
-    "author": {
-        "name": "TypicalBot LLC",
-        "email": "opensource@typicalbot.com"
-    },
+    "name": "typicalbot",
+    "version": "4.0.0-canary.0",
+    "description": "TypicalBot is far from typical. It's stable, lightning fast, and easy to use— TypicalBot will seamlessly help you moderate your server and provide entertainment for its members, no problem at all!",
     "license": "Apache-2.0",
+    "main": "dist/src/index.js",
     "private": true,
-    "workspaces": [
-        "packages/**",
-        "services/**"
+    "scripts": {
+        "build": "tsc",
+        "build:clean": "git clean -d -x -e node_modules -e .env -f && tsc",
+        "build:watch": "tsc --watch",
+        "build:database": "node bin/setup.js",
+        "build:instance": "tsc && node bin/pm2.js",
+        "lint": "eslint src --ext .ts",
+        "lint:fix": "eslint src --ext .ts --fix",
+        "start": "tsc && node dist/src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/typicalbot/typicalbot.git"
+    },
+    "keywords": [
+        "discordjs",
+        "javascript",
+        "bot",
+        "discord",
+        "typicalbot",
+        "discord-bot",
+        "discordapp"
     ],
+    "bugs": {
+        "url": "https://github.com/typicalbot/typicalbot/issues"
+    },
+    "homepage": "https://github.com/typicalbot/typicalbot#readme",
+    "dependencies": {
+        "@sentry/node": "^6.2.5",
+        "discord.js": "12.5.3",
+        "dotenv": "^8.2.0",
+        "fs": "0.0.2",
+        "i18next": "^20.2.1",
+        "i18next-node-fs-backend": "^2.1.3",
+        "klaw": "^3.0.0",
+        "mathjs": "^9.3.2",
+        "moment": "^2.29.1",
+        "mongodb": "^3.6.6",
+        "node-fetch": "^2.6.1",
+        "pm2": "^4.5.6",
+        "rethinkdb-ts": "^2.4.9",
+        "tslib": "^2.2.0",
+        "veza": "^1.1.0",
+        "vm2": "^3.9.3",
+        "winston": "^3.3.3"
+    },
+    "optionalDependencies": {
+        "bufferutil": "^4.0.3",
+        "erlpack": "github:discord/erlpack",
+        "utf-8-validate": "^5.0.4",
+        "zlib-sync": "^0.1.7"
+    },
     "devDependencies": {
-        "@commitlint/cli": "^12.0.1",
-        "@commitlint/config-conventional": "^12.0.1",
-        "@types/node": "^14.14.33",
-        "@typescript-eslint/eslint-plugin": "^4.17.0",
-        "@typescript-eslint/parser": "^4.17.0",
-        "eslint": "^7.21.0",
+        "@commitlint/cli": "^12.1.1",
+        "@commitlint/config-conventional": "^12.1.1",
+        "@types/i18next-node-fs-backend": "^2.1.0",
+        "@types/klaw": "^3.0.1",
+        "@types/mathjs": "^6.0.11",
+        "@types/mongodb": "^3.6.12",
+        "@types/node": "^14.14.41",
+        "@types/node-fetch": "^2.5.10",
+        "@types/ws": "^7.4.1",
+        "@typescript-eslint/eslint-plugin": "^4.22.0",
+        "@typescript-eslint/parser": "^4.22.0",
+        "eslint": "^7.24.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-security": "^1.4.0",
         "husky": "^4.3.8",
         "lint-staged": "^10.5.4",
-        "typescript": "^4.2.3"
+        "typescript": "^4.2.4"
     },
     "husky": {
         "hooks": {
@@ -44,5 +91,8 @@
         "extends": [
             "@commitlint/config-conventional"
         ]
+    },
+    "engines": {
+        "node": ">=14"
     }
 }
