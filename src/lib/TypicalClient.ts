@@ -89,8 +89,6 @@ export default class Cluster extends Client {
         this.translate = await i18n();
         this.logger.info('Loaded i18n Languages');
 
-        this.on('debug', console.log);
-
         return super.login(token);
     }
 
