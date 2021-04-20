@@ -2,7 +2,7 @@
 import dotenv from 'dotenv';
 import fs from 'fs';
 import { Client, ClientSocket, NodeMessage } from 'veza';
-import Cluster from './lib/TypicalClient';
+import TypicalClient from './lib/TypicalClient';
 
 dotenv.config();
 
@@ -11,7 +11,7 @@ fs.mkdir('data', (err) => {
 });
 
 if (process.env.CLUSTERED !== 'true') {
-    new Cluster(undefined);
+    new TypicalClient(undefined);
 } else {
     const node = new Client(process.env.CLUSTER ?? 'TypicalBot')
         .on('error', (error: Error, client: ClientSocket) =>
@@ -25,7 +25,7 @@ if (process.env.CLUSTERED !== 'true') {
     node.connectTo(process.env.NODE_PORT!).catch((error) =>
         console.error('[IPC] Disconnected!', error));
 
-    const client = new Cluster(node);
+    const client = new TypicalClient(node);
 
     // eslint-disable-next-line consistent-return
     node.on('message', async (message: NodeMessage) => {

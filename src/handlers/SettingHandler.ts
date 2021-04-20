@@ -1,11 +1,11 @@
 import { Collection } from 'discord.js';
-import Cluster from '../lib/TypicalClient';
+import TypicalClient from '../lib/TypicalClient';
 import DefaultSettings from '../lib/structures/Settings';
 import { GuildSettings } from '../lib/types/typicalbot';
 
 export default class SettingHandler extends Collection<string, GuildSettings> {
-    client: Cluster;
-    constructor(client: Cluster) {
+    client: TypicalClient;
+    constructor(client: TypicalClient) {
         super();
         this.client = client;
     }

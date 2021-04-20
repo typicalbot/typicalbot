@@ -1,14 +1,14 @@
 import * as Sentry from '@sentry/node';
-import Cluster from '../lib/TypicalClient';
+import TypicalClient from '../lib/TypicalClient';
 import { MongoClient, Db } from 'mongodb';
 
 export default class DatabaseHandler {
-    client: Cluster;
+    client: TypicalClient;
 
     mongo: MongoClient | null = null;
     db: Db | null = null;
 
-    constructor(client: Cluster) {
+    constructor(client: TypicalClient) {
         this.client = client;
 
         this.init().catch((err) => Sentry.captureException(err));

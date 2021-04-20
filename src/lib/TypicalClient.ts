@@ -29,7 +29,7 @@ interface TypicalHandlers {
     moderationLog: ModerationLogHandler;
 }
 
-export default class Cluster extends Client {
+export default class TypicalClient extends Client {
     /**
      * The client identifier.
      * @since 4.0.1

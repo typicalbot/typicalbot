@@ -1,4 +1,4 @@
-import Cluster from '../TypicalClient';
+import TypicalClient from '../TypicalClient';
 import { TaskOptions } from '../types/typicalbot';
 
 export default class Task {
@@ -6,9 +6,9 @@ export default class Task {
     type: string;
     end: number;
     data: unknown;
-    client: Cluster;
+    client: TypicalClient;
 
-    constructor(client: Cluster, options: TaskOptions) {
+    constructor(client: TypicalClient, options: TaskOptions) {
         this.client = client;
         this.id = options.id;
         this.type = options.type;

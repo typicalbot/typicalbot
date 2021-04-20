@@ -1,11 +1,11 @@
-import Cluster from '../TypicalClient';
+import TypicalClient from '../TypicalClient';
 
 export default class Event {
-    client: Cluster;
+    client: TypicalClient;
     name: string;
     once = false;
 
-    constructor(client: Cluster, name: string) {
+    constructor(client: TypicalClient, name: string) {
         this.client = client;
         this.name = name;
     }

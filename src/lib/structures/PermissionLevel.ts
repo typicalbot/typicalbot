@@ -1,5 +1,5 @@
 import { Guild, GuildMember } from 'discord.js';
-import Cluster from '../TypicalClient';
+import TypicalClient from '../TypicalClient';
 import { PermissionLevelOptions } from '../types/typicalbot';
 import { PERMISSION_ROLE_TITLE } from '../utils/constants';
 
@@ -8,9 +8,9 @@ export default class PermissionLevel {
     level: -1 | 0 | 2 | 3 | 4 | 10;
     staff = false;
     staffOverride = false;
-    client: Cluster;
+    client: TypicalClient;
 
-    constructor(client: Cluster, options: PermissionLevelOptions) {
+    constructor(client: TypicalClient, options: PermissionLevelOptions) {
         this.client = client;
         this.title = options.title;
         this.level = options.level;

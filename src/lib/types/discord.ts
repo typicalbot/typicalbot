@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
 import { TFunction } from 'i18next';
 import { GuildSettings } from './typicalbot';
-import Cluster from '../TypicalClient';
+import TypicalClient from '../TypicalClient';
 
 declare module 'discord.js' {
     interface Client {
@@ -9,12 +9,12 @@ declare module 'discord.js' {
     }
 
     interface Guild {
-        client: Cluster;
+        client: TypicalClient;
         settings: GuildSettings;
     }
 
     interface GuildMember {
-        client: Cluster;
+        client: TypicalClient;
     }
 
     interface ClientEvents {

@@ -1,11 +1,11 @@
 import { MessageEmbed, User, TextChannel } from 'discord.js';
-import Cluster from '../TypicalClient';
+import TypicalClient from '../TypicalClient';
 import { ModlogAction, TypicalGuild } from '../types/typicalbot';
 import { MODERATION_LOG_TYPE, MODERATION_LOG_REGEX, LINK, WEBSITE } from '../utils/constants';
 import { convertTime } from '../utils/util';
 
 export default class ModerationLog {
-    client: Cluster;
+    client: TypicalClient;
     guild: TypicalGuild;
     id = '';
     _id = '';
@@ -21,7 +21,7 @@ export default class ModerationLog {
     reason = '';
     expiration = 0;
 
-    constructor(client: Cluster, guild: TypicalGuild) {
+    constructor(client: TypicalClient, guild: TypicalGuild) {
         this.client = client;
         this.guild = guild;
     }

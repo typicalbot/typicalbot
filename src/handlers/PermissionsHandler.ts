@@ -2,14 +2,14 @@
 import { join, parse } from 'path';
 import { Collection, Guild } from 'discord.js';
 import klaw from 'klaw';
-import Cluster from '../lib/TypicalClient';
+import TypicalClient from '../lib/TypicalClient';
 import PermissionLevel from '../lib/structures/PermissionLevel';
 
 export default class PermissionsHandler {
-    client: Cluster;
+    client: TypicalClient;
     levels: Collection<number, PermissionLevel> = new Collection();
 
-    constructor(client: Cluster) {
+    constructor(client: TypicalClient) {
         this.client = client;
         this.init();
     }

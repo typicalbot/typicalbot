@@ -8,7 +8,7 @@ import {
     TextChannel,
     User
 } from 'discord.js';
-import Cluster from '../TypicalClient';
+import TypicalClient from '../TypicalClient';
 import ModerationLog from '../structures/ModerationLog';
 import PermLevel from '../structures/PermissionLevel';
 
@@ -189,7 +189,7 @@ export interface TypicalGuildMember extends GuildMember {
 }
 
 export interface TypicalGuild extends Guild {
-    client: Cluster;
+    client: TypicalClient;
     settings: GuildSettings;
     buildModerationLog(): Promise<ModerationLog>;
     translate(key: string, args?: Record<string, unknown>): string;

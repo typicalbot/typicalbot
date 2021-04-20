@@ -1,13 +1,13 @@
 import { Guild, GuildMember, TextChannel, User } from 'discord.js';
-import Cluster from '../lib/TypicalClient';
+import TypicalClient from '../lib/TypicalClient';
 import ModerationLog from '../lib/structures/ModerationLog';
 import { TypicalGuildMessage, TypicalGuild, GuildSettings } from '../lib/types/typicalbot';
 import * as Sentry from '@sentry/node';
 
 export default class ModerationLogHandler {
-    client: Cluster;
+    client: TypicalClient;
 
-    constructor(client: Cluster) {
+    constructor(client: TypicalClient) {
         this.client = client;
     }
 

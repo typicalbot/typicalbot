@@ -2,17 +2,17 @@
 import { join, parse } from 'path';
 import { Collection } from 'discord.js';
 import klaw from 'klaw';
-import Cluster from '../lib/TypicalClient';
+import TypicalClient from '../lib/TypicalClient';
 import Task from '../lib/structures/Task';
 
 export default class TaskHandler {
-    client: Cluster;
+    client: TypicalClient;
 
     collection: Collection<number, Task> = new Collection();
 
     taskTypes: Collection<string, any> = new Collection();
 
-    constructor(client: Cluster) {
+    constructor(client: TypicalClient) {
         this.client = client;
 
         const path = join(__dirname, '..', 'tasks');

@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import Cluster from '../TypicalClient';
+import TypicalClient from '../TypicalClient';
 import {
     CommandOptions,
     TypicalGuildMessage,
@@ -8,7 +8,7 @@ import {
 import { PERMISSION_LEVEL, MODE, ACCESS_LEVEL } from '../utils/constants';
 
 export default class Command {
-    client: Cluster;
+    client: TypicalClient;
     name: string;
     path: string;
     aliases: string[];
@@ -18,7 +18,7 @@ export default class Command {
     access: 0 | 1 | 3;
     category: string;
 
-    constructor(client: Cluster, name: string, path: string, options?: CommandOptions) {
+    constructor(client: TypicalClient, name: string, path: string, options?: CommandOptions) {
         this.client = client;
         this.name = name;
         this.path = path;
