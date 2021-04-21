@@ -22,10 +22,12 @@ import { RewriteFrames } from '@sentry/integrations';
 import { join } from 'path';
 import { version } from '../../package.json';
 
-/**
- * @since 4.0.2
- */
-type TypicalHandler = DatabaseHandler | TaskHandler | PermissionsHandler | ModerationLogHandler;
+interface TypicalHandler {
+    database: DatabaseHandler;
+    tasks: TaskHandler;
+    permissions: PermissionsHandler;
+    moderationLog: ModerationLogHandler;
+}
 
 export default class TypicalClient extends Client {
     /**
@@ -78,7 +80,8 @@ export default class TypicalClient extends Client {
     /**
      * @since 3.0.0
      */
-    public handlers: Record<string, TypicalHandler> = {};
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    public handlers = {} as TypicalHandler;
 
     /**
      * @since 3.0.0
