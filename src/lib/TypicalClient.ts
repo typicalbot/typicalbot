@@ -22,12 +22,10 @@ import { RewriteFrames } from '@sentry/integrations';
 import { join } from 'path';
 import { version } from '../../package.json';
 
-interface TypicalHandlers {
-    database: DatabaseHandler;
-    tasks: TaskHandler;
-    permissions: PermissionsHandler;
-    moderationLog: ModerationLogHandler;
-}
+/**
+ * @since 4.0.2
+ */
+type TypicalHandler = DatabaseHandler | TaskHandler | PermissionsHandler | ModerationLogHandler;
 
 export default class TypicalClient extends Client {
     /**
@@ -66,20 +64,46 @@ export default class TypicalClient extends Client {
      */
     public shardCount = process.env.TOTAL_SHARD_COUNT ?? '1';
 
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    public handlers = {} as TypicalHandlers;
+    /**
+     * The array of the application owners, fetched on 'ready' event.
+     * @since 3.2.4
+     */
+    public owners: string[] = [];
+
+    /**
+     * @since 3.0.0
+     */
+    public translate: Map<string, TFunction> = new Map();
+
+    /**
+     * @since 3.0.0
+     */
+    public handlers: Record<string, TypicalHandler> = {};
+
+    /**
+     * @since 3.0.0
+     */
     public settings = new SettingHandler(this);
+
+    /**
+     * @since 3.0.0
+     */
     public commands = new CommandHandler(this);
+
+    /**
+     * @since 3.0.0
+     */
     public events = new EventHandler(this);
+
+    /**
+     * @since 3.0.0
+     */
     public caches = {
         bans: new Collection<string, BanLog>(),
         unbans: new Collection<string, UnbanLog>(),
         softbans: new Collection(),
         invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
-
-    public translate: Map<string, TFunction> = new Map();
-    public owners: string[] = [];
 
     public constructor(ipc: VezaClient | undefined) {
         super({
