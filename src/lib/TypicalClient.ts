@@ -48,14 +48,24 @@ export default class TypicalClient extends Client {
      */
     public logger: Logger;
 
-    public shards: number[] = JSON.parse(process.env.SHARDS ?? '[1]');
     /**
      * The ipc client that connects to the external ipc server.
      * @since 3.0.0
      */
     public ipc: VezaClient | undefined;
+
+    /**
+     * The shards in this cluster.
+     * @since 3.0.0
+     */
+    public shards: number[] = process.env.SHARDS ? JSON.parse(process.env.SHARDS) : [1];
+
+    /**
+     * The total amount of shards of all clusters.
+     * @since 3.0.0
+     */
     public shardCount = process.env.TOTAL_SHARD_COUNT ?? '1';
-    public cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
+
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     public handlers = {} as TypicalHandlers;
     public settings = new SettingHandler(this);

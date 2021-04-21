@@ -5,7 +5,7 @@ export default class Ready extends Event {
     once = true;
 
     async execute() {
-        this.client.logger.info(`Client Connected | Cluster ${this.client.cluster}`);
+        this.client.logger.info(`Client Connected | Cluster ${process.env.CLUSTER} [${this.client.shards.join(', ')}]`);
 
         this.client.id ??= this.client.user?.id ?? null;
 
