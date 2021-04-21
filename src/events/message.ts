@@ -5,6 +5,7 @@ import { TypicalGuildMessage, GuildSettings } from '../lib/types/typicalbot';
 import { PERMISSION_LEVEL, MODE } from '../lib/utils/constants';
 import { fetchAccess } from '../lib/utils/util';
 import { permissionError } from '../lib/utils/util';
+import * as Sentry from '@sentry/node';
 
 export default class extends Event {
     readonly requiredPermissions = new Permissions(['VIEW_CHANNEL', 'SEND_MESSAGES']).freeze();
@@ -21,7 +22,12 @@ export default class extends Event {
         const channel = message.channel as TextChannel | NewsChannel;
         if (!channel.permissionsFor(me)!.has(this.requiredPermissions, false)) return;
 
-        return this.handleGuild(message as TypicalGuildMessage);
+        return this.handleGuild(message as TypicalGuildMessage)
+            .catch(err => Sentry.captureMessage(err, scope => {
+                scope.clear();
+                scope.setTag('guildId', message.guild!.id);
+                return scope;
+            }));
     }
 
     async handleGuild(message: TypicalGuildMessage) {
