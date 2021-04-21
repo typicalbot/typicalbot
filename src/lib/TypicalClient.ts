@@ -48,8 +48,12 @@ export default class TypicalClient extends Client {
      */
     public logger: Logger;
 
-    public node: VezaClient | undefined;
     public shards: number[] = JSON.parse(process.env.SHARDS ?? '[1]');
+    /**
+     * The ipc client that connects to the external ipc server.
+     * @since 3.0.0
+     */
+    public ipc: VezaClient | undefined;
     public shardCount = process.env.TOTAL_SHARD_COUNT ?? '1';
     public cluster = `${process.env.CLUSTER} [${this.shards.join(',')}]`;
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -67,7 +71,7 @@ export default class TypicalClient extends Client {
     public translate: Map<string, TFunction> = new Map();
     public owners: string[] = [];
 
-    public constructor(node: VezaClient | undefined) {
+    public constructor(ipc: VezaClient | undefined) {
         super({
             messageCacheMaxSize: 300,
             messageCacheLifetime: 900,
@@ -97,7 +101,7 @@ export default class TypicalClient extends Client {
 
         this.logger = new Logger();
 
-        this.node = node;
+        this.ipc = ipc;
 
         this.login(process.env.TOKEN!).catch((err) => Sentry.captureException(err));
     }
@@ -119,9 +123,9 @@ export default class TypicalClient extends Client {
     }
 
     public fetchData(property: string): any {
-        if (!this.node) return eval(`this.${property}`);
+        if (!this.ipc) return eval(`this.${property}`);
 
-        return this.node.sendTo('manager', {
+        return this.ipc.sendTo('manager', {
             event: 'collectData',
             data: property
         }, { receptive: true });
