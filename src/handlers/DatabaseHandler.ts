@@ -17,7 +17,8 @@ export default class DatabaseHandler {
     async init() {
         this.mongo = new MongoClient(process.env.MONGO_URI!, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            poolSize: parseInt(process.env.MONGO_POOL_SIZE!)
         });
 
         await this.mongo.connect();
