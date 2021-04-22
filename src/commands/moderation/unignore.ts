@@ -51,12 +51,7 @@ export default class extends Command {
         channelIDs.splice(channelIDs.indexOf(message.channel.id), 1);
 
         const ignored = await this.client.settings
-            .update(message.guild.id, {
-                ignored: {
-                    ...message.guild.settings.ignored,
-                    [type]: channelIDs
-                }
-            })
+            .update(message.guild.id, `ignored.${type}`, channelIDs)
             .catch(() => null);
 
         if (ignored)

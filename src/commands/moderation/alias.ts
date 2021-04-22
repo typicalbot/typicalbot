@@ -73,7 +73,7 @@ export default class extends Command {
         aliasList.push({ alias, command: cmd.name });
 
         const updated = await this.client.settings
-            .update(message.guild.id, { aliases: aliasList })
+            .update(message.guild.id, 'aliases', aliasList)
             .catch(() => null);
 
         if (!updated)
@@ -96,7 +96,7 @@ export default class extends Command {
         aliasList.splice(aliasIndex, 1);
 
         const updated = await this.client.settings
-            .update(message.guild.id, { aliases: aliasList })
+            .update(message.guild.id, 'aliases', aliasList)
             .catch(() => null);
         if (!updated)
             return message.error(message.translate('moderation/alias:REMOVE_ERROR'));
@@ -106,7 +106,7 @@ export default class extends Command {
 
     clear(message: TypicalGuildMessage) {
         this.client.settings
-            .update(message.guild.id, { aliases: [] })
+            .update(message.guild.id, 'aliases', [])
             .then(() =>
                 message.success(message.translate('moderation/alias:CLEARED')))
             .catch(() =>

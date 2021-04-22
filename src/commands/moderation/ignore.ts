@@ -60,9 +60,7 @@ export default class extends Command {
         array.push(message.channel.id);
 
         return this.client.settings
-            .update(message.guild.id, {
-                ignored: { ...message.guild.settings.ignored, [key]: array }
-            })
+            .update(message.guild.id, `ignored.${key}`, array)
             .then(() =>
                 message.success(message.translate('moderation/ignore:ADDED', { type: key })));
     }

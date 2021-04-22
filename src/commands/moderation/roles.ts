@@ -256,7 +256,7 @@ export default class extends Command {
         }
 
         const updated = await this.client.settings
-            .update(message.guild.id, { roles: { public: roleIDs } })
+            .update(message.guild.id, 'roles.public', roleIDs)
             .catch(() => null);
 
         return updated
@@ -270,7 +270,7 @@ export default class extends Command {
             return message.error(permissionError(this.client, message, this, permission));
 
         const updated = await this.client.settings
-            .update(message.guild.id, { roles: { public: [] } })
+            .update(message.guild.id, 'roles.public', [])
             .catch(() => null);
 
         return updated

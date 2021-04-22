@@ -457,7 +457,7 @@ export default class extends Command {
     }
 
     async edit(message: TypicalGuildMessage, setting: SettingsData, value: string) {
-        let payload = {};
+        let payload;
         const HERE = message.translate('common:HERE');
         const EMBED = message.translate('common:EMBED');
 
@@ -624,18 +624,21 @@ export default class extends Command {
                 : value);
         }
 
-        await this.client.settings.update(message.guild.id, payload);
+        // TODO: This is a temporary fix
+        await this.client.settings.update(message.guild.id, setting.path, payload);
 
         return message.success(message.translate('administration/conf:UPDATED'));
     }
 
+    // TODO: This is a temporary fix
     // eslint-disable-next-line @typescript-eslint/ban-types
-    stringToObject(path: string, value: unknown): {} {
-        if (!path.includes('.')) return { [path]: value };
-        const parts = path.split('.');
-        return {
-            // @ts-ignore
-            [parts.shift()]: this.stringToObject(parts.join('.'), value)
-        };
+    stringToObject(path: string, value: unknown) {
+        // if (!path.includes('.')) return { [path]: value };
+        // const parts = path.split('.');
+        // return {
+        //     @ts-ignore
+        // [parts.shift()]: this.stringToObject(parts.join('.'), value)
+        // };
+        return value;
     }
 }
