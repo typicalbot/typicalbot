@@ -4,6 +4,7 @@
 <p align="center">
     <a target="_blank" href="https://discord.gg/typicalbot"><img src="https://discordapp.com/api/guilds/163038706117115906/embed.png?style=shield" alt="Discord"></a>
     <a target="_blank" href="https://translate.typicalbot.com/project/typicalbot"><img src="https://badges.crowdin.net/typicalbot/localized.svg" alt="Crowdin"></a>
+    <a target="_blank" href="https://stackshare.io/typicalbot-llc/typicalbot"><img src="https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat" alt="StackShare"></a>
 </p>
 
 ## About TypicalBot
