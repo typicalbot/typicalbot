@@ -26,6 +26,7 @@ export default class extends Event {
             .catch(err => Sentry.captureMessage(err, scope => {
                 scope.clear();
                 scope.setTag('guildId', message.guild!.id);
+                scope.setTag('clusterId', process.env.CLUSTER!);
                 return scope;
             }));
     }
