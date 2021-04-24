@@ -33,7 +33,9 @@ export default class DatabaseHandler {
                 ?.collection(table)
                 .findOne(key)
             : this.db
-                ?.collection(table);
+                ?.collection(table)
+                .find({})
+                .toArray();
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-types
