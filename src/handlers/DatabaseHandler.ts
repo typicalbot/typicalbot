@@ -49,20 +49,38 @@ export default class DatabaseHandler {
     insert(table: string, data: object = {}) {
         return this.db
             ?.collection(table)
-            .insertOne(data);
+            .insertOne(data)
+            .then(res => this.client.logger.debug(`Inserted ${res.result.n} documents`))
+            .catch(err => Sentry.captureException(err, scope => {
+                scope.clear();
+                scope.setTag('clusterId', process.env.CLUSTER!);
+                return scope;
+            }));
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-types
     update(table: string, key: object, data: object = {}) {
         return this.db
             ?.collection(table)
-            .updateOne(key, { $set: data });
+            .updateOne(key, { $set: data })
+            .then(res => this.client.logger.debug(`Updated ${res.result.n} documents`))
+            .catch(err => Sentry.captureException(err, scope => {
+                scope.clear();
+                scope.setTag('clusterId', process.env.CLUSTER!);
+                return scope;
+            }));
     }
 
     // eslint-disable-next-line @typescript-eslint/ban-types
     delete(table: string, key: object) {
         return this.db
             ?.collection(table)
-            .deleteOne(key);
+            .deleteOne(key)
+            .then(res => this.client.logger.debug(`Deleted ${res.result.n} documents`))
+            .catch(err => Sentry.captureException(err, scope => {
+                scope.clear();
+                scope.setTag('clusterId', process.env.CLUSTER!);
+                return scope;
+            }));
     }
 }
