@@ -64,8 +64,7 @@ export default (id: string) => ({
         invite: false,
         inviteaction: false,
         invitewarn: 1,
-        invitekick: 3,
-        link: false
+        invitekick: 3
     },
     nonickname: true,
     subscriber: null,
