@@ -89,7 +89,6 @@ export interface GuildSettings {
         inviteaction: boolean;
         invitewarn: number;
         invitekick: number;
-        link: boolean;
     };
     nonickname: boolean;
     subscriber: string | null;
