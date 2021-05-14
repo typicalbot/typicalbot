@@ -30,7 +30,7 @@ export default class GuildInvitePosted extends Event {
                 cache.size === settings.automod.invitewarn
             ) {
                 if (settings.logs.moderation) {
-                    this.client.handlers.moderationLog
+                    await this.client.handlers.moderationLog
                         .buildCase(message.guild)
                         .setAction(MODERATION_LOG_TYPE.WARN)
                         .setModerator(this.client.user as User)

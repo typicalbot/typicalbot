@@ -61,6 +61,9 @@ export default class extends Event {
         if (userPermissions.level < PERMISSION_LEVEL.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id))
             this.inviteCheck(message);
 
+        if (userPermissions.level < PERMISSION_LEVEL.SERVER_MODERATOR)
+            this.spamCheck(message);
+
         if (userPermissions.level < PERMISSION_LEVEL.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id))
             return;
 
@@ -119,6 +122,24 @@ export default class extends Event {
 
         if (inviteRegex.test(message.content) || inviteRegex.test(inspect(message.embeds, { depth: 4 })))
             this.client.emit('guildInvitePosted', message);
+    }
+
+    spamCheck(message: TypicalGuildMessage) {
+        if (message.guild.settings.automod.spam.caps.enabled) {
+            const capsRegex = /[A-Z]/g;
+            const severity = message.guild.settings.automod.spam.caps.severity;
+
+            if (message.content.length > 5 && (message.content.match(capsRegex)!.length / message.content.length) >= (severity / 10))
+                this.client.emit('guildSpamPosted', message);
+        }
+
+        if (message.guild.settings.automod.spam.mentions.enabled) {
+            const mentionsRegex = /<@![0-9]{18}>/gm;
+            const severity = message.guild.settings.automod.spam.mentions.severity;
+
+            if (message.content.match(mentionsRegex)!.length >= severity)
+                this.client.emit('guildSpamPosted', message);
+        }
     }
 
     handleDM(message: Message) {

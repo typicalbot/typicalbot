@@ -1,0 +1,4 @@
+{
+    "REASON": "Automatic {{action}}: User sent {{type}} in {{channel}}",
+    "SPAM": "spam"
+}

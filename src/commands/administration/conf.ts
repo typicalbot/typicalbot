@@ -254,6 +254,30 @@ export default class extends Command {
                 type: 'boolean',
                 path: 'prefix.default'
             },
+            'antispam-mentions': {
+                description: 'administration/conf:ANTISPAM-MENTIONS',
+                value: settings.automod.spam.mentions.enabled,
+                type: 'boolean',
+                path: 'automod.spam.mentions.enabled'
+            },
+            'antispam-mentions-severity': {
+                description: 'administration/conf:ANTISPAM-MENTIONS-SEVERITY',
+                value: settings.automod.spam.mentions.severity,
+                type: 'default',
+                path: 'automod.spam.mentions.severity'
+            },
+            'antispam-caps': {
+                description: 'administration/conf:ANTISPAM-CAPS',
+                value: settings.automod.spam.caps.enabled,
+                type: 'boolean',
+                path: 'automod.spam.caps.enabled'
+            },
+            'antispam-caps-severity': {
+                description: 'administration/conf:ANTISPAM-CAPS-SEVERITY',
+                value: settings.automod.spam.caps.severity,
+                type: 'default',
+                path: 'automod.spam.caps.severity'
+            },
             antiinvite: {
                 description: 'administration/conf:ANTIINVITE',
                 value: settings.automod.invite,

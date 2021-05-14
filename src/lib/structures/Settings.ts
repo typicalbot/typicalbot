@@ -51,6 +51,16 @@ export default (id: string) => ({
         default: true
     },
     automod: {
+        spam: {
+            mentions: {
+                enabled: false,
+                severity: 3
+            },
+            caps: {
+                enabled: false,
+                severity: 7
+            }
+        },
         invite: false,
         inviteaction: false,
         invitewarn: 1,

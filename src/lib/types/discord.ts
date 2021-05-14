@@ -19,5 +19,6 @@ declare module 'discord.js' {
 
     interface ClientEvents {
         guildInvitePosted: [Message];
+        guildSpamPosted: [Message];
     }
 }

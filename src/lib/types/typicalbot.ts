@@ -75,6 +75,16 @@ export interface GuildSettings {
         default: boolean;
     };
     automod: {
+        spam: {
+            mentions: {
+                enabled: boolean;
+                severity: number;
+            };
+            caps: {
+                enabled: boolean;
+                severity: number;
+            };
+        };
         invite: boolean;
         inviteaction: boolean;
         invitewarn: number;
