@@ -328,7 +328,7 @@ export default class extends Command {
             }
         };
 
-        if (!setting) {
+        if (!setting || /^\d+$/.test(setting)) {
             return this.list(message, setting, settingsData);
         }
 
