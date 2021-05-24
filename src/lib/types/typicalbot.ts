@@ -58,6 +58,7 @@ export interface GuildSettings {
         moderation: string | null;
         purge: string | null;
         say: string | null;
+        slowmode: string | null;
     };
     auto: {
         role: {

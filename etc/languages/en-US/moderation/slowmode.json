@@ -3,5 +3,8 @@
     "USAGE": "slowmode [time]",
     "ERROR": "The maximum slowmode that Discord allows is 6 hours (21600 seconds)",
     "RESET": "Successfully disabled Discord slowmode.",
-    "SET": "Successfully set Discord slowmode to {{cooldown}} seconds."
+    "SET": "Successfully set Discord slowmode to {{cooldown}} seconds.",
+    "SLOWMODE": "Slowmode",
+    "LOG_EMBED": "{{cooldown}} seconds",
+    "LOG_TEXT": "**{{user}}** has set the slowmode in <#{{channel}}> to {{cooldown}} seconds."
 }

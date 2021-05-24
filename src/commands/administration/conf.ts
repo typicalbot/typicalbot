@@ -212,6 +212,12 @@ export default class extends Command {
                 type: 'log',
                 path: 'logs.say'
             },
+            'logs-slowmode': {
+                description: 'administration/conf:LOGS-SLOWMODE',
+                value: settings.logs.slowmode,
+                type: 'log',
+                path: 'logs.slowmode'
+            },
             modlogs: {
                 description: 'administration/conf:MODLOGS',
                 value: settings.logs.moderation,

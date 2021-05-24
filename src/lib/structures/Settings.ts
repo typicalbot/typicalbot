@@ -33,7 +33,8 @@ export default (id: string) => ({
         invite: null,
         moderation: null,
         purge: null,
-        say: null
+        say: null,
+        slowmode: null
     },
     auto: {
         role: {

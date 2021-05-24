@@ -41,6 +41,7 @@
   "LOGS-NICKNAME": "A custom set message to be posted when a user changes their nickname in the server.",
   "LOGS-INVITE": "A custom set message to be posted when a user posts an invite in the server.",
   "LOGS-SAY": "Whether to log uses of the `$say` command.",
+    "LOGS-SLOWMODE": "Whether to log uses of the `$slowmode` command",
   "MODLOGS": "A channel to send moderation logs in. Aka audit logs.",
   "MODLOGS-PURGE": "A modlog to log when a moderator or administrator purges messages in a channel.",
   "AUTOMESSAGE": "A message to be sent to a user when they join the server.",
