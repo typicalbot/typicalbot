@@ -1,0 +1,7 @@
+{
+    "DESCRIPTION": "Enable or disable the Discord slowmode.",
+    "USAGE": "slowmode [time]",
+    "ERROR": "The maximum slowmode that Discord allows is 6 hours (21600 seconds)",
+    "RESET": "Successfully disabled Discord slowmode.",
+    "SET": "Successfully set Discord slowmode to {{cooldown}} seconds."
+}
