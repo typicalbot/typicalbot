@@ -6,6 +6,7 @@ import { PERMISSION_LEVEL, MODE } from '../lib/utils/constants';
 import { fetchAccess } from '../lib/utils/util';
 import { permissionError } from '../lib/utils/util';
 import * as Sentry from '@sentry/node';
+import { CustomCommand } from '../lib/database/structures/CustomCommand';
 
 export default class extends Event {
     readonly requiredPermissions = new Permissions(['VIEW_CHANNEL', 'SEND_MESSAGES']).freeze();
@@ -75,9 +76,18 @@ export default class extends Event {
         const prefix = this.matchPrefix(message.author, settings, split);
         if (!prefix || !message.content.startsWith(prefix)) return;
 
-        const command = this.client.commands.fetch(split.slice(prefix.length).toLowerCase(), settings);
+        const raw = split.slice(prefix.length).toLowerCase();
+        const command = this.client.commands.fetch(raw, settings);
 
-        if (!command) return;
+        if (!command) {
+            const customCommand = (await this.client.handlers.database.get('custom_commands', { guildId: message.guild.id, command: raw })) as CustomCommand;
+
+            if (!customCommand) {
+                return;
+            } else {
+                return message.send(customCommand.content);
+            }
+        }
 
         if (!message.member)
             await message.guild.members.fetch(message.author.id);

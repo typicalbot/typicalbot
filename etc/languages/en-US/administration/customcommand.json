@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Create or update a custom command.",
+    "USAGE": "customcommand <command> <content>",
+    "INVALID": "You must specify both the command and the contents: `$customcommand <command> <content>`",
+    "CREATED": "You have successfully created the `{{command}}` command.",
+    "UPDATED": "You have successfully updated the `{{command}}` command.",
+    "NOT_FOUND": "The command `{{command}}` could not be found.",
+    "DELETED": "You have successfully deleted the `{{command}}` command."
+}
