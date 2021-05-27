@@ -1,7 +1,6 @@
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, SettingsData } from '../../lib/types/typicalbot';
 import { MODE, PERMISSION_LEVEL, LINK } from '../../lib/utils/constants';
-import { permissionError } from '../../lib/utils/util';
 
 const roleRegex = /(?:(?:<@&)?(\d{17,20})>?|(.+))/i;
 const msRegex = /^(\d+)$/i;
