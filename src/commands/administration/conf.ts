@@ -73,15 +73,10 @@ export const possibleLanguages = [
 export default class extends Command {
     aliases = ['set', 'settings'];
     mode = MODE.STRICT;
+    permission = PERMISSION_LEVEL.SERVER_ADMINISTRATOR;
 
     async execute(message: TypicalGuildMessage, parameters: string) {
         const [setting, value] = parameters.split(/(?<=^\S+)\s/);
-
-        const permission = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
-
-        if (permission.level < PERMISSION_LEVEL.SERVER_ADMINISTRATOR)
-            // eslint-disable-next-line max-len
-            return message.error(permissionError(this.client, message, this, permission, PERMISSION_LEVEL.SERVER_ADMINISTRATOR));
 
         const settings = message.guild.settings;
         const settingsData = {
