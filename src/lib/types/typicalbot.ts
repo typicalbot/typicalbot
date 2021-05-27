@@ -135,6 +135,7 @@ export interface PermissionLevel {
     level: -1 | 0 | 2 | 3 | 4 | 10;
     staff?: boolean;
     staffOverride?: boolean;
+
     check(guild: Guild, member: GuildMember): boolean;
 }
 
@@ -156,7 +157,9 @@ export interface AccessLevel {
 export interface TypicalMessage extends Message {
     menuResponse?: Message;
     embeddable: boolean;
+
     ask(question: string): Promise<Message | undefined>;
+
     chooseOption(options: string[]): Promise<string | undefined>;
 
     dm(
@@ -164,26 +167,31 @@ export interface TypicalMessage extends Message {
         embed?: MessageEmbed,
         options?: MessageOptions
     ): Promise<Message>;
+
     error(
         content: string | MessageEmbed,
         embed?: MessageEmbed,
         options?: MessageOptions
     ): Promise<Message>;
+
     send(
         content: string | MessageEmbed,
         embed?: MessageEmbed,
         options?: MessageOptions
     ): Promise<Message>;
+
     success(
         content: string | MessageEmbed,
         embed?: MessageEmbed,
         options?: MessageOptions
     ): Promise<Message>;
+
     respond(
         content: string | MessageEmbed,
         embed?: MessageEmbed,
         options?: MessageOptions
     ): Promise<Message>;
+
     translate(key: string, args?: Record<string, unknown>): string;
 }
 
@@ -201,9 +209,13 @@ export interface TypicalGuildMember extends GuildMember {
 export interface TypicalGuild extends Guild {
     client: TypicalClient;
     settings: GuildSettings;
+
     buildModerationLog(): Promise<ModerationLog>;
+
     translate(key: string, args?: Record<string, unknown>): string;
+
     fetchPermissions(userID: string, ignoreStaff?: boolean): Promise<PermLevel>;
+
     fetchSettings(): Promise<GuildSettings>;
 }
 
@@ -224,6 +236,7 @@ export interface UnbanLog {
     moderator: User;
     reason?: string;
 }
+
 export interface FormatMessageOptions {
     oldMember?: TypicalGuildMember;
     channel?: GuildChannel;

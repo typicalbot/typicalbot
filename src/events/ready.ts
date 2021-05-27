@@ -9,7 +9,7 @@ export default class Ready extends Event {
 
         this.client.id ??= this.client.user?.id ?? null;
 
-        this.client.fetchApplication()
+        this.client.application?.fetch()
             .then((application) => {
                 if (application.owner instanceof Team) {
                     application.owner.members.forEach((m) => this.client.owners.push(m.id));
