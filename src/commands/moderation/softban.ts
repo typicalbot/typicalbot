@@ -41,7 +41,7 @@ export default class extends Command {
         )
             return message.error(message.translate('moderation/ban:TOO_LOW'));
         if (!member.bannable)
-            return message.error(message.translate('moderation/ban:UNBANNABLEs'));
+            return message.error(message.translate('moderation/ban:UNBANNABLE'));
 
         this.client.caches.softbans.set(userID, userID);
 
