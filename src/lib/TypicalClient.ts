@@ -7,7 +7,6 @@ import * as Sentry from '@sentry/node';
 import { Client, Collection, Intents } from 'discord.js';
 import { TFunction } from 'i18next';
 import fetch from 'node-fetch';
-import { Client as VezaClient } from 'veza';
 import { BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import i18n from './utils/i18n';
@@ -47,12 +46,6 @@ export default class TypicalClient extends Client {
      * @since 3.1.0
      */
     public logger: Logger;
-
-    /**
-     * The ipc client that connects to the external ipc server.
-     * @since 3.0.0
-     */
-    public ipc: VezaClient | undefined;
 
     /**
      * The shards in this cluster.
@@ -108,7 +101,7 @@ export default class TypicalClient extends Client {
         invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
 
-    public constructor(ipc: VezaClient | undefined) {
+    public constructor() {
         super({
             messageCacheMaxSize: 300,
             messageCacheLifetime: 900,
@@ -143,8 +136,6 @@ export default class TypicalClient extends Client {
 
         this.logger = new Logger();
 
-        this.ipc = ipc;
-
         this.login(process.env.TOKEN!).catch((err) => Sentry.captureException(err));
     }
 
@@ -162,15 +153,6 @@ export default class TypicalClient extends Client {
         this.logger.info('Loaded i18n Languages');
 
         return super.login(token);
-    }
-
-    public fetchData(property: string): any {
-        if (!this.ipc) return eval(`this.${property}`);
-
-        return this.ipc.sendTo('manager', {
-            event: 'collectData',
-            data: property
-        }, { receptive: true });
     }
 
     public async sendStatistics(shardID: number): Promise<void> {
@@ -208,33 +190,33 @@ export default class TypicalClient extends Client {
             Sentry.captureException(err);
         });
 
-        const guildCount = await this.fetchData('guilds.cache.size');
+        // TODO: Look into API to see if they support sending guild count per shard
+        // fetch(`https://api.discordextremelist.xyz/v2/bot/${this.id}/stats`, {
+        //     method: 'post',
+        //     headers: {
+        //         Authorization: process.env.API_DEL!,
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         guildCount: guildCount,
+        //         shardCount: this.shardCount
+        //     })
+        // }).catch((err) => {
+        //     Sentry.captureException(err);
+        // });
 
-        fetch(`https://api.discordextremelist.xyz/v2/bot/${this.id}/stats`, {
-            method: 'post',
-            headers: {
-                Authorization: process.env.API_DEL!,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                guildCount: guildCount,
-                shardCount: this.shardCount
-            })
-        }).catch((err) => {
-            Sentry.captureException(err);
-        });
-
-        fetch(`https://api.botlist.space/v1/bots/${this.id}`, {
-            method: 'post',
-            headers: {
-                Authorization: process.env.API_BLS!,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                server_count: guildCount
-            })
-        }).catch((err) => {
-            Sentry.captureException(err);
-        });
+        // TODO: Look into API to see if they support sending guild count per shard
+        // fetch(`https://api.botlist.space/v1/bots/${this.id}`, {
+        //     method: 'post',
+        //     headers: {
+        //         Authorization: process.env.API_BLS!,
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         server_count: guildCount
+        //     })
+        // }).catch((err) => {
+        //     Sentry.captureException(err);
+        // });
     }
 }
