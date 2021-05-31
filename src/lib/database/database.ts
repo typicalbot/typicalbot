@@ -19,7 +19,11 @@ class Database {
             poolSize: parseInt(process.env.MONGO_POOL_SIZE!)
         });
 
-        this.mongo.connect().catch(Sentry.captureException);
+        this.mongo.connect().catch(err => Sentry.captureException(err, scope => {
+            scope.clear();
+            scope.setTag('clusterId', process.env.CLUSTER!);
+            return scope;
+        }));
 
         this.db = this.mongo.db(process.env.MONGO_DATABASE!);
     }
