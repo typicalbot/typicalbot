@@ -1,7 +1,7 @@
 import Command from '../../lib/structures/Command';
 import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { CustomCommand } from '../../lib/database/structures/CustomCommand';
+import { GuildCustomCommand } from '../../lib/database/structures/GuildStructure';
 
 export default class extends Command {
     aliases = ['cc'];
@@ -22,7 +22,7 @@ export default class extends Command {
         if (command === 'delete') {
             const toDelete = content.split(' ')[0];
 
-            const row = (await this.client.handlers.database.get('custom_commands', { guildId: message.guild.id, command: toDelete })) as CustomCommand;
+            const row = (await this.client.handlers.database.get('custom_commands', { guildId: message.guild.id, command: toDelete })) as GuildCustomCommand;
 
             if (!row) {
                 // no command found
@@ -34,11 +34,11 @@ export default class extends Command {
             return message.send(message.translate('administration/customcommand:DELETED', { command: toDelete }));
         }
 
-        const row = (await this.client.handlers.database.get('custom_commands', { guildId: message.guild.id, command: command })) as CustomCommand;
+        const row = (await this.client.handlers.database.get('custom_commands', { guildId: message.guild.id, command: command })) as GuildCustomCommand;
 
         if (!row) {
             // new command
-            const customCommand: CustomCommand = {
+            const customCommand: GuildCustomCommand = {
                 guildId: message.guild.id,
                 command: command,
                 content: content
