@@ -1,6 +1,13 @@
 import * as Sentry from '@sentry/node';
 import { MongoClient, Db, FilterQuery } from 'mongodb';
 
+/**
+ * The different collections that can be used in the database class.
+ *
+ * The following collections will be removed in the near future: 'guilds', 'mutes' and 'tasks'
+ */
+type DatabaseCollection = 'guilds' | 'mutes' | 'tasks' | 'custom_commands';
+
 class Database {
     private readonly mongo: MongoClient;
     private readonly db: Db;
@@ -17,15 +24,15 @@ class Database {
         this.db = this.mongo.db(process.env.MONGO_DATABASE!);
     }
 
-    public get(collection: string, filter: FilterQuery<any>) {
+    public get(collection: DatabaseCollection, filter: FilterQuery<any>) {
         return this.db.collection(collection).findOne(filter);
     }
 
-    public exists(collection: string, path: string) {
+    public exists(collection: DatabaseCollection, path: string) {
         return this.db.collection(collection).find({ [path]: { $exists: true, $ne: null } });
     }
 
-    public insert(collection: string, data: unknown) {
+    public insert(collection: DatabaseCollection, data: unknown) {
         return this.db.collection(collection).insertOne(data)
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
@@ -34,7 +41,7 @@ class Database {
             }));
     }
 
-    public update(collection: string, filter: FilterQuery<any>, data: unknown) {
+    public update(collection: DatabaseCollection, filter: FilterQuery<any>, data: unknown) {
         return this.db.collection(collection).updateOne(filter, { $set: data })
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
@@ -43,7 +50,7 @@ class Database {
             }));
     }
 
-    public delete(collection: string, filter: FilterQuery<any>) {
+    public delete(collection: DatabaseCollection, filter: FilterQuery<any>) {
         return this.db.collection(collection).deleteOne(filter)
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
@@ -54,3 +61,4 @@ class Database {
 }
 
 export default Database;
+export type { DatabaseCollection };
