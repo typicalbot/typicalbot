@@ -11,7 +11,6 @@ import { BanLog, UnbanLog } from './types/typicalbot';
 import Logger from './utils/Logger';
 import i18n from './utils/i18n';
 import CommandHandler from '../handlers/CommandHandler';
-import DatabaseHandler from '../handlers/DatabaseHandler';
 import EventHandler from '../handlers/EventHandler';
 import ModerationLogHandler from '../handlers/ModerationLogHandler';
 import PermissionsHandler from '../handlers/PermissionsHandler';
@@ -20,9 +19,9 @@ import TaskHandler from '../handlers/TaskHandler';
 import { RewriteFrames } from '@sentry/integrations';
 import { join } from 'path';
 import { version } from '../../package.json';
+import Database from './database/database';
 
 interface TypicalHandler {
-    database: DatabaseHandler;
     tasks: TaskHandler;
     permissions: PermissionsHandler;
     moderationLog: ModerationLogHandler;
@@ -91,6 +90,8 @@ export default class TypicalClient extends Client {
      */
     public events = new EventHandler(this);
 
+    public database: Database;
+
     /**
      * @since 3.0.0
      */
@@ -101,7 +102,7 @@ export default class TypicalClient extends Client {
         invites: new Collection<string, Collection<string, NodeJS.Timeout>>()
     };
 
-    public constructor() {
+    public constructor(database: Database) {
         super({
             messageCacheMaxSize: 300,
             messageCacheLifetime: 900,
@@ -120,6 +121,8 @@ export default class TypicalClient extends Client {
                 Intents.FLAGS.GUILD_MESSAGE_REACTIONS | Intents.FLAGS.DIRECT_MESSAGES |
                 Intents.FLAGS.DIRECT_MESSAGE_REACTIONS
         });
+
+        this.database = database;
 
         Sentry.init({
             dsn: process.env.API_SENTRY,
@@ -140,10 +143,6 @@ export default class TypicalClient extends Client {
     }
 
     public async login(token: string): Promise<string> {
-        // MUST SETUP DATABASE BEFORE ANYTHING ELSE
-        this.handlers.database = new DatabaseHandler(this);
-        await this.handlers.database.init();
-
         this.handlers.tasks = new TaskHandler(this);
         this.handlers.permissions = new PermissionsHandler(this);
         this.handlers.moderationLog = new ModerationLogHandler(this);

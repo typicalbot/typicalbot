@@ -80,7 +80,7 @@ export default class extends Event {
         const command = this.client.commands.fetch(raw, settings);
 
         if (!command) {
-            const customCommand = (await this.client.handlers.database.get('custom_commands', { guildId: message.guild.id, command: raw })) as GuildCustomCommand;
+            const customCommand = (await this.client.database.get('custom_commands', { guildId: message.guild.id, command: raw })) as GuildCustomCommand;
 
             if (!customCommand) {
                 return;

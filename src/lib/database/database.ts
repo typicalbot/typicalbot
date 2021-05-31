@@ -17,35 +17,47 @@ import {
 type DatabaseCollection = 'guilds' | 'mutes' | 'tasks' | 'custom_commands';
 
 class Database {
-    private readonly mongo: MongoClient;
-    private readonly db: Db;
+    private mongo: MongoClient | undefined;
+    private db: Db | undefined;
 
     public constructor() {
+        this._initialize().catch(err => {
+            Sentry.captureException(err, scope => {
+                scope.clear();
+                scope.setTag('clusterId', process.env.CLUSTER!);
+                return scope;
+            });
+
+            process.exit(1);
+        });
+    }
+
+    private async _initialize() {
         this.mongo = new MongoClient(process.env.MONGO_URI!, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             poolSize: parseInt(process.env.MONGO_POOL_SIZE!)
         });
 
-        this.mongo.connect().catch(err => Sentry.captureException(err, scope => {
-            scope.clear();
-            scope.setTag('clusterId', process.env.CLUSTER!);
-            return scope;
-        }));
+        await this.mongo.connect();
 
         this.db = this.mongo.db(process.env.MONGO_DATABASE!);
     }
 
-    public get(collection: DatabaseCollection, filter: FilterQuery<any>): Promise<any> {
-        return this.db.collection(collection).findOne(filter);
+    public get(collection: DatabaseCollection, filter: FilterQuery<any>): Promise<any> | undefined {
+        return this.db?.collection(collection).findOne(filter);
     }
 
-    public exists(collection: DatabaseCollection, path: string): Cursor<any> {
-        return this.db.collection(collection).find({ [path]: { $exists: true, $ne: null } });
+    public getAll(collection: DatabaseCollection): Promise<any[]> | undefined {
+        return this.db?.collection(collection).find({}).toArray();
     }
 
-    public insert(collection: DatabaseCollection, data: unknown): Promise<InsertOneWriteOpResult<any> | string> {
-        return this.db.collection(collection).insertOne(data)
+    public exists(collection: DatabaseCollection, path: string): Cursor<any> | undefined {
+        return this.db?.collection(collection).find({ [path]: { $exists: true, $ne: null } });
+    }
+
+    public insert(collection: DatabaseCollection, data: unknown): Promise<InsertOneWriteOpResult<any> | string> | undefined {
+        return this.db?.collection(collection).insertOne(data)
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
                 scope.setTag('clusterId', process.env.CLUSTER!);
@@ -53,8 +65,8 @@ class Database {
             }));
     }
 
-    public update(collection: DatabaseCollection, filter: FilterQuery<any>, data: unknown): Promise<UpdateWriteOpResult | string> {
-        return this.db.collection(collection).updateOne(filter, { $set: data })
+    public update(collection: DatabaseCollection, filter: FilterQuery<any>, data: unknown): Promise<UpdateWriteOpResult | string> | undefined {
+        return this.db?.collection(collection).updateOne(filter, { $set: data })
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
                 scope.setTag('clusterId', process.env.CLUSTER!);
@@ -62,8 +74,8 @@ class Database {
             }));
     }
 
-    public delete(collection: DatabaseCollection, filter: FilterQuery<any>): Promise<DeleteWriteOpResultObject | string> {
-        return this.db.collection(collection).deleteOne(filter)
+    public delete(collection: DatabaseCollection, filter: FilterQuery<any>): Promise<DeleteWriteOpResultObject | string> | undefined {
+        return this.db?.collection(collection).deleteOne(filter)
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
                 scope.setTag('clusterId', process.env.CLUSTER!);

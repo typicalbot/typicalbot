@@ -22,19 +22,19 @@ export default class extends Command {
         if (command === 'delete') {
             const toDelete = content.split(' ')[0];
 
-            const row = (await this.client.handlers.database.get('custom_commands', { guildId: message.guild.id, command: toDelete })) as GuildCustomCommand;
+            const row = (await this.client.database.get('custom_commands', { guildId: message.guild.id, command: toDelete })) as GuildCustomCommand;
 
             if (!row) {
                 // no command found
                 return message.error(message.translate('administration/customcommand:NOT_FOUND', { command: toDelete }));
             }
 
-            await this.client.handlers.database.delete('custom_commands', { guildId: message.guild.id, command: toDelete });
+            await this.client.database.delete('custom_commands', { guildId: message.guild.id, command: toDelete });
 
             return message.send(message.translate('administration/customcommand:DELETED', { command: toDelete }));
         }
 
-        const row = (await this.client.handlers.database.get('custom_commands', { guildId: message.guild.id, command: command })) as GuildCustomCommand;
+        const row = (await this.client.database.get('custom_commands', { guildId: message.guild.id, command: command })) as GuildCustomCommand;
 
         if (!row) {
             // new command
@@ -44,14 +44,14 @@ export default class extends Command {
                 content: content
             };
 
-            await this.client.handlers.database.insert('custom_commands', customCommand);
+            await this.client.database.insert('custom_commands', customCommand);
 
             return message.send(message.translate('administration/customcommand:CREATED', { command: command }));
         }
 
         // update command
         row.content = content;
-        await this.client.handlers.database.update('custom_commands', { guildId: message.guild.id, command: command }, row);
+        await this.client.database.update('custom_commands', { guildId: message.guild.id, command: command }, row);
 
         return message.send(message.translate('administration/customcommand:UPDATED', { command: command }));
     }

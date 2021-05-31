@@ -55,8 +55,8 @@ export default class extends Command {
 
         await message.success(message.translate('moderation/unban:UNBANNED', { user: user.tag }));
 
-        const tasks = (await this.client.handlers.database
-            .get('tasks')) as TaskOptions[];
+        const tasks = (await this.client.database
+            .getAll('tasks')) as TaskOptions[];
 
         const relevantTask = tasks.find((task) =>
             task.type === 'unban' &&

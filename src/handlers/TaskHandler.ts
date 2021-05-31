@@ -32,7 +32,7 @@ export default class TaskHandler {
                 // eslint-disable-next-line no-console
                 this.client.logger.info(`Loaded ${this.collection.size} Tasks in ${Date.now() - start}ms`);
 
-                // const list: TaskOptions[] = await this.client.handlers.database.get('tasks');
+                // const list: TaskOptions[] = await this.client.database.get('tasks');
                 // for (const task of list) {
                 //     const taskType = this.taskTypes.get(task.type);
                 //     if (!taskType) continue;
@@ -60,7 +60,7 @@ export default class TaskHandler {
             data
         };
 
-        await this.client.handlers.database.insert('tasks', payload);
+        await this.client.database.insert('tasks', payload);
 
         const Task = this.taskTypes.get(type);
         if (!type) return null;
@@ -71,7 +71,7 @@ export default class TaskHandler {
     }
 
     async delete(id: number) {
-        await this.client.handlers.database.delete('tasks', { id: id.toString() });
+        await this.client.database.delete('tasks', { id: id.toString() });
         this.collection.delete(id);
     }
 }

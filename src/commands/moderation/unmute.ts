@@ -93,8 +93,8 @@ export default class extends Command {
             if (reason) newCase.setReason(reason);
             await newCase.send();
 
-            const tasks = (await this.client.handlers.database
-                .get('tasks')) as TaskOptions[];
+            const tasks = (await this.client.database
+                .getAll('tasks')) as TaskOptions[];
             const releventTask = tasks.find((task) =>
                 task.type === 'unmute' &&
                 (task.data as UnmuteTaskData).guildID ===
