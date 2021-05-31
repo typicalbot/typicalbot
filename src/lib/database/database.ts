@@ -1,5 +1,13 @@
 import * as Sentry from '@sentry/node';
-import { MongoClient, Db, FilterQuery } from 'mongodb';
+import {
+    MongoClient,
+    Db,
+    FilterQuery,
+    UpdateWriteOpResult,
+    DeleteWriteOpResultObject,
+    InsertOneWriteOpResult,
+    Cursor
+} from 'mongodb';
 
 /**
  * The different collections that can be used in the database class.
@@ -28,15 +36,15 @@ class Database {
         this.db = this.mongo.db(process.env.MONGO_DATABASE!);
     }
 
-    public get(collection: DatabaseCollection, filter: FilterQuery<any>) {
+    public get(collection: DatabaseCollection, filter: FilterQuery<any>): Promise<any> {
         return this.db.collection(collection).findOne(filter);
     }
 
-    public exists(collection: DatabaseCollection, path: string) {
+    public exists(collection: DatabaseCollection, path: string): Cursor<any> {
         return this.db.collection(collection).find({ [path]: { $exists: true, $ne: null } });
     }
 
-    public insert(collection: DatabaseCollection, data: unknown) {
+    public insert(collection: DatabaseCollection, data: unknown): Promise<InsertOneWriteOpResult<any> | string> {
         return this.db.collection(collection).insertOne(data)
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
@@ -45,7 +53,7 @@ class Database {
             }));
     }
 
-    public update(collection: DatabaseCollection, filter: FilterQuery<any>, data: unknown) {
+    public update(collection: DatabaseCollection, filter: FilterQuery<any>, data: unknown): Promise<UpdateWriteOpResult | string> {
         return this.db.collection(collection).updateOne(filter, { $set: data })
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
@@ -54,7 +62,7 @@ class Database {
             }));
     }
 
-    public delete(collection: DatabaseCollection, filter: FilterQuery<any>) {
+    public delete(collection: DatabaseCollection, filter: FilterQuery<any>): Promise<DeleteWriteOpResultObject | string> {
         return this.db.collection(collection).deleteOne(filter)
             .catch(err => Sentry.captureException(err, scope => {
                 scope.clear();
