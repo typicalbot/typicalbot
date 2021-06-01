@@ -11,13 +11,13 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
     }
 
     async fetch(id: string) {
-        // if (this.has(id)) return this.get(id) as GuildSettings;
+        if (this.has(id)) return this.get(id) as GuildSettings;
 
         const row = (await this.client.database.get('guilds', { id: id })) as GuildSettings;
 
         if (!row) return this.create(id);
 
-        // this.set(id, row);
+        this.set(id, row);
         return row;
     }
 
@@ -25,7 +25,7 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
         const payload = DefaultSettings(id) as GuildSettings;
 
         await this.client.database.insert('guilds', payload);
-        // this.set(id, payload);
+        this.set(id, payload);
 
         return payload;
     }
@@ -34,8 +34,9 @@ export default class SettingHandler extends Collection<string, GuildSettings> {
         // TODO: Refactor this to remove extra query
         await this.client.database.update('guilds', { id: id }, { [path]: value });
 
-        // this.set(id, row);
+        const row = (await this.client.database.get('guilds', { id: id })) as GuildSettings;
+        this.set(id, row);
 
-        return (await this.client.database.get('guilds', { id: id })) as GuildSettings;
+        return row;
     }
 }
