@@ -12,6 +12,11 @@ type GuildLanguage = 'bg-BG' | 'de-DE' | 'en-US' | 'es-ES' | 'fr-FR' | 'pl-PL' |
 type GuildReactionRoleMode = 'default' | 'reverse';
 
 /**
+ * The different actions taken against users.
+ */
+type GuildModerationCaseType = 'ban' | 'unban' | 'kick';
+
+/**
  * Basic settings changeable within TypicalBot.
  */
 interface GuildSettings {
@@ -45,13 +50,29 @@ interface GuildReactionRole {
     limit: boolean;
 }
 
+/**
+ * Create and view a moderation case
+ */
+interface GuildModerationCase {
+    guildId: string;
+    case: {
+        id: string;
+        type: GuildModerationCaseType;
+        user: string;
+        reason: string;
+        moderator: string;
+    };
+}
+
 export {
     GuildSettings,
     GuildCustomCommand,
-    GuildReactionRole
+    GuildReactionRole,
+    GuildModerationCase
 };
 
 export type {
     GuildLanguage,
-    GuildReactionRoleMode
+    GuildReactionRoleMode,
+    GuildModerationCaseType
 };
