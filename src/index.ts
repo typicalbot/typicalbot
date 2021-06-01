@@ -2,7 +2,7 @@
 import dotenv from 'dotenv';
 import fs from 'fs';
 import TypicalClient from './lib/TypicalClient';
-import Database from './lib/database/database';
+import Database from './common/database/database';
 
 dotenv.config();
 

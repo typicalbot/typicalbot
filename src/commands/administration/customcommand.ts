@@ -1,7 +1,7 @@
 import Command from '../../lib/structures/Command';
 import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
-import { GuildCustomCommand } from '../../lib/database/structures/GuildStructure';
+import { GuildCustomCommand } from '../../common/database/structures/GuildStructure';
 
 export default class extends Command {
     aliases = ['cc'];

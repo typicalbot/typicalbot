@@ -6,7 +6,7 @@ import { PERMISSION_LEVEL, MODE } from '../lib/utils/constants';
 import { fetchAccess } from '../lib/utils/util';
 import { permissionError } from '../lib/utils/util';
 import * as Sentry from '@sentry/node';
-import { GuildCustomCommand } from '../lib/database/structures/GuildStructure';
+import { GuildCustomCommand } from '../common/database/structures/GuildStructure';
 
 export default class extends Event {
     readonly requiredPermissions = new Permissions(['VIEW_CHANNEL', 'SEND_MESSAGES']).freeze();
