@@ -3,5 +3,5 @@
   "USAGE": "slap [@user]",
   "SELF": ", stop hitting yourself! :dizzy_face::wave:",
   "RESPONSE": "just slapped {{user}}! :dizzy_face::wave:",
-  "RESPONSE_HURT": "just slapped {{user}}! :dizzy_face::wave: Oh, dang! That must've hurt!`"
+  "RESPONSE_HURT": "just slapped {{user}}! :dizzy_face::wave: Oh, dang! That must've hurt!"
 }

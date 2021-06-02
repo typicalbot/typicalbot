@@ -3,5 +3,5 @@
   "USAGE": "punch [@user]",
   "SELF": " stop hitting yourself! :punch:",
   "RESPONSE": "just punched {{user}}! :punch:",
-  "RESPONSE_JAW": "just punched {{user}}! :punch: Oh, dang! Right to the jaw! That must've hurt!'"
+  "RESPONSE_JAW": "just punched {{user}}! :punch: Oh, dang! Right to the jaw! That must've hurt!"
 }
