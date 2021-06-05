@@ -3,5 +3,5 @@
     "USAGE": "slap [@user]",
     "SELF": ", kendine vurmayı kes! :dizzy_face::wave:",
     "RESPONSE": "az önce {{user}} kullanıcısını tokatladı! :dizzy_face::wave:",
-    "RESPONSE_HURT": "az önce {{user}} kullanıcısını tokatladı! :dizzy_face::wave: Lanet olsun! Acıtmış olmalı!`"
+    "RESPONSE_HURT": "az önce {{user}} kullanıcısını tokatladı! :dizzy_face::wave: Lanet olsun! Acıtmış olmalı!"
 }
