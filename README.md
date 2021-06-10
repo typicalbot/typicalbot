@@ -18,19 +18,12 @@ TypicalBot is far from typical. It's stable, lightning fast, and easy to use— 
 
 ## Table of Contents
 
-- [Ecosystem](#ecosystem)
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
 - [Show Your Support](#show-your-support)
 - [Security Vulnerabilities](#security-vulnerabilities)
 - [License](#license)
-
-## Ecosystem
-
-| Project | Description |
-|---------|-------------|
-| [typicalbot-cluster-manager](https://github.com/typicalbot/typicalbot-cluster-manager) | Inter-process communication manager |
 
 ## Getting Started
 
