@@ -52,7 +52,6 @@ export interface GuildSettings {
         leave: string | null;
         ban: string | null;
         unban: string | null;
-        delete: string | null;
         nickname: string | null;
         invite: string | null;
         moderation: string | null;

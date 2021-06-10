@@ -28,7 +28,6 @@ export default (id: string) => ({
         leave: null,
         ban: null,
         unban: null,
-        delete: null,
         nickname: null,
         invite: null,
         moderation: null,
