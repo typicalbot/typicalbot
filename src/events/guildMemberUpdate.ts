@@ -15,7 +15,7 @@ export default class GuildMemberUpdate extends Event {
         if (oldNickname === nickname) return;
 
         const settings = await this.client.settings.fetch(guild.id);
-        if (!settings.logs.id || !settings.logs.nickname) return;
+        if (!settings.logs.id || !settings.logs.nickname || settings.logs.nickname === '--disabled') return;
 
         const { user } = member;
 
