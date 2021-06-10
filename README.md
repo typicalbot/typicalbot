@@ -38,24 +38,22 @@ This section provides a quick-start guide.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/): Node.js 12.x or newer is required.
-- [RethinkDB](https://rethinkdb.com/): RethinkDB is required.
+- [Node.js](https://nodejs.org/en/): Node.js 14.x or newer is required.
+- [MongoDB](https://www.mongodb.com/): MongoDB is required.
 - [PM2](http://pm2.keymetrics.io/): PM2 is required.
 
 **Windows Only**
 - [Windows Build Tools](https://github.com/felixrieseberg/windows-build-tools): Python 2.7 and VisualStudio is required to compile dependencies.
-- [GTK+](http://ftp.gnome.org/pub/GNOME/binaries/win64/gtk+/): GTK 2 is required for canvas, use version 2.X.X (Do not use version 3.X.X)
 
 ### Installation
 
 0. Make sure all prerequisites above are installed.
 1. Clone the repository, ie. `git clone https://github.com/typicalbot/typicalbot.git`
-2. Install the dependencies with `npm install`
-3. Start RethinkDB database with `rethinkdb`
-4. Run `npm run build:database` to build the database structure.
-5. While the above is running create your `config.json` file using the example file provided in the repo.
-6. Run `npm run build:instance`
-7. Profit!
+2. Install the dependencies with `yarn`
+3. Run `yarn build:database` to build the database structure.
+4. While the above is running create your `.env` file using the example file provided in the repo.
+5. Run `yarn build:instance`
+6. Success!
 
 ## Show Your Support
 
