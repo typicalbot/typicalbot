@@ -73,18 +73,6 @@ In order to have your pull request considered for review, it must meet the follo
 
 ## Style Guides
 
-### CHANGELOG
-
-Use [Keepachangelog.org](https://keepachangelog.com/en/1.0.0/) as a guide for adding changes to the CHANGELOG.
-
-Each item should be in the following format: `<package>: <change> (#<pr>) (<commit>)[, closes #<issue>]`.
-
-- Replace `<package>` with the name of the package the change applies to.
-- Replace `<change>` with a description of the change (usually the commit name will suffice).
-- Replace `<pr>` with the pull request number where the change was proposed.
-- Replace `<commit>` with the hash of the commit where the change was made.
-- Replace `<issue>` with the issue that the change closes, if applicable.
-
 ### Git Commit Messages
 
 - Follow [Conventional Commits v1.0.0-beta.4](https://www.conventionalcommits.org/en/v1.0.0-beta.4/). Allowed commit types are: `chore:`, `ci:`, `docs:`, `enhancement:`, `feat:` `fix:`, `pref:`, `style:`, `refactor:`, and `test:`. Commit types should be in lowercase. If a commit fits into multiple commit types, go back and make multiple commits whenever possible.
