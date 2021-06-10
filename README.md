@@ -1,6 +1,9 @@
 <p align="center">
     <h1 align="center">TypicalBot</h1>
 </p>
+
+> We have begun development on our next version of TypicalBot that is built on the Deno runtime and Rust. Checkout our two new repositories [typicalbot-deno](https://github.com/typicalbot/typicalbot-deno) and [typicalbot-internal-api](https://github.com/typicalbot/typicalbot-internal-api)!
+
 <p align="center">
     <a target="_blank" href="https://discord.gg/typicalbot"><img src="https://discordapp.com/api/guilds/163038706117115906/embed.png?style=shield" alt="Discord"></a>
     <a target="_blank" href="https://translate.typicalbot.com/project/typicalbot"><img src="https://badges.crowdin.net/typicalbot/localized.svg" alt="Crowdin"></a>
