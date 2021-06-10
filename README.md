@@ -40,13 +40,13 @@ This section provides a quick-start guide.
 
 ### Installation
 
-0. Make sure all prerequisites above are installed.
-1. Clone the repository, ie. `git clone https://github.com/typicalbot/typicalbot.git`
-2. Install the dependencies with `yarn`
-3. Run `yarn build:database` to build the database structure.
-4. While the above is running create your `.env` file using the example file provided in the repo.
-5. Run `yarn build:instance`
-6. Success!
+1. Make sure all prerequisites above are installed.
+2. Clone the repository, ie. `git clone https://github.com/typicalbot/typicalbot.git`
+3. Install the dependencies with `yarn`
+4. Run `yarn build:database` to build the database structure.
+5. While the above is running create your `.env` file using the example file provided in the repo.
+6. Run `yarn build:instance`
+7. Success!
 
 ## Show Your Support
 
