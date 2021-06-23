@@ -135,20 +135,24 @@ export default class extends Event {
     }
 
     spamCheck(message: TypicalGuildMessage) {
-        if (message.guild.settings.automod.spam.caps.enabled) {
-            const capsRegex = /[A-Z]/g;
-            const severity = message.guild.settings.automod.spam.caps.severity;
+        try {
+            if (message.guild.settings.automod.spam.caps.enabled) {
+                const capsRegex = /[A-Z]/g;
+                const severity = message.guild.settings.automod.spam.caps.severity;
 
-            if (message.content.length > 5 && (message.content.match(capsRegex)!.length / message.content.length) >= (severity / 10))
-                this.client.emit('guildSpamPosted', message);
-        }
+                if (message.content.length > 5 && (message.content.match(capsRegex)!.length / message.content.length) >= (severity / 10))
+                    this.client.emit('guildSpamPosted', message);
+            }
 
-        if (message.guild.settings.automod.spam.mentions.enabled) {
-            const mentionsRegex = /<@![0-9]{18}>/gm;
-            const severity = message.guild.settings.automod.spam.mentions.severity;
+            if (message.guild.settings.automod.spam.mentions.enabled) {
+                const mentionsRegex = /<@![0-9]{18}>/gm;
+                const severity = message.guild.settings.automod.spam.mentions.severity;
 
-            if (message.content.match(mentionsRegex)!.length >= severity)
-                this.client.emit('guildSpamPosted', message);
+                if (message.content.match(mentionsRegex)!.length >= severity)
+                    this.client.emit('guildSpamPosted', message);
+            }
+        } catch (ex) {
+            Sentry.captureException(ex);
         }
     }
 
