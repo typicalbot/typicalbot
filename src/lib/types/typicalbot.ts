@@ -88,6 +88,9 @@ export interface GuildSettings {
                 enabled: boolean;
                 severity: number;
             };
+            scamlinks: {
+                enabled: boolean;
+            };
         };
         invite: boolean;
         inviteaction: boolean;

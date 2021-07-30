@@ -1,9 +1,7 @@
 import { Message } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import {
-    TypicalGuildMessage,
-    TaskOptions,
-    UnbanTaskData
+    TypicalGuildMessage
 } from '../../lib/types/typicalbot';
 import { MODE, PERMISSION_LEVEL } from '../../lib/utils/constants';
 
@@ -55,15 +53,15 @@ export default class extends Command {
 
         await message.success(message.translate('moderation/unban:UNBANNED', { user: user.tag }));
 
-        const tasks = (await this.client.database
-            .getAll('tasks')) as TaskOptions[];
+        // const tasks = (await this.client.database
+        //     .getAll('tasks')?.toArray()) as TaskOptions[];
 
-        const relevantTask = tasks.find((task) =>
-            task.type === 'unban' &&
-            (task.data as UnbanTaskData).userID === userID &&
-            (task.data as UnbanTaskData).guildID === message.guild.id);
-        if (!relevantTask) return null;
+        // const relevantTask = tasks.find((task) =>
+        //     task.type === 'unban' &&
+        //     (task.data as UnbanTaskData).userID === userID &&
+        //     (task.data as UnbanTaskData).guildID === message.guild.id);
+        // if (!relevantTask) return null;
 
-        return this.client.handlers.tasks.delete(relevantTask.id);
+        // return this.client.handlers.tasks.delete(relevantTask.id);
     }
 }

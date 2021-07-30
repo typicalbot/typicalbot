@@ -290,6 +290,12 @@ export default class extends Command {
                 type: 'default',
                 path: 'automod.spam.zalgo.severity'
             },
+            'antispam-scamlinks': {
+                description: 'administration/conf:ANTISPAM-SCAMLINKS',
+                value: settings.automod.spam.scamlinks.enabled,
+                type: 'boolean',
+                path: 'automod.spam.scamlinks.enabled'
+            },
             antiinvite: {
                 description: 'administration/conf:ANTIINVITE',
                 value: settings.automod.invite,

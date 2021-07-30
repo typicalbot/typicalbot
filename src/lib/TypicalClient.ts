@@ -92,6 +92,8 @@ export default class TypicalClient extends Client {
 
     public database: Database;
 
+    public scamlinks: string[] = [];
+
     /**
      * @since 3.0.0
      */
@@ -150,6 +152,10 @@ export default class TypicalClient extends Client {
         // Setup translation i18n before login to client
         this.translate = await i18n();
         this.logger.info('Loaded i18n Languages');
+
+        const cursor = this.database.getAll('scamlinks');
+        // @ts-ignore
+        await cursor?.forEach(scamlink => this.scamlinks.push(scamlink.key));
 
         return super.login(token);
     }

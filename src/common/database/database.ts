@@ -14,7 +14,7 @@ import {
  *
  * The following collections will be removed in the near future: 'guilds', 'mutes' and 'tasks'
  */
-type DatabaseCollection = 'guilds' | 'mutes' | 'tasks' | 'custom_commands';
+type DatabaseCollection = 'guilds' | 'mutes' | 'tasks' | 'custom_commands' | 'scamlinks';
 
 class Database {
     private mongo: MongoClient | undefined;
@@ -48,8 +48,8 @@ class Database {
         return this.db?.collection(collection).findOne(filter);
     }
 
-    public getAll(collection: DatabaseCollection): Promise<any[]> | undefined {
-        return this.db?.collection(collection).find({}).toArray();
+    public getAll(collection: DatabaseCollection): Cursor<any[]> | undefined {
+        return this.db?.collection(collection).find({});
     }
 
     public exists(collection: DatabaseCollection, path: string): Cursor<any> | undefined {

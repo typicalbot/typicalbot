@@ -160,6 +160,15 @@ export default class extends Event {
                 if (message.content.match(zalgoRegex)!.length >= severity)
                     this.client.emit('guildSpamPosted', message);
             }
+
+            if (message.guild.settings.automod.spam.scamlinks.enabled) {
+                // split message content by spaces, check if any of the words are in the scamlinks array
+                const content = message.content.split(' ');
+
+                if (content.some(word => this.client.scamlinks.includes(word))) {
+                    this.client.emit('guildSpamPosted', message);
+                }
+            }
         } catch (ex) {
             Sentry.captureException(ex);
         }

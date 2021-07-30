@@ -63,6 +63,9 @@ export default (id: string) => ({
             zalgo: {
                 enabled: false,
                 severity: 7
+            },
+            scamlinks: {
+                enabled: false
             }
         },
         invite: false,

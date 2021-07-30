@@ -2,9 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import PermissionLevel from '../../lib/structures/PermissionLevel';
 import {
-    TypicalGuildMessage,
-    TaskOptions,
-    UnmuteTaskData
+    TypicalGuildMessage
 } from '../../lib/types/typicalbot';
 import { MODE, PERMISSION_LEVEL, MODERATION_LOG_TYPE, LINK } from '../../lib/utils/constants';
 
@@ -93,15 +91,15 @@ export default class extends Command {
             if (reason) newCase.setReason(reason);
             await newCase.send();
 
-            const tasks = (await this.client.database
-                .getAll('tasks')) as TaskOptions[];
-            const releventTask = tasks.find((task) =>
-                task.type === 'unmute' &&
-                (task.data as UnmuteTaskData).guildID ===
-                message.guild.id &&
-                (task.data as UnmuteTaskData).memberID === member.id);
-            if (releventTask)
-                await this.client.handlers.tasks.delete(releventTask.id);
+            // const tasks = (await this.client.database
+            //     .getAll('tasks')) as TaskOptions[];
+            // const releventTask = tasks.find((task) =>
+            //     task.type === 'unmute' &&
+            //     (task.data as UnmuteTaskData).guildID ===
+            //     message.guild.id &&
+            //     (task.data as UnmuteTaskData).memberID === member.id);
+            // if (releventTask)
+            //     await this.client.handlers.tasks.delete(releventTask.id);
         }
 
         return message.success(message.translate('moderation/unmute:SUCCESS', {
