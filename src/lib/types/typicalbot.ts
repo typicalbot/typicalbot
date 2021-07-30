@@ -84,6 +84,10 @@ export interface GuildSettings {
                 enabled: boolean;
                 severity: number;
             };
+            zalgo: {
+                enabled: boolean;
+                severity: number;
+            };
         };
         invite: boolean;
         inviteaction: boolean;

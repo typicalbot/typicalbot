@@ -278,6 +278,18 @@ export default class extends Command {
                 type: 'default',
                 path: 'automod.spam.caps.severity'
             },
+            'antispam-zalgo': {
+                description: 'administration/conf:ANTISPAM-ZALGO',
+                value: settings.automod.spam.zalgo.enabled,
+                type: 'boolean',
+                path: 'automod.spam.zalgo.enabled'
+            },
+            'antispam-zalgo-severity': {
+                description: 'administration/conf:ANTISPAM-ZALGO-SEVERITY',
+                value: settings.automod.spam.zalgo.severity,
+                type: 'default',
+                path: 'automod.spam.zalgo.severity'
+            },
             antiinvite: {
                 description: 'administration/conf:ANTIINVITE',
                 value: settings.automod.invite,

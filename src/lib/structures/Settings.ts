@@ -59,6 +59,10 @@ export default (id: string) => ({
             caps: {
                 enabled: false,
                 severity: 7
+            },
+            zalgo: {
+                enabled: false,
+                severity: 7
             }
         },
         invite: false,

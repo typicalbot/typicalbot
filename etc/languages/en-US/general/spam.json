@@ -1,4 +1,5 @@
 {
     "REASON": "Automatic {{action}}: User sent {{type}} in {{channel}}",
-    "SPAM": "spam"
+    "SPAM": "spam",
+    "PROHIBITED": "This server prohibits spam from being sent. Your message has been deleted."
 }

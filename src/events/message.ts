@@ -151,6 +151,15 @@ export default class extends Event {
                 if (message.content.match(mentionsRegex)!.length >= severity)
                     this.client.emit('guildSpamPosted', message);
             }
+
+            if (message.guild.settings.automod.spam.zalgo.enabled) {
+                // eslint-disable-next-line no-control-regex
+                const zalgoRegex = /[^\u0000-\u007F]/g;
+                const severity = message.guild.settings.automod.spam.zalgo.severity;
+
+                if (message.content.match(zalgoRegex)!.length >= severity)
+                    this.client.emit('guildSpamPosted', message);
+            }
         } catch (ex) {
             Sentry.captureException(ex);
         }
