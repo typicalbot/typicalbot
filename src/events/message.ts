@@ -162,7 +162,6 @@ export default class extends Event {
             }
 
             if (message.guild.settings.automod.spam.scamlinks.enabled) {
-                // split message content by spaces, check if any of the words are in the scamlinks array
                 const content = message.content.split(' ');
 
                 if (content.some(word => this.client.scamlinks.includes(word))) {
