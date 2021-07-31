@@ -4,7 +4,6 @@ import {
     GuildChannel,
     Message,
     MessageEmbed,
-    MessageOptions,
     TextChannel,
     User,
     MessageAttachment

@@ -34,7 +34,7 @@ export default class extends Command {
             }
         } else {
             channel
-                .send({content, allowedMentions: { parse: [] }})
+                .send({ content, allowedMentions: { parse: [] } })
                 .catch(() =>
                     message.error(message.translate('moderation/say:MISSING_SEND')));
         }
@@ -65,7 +65,7 @@ export default class extends Command {
                     .catch(() => null);
             } else if (logChannel) {
                 logChannel
-                    .send({content: [
+                    .send({ content: [
                         message.translate('moderation/say:TEXT', {
                             user: message.author.tag,
                             channel

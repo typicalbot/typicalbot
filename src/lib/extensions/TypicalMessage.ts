@@ -3,7 +3,6 @@ import {
     Message,
     MessageAttachment,
     MessageEmbed,
-    MessageOptions,
     Structures,
 } from 'discord.js';
 
@@ -66,7 +65,7 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     respond(content: string, embed?: MessageEmbed) {
-        return this.channel.send({content: `${this.author} | ${content}`, embed });
+        return this.channel.send({ content: `${this.author} | ${content}`, embed });
     }
 
     send(content: string,
@@ -75,7 +74,7 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     embed(embed: MessageEmbed) {
-        return this.channel.send({embed});
+        return this.channel.send({ embed });
     }
 
     attachment(attachment: MessageAttachment) {
