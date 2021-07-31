@@ -28,8 +28,11 @@ export class TypicalMessage extends Structures.get('Message') {
     async ask(question: string) {
         this.menuResponse = this.menuResponse ? await this.menuResponse.edit(question) : await this.respond(question);
 
-        const responses = await this.channel.awaitMessages((msg) =>
-            msg.author.id === this.author.id, { time: 15000, max: 1 });
+        const responses = await this.channel.awaitMessages({
+            filter: (msg: Message) => msg.author.id === this.author.id,
+            time: 15000,
+            max: 1
+        });
         return responses.first();
     }
 

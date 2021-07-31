@@ -1,4 +1,4 @@
-import { PermissionOverwrites, MessageEmbed } from 'discord.js';
+import { PermissionOverwrites, MessageEmbed, TextChannel } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
 import { MODE, PERMISSION_LEVEL, MODERATION_LOG_TYPE, LINK } from '../../lib/utils/constants';
@@ -47,7 +47,7 @@ export default class extends Command {
         if (deny) {
             const channel = useCurrentChannel
                 ? message.channel
-                : message.guild.channels.cache.get(`${BigInt(channelID)}`);
+                : message.guild.channels.cache.get(`${BigInt(channelID)}`) as TextChannel;
             if (!channel)
                 return message.error(message.translate('moderation/mute:INVALID_CHANNEL'));
 

@@ -473,7 +473,7 @@ export default class extends Command {
         if (setting.type === 'channel') {
             const channel = message.guild.channels.cache.get(`${BigInt(setting.value as string)}`);
             return message.reply(message.translate('administration/conf:CURRENT_VALUE', {
-                value: channel ? channel.toString() : NONE
+                value: channel ? `<#${channel.id}>` : NONE
             }));
         }
 
