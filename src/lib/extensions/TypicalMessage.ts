@@ -65,16 +65,24 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     respond(content: string, embed?: MessageEmbed) {
-        return this.channel.send({ content: `${this.author} | ${content}`, embed });
+        if (embed) {
+            return this.channel.send({ content: `${this.author} | ${content}`, embeds: [embed] });
+        }
+
+        return this.channel.send({ content: `${this.author} | ${content}` });
     }
 
     send(content: string,
         embed?: MessageEmbed) {
-        return this.channel.send({ content, embed, allowedMentions: { parse: [] } });
+        if (embed) {
+            return this.channel.send({ content, embeds: [embed], allowedMentions: { parse: [] } });
+        }
+
+        return this.channel.send({ content, allowedMentions: { parse: [] } });
     }
 
     embed(embed: MessageEmbed) {
-        return this.channel.send({ embed });
+        return this.channel.send({ embeds: [embed] });
     }
 
     attachment(attachment: MessageAttachment) {
@@ -82,16 +90,28 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     success(content: string, embed?: MessageEmbed) {
-        return this.channel.send({ content: `${this.author} | ✔️ | ${content}`, embed });
+        if (embed) {
+            return this.channel.send({ content: `${this.author} | ✔️ | ${content}`, embeds: [embed] });
+        }
+
+        return this.channel.send({ content: `${this.author} | ✔️ | ${content}` });
     }
 
     error(content: string, embed?: MessageEmbed) {
-        return this.channel.send({ content: `${this.author} | ❌ | ${content}`, embed });
+        if (embed) {
+            return this.channel.send({ content: `${this.author} | ❌ | ${content}`, embeds: [embed] });
+        }
+
+        return this.channel.send({ content: `${this.author} | ❌ | ${content}` });
     }
 
     dm(content: string,
         embed?: MessageEmbed) {
-        return this.author?.send({ content, embed });
+        if (embed) {
+            return this.author?.send({ content, embeds: [embed] });
+        }
+
+        return this.author?.send({ content });
     }
 
     translate(key: string, args?: Record<string, unknown>) {

@@ -48,7 +48,7 @@ export default class MessageReactionAdd extends Event {
             const [boardEmbed] = boardMsg.embeds;
 
             return boardMsg.edit({
-                embed: boardEmbed.setFooter(`⭐ ${count} | ${message.id}`)
+                embeds: [boardEmbed.setFooter(`⭐ ${count} | ${message.id}`)]
             });
         }
 
@@ -89,6 +89,6 @@ export default class MessageReactionAdd extends Event {
             ]);
         }
 
-        return channel.send({ embed });
+        return channel.send({ embeds: [embed] });
     }
 }

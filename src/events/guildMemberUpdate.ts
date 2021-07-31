@@ -41,13 +41,13 @@ export default class GuildMemberUpdate extends Event {
                 .catch((err) => Sentry.captureException(err));
 
         return channel
-            .send(new MessageEmbed()
+            .send({ embeds: [new MessageEmbed()
                 .setColor(0x00ff00)
                 .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
                 .setFooter(guild.translate('help/logs:CHANGED_NICK', {
                     nickname: member.displayName
                 }))
-                .setTimestamp())
+                .setTimestamp()] })
             .catch((err) => Sentry.captureException(err));
     }
 }

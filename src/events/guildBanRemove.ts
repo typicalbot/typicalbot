@@ -44,11 +44,11 @@ export default class GuildBanRemove extends Event {
         }
 
         return channel
-            .send(new MessageEmbed()
+            .send({ embeds:[new MessageEmbed()
                 .setColor(0x3ea7ed)
                 .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
                 .setFooter(guild.translate('moderation/unban:USER_UNBANNED'))
-                .setTimestamp())
+                .setTimestamp()] })
             .catch((err) => Sentry.captureException(err));
     }
 }

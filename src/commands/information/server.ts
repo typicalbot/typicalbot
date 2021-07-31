@@ -31,9 +31,6 @@ export default class extends Command {
                 message.translate('information/server:CREATED', {
                     time: moment(message.guild.createdAt).format('dddd MMMM Do, YYYY, hh:mm A')
                 }),
-                message.translate('information/server:REGION', {
-                    region: message.guild.region
-                }),
                 message.translate('information/server:VERIFICATION', {
                     level: message.guild.verificationLevel
                 }),
@@ -88,11 +85,6 @@ export default class extends Command {
                     name: message.translate('common:CREATED_FIELD'),
                     value: `${moment(message.guild.createdAt)
                         .format('dddd MMMM Do, YYYY')}\n${moment(message.guild.createdAt).format('hh:mm A')}`,
-                    inline: true
-                },
-                {
-                    name: message.translate('common:REGION_FIELD'),
-                    value: message.guild.region.toUpperCase(),
                     inline: true
                 },
                 {

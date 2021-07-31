@@ -124,7 +124,7 @@ export default class extends Command {
                     value: reason
                 }
             ]);
-        member.send(embed).catch(() => null);
+        member.send({ embeds:[embed] }).catch(() => null);
 
         const muted = await member.roles.add(role).catch(() => null);
         if (!muted)

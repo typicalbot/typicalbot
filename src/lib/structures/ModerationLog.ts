@@ -118,7 +118,7 @@ export default class ModerationLog {
             this.setId(id || 1);
         }
 
-        await channel.send(this.embed);
+        await channel.send({ embeds: [this.embed] });
 
         return this.id;
     }

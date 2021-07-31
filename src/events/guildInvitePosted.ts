@@ -91,13 +91,13 @@ export default class GuildInvitePosted extends Event {
         }
 
         return channel
-            .send(new MessageEmbed()
+            .send({ embeds: [new MessageEmbed()
                 .setColor(0x00ff00)
                 .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
                 .setFooter(message.translate('general/invite:SENT_IN', {
                     channel: `<#${message.channel.id}>`
                 }))
-                .setTimestamp())
+                .setTimestamp()] })
             .catch((err) => Sentry.captureException(err));
     }
 }

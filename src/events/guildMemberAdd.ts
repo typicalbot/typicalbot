@@ -28,12 +28,12 @@ export default class GuildMemberAdd extends Event {
                         age: convertTime(guild, age, true)
                     })} ${age < 60000 * 15 ? guild.translate('help/logs:NEW_ACCOUNT') : ''}`;
                     channel
-                        .send(new MessageEmbed()
+                        .send({ embeds: [new MessageEmbed()
                             .setColor(0x00ff00)
                             .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
                             .setDescription(ACCOUNT_AGE)
                             .setFooter(guild.translate('help/logs:USER_JOINED'))
-                            .setTimestamp())
+                            .setTimestamp()] })
                         .catch(() => null);
                 } else {
                     channel

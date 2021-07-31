@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { MessageAttachment, MessageEmbed } from 'discord.js';
+import { MessageAttachment } from 'discord.js';
 import fetch from 'node-fetch';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage } from '../../lib/types/typicalbot';
@@ -31,18 +31,6 @@ export default class extends Command {
             if (err) console.error(err);
         });
 
-        if (!message.embeddable)
-            return message.attachment(new MessageAttachment('data/image.png'));
-
-        return message.embed(new MessageEmbed()
-            .attachFiles([
-                {
-                    attachment: 'data/image.png',
-                    name: 'color.png'
-                }
-            ])
-            .setColor(parseInt(hex, 16))
-            .setImage('attachment://color.png')
-            .setFooter(`#${hex}`));
+        return message.attachment(new MessageAttachment('data/image.png'));
     }
 }

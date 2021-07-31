@@ -46,11 +46,11 @@ export default class extends Command {
         }
 
         return channel.send({ content: mentionRole ? mentionRole.toString() : '',
-            embed: new MessageEmbed()
+            embeds: [new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('moderation/announce:TITLE'))
                 .setDescription(content)
-                .setFooter(message.author.tag, message.author.displayAvatarURL())
+                .setFooter(message.author.tag, message.author.displayAvatarURL())]
         });
     }
 }

@@ -44,7 +44,7 @@ export default class extends Command {
         const channel = dm ? message.author : message.channel;
 
         return channel
-            .send(new MessageEmbed()
+            .send({ embeds: [new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle('TypicalBot Commands')
                 .setDescription(message.translate('general/commands:TEXT', {
@@ -69,7 +69,7 @@ export default class extends Command {
                     }
                 ])
                 .setFooter('TypicalBot', LINK.ICON)
-                .setTimestamp())
+                .setTimestamp()] })
             .catch(() => null);
     }
 }

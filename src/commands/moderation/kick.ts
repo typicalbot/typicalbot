@@ -64,7 +64,7 @@ export default class extends Command {
                 }
             ]);
 
-        await member.send(embed).catch(() => null);
+        await member.send({ embeds:[embed] }).catch(() => null);
 
         const kicked = await member
             .kick(message.translate('moderation/kick:REASON', {

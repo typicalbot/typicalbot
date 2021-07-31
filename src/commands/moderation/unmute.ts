@@ -77,7 +77,7 @@ export default class extends Command {
                 }
             ]);
 
-        member.send(embed).catch(() => null);
+        member.send({ embeds:[embed] }).catch(() => null);
 
         const unmuted = await member.roles.remove(role).catch(() => null);
         if (!unmuted) return message.error(message.translate('moderation/unmute:ERROR'));

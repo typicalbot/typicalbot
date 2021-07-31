@@ -66,14 +66,14 @@ export default class ModerationLogHandler {
             ? embed.description.substring(0, embed.description.lastIndexOf('\n'))
             : '';
 
-        return message.edit(embed
+        return message.edit({ embeds: [embed
             .setAuthor(`${moderator.tag} (${moderator.id})`, moderator.displayAvatarURL())
             .setDescription([
                 start,
                 message.translate('moderation/modlog:REASON', {
                     reason
                 })
-            ].join('\n')));
+            ].join('\n'))] });
     }
 
     processAutoRoles() {

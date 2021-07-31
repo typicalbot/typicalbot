@@ -88,7 +88,7 @@ export default class extends Command {
                 }
             ]);
 
-        await user.send(embed).catch(() => null);
+        await user.send({ embeds:[embed] }).catch(() => null);
 
         await message.guild.members
             .ban(user, {

@@ -32,11 +32,11 @@ export default class GuildMemberRemove extends Event {
                 .catch((err) => Sentry.captureException(err));
 
         return channel
-            .send(new MessageEmbed()
+            .send({ embeds: [new MessageEmbed()
                 .setColor(0xff6600)
                 .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
                 .setFooter(guild.translate('help/logs:USER_LEFT'))
-                .setTimestamp())
+                .setTimestamp()] })
             .catch((err) => Sentry.captureException(err));
     }
 }

@@ -13,13 +13,13 @@ export default class extends Command {
                 link: LINK.OAUTH
             }));
 
-        return message.reply(new MessageEmbed()
+        return message.reply({ embeds: [new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('general/invite:TYPICAL_INVITE'))
             .setDescription(message.translate('general/invite:TEXT', {
                 link: LINK.OAUTH
             }))
             .setFooter('TypicalBot', LINK.ICON)
-            .setTimestamp());
+            .setTimestamp()] });
     }
 }

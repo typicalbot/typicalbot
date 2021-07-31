@@ -67,7 +67,7 @@ export default class extends Command {
                     value: reason
                 }
             ]);
-        member.send(embed).catch(() => null);
+        member.send({ embeds: [embed] }).catch(() => null);
 
         return message.success(message.translate('moderation/warn:SUCCESS', {
             user: member.user.tag

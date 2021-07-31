@@ -27,7 +27,7 @@ export default class extends Command {
         if (logChannel && logChannel instanceof TextChannel && settings.logs.slowmode) {
             if (settings.logs.slowmode === '--embed') {
                 logChannel
-                    .send(new MessageEmbed()
+                    .send({ embeds:[new MessageEmbed()
                         .setColor(0xff33cc)
                         .setAuthor(`${message.author.tag} (${message.author.id})`, message.author.displayAvatarURL())
                         .addFields([
@@ -40,7 +40,7 @@ export default class extends Command {
                                 value: message.translate('moderation/slowmode:LOG_EMBED', { cooldown })
                             }
                         ])
-                        .setTimestamp())
+                        .setTimestamp()] })
                     .catch(() => null);
             } else if (settings.logs.slowmode !== '--disabled') {
                 logChannel

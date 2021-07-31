@@ -37,11 +37,11 @@ export default class GuildBanAdd extends Event {
 
         if (settings.logs.ban === '--embed')
             return channel
-                .send(new MessageEmbed()
+                .send({ embeds:[new MessageEmbed()
                     .setColor(0xff0000)
                     .setAuthor(`${user.tag} (${user.id})`, user.displayAvatarURL())
                     .setFooter(guild.translate('moderation/ban:USER_BANNED'))
-                    .setTimestamp())
+                    .setTimestamp()] })
                 .catch(() => null);
 
         return channel
