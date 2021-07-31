@@ -5,13 +5,13 @@ import { MODERATION_LOG_TYPE } from '../lib/utils/constants';
 
 export default class extends Task {
     async execute(data: UnmuteTaskData): Promise<void> {
-        const guild = this.client.guilds.cache.get(data.guildID) as TypicalGuild;
+        const guild = this.client.guilds.cache.get(`${BigInt(data.guildID)}`) as TypicalGuild;
         if (!guild) return;
 
         if (!guild.me?.permissions.has('MANAGE_ROLES', true)) return;
 
         const member = await guild.members
-            .fetch(data.memberID)
+            .fetch(`${BigInt(data.memberID)}`)
             .catch(() => null);
         if (!member) return;
 
@@ -19,11 +19,11 @@ export default class extends Task {
 
         if (
             !settings.roles.mute ||
-            !member.roles.cache.has(settings.roles.mute)
+            !member.roles.cache.has(`${BigInt(settings.roles.mute)}`)
         )
             return;
 
-        const editable = guild.roles.cache.get(settings.roles.mute);
+        const editable = guild.roles.cache.get(`${BigInt(settings.roles.mute)}`);
         if (!editable) return;
 
         const reason = guild.translate('moderation/unmute:TASK_REASON');

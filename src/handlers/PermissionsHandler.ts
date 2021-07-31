@@ -32,7 +32,7 @@ export default class PermissionsHandler {
     }
 
     async fetch(guild: Guild, userID: string, ignoreStaff = false) {
-        const member = await guild.members.fetch(userID);
+        const member = await guild.members.fetch(`${BigInt(userID)}`);
         if (!member) return this.levels.get(0) as PermissionLevel;
 
         for (const permLevel of this.levels.values()) {

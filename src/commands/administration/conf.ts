@@ -397,7 +397,7 @@ export default class extends Command {
                     else response += NA;
                 } else if (type === 'roles') {
                     if (value.length)
-                        response += value.map((id: string) => message.guild.roles.cache.get(id)?.name ?? 'Unknown Role')
+                        response += value.map((id: string) => message.guild.roles.cache.get(`${BigInt(id)}`)?.name ?? 'Unknown Role')
                             .join(', ');
                     else response += NA;
                 } else if (type === 'boolean')
@@ -441,7 +441,7 @@ export default class extends Command {
         if (setting.type === 'roles') {
             const list = [];
             for (const roleID of setting.value as string[]) {
-                const role = message.guild.roles.cache.get(roleID);
+                const role = message.guild.roles.cache.get(`${BigInt(roleID)}`);
                 if (!role) continue;
 
                 list.push(`*${
@@ -456,7 +456,7 @@ export default class extends Command {
         }
 
         if (setting.type === 'role') {
-            const role = message.guild.roles.cache.get(setting.value as string);
+            const role = message.guild.roles.cache.get(`${BigInt(setting.value as string)}`);
             return message.reply(message.translate('administration/conf:CURRENT_VALUE', {
                 value: role ? role.name : NONE
             }));
@@ -471,7 +471,7 @@ export default class extends Command {
         }
 
         if (setting.type === 'channel') {
-            const channel = message.guild.channels.cache.get(setting.value as string);
+            const channel = message.guild.channels.cache.get(`${BigInt(setting.value as string)}`);
             return message.reply(message.translate('administration/conf:CURRENT_VALUE', {
                 value: channel ? channel.toString() : NONE
             }));
@@ -552,7 +552,7 @@ export default class extends Command {
                 const [roleID, roleName] = args;
 
                 const role = roleID
-                    ? message.guild.roles.cache.get(roleID)
+                    ? message.guild.roles.cache.get(`${BigInt(roleID)}`)
                     : message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase());
 
                 if (!role)
@@ -582,7 +582,7 @@ export default class extends Command {
                 const [roleID, roleName] = args;
 
                 const role = roleID
-                    ? message.guild.roles.cache.get(roleID)
+                    ? message.guild.roles.cache.get(`${BigInt(roleID)}`)
                     : message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase());
 
                 if (!role)
@@ -632,7 +632,7 @@ export default class extends Command {
                 const [channelID, channelName] = args;
 
                 const channel = channelID
-                    ? message.guild.channels.cache.get(channelID)
+                    ? message.guild.channels.cache.get(`${BigInt(channelID)}`)
                     : message.guild.channels.cache.find((r) =>
                         r.name.toLowerCase() === channelName.toLowerCase());
 

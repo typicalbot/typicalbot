@@ -28,7 +28,7 @@ export default class extends Command {
         const member = await resolveMember(this.client, message, id, username, discriminator, false);
 
         const role = roleID
-            ? message.guild.roles.cache.get(roleID)
+            ? message.guild.roles.cache.get(`${BigInt(roleID)}`)
             : roleName
                 ? message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase())
                 : null;

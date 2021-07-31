@@ -17,7 +17,7 @@ export default class extends Event {
         if (message.channel.type === 'dm')
             return this.handleDM(message as Message);
 
-        const me = message.guild!.me ?? await message.guild!.members.fetch(this.client.id!);
+        const me = message.guild!.me ?? await message.guild!.members.fetch(`${BigInt(this.client.id!)}`);
         if (!me) return;
 
         const channel = message.channel as TextChannel | NewsChannel;

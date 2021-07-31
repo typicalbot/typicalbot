@@ -17,9 +17,9 @@ export default class GuildMemberAdd extends Event {
         if (settings.logs.join !== '--disabled') {
             if (
                 settings.logs.id &&
-                guild.channels.cache.has(settings.logs.id)
+                guild.channels.cache.has(`${BigInt(settings.logs.id)}`)
             ) {
-                const channel = guild.channels.cache.get(settings.logs.id) as TextChannel;
+                const channel = guild.channels.cache.get(`${BigInt(settings.logs.id)}`) as TextChannel;
                 if (channel.type !== 'text') return;
 
                 if (settings.logs.join === '--embed') {

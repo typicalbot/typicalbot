@@ -14,7 +14,7 @@ export default class extends Command {
 
         const roleInfo = args.join(' ').toLowerCase();
         const role = roleInfo
-            ? message.guild.roles.cache.get(roleInfo)
+            ? message.guild.roles.cache.get(`${BigInt(roleInfo)}`)
             ?? message.guild.roles.cache.find((role) => role.name.toLowerCase() === roleInfo)
             : message.mentions.roles.first();
 

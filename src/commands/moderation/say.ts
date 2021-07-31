@@ -20,7 +20,7 @@ export default class extends Command {
         args.shift();
 
         const [json, channelID, content] = args;
-        const channel = (message.guild.channels.cache.get(channelID) ??
+        const channel = (message.guild.channels.cache.get(`${BigInt(channelID)}`) ??
             message.channel) as TextChannel;
 
         if (json) {
@@ -44,7 +44,7 @@ export default class extends Command {
         const { settings } = message.guild;
         const logChannel =
             settings.logs.id &&
-            message.guild.channels.cache.get(settings.logs.id);
+            message.guild.channels.cache.get(`${BigInt(settings.logs.id)}`);
         if (
             logChannel &&
             logChannel instanceof TextChannel &&
@@ -58,7 +58,7 @@ export default class extends Command {
                         .addFields([
                             {
                                 name: message.translate('common:CHANNEL'),
-                                value: channel
+                                value: channel.id
                             }
                         ])
                         .setDescription(content)

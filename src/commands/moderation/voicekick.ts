@@ -25,7 +25,7 @@ export default class extends Command {
         const [userID, reason] = args;
 
         const member = await message.guild.members
-            .fetch(userID)
+            .fetch(`${BigInt(userID)}`)
             .catch(() => null);
 
         if (!member)

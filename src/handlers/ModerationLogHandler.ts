@@ -16,10 +16,10 @@ export default class ModerationLogHandler {
 
         if (!settings.logs.moderation)
             return null;
-        if (!guild.channels.cache.has(settings.logs.moderation))
+        if (!guild.channels.cache.has(`${BigInt(settings.logs.moderation)}`))
             return null;
 
-        return guild.channels.cache.get(settings.logs.moderation) as TextChannel;
+        return guild.channels.cache.get(`${BigInt(settings.logs.moderation)}`) as TextChannel;
     }
 
     async fetchCase(guild: Guild, id = 'latest') {
@@ -73,7 +73,7 @@ export default class ModerationLogHandler {
                 message.translate('moderation/modlog:REASON', {
                     reason
                 })
-            ]));
+            ].join('\n')));
     }
 
     processAutoRoles() {
@@ -88,9 +88,9 @@ export default class ModerationLogHandler {
     grantAutoRole(member: GuildMember, settings: GuildSettings) {
         const autorole =
             settings.auto.role.bots && member.user.bot
-                ? member.guild.roles.cache.get(settings.auto.role.bots)
+                ? member.guild.roles.cache.get(`${BigInt(settings.auto.role.bots)}`)
                 : settings.auto.role.id
-                    ? member.guild.roles.cache.get(settings.auto.role.id)
+                    ? member.guild.roles.cache.get(`${BigInt(settings.auto.role.id)}`)
                     : undefined;
 
         if (!autorole || !autorole.editable || member.roles.cache.has(autorole.id) || member.guild.verificationLevel === 'VERY_HIGH') return;
@@ -104,7 +104,7 @@ export default class ModerationLogHandler {
 
             if (!added || !settings.logs.id) return;
 
-            const channel = member.guild.channels.cache.get(settings.logs.id) as TextChannel;
+            const channel = member.guild.channels.cache.get(`${BigInt(settings.logs.id)}`) as TextChannel;
             if (!channel || channel.type !== 'text') return;
 
             return channel.send((member.guild as TypicalGuild).translate('help/logs:AUTOROLE', {

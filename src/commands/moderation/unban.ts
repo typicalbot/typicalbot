@@ -27,7 +27,7 @@ export default class extends Command {
 
         const [userID, reason] = args;
 
-        const user = await this.client.users.fetch(userID).catch(() => null);
+        const user = await this.client.users.fetch(`${BigInt(userID)}`).catch(() => null);
         if (!user)
             return message.error(message.translate('common:USER_FETCH_ERROR'));
 
@@ -37,7 +37,7 @@ export default class extends Command {
         this.client.caches.unbans.set(user.id, log);
 
         const unbanned = await message.guild.members
-            .unban(userID, message.translate('moderation/unban:REASON', {
+            .unban(`${BigInt(userID)}`, message.translate('moderation/unban:REASON', {
                 mod: message.author.tag,
                 reason: reason || message.translate('common:NO_REASON')
             }))

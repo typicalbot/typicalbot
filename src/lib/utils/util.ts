@@ -103,7 +103,7 @@ export const permissionError = (client: TypicalClient, message: TypicalGuildMess
 
 export const resolveMember = async (client: TypicalClient, message: TypicalGuildMessage, id?: string, username?: string, discriminator?: string, returnSelf = true) => {
     if (id) {
-        const user = await client.users.fetch(id).catch(console.error);
+        const user = await client.users.fetch(`${BigInt(id)}`).catch(console.error);
         if (!user) return returnSelf ? message.member : null;
 
         const member = await message.guild.members

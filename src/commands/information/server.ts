@@ -97,27 +97,27 @@ export default class extends Command {
                 },
                 {
                     name: message.translate('common:VERIFICATION_FIELD'),
-                    value: message.guild.verificationLevel,
+                    value: `${message.guild.verificationLevel}`,
                     inline: true
                 },
                 {
                     name: message.translate('common:CHANNELS_FIELD'),
-                    value: message.guild.channels.cache.size,
+                    value: `${message.guild.channels.cache.size}`,
                     inline: true
                 },
                 {
                     name: message.translate('common:MEMBERS_FIELD'),
-                    value: message.guild.memberCount,
+                    value: `${message.guild.memberCount}`,
                     inline: true
                 },
                 {
                     name: message.translate('common:ROLES_FIELD'),
-                    value: message.guild.roles.cache.size,
+                    value: `${message.guild.roles.cache.size}`,
                     inline: true
                 },
                 {
                     name: message.translate('common:EMOJIS_FIELD'),
-                    value: message.guild.emojis.cache.size,
+                    value: `${message.guild.emojis.cache.size}`,
                     inline: true
                 },
                 {

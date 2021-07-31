@@ -28,7 +28,7 @@ export default class extends Command {
         const [userID, days, reason] = args;
 
         const member = await message.guild.members
-            .fetch(userID)
+            .fetch(`${BigInt(userID)}`)
             .catch(() => null);
         if (!member)
             return message.error(message.translate('common:USER_NOT_FOUND'));
@@ -59,7 +59,7 @@ export default class extends Command {
             return message.error(message.translate('common:REQUEST_ERROR'));
 
         return setTimeout(async () => {
-            await message.guild.members.unban(userID, banReason);
+            await message.guild.members.unban(`${BigInt(userID)}`, banReason);
 
             if (!message.guild.settings.logs.moderation) {
                 const newCase = await message.guild.buildModerationLog();

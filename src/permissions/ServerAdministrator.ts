@@ -11,6 +11,6 @@ export default class extends PermissionLevel {
 
         const roleIDs = this.fetchRoles(guild, 'administrator');
 
-        return roleIDs.some((id) => member.roles.cache.has(id));
+        return roleIDs.some((id) => member.roles.cache.has(`${BigInt(id)}`));
     }
 }

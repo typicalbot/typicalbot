@@ -40,14 +40,14 @@ export default class extends Command {
 
         if (!message.guild.settings.roles.mute)
             return message.error(message.translate('moderation/mute:NO_ROLE'));
-        const role = message.guild.roles.cache.get(message.guild.settings.roles.mute);
+        const role = message.guild.roles.cache.get(`${BigInt(message.guild.settings.roles.mute)}`);
         if (!role)
             return message.error(message.translate('moderation/mute:NO_ROLE'));
 
         if (deny) {
             const channel = useCurrentChannel
                 ? message.channel
-                : message.guild.channels.cache.get(channelID);
+                : message.guild.channels.cache.get(`${BigInt(channelID)}`);
             if (!channel)
                 return message.error(message.translate('moderation/mute:INVALID_CHANNEL'));
 
@@ -85,12 +85,12 @@ export default class extends Command {
             return message.error(message.translate('moderation/mute:TOO_LONG'));
 
         const member = await message.guild.members
-            .fetch(userID)
+            .fetch(`${BigInt(userID)}`)
             .catch(() => null);
         if (!member)
             return message.error(message.translate('common:USER_NOT_FOUND'));
 
-        if (member.roles.cache.has(message.guild.settings.roles.mute))
+        if (member.roles.cache.has(`${BigInt(message.guild.settings.roles.mute)}`))
             return message.error(message.translate('moderation/mute:ALREADY_MUTED'));
 
         if (

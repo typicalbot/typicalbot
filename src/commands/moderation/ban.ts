@@ -40,7 +40,7 @@ export default class extends Command {
         if (time > 1000 * 60 * 60 * 24 * 7)
             return message.error(message.translate('moderation/ban:WEEK'));
 
-        const user = await this.client.users.fetch(userID).catch(() => null);
+        const user = await this.client.users.fetch(`${BigInt(userID)}`).catch(() => null);
         if (!user)
             return message.error(message.translate('common:USER_FETCH_ERROR'));
 

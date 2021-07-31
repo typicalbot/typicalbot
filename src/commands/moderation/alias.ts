@@ -45,7 +45,7 @@ export default class extends Command {
                     .map((a) => `${a.alias} -> ${a.command}`)
                     .join('\n')
                 : NONE
-        ]);
+        ].join('\n'));
     }
 
     async add(message: TypicalGuildMessage,

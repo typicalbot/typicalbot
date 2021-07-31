@@ -15,7 +15,7 @@ export default class extends Command {
 
         const [userID, nickname] = args;
         const member = userID
-            ? await message.guild.members.fetch(userID).catch(() => null)
+            ? await message.guild.members.fetch(`${BigInt(userID)}`).catch(() => null)
             : null;
         const reset = !nickname || nickname === 'reset';
         const type = message

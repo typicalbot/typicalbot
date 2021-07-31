@@ -22,7 +22,7 @@ export default class PermissionLevel {
     fetchRoles(guild: Guild,
         permission: 'blacklist' | 'moderator' | 'administrator') {
         const pool = guild.settings.roles[permission].filter((role) =>
-            guild.roles.cache.has(role));
+            guild.roles.cache.has(`${BigInt(role)}`));
 
         let roleName: string;
         switch (permission) {

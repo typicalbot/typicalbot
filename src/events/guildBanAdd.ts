@@ -32,7 +32,7 @@ export default class GuildBanAdd extends Event {
 
         if (!settings.logs.id || settings.logs.ban === '--disabled') return;
 
-        const channel = guild.channels.cache.get(settings.logs.id) as TextChannel;
+        const channel = guild.channels.cache.get(`${BigInt(settings.logs.id)}`) as TextChannel;
         if (!channel || channel.type !== 'text') return;
 
         if (settings.logs.ban === '--embed')

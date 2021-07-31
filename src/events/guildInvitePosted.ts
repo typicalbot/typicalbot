@@ -77,7 +77,7 @@ export default class GuildInvitePosted extends Event {
 
         if (!settings.logs.id || !settings.logs.invite) return;
 
-        const channel = message.guild.channels.cache.get(settings.logs.id) as TextChannel;
+        const channel = message.guild.channels.cache.get(`${BigInt(settings.logs.id)}`) as TextChannel;
         if (!channel || channel.type !== 'text') return;
 
         if (settings.logs.invite !== '--embed') {

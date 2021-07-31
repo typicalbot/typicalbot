@@ -22,7 +22,7 @@ export default class extends Command {
             : await message.send(message.translate('moderation/slowmode:SET', { cooldown }));
 
         const { settings } = message.guild;
-        const logChannel = settings.logs.id && message.guild.channels.cache.get(settings.logs.id);
+        const logChannel = settings.logs.id && message.guild.channels.cache.get(`${BigInt(settings.logs.id)}`);
 
         if (logChannel && logChannel instanceof TextChannel && settings.logs.slowmode) {
             if (settings.logs.slowmode === '--embed') {
@@ -33,7 +33,7 @@ export default class extends Command {
                         .addFields([
                             {
                                 name: message.translate('common:CHANNEL'),
-                                value: channel
+                                value: channel.id,
                             },
                             {
                                 name: message.translate('moderation/slowmode:SLOWMODE'),

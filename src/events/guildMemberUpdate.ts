@@ -19,7 +19,7 @@ export default class GuildMemberUpdate extends Event {
 
         const { user } = member;
 
-        const channel = guild.channels.cache.get(settings.logs.id) as TextChannel;
+        const channel = guild.channels.cache.get(`${BigInt(settings.logs.id)}`) as TextChannel;
         if (!channel || channel.type !== 'text') return;
 
         if (

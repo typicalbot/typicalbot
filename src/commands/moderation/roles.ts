@@ -87,7 +87,7 @@ export default class extends Command {
 
         const role =
             roleMention || roleID
-                ? message.guild.roles.cache.get(roleMention || roleID)
+                ? message.guild.roles.cache.get(`${BigInt(roleMention || roleID)}`)
                 : roleName
                     ? message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase())
                     : null;
@@ -139,7 +139,7 @@ export default class extends Command {
             return message.error(message.translate('common:USER_FETCH_ERROR'));
 
         const role = roleID
-            ? message.guild.roles.cache.get(roleID)
+            ? message.guild.roles.cache.get(`${BigInt(roleID)}`)
             : roleName
                 ? message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase())
                 : null;
@@ -179,7 +179,7 @@ export default class extends Command {
         const [action, roleID, roleName] = args;
 
         const role = roleID
-            ? message.guild.roles.cache.get(roleID)
+            ? message.guild.roles.cache.get(`${BigInt(roleID)}`)
             : roleName
                 ? message.guild.roles.cache.find((r) => r.name.toLowerCase() === roleName.toLowerCase())
                 : null;
@@ -201,7 +201,7 @@ export default class extends Command {
         const roles: Role[] = [];
 
         for (const roleID of message.guild.settings.roles.public) {
-            const role = message.guild.roles.cache.get(roleID);
+            const role = message.guild.roles.cache.get(`${BigInt(roleID)}`);
             if (!role) continue;
             roles.push(role);
         }
@@ -242,7 +242,7 @@ export default class extends Command {
             return message.error(message.translate('moderation/give:INVALID'));
 
         const roleIDs = message.guild.settings.roles.public.filter((r) =>
-            message.guild.roles.cache.has(r));
+            message.guild.roles.cache.has(`${BigInt(r)}`));
         if (subcommand === 'add') {
             if (roleIDs.includes(role.id))
                 return message.error(message.translate('moderation/roles:ALREADY_PUBLIC'));

@@ -28,7 +28,7 @@ export default class MessageReactionRemove extends Event {
 
         if (messageReaction.users.cache.get(message.author.id)) count--;
 
-        const channel = message.guild.channels.cache.get(settings.starboard.id) as TextChannel;
+        const channel = message.guild.channels.cache.get(`${BigInt(settings.starboard.id)}`) as TextChannel;
         if (!channel || channel.type !== 'text') return;
 
         const messages = await channel.messages.fetch({ limit: 100 });

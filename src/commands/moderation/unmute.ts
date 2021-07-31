@@ -31,18 +31,18 @@ export default class extends Command {
         const [userID, reason] = args;
 
         const member = await message.guild.members
-            .fetch(userID)
+            .fetch(`${BigInt(userID)}`)
             .catch(() => null);
         if (!member)
             return message.error(message.translate('common:USER_NOT_FOUND'));
 
         const role =
             message.guild.settings.roles.mute &&
-            message.guild.roles.cache.get(message.guild.settings.roles.mute);
+            message.guild.roles.cache.get(`${BigInt(message.guild.settings.roles.mute)}`);
         if (!message.guild.settings.roles.mute || !role)
             return message.error(message.translate('moderation/mute:NO_ROLE'));
 
-        if (!member.roles.cache.has(message.guild.settings.roles.mute))
+        if (!member.roles.cache.has(`${BigInt(message.guild.settings.roles.mute)}`))
             return message.error(message.translate('moderation/unmute:NOT_MUTED'));
 
         if (
