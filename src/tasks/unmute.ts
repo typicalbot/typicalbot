@@ -36,6 +36,6 @@ export default class extends Task {
             .setReason(reason);
         await newCase.send();
 
-        await member.roles.remove(settings.roles.mute, reason);
+        await member.roles.remove(`${BigInt(settings.roles.mute)}`, reason);
     }
 }

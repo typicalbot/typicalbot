@@ -1,4 +1,4 @@
-import { PermissionOverwrites, MessageEmbed, TextChannel } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 import Command from '../../lib/structures/Command';
 import { TypicalGuildMessage, PermissionLevel } from '../../lib/types/typicalbot';
 import { MODE, PERMISSION_LEVEL, MODERATION_LOG_TYPE, LINK } from '../../lib/utils/constants';
@@ -34,8 +34,8 @@ export default class extends Command {
             seconds,
             reason,
             deny,
-            useCurrentChannel,
-            channelID
+            // useCurrentChannel,
+            // channelID
         ] = args;
 
         if (!message.guild.settings.roles.mute)
@@ -45,32 +45,33 @@ export default class extends Command {
             return message.error(message.translate('moderation/mute:NO_ROLE'));
 
         if (deny) {
-            const channel = useCurrentChannel
-                ? message.channel
-                : message.guild.channels.cache.get(`${BigInt(channelID)}`) as TextChannel;
-            if (!channel)
-                return message.error(message.translate('moderation/mute:INVALID_CHANNEL'));
+            return message.error('This method is no longer supported');
+            // const channel = useCurrentChannel
+            //     ? message.channel
+            //     : message.guild.channels.cache.get(`${BigInt(channelID)}`) as TextChannel;
+            // if (!channel)
+            //     return message.error(message.translate('moderation/mute:INVALID_CHANNEL'));
 
-            const permissions = channel.permissionsFor(message.guild.me || this.client.id);
+            // const permissions = channel.permissionsFor(message.guild.me || this.client.id);
 
-            if (permissions && !permissions.has('MANAGE_ROLES'))
-                return message.error(message.translate('moderation/mute:MISSING_PERMS'));
+            // if (permissions && !permissions.has('MANAGE_ROLES'))
+            //     return message.error(message.translate('moderation/mute:MISSING_PERMS'));
 
-            const currentOverwrites = channel.permissionOverwrites;
-            currentOverwrites.set(role.id, new PermissionOverwrites(channel, {
-                id: role.id,
-                deny: ['SEND_MESSAGES'],
-                allow: [],
-                type: 'role'
-            }));
+            // const currentOverwrites = channel.permissionOverwrites;
+            // currentOverwrites.set([new PermissionOverwrites(this.client, {
+            //     id: role.id,
+            //     deny: ['SEND_MESSAGES'],
+            //     allow: [],
+            //     type: 'role'
+            // }, channel)]);
 
-            const edited = await channel
-                .overwritePermissions(currentOverwrites, message.translate('moderation/mute:DENYING'))
-                .catch(() => null);
+            // const edited = await channel
+            //     .overwritePermissions(currentOverwrites, message.translate('moderation/mute:DENYING'))
+            //     .catch(() => null);
 
-            return edited
-                ? message.success(message.translate('moderation/mute:DENYING'))
-                : message.error(message.translate('moderation/mute:DENY_ERROR'));
+            // return edited
+            //     ? message.success(message.translate('moderation/mute:DENYING'))
+            //     : message.error(message.translate('moderation/mute:DENY_ERROR'));
         }
 
         // Mute a member

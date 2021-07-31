@@ -198,10 +198,10 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@discordjs/builders@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.1.1.tgz#d1e888ee8ef273cce639c79cb24abac7169cfb88"
-  integrity sha512-9eBC22bX2HBsob5ixMwZ6quy/vewU5GHuSJhpmSZ3cDGg8XPnrYdzbwI54U+V9kQBTa7M+aMu1lYVqMEPojj8A==
+"@discordjs/builders@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.2.0.tgz#832c8d894aad13362db7a99f11a7826b21e4cd94"
+  integrity sha512-TVq7NZBCJrrTRc3CfxOr3IdgY5nrtqVxZ7qDUF1mN6LgxIiOldmFxsSwMrQBzLFVmOwqFyNLKCeblley8UpEuw==
   dependencies:
     discord-api-types "^0.18.1"
     tslib "^2.3.0"
@@ -1318,11 +1318,11 @@ discord-api-types@^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.19.0.tgz#86ba8021b29190cf860e90a2bc3e29b1d7aab3ba"
   integrity sha512-t2HKLd43Lbe+rf+ffYfKVv9Kk5f6p7sFqvO6CMV55ZB0PgZv8WigCkt9FoJciYo5S3Q6CGYK+WnE/ZG+6vkBDQ==
 
-"discord.js@github:discordjs/discord.js#a08ce7dddb5f056128488392742495398f9e33b5":
+"discord.js@github:discordjs/discord.js#610b0b4dd6b6e66c05c22eb852d2a752b99d07ba":
   version "13.0.0-dev"
-  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/a08ce7dddb5f056128488392742495398f9e33b5"
+  resolved "https://codeload.github.com/discordjs/discord.js/tar.gz/610b0b4dd6b6e66c05c22eb852d2a752b99d07ba"
   dependencies:
-    "@discordjs/builders" "^0.1.1"
+    "@discordjs/builders" "^0.2.0"
     "@discordjs/collection" "^0.1.6"
     "@discordjs/form-data" "^3.0.1"
     "@sapphire/async-queue" "^1.1.4"

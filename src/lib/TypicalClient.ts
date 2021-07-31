@@ -106,7 +106,6 @@ export default class TypicalClient extends Client {
 
     public constructor(database: Database) {
         super({
-            messageCacheMaxSize: 300,
             messageCacheLifetime: 900,
             messageSweepInterval: 180,
             partials: ['MESSAGE'],
