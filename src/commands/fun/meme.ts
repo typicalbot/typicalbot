@@ -21,7 +21,7 @@ export default class extends Command {
                 meme.url
             ].join('\n'));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setTitle(meme.title)
             .setImage(meme.url)
             .setColor(0x1976D2)

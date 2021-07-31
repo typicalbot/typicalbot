@@ -55,7 +55,7 @@ export default class extends Command {
                 '```'
             ].join('\n'));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setAuthor(user.tag, user.displayAvatarURL({ format: 'png', size: 2048 }))
             .setThumbnail(user.displayAvatarURL({ format: 'png', size: 2048 }))
             .addFields([

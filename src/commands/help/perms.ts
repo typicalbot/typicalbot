@@ -7,7 +7,7 @@ export default class extends Command {
     mode = MODE.STRICT;
 
     async execute(message: TypicalGuildMessage) {
-        await message.send(new MessageEmbed()
+        await message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('help/perms:LEVELS'))
             .setURL(WEBSITE)

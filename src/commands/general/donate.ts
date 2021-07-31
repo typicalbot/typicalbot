@@ -13,7 +13,7 @@ export default class extends Command {
                 link: LINK.DONATE
             }));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('general/donate:SUPPORT'))
             .setDescription(message.translate('general/donate:TEXT', {

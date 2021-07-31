@@ -1,6 +1,7 @@
 import {
     DMChannel,
     Message,
+    MessageAttachment,
     MessageEmbed,
     MessageOptions,
     Structures,
@@ -65,34 +66,33 @@ export class TypicalMessage extends Structures.get('Message') {
     }
 
     respond(content: string, embed?: MessageEmbed) {
-        return this.channel.send(`${this.author} | ${content}`, { embed });
+        return this.channel.send({content: `${this.author} | ${content}`, embed });
     }
 
-    send(content: string | MessageEmbed,
-        embed?: MessageEmbed,
-        options?: MessageOptions) {
-        if (typeof content === 'string') {
-            return this.channel.send(content, { ...options, embed });
-        }
-        return this.channel.send(content);
+    send(content: string,
+        embed?: MessageEmbed) {
+        return this.channel.send({ content, embed, allowedMentions: { parse: [] } });
     }
 
     embed(embed: MessageEmbed) {
-        return this.channel.send('', embed);
+        return this.channel.send({embed});
+    }
+
+    attachment(attachment: MessageAttachment) {
+        return this.channel.send({ files: [attachment] });
     }
 
     success(content: string, embed?: MessageEmbed) {
-        return this.channel.send(`${this.author} | ✔️ | ${content}`, { embed });
+        return this.channel.send({ content: `${this.author} | ✔️ | ${content}`, embed });
     }
 
-    error(content: string, embed?: MessageEmbed, options?: MessageOptions) {
-        return this.channel.send(`${this.author} | ❌ | ${content}`, { ...options, embed });
+    error(content: string, embed?: MessageEmbed) {
+        return this.channel.send({ content: `${this.author} | ❌ | ${content}`, embed });
     }
 
     dm(content: string,
-        embed?: MessageEmbed,
-        options?: MessageOptions) {
-        return this.author?.send(content, { ...options, embed });
+        embed?: MessageEmbed) {
+        return this.author?.send({ content, embed });
     }
 
     translate(key: string, args?: Record<string, unknown>) {

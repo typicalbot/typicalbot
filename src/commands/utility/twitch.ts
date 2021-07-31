@@ -50,7 +50,7 @@ export default class extends Command {
 
         const NA = message.translate('common:NA');
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle('Twitch Statistics')
             .setDescription(data.description)

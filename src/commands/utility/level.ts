@@ -30,7 +30,7 @@ export default class extends Command {
                 user: member.user.tag
             }));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('utility/level:TITLE', {
                 user: member.user.tag

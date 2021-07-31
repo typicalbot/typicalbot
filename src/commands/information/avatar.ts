@@ -25,7 +25,7 @@ export default class extends Command {
             }));
         }
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setTitle(user.tag)
             .setDescription(`${message.translate('common:ID_FIELD')}: ${user.id}`)
             .setImage(user.displayAvatarURL({

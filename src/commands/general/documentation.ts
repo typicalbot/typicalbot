@@ -14,7 +14,7 @@ export default class extends Command {
                 link: LINK.DOCUMENTATION
             }));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('general/documentation:TYPICAL_DOCS'))
             .setDescription(message.translate('general/documentation:TEXT', {

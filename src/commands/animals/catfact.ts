@@ -11,6 +11,6 @@ export default class extends Command {
                 message.error(message.translate('common:REQUEST_ERROR')));
         if (!message.embeddable) return message.send(data.fact);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setTitle(message.translate('animals/catfact:TITLE')).setDescription(data.fact).setFooter(message.translate('common:POWERED_BY', { service: 'some-random-api.ml' })));
+        return message.embed(new MessageEmbed().setColor(0x00adff).setTitle(message.translate('animals/catfact:TITLE')).setDescription(data.fact).setFooter(message.translate('common:POWERED_BY', { service: 'some-random-api.ml' })));
     }
 }

@@ -13,7 +13,7 @@ export default class extends Command {
                 link: LINK.VOTE
             }));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('utility/vote:TITLE'))
             .setDescription(message.translate('utility/vote:TEXT', {

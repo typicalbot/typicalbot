@@ -40,7 +40,7 @@ export default class extends Command {
                 '```'
             ].join('\n'));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setTitle('Heap Statistics')
             .setDescription([
                 '```swift',

@@ -25,10 +25,8 @@ export default class extends Command {
 
         if (json) {
             try {
-                const jsonParse = JSON.parse(content);
-
                 channel
-                    .send('', jsonParse)
+                    .send('This method is no longer supported')
                     .catch(() =>
                         message.error(message.translate('moderation/say:MISSING_SEND')));
             } catch (err) {
@@ -36,7 +34,7 @@ export default class extends Command {
             }
         } else {
             channel
-                .send(content, { allowedMentions: { parse: [] } })
+                .send({content, allowedMentions: { parse: [] }})
                 .catch(() =>
                     message.error(message.translate('moderation/say:MISSING_SEND')));
         }
@@ -67,7 +65,7 @@ export default class extends Command {
                     .catch(() => null);
             } else if (logChannel) {
                 logChannel
-                    .send([
+                    .send({content: [
                         message.translate('moderation/say:TEXT', {
                             user: message.author.tag,
                             channel
@@ -75,7 +73,7 @@ export default class extends Command {
                         '```',
                         content,
                         '```'
-                    ].join('\n'), { allowedMentions: { parse: [] } })
+                    ].join('\n'), allowedMentions: { parse: [] } })
                     .catch(() => null);
             }
         }

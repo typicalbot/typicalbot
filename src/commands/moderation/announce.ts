@@ -45,7 +45,7 @@ export default class extends Command {
             })}\n\n${content}`);
         }
 
-        return channel.send(mentionRole ? mentionRole.toString() : '', {
+        return channel.send({ content: mentionRole ? mentionRole.toString() : '',
             embed: new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('moderation/announce:TITLE'))

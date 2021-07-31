@@ -37,7 +37,7 @@ export default class extends Command {
 
         const rating = Math.round((resp.thumbs_up / (resp.thumbs_up + resp.thumbs_down)) * 100);
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(query)
             .setURL(resp.permalink)

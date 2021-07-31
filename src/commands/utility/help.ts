@@ -23,7 +23,7 @@ export default class extends Command {
                 return message.send(`${response}\n\n${appendixA}\n${appendixB}`);
             }
 
-            return message.send(new MessageEmbed()
+            return message.embed(new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('utility/help:TYPICAL_INFO'))
                 .setDescription(response)
@@ -39,9 +39,9 @@ export default class extends Command {
             const response = message.translate('utility/help:INVALID', {
                 name: parameters
             });
-            if (!message.embeddable) return message.error(response, undefined, { allowedMentions: { users: [message.author.id] } });
+            if (!message.embeddable) return message.error(response);
 
-            return message.send(new MessageEmbed()
+            return message.embed(new MessageEmbed()
                 .setColor(0x00adff)
                 .setTitle(message.translate('utility/help:INVALID_INFO'))
                 .setDescription(response)
@@ -76,7 +76,7 @@ export default class extends Command {
                 '```'
             ].join('\n'));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('utility/help:COMMAND_USAGE', {
                 name: command.name

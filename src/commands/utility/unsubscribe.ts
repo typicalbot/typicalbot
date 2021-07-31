@@ -23,7 +23,7 @@ export default class extends Command {
         if (!message.embeddable)
             return message.reply(message.translate('utility/unsubscribe:UNSUBBED'));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0x00adff)
             .setTitle(message.translate('common:SUCCESS'))
             .setDescription(message.translate('utility/unsubscribe:UNSUBBED'))

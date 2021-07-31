@@ -14,6 +14,6 @@ export default class extends Command {
 
         if (!message.embeddable) return message.send(data.link);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setImage(data.link).setFooter(message.translate('common:POWERED_BY', { service: 'some-random-api.ml' })));
+        return message.embed(new MessageEmbed().setColor(0x00adff).setImage(data.link).setFooter(message.translate('common:POWERED_BY', { service: 'some-random-api.ml' })));
     }
 }

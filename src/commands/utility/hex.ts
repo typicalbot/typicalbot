@@ -32,9 +32,9 @@ export default class extends Command {
         });
 
         if (!message.embeddable)
-            return message.channel.send(new MessageAttachment('data/image.png'));
+            return message.attachment(new MessageAttachment('data/image.png'));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .attachFiles([
                 {
                     attachment: 'data/image.png',

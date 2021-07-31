@@ -6,7 +6,8 @@ import {
     MessageEmbed,
     MessageOptions,
     TextChannel,
-    User
+    User,
+    MessageAttachment
 } from 'discord.js';
 import TypicalClient from '../TypicalClient';
 import ModerationLog from '../structures/ModerationLog';
@@ -169,33 +170,36 @@ export interface TypicalMessage extends Message {
     chooseOption(options: string[]): Promise<string | undefined>;
 
     dm(
-        content: string | MessageEmbed,
-        embed?: MessageEmbed,
-        options?: MessageOptions
+        content: string,
+        embed?: MessageEmbed
     ): Promise<Message>;
 
     error(
-        content: string | MessageEmbed,
-        embed?: MessageEmbed,
-        options?: MessageOptions
+        content: string,
+        embed?: MessageEmbed
     ): Promise<Message>;
 
     send(
-        content: string | MessageEmbed,
-        embed?: MessageEmbed,
-        options?: MessageOptions
+        content: string,
+        embed?: MessageEmbed
     ): Promise<Message>;
 
     success(
-        content: string | MessageEmbed,
-        embed?: MessageEmbed,
-        options?: MessageOptions
+        content: string,
+        embed?: MessageEmbed
     ): Promise<Message>;
 
     respond(
-        content: string | MessageEmbed,
-        embed?: MessageEmbed,
-        options?: MessageOptions
+        content: string,
+        embed?: MessageEmbed
+    ): Promise<Message>;
+
+    embed(
+        embed: MessageEmbed
+    ): Promise<Message>;
+
+    attachment(
+        attachment: MessageAttachment
     ): Promise<Message>;
 
     translate(key: string, args?: Record<string, unknown>): string;

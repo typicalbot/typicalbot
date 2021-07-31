@@ -32,7 +32,7 @@ export default class extends Command {
                 })
                 : message.translate('moderation/adcheck:NONE'));
 
-        return message.send(new MessageEmbed()
+        return message.embed(new MessageEmbed()
             .setColor(0xff0000)
             .setTitle(message.translate('moderation/adcheck:TITLE'))
             .setDescription(list.length

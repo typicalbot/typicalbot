@@ -30,7 +30,7 @@ export default class extends Command {
                 result
                     .then((a) => {
                         message
-                            .send(embed.setDescription([
+                            .embed(embed.setDescription([
                                 '',
                                 '',
                                 '```ts',
@@ -38,11 +38,11 @@ export default class extends Command {
                                 '```'
                             ].join('\n')))
                             .catch((err) => {
-                                message.send(embed.setDescription(['```', err.stack, '```'].join('\n')));
+                                message.embed(embed.setDescription(['```', err.stack, '```'].join('\n')));
                             });
                     })
                     .catch((err) => {
-                        message.send(embed.setDescription([
+                        message.embed(embed.setDescription([
                             '',
                             '',
                             '```',
@@ -55,13 +55,13 @@ export default class extends Command {
             }
 
             if (result instanceof Object) {
-                return message.send(embed.setDescription(['```ts', inspect(result, { depth: 0 }), '```'].join('\n')));
+                return message.embed(embed.setDescription(['```ts', inspect(result, { depth: 0 }), '```'].join('\n')));
             }
 
-            return message.send(embed.setDescription(['```', result, '```'].join('\n')));
+            return message.embed(embed.setDescription(['```', result, '```'].join('\n')));
         } catch (err) {
             return message
-                .send(embed
+                .embed(embed
                     .setDescription(['```', err.stack, '```'].join('\n'))
                     .setColor(0xff0000))
                 .catch(() => {

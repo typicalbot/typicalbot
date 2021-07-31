@@ -11,6 +11,6 @@ export default class extends Command {
                 message.error(message.translate('common:REQUEST_ERROR')));
         if (!message.embeddable) return message.send(`${text}`);
 
-        return message.send(new MessageEmbed().setColor(0x00adff).setTitle(message.translate('fun/yearfact:TITLE')).setDescription(`${text}`).setFooter(message.translate('common:POWERED_BY', { service: 'numbersapi.com' })));
+        return message.embed(new MessageEmbed().setColor(0x00adff).setTitle(message.translate('fun/yearfact:TITLE')).setDescription(`${text}`).setFooter(message.translate('common:POWERED_BY', { service: 'numbersapi.com' })));
     }
 }

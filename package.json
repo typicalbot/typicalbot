@@ -35,7 +35,7 @@
     "dependencies": {
         "@sentry/integrations": "^6.10.0",
         "@sentry/node": "^6.10.0",
-        "discord.js": "github:discordjs/discord.js#086c3f0799d65c64c4e60d6370246a37a27a1eab",
+        "discord.js": "github:discordjs/discord.js#35c2225f5035fce47b0defc12754bda5901a453c",
         "dotenv": "^10.0.0",
         "fs": "0.0.2",
         "i18next": "^20.3.5",
