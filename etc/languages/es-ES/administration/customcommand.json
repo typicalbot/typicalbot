@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "Crear o actualizar un comando personalizado.",
+    "USAGE": "customcommand <command> <content>",
+    "INVALID": "Debes especificar tanto el comando como el contenido: `$customcommand <command> <content>`",
+    "CREATED": "Has creado con éxito el comando `{{command}}`.",
+    "UPDATED": "Has actualizado con éxito el comando `{{command}}.",
+    "NOT_FOUND": "El comando `{{command}}` no pudo ser encontrado.",
+    "DELETED": "Has eliminado con éxito el comando `{{command}}`."
+}

@@ -1,7 +1,0 @@
-{
-	"DESCRIPTION": "Skapa och visa API-nycklar.",
-	"USAGE": "api <view|generate>",
-	"NONE": "Ingen API-nyckel finns. Använd `$api generera` för att skapa en.",
-	"SUCCESS": "API-nyckel skapad.",
-	"KEY": "{{guild}}'s API-nyckel: `{{key}}`"
-}

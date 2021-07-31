@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "Una comprobación para ver si TypicalBot es capaz de responder.",
-	"USAGE": "ping",
-	"CALCULATING": "Calculando tiempo de ejecución de comandos y latencia de la API de Discord...",
-	"RESPONSE": "Tiempo de Ejecución de Comandos: {{command}}ms | Latencia de la API de Discord: {{api}}ms"
+  "DESCRIPTION": "Una comprobación para ver si TypicalBot es capaz de responder.",
+  "USAGE": "ping",
+  "CALCULATING": "Calculando tiempo de ejecución de comandos y latencia de la API de Discord...",
+  "RESPONSE": "Tiempo de Ejecución de Comandos: {{command}}ms | Latencia de la API de Discord: {{api}}ms"
 }

@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "Kiểm tra xem TypicalBot có thể trả lời hay không.",
-	"USAGE": "ping",
-	"CALCULATING": "Đang tính toán thời gian xử lí câu lệnh và Discord API latency...",
-	"RESPONSE": "Thời gian xử lí câu lệnh : {{command}}ms | Discord API Latency : {{api}}ms"
+  "DESCRIPTION": "Kiểm tra xem TypicalBot có thể trả lời hay không.",
+  "USAGE": "ping",
+  "CALCULATING": "Đang tính toán thời gian xử lí câu lệnh và Discord API latency...",
+  "RESPONSE": "Thời gian xử lí câu lệnh : {{command}}ms | Discord API Latency : {{api}}ms"
 }

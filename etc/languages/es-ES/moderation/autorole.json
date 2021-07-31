@@ -1,0 +1,5 @@
+{
+    "DESCRIPTION": "Reprocesa a los usuarios mediante un autorol. Comprueba si hay algún usuario sin uno.",
+    "USAGE": "autorol",
+    "SYNC": "Se ha resincronizado a todos los usuarios con el rol correctamente."
+}

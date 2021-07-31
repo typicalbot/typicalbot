@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "A check t' see if the ship's still above water.",
-	"USAGE": "ping",
-	"CALCULATING": "Figurin' how fast the ship's goin'...",
-	"RESPONSE": "Cruisin' Speed : {{command}}ms | Discord API Latency : {{api}}ms"
+  "DESCRIPTION": "A check t' see if the ship's still above water.",
+  "USAGE": "ping",
+  "CALCULATING": "Figurin' how fast the ship's goin'...",
+  "RESPONSE": "Cruisin' Speed : {{command}}ms | Discord API Latency : {{api}}ms"
 }

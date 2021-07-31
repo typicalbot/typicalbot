@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "Проверьте, может ли отвечать TypicalBot.",
-	"USAGE": "пинг",
-	"CALCULATING": "Вычисление времени выполнения команды и задержки Discord API...",
-	"RESPONSE": "Время выполнения команды: {{command}}мс | Задержка API Discord : {{api}}мс"
+  "DESCRIPTION": "Проверьте, может ли отвечать TypicalBot.",
+  "USAGE": "пинг",
+  "CALCULATING": "Вычисление времени выполнения команды и задержки Discord API...",
+  "RESPONSE": "Время выполнения команды: {{command}}мс | Задержка API Discord : {{api}}мс"
 }

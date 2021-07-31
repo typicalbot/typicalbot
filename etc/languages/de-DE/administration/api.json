@@ -1,7 +1,0 @@
-{
-	"DESCRIPTION": "API-Schlüssel generieren und anzeigen.",
-	"USAGE": "API <anschauen|generieren>",
-	"NONE": "Es existiert kein API-Schlüssel. Verwende `$api generate`, um einen zu generieren.",
-	"SUCCESS": "API-Schlüssel erfolgreich generiert.",
-	"KEY": "{{guild}}'s API-Schlüssel: `{{key}}`"
-}

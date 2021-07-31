@@ -1,19 +1,19 @@
 {
-    "PREFIX": "Prefix tego serwera to {{prefix}}.",
-    "MULTIPLE_PREFIXES": "`{{default}}` lub `{{custom}}`",
-    "PTB_ONLY": "Ta komenda funkcjonuje tylko w trybie PTB. Nie funkcjonuje na wersji TypicalBot stable.",
-    "DISABLED": "Ta komenda jest wyłączona na tym serwerze.",
-    "MISSING_PERMS": "Twój poziom uprawnień jest zbyt niski do wykonania tej komendy. Ta komenda wymaga poziomu uprawnień {{requiredLevel}} ({{requiredTitle}}), podczas gdy twój poziom to {{userLevel}} ({{userTitle}}).",
-    "MISSING_ACCESS": "Poziom uprawnień właściciela serwera jest zbyt niski do wykonania tej komendy. Komenda wymaga poziomu {{command}}, ale poziom właściciela to tylko {{level}} ({{title}}). Właściciel może podnieść swój poziom uprawnień, wpłacając $5 lub więcej na TypicalBot.",
-    "USAGE_ERROR": "Niewłaściwe wykorzystanie komendy. Sprawdź `{{prefix}} pomoc {{name}}`aby uzyskać więcej informacji.",
-    "PAGIFY": "Strona {{page}} / {{pages}} | {{total}} Łącznie\n\n{{content}}",
-    "CHOOSE_OPTION_1": "Wybierz opcję, wpisując liczbę.",
-    "CHOOSE_OPTION_2": "{{options}}",
-    "CANCEL_OPTIONS": [
-        "anuluj",
-        "anuluj",
-        "wyjdź",
-        "wyjdź"
-    ],
-    "CANCELLED": "Menu zostało anulowane."
+  "PREFIX": "Prefix tego serwera to {{prefix}}.",
+  "MULTIPLE_PREFIXES": "`{{default}}` lub `{{custom}}`",
+  "PTB_ONLY": "Ta komenda funkcjonuje tylko w trybie PTB. Nie funkcjonuje na wersji TypicalBot stable.",
+  "DISABLED": "Ta komenda jest wyłączona na tym serwerze.",
+  "MISSING_PERMS": "Twój poziom uprawnień jest zbyt niski do wykonania tej komendy. Ta komenda wymaga poziomu uprawnień {{requiredLevel}} ({{requiredTitle}}), podczas gdy twój poziom to {{userLevel}} ({{userTitle}}).",
+  "MISSING_ACCESS": "Poziom uprawnień właściciela serwera jest zbyt niski do wykonania tej komendy. Komenda wymaga poziomu {{command}}, ale poziom właściciela to tylko {{level}} ({{title}}). Właściciel może podnieść swój poziom uprawnień, wpłacając $5 lub więcej na TypicalBot.",
+  "USAGE_ERROR": "Niewłaściwe wykorzystanie komendy. Sprawdź `{{prefix}} pomoc {{name}}`aby uzyskać więcej informacji.",
+  "PAGIFY": "Strona {{page}} / {{pages}} | {{total}} Łącznie\n\n{{content}}",
+  "CHOOSE_OPTION_1": "Wybierz opcję, wpisując liczbę.",
+  "CHOOSE_OPTION_2": "{{options}}",
+  "CANCEL_OPTIONS": [
+    "anuluj",
+    "anuluj",
+    "wyjdź",
+    "wyjdź"
+  ],
+  "CANCELLED": "Menu zostało anulowane."
 }

@@ -1,7 +1,0 @@
-{
-	"DESCRIPTION": "Genereaza si vezi cheile API.",
-	"USAGE": "api <view|generate>",
-	"NONE": "Nu exista chei API. Foloseste `$api genereaza` pentru a genera una.",
-	"SUCCESS": "Cheia API a fost generata cu succes.",
-	"KEY": "Cheia API a lui {{guild}} este: `{{key}}`"
-}

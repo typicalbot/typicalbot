@@ -1,0 +1,10 @@
+{
+    "DESCRIPTION": "Habilita o deshabilita el modo lento en Discord.",
+    "USAGE": "slowmode [time]",
+    "ERROR": "El tiempo máximo en modo lento que Discord permite es de 6 horas (21600 segundos)",
+    "RESET": "Se ha deshabilitado el modo lento correctamente.",
+    "SET": "Se ha establecido el modo lento a {{cooldown}} segundos.",
+    "SLOWMODE": "Modo lento",
+    "LOG_EMBED": "{{cooldown}} segundos",
+    "LOG_TEXT": "**{{user}}** ha establecido el modo lento en el canal <#{{channel}}> a {{cooldown}} segundos."
+}

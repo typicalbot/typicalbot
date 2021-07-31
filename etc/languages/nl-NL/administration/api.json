@@ -1,7 +1,0 @@
-{
-	"DESCRIPTION": "Genereer en bekijk API-sleutels.",
-	"USAGE": "api <view|generate>",
-	"NONE": "Er bestaat geen API-sleutel. Gebruik `$api generate` om er een te genereren.",
-	"SUCCESS": "API-sleutel succesvol gegenereerd.",
-	"KEY": "API-sleutel van {{guild}}: `{{key}}`"
-}

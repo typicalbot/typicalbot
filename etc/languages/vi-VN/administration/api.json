@@ -1,7 +1,0 @@
-{
-	"DESCRIPTION": "Tạo và xem khoá API.",
-	"USAGE": "api <view|generate>",
-	"NONE": "Không tìm thấy khoá API nào. Dùng lệnh '$api generate' để tạo 1 cái.",
-	"SUCCESS": "Tạo API key thành công.",
-	"KEY": "Khoá API của {{guild}}: '{{key}}'"
-}

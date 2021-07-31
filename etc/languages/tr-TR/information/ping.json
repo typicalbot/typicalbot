@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "TypicalBot karşılık verebilecek mi diye bir kontrol.",
-	"USAGE": "ping",
-	"CALCULATING": "Komut yürütme süresi ve Discord API gecikmesi hesaplanıyor...",
-	"RESPONSE": "Komut Yürütme Süresi : {{command}}ms | Discord API Gecikmesi : {{api}}ms"
+  "DESCRIPTION": "TypicalBot karşılık verebilecek mi diye bir kontrol.",
+  "USAGE": "ping",
+  "CALCULATING": "Komut yürütme süresi ve Discord API gecikmesi hesaplanıyor...",
+  "RESPONSE": "Komut Yürütme Süresi : {{command}}ms | Discord API Gecikmesi : {{api}}ms"
 }

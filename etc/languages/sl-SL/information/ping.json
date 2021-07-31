@@ -1,6 +1,6 @@
 {
-	"DESCRIPTION": "Preverjanje, če se lahko TypicalBot odzove.",
-	"USAGE": "ping",
-	"CALCULATING": "Izračun časa izvajanja ukazov in odziva Discord API-ja...",
-	"RESPONSE": "Čas izvajanja ukaza : {{command}}ms | Odziv Discord API-ja : {{api}}ms"
+  "DESCRIPTION": "Preverjanje, če se lahko TypicalBot odzove.",
+  "USAGE": "ping",
+  "CALCULATING": "Izračun časa izvajanja ukazov in odziva Discord API-ja...",
+  "RESPONSE": "Čas izvajanja ukaza : {{command}}ms | Odziv Discord API-ja : {{api}}ms"
 }

@@ -3,5 +3,5 @@
     "USAGE": "udari [@uporabnik]",
     "SELF": " nehaj se udarjati! :punch:",
     "RESPONSE": "je pravkar udaril {{user}}! :punch:",
-    "RESPONSE_JAW": "je pravkar udaril {{user}}! :punch: O, šment! Pa ravno v čeljust ga je! To mora boleti!"
+    "RESPONSE_JAW": "je pravkar udaril {{user}}! :punch: O, šment! Pa ravno v čeljust ga je! To mora boleti! '"
 }

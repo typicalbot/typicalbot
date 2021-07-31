@@ -1,7 +1,0 @@
-{
-	"DESCRIPTION": "Generar y ver claves API.",
-	"USAGE": "api <view|generate>",
-	"NONE": "No existen claves API. Use `$api generate` para generar una.",
-	"SUCCESS": "Clave API generada con éxito.",
-	"KEY": "Clave API de {{guild}}: `{{key}}`"
-}

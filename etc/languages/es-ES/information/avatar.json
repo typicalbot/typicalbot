@@ -1,0 +1,4 @@
+{
+    "DESCRIPTION": "Muestra el avatar de un usuario",
+    "USAGE": "avatar [user]"
+}
