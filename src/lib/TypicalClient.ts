@@ -19,7 +19,7 @@ import TaskHandler from '../handlers/TaskHandler';
 import { RewriteFrames } from '@sentry/integrations';
 import { join } from 'path';
 import { version } from '../../package.json';
-import Database from '../common/database/database';
+import Database from '../common/database';
 
 interface TypicalHandler {
     tasks: TaskHandler;

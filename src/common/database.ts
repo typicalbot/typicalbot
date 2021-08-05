@@ -14,7 +14,11 @@ import {
  *
  * The following collections will be removed in the near future: 'guilds', 'mutes' and 'tasks'
  */
-type DatabaseCollection = 'guilds' | 'mutes' | 'tasks' | 'custom_commands' | 'scamlinks';
+type DatabaseCollection = 'guilds' | 'mutes' | 'tasks' | 'custom_commands' | 'scamlinks' | TypicalBotCollection;
+/**
+ * New infrastructure collections for TypicalBot will start with 'typicalbot_'.
+ */
+type TypicalBotCollection = 'typicalbot_starboard';
 
 class Database {
     private mongo: MongoClient | undefined;
