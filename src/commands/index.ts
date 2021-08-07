@@ -19,6 +19,7 @@ import DuckCommand from './DuckCommand';
 import FoxCommand from './FoxCommand';
 import PandaCommand from './PandaCommand';
 import HelpCommand from './HelpCommand';
+import DocumentationCommand from './DocumentationCommand';
 
 const commandMap = (): Collection<string, Command> => {
     const collection = new Collection<string, Command>();
@@ -29,6 +30,7 @@ const commandMap = (): Collection<string, Command> => {
     collection.set(BunnyCommand.options.name, BunnyCommand);
     collection.set(CatCommand.options.name, CatCommand);
     collection.set(CatFactCommand.options.name, CatFactCommand);
+    collection.set(DocumentationCommand.options.name, DocumentationCommand);
     collection.set(DogCommand.options.name, DogCommand);
     collection.set(DonateCommand.options.name, DonateCommand);
     collection.set(DuckCommand.options.name, DuckCommand);
