@@ -8,6 +8,7 @@ import ServerCommand from './ServerCommand';
 import UrbanDictionaryCommand from './UrbanDictionaryCommand';
 import UserCommand from './UserCommand';
 import DonateCommand from './DonateCommand';
+import VoteCommand from "./VoteCommand";
 
 const commandMap = (): Collection<string, Command> => {
     const collection = new Collection<string, Command>();
@@ -19,6 +20,7 @@ const commandMap = (): Collection<string, Command> => {
     collection.set(ServerCommand.options.name, ServerCommand);
     collection.set(UrbanDictionaryCommand.options.name, UrbanDictionaryCommand);
     collection.set(UserCommand.options.name, UserCommand);
+    collection.set(VoteCommand.options.name, VoteCommand);
 
     return collection;
 };
