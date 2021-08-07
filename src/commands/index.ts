@@ -8,7 +8,7 @@ import ServerCommand from './ServerCommand';
 import UrbanDictionaryCommand from './UrbanDictionaryCommand';
 import UserCommand from './UserCommand';
 import DonateCommand from './DonateCommand';
-import VoteCommand from "./VoteCommand";
+import VoteCommand from './VoteCommand';
 
 const commandMap = (): Collection<string, Command> => {
     const collection = new Collection<string, Command>();
