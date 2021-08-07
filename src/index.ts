@@ -7,6 +7,7 @@ import ServerCommand from './commands/ServerCommand';
 import UserCommand from './commands/UserCommand';
 import dotenv from 'dotenv';
 import UrbanDictionaryCommand from './commands/UrbanDictionaryCommand';
+import Database from './lib/database';
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ dotenv.config();
 const client = new TypicalBotClient({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
+
+client.containers.create('database', new Database());
 
 // TODO: Move this to TB Client
 const commandMap = new Collection<string, Command>();
