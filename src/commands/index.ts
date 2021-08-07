@@ -7,12 +7,14 @@ import PingCommand from './PingCommand';
 import ServerCommand from './ServerCommand';
 import UrbanDictionaryCommand from './UrbanDictionaryCommand';
 import UserCommand from './UserCommand';
+import DonateCommand from './DonateCommand';
 
 const commandMap = (): Collection<string, Command> => {
     const collection = new Collection<string, Command>();
 
     // Register commands
     collection.set(AvatarCommand.options.name, AvatarCommand);
+    collection.set(DonateCommand.options.name, DonateCommand);
     collection.set(PingCommand.options.name, PingCommand);
     collection.set(ServerCommand.options.name, ServerCommand);
     collection.set(UrbanDictionaryCommand.options.name, UrbanDictionaryCommand);
