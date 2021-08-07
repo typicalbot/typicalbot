@@ -40,9 +40,10 @@ export default class extends Command {
         if (messageCount < 2)
             return message.error(message.translate('moderation/purge:TOO_LITTLE'));
 
-        let channelToUse = message.guild.channels.cache.get(`${BigInt(channelID)}`) as TextChannel;
-        if (!channelToUse || channelToUse.type !== 'text')
-            channelToUse = message.channel;
+        // let channelToUse = message.guild.channels.cache.get(`${BigInt(channelID)}`) as TextChannel;
+        let channelToUse = message.channel;
+        // if (!channelToUse || channelToUse.type !== 'text')
+            // channelToUse = message.channel;
 
         let messages = await channelToUse.messages.fetch({
             limit: 100,

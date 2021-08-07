@@ -17,7 +17,7 @@
     "removeComments": false,
     "alwaysStrict": true,
     "pretty": true,
-    "outDir": "dist",
+    "outDir": "../dist",
     "incremental": true,
     "noEmitHelpers": true,
     "importHelpers": true,

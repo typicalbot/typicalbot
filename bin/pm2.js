@@ -17,7 +17,7 @@ async function generateClusters() {
             name: `${process.env.CLUSTER_SERVER}-${
                 process.env.CLUSTER_BUILD ? `${process.env.CLUSTER_BUILD}-` : ''
             }${i}`,
-            script: './dist/src/index.js',
+            script: './dist/old-src/index.js',
             autorestart: true,
             watch: false,
             env: {
