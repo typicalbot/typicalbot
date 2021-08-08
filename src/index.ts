@@ -12,12 +12,4 @@ const client = new TypicalBotClient({
 
 client.containers.create('database', new Database());
 
-// TODO: Move this TB Client
-client.once('ready', async () => {
-    console.log('Client Ready');
-
-    const data = client.commands.map(c => c.options);
-    await client.guilds.cache.get('736369721817038939')?.commands.set(data);
-});
-
 client.login(process.env.DISCORD_TOKEN);
