@@ -19,7 +19,7 @@ const MemeCommand: Command = async (client, interaction) => {
     const embed = new MessageEmbed()
         .setTitle(meme.title)
         .setImage(meme.url)
-        .setFooter(`👍 ${meme.ups} | 👎 ${meme.downs}`));
+        .setFooter(`👍 ${meme.ups} | 👎 ${meme.downs}`);
 
     await interaction.reply({ embeds: [embed] });
 };
