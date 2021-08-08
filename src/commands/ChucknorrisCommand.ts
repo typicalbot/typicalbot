@@ -8,7 +8,7 @@ const ChucknorrisCommand: Command = async (client, interaction) => {
         .catch(console.error);
 
     const embed = new MessageEmbed()
-        .setImage(data.value.joke)
+        .setDescription(data.value.joke)
         .setFooter('Powered by icndb.com');
 
     await interaction.reply({ embeds: [embed] });

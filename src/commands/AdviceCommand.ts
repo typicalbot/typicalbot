@@ -8,7 +8,7 @@ const AdviceCommand: Command = async (client, interaction) => {
         .catch(console.error);
 
     const embed = new MessageEmbed()
-        .setImage(data.slip.advice)
+        .setDescription(data.slip.advice)
         .setFooter('Powered by adviceslip.com');
 
     await interaction.reply({ embeds: [embed] });

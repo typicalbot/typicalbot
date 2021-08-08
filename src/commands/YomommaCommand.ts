@@ -8,7 +8,7 @@ const YomommaCommand: Command = async (client, interaction) => {
         .catch(console.error);
 
     const embed = new MessageEmbed()
-        .setImage(data.joke)
+        .setDescription(data.joke)
         .setFooter('Powered by yomomma.info');
 
     await interaction.reply({ embeds: [embed] });

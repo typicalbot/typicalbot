@@ -24,7 +24,11 @@ import AdviceCommand from './AdviceCommand';
 import EightballCommand from './EightballCommand';
 import ChucknorrisCommand from './ChucknorrisCommand';
 import CoinflipCommand from './CoinflipCommand';
-import YomommaCommand from "./YomommaCommand";
+import YomommaCommand from './YomommaCommand';
+import PunCommand from './PunCommand';
+import ThouartCommand from './ThouartCommand';
+import YearfactCommand from './YearfactCommand';
+import MemeCommand from './MemeCommand';
 
 const commandMap = (): Collection<string, Command> => {
     const collection = new Collection<string, Command>();
@@ -46,12 +50,16 @@ const commandMap = (): Collection<string, Command> => {
     collection.set(FoxCommand.options.name, FoxCommand);
     collection.set(HelpCommand.options.name, HelpCommand);
     collection.set(InviteCommand.options.name, InviteCommand);
+    collection.set(MemeCommand.options.name, MemeCommand);
     collection.set(PandaCommand.options.name, PandaCommand);
     collection.set(PingCommand.options.name, PingCommand);
+    collection.set(PunCommand.options.name, PunCommand);
     collection.set(ServerCommand.options.name, ServerCommand);
+    collection.set(ThouartCommand.options.name, ThouartCommand);
     collection.set(UrbanDictionaryCommand.options.name, UrbanDictionaryCommand);
     collection.set(UserCommand.options.name, UserCommand);
     collection.set(VoteCommand.options.name, VoteCommand);
+    collection.set(YearfactCommand.options.name, YearfactCommand);
     collection.set(YomommaCommand.options.name, YomommaCommand);
 
     return collection;
