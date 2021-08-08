@@ -20,20 +20,29 @@ import FoxCommand from './FoxCommand';
 import PandaCommand from './PandaCommand';
 import HelpCommand from './HelpCommand';
 import DocumentationCommand from './DocumentationCommand';
+import AdviceCommand from './AdviceCommand';
+import EightballCommand from './EightballCommand';
+import ChucknorrisCommand from './ChucknorrisCommand';
+import CoinflipCommand from './CoinflipCommand';
+import YomommaCommand from "./YomommaCommand";
 
 const commandMap = (): Collection<string, Command> => {
     const collection = new Collection<string, Command>();
 
     // Register commands
+    collection.set(AdviceCommand.options.name, AdviceCommand);
     collection.set(AvatarCommand.options.name, AvatarCommand);
     collection.set(BirdCommand.options.name, BirdCommand);
     collection.set(BunnyCommand.options.name, BunnyCommand);
     collection.set(CatCommand.options.name, CatCommand);
     collection.set(CatFactCommand.options.name, CatFactCommand);
+    collection.set(ChucknorrisCommand.options.name, ChucknorrisCommand);
+    collection.set(CoinflipCommand.options.name, CoinflipCommand);
     collection.set(DocumentationCommand.options.name, DocumentationCommand);
     collection.set(DogCommand.options.name, DogCommand);
     collection.set(DonateCommand.options.name, DonateCommand);
     collection.set(DuckCommand.options.name, DuckCommand);
+    collection.set(EightballCommand.options.name, EightballCommand);
     collection.set(FoxCommand.options.name, FoxCommand);
     collection.set(HelpCommand.options.name, HelpCommand);
     collection.set(InviteCommand.options.name, InviteCommand);
@@ -43,6 +52,7 @@ const commandMap = (): Collection<string, Command> => {
     collection.set(UrbanDictionaryCommand.options.name, UrbanDictionaryCommand);
     collection.set(UserCommand.options.name, UserCommand);
     collection.set(VoteCommand.options.name, VoteCommand);
+    collection.set(YomommaCommand.options.name, YomommaCommand);
 
     return collection;
 };
