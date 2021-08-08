@@ -30,6 +30,7 @@ import ThouartCommand from './ThouartCommand';
 import YearfactCommand from './YearfactCommand';
 import MemeCommand from './MemeCommand';
 import DiceCommand from './DiceCommand';
+import CalculatorCommand from './CalculatorCommand';
 
 const commandMap = (): Collection<string, Command> => {
     const collection = new Collection<string, Command>();
@@ -39,6 +40,7 @@ const commandMap = (): Collection<string, Command> => {
     collection.set(AvatarCommand.options.name, AvatarCommand);
     collection.set(BirdCommand.options.name, BirdCommand);
     collection.set(BunnyCommand.options.name, BunnyCommand);
+    collection.set(CalculatorCommand.options.name, CalculatorCommand);
     collection.set(CatCommand.options.name, CatCommand);
     collection.set(CatFactCommand.options.name, CatFactCommand);
     collection.set(ChucknorrisCommand.options.name, ChucknorrisCommand);
