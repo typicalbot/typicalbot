@@ -1,5 +1,7 @@
 import HandlerCollection from './HandlerCollection';
 import {
+    CapsCheckHandler,
+    CapsCheckTwoHandler,
     InviteCheckHandler,
     InviteCheckTwoHandler,
     MessageCommandHandler,
@@ -10,6 +12,8 @@ import {
 const handlerMap = (): HandlerCollection => {
     const collection = new HandlerCollection();
 
+    collection.add('messageCreate', CapsCheckHandler);
+    collection.add('messageUpdate', CapsCheckTwoHandler);
     collection.add('messageCreate', InviteCheckHandler);
     collection.add('messageUpdate', InviteCheckTwoHandler);
     collection.add('messageCreate', MessageCommandHandler);
