@@ -1,15 +1,20 @@
 import TypicalBotClient from './lib/TypicalBotClient';
-import { Intents } from 'discord.js';
 import dotenv from 'dotenv';
 import Database from './lib/database';
 
 dotenv.config();
 
-// TODO: Move this to TB Client
-const client = new TypicalBotClient({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
-});
+const client = new TypicalBotClient();
 
-client.containers.create('database', new Database());
+const startService = async () => {
+    try {
+        client.containers.create('database', new Database());
 
-client.login(process.env.DISCORD_TOKEN);
+        await client.login(process.env.DISCORD_TOKEN);
+    } catch (error) {
+        client.destroy();
+        process.exit(1);
+    }
+};
+
+startService().catch(err => console.error(err));

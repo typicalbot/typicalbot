@@ -1,4 +1,4 @@
-import { Client, ClientOptions } from 'discord.js';
+import { Client, Intents } from 'discord.js';
 import ContainerManager from './container/ContainerManager';
 import CommandCollection from './command/CommandCollection';
 import { commandMap } from './command/CommandRegistry';
@@ -10,8 +10,10 @@ class TypicalBotClient extends Client {
     public commands: CommandCollection = commandMap();
     public handlers: HandlerCollection = handlerMap();
 
-    constructor(options: ClientOptions) {
-        super(options);
+    constructor() {
+        super({
+            intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+        });
 
         this.containers = new ContainerManager();
 
