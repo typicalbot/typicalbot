@@ -4,6 +4,8 @@ import {
     CapsCheckTwoHandler,
     InviteCheckHandler,
     InviteCheckTwoHandler,
+    MentionsCheckHandler,
+    MentionsCheckTwoHandler,
     MessageCommandHandler,
     SlashCommandHandler,
     StartupHandler
@@ -16,6 +18,8 @@ const handlerMap = (): HandlerCollection => {
     collection.add('messageUpdate', CapsCheckTwoHandler);
     collection.add('messageCreate', InviteCheckHandler);
     collection.add('messageUpdate', InviteCheckTwoHandler);
+    collection.add('messageCreate', MentionsCheckHandler);
+    collection.add('messageUpdate', MentionsCheckTwoHandler);
     collection.add('messageCreate', MessageCommandHandler);
     collection.add('interactionCreate', SlashCommandHandler);
     collection.add('ready', StartupHandler);
