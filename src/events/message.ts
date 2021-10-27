@@ -37,24 +37,6 @@ export default class extends Event {
 
         const settings = (message.guild.settings = await message.guild.fetchSettings());
 
-        const possibleBotMentions = [
-            `<@${this.client.id!}>`,
-            `<@!${this.client.id!}>`
-        ];
-
-        if (possibleBotMentions.includes(message.content)) {
-            const prefix = settings.prefix.custom
-                ? settings.prefix.default
-                    ? message.translate('misc:MULTIPLE_PREFIXES', {
-                        default: process.env.PREFIX,
-                        custom: settings.prefix.custom
-                    })
-                    : `\`${settings.prefix.custom}\``
-                : `\`${process.env.PREFIX}\``;
-
-            return message.reply(message.translate('misc:PREFIX', { prefix }));
-        }
-
         const userPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author.id);
         // eslint-disable-next-line max-len
         const actualUserPermissions = await this.client.handlers.permissions.fetch(message.guild, message.author.id, true);
