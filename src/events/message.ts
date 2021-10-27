@@ -126,14 +126,6 @@ export default class extends Event {
                     this.client.emit('guildSpamPosted', message);
             }
 
-            if (message.guild.settings.automod.spam.mentions.enabled) {
-                const mentionsRegex = /<@![0-9]{18}>/gm;
-                const severity = message.guild.settings.automod.spam.mentions.severity;
-
-                if (message.content.match(mentionsRegex)!.length >= severity)
-                    this.client.emit('guildSpamPosted', message);
-            }
-
             if (message.guild.settings.automod.spam.zalgo.enabled) {
                 // eslint-disable-next-line no-control-regex
                 const zalgoRegex = /[^\u0000-\u007F]/g;
