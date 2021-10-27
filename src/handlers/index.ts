@@ -3,6 +3,7 @@ import BotStartupHandler from './BotStartupHandler';
 import BotStatisticsHandler from './BotStatisticsHandler';
 import { UserCapLockSpamHandler, UserCapLockSpamHandlerTwo } from './UserCapLockSpamHandler';
 import { UserMentionSpamHandler, UserMentionSpamHandlerTwo } from './UserMentionSpamHandler';
+import { UserZalgoSpamHandler, UserZalgoSpamHandlerTwo } from './UserZalgoSpamHandler';
 
 export {
     BotMentionHandler,
@@ -11,5 +12,7 @@ export {
     UserCapLockSpamHandler,
     UserCapLockSpamHandlerTwo,
     UserMentionSpamHandler,
-    UserMentionSpamHandlerTwo
+    UserMentionSpamHandlerTwo,
+    UserZalgoSpamHandler,
+    UserZalgoSpamHandlerTwo
 };
