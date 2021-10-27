@@ -1,6 +1,5 @@
 import Handler from '../lib/handler/Handler';
 import { NewsChannel, Permissions, TextChannel } from 'discord.js';
-import TypicalClient from '../lib/TypicalClient';
 
 const requiredPermissions = new Permissions(['VIEW_CHANNEL', 'SEND_MESSAGES']).freeze();
 
