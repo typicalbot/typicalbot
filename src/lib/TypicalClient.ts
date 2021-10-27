@@ -20,6 +20,7 @@ import { RewriteFrames } from '@sentry/integrations';
 import { join } from 'path';
 import { version } from '../../package.json';
 import Database from '../common/database';
+import { handlerMap } from './handler/HandlerRegistry';
 
 interface TypicalHandler {
     tasks: TaskHandler;
@@ -94,6 +95,8 @@ export default class TypicalClient extends Client {
 
     public scamlinks: string[] = [];
 
+    public typicalbot5Handlers = handlerMap();
+
     /**
      * @since 3.0.0
      */
@@ -139,6 +142,8 @@ export default class TypicalClient extends Client {
         });
 
         this.logger = new Logger();
+
+        this.registerEvents();
 
         this.login(process.env.TOKEN!).catch((err) => Sentry.captureException(err));
     }
@@ -222,5 +227,23 @@ export default class TypicalClient extends Client {
         // }).catch((err) => {
         //     Sentry.captureException(err);
         // });
+    }
+
+    registerEvents() {
+        this.typicalbot5Handlers.forEach((value, key) => {
+            if (key === 'ready') {
+                this.once(key, (...args) => {
+                    for (const handler of value) {
+                        handler(this, ...args);
+                    }
+                });
+            } else {
+                this.on(key, (...args) => {
+                    for (const handler of value) {
+                        handler(this, ...args);
+                    }
+                });
+            }
+        });
     }
 }
