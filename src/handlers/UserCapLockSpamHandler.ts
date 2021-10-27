@@ -1,10 +1,10 @@
 import Handler from '../lib/handler/Handler';
 import { NewsChannel, Permissions, TextChannel } from 'discord.js';
 
-const regex = /<@![0-9]{18}>/gm;
+const regex = /[A-Z]/g;
 const requiredPermissions = new Permissions(['VIEW_CHANNEL', 'SEND_MESSAGES']).freeze();
 
-const UserMentionSpamHandler: Handler<'messageCreate'> = async (client, message) => {
+const UserCapLockSpamHandler: Handler<'messageCreate'> = async (client, message) => {
     if (message.author.bot || message.webhookID || message.partial) return;
     if (message.channel.type === 'dm') return;
 
@@ -18,14 +18,14 @@ const UserMentionSpamHandler: Handler<'messageCreate'> = async (client, message)
     if (!message.deletable) return;
 
     const settings = await client.settings.fetch(message.guild!.id);
-    if (!settings.automod.spam.mentions.enabled) return;
-    if (message.content.match(regex)!.length < settings.automod.spam.mentions.severity) return;
+    if (!settings.automod.spam.caps.enabled) return;
+    if ((message.content.match(regex)!.length / message.content.length) < (settings.automod.spam.caps.severity / 10))  return;
 
     await message.delete();
 
     // Commenting this section out as the moderation log handler requires a TypicalGuildMessage which won't exist with the removal of the event handler.
     /**
-    if (settings.logs.moderation) {
+     if (settings.logs.moderation) {
         const _ = (key: string, args?: Record<string, unknown>) => {
             const lang = client.translate.get(settings.language || 'en_US');
 
@@ -48,12 +48,12 @@ const UserMentionSpamHandler: Handler<'messageCreate'> = async (client, message)
      */
 };
 
-const UserMentionSpamHandlerTwo: Handler<'messageUpdate'> = async (client, oldMessage, newMessage) => {
+const UserCapLockSpamHandlerTwo: Handler<'messageUpdate'> = async (client, oldMessage, newMessage) => {
     if (!newMessage.deletable) return;
 
     const settings = await client.settings.fetch(newMessage.guild!.id);
-    if (!settings.automod.spam.mentions.enabled) return;
-    if (newMessage.content!.match(regex)!.length < settings.automod.spam.mentions.severity) return;
+    if (!settings.automod.spam.caps.enabled) return;
+    if ((newMessage.content!.match(regex)!.length / newMessage.content!.length) < (settings.automod.spam.caps.severity / 10))  return;
 
     await newMessage.delete();
 
@@ -83,6 +83,6 @@ const UserMentionSpamHandlerTwo: Handler<'messageUpdate'> = async (client, oldMe
 };
 
 export {
-    UserMentionSpamHandler,
-    UserMentionSpamHandlerTwo
+    UserCapLockSpamHandler,
+    UserCapLockSpamHandlerTwo
 };

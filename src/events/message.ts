@@ -118,14 +118,6 @@ export default class extends Event {
 
     spamCheck(message: TypicalGuildMessage) {
         try {
-            if (message.guild.settings.automod.spam.caps.enabled) {
-                const capsRegex = /[A-Z]/g;
-                const severity = message.guild.settings.automod.spam.caps.severity;
-
-                if (message.content.length > 5 && (message.content.match(capsRegex)!.length / message.content.length) >= (severity / 10))
-                    this.client.emit('guildSpamPosted', message);
-            }
-
             if (message.guild.settings.automod.spam.zalgo.enabled) {
                 // eslint-disable-next-line no-control-regex
                 const zalgoRegex = /[^\u0000-\u007F]/g;
