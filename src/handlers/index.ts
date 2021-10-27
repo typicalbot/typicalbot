@@ -1,3 +1,4 @@
+import BotDMCommandHandler from './BotDMCommandHandler';
 import BotMentionHandler from './BotMentionHandler';
 import BotStartupHandler from './BotStartupHandler';
 import BotStatisticsHandler from './BotStatisticsHandler';
@@ -7,6 +8,7 @@ import { UserScamLinkSpamHandler, UserScamLinkSpamHandlerTwo } from './UserScamL
 import { UserZalgoSpamHandler, UserZalgoSpamHandlerTwo } from './UserZalgoSpamHandler';
 
 export {
+    BotDMCommandHandler,
     BotMentionHandler,
     BotStartupHandler,
     BotStatisticsHandler,

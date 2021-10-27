@@ -13,9 +13,7 @@ export default class extends Event {
 
     async execute(message: Message | TypicalGuildMessage) {
         if (message.author.bot || message.webhookID || message.partial) return;
-
-        if (message.channel.type === 'dm')
-            return this.handleDM(message as Message);
+        if (message.channel.type === 'dm') return;
 
         const me = message.guild!.me ?? await message.guild!.members.fetch(`${BigInt(this.client.id!)}`);
         if (!me) return;
@@ -113,16 +111,4 @@ export default class extends Event {
             this.client.emit('guildInvitePosted', message);
     }
 
-    handleDM(message: Message) {
-        if (!message.content.startsWith(process.env.PREFIX!)) return;
-
-        const command = this.client.commands.get(message.content
-            .split(' ')[0]
-            .slice(process.env.PREFIX!.length));
-
-        if (!command || !command.dm || command.permission > PERMISSION_LEVEL.SERVER_MEMBER)
-            return;
-
-        command.execute(message);
-    }
 }

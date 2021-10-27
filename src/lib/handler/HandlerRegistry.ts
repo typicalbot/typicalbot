@@ -8,7 +8,7 @@ import {
     UserCapLockSpamHandler,
     UserZalgoSpamHandler,
     UserZalgoSpamHandlerTwo,
-    UserScamLinkSpamHandler, UserScamLinkSpamHandlerTwo
+    UserScamLinkSpamHandler, UserScamLinkSpamHandlerTwo, BotDMCommandHandler
 } from '../../handlers';
 
 const handlerMap = (): HandlerCollection => {
@@ -18,6 +18,7 @@ const handlerMap = (): HandlerCollection => {
     collection.add('ready', BotStartupHandler);
 
     // Message Create
+    collection.add('messageCreate', BotDMCommandHandler);
     collection.add('messageCreate', BotMentionHandler);
     collection.add('messageCreate', UserCapLockSpamHandler);
     collection.add('messageCreate', UserMentionSpamHandler);
