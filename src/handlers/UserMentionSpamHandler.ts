@@ -19,6 +19,7 @@ const UserMentionSpamHandler: Handler<'messageCreate'> = async (client, message)
 
     const settings = await client.settings.fetch(message.guild!.id);
     if (!settings.automod.spam.mentions.enabled) return;
+    if (message.content.match(regex)!.length < settings.automod.spam.mentions.severity) return;
 
     if (regex.test(message.content)) {
         await message.delete();
@@ -54,6 +55,7 @@ const UserMentionSpamHandlerTwo: Handler<'messageUpdate'> = async (client, oldMe
 
     const settings = await client.settings.fetch(newMessage.guild!.id);
     if (!settings.automod.spam.mentions.enabled) return;
+    if (newMessage.content!.match(regex)!.length < settings.automod.spam.mentions.severity) return;
 
     if (regex.test(newMessage.content!)) {
         await newMessage.delete();
