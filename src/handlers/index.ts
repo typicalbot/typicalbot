@@ -1,7 +1,7 @@
 import BotStatisticsHandler from './BotStatisticsHandler';
-import StartupHandler from './StartupHandler';
+import BotStartupHandler from './BotStartupHandler';
 
 export {
     BotStatisticsHandler,
-    StartupHandler
+    BotStartupHandler
 };

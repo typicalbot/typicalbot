@@ -1,7 +1,7 @@
 import Handler from '../lib/handler/Handler';
 import { Team } from 'discord.js';
 
-const StartupHandler: Handler<'ready'> = async (client) => {
+const BotStartupHandler: Handler<'ready'> = async (client) => {
     client.logger.info(`Client Connected | Cluster ${process.env.CLUSTER} [${client.shards.join(', ')}]`);
 
     client.id ??= client.user?.id ?? null;
@@ -18,4 +18,4 @@ const StartupHandler: Handler<'ready'> = async (client) => {
         }).catch(() => client.logger.debug('Failed to load owners from application'));
 };
 
-export default StartupHandler;
+export default BotStartupHandler;
