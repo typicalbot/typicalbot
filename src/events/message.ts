@@ -44,9 +44,6 @@ export default class extends Event {
         if (userPermissions.level < PERMISSION_LEVEL.SERVER_MODERATOR && !settings.ignored.invites.includes(message.channel.id))
             this.inviteCheck(message);
 
-        if (userPermissions.level < PERMISSION_LEVEL.SERVER_MODERATOR)
-            this.spamCheck(message);
-
         if (userPermissions.level < PERMISSION_LEVEL.SERVER_MODERATOR && settings.ignored.commands.includes(message.channel.id))
             return;
 
@@ -114,20 +111,6 @@ export default class extends Event {
 
         if (inviteRegex.test(message.content) || inviteRegex.test(inspect(message.embeds, { depth: 4 })))
             this.client.emit('guildInvitePosted', message);
-    }
-
-    spamCheck(message: TypicalGuildMessage) {
-        try {
-            if (message.guild.settings.automod.spam.scamlinks.enabled) {
-                const content = message.content.split(' ');
-
-                if (content.some(word => this.client.scamlinks.includes(word))) {
-                    this.client.emit('guildSpamPosted', message);
-                }
-            }
-        } catch (ex) {
-            Sentry.captureException(ex);
-        }
     }
 
     handleDM(message: Message) {

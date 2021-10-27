@@ -4,7 +4,11 @@ import {
     BotStartupHandler,
     BotMentionHandler,
     UserMentionSpamHandler,
-    UserMentionSpamHandlerTwo, UserCapLockSpamHandler, UserZalgoSpamHandler, UserZalgoSpamHandlerTwo
+    UserMentionSpamHandlerTwo,
+    UserCapLockSpamHandler,
+    UserZalgoSpamHandler,
+    UserZalgoSpamHandlerTwo,
+    UserScamLinkSpamHandler, UserScamLinkSpamHandlerTwo
 } from '../../handlers';
 
 const handlerMap = (): HandlerCollection => {
@@ -17,11 +21,13 @@ const handlerMap = (): HandlerCollection => {
     collection.add('messageCreate', BotMentionHandler);
     collection.add('messageCreate', UserCapLockSpamHandler);
     collection.add('messageCreate', UserMentionSpamHandler);
+    collection.add('messageCreate', UserScamLinkSpamHandler);
     collection.add('messageCreate', UserZalgoSpamHandler);
 
     // Message Update
     collection.add('messageUpdate', UserMentionSpamHandlerTwo);
     collection.add('messageUpdate', UserMentionSpamHandlerTwo);
+    collection.add('messageUpdate', UserScamLinkSpamHandlerTwo);
     collection.add('messageUpdate', UserZalgoSpamHandlerTwo);
 
     // Guild Create
