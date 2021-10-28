@@ -1,5 +1,6 @@
 import BotDMCommandHandler from './BotDMCommandHandler';
 import BotMentionHandler from './BotMentionHandler';
+import { BotStarboardHandler, BotStarboardHandlerTwo } from './BotStarboardHandler';
 import BotStartupHandler from './BotStartupHandler';
 import BotStatisticsHandler from './BotStatisticsHandler';
 import { UserCapLockSpamHandler, UserCapLockSpamHandlerTwo } from './UserCapLockSpamHandler';
@@ -10,6 +11,8 @@ import { UserZalgoSpamHandler, UserZalgoSpamHandlerTwo } from './UserZalgoSpamHa
 export {
     BotDMCommandHandler,
     BotMentionHandler,
+    BotStarboardHandler,
+    BotStarboardHandlerTwo,
     BotStartupHandler,
     BotStatisticsHandler,
     UserCapLockSpamHandler,

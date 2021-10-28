@@ -8,7 +8,11 @@ import {
     UserCapLockSpamHandler,
     UserZalgoSpamHandler,
     UserZalgoSpamHandlerTwo,
-    UserScamLinkSpamHandler, UserScamLinkSpamHandlerTwo, BotDMCommandHandler
+    UserScamLinkSpamHandler,
+    UserScamLinkSpamHandlerTwo,
+    BotDMCommandHandler,
+    BotStarboardHandler,
+    BotStarboardHandlerTwo
 } from '../../handlers';
 
 const handlerMap = (): HandlerCollection => {
@@ -30,6 +34,12 @@ const handlerMap = (): HandlerCollection => {
     collection.add('messageUpdate', UserMentionSpamHandlerTwo);
     collection.add('messageUpdate', UserScamLinkSpamHandlerTwo);
     collection.add('messageUpdate', UserZalgoSpamHandlerTwo);
+
+    // Message Reaction Add
+    collection.add('messageReactionAdd', BotStarboardHandler);
+
+    // Message Reaction Remove
+    collection.add('messageReactionRemove', BotStarboardHandlerTwo);
 
     // Guild Create
     collection.add('guildCreate', BotStatisticsHandler);
